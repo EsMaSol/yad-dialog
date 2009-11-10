@@ -1,0 +1,309 @@
+.TH YAD 1 "February 1st, 2003"
+.SH NAME
+yad \- display GTK+ dialogs
+.SH SYNOPSIS
+.B yad
+.RI [ options ]
+.SH DESCRIPTION
+\fBYad\fP is a program that will display GTK+ dialogs, and return
+(either in the return code, or on standard output) the users
+input. This allows you to present information, and ask for information
+from the user, from all manner of shell scripts.
+.PP
+\fBYad\fP is the fork of \fBZenity\fP program.
+.SH OPTIONS
+This program follows the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+
+.PP
+Dialog options
+.TP
+.B \-\-calendar
+Display calendar dialog.
+.TP
+.B \-\-color
+Display color selection dialog.
+.TP
+.B \-\-entry
+Display text entry dialog.
+.TP
+.B \-\-file\-selection
+Display file selection dialog.
+.TP
+.B \-\-list
+Display list dialog
+.TP
+.B \-\-notification
+Display notification icon.
+.TP
+.B \-\-progress
+Display progress indication dialog.
+.TP
+.B \-\-question
+Display question dialog.
+.TP
+.B \-\-text-info
+Display text information dialog.
+.TP
+.B \-\-scale
+Display scale dialog.
+
+.PP
+General options
+.TP
+.B \-\-title=TITLE
+Set the dialog title.
+.TP
+.B \-\-window-icon=ICONPATH
+Set the window icon.
+.TP
+.B \-\-width=WIDTH
+Set the dialog width.
+.TP
+.B \-\-height=HEIGHT
+Set the dialog height.
+.TP
+.B \-\-no-wrap
+Set the dialog timeout in seconds.
+.TP
+.B \-\-timeout=TIMEOUT
+Set the dialog timeout in seconds.
+.TP
+.B \-\-text=STRING
+Set the dialog text.
+.TP
+.B \-\-image=IMAGE
+Set the dialog image which appears on the left side of dialog. 
+IMAGE might be file name or icon name from current icon theme.
+.TP
+.B \-\-button=BUTTON:ID
+Add the dialog button. May be used several times. ID is a exit code. 
+If no buttons specified OK and Cancel button used.
+.TP
+.B \-\-dialog-sep
+Show separaytor between dialog and buttons.
+
+.PP 
+Calendar options
+.TP
+.B \-\-day=INT
+Set the calendar day.
+.TP
+.B \-\-month=INT
+Set the calendar month.
+.TP
+.B \-\-year=INT
+Set the calendar year.
+.TP
+.B \-\-date-format=PATTERN
+Set the format for the returned date.
+
+.PP 
+Color options
+.TP
+.B \-\-value=COLOR
+Set initial color value.
+.TP
+.B \-\-extra
+Show extra information about color in returned string.
+
+.PP
+Text entry options
+.TP
+.B \-\-entry-text=STRING
+Set the entry text.
+.TP
+.B \-\-hide-text
+Hide the entry text.
+
+.PP
+File selection options
+.TP
+.B \-\-filename=FILENAME
+Set the filename.
+.TP
+.B \-\-multiple
+Allow selection of multiple filenames in file selection dialog.
+.TP
+.B \-\-directory
+Activate directory-only selection.
+.TP
+.B \-\-save
+Activate save mode.
+.TP
+.B \-\-separator=SEPARATOR
+Specify separator character when returning multiple filenames.
+.TP
+.B \-\-confirm\-overwrite
+Confirm file selection if filename already exists.
+
+.PP
+List options
+.TP
+.B \-\-column=STRING
+Set the column header.
+.TP
+.B \-\-checklist
+Use check boxes for first column.
+.TP
+.B \-\-separator=STRING
+Set output separator character.
+.TP
+.B \-\-multiple
+Allow multiple rows to be selected.
+.TP
+.B \-\-editable
+Allow changes to text.
+.TP
+.B \-\-print-all
+Print all data from the list. 
+.TP
+.B \-\-print-column=NUM
+Specify what column to print to standard output. The default is to return
+the first column. '0' may be used to print all columns.
+.TP
+.B \-\-hide\-column=NUMBER
+Hide a specific column.
+
+.PP
+Notification options
+.TP
+.B \-\-command=STRING
+Set the command running when double-clicked on the icon.
+.TP
+.B \-\-listen
+Listen for commands on stdin. See \fBNOTIFICATION\fP section.
+
+.PP
+Progress options
+.TP
+.B \-\-percentage=INT
+Set initial percentage.
+.TP
+.B \-\-auto\-close
+Close dialog when 100% has been reached.
+.TP
+.B \-\-auto\-kill
+Kill parent process if cancel button is pressed.
+.TP
+.B \-\-pulsate
+Pulsate progress bar.
+
+.PP
+Text options
+.TP
+.B \-\-filename=FILENAME
+Open specified file.
+.TP
+.B \-\-editable
+Allow changes to text.
+
+.PP
+Scale options
+.TP
+.B \-\-value=VALUE
+Set initial value.
+.TP
+.B \-\-min\-value=VALUE
+Set minimum value.
+.TP
+.B \-\-max\-value=VALUE
+Set maximum value.
+.TP
+.B \-\-step=VALUE
+Set step size.
+.TP
+.B \-\-print\-partial
+Print partial values.
+.TP
+.B \-\-hide\-value
+Hide value.
+
+.PP
+Miscellaneous options
+.TP
+.B \-?, \-\-help
+Show summary of options.
+.TP
+.B \-\-about
+Display an about dialog.
+.TP
+.B \-\-version
+Show version of program.
+
+.PP
+Also the standard GTK+ options are accepted.
+
+.SH NOTIFICATION ICON
+Commands send to yad in form \fBcommand:args\fP.
+Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP and \fImenu\fP.
+.TP
+.B
+icon:ICONNAME
+Set notification icon to ICONNAME.
+.TP
+.B
+tooltip:STRING
+Set notification tooltip.
+.TP
+.B
+visible:[true|false|blink]
+Set notification icon to visible, invisible or blinking states.
+.TP
+.B
+action:COMMAND
+Set command running when double-clicked on the icon. 
+Special string "quit" exit the program.
+.TP
+.B
+menu:STRING
+Set popup menu for notification icon.
+STRING must be in form \fIname1!action1|name2!action2...\fP.
+Empty name add separator to menu.
+
+.SH EXAMPLES
+Display a file selector with the title \fISelect a file to
+remove\fP. The file selected is returned on standard output.
+.IP
+yad  \-\-title="Select a file to remove" \-\-file-selection
+.PP
+Display a text entry dialog with the title \fISelect Host\fP and the
+text \fISelect the host you would like to flood-ping\fP. The entered
+text is returned on standard output.
+.IP
+yad  \-\-title "Select Host" \-\-entry \-\-text "Select the host you would like to flood-ping"
+.PP
+Display a dialog, asking \fIMicrosoft Windows has been found! Would
+you like to remove it?\fP. The return code will be 0 (true in shell)
+if \fIYES\fP is selected, and 1 (false) if \fINO\fP is selected.
+.IP
+yad  \-\-image "dialog-question" \-\-title "Alert" \-\-button=gtk-yes:0 \-\-button=gtk-no:1 \-\-text "Microsoft Windows has been found! Would you like to remove it?"
+.PP
+Show the search results in a list dialog with the title \fISearch Results\fP
+and the text \fIFinding all header files...\fP.
+.IP
+find . \-name '*.h' | yad \-\-list \-\-title "Search Results" \-\-text "Finding all header files.." \-\-column "Files"
+.PP
+Show an icon in the notification area
+.IP
+yad \-\-notification \-\-window-icon=update.png \-\-text "System update necessary!"
+.PP
+Display a weekly shopping list in a check list dialog with \fIApples\fP and \fIOranges\fP pre selected
+.IP
+yad \-\-list \-\-checklist \-\-column "Buy" \-\-column "Item" TRUE Apples TRUE Oranges FALSE Pears FALSE Toothpaste
+.PP
+Display a progress dialog while searching for all the postscript files in your home directory
+.IP
+find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
+
+.SH FILES
+.PP
+\fI$XDG_DATA_HOME/yad.conf\fP	default configuration file.
+.IP
+If \fI$XDG_DATA_HOME\fP is not set, \fI$HOME/.config\fP will be used.
+
+.SH AUTHOR
+\fBYad\fP was written by Victor Ananjevsky <ananasik@gmail.com>.
+
+.SH SEE ALSO
+\fBgdialog\fP(1), \fBdialog\fP(1), \fBzenity\fP(1)
