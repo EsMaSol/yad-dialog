@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include "yad.h"
-#include "util.h"
 
 static GtkWidget *list_view;
 static GType *ctypes;
@@ -359,8 +358,8 @@ list_create_widget (GtkWidget *dlg)
   model = create_model (n_columns);
 
   list_view = gtk_tree_view_new_with_model (model);
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list_view), TRUE);
-  gtk_tree_view_set_reorderable (GTK_TREE_VIEW (list_view), TRUE);
+  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list_view), settings.rules_hint);
+  gtk_tree_view_set_reorderable (GTK_TREE_VIEW (list_view), options.common_data.editable);
   g_object_unref (model);
 
   gtk_container_add (GTK_CONTAINER (w), list_view);

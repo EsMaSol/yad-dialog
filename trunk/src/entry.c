@@ -52,7 +52,7 @@ entry_create_widget (GtkWidget *dlg)
     {
       gint i = 0;
 
-      if (options.common_data.editable)
+      if (options.common_data.editable || settings.combo_always_editable)
 	{
 	  c = gtk_combo_box_entry_new_text ();
 	  entry = GTK_BIN (c)->child;

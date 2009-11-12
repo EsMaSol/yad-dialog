@@ -562,19 +562,19 @@ yad_options_init (void)
 
   /* Initialize general data */
   options.data.dialog_title = NULL;
-  options.data.window_icon = NULL;
-  options.data.width = -1;
-  options.data.height = -1;
+  options.data.window_icon = "yad";
+  options.data.width = settings.width;
+  options.data.height = settings.height;
   options.data.dialog_text = NULL;
   options.data.dialog_image = NULL;
   options.data.no_wrap = FALSE;
-  options.data.timeout = 0;
+  options.data.timeout = settings.timeout;
   options.data.buttons = NULL;
-  options.data.dialog_sep = FALSE;
+  options.data.dialog_sep = settings.dlg_sep;
 
   /* Initialize common data */
   options.common_data.uri = NULL;
-  options.common_data.separator = "|";
+  options.common_data.separator = settings.sep;
   options.common_data.multi = FALSE;
   options.common_data.editable = FALSE;  
 

@@ -6,7 +6,6 @@
 #include <unistd.h>
 
 #include "yad.h"
-#include "util.h"
 
 typedef struct {
   gchar *name;
@@ -230,7 +229,7 @@ handle_stdin (GIOChannel * channel,
             {
               MenuData *mdata;
               int i = 0;
-              gchar *s, **menu_vals = g_strsplit (value, "|", -1);
+              gchar *s, **menu_vals = g_strsplit (value, options.common_data.separator, -1);
 
               g_slist_free (menu_data);
               menu_data = NULL;
@@ -238,7 +237,7 @@ handle_stdin (GIOChannel * channel,
               while (menu_vals[i] != NULL)
                 {
                   mdata = g_new0 (MenuData, 1);
-                  s = strchr (menu_vals[i], '!');
+                  s = strchr (menu_vals[i], settings.menu_sep[0]);
                   if (s != NULL)
                     {
                       mdata->name =

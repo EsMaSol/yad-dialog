@@ -142,6 +142,19 @@ typedef struct
 
 extern YadOptions options;
 
+typedef struct {
+  gchar *sep;
+  guint width;
+  guint height;
+  guint timeout;
+  gboolean rules_hint;
+  gchar *menu_sep;
+  gboolean dlg_sep;
+  gboolean combo_always_editable;
+} YadSettings;
+
+extern YadSettings settings;
+
 void yad_options_init (void);
 GOptionContext * yad_create_context (void);
 void yad_set_mode (void);
@@ -169,6 +182,10 @@ void text_print_result (void);
 gint yad_notification_tun (void);
 
 gint yad_about (void);
+
+void read_settings (void);
+
+inline void strip_new_line (gchar *str);
 
 G_END_DECLS
 
