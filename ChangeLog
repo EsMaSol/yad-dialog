@@ -1,4 +1,5 @@
 Version 0.0.6
     - add form dialog
     - add label to entry dialog
-    - change the default behavior of combo-box entry
+    - change the default behavior of combo-box entry (this may change in config file)
+    - update translation and man page
