@@ -266,19 +266,10 @@ add_row_cb (GtkMenuItem *item, gpointer data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  /* gint i; */
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
 
   gtk_list_store_append (GTK_LIST_STORE (model), &iter);
- 
-  /* if (options.list_data.checkbox) */
-  /*   gtk_list_store_set_value (GTK_LIST_STORE (model), &iter, 0, FALSE); */
-  /* else */
-  /*   gtk_list_store_set_value (GTK_LIST_STORE (model), &iter, 0, ""); */
-
-  /* for (i = 1; i < gtk_tree_model_get_n_columns (model); i++) */
-  /*   gtk_list_store_set_value (GTK_LIST_STORE (model), &iter, 0, ""); */
 }
 
 void
