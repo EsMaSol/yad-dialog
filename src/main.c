@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include "yad.h"
-#include "util.h"
 
 YadOptions options;
 
@@ -193,6 +192,8 @@ main (gint argc, gchar ** argv)
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 #endif
+
+  read_settings ();
 
   gtk_init (&argc, &argv);
 
