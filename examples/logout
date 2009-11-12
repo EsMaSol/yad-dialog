@@ -8,7 +8,7 @@ action=$(yad --width 300 --entry --title "Logout" \
     --image=gnome-shutdown \
     --button="Switch User:2" \
     --button="gtk-ok:0" --button="gtk-close:1" \
-    --text "Choose action:" \
+    --text "Выберите действие:" \
     --entry-text \
     "Power Off" "Reboot" "Suspend" "Logout")
 ret=$?

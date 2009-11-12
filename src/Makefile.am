@@ -10,13 +10,14 @@ yad_SOURCES = 		\
 	color.c		\
 	entry.c		\
 	fileselection.c	\
+	form.c		\
 	list.c		\
 	notification.c	\
 	option.c	\
 	progress.c	\
 	scale.c		\
 	text.c		\
-	util.c		\
+	util.c util.h	\
 	main.c		\
 	yad.h
 

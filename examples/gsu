@@ -25,11 +25,11 @@ shift $((OPTIND - 1))
 cmd="$*"
 
 # check for sudo
-#sudo_check=$(sudo -H -S -- echo SUDO_OK 2>&1 &)
-#if [[ $sudo_check == "SUDO_OK" ]]; then
-#    eval sudo $cmd
-#    exit $?
-#fi
+sudo_check=$(sudo -H -S -- echo SUDO_OK 2>&1 &)
+if [[ $sudo_check == "SUDO_OK" ]]; then
+    eval sudo $cmd
+    exit $?
+fi
 
 # get password
 pass=$(yad --class="GSu" \

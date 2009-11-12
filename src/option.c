@@ -5,6 +5,7 @@
 
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -12,6 +13,7 @@ static gboolean calendar_mode = FALSE;
 static gboolean color_mode = FALSE;
 static gboolean entry_mode = FALSE;
 static gboolean file_mode = FALSE;
+static gboolean form_mode = FALSE;
 static gboolean list_mode = FALSE;
 static gboolean notification_mode = FALSE;
 static gboolean progress_mode = FALSE;
@@ -144,8 +146,14 @@ static GOptionEntry entry_options[] = {
     G_OPTION_FLAG_IN_MAIN,
     G_OPTION_ARG_NONE,
     &entry_mode,
-    N_("Display text entry dialog"),
+    N_("Display text entry or combo-box dialog"),
     NULL },
+  { "entry-label", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.entry_data.entry_label,
+    N_("Set the entry label"),
+    N_("TEXT") },
   { "entry-text", 0,
     0,
     G_OPTION_ARG_STRING,
@@ -163,6 +171,12 @@ static GOptionEntry entry_options[] = {
     G_OPTION_ARG_NONE,
     &options.entry_data.completion,
     N_("Use completion instead of combo-box"),
+    NULL },
+  { "editable", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_NONE,
+    &options.common_data.editable,
+    N_("Allow changes to text in combo-box"),
     NULL },
   { NULL }
 };
@@ -216,6 +230,28 @@ static GOptionEntry file_selection_options[] = {
     &options.file_data.filter,
     N_("Sets a filename filter"),
     N_("NAME | PATTERN1 PATTERN2 ...") },
+  { NULL}
+};
+
+static GOptionEntry form_options[] = {
+  { "form", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &form_mode,
+    N_("Display form dialog"),
+    NULL },
+  { "field", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    add_field,
+    N_("Add field to form"),
+    N_("LABEL") },
+  { "separator", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.separator,
+    N_("Set output separator character"),
+    N_("SEPARATOR") },
   { NULL}
 };
 
@@ -342,7 +378,6 @@ static GOptionEntry progress_options[] = {
     0,
     G_OPTION_ARG_NONE,
     &options.progress_data.autokill,
-    /* xgettext: no-c-format */
     N_("Kill parent process if cancel button is pressed"),
     NULL },
   { NULL }
@@ -477,6 +512,18 @@ add_column (const gchar *option_name,
   return TRUE;
 }
 
+static gboolean
+add_field (const gchar *option_name,
+	   const gchar *value,
+	   gpointer data, GError **err)
+{
+  gchar *name = g_strdup (value);
+
+  options.form_data.fields =
+    g_slist_append (options.form_data.fields, name);
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -488,6 +535,8 @@ yad_set_mode (void)
     options.mode = MODE_ENTRY;
   else if (file_mode)
     options.mode = MODE_FILE;
+  else if (form_mode)
+    options.mode = MODE_FORM;
   else if (list_mode)
     options.mode = MODE_LIST;
   else if (notification_mode)
@@ -514,18 +563,18 @@ yad_options_init (void)
   /* Initialize general data */
   options.data.dialog_title = NULL;
   options.data.window_icon = NULL;
-  options.data.width = settings.width;
-  options.data.height = settings.height;
+  options.data.width = -1;
+  options.data.height = -1;
   options.data.dialog_text = NULL;
   options.data.dialog_image = NULL;
   options.data.no_wrap = FALSE;
-  options.data.timeout = settings.timeout;
+  options.data.timeout = 0;
   options.data.buttons = NULL;
-  options.data.dialog_sep = settings.dlg_sep;
+  options.data.dialog_sep = FALSE;
 
   /* Initialize common data */
   options.common_data.uri = NULL;
-  options.common_data.separator = settings.sep;
+  options.common_data.separator = "|";
   options.common_data.multi = FALSE;
   options.common_data.editable = FALSE;  
 
@@ -541,6 +590,7 @@ yad_options_init (void)
 
   /* Initialize entry data */
   options.entry_data.entry_text = NULL;
+  options.entry_data.entry_label = NULL;
   options.entry_data.hide_text = FALSE;
   options.entry_data.completion = FALSE;
 
@@ -549,6 +599,9 @@ yad_options_init (void)
   options.file_data.save = FALSE;
   options.file_data.confirm_overwrite = FALSE;
   options.file_data.filter = NULL;
+
+  /* Initialize form data */
+  options.form_data.fields = NULL;
 
   /* Initialize list data */
   options.list_data.columns = NULL;
@@ -621,6 +674,13 @@ yad_create_context (void)
   a_group = g_option_group_new ("file", _("File selection options"),
 				_("Show file selection options"), NULL, NULL);
   g_option_group_add_entries (a_group, file_selection_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Add form option entries */
+  a_group = g_option_group_new ("form", _("Form options"),
+				_("Show form options"), NULL, NULL);
+  g_option_group_add_entries (a_group, form_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
