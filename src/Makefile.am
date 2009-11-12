@@ -17,7 +17,7 @@ yad_SOURCES = 		\
 	progress.c	\
 	scale.c		\
 	text.c		\
-	util.c util.h	\
+	util.c		\
 	main.c		\
 	yad.h
 
