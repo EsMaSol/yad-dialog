@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "yad.h"
+#include "util.h"
 
 static GtkWidget *list_view;
 static GType *ctypes;
@@ -37,7 +38,7 @@ cell_edited_cb (GtkCellRendererText * cell,
 {    
   gint column;
   GtkTreeIter iter;                                         
-  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);;
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
                                 
   column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
@@ -358,8 +359,8 @@ list_create_widget (GtkWidget *dlg)
   model = create_model (n_columns);
 
   list_view = gtk_tree_view_new_with_model (model);
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list_view), settings.rules_hint);
-  gtk_tree_view_set_reorderable (GTK_TREE_VIEW (list_view), options.common_data.editable);
+  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list_view), TRUE);
+  gtk_tree_view_set_reorderable (GTK_TREE_VIEW (list_view), TRUE);
   g_object_unref (model);
 
   gtk_container_add (GTK_CONTAINER (w), list_view);

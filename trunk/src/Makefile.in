@@ -48,10 +48,11 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_yad_OBJECTS = yad-about.$(OBJEXT) yad-calendar.$(OBJEXT) \
 	yad-color.$(OBJEXT) yad-entry.$(OBJEXT) \
-	yad-fileselection.$(OBJEXT) yad-list.$(OBJEXT) \
-	yad-notification.$(OBJEXT) yad-option.$(OBJEXT) \
-	yad-progress.$(OBJEXT) yad-scale.$(OBJEXT) yad-text.$(OBJEXT) \
-	yad-util.$(OBJEXT) yad-main.$(OBJEXT)
+	yad-fileselection.$(OBJEXT) yad-form.$(OBJEXT) \
+	yad-list.$(OBJEXT) yad-notification.$(OBJEXT) \
+	yad-option.$(OBJEXT) yad-progress.$(OBJEXT) \
+	yad-scale.$(OBJEXT) yad-text.$(OBJEXT) yad-util.$(OBJEXT) \
+	yad-main.$(OBJEXT)
 yad_OBJECTS = $(am_yad_OBJECTS)
 am__DEPENDENCIES_1 =
 yad_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -213,13 +214,14 @@ yad_SOURCES = \
 	color.c		\
 	entry.c		\
 	fileselection.c	\
+	form.c		\
 	list.c		\
 	notification.c	\
 	option.c	\
 	progress.c	\
 	scale.c		\
 	text.c		\
-	util.c		\
+	util.c util.h	\
 	main.c		\
 	yad.h
 
@@ -317,6 +319,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-color.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-entry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-fileselection.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-form.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yad-notification.Po@am__quote@
@@ -421,6 +424,22 @@ yad-fileselection.obj: fileselection.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='fileselection.c' object='yad-fileselection.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yad_CFLAGS) $(CFLAGS) -c -o yad-fileselection.obj `if test -f 'fileselection.c'; then $(CYGPATH_W) 'fileselection.c'; else $(CYGPATH_W) '$(srcdir)/fileselection.c'; fi`
+
+yad-form.o: form.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yad_CFLAGS) $(CFLAGS) -MT yad-form.o -MD -MP -MF $(DEPDIR)/yad-form.Tpo -c -o yad-form.o `test -f 'form.c' || echo '$(srcdir)/'`form.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/yad-form.Tpo $(DEPDIR)/yad-form.Po
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='form.c' object='yad-form.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yad_CFLAGS) $(CFLAGS) -c -o yad-form.o `test -f 'form.c' || echo '$(srcdir)/'`form.c
+
+yad-form.obj: form.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yad_CFLAGS) $(CFLAGS) -MT yad-form.obj -MD -MP -MF $(DEPDIR)/yad-form.Tpo -c -o yad-form.obj `if test -f 'form.c'; then $(CYGPATH_W) 'form.c'; else $(CYGPATH_W) '$(srcdir)/form.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/yad-form.Tpo $(DEPDIR)/yad-form.Po
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='form.c' object='yad-form.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yad_CFLAGS) $(CFLAGS) -c -o yad-form.obj `if test -f 'form.c'; then $(CYGPATH_W) 'form.c'; else $(CYGPATH_W) '$(srcdir)/form.c'; fi`
 
 yad-list.o: list.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yad_CFLAGS) $(CFLAGS) -MT yad-list.o -MD -MP -MF $(DEPDIR)/yad-list.Tpo -c -o yad-list.o `test -f 'list.c' || echo '$(srcdir)/'`list.c

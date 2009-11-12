@@ -19,6 +19,7 @@ typedef enum
   MODE_COLOR,
   MODE_ENTRY,
   MODE_FILE,
+  MODE_FORM,
   MODE_LIST,
   MODE_NOTIFICATION,
   MODE_PROGRESS,
@@ -60,6 +61,7 @@ typedef struct {
 
 typedef struct {
   gchar *entry_text;
+  gchar *entry_label;
   gboolean hide_text;
   gboolean completion;
 } YadEntryData;
@@ -70,6 +72,11 @@ typedef struct {
   gboolean confirm_overwrite;
   gchar **filter;
 } YadFileData;
+
+typedef struct {
+  gchar *separator;
+  GSList *fields;
+} YadFormData;
 
 typedef struct {
   GSList *columns;
@@ -123,6 +130,7 @@ typedef struct
   YadColorData color_data;
   YadEntryData entry_data;
   YadFileData file_data;
+  YadFormData form_data;
   YadListData list_data;
   YadNotificationData notification_data;
   YadProgressData progress_data;
@@ -134,18 +142,6 @@ typedef struct
 
 extern YadOptions options;
 
-typedef struct {
-  gchar *sep;
-  guint width;
-  guint height;
-  guint timeout;
-  gboolean rules_hint;
-  gchar *menu_sep;
-  gboolean dlg_sep;
-} YadSettings;
-
-extern YadSettings settings;
-
 void yad_options_init (void);
 GOptionContext * yad_create_context (void);
 void yad_set_mode (void);
@@ -154,6 +150,7 @@ GtkWidget * calendar_create_widget (GtkWidget *dlg);
 GtkWidget * color_create_widget (GtkWidget *dlg);
 GtkWidget * entry_create_widget (GtkWidget *dlg);
 GtkWidget * file_create_widget (GtkWidget *dlg);
+GtkWidget * form_create_widget (GtkWidget *dlg);
 GtkWidget * list_create_widget (GtkWidget *dlg);
 GtkWidget * progress_create_widget (GtkWidget *dlg);
 GtkWidget * scale_create_widget (GtkWidget *dlg);
@@ -163,6 +160,7 @@ void calendar_print_result (void);
 void color_print_result (void);
 void entry_print_result (void);
 void file_print_result (void);
+void form_print_result (void);
 void list_print_result (void);
 void progress_print_result (void);
 void scale_print_result (void);
@@ -171,10 +169,6 @@ void text_print_result (void);
 gint yad_notification_tun (void);
 
 gint yad_about (void);
-
-void read_settings (void);
-
-inline void strip_new_line (gchar *str);
 
 G_END_DECLS
 
