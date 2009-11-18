@@ -45,6 +45,12 @@ typedef struct {
   gboolean no_wrap;
   gboolean dialog_sep;
   GSList *buttons;
+  /* window settings */
+  gboolean sticky;
+  gboolean fixed;
+  gboolean ontop;
+  gboolean center;
+  gboolean decorated;
 } YadData;
 
 typedef struct {
@@ -118,6 +124,9 @@ typedef struct {
   gboolean editable;
   gboolean multi;
 } YadCommonData;
+
+typedef struct {
+} YadWindowData;
 
 typedef struct
 {
