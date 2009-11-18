@@ -202,7 +202,11 @@ handle_stdin (GIOChannel * channel,
               if (g_utf8_validate (value, -1, NULL))
                 {
                   gchar *message = g_strcompress (value);
+#if GTK_CHECK_VERSION(2,16,0)
+                  gtk_status_icon_set_tooltip_markup (status_icon, message);
+#else
                   gtk_status_icon_set_tooltip (status_icon, message);
+#endif
                   g_free (message);
                 }
               else
@@ -272,7 +276,7 @@ handle_stdin (GIOChannel * channel,
 gint
 yad_notification_run ()
 {
-  GIOChannel *channel;
+  GIOChannel *channel = NULL;
 
   status_icon = gtk_status_icon_new ();
   g_signal_connect (status_icon, "size-changed",
@@ -289,22 +293,22 @@ yad_notification_run ()
     action = g_strdup (options.notification_data.command);
   menu_data = NULL;
 
+  g_signal_connect (status_icon, "activate",
+		    G_CALLBACK (activate_cb), NULL);
+
   if (options.notification_data.listen)
     {
-      g_signal_connect (status_icon, "activate",
-                        G_CALLBACK (activate_cb), NULL);
-      g_signal_connect (status_icon, "popup_menu",
-                        G_CALLBACK (popup_menu_cb), NULL);
-
       channel = g_io_channel_unix_new (0);
-      g_io_channel_set_encoding (channel, NULL, NULL);
-      g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
-      g_io_add_watch (channel, G_IO_IN | G_IO_HUP,
-		      handle_stdin, NULL);
+      if (channel)
+	{
+	  g_io_channel_set_encoding (channel, NULL, NULL);
+	  g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
+	  g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
+
+	  g_signal_connect (status_icon, "popup_menu", 
+			    G_CALLBACK (popup_menu_cb), NULL);
+	}
     }
-  else
-    g_signal_connect (status_icon, "activate",
-		      G_CALLBACK (activate_cb), NULL);
 
   /* Show icon and wait */
   gtk_status_icon_set_visible (status_icon, TRUE);

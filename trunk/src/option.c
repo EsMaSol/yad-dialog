@@ -572,6 +572,13 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.dialog_sep = settings.dlg_sep;
 
+  /* Initialize window options */
+  options.data.sticky = FALSE;
+  options.data.fixed = FALSE;
+  options.data.ontop = FALSE;
+  options.data.center = FALSE;
+  options.data.decorated = FALSE;
+
   /* Initialize common data */
   options.common_data.uri = NULL;
   options.common_data.separator = settings.sep;
