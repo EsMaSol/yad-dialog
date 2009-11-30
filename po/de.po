@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-30 17:06+0200\n"
-"PO-Revision-Date: 2009-11-16 22:01+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2009-11-30 16:38+0100\n"
+"Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,31 +24,12 @@ msgstr ""
 
 #: ../src/about.c:18
 msgid ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
-"any later version.\n"
+"This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
 "\n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with "
-"this program; if not, write to the Free Software Foundation, Inc., 51 "
-"Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
-msgstr ""
-" Dieses Programm ist freie Software. Sie können es unter den Bedingungen der "
-"GNU General Public License, wie von der Free Software Foundation "
-"veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 2 "
-"der Lizenz oder (nach Ihrer Option) jeder späteren Version.Die "
-"Veröffentlichung dieses Programms erfolgt in der Hoffnung, dass es Ihnen von "
-"Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite "
-"Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. "
-"Details finden Sie in der GNU General Public License.Sie sollten eine Kopie "
-"der GNU General Public License zusammen mit diesem Programm erhalten haben. "
-"Falls nicht, schreiben Sie an die Free Software Foundation, Inc., 51 "
-"Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. "
+"You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+msgstr " Dieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 2 der Lizenz oder (nach Ihrer Option) jeder späteren Version.Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.Sie sollten eine Kopie der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, schreiben Sie an die Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. "
 
 #: ../src/about.c:36
 msgid ""
@@ -163,8 +144,11 @@ msgstr "ABLAUFZEIT"
 msgid "Set the dialog text"
 msgstr "Dialogtext angeben"
 
-#: ../src/option.c:59 ../src/option.c:187 ../src/option.c:193
-#: ../src/option.c:199 ../src/option.c:388
+#: ../src/option.c:59
+#: ../src/option.c:187
+#: ../src/option.c:193
+#: ../src/option.c:199
+#: ../src/option.c:388
 msgid "TEXT"
 msgstr "TEXT"
 
@@ -193,26 +177,24 @@ msgid "Add separator between dialog and buttons"
 msgstr "Leerraum zwischen Dialog und Schaltflächen"
 
 #: ../src/option.c:89
-#, fuzzy
 msgid "Set window sticky"
-msgstr "Fenster-Symbol angeben"
+msgstr "Fenster fixieren"
 
 #: ../src/option.c:95
 msgid "Set window unresizable"
-msgstr ""
+msgstr "Fenster-Größe fixieren"
 
 #: ../src/option.c:101
 msgid "Place window on top"
-msgstr ""
+msgstr "Als oberstes Fenster  anzeigen"
 
 #: ../src/option.c:107
 msgid "Place window on center of screen"
-msgstr ""
+msgstr "Fenster auf Bildschirm zentrieren"
 
 #: ../src/option.c:113
-#, fuzzy
 msgid "Set window undecorated"
-msgstr "Fenster-Symbol angeben"
+msgstr "Fenster-Dekoration entfernen"
 
 #: ../src/option.c:123
 msgid "Display calendar dialog"
@@ -298,7 +280,8 @@ msgstr "Datei-Auswahlfeld"
 msgid "Set the filename"
 msgstr "Dateinamen angeben"
 
-#: ../src/option.c:227 ../src/option.c:481
+#: ../src/option.c:227
+#: ../src/option.c:481
 msgid "FILENAME"
 msgstr "FATEINAME"
 
@@ -314,11 +297,15 @@ msgstr "Nur Verzeichnis-Auswahl aktivieren"
 msgid "Activate save mode"
 msgstr "Sicheren Modus aktivieren"
 
-#: ../src/option.c:250 ../src/option.c:284 ../src/option.c:319
+#: ../src/option.c:250
+#: ../src/option.c:284
+#: ../src/option.c:319
 msgid "Set output separator character"
 msgstr "Ausgabe-Trennzeichen angeben"
 
-#: ../src/option.c:251 ../src/option.c:285 ../src/option.c:320
+#: ../src/option.c:251
+#: ../src/option.c:285
+#: ../src/option.c:320
 msgid "SEPARATOR"
 msgstr "Trennzeichen"
 
@@ -370,7 +357,8 @@ msgstr "Alias für Ankreuzfeld (veraltet)"
 msgid "Allow multiple rows to be selected"
 msgstr "Auswahl mehrerer Reihen erlauben"
 
-#: ../src/option.c:331 ../src/option.c:486
+#: ../src/option.c:331
+#: ../src/option.c:486
 msgid "Allow changes to text"
 msgstr "Textänderungen erlauben"
 
@@ -379,11 +367,11 @@ msgid "Print all data from list"
 msgstr "Alle Werte der Liste"
 
 #: ../src/option.c:343
-msgid ""
-"Print a specific column (Default is 1. 0 can be used to print all columns)"
+msgid "Print a specific column (Default is 1. 0 can be used to print all columns)"
 msgstr "Bestimmte  Spalte ausgeben (Standard=1 - Alle=0)"
 
-#: ../src/option.c:344 ../src/option.c:350
+#: ../src/option.c:344
+#: ../src/option.c:350
 msgid "NUMBER"
 msgstr "ZAHL"
 
@@ -395,7 +383,8 @@ msgstr "Bestimmte Spalte verbergen"
 msgid "Display notification"
 msgstr "Benachrichtigung"
 
-#: ../src/option.c:365 ../src/option.c:371
+#: ../src/option.c:365
+#: ../src/option.c:371
 msgid "Listen for commands on stdin"
 msgstr "Auf Befehle von stdin warten"
 
@@ -436,7 +425,9 @@ msgstr "Schieberegler"
 msgid "Set initial value"
 msgstr "Anfangswert angeben"
 
-#: ../src/option.c:429 ../src/option.c:435 ../src/option.c:441
+#: ../src/option.c:429
+#: ../src/option.c:435
+#: ../src/option.c:441
 #: ../src/option.c:447
 msgid "VALUE"
 msgstr "WERT"
@@ -496,7 +487,7 @@ msgstr "Allgemeine Einstellungen"
 
 #: ../src/option.c:685
 msgid "Show general options"
-msgstr "Allgemeine Einstellungen"
+msgstr "Allgemeine Einstellungen anzeigen"
 
 #. Adds calendar option entries
 #: ../src/option.c:691
@@ -505,7 +496,7 @@ msgstr "Kalender-Einstellungen"
 
 #: ../src/option.c:692
 msgid "Show calendar options"
-msgstr "Kalender-Einstellungen"
+msgstr "Kalender-Einstellungen anzeigen"
 
 #. Adds calendar option entries
 #: ../src/option.c:698
@@ -514,7 +505,7 @@ msgstr "Farb-Einstellungen"
 
 #: ../src/option.c:699
 msgid "Show color options"
-msgstr "Farb-Einstellungen"
+msgstr "Farb-Einstellungen anzeigen"
 
 #. Adds entry option entries
 #: ../src/option.c:705
@@ -523,7 +514,7 @@ msgstr "Textfeld-Einstellungen"
 
 #: ../src/option.c:706
 msgid "Show text entry options"
-msgstr "Textfeld-Einstellungen"
+msgstr "Textfeld-Einstellungen anzeigen"
 
 #. Adds file selection option entries
 #: ../src/option.c:712
@@ -532,7 +523,7 @@ msgstr "Dateiauswahl-Einstellungen"
 
 #: ../src/option.c:713
 msgid "Show file selection options"
-msgstr "Dateiauswahl-Einstellungen"
+msgstr "Dateiauswahl-Einstellungen anzeigen"
 
 #. Add form option entries
 #: ../src/option.c:719
@@ -541,7 +532,7 @@ msgstr "Formular-Einstellungen"
 
 #: ../src/option.c:720
 msgid "Show form options"
-msgstr "Formular-Einstellungen"
+msgstr "Formular-Einstellungen anzeigen"
 
 #. Adds list option entries
 #: ../src/option.c:726
@@ -550,7 +541,7 @@ msgstr "Listen-Einstellungen"
 
 #: ../src/option.c:727
 msgid "Show list options"
-msgstr "Listen-Einstellungen"
+msgstr "Listen-Einstellungen anzeigen"
 
 #. Adds notification option entries
 #: ../src/option.c:733
@@ -559,7 +550,7 @@ msgstr "Benachrichtigungssymbol-Einstellungen"
 
 #: ../src/option.c:734
 msgid "Show notification icon options"
-msgstr "Benachrichtigungssymbol-Einstellungen"
+msgstr "Benachrichtigungssymbol-Einstellungen anzeigen"
 
 #. Adds progress option entries
 #: ../src/option.c:740
@@ -568,7 +559,7 @@ msgstr "Fortschrittsbalken-Einstellungen"
 
 #: ../src/option.c:741
 msgid "Show progress options"
-msgstr "Fortschrittsbalken-Einstellungen"
+msgstr "Fortschrittsbalken-Einstellungen anzeigen"
 
 #. Adds scale option entries
 #: ../src/option.c:747
@@ -577,7 +568,7 @@ msgstr "Schieberegler-Einstellungen"
 
 #: ../src/option.c:748
 msgid "Show scale options"
-msgstr "Schieberegler-Einstellungen"
+msgstr "Schieberegler-Einstellungen anzeigen"
 
 #. Adds text option entries
 #: ../src/option.c:754
@@ -586,7 +577,7 @@ msgstr "Informationstext-Einstellungen"
 
 #: ../src/option.c:755
 msgid "Show text information options"
-msgstr "Informationstext-Einstellungen"
+msgstr "Informationstext-Einstellungen anzeigen"
 
 #. Adds miscellaneous option entries
 #: ../src/option.c:761
@@ -595,4 +586,5 @@ msgstr "Verschiedene Einstellungen"
 
 #: ../src/option.c:762
 msgid "Show miscellaneous options"
-msgstr "Verschiedene Einstellungen"
+msgstr "Verschiedene Einstellungen anzeigen"
+
