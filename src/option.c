@@ -81,6 +81,37 @@ static GOptionEntry general_options[] = {
     &options.data.dialog_sep,
     N_("Add separator between dialog and buttons"),
     NULL },
+  /* window settings */
+  { "sticky", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.sticky,
+    N_("Set window sticky"),
+    NULL },
+  { "fixed", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.fixed,
+    N_("Set window unresizable"),
+    NULL },
+  { "on-top", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.ontop,
+    N_("Place window on top"),
+    NULL },
+  { "center", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.center,
+    N_("Place window on center of screen"),
+    NULL },
+  { "undecorated", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.undecorated,
+    N_("Set window undecorated"),
+    NULL },
   { NULL }
 };
 
@@ -577,7 +608,7 @@ yad_options_init (void)
   options.data.fixed = FALSE;
   options.data.ontop = FALSE;
   options.data.center = FALSE;
-  options.data.decorated = FALSE;
+  options.data.undecorated = FALSE;
 
   /* Initialize common data */
   options.common_data.uri = NULL;
