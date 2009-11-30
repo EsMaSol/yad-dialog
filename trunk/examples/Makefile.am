@@ -1,2 +1,2 @@
 
-EXTRA_DIST = gsu logout
+EXTRA_DIST = autostart gsu logout

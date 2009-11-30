@@ -53,7 +53,16 @@ create_dialog ()
 	gtk_window_set_icon_name (GTK_WINDOW (dlg),
 				  options.data.window_icon);
     }
-
+    
+  /* set window behavior */
+  if (options.data.sticky)
+    gtk_window_stick (GTK_WINDOW (dlg));
+  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+  gtk_window_set_keep_above (GTK_WINDOW (dlg), options.data.ontop);
+  if (options.data.center)
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+  gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
+  
   /* set timeout */
   if (options.data.timeout)
     g_timeout_add (options.data.timeout * 1000, 

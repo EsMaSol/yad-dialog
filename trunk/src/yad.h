@@ -50,7 +50,7 @@ typedef struct {
   gboolean fixed;
   gboolean ontop;
   gboolean center;
-  gboolean decorated;
+  gboolean undecorated;
 } YadData;
 
 typedef struct {
