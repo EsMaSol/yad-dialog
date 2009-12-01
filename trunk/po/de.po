@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-30 17:06+0200\n"
-"PO-Revision-Date: 2009-11-30 16:38+0100\n"
+"PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
 "MIME-Version: 1.0\n"
@@ -283,7 +283,7 @@ msgstr "Dateinamen angeben"
 #: ../src/option.c:227
 #: ../src/option.c:481
 msgid "FILENAME"
-msgstr "FATEINAME"
+msgstr "DATEINAME"
 
 #: ../src/option.c:232
 msgid "Allow multiple files to be selected"
@@ -311,7 +311,7 @@ msgstr "Trennzeichen"
 
 #: ../src/option.c:256
 msgid "Confirm file selection if filename already exists"
-msgstr "Datei-auswahl bei bestehender Datei bestätigen"
+msgstr "Datei-Auswahl bei bestehender Datei bestätigen"
 
 #: ../src/option.c:262
 msgid "Sets a filename filter"
@@ -550,7 +550,7 @@ msgstr "Benachrichtigungssymbol-Einstellungen"
 
 #: ../src/option.c:734
 msgid "Show notification icon options"
-msgstr "Benachrichtigungssymbol-Einstellungen anzeigen"
+msgstr "Benachrichtigungssymbol-Einstellungen"
 
 #. Adds progress option entries
 #: ../src/option.c:740
