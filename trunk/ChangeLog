@@ -1,3 +1,9 @@
+Version 0.0.7
+    - add window behavior options
+    - add markup tooltips for tray icon if gtk+ >= 2.16.0
+    - add german translation
+    - fix build on gtk+ 2.12.x
+
 Version 0.0.6
     - add form dialog
     - add label to entry dialog
