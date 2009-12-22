@@ -147,10 +147,19 @@ create_dialog ()
     }
   else
     {
-      gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
-			      GTK_STOCK_OK, YAD_RESPONSE_OK,
-			      GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
-			      NULL);
+#if GTK_CHECK_VERSION (2, 14, 0)  
+      if (gtk_alternative_dialog_button_order (NULL))
+	gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
+				GTK_STOCK_OK, YAD_RESPONSE_OK,
+				GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
+				NULL);
+      else
+#endif
+	gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
+				GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
+				GTK_STOCK_OK, YAD_RESPONSE_OK,
+				NULL);
+      gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
     }
 
   gtk_widget_show_all (dlg);
