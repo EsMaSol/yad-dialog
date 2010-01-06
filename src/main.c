@@ -133,33 +133,36 @@ create_dialog ()
     gtk_box_pack_start (GTK_BOX (vbox), main_widget, TRUE, TRUE, 2);
 
   /* add buttons */
-  if (options.data.buttons)
+  if (!options.data.no_buttons)
     {
-      GSList *tmp = options.data.buttons;
-
-      do
+      if (options.data.buttons)
 	{
-	  YadButton *b = (YadButton *) tmp->data;
-	  gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
-	  tmp = tmp->next;
+	  GSList *tmp = options.data.buttons;
+
+	  do
+	    {
+	      YadButton *b = (YadButton *) tmp->data;
+	      gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
+	      tmp = tmp->next;
+	    }
+	  while (tmp != NULL);
 	}
-      while (tmp != NULL);
-    }
-  else
-    {
-#if GTK_CHECK_VERSION (2, 14, 0)  
-      if (gtk_alternative_dialog_button_order (NULL))
-	gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
-				GTK_STOCK_OK, YAD_RESPONSE_OK,
-				GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
-				NULL);
       else
+	{
+#if GTK_CHECK_VERSION (2, 14, 0)  
+	  if (gtk_alternative_dialog_button_order (NULL))
+	    gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
+				    GTK_STOCK_OK, YAD_RESPONSE_OK,
+				    GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
+				    NULL);
+	  else
 #endif
-	gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
-				GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
-				GTK_STOCK_OK, YAD_RESPONSE_OK,
-				NULL);
-      gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
+	    gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
+				    GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
+				    GTK_STOCK_OK, YAD_RESPONSE_OK,
+				    NULL);
+	  gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
+	}
     }
 
   gtk_widget_show_all (dlg);

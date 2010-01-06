@@ -1,3 +1,8 @@
+Version 0.0.8
+    - use HIG buttons order (with honouring gtk-alternative-button-order settings in .gtkrc)
+    - add --no-buttons option
+    - fix typo in man page
+
 Version 0.0.7
     - add window behavior options
     - add markup tooltips for tray icon if gtk+ >= 2.16.0
