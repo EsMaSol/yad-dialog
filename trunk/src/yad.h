@@ -45,6 +45,7 @@ typedef struct {
   gboolean no_wrap;
   gboolean dialog_sep;
   GSList *buttons;
+  gboolean no_buttons;
   /* window settings */
   gboolean sticky;
   gboolean fixed;

@@ -75,6 +75,12 @@ static GOptionEntry general_options[] = {
     add_button,
     N_("Add dialog button (may be used multiple times)"),
     N_("NAME:ID") },
+  { "no-buttons", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.no_buttons,
+    N_("Don't show buttons"),
+    NULL },
   { "dialog-sep", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -601,6 +607,7 @@ yad_options_init (void)
   options.data.no_wrap = FALSE;
   options.data.timeout = settings.timeout;
   options.data.buttons = NULL;
+  options.data.no_buttons = FALSE;
   options.data.dialog_sep = settings.dlg_sep;
 
   /* Initialize window options */
