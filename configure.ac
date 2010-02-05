@@ -1,4 +1,4 @@
-AC_INIT([Yad], [0.0.8], [http://code.google.com/p/yad/issues/entry], yad)
+AC_INIT([Yad], [0.0.9], [http://code.google.com/p/yad/issues/entry], yad)
 AM_INIT_AUTOMAKE([1.11 foreign dist-bzip2 no-dist-gzip])
 AM_SILENT_RULES([yes])
 
@@ -46,6 +46,7 @@ Makefile
 po/Makefile.in
 src/Makefile
 data/Makefile
+data/yad.spec
 examples/Makefile
 ])
 

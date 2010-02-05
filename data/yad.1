@@ -214,6 +214,11 @@ Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 
 .PP
 Progress options
+.PP
+Progress reading data from stdin. When line begins from \fI`#'\fP, it's replaced progress bar text. Numeric values treats like a persents for progress bar.    
+.TP
+.B \-\-progress-text=STRING
+Set text in progress bar to STRING.
 .TP
 .B \-\-percentage=INT
 Set initial percentage.
