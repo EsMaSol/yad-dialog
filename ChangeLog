@@ -1,3 +1,8 @@
+Version 0.0.9
+    - fix bug in progress dialog
+    - add .spec file
+    - update man page
+
 Version 0.0.8
     - use HIG buttons order (with honouring gtk-alternative-button-order settings in .gtkrc)
     - add --no-buttons option
