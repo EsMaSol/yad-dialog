@@ -11,7 +11,6 @@
 #include "yad.h"
 
 static GtkWidget *progress_bar;
-static GtkWidget *progress_label;
 
 static GIOChannel *channel;
 
@@ -25,8 +24,7 @@ pulsate_progress_bar (gpointer user_data)
 }
 
 static gboolean
-handle_stdin (GIOChannel * channel,
-	      GIOCondition condition, gpointer data)
+handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
   static gint pulsate_timeout = -1;
   float percentage = 0.0;
@@ -41,8 +39,7 @@ handle_stdin (GIOChannel * channel,
       if (options.progress_data.pulsate)
 	{
 	  if (pulsate_timeout == -1)
-	    pulsate_timeout =
-	      g_timeout_add (100, pulsate_progress_bar, NULL);
+	    pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
 	}
 
       while (channel->is_readable != TRUE)
@@ -81,9 +78,9 @@ handle_stdin (GIOChannel * channel,
 	      /* We have a comment, so let's try to change the label */
 	      match = g_strstr_len (string->str, strlen (string->str), "#");
 	      match++;
-	      gtk_label_set_text (GTK_LABEL (progress_label),
-				  g_strcompress (g_strchomp
-						 (g_strchug (match))));
+	      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar),
+					 g_strcompress (g_strchomp
+							(g_strchug (match))));
 	    }
 	  else
 	    {
@@ -130,7 +127,7 @@ handle_stdin (GIOChannel * channel,
 }
 
 GtkWidget *
-progress_create_widget (GtkWidget *dlg)
+progress_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
 
@@ -150,4 +147,3 @@ progress_create_widget (GtkWidget *dlg)
 
   return w;
 }
-
