@@ -12,8 +12,6 @@
 
 static GtkWidget *progress_bar;
 
-static GIOChannel *channel;
-
 gint pulsate_timeout (gpointer data);
 
 static gboolean
@@ -130,6 +128,7 @@ GtkWidget *
 progress_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
+  GIOChannel *channel;
 
   w = progress_bar = gtk_progress_bar_new ();
 
@@ -139,6 +138,9 @@ progress_create_widget (GtkWidget * dlg)
   if (options.progress_data.progress_text)
     gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
 			       options.progress_data.progress_text);
+  if (options.progress_data.rtl)
+    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w),
+				      GTK_PROGRESS_RIGHT_TO_LEFT);
 
   channel = g_io_channel_unix_new (0);
   g_io_channel_set_encoding (channel, NULL, NULL);
