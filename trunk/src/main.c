@@ -92,10 +92,12 @@ create_dialog ()
     }
   if (options.data.dialog_text)
     {
+      gchar *buf = g_strcompress (options.data.dialog_text);
       text = gtk_label_new (NULL);
-      gtk_label_set_markup (GTK_LABEL (text), options.data.dialog_text);
+      gtk_label_set_markup (GTK_LABEL (text), buf);
       gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
       gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
+      g_free (buf);
     }
 
   /* add main widget */
