@@ -417,6 +417,12 @@ static GOptionEntry progress_options[] = {
     &options.progress_data.autokill,
     N_("Kill parent process if cancel button is pressed"),
     NULL },
+  { "rtl", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.progress_data.rtl,
+    N_("Right-To-Left progress bar direction"),
+    NULL },
   { NULL }
 };
 
@@ -665,6 +671,7 @@ yad_options_init (void)
   options.progress_data.pulsate = FALSE;
   options.progress_data.autoclose = FALSE;
   options.progress_data.autokill = FALSE;
+  options.progress_data.rtl = FALSE;
 
   /* Initialize scale data */
   options.scale_data.value = 0;

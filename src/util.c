@@ -34,7 +34,6 @@ create_settings (gchar *filename)
   g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
   g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
-  
   context = g_key_file_to_data (kf, NULL, NULL);
 
   g_key_file_free (kf);

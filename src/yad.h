@@ -104,6 +104,7 @@ typedef struct {
   gboolean autoclose;
   gboolean autokill;
   gdouble percentage;
+  gboolean rtl;
 } YadProgressData;
 
 typedef struct {
