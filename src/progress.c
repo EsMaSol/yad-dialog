@@ -76,11 +76,11 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 	      gchar *match;
 
 	      /* We have a comment, so let's try to change the label */
-	      match = g_strstr_len (string->str, strlen (string->str), "#");
+	      match = g_strstr_len (string->str, string->len, "#");
 	      match++;
+	      /* FIXME: g_strcompress() return newly allocated string. so there is a little memory leak */
 	      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar),
-					 g_strcompress (g_strchomp
-							(g_strchug (match))));
+					 g_strcompress (g_strstrip (match)));
 	    }
 	  else
 	    {
