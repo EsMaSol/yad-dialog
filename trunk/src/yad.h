@@ -42,6 +42,7 @@ typedef struct {
   guint timeout;
   gchar *dialog_text;
   gchar *dialog_image;
+  gboolean image_on_top;
   gboolean no_wrap;
   gboolean dialog_sep;
   GSList *buttons;

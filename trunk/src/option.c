@@ -63,6 +63,12 @@ static GOptionEntry general_options[] = {
     &options.data.dialog_image,
     N_("Set the dialog image"),
     N_("IMAGE") },
+  { "image-on-top", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_NONE,
+    &options.data.image_on_top,
+    N_("Show image above main widget"),
+    NULL },
   { "no-wrap", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_NONE,
@@ -610,6 +616,7 @@ yad_options_init (void)
   options.data.height = settings.height;
   options.data.dialog_text = NULL;
   options.data.dialog_image = NULL;
+  options.data.image_on_top = FALSE;
   options.data.no_wrap = FALSE;
   options.data.timeout = settings.timeout;
   options.data.buttons = NULL;

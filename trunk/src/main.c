@@ -20,7 +20,7 @@ GtkWidget *
 create_dialog ()
 {
   GtkWidget *dlg;
-  GtkWidget *hbox, *vbox; 
+  GtkWidget *hbox, *vbox, *hbox2; 
   GtkWidget *image;
   GtkWidget *text;
   GtkWidget *main_widget = NULL;
@@ -69,7 +69,7 @@ create_dialog ()
 		   (GSourceFunc) timeout_cb, dlg);
 
   /* add top label widgets */
-  hbox = gtk_hbox_new (FALSE, 2);
+  hbox2 = hbox = gtk_hbox_new (FALSE, 2);
 #if GTK_CHECK_VERSION (2, 14, 0)  
   gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area 
 				    (GTK_DIALOG (dlg))), hbox);
@@ -79,8 +79,15 @@ create_dialog ()
   vbox = gtk_vbox_new (FALSE, 2);
   gtk_box_pack_end (GTK_BOX (hbox), vbox, TRUE, TRUE, 2);
 
+  if (options.data.image_on_top)
+    {
+      hbox2 = gtk_hbox_new (FALSE, 5);
+      gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 2);
+    }
+
   if (options.data.dialog_image)
     {
+      
       if (g_file_test (options.data.dialog_image, G_FILE_TEST_EXISTS))
 	image = gtk_image_new_from_file (options.data.dialog_image);
       else
@@ -88,7 +95,7 @@ create_dialog ()
 					      GTK_ICON_SIZE_DIALOG);
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
       gtk_misc_set_padding (GTK_MISC (image), 5, 5);
-      gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 2);
+      gtk_box_pack_start (GTK_BOX (hbox2), image, FALSE, FALSE, 2);
     }
   if (options.data.dialog_text)
     {
@@ -96,7 +103,10 @@ create_dialog ()
       text = gtk_label_new (NULL);
       gtk_label_set_markup (GTK_LABEL (text), buf);
       gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
-      gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
+      if (options.data.image_on_top)
+	gtk_box_pack_start (GTK_BOX (hbox2), text, FALSE, FALSE, 2);
+      else
+	gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
       g_free (buf);
     }
 
