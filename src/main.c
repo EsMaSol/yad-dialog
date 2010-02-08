@@ -86,8 +86,7 @@ create_dialog ()
     }
 
   if (options.data.dialog_image)
-    {
-      
+    {      
       if (g_file_test (options.data.dialog_image, G_FILE_TEST_EXISTS))
 	image = gtk_image_new_from_file (options.data.dialog_image);
       else
