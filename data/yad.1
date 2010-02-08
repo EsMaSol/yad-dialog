@@ -1,4 +1,4 @@
-.TH YAD 1 "November 12, 2009"
+.TH YAD 1 "February 08, 2009"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
@@ -78,6 +78,9 @@ Set the dialog text.
 .B \-\-image=IMAGE
 Set the dialog image which appears on the left side of dialog. 
 IMAGE might be file name or icon name from current icon theme.
+.TP
+.B \-\-image-on-top
+Show image above main widget instead left.
 .TP
 .B \-\-button=BUTTON:ID
 Add the dialog button. May be used several times. ID is an exit code. 
@@ -222,6 +225,9 @@ Set text in progress bar to STRING.
 .TP
 .B \-\-percentage=INT
 Set initial percentage.
+.TP
+.B \-\-rtl
+Set Right-To-Left progress bar direction.
 .TP
 .B \-\-auto\-close
 Close dialog when 100% has been reached.
