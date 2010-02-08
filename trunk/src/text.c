@@ -149,7 +149,7 @@ fill_buffer_from_stdin ()
 }
 
 GtkWidget *
-text_create_widget (GtkWidget *dlg)
+text_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
 
@@ -163,6 +163,8 @@ text_create_widget (GtkWidget *dlg)
   gtk_text_view_set_buffer (GTK_TEXT_VIEW (text_view), text_buffer);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), 
 			      options.common_data.editable);
+  if (!options.common_data.editable)
+    gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
 
   if (options.text_data.font)
     {
