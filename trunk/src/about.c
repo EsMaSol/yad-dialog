@@ -1,8 +1,4 @@
 
-#include <config.h>
-
-#include <glib/gi18n.h>
-
 #include "yad.h"
 
 gint
@@ -30,12 +26,12 @@ yad_about (void)
   dialog = gtk_about_dialog_new ();
 
   g_object_set (G_OBJECT (dialog),
-		"name", "YAD",
-		"version", VERSION,
+		"name", PACKAGE_NAME,
+		"version", PACKAGE_VERSION,
 		"copyright", "Copyright \xc2\xa9 2009 Victor Ananjevsky <ananasik@gmail.com>",
 		"comments", _("Yet Another Dialog\n(show dialog boxes from shell scripts)\n\nBased on Zenity code\n"),
 		"authors", authors,
-		"website", "http://code.google.com/p/yad",
+		"website", PACKAGE_URL,
 		"translator-credits", translators,
 		"wrap-license", TRUE, "license", license, 
 		NULL);

@@ -2,6 +2,8 @@
 #ifndef YAD_H
 #define YAD_H
 
+#include <config.h>
+
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
@@ -64,6 +66,8 @@ typedef struct {
 
 typedef struct {
   gchar *init_color;
+  gboolean use_palette;
+  gchar *palette;
   gboolean extra;
 } YadColorData;
 
@@ -163,6 +167,7 @@ typedef struct {
   gchar *menu_sep;
   gboolean dlg_sep;
   gboolean combo_always_editable;
+  gboolean expand_palette;
 } YadSettings;
 
 extern YadSettings settings;
@@ -191,7 +196,7 @@ void progress_print_result (void);
 void scale_print_result (void);
 void text_print_result (void);
 
-gint yad_notification_tun (void);
+gint yad_notification_run (void);
 
 gint yad_about (void);
 

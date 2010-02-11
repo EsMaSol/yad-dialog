@@ -1,11 +1,10 @@
 
-#include <config.h>
-
 #include "yad.h"
 
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -175,7 +174,13 @@ static GOptionEntry color_options[] = {
     &options.color_data.init_color,
     N_("Set initial color value"),
     N_("COLOR") },
-  { "extra", 0,
+   { "palette", 0,
+    G_OPTION_FLAG_OPTIONAL_ARG,
+    G_OPTION_ARG_CALLBACK,
+    add_palette,
+    N_("Set path to rgb.txt file"),
+    N_("FILENAME") },
+ { "extra", 0,
     0,
     G_OPTION_ARG_NONE,
     &options.color_data.extra,
@@ -573,6 +578,17 @@ add_field (const gchar *option_name,
   return TRUE;
 }
 
+static gboolean
+add_palette (const gchar *option_name,
+	     const gchar *value,
+	     gpointer data, GError **err)
+{
+  options.color_data.use_palette = TRUE;
+  if (value)
+    options.color_data.palette = g_strdup (value);
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -644,6 +660,8 @@ yad_options_init (void)
 
   /* I(nitialize color data */
   options.color_data.init_color = NULL;
+  options.color_data.use_palette = FALSE;
+  options.color_data.palette = NULL;
   options.color_data.extra = FALSE;
 
   /* Initialize entry data */

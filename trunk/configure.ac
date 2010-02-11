@@ -1,4 +1,4 @@
-AC_INIT([Yad], [0.0.9], [http://code.google.com/p/yad/issues/entry], yad)
+AC_INIT([YAD], [0.0.9], [http://code.google.com/p/yad/issues/entry], yad, [http://code.google.com/p/yad])
 AM_INIT_AUTOMAKE([1.11 foreign dist-bzip2 no-dist-gzip])
 AM_SILENT_RULES([yes])
 
@@ -22,6 +22,13 @@ AC_SUBST([YAD_CFLAGS])
 AC_SUBST([YAD_LIBS])
 
 GTK_DISABLE_DEPRECATED
+
+# rgb.txt
+AC_ARG_WITH([rgb],
+	[AS_HELP_STRING([--with-rgb=PATH],
+			[set path to rgb.txt file (default - /etc/X11/rgb.txt)])],
+	[AC_DEFINE_UNQUOTED([RGB_FILE], ["$withval"], [Path to rgb.txt file])],
+	[AC_DEFINE([RGB_FILE], ["/etc/X11/rgb.txt"], [Path to rgb.txt file])])
 
 # *******************************
 # Internationalization
