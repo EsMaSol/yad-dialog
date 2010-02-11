@@ -41,7 +41,7 @@ create_palette ()
 
   if ((fp = fopen (filename, "r")) == NULL)
     {  
-      g_warning (_("Can't open file %s: %s"), filename, strerror (errno));
+      g_printerr (_("Can't open file %s: %s"), filename, strerror (errno));
       return NULL;
     }
 
