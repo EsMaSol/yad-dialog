@@ -1,6 +1,4 @@
 
-#include <config.h>
-
 #include "yad.h"
 
 static GtkWidget *scale;

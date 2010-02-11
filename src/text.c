@@ -1,6 +1,4 @@
 
-#include <config.h>
-
 #include <errno.h>
 
 #include <gdk/gdkkeysyms.h>

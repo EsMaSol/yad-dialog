@@ -1,6 +1,4 @@
 
-#include <config.h>
-
 #include <locale.h>
 #include <stdlib.h>
 

@@ -1,8 +1,6 @@
 
 #include <string.h>
 
-#include <gtk/gtk.h>
-
 #include "yad.h"
 
 #define SETTINGS_FILE "yad.conf"
@@ -34,6 +32,8 @@ create_settings (gchar *filename)
   g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
   g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
+  g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
+  g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
   context = g_key_file_to_data (kf, NULL, NULL);
 
   g_key_file_free (kf);
@@ -56,6 +56,7 @@ read_settings (void)
   settings.menu_sep = "!";
   settings.dlg_sep = FALSE;
   settings.combo_always_editable = FALSE;
+  settings.expand_palette = FALSE;
 
   filename = g_build_filename (g_get_user_config_dir (), 
 			       SETTINGS_FILE, NULL);
@@ -82,14 +83,14 @@ read_settings (void)
 	    settings.rules_hint = g_key_file_get_boolean (kf, "General", "rules_hint", NULL);
 	  if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
 	    settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
+	  if (g_key_file_has_key (kf, "General", "expand_palette", NULL))
+	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
 	}
 
       g_key_file_free (kf);
     }
   else
-    {
-      create_settings (filename);
-    }
+    create_settings (filename);
 
   g_free (filename);
 }

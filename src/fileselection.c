@@ -1,6 +1,4 @@
 
-#include <config.h>
-
 #include <string.h>
 
 #include "yad.h"

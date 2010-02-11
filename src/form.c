@@ -1,6 +1,4 @@
 
-#include "config.h"
-
 #include "yad.h"
 
 GSList *fields = NULL;
