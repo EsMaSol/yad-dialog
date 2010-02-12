@@ -490,6 +490,18 @@ static GOptionEntry text_options[] = {
     &text_mode,
     N_("Display text information dialog"),
     NULL },
+  { "fore", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.text_data.fore,
+    N_("Use specified color for text"),
+    N_("COLOR") },
+  { "back", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.text_data.back,
+    N_("Use specified color for background"),
+    N_("COLOR") },
   { "font", 0,
     0,
     G_OPTION_ARG_STRING,
@@ -707,6 +719,8 @@ yad_options_init (void)
   options.scale_data.hide_value = FALSE;
 
   /* Initialize text data */
+  options.text_data.fore = NULL;
+  options.text_data.back = NULL;
   options.text_data.font = NULL;
 }
 
