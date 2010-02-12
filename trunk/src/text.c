@@ -71,7 +71,6 @@ handle_stdin (GIOChannel * channel,
           else
 	    gtk_text_buffer_insert (text_buffer, &end, buf, len);
 
-	  /* FIXME: add tail here */
 	  if (options.text_data.tail)
 	    gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
         }
