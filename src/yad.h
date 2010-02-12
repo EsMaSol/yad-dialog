@@ -122,6 +122,8 @@ typedef struct {
 } YadScaleData;
 
 typedef struct {
+  gchar *fore;
+  gchar *back;
   gchar *font;
 } YadTextData;
 

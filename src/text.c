@@ -70,6 +70,8 @@ handle_stdin (GIOChannel * channel,
             }
           else
 	    gtk_text_buffer_insert (text_buffer, &end, buf, len);
+
+	  /* FIXME: add tail here */
         }
     }
 
@@ -163,6 +165,22 @@ text_create_widget (GtkWidget * dlg)
 			      options.common_data.editable);
   if (!options.common_data.editable)
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
+
+  if (options.text_data.fore)
+    {
+      GdkColor clr;
+
+      if (gdk_color_parse (options.text_data.fore, &clr))
+	gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
+    }
+
+  if (options.text_data.back)
+    {
+      GdkColor clr;
+
+      if (gdk_color_parse (options.text_data.back, &clr))
+	gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
+    }
 
   if (options.text_data.font)
     {
