@@ -68,12 +68,6 @@ static GOptionEntry general_options[] = {
     &options.data.image_on_top,
     N_("Show image above main widget"),
     NULL },
-  { "no-wrap", 0,
-    G_OPTION_FLAG_NOALIAS,
-    G_OPTION_ARG_NONE,
-    &options.data.no_wrap,
-    N_("Do not enable text wrapping"),
-    NULL },
   { "button", 0,
     0,
     G_OPTION_ARG_CALLBACK,
@@ -508,6 +502,12 @@ static GOptionEntry text_options[] = {
     &options.text_data.font,
     N_("Use specified font"),
     N_("FONTNAME") },
+  { "wrap", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.text_data.wrap,
+    N_("Enable text wrapping"),
+    NULL },
   { "filename", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_FILENAME,
@@ -645,7 +645,6 @@ yad_options_init (void)
   options.data.dialog_text = NULL;
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
-  options.data.no_wrap = FALSE;
   options.data.timeout = settings.timeout;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
@@ -722,6 +721,7 @@ yad_options_init (void)
   options.text_data.fore = NULL;
   options.text_data.back = NULL;
   options.text_data.font = NULL;
+  options.text_data.wrap = FALSE;
 }
 
 GOptionContext *
