@@ -312,8 +312,8 @@ yad_notification_run ()
   gtk_status_icon_set_visible (status_icon, TRUE);
 
   if (options.data.timeout > 0)
-    g_timeout_add (options.data.timeout * 1000,
-		   (GSourceFunc) timeout_cb, NULL);
+    g_timeout_add_seconds (options.data.timeout,
+			   (GSourceFunc) timeout_cb, NULL);
 
   gtk_main ();
 
