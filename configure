@@ -6275,7 +6275,7 @@ $as_echo "$LINGUAS" >&6; }
 
 # *******************************
 
-ac_config_files="$ac_config_files Makefile po/Makefile.in src/Makefile data/Makefile data/yad.spec examples/Makefile"
+ac_config_files="$ac_config_files Makefile po/Makefile.in src/Makefile data/Makefile data/yad.spec"
 
 
 cat >confcache <<\_ACEOF
@@ -7006,7 +7006,6 @@ do
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
     "data/yad.spec") CONFIG_FILES="$CONFIG_FILES data/yad.spec" ;;
-    "examples/Makefile") CONFIG_FILES="$CONFIG_FILES examples/Makefile" ;;
     "po/stamp-it") CONFIG_COMMANDS="$CONFIG_COMMANDS po/stamp-it" ;;
 
   *) as_fn_error "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
