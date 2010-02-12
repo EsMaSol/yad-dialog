@@ -63,8 +63,8 @@ create_dialog ()
   
   /* set timeout */
   if (options.data.timeout)
-    g_timeout_add (options.data.timeout * 1000, 
-		   (GSourceFunc) timeout_cb, dlg);
+    g_timeout_add_seconds (options.data.timeout, 
+			   (GSourceFunc) timeout_cb, dlg);
 
   /* add top label widgets */
   hbox2 = hbox = gtk_hbox_new (FALSE, 2);
