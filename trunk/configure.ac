@@ -54,7 +54,6 @@ po/Makefile.in
 src/Makefile
 data/Makefile
 data/yad.spec
-examples/Makefile
 ])
 
 AC_OUTPUT
