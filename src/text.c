@@ -166,6 +166,9 @@ text_create_widget (GtkWidget * dlg)
   if (!options.common_data.editable)
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
 
+  if (options.text_data.wrap)
+    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
+
   if (options.text_data.fore)
     {
       GdkColor clr;

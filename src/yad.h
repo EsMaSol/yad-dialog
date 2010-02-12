@@ -45,7 +45,6 @@ typedef struct {
   gchar *dialog_text;
   gchar *dialog_image;
   gboolean image_on_top;
-  gboolean no_wrap;
   gboolean dialog_sep;
   GSList *buttons;
   gboolean no_buttons;
@@ -125,6 +124,7 @@ typedef struct {
   gchar *fore;
   gchar *back;
   gchar *font;
+  gboolean wrap;
 } YadTextData;
 
 typedef struct {
