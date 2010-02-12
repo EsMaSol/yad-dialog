@@ -125,6 +125,7 @@ typedef struct {
   gchar *back;
   gchar *font;
   gboolean wrap;
+  gboolean tail;
 } YadTextData;
 
 typedef struct {

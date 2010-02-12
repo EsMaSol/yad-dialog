@@ -508,6 +508,12 @@ static GOptionEntry text_options[] = {
     &options.text_data.wrap,
     N_("Enable text wrapping"),
     NULL },
+  { "tail", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.text_data.tail,
+    N_("Autoscroll to end of text"),
+    NULL },
   { "filename", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_FILENAME,
@@ -722,6 +728,7 @@ yad_options_init (void)
   options.text_data.back = NULL;
   options.text_data.font = NULL;
   options.text_data.wrap = FALSE;
+  options.text_data.tail = FALSE;
 }
 
 GOptionContext *
