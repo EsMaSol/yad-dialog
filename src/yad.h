@@ -14,27 +14,37 @@ G_BEGIN_DECLS
 #define YAD_RESPONSE_TIMEOUT   	127
 #define YAD_RESPONSE_ESC   	252
 
-typedef enum
-{
-  MODE_MESSAGE,
-  MODE_CALENDAR,
-  MODE_COLOR,
-  MODE_ENTRY,
-  MODE_FILE,
-  MODE_FORM,
-  MODE_LIST,
-  MODE_NOTIFICATION,
-  MODE_PROGRESS,
-  MODE_SCALE,
-  MODE_TEXTINFO,
-  MODE_ABOUT,
-  MODE_VERSION,
+typedef enum {
+  YAD_MODE_MESSAGE,
+  YAD_MODE_CALENDAR,
+  YAD_MODE_COLOR,
+  YAD_MODE_ENTRY,
+  YAD_MODE_FILE,
+  YAD_MODE_FORM,
+  YAD_MODE_LIST,
+  YAD_MODE_NOTIFICATION,
+  YAD_MODE_PROGRESS,
+  YAD_MODE_SCALE,
+  YAD_MODE_TEXTINFO,
+  YAD_MODE_ABOUT,
+  YAD_MODE_VERSION,
 } YadDialogMode;
+
+typedef enum {
+  YAD_FIELD_SIMPLE = 0,
+  YAD_FIELD_HIDDEN,
+  YAD_FIELD_READ_ONLY,
+} YadFieldType;
 
 typedef struct {
   gchar *name;
   gint response;
 } YadButton;
+
+typedef struct {
+  gchar *name;
+  YadFieldType type;
+} YadField;
 
 typedef struct {
   gchar *dialog_title;

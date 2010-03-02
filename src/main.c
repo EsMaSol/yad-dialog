@@ -110,31 +110,31 @@ create_dialog ()
   /* add main widget */
   switch (options.mode)
     {
-    case MODE_CALENDAR:
+    case YAD_MODE_CALENDAR:
       main_widget = calendar_create_widget (dlg);
       break;
-    case MODE_COLOR:
+    case YAD_MODE_COLOR:
       main_widget = color_create_widget (dlg);
       break;
-    case MODE_ENTRY:
+    case YAD_MODE_ENTRY:
       main_widget = entry_create_widget (dlg);
       break;
-    case MODE_FILE:
+    case YAD_MODE_FILE:
       main_widget = file_create_widget (dlg);
       break;
-    case MODE_FORM:
+    case YAD_MODE_FORM:
       main_widget = form_create_widget (dlg);
       break;
-    case MODE_LIST:
+    case YAD_MODE_LIST:
       main_widget = list_create_widget (dlg);
       break;
-    case MODE_PROGRESS:
+    case YAD_MODE_PROGRESS:
       main_widget = progress_create_widget (dlg);
       break;
-    case MODE_SCALE:
+    case YAD_MODE_SCALE:
       main_widget = scale_create_widget (dlg);
       break;
-    case MODE_TEXTINFO:
+    case YAD_MODE_TEXTINFO:
       main_widget = text_create_widget (dlg);
       break;
     }
@@ -184,28 +184,28 @@ print_result (void)
 {
     switch (options.mode)
     {
-    case MODE_CALENDAR:
+    case YAD_MODE_CALENDAR:
       calendar_print_result ();
       break;
-    case MODE_COLOR:
+    case YAD_MODE_COLOR:
       color_print_result ();
       break;
-    case MODE_ENTRY:
+    case YAD_MODE_ENTRY:
       entry_print_result ();
       break;
-    case MODE_FILE:
+    case YAD_MODE_FILE:
       file_print_result ();
       break;
-    case MODE_FORM:
+    case YAD_MODE_FORM:
       form_print_result ();
       break;
-    case MODE_LIST:
+    case YAD_MODE_LIST:
       list_print_result ();
       break;
-    case MODE_SCALE:
+    case YAD_MODE_SCALE:
       scale_print_result ();
       break;
-    case MODE_TEXTINFO:
+    case YAD_MODE_TEXTINFO:
       text_print_result ();
       break;
     }
@@ -244,13 +244,13 @@ main (gint argc, gchar ** argv)
 
   switch (options.mode)
     {
-    case MODE_ABOUT:
+    case YAD_MODE_ABOUT:
       ret = yad_about ();
       break;
-    case MODE_VERSION:
+    case YAD_MODE_VERSION:
       g_print ("%s\n", VERSION);
       break;
-    case MODE_NOTIFICATION:
+    case YAD_MODE_NOTIFICATION:
       ret = yad_notification_run ();
       break;
     default:

@@ -286,8 +286,8 @@ static GOptionEntry form_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_field,
-    N_("Add field to form"),
-    N_("LABEL") },
+    N_("Add field to form (TYPE - H for hidden, RO for readonly)"),
+    N_("LABEL[:TYPE]") },
   { "separator", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
@@ -589,10 +589,25 @@ add_field (const gchar *option_name,
 	   const gchar *value,
 	   gpointer data, GError **err)
 {
-  gchar *name = g_strdup (value);
+  YadField *fld;
+  gchar **fstr = g_strsplit (value, ":", 2);
 
+  fld = g_new0 (YadField, 1);
+  fld->name = g_strdup (fstr[0]);
+  if (fstr[1])
+    {
+      if (g_ascii_strcasecmp (fstr[1], "H") == 0)
+	fld->type = YAD_FIELD_HIDDEN;
+      else if (g_ascii_strcasecmp (fstr[1], "RO") == 0)
+	fld->type = YAD_FIELD_READ_ONLY;
+    }
+  else
+    fld->type = YAD_FIELD_SIMPLE;
   options.form_data.fields =
-    g_slist_append (options.form_data.fields, name);
+    g_slist_append (options.form_data.fields, fld);
+
+  g_strfreev (fstr);
+
   return TRUE;
 }
 
@@ -611,36 +626,36 @@ void
 yad_set_mode (void)
 {
   if (calendar_mode)
-    options.mode = MODE_CALENDAR;
+    options.mode = YAD_MODE_CALENDAR;
   if (color_mode)
-    options.mode = MODE_COLOR;
+    options.mode = YAD_MODE_COLOR;
   else if (entry_mode)
-    options.mode = MODE_ENTRY;
+    options.mode = YAD_MODE_ENTRY;
   else if (file_mode)
-    options.mode = MODE_FILE;
+    options.mode = YAD_MODE_FILE;
   else if (form_mode)
-    options.mode = MODE_FORM;
+    options.mode = YAD_MODE_FORM;
   else if (list_mode)
-    options.mode = MODE_LIST;
+    options.mode = YAD_MODE_LIST;
   else if (notification_mode)
-    options.mode = MODE_NOTIFICATION;
+    options.mode = YAD_MODE_NOTIFICATION;
   else if (progress_mode)
-    options.mode = MODE_PROGRESS;
+    options.mode = YAD_MODE_PROGRESS;
   else if (scale_mode)
-    options.mode = MODE_SCALE;
+    options.mode = YAD_MODE_SCALE;
   else if (text_mode)
-    options.mode = MODE_TEXTINFO;
+    options.mode = YAD_MODE_TEXTINFO;
   else if (about_mode)
-    options.mode = MODE_ABOUT;
+    options.mode = YAD_MODE_ABOUT;
   else if (version_mode)
-    options.mode = MODE_VERSION;
+    options.mode = YAD_MODE_VERSION;
 }
 
 void
 yad_options_init (void)
 {
   /* Set default mode */
-  options.mode = MODE_MESSAGE;
+  options.mode = YAD_MODE_MESSAGE;
   options.extra_data = NULL;
 
   /* Initialize general data */
