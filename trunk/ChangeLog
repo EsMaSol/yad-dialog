@@ -1,3 +1,15 @@
+Version 0.0.10
+    - add rtl direction to progress bar
+    - add --image-on-top option 
+    - set cursor invisible when text is not editable in text dialog
+    - add oprtion for setting colors of text-dialog
+    - add --tail options to text dialog for autoscrolling
+    - add predefined colors to color dialog
+    - recognize 'quit' command from stdin in notification icon
+    - add types to fields in form dialog
+    - usage examples now on wiki
+    - cleanups and bugfixes
+
 Version 0.0.9
     - fix bug in progress dialog
     - add .spec file
