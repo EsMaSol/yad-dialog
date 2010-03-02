@@ -300,7 +300,7 @@ Also the standard GTK+ options are accepted.
 
 .SH NOTIFICATION ICON
 Commands send to yad in form \fBcommand:args\fP.
-Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP and \fImenu\fP.
+Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP, \fImenu\fP and \fIquit\fP.
 .TP
 .B
 icon:ICONNAME
@@ -324,6 +324,10 @@ menu:STRING
 Set popup menu for notification icon.
 STRING must be in form \fIname1!action1|name2!action2...\fP.
 Empty name add separator to menu.
+.TP
+.B
+quit
+Exit the program.
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to

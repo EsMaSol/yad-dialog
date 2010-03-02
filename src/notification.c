@@ -227,6 +227,11 @@ handle_stdin (GIOChannel * channel,
               g_free (action);
               action = g_strdup (value);
             }
+	  else if (!g_ascii_strcasecmp (command, "quit"))
+	    {
+	      exit_code = YAD_RESPONSE_OK;
+	      gtk_main_quit ();
+	    }
           else if (!g_ascii_strcasecmp (command, "menu"))
             {
               MenuData *mdata;
