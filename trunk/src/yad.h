@@ -63,6 +63,7 @@ typedef struct {
   gboolean fixed;
   gboolean ontop;
   gboolean center;
+  gboolean mouse;
   gboolean undecorated;
 } YadData;
 

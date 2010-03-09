@@ -111,6 +111,12 @@ static GOptionEntry general_options[] = {
     &options.data.center,
     N_("Place window on center of screen"),
     NULL },
+  { "mouse", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.mouse,
+    N_("Place window at the mouse position"),
+    NULL },
   { "undecorated", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -676,6 +682,7 @@ yad_options_init (void)
   options.data.fixed = FALSE;
   options.data.ontop = FALSE;
   options.data.center = FALSE;
+  options.data.mouse = FALSE;
   options.data.undecorated = FALSE;
 
   /* Initialize common data */
