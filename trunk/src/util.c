@@ -59,7 +59,6 @@ read_settings (void)
   settings.dlg_sep = FALSE;
   settings.combo_always_editable = FALSE;
   settings.expand_palette = FALSE;
-  settings.icon_theme = gtk_icon_theme_get_default ();
   settings.icon_size = 16;
 
   filename = g_build_filename (g_get_user_config_dir (), 
@@ -114,14 +113,18 @@ get_pixbuf (gchar *name)
 	{
 	  g_warning ("yad_get_pixbuf(): %s", err->message);
 	  g_error_free (err);
-	  /* get fallback pixbuf */
-	  pb = gtk_icon_theme_load_icon (settings.icon_theme, "unknown", settings.icon_size, 
-					 GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 	}
     }
   else
     {
       pb = gtk_icon_theme_load_icon (settings.icon_theme, name, settings.icon_size, 
+				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+    }
+
+  if (!pb)
+    {
+      /* get fallback pixbuf */
+      pb = gtk_icon_theme_load_icon (settings.icon_theme, "unknown", settings.icon_size, 
 				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
     }
 
