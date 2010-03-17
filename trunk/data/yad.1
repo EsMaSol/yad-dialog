@@ -73,14 +73,14 @@ Set the dialog timeout in seconds.
 Set the dialog text.
 .TP
 .B \-\-image=IMAGE
-Set the dialog image which appears on the left side of dialog. 
+Set the dialog image which appears on the left side of dialog.
 IMAGE might be file name or icon name from current icon theme.
 .TP
 .B \-\-image-on-top
 Show image above main widget instead left.
 .TP
 .B \-\-button=BUTTON:ID
-Add the dialog button. May be used several times. ID is an exit code. 
+Add the dialog button. May be used several times. ID is an exit code.
 If no buttons specified OK and Cancel button used.
 .TP
 .B \-\-no-buttons
@@ -132,7 +132,8 @@ Set initial color value.
 Show extra information about color in returned string.
 .TP
 .B \-\-palette[=FILENAME]
-Show palette ans set predefined colors from given filename. By default used /etc/X11/rgb.txt.
+Show palette ans set predefined colors from given filename.
+By default used /etc/X11/rgb.txt.
 
 .PP
 Text entry options
@@ -185,7 +186,9 @@ Additional data in command line interpret as a default values for form fields.
 List options
 .TP
 .B \-\-column=STRING[:TYPE]
-Set the column header. Types are TEXT, NUM, CHK or IMG. TEXT type is default. Images may be path to image or icon name from currnet GTK icon theme. Size of icons may be set in config file.
+Set the column header. Types are TEXT, NUM, CHK or IMG. TEXT type is default.
+Images may be path to image or icon name from currnet GTK icon theme.
+Size of icons may be set in config file. Image field prints as empty value.
 .TP
 .B \-\-checklist
 Use check boxes for first column.
