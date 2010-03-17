@@ -195,6 +195,7 @@ typedef struct {
   gboolean combo_always_editable;
   gboolean expand_palette;
   GtkIconTheme *icon_theme;
+  GdkPixbuf *fallback_image;
   guint icon_size;
 } YadSettings;
 

@@ -122,11 +122,7 @@ get_pixbuf (gchar *name)
     }
 
   if (!pb)
-    {
-      /* get fallback pixbuf */
-      pb = gtk_icon_theme_load_icon (settings.icon_theme, "unknown", settings.icon_size, 
-				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
-    }
+    pb = settings.fallback_image;
 
   return pb;
 }

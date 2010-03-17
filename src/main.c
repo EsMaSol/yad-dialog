@@ -235,8 +235,10 @@ main (gint argc, gchar ** argv)
 
   yad_options_init ();
 
-  /* set default icon theme */
+  /* set default icon and icon theme */
   settings.icon_theme = gtk_icon_theme_get_default ();
+  settings.fallback_image = gtk_icon_theme_load_icon (settings.icon_theme, "unknown", settings.icon_size, 
+						      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   ctx = yad_create_context ();
   g_option_context_parse (ctx, &argc, &argv, &err);
