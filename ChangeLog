@@ -1,3 +1,9 @@
+2010-03-17 09:56  ananasik
+
+	* ChangeLog, Makefile.in, NEWS, aclocal.m4, configure,
+	  configure.ac, data/Makefile.in, data/yad.1, src/Makefile.in: Come
+	  cleanups. Bump version to 0.1.0
+
 2010-03-17 06:53  ananasik
 
 	* src/main.c, src/util.c, src/yad.h: initialize fallback image at
