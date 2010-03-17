@@ -1,4 +1,4 @@
-.TH YAD 1 "February 08, 2009"
+.TH YAD 1 "Marth 17, 2010"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
@@ -98,6 +98,9 @@ Make window fixed width and height.
 .B \-\-center
 Place window on center of screen.
 .TP
+.B \-\-mouse
+Place window under mouse position.
+.TP
 .B \-\-on-top
 Place window over other windows.
 .TP
@@ -181,8 +184,8 @@ Additional data in command line interpret as a default values for form fields.
 .PP
 List options
 .TP
-.B \-\-column=STRING
-Set the column header.
+.B \-\-column=STRING[:TYPE]
+Set the column header. Types are TEXT, NUM, CHK or IMG. TEXT type is default. Images may be path to image or icon name from currnet GTK icon theme. Size of icons may be set in config file.
 .TP
 .B \-\-checklist
 Use check boxes for first column.
@@ -200,8 +203,7 @@ Allow changes to text.
 Print all data from the list. 
 .TP
 .B \-\-print-column=NUM
-Specify what column to print to standard output. The default is to return
-the first column. '0' may be used to print all columns.
+Specify what column to print to standard output. '0' may be used to print all columns (this is default).
 .TP
 .B \-\-hide\-column=NUMBER
 Hide a specific column.
