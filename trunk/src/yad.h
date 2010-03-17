@@ -36,6 +36,13 @@ typedef enum {
   YAD_FIELD_READ_ONLY,
 } YadFieldType;
 
+typedef enum {
+  YAD_COLUMN_TEXT = 0,
+  YAD_COLUMN_NUM,
+  YAD_COLUMN_CHECK,
+  YAD_COLUMN_IMAGE,
+} YadColumnType;
+
 typedef struct {
   gchar *name;
   gint response;
@@ -45,6 +52,11 @@ typedef struct {
   gchar *name;
   YadFieldType type;
 } YadField;
+
+typedef struct {
+  gchar *name;
+  YadColumnType type;
+} YadColumn;
 
 typedef struct {
   gchar *dialog_title;
@@ -215,6 +227,8 @@ gint yad_notification_run (void);
 gint yad_about (void);
 
 void read_settings (void);
+
+GdkPixbuf * get_pixbuf (gchar *name);
 
 inline void strip_new_line (gchar *str);
 

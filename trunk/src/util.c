@@ -95,6 +95,30 @@ read_settings (void)
   g_free (filename);
 }
 
+GdkPixbuf * 
+get_pixbuf (gchar *name)
+{
+  GdkPixbuf *pb;
+  GError *err = NULL;
+  GtkIconTheme *it = gtk_icon_theme_get_default ();
+
+  if (g_file_test (name, G_FILE_TEST_EXISTS))
+    {
+      pb = gdk_pixbuf_new_from_file (name, &err);
+      if (!pb)
+	{
+	  g_warning ("yad_get_pixbuf(): %s", err->message);
+	  g_error_free (err);
+	  /* get fallback pixbuf */
+	  pb = gtk_icon_theme_load_icon (it, "unknown", 16, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+	}
+    }
+  else
+    pb = gtk_icon_theme_load_icon (it, name, 16, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+
+  return pb;
+}
+
 inline void 
 strip_new_line (gchar *str)
 {
