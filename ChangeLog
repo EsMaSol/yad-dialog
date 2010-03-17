@@ -1,33 +1,251 @@
-Version 0.0.10
-    - add rtl direction to progress bar
-    - add --image-on-top option 
-    - set cursor invisible when text is not editable in text dialog
-    - add oprtion for setting colors of text-dialog
-    - add --tail options to text dialog for autoscrolling
-    - add predefined colors to color dialog
-    - recognize 'quit' command from stdin in notification icon
-    - add types to fields in form dialog
-    - usage examples now on wiki
-    - cleanups and bugfixes
+2010-03-17 06:53  ananasik
 
-Version 0.0.9
-    - fix bug in progress dialog
-    - add .spec file
-    - update man page
+	* src/main.c, src/util.c, src/yad.h: initialize fallback image at
+	  startup
 
-Version 0.0.8
-    - use HIG buttons order (with honouring gtk-alternative-button-order settings in .gtkrc)
-    - add --no-buttons option
-    - fix typo in man page
+2010-03-17 06:46  ananasik
 
-Version 0.0.7
-    - add window behavior options
-    - add markup tooltips for tray icon if gtk+ >= 2.16.0
-    - add german translation
-    - fix build on gtk+ 2.12.x
+	* configure, configure.ac, src/main.c, src/util.c: some fixes in
+	  icons handle
 
-Version 0.0.6
-    - add form dialog
-    - add label to entry dialog
-    - change the default behavior of combo-box entry (this may change in config file)
-    - update translation and man page
+2010-03-17 06:39  ananasik
+
+	* src/util.c, src/yad.h: keep icon size and theme in settings
+	  structure
+
+2010-03-17 05:54  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, src/option.c: update translation
+	  and manual
+
+2010-03-17 05:37  ananasik
+
+	* Makefile.am, Makefile.in, acinclude.m4, aclocal.m4, configure,
+	  configure.ac, data/Makefile.in, m4, po/ChangeLog,
+	  src/Makefile.in, src/list.c, src/option.c, src/util.c, src/yad.h:
+	  add types to list columns
+
+2010-03-09 09:10  ananasik
+
+	* src/main.c, src/option.c, src/yad.h: add --mouse option
+
+2010-03-02 19:31  ananasik
+
+	* ChangeLog: update changelog. release 0.0.10
+
+2010-03-02 14:49  ananasik
+
+	* data/yad.1, src/notification.c: recognize 'quit' command from
+	  stdin in notification icon
+
+2010-03-02 13:54  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, src/form.c, src/main.c,
+	  src/option.c, src/yad.h: Add types to form fields
+
+2010-02-12 12:22  ananasik
+
+	* README: update project info
+
+2010-02-12 12:09  ananasik
+
+	* Makefile.am, Makefile.in, README, configure, configure.ac,
+	  examples: remove examples
+
+2010-02-12 06:54  ananasik
+
+	* TODO: update TODO
+
+2010-02-12 06:03  ananasik
+
+	* data/yad.1, src/text.c: some cleanups
+
+2010-02-12 06:01  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, src/option.c, src/text.c,
+	  src/yad.h: add --tail option to text-info dialog
+
+2010-02-12 05:42  ananasik
+
+	* src/main.c, src/notification.c: use g_timeout_add_seconds instead
+	  of g_timeout_add with power of 1000
+
+2010-02-12 05:24  ananasik
+
+	* configure, configure.ac, po/de.po, po/ru.po: update translation.
+	  bump version to 0.0.10
+
+2010-02-12 05:19  ananasik
+
+	* data/yad.1, src/option.c, src/text.c, src/yad.h: enable text
+	  wrapping in text-info dialog. remove --no-wrap option
+
+2010-02-12 05:00  ananasik
+
+	* src/option.c, src/text.c, src/yad.h: add custom colors for
+	  text-info dialog
+
+2010-02-11 16:01  ananasik
+
+	* po/POTFILES.in, po/de.po, po/ru.po, src/color.c: update
+	  translation
+
+2010-02-11 15:50  ananasik
+
+	* data/yad.1, src/option.c: update documentation
+
+2010-02-11 15:08  ananasik
+
+	* config.h.in, configure, configure.ac, src/about.c,
+	  src/calendar.c, src/color.c, src/entry.c, src/fileselection.c,
+	  src/form.c, src/list.c, src/main.c, src/notification.c,
+	  src/option.c, src/progress.c, src/scale.c, src/text.c,
+	  src/util.c, src/yad.h: add palette to color dialog. some cleanups
+
+2010-02-08 10:28  ananasik
+
+	* data/yad.1: update man page
+
+2010-02-08 09:17  ananasik
+
+	* po/de.po, po/ru.po: update translation
+
+2010-02-08 07:28  ananasik
+
+	* src/main.c, src/text.c: set cursor invisible when text is not
+	  editable
+
+2010-02-07 10:34  ananasik
+
+	* src/main.c, src/option.c, src/yad.h: add --image-on-top option
+
+2010-02-07 09:29  ananasik
+
+	* src/option.c, src/progress.c, src/util.c, src/yad.h: add rtl
+	  direction to progress bar
+
+2010-02-07 07:30  ananasik
+
+	* src/progress.c: some cleanups
+
+2010-02-07 07:23  ananasik
+
+	* src/main.c: recognize special characters (like '\n') in --text
+
+2010-02-05 09:16  ananasik
+
+	* ChangeLog: Update ChangeLog for release 0.0.9
+
+2010-02-05 09:14  ananasik
+
+	* TODO, configure, data/Makefile.in: Update TODO. Release 0.0.9
+
+2010-02-05 08:57  ananasik
+
+	* configure.ac, data/Makefile.am, data/yad.1, data/yad.spec,
+	  data/yad.spec.in: Update man page. Autogenerating yad.spec from
+	  ./configure script for add correct version number
+
+2010-02-05 06:49  ananasik
+
+	* src/progress.c: fix bug with updating progress text from stdin
+
+2010-01-15 04:40  ananasik
+
+	* data/Makefile.am, data/Makefile.in, data/yad.spec: add .spec file
+	  (thanks to Detlef Reichelt)
+
+2010-01-06 09:17  ananasik
+
+	* po/de.po, po/ru.po: update translation
+
+2010-01-06 09:12  ananasik
+
+	* ChangeLog, configure, configure.ac, data/yad.1, src/main.c,
+	  src/option.c, src/yad.h: add --no-buttons option. fix typo in man
+	  page. bump version to 0.0.8
+
+2009-12-22 04:34  ananasik
+
+	* src/main.c: set HIG-compliant buttons order
+
+2009-12-02 11:22  ananasik
+
+	* ChangeLog, data/yad.1: update documentation. release 0.0.7
+
+2009-12-02 10:42  ananasik
+
+	* src/main.c: fix build on oldest gtk+ (<2.14)
+
+2009-12-01 05:50  ananasik
+
+	* po/de.po: update german translation
+
+2009-11-30 15:46  ananasik
+
+	* po/de.po: update german translation
+
+2009-11-30 15:08  ananasik
+
+	* po/de.po, po/ru.po: update russian translation
+
+2009-11-30 15:05  ananasik
+
+	* examples/Makefile.am, examples/Makefile.in, examples/autostart,
+	  src/main.c, src/option.c, src/yad.h: - add one more example
+	  - add window behavior options
+
+2009-11-18 06:16  ananasik
+
+	* configure, configure.ac, src/notification.c, src/option.c,
+	  src/yad.h: working changes
+
+2009-11-17 05:47  ananasik
+
+	* po/LINGUAS, po/de.po: Add German translation from Manfred Mueller
+
+2009-11-12 19:33  ananasik
+
+	* src/Makefile.am, src/Makefile.in: release 0.0.6
+
+2009-11-12 19:31  ananasik
+
+	* src/list.c: release 0.0.6
+
+2009-11-12 19:03  ananasik
+
+	* ChangeLog: update changelog
+
+2009-11-12 19:02  ananasik
+
+	* src/entry.c, src/list.c, src/main.c, src/notification.c,
+	  src/option.c, src/util.c, src/yad.h:
+
+2009-11-12 17:57  ananasik
+
+	* ChangeLog, Makefile.in, README, THANKS, TODO, config.guess,
+	  configure, configure.ac, data/yad.1, examples/gsu,
+	  examples/logout, po/ru.po, src/Makefile.am, src/Makefile.in,
+	  src/entry.c, src/form.c, src/list.c, src/main.c,
+	  src/notification.c, src/option.c, src/util.c, src/yad.h: add form
+	  dialog, improvements in entry dialog, prepare to release 0.0.6
+
+2009-11-10 06:49  ananasik
+
+	* AUTHORS, COPYING, ChangeLog, Makefile.am, Makefile.in, NEWS,
+	  README, THANKS, TODO, aclocal.m4, config.guess, config.h.in,
+	  config.sub, configure, configure.ac, data, data/Makefile.am,
+	  data/Makefile.in, data/yad.1, data/yad.png, depcomp, examples,
+	  examples/Makefile.am, examples/Makefile.in, examples/gsu,
+	  examples/logout, install-sh, m4, m4/gtk-deprecated.m4, missing,
+	  mkinstalldirs, po, po/ChangeLog, po/LINGUAS, po/Makefile.in.in,
+	  po/POTFILES.in, po/ru.po, src, src/Makefile.am, src/Makefile.in,
+	  src/about.c, src/calendar.c, src/color.c, src/entry.c,
+	  src/fileselection.c, src/list.c, src/main.c, src/notification.c,
+	  src/option.c, src/progress.c, src/scale.c, src/text.c,
+	  src/util.c, src/yad.h: initial upload
+
+2009-10-22 04:27  
+
+	* .: Initial directory structure.
+

@@ -1,0 +1,33 @@
+Version 0.0.10
+    - add rtl direction to progress bar
+    - add --image-on-top option 
+    - set cursor invisible when text is not editable in text dialog
+    - add oprtion for setting colors of text-dialog
+    - add --tail options to text dialog for autoscrolling
+    - add predefined colors to color dialog
+    - recognize 'quit' command from stdin in notification icon
+    - add types to fields in form dialog
+    - usage examples now on wiki
+    - cleanups and bugfixes
+
+Version 0.0.9
+    - fix bug in progress dialog
+    - add .spec file
+    - update man page
+
+Version 0.0.8
+    - use HIG buttons order (with honouring gtk-alternative-button-order settings in .gtkrc)
+    - add --no-buttons option
+    - fix typo in man page
+
+Version 0.0.7
+    - add window behavior options
+    - add markup tooltips for tray icon if gtk+ >= 2.16.0
+    - add german translation
+    - fix build on gtk+ 2.12.x
+
+Version 0.0.6
+    - add form dialog
+    - add label to entry dialog
+    - change the default behavior of combo-box entry (this may change in config file)
+    - update translation and man page
