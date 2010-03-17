@@ -235,6 +235,9 @@ main (gint argc, gchar ** argv)
 
   yad_options_init ();
 
+  /* set default icon theme */
+  settings.icon_theme = gtk_icon_theme_get_default ();
+
   ctx = yad_create_context ();
   g_option_context_parse (ctx, &argc, &argv, &err);
   if (err)
