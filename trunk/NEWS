@@ -1,3 +1,8 @@
+Version 0.1.0
+    - add types to form fields and list columns
+    - change default behaviour when print list results (print full row instead of first column)
+    - new --mouse options for place dialog under mouse position
+
 Version 0.0.10
     - add rtl direction to progress bar
     - add --image-on-top option 
