@@ -194,6 +194,8 @@ typedef struct {
   gboolean dlg_sep;
   gboolean combo_always_editable;
   gboolean expand_palette;
+  GtkIconTheme *icon_theme;
+  guint icon_size;
 } YadSettings;
 
 extern YadSettings settings;
