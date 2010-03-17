@@ -34,6 +34,8 @@ create_settings (gchar *filename)
   g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
   g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
   g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
+  g_key_file_set_integer (kf, "General", "icon_size", settings.icon_size);
+  g_key_file_set_comment (kf, "General", "icon_size", "Default icon size for lis widget", NULL);
   context = g_key_file_to_data (kf, NULL, NULL);
 
   g_key_file_free (kf);
@@ -57,6 +59,8 @@ read_settings (void)
   settings.dlg_sep = FALSE;
   settings.combo_always_editable = FALSE;
   settings.expand_palette = FALSE;
+  settings.icon_theme = gtk_icon_theme_get_default ();
+  settings.icon_size = 16;
 
   filename = g_build_filename (g_get_user_config_dir (), 
 			       SETTINGS_FILE, NULL);
@@ -85,6 +89,8 @@ read_settings (void)
 	    settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
 	  if (g_key_file_has_key (kf, "General", "expand_palette", NULL))
 	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
+	  if (g_key_file_has_key (kf, "General", "icon_size", NULL))
+	    settings.icon_size = g_key_file_get_integer (kf, "General", "icon_size", NULL);
 	}
 
       g_key_file_free (kf);
@@ -100,7 +106,6 @@ get_pixbuf (gchar *name)
 {
   GdkPixbuf *pb;
   GError *err = NULL;
-  GtkIconTheme *it = gtk_icon_theme_get_default ();
 
   if (g_file_test (name, G_FILE_TEST_EXISTS))
     {
@@ -110,11 +115,15 @@ get_pixbuf (gchar *name)
 	  g_warning ("yad_get_pixbuf(): %s", err->message);
 	  g_error_free (err);
 	  /* get fallback pixbuf */
-	  pb = gtk_icon_theme_load_icon (it, "unknown", 16, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+	  pb = gtk_icon_theme_load_icon (settings.icon_theme, "unknown", settings.icon_size, 
+					 GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 	}
     }
   else
-    pb = gtk_icon_theme_load_icon (it, name, 16, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+    {
+      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, settings.icon_size, 
+				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+    }
 
   return pb;
 }
