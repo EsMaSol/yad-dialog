@@ -560,7 +560,7 @@ static GOptionEntry rest_options[] = {
   { NULL }
 };
 
-static gboolean
+static gboolean 
 add_button (const gchar *option_name,
 	    const gchar *value,
 	    gpointer data, GError **err)
@@ -583,10 +583,29 @@ add_column (const gchar *option_name,
 	    const gchar *value,
 	    gpointer data, GError **err)
 {
-  gchar *name = g_strdup (value);
+  YadColumn *col;
+  gchar **cstr = g_strsplit (value, ":", 2);
 
-  options.list_data.columns = 
-    g_slist_append (options.list_data.columns, name);
+  col = g_new0 (YadColumn, 1);
+  col->name = g_strdup (cstr[0]);
+  if (cstr[1])
+    {
+      if (g_ascii_strcasecmp (cstr[1], "NUM") == 0)
+	col->type = YAD_COLUMN_NUM ;
+      else if (g_ascii_strcasecmp (cstr[1], "CHK") == 0)
+	col->type = YAD_COLUMN_CHECK;
+      else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
+	col->type = YAD_COLUMN_IMAGE;
+      else
+	col->type = YAD_COLUMN_TEXT;      
+    }
+  else
+    col->type = YAD_COLUMN_TEXT;
+  options.list_data.columns =
+    g_slist_append (options.list_data.columns, col);
+
+  g_strfreev (cstr);
+
   return TRUE;
 }
 
@@ -606,6 +625,8 @@ add_field (const gchar *option_name,
 	fld->type = YAD_FIELD_HIDDEN;
       else if (g_ascii_strcasecmp (fstr[1], "RO") == 0)
 	fld->type = YAD_FIELD_READ_ONLY;
+      else
+	fld->type = YAD_FIELD_SIMPLE;
     }
   else
     fld->type = YAD_FIELD_SIMPLE;
@@ -722,7 +743,7 @@ yad_options_init (void)
   options.list_data.columns = NULL;
   options.list_data.checkbox = FALSE;
   options.list_data.print_all = FALSE;
-  options.list_data.print_column = 1;
+  options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
 
   /* Initialize notification data */
