@@ -59,7 +59,7 @@ create_dialog ()
   gtk_window_set_keep_above (GTK_WINDOW (dlg), options.data.ontop);
   if (options.data.center)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-  else if (options.data.center)
+  else if (options.data.mouse)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
   gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
   
