@@ -11,7 +11,13 @@ file_activated_cb (GtkFileChooser *chooser, gpointer *data)
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
-GtkWidget *
+static GtkFileChooserConfirmation
+confirm_overwrite_cb (GtkFileChooser *chooser, gpointer data)
+{
+  return GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
+}
+
+GtkWidget * 
 file_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;
@@ -35,8 +41,12 @@ file_create_widget (GtkWidget *dlg)
   g_signal_connect (w, "file-activated",
 		    G_CALLBACK (file_activated_cb), dlg);
 
-  gtk_file_chooser_set_do_overwrite_confirmation 
-    (GTK_FILE_CHOOSER (w), options.file_data.confirm_overwrite);
+  if (options.file_data.confirm_overwrite)
+    {
+      gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (w), TRUE);
+      g_signal_connect (w, "confirm-overwrite", 
+			G_CALLBACK (confirm_overwrite_cb), NULL);
+    }
 
   if (options.common_data.uri)
     {
@@ -105,9 +115,7 @@ file_create_widget (GtkWidget *dlg)
           for (pattern = patterns; *pattern; pattern++)
             gtk_file_filter_add_pattern (filter, *pattern);
 
-          if (name)
-            g_free (name);
-
+	  g_free (name);
           g_strfreev (patterns);
 
           gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (w), filter);

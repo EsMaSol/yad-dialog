@@ -1,4 +1,4 @@
-.TH YAD 1 "Marth 17, 2010"
+.TH YAD 1 "Marth 31, 2010"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
@@ -87,7 +87,7 @@ If no buttons specified OK and Cancel button used.
 Don't show buttons.
 .TP
 .B \-\-dialog-sep
-Show separaytor between dialog and buttons.
+Show separator between dialog and buttons.
 .TP
 .B \-\-sticky
 Make window visible on all desktops.
@@ -165,7 +165,7 @@ Activate directory-only selection.
 .B \-\-save
 Activate save mode.
 .TP
-.B \-\-separator=SEPARATOR
+.B \-\-separator=STRING
 Specify separator character when returning multiple filenames.
 .TP
 .B \-\-confirm\-overwrite
@@ -178,7 +178,7 @@ Form options
 Add field to form. Type may be H for hidden fields or RO for read-only fields.
 .TP
 .B \-\-separator=STRING
-Set output separator character.
+Set output separator characters.
 .PP
 Additional data in command line interpret as a default values for form fields.
 
@@ -187,14 +187,14 @@ List options
 .TP
 .B \-\-column=STRING[:TYPE]
 Set the column header. Types are TEXT, NUM, CHK or IMG. TEXT type is default.
-Images may be path to image or icon name from currnet GTK icon theme.
+Images may be path to image or icon name from currnet GTK+ icon theme.
 Size of icons may be set in config file. Image field prints as empty value.
 .TP
 .B \-\-checklist
 Use check boxes for first column.
 .TP
 .B \-\-separator=STRING
-Set output separator character.
+Set output separator characters.
 .TP
 .B \-\-multiple
 Allow multiple rows to be selected.
@@ -223,7 +223,9 @@ Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 .PP
 Progress options
 .PP
-Progress reading data from stdin. When line begins from \fI`#'\fP, it's replaced progress bar text. Numeric values treats like a persents for progress bar.    
+When the --progress option is used, yad reads
+lines of progress data from stdin. When the lines begin with \fI`#'\fP the text
+after \fI`#'\fP is displayed in the progress bar label. Numeric values treats like a persents for progress bar.    
 .TP
 .B \-\-progress-text=STRING
 Set text in progress bar to STRING.
@@ -265,7 +267,7 @@ Set text font. FONT must be in a Pango font description format.
 Enable text wrapping.
 .TP
 .B \-\-tail
-Autoscroll to end when new text appears. Work only when text reads from stdin.
+Autoscroll to end when new text appears. Works only when text is read from stdin.
 
 .PP
 Scale options
@@ -303,8 +305,8 @@ Show version of program.
 .PP
 Also the standard GTK+ options are accepted.
 
-.SH NOTIFICATION ICON
-Commands send to yad in form \fBcommand:args\fP.
+.SH NOTIFICATION
+Allows commands to be sent yad in the form \fBcommand:args\fP.
 Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP, \fImenu\fP and \fIquit\fP.
 .TP
 .B
@@ -321,7 +323,7 @@ Set notification icon to visible, invisible or blinking states.
 .TP
 .B
 action:COMMAND
-Set command running when double-clicked on the icon. 
+Specify the command running when double-clicked on the icon. 
 Special string "quit" exit the program.
 .TP
 .B
