@@ -570,7 +570,8 @@ add_button (const gchar *option_name,
   
   btn = g_new0 (YadButton, 1);
   btn->name = g_strdup (bstr[0]);
-  btn->response = g_ascii_strtoll (bstr[1], NULL, 10);
+  if (bstr[1])
+    btn->response = g_ascii_strtoll (bstr[1], NULL, 10);
   options.data.buttons = g_slist_append (options.data.buttons, btn);
   
   g_strfreev (bstr);

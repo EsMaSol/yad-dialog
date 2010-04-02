@@ -336,6 +336,26 @@ Empty name add separator to menu.
 quit
 Exit the program.
 
+.SH EXIT STATUS
+.TP
+.B
+0
+The user has pressed \fIOK\fP button
+.TP
+.B
+1
+The user has pressed \fICancel\fP button
+.TP
+.B
+70
+The dialog has been closed because the timeout has been reached.
+.TP
+.B
+252
+The dialog has been closed by pressing \fIEsc\fP or used the window functions to close the dialog
+.TP
+Exit codes for user-specified buttons must be specified in command line.
+
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to
 remove\fP. The file selected is returned on standard output.

@@ -11,7 +11,7 @@ G_BEGIN_DECLS
 
 #define YAD_RESPONSE_OK         0
 #define YAD_RESPONSE_CANCEL     1
-#define YAD_RESPONSE_TIMEOUT   	127
+#define YAD_RESPONSE_TIMEOUT   	70
 #define YAD_RESPONSE_ESC   	252
 
 typedef enum {
