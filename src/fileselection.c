@@ -1,6 +1,4 @@
 
-#include <string.h>
-
 #include "yad.h"
 
 static GtkWidget *filechooser;
@@ -38,8 +36,6 @@ file_create_widget (GtkWidget *dlg)
     }
 
   w = filechooser = gtk_file_chooser_widget_new (action);
-  g_signal_connect (w, "file-activated",
-		    G_CALLBACK (file_activated_cb), dlg);
 
   if (options.file_data.confirm_overwrite)
     {
@@ -121,7 +117,10 @@ file_create_widget (GtkWidget *dlg)
           gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (w), filter);
         }
     }
-  
+
+  g_signal_connect (w, "file-activated",
+		    G_CALLBACK (file_activated_cb), dlg);
+
   return w;
 }
 
