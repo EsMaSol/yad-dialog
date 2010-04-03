@@ -8,6 +8,7 @@ yad_SOURCES = 		\
 	about.c		\
 	calendar.c	\
 	color.c		\
+	dnd.c           \
 	entry.c		\
 	fileselection.c	\
 	form.c		\

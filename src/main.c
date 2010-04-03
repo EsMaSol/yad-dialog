@@ -118,6 +118,9 @@ create_dialog ()
     case YAD_MODE_COLOR:
       main_widget = color_create_widget (dlg);
       break;
+    case YAD_MODE_DND:
+      dnd_init (dlg);
+      break;
     case YAD_MODE_ENTRY:
       main_widget = entry_create_widget (dlg);
       break;
