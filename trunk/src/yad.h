@@ -18,6 +18,7 @@ typedef enum {
   YAD_MODE_MESSAGE,
   YAD_MODE_CALENDAR,
   YAD_MODE_COLOR,
+  YAD_MODE_DND,
   YAD_MODE_ENTRY,
   YAD_MODE_FILE,
   YAD_MODE_FORM,
@@ -92,6 +93,10 @@ typedef struct {
   gchar *palette;
   gboolean extra;
 } YadColorData;
+
+typedef struct {
+  gchar *command;
+} YadDndData;
 
 typedef struct {
   gchar *entry_text;
@@ -170,6 +175,7 @@ typedef struct
 
   YadCalendarData calendar_data;
   YadColorData color_data;
+  YadDndData dnd_data;
   YadEntryData entry_data;
   YadFileData file_data;
   YadFormData form_data;
@@ -224,6 +230,8 @@ void list_print_result (void);
 void progress_print_result (void);
 void scale_print_result (void);
 void text_print_result (void);
+
+void dnd_init (GtkWidget *w);
 
 gint yad_notification_run (void);
 

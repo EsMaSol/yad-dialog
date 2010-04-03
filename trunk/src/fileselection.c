@@ -83,14 +83,13 @@ file_create_widget (GtkWidget *dlg)
 
           /* Set name */
           for (i = 0; filter_str[i] != '\0'; i++)
-            if (filter_str[i] == '|')
-              break;
+	    {
+	      if (filter_str[i] == '|')
+		break;
+	    }
 
           if (filter_str[i] == '|')
-            {
-              name = g_strndup (filter_str, i);
-              g_strstrip (name);
-            }
+	    name = g_strstrip (g_strndup (filter_str, i));
 
           if (name)
             {

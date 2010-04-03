@@ -10,6 +10,7 @@ static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
 static gboolean calendar_mode = FALSE;
 static gboolean color_mode = FALSE;
+static gboolean dnd_mode = FALSE;
 static gboolean entry_mode = FALSE;
 static gboolean file_mode = FALSE;
 static gboolean form_mode = FALSE;
@@ -157,8 +158,7 @@ static GOptionEntry calendar_options[] = {
     &options.calendar_data.date_format,
     N_("Set the format for the returned date"),
     N_("PATTERN") },
-  {
-    NULL}
+  { NULL }
 };
 
 static GOptionEntry color_options[] = {
@@ -186,6 +186,22 @@ static GOptionEntry color_options[] = {
     &options.color_data.extra,
     N_("Use #rrrrggggbbbb format instead of #rrggbb"),
     NULL },
+  { NULL }
+};
+
+static GOptionEntry dnd_options[] = {
+  { "dnd", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &dnd_mode,
+    N_("Display drag-n-drop box"),
+    NULL },
+  { "command", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.dnd_data.command,
+    N_("Set command for process d-n-d data"),
+    N_("CMD") },
   { NULL }
 };
 
@@ -379,8 +395,8 @@ static GOptionEntry notification_options[] = {
     0,
     G_OPTION_ARG_STRING,
     &options.notification_data.command,
-    N_("Listen for commands on stdin"),
-    NULL },
+    N_("Set left-click action"),
+    N_("CMD") },
   { "listen", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -655,8 +671,10 @@ yad_set_mode (void)
 {
   if (calendar_mode)
     options.mode = YAD_MODE_CALENDAR;
-  if (color_mode)
+  else if (color_mode)
     options.mode = YAD_MODE_COLOR;
+  else if (dnd_mode)
+    options.mode = YAD_MODE_DND;
   else if (entry_mode)
     options.mode = YAD_MODE_ENTRY;
   else if (file_mode)
@@ -719,11 +737,14 @@ yad_options_init (void)
   options.calendar_data.month = -1;
   options.calendar_data.year = -1;
 
-  /* I(nitialize color data */
+  /* Initialize color data */
   options.color_data.init_color = NULL;
   options.color_data.use_palette = FALSE;
   options.color_data.palette = NULL;
   options.color_data.extra = FALSE;
+
+  /* Initialize dnd data */
+  options.dnd_data.command = NULL;
 
   /* Initialize entry data */
   options.entry_data.entry_text = NULL;
@@ -798,10 +819,17 @@ yad_create_context (void)
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
-  /* Adds calendar option entries */
+  /* Adds color option entries */
   a_group = g_option_group_new ("color", _("Color options"),
 				_("Show color options"), NULL, NULL);
   g_option_group_add_entries (a_group, color_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds dnd option entries */
+  a_group = g_option_group_new ("dnd", _("DND options"),
+				_("Show drag-n-drop options"), NULL, NULL);
+  g_option_group_add_entries (a_group, dnd_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
