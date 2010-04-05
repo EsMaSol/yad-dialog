@@ -9,10 +9,32 @@ file_activated_cb (GtkFileChooser *chooser, gpointer *data)
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
-static GtkFileChooserConfirmation
-confirm_overwrite_cb (GtkFileChooser *chooser, gpointer data)
+void
+confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data)
 {
-  return GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
+  if (id != YAD_RESPONSE_OK)
+    return;
+  
+  if (options.file_data.save && 
+      options.file_data.confirm_overwrite &&
+      !options.common_data.multi)
+    {
+      gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
+      
+      if (g_file_test (filename, G_FILE_TEST_EXISTS))
+	{
+	  GtkWidget *d;
+	  gint r;
+
+	  d = gtk_message_dialog_new (GTK_WINDOW (dlg), GTK_DIALOG_DESTROY_WITH_PARENT,
+				      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
+				      options.file_data.confirm_text);
+	  r = gtk_dialog_run (GTK_DIALOG (d));
+	  gtk_widget_destroy (d);
+	  if (r != GTK_RESPONSE_YES)
+	    g_signal_stop_emission_by_name (dlg, "response");
+	}
+    }
 }
 
 GtkWidget * 
@@ -36,13 +58,6 @@ file_create_widget (GtkWidget *dlg)
     }
 
   w = filechooser = gtk_file_chooser_widget_new (action);
-
-  if (options.file_data.confirm_overwrite)
-    {
-      gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (w), TRUE);
-      g_signal_connect (w, "confirm-overwrite", 
-			G_CALLBACK (confirm_overwrite_cb), NULL);
-    }
 
   if (options.common_data.uri)
     {
@@ -118,7 +133,7 @@ file_create_widget (GtkWidget *dlg)
     }
 
   g_signal_connect (w, "file-activated",
-		    G_CALLBACK (file_activated_cb), dlg);
+  		    G_CALLBACK (file_activated_cb), dlg);
 
   return w;
 }

@@ -5,6 +5,7 @@ static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -289,11 +290,11 @@ static GOptionEntry file_selection_options[] = {
     N_("Set output separator character"),
     N_("SEPARATOR") },
   { "confirm-overwrite", 0,
-    0,
-    G_OPTION_ARG_NONE,
-    &options.file_data.confirm_overwrite,
+    G_OPTION_FLAG_OPTIONAL_ARG,
+    G_OPTION_ARG_CALLBACK,
+    add_confirm_overwrite,
     N_("Confirm file selection if filename already exists"),
-    NULL },
+    N_("TEXT") },
   { "file-filter", 0,
     0,
     G_OPTION_ARG_STRING_ARRAY,
@@ -672,6 +673,18 @@ add_palette (const gchar *option_name,
   return TRUE;
 }
 
+static gboolean
+add_confirm_overwrite (const gchar *option_name,
+	     const gchar *value,
+	     gpointer data, GError **err)
+{
+  options.file_data.confirm_overwrite = TRUE;
+  if (value)
+    options.file_data.confirm_text = g_strdup (value);
+    
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -763,6 +776,7 @@ yad_options_init (void)
   options.file_data.directory = FALSE;
   options.file_data.save = FALSE;
   options.file_data.confirm_overwrite = FALSE;
+  options.file_data.confirm_text = N_("File exist. Overwrite?");
   options.file_data.filter = NULL;
 
   /* Initialize form data */
