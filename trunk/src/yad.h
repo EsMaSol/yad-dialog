@@ -110,6 +110,7 @@ typedef struct {
   gboolean directory;
   gboolean save;
   gboolean confirm_overwrite;
+  gchar *confirm_text;
   gchar **filter;
 } YadFileData;
 
@@ -225,6 +226,8 @@ GtkWidget * list_create_widget (GtkWidget *dlg);
 GtkWidget * progress_create_widget (GtkWidget *dlg);
 GtkWidget * scale_create_widget (GtkWidget *dlg);
 GtkWidget * text_create_widget (GtkWidget *dlg);
+
+void confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data);
 
 void calendar_print_result (void);
 void color_print_result (void);

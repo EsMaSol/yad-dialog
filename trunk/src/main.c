@@ -328,6 +328,12 @@ main (gint argc, gchar ** argv)
       break;
     default:
       dialog = create_dialog ();
+      if (options.mode == YAD_MODE_FILE)
+	{
+	  /* show custom confirmation dialog */
+	  g_signal_connect (G_OBJECT (dialog), "response",
+			    G_CALLBACK (confirm_overwrite_cb), NULL);
+	}
       ret = gtk_dialog_run (GTK_DIALOG (dialog));
       if (ret >= 0 && ret != YAD_RESPONSE_TIMEOUT &&
 	  (options.data.buttons == NULL && ret != YAD_RESPONSE_CANCEL))
