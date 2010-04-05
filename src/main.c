@@ -6,31 +6,49 @@
 
 YadOptions options;
 
-static void
+static gboolean
 timeout_cb (gpointer data)
 {
   GtkWidget *w = (GtkWidget *) data;
 
   gtk_dialog_response (GTK_DIALOG (w), YAD_RESPONSE_TIMEOUT);
+
+  return FALSE;
+}
+
+static gboolean
+timeout_indicator_cb (gpointer data)
+{
+  static guint count = 1;
+  gdouble percent;
+  GtkWidget *w = (GtkWidget *) data;
+
+  if (!w)
+    return FALSE;
+
+  percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
+  count++;
+
+  return TRUE;
 }
 
 GtkWidget *
 create_dialog ()
 {
   GtkWidget *dlg;
-  GtkWidget *hbox, *vbox, *hbox2; 
+  GtkWidget *hbox, *vbox, *hbox2;
   GtkWidget *image;
   GtkWidget *text;
   GtkWidget *main_widget = NULL;
+  GtkWidget *topb = NULL;
   GError *err = NULL;
 
   /* create dialog window */
   dlg = gtk_dialog_new ();
-  gtk_window_set_title (GTK_WINDOW (dlg),
-			options.data.dialog_title);
+  gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
   gtk_window_set_default_size (GTK_WINDOW (dlg),
-			       options.data.width,
-			       options.data.height);
+			       options.data.width, options.data.height);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 
   /* set window icon */
@@ -38,7 +56,7 @@ create_dialog ()
     {
       if (g_file_test (options.data.window_icon, G_FILE_TEST_EXISTS))
 	{
-	  gtk_window_set_icon_from_file (GTK_WINDOW (dlg), 
+	  gtk_window_set_icon_from_file (GTK_WINDOW (dlg),
 					 options.data.window_icon, &err);
 	  if (err)
 	    {
@@ -46,12 +64,11 @@ create_dialog ()
 			  options.data.window_icon, err->message);
 	      g_error_free (err);
 	    }
-	}  
+	}
       else
-	gtk_window_set_icon_name (GTK_WINDOW (dlg),
-				  options.data.window_icon);
+	gtk_window_set_icon_name (GTK_WINDOW (dlg), options.data.window_icon);
     }
-    
+
   /* set window behavior */
   if (options.data.sticky)
     gtk_window_stick (GTK_WINDOW (dlg));
@@ -62,21 +79,59 @@ create_dialog ()
   else if (options.data.mouse)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
   gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
-  
-  /* set timeout */
+
+  /* create timeout indicator widget */
   if (options.data.timeout)
-    g_timeout_add_seconds (options.data.timeout, 
-			   (GSourceFunc) timeout_cb, dlg);
+    {
+      if (G_LIKELY (options.data.to_indicator) &&
+	  g_ascii_strcasecmp (options.data.to_indicator, "none"))
+	{
+	  topb = gtk_progress_bar_new ();
+	  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (topb), 1.0);
+	  gtk_widget_set_name (topb, "yad-timeout-indicator");
+	}
+    }
 
   /* add top label widgets */
-  hbox2 = hbox = gtk_hbox_new (FALSE, 2);
-#if GTK_CHECK_VERSION (2, 14, 0)  
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area 
+  hbox = hbox2 = gtk_hbox_new (FALSE, 2);
+#if GTK_CHECK_VERSION (2, 14, 0)
+  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area
 				    (GTK_DIALOG (dlg))), hbox);
 #else
   gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox), hbox);
-#endif				    
+#endif
   vbox = gtk_vbox_new (FALSE, 2);
+
+  /* add timeout indicator */
+  if (topb)
+    {
+      if (g_ascii_strcasecmp (options.data.to_indicator, "top") == 0)
+	{
+	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
+					    GTK_PROGRESS_LEFT_TO_RIGHT);
+	  gtk_box_pack_start (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
+	}
+      else if (g_ascii_strcasecmp (options.data.to_indicator, "bottom") == 0)
+	{
+	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
+					    GTK_PROGRESS_LEFT_TO_RIGHT);
+	  gtk_box_pack_end (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
+	}
+      else if (g_ascii_strcasecmp (options.data.to_indicator, "left") == 0)
+	{
+	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
+					    GTK_PROGRESS_BOTTOM_TO_TOP);
+	  gtk_box_pack_start (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
+	}
+      else if (g_ascii_strcasecmp (options.data.to_indicator, "right") == 0)
+	{
+	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
+					    GTK_PROGRESS_BOTTOM_TO_TOP);
+	  gtk_box_pack_end (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
+	}
+    }
+
+  /* must be after indicator! */
   gtk_box_pack_end (GTK_BOX (hbox), vbox, TRUE, TRUE, 2);
 
   if (options.data.image_on_top)
@@ -86,11 +141,11 @@ create_dialog ()
     }
 
   if (options.data.dialog_image)
-    {      
+    {
       if (g_file_test (options.data.dialog_image, G_FILE_TEST_EXISTS))
 	image = gtk_image_new_from_file (options.data.dialog_image);
       else
-	image = gtk_image_new_from_icon_name (options.data.dialog_image, 
+	image = gtk_image_new_from_icon_name (options.data.dialog_image,
 					      GTK_ICON_SIZE_DIALOG);
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
       gtk_misc_set_padding (GTK_MISC (image), 5, 5);
@@ -163,23 +218,29 @@ create_dialog ()
 	}
       else
 	{
-#if GTK_CHECK_VERSION (2, 14, 0)  
+#if GTK_CHECK_VERSION (2, 14, 0)
 	  if (gtk_alternative_dialog_button_order (NULL))
-	    gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
+	    gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 				    GTK_STOCK_OK, YAD_RESPONSE_OK,
 				    GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
 				    NULL);
 	  else
 #endif
-	    gtk_dialog_add_buttons (GTK_DIALOG (dlg), 
+	    gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 				    GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
-				    GTK_STOCK_OK, YAD_RESPONSE_OK,
-				    NULL);
+				    GTK_STOCK_OK, YAD_RESPONSE_OK, NULL);
 	  gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
 	}
     }
 
   gtk_widget_show_all (dlg);
+
+  /* set timeout */
+  if (options.data.timeout)
+    {
+      g_timeout_add_seconds (options.data.timeout, timeout_cb, dlg);
+      g_timeout_add_seconds (1, timeout_indicator_cb, topb);
+    }
 
   return dlg;
 }
@@ -187,7 +248,7 @@ create_dialog ()
 void
 print_result (void)
 {
-    switch (options.mode)
+  switch (options.mode)
     {
     case YAD_MODE_CALENDAR:
       calendar_print_result ();
@@ -240,8 +301,10 @@ main (gint argc, gchar ** argv)
 
   /* set default icon and icon theme */
   settings.icon_theme = gtk_icon_theme_get_default ();
-  settings.fallback_image = gtk_icon_theme_load_icon (settings.icon_theme, "unknown", settings.icon_size, 
-						      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+  settings.fallback_image =
+    gtk_icon_theme_load_icon (settings.icon_theme, "unknown",
+			      settings.icon_size,
+			      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   ctx = yad_create_context ();
   g_option_context_parse (ctx, &argc, &argv, &err);
@@ -270,8 +333,8 @@ main (gint argc, gchar ** argv)
 	  (options.data.buttons == NULL && ret != YAD_RESPONSE_CANCEL))
 	print_result ();
       else if (options.data.buttons && ret == YAD_RESPONSE_OK)
-        print_result ();
+	print_result ();
     }
-  
+
   return ret;
 }

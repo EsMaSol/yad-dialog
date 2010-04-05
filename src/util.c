@@ -28,6 +28,8 @@ create_settings (gchar *filename)
   g_key_file_set_comment (kf, "General", "height", "Default dialog height", NULL);
   g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
   g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
+  g_key_file_set_integer (kf, "General", "timeout_indicator", settings.timeout);
+  g_key_file_set_comment (kf, "General", "timeout_indicator", "Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "rules_hint", settings.rules_hint);
   g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
@@ -54,6 +56,7 @@ read_settings (void)
   settings.sep = "|";
   settings.width = settings.height = -1;
   settings.timeout = 0;
+  settings.to_indicator = "none";
   settings.rules_hint = TRUE;
   settings.menu_sep = "!";
   settings.dlg_sep = FALSE;
@@ -82,6 +85,8 @@ read_settings (void)
 	    settings.height = g_key_file_get_integer (kf, "General", "height", NULL);
 	  if (g_key_file_has_key (kf, "General", "timeout", NULL))
 	    settings.timeout = g_key_file_get_integer (kf, "General", "timeout", NULL);
+	  if (g_key_file_has_key (kf, "General", "timeout_indicator", NULL))
+	    settings.to_indicator = g_key_file_get_string (kf, "General", "timeout_indicator", NULL);
 	  if (g_key_file_has_key (kf, "General", "rules_hint", NULL))
 	    settings.rules_hint = g_key_file_get_boolean (kf, "General", "rules_hint", NULL);
 	  if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
