@@ -24,6 +24,9 @@ Display calendar dialog.
 .B \-\-color
 Display color selection dialog.
 .TP
+.B \-\-dnd
+Display drag-and-drop box.
+.TP
 .B \-\-entry
 Display text entry dialog.
 .TP
@@ -69,6 +72,11 @@ Set the dialog height.
 .B \-\-timeout=TIMEOUT
 Set the dialog timeout in seconds.
 .TP
+.B \-\-timeout-indicator=POSITION
+Show timeout indicator in given position. Positions are \fItop\fP, \fIbottom\fP, \fIleft\fP or \fIright\fP.
+Style of indicator may be set through gtkrc file. 
+See http://code.google.com/p/yad/wiki/TimeoutIndicator for details.
+.TP
 .B \-\-text=STRING
 Set the dialog text.
 .TP
@@ -77,7 +85,7 @@ Set the dialog image which appears on the left side of dialog.
 IMAGE might be file name or icon name from current icon theme.
 .TP
 .B \-\-image-on-top
-Show image above main widget instead left.
+Show image above main widget instead of left.
 .TP
 .B \-\-button=BUTTON:ID
 Add the dialog button. May be used several times. ID is an exit code.
@@ -136,6 +144,13 @@ Show palette ans set predefined colors from given filename.
 By default used /etc/X11/rgb.txt.
 
 .PP
+Drag-and-Drop box options
+.TP
+.B \-\-command=CMD
+Run command when data received. Data strings pass to command as an agrument. 
+By default data just prints to stdout.
+
+.PP
 Text entry options
 .TP
 .B \-\-entry-text=STRING
@@ -175,7 +190,7 @@ Confirm file selection if filename already exists.
 Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be H for hidden fields or RO for read-only fields.
+Add field to form. Type may be \fIH\fP for hidden fields or \fIRO\fP for read-only fields.
 .TP
 .B \-\-separator=STRING
 Set output separator characters.
@@ -186,7 +201,8 @@ Additional data in command line interpret as a default values for form fields.
 List options
 .TP
 .B \-\-column=STRING[:TYPE]
-Set the column header. Types are TEXT, NUM, CHK or IMG. TEXT type is default.
+Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fICHK\fP or \fIIMG\fP. 
+\fITEXT\fP type is default.
 Images may be path to image or icon name from currnet GTK+ icon theme.
 Size of icons may be set in config file. Image field prints as empty value.
 .TP
@@ -206,7 +222,7 @@ Allow changes to text.
 Print all data from the list. 
 .TP
 .B \-\-print-column=NUM
-Specify what column to print to standard output. '0' may be used to print all columns (this is default).
+Specify what column to print to standard output. \fI0\fP may be used to print all columns (this is default).
 .TP
 .B \-\-hide\-column=NUMBER
 Hide a specific column.
@@ -214,7 +230,7 @@ Hide a specific column.
 .PP
 Notification options
 .TP
-.B \-\-command=STRING
+.B \-\-command=CMD
 Set the command running when clicked on the icon.
 .TP
 .B \-\-listen
@@ -223,9 +239,9 @@ Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 .PP
 Progress options
 .PP
-When the --progress option is used, yad reads
-lines of progress data from stdin. When the lines begin with \fI`#'\fP the text
-after \fI`#'\fP is displayed in the progress bar label. Numeric values treats like a persents for progress bar.    
+When the --progress option is used, yad reads lines of progress data from stdin. 
+When the lines begin with \fI#\fP the text after \fI#\fP is displayed in the progress 
+bar label. Numeric values treats like a persents for progress bar.    
 .TP
 .B \-\-progress-text=STRING
 Set text in progress bar to STRING.
