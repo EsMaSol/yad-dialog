@@ -1,3 +1,56 @@
+2010-04-05 12:42  ananasik
+
+	* configure, configure.ac, data/yad.1, po/de.po, po/ru.po,
+	  src/fileselection.c, src/main.c, src/option.c, src/yad.h: Fix bug
+	  with --confirm-overwrite. Bump version to 0.2.0
+
+2010-04-05 09:28  ananasik
+
+	* acinclude.m4, configure, src/dnd.c, src/entry.c: cleanup code
+	  from deprecated elements
+
+2010-04-05 08:32  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po: Update translationn ad man page
+
+2010-04-05 07:58  ananasik
+
+	* src/main.c, src/option.c, src/progress.c, src/util.c, src/yad.h:
+	  add timeout indicator
+
+2010-04-03 06:51  ananasik
+
+	* po/de.po, po/ru.po: update russian translation
+
+2010-04-03 06:43  ananasik
+
+	* Makefile.in, aclocal.m4, configure, configure.ac,
+	  data/Makefile.in, src/Makefile.am, src/Makefile.in, src/dnd.c,
+	  src/fileselection.c, src/main.c, src/option.c, src/yad.h: add dnd
+	  box dialog
+
+2010-04-02 03:58  ananasik
+
+	* data/yad.1, src/fileselection.c, src/option.c, src/yad.h: Fix
+	  exit codes for timeout and user-specified buttons
+	  Add 'Exit codes' section to man page
+
+2010-04-01 01:40  ananasik
+
+	* data/yad.1, src/fileselection.c: Fix typos in man page
+
+2010-03-19 05:31  ananasik
+
+	* src/main.c: fix placement under mouse position
+
+2010-03-17 12:11  ananasik
+
+	* NEWS: update NEWS with release changes
+
+2010-03-17 12:05  ananasik
+
+	* ChangeLog: release 0.1.0
+
 2010-03-17 09:56  ananasik
 
 	* ChangeLog, Makefile.in, NEWS, aclocal.m4, configure,

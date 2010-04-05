@@ -1,3 +1,11 @@
+Version 0.2.0
+    - add drag-and-drop box dialog
+    - fix --confirm-overwrite option for fileselection dialog
+    - fix --mouse position placement
+    - add remainind time indicator for --timeout option
+    - code cleaun
+    - fix typos in man page
+
 Version 0.1.0
     - add types to form fields and list columns
     - change default behaviour when print list results (print full row instead of first column)
