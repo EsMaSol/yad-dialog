@@ -31,20 +31,22 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
     case TARGET_UTF8_STRING:
     case TARGET_COMPOUND_TEXT:
     case TARGET_TEXT:
-      str = g_strdup (gtk_selection_data_get_text (sel));
+      str = gtk_selection_data_get_text (sel);
       break;
     case TARGET_TEXT_PLAIN:
-      str = g_strdup (sel->data);
+      str = g_strdup (gtk_selection_data_get_data (sel));
       break;
     case TARGET_MOZ_URL:
       {
         GString *str1;
         const guint16 *char_data;
+	guint length;
         int i = 0;
 
         str1 = g_string_new (NULL);
-        char_data = (const guint16 *) sel->data;
-        while (i < (sel->length / 2))
+        char_data = (const guint16 *) gtk_selection_data_get_data (sel);
+	length = strlen ((const guchar *) char_data);
+        while (i < (length / 2))
           {
             if (char_data[i] == '\n')
               break;
