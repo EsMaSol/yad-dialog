@@ -51,6 +51,12 @@ static GOptionEntry general_options[] = {
     &options.data.timeout,
     N_("Set dialog timeout in seconds"),
     N_("TIMEOUT") },
+  { "timeout-indicator", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.data.to_indicator,
+    N_("Show remaining time indicator (top, bottom, left, right)"),
+    N_("POS") },
   { "text", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
@@ -713,6 +719,7 @@ yad_options_init (void)
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
   options.data.timeout = settings.timeout;
+  options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.dialog_sep = settings.dlg_sep;

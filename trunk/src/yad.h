@@ -1,6 +1,6 @@
 
-#ifndef YAD_H
-#define YAD_H
+#ifndef __YAD_H_
+#define __YAD_H_
 
 #include <config.h>
 
@@ -65,6 +65,7 @@ typedef struct {
   gint width;
   gint height;
   guint timeout;
+  gchar *to_indicator;
   gchar *dialog_text;
   gchar *dialog_image;
   gboolean image_on_top;
@@ -195,6 +196,10 @@ typedef struct {
   guint width;
   guint height;
   guint timeout;
+  gchar *to_indicator;
+#if GTK_CHECK_VERSION (2, 14, 0) 
+  guint indicator_height;
+#endif
   gboolean rules_hint;
   gchar *menu_sep;
   gboolean dlg_sep;
@@ -245,4 +250,4 @@ inline void strip_new_line (gchar *str);
 
 G_END_DECLS
 
-#endif /* YAD_H */
+#endif /* __YAD_H_ */
