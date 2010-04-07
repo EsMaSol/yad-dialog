@@ -93,14 +93,14 @@ create_dialog ()
     }
 
   /* add top label widgets */
-  hbox = hbox2 = gtk_hbox_new (FALSE, 2);
+  hbox = hbox2 = gtk_hbox_new (FALSE, 0);
 #if GTK_CHECK_VERSION (2, 14, 0)
   gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area
 				    (GTK_DIALOG (dlg))), hbox);
 #else
   gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox), hbox);
 #endif
-  vbox = gtk_vbox_new (FALSE, 2);
+  vbox = gtk_vbox_new (FALSE, 0);
 
   /* add timeout indicator */
   if (topb)
@@ -132,12 +132,12 @@ create_dialog ()
     }
 
   /* must be after indicator! */
-  gtk_box_pack_end (GTK_BOX (hbox), vbox, TRUE, TRUE, 2);
+  gtk_box_pack_end (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
   if (options.data.image_on_top)
     {
-      hbox2 = gtk_hbox_new (FALSE, 5);
-      gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 2);
+      hbox2 = gtk_hbox_new (FALSE, 0);
+      gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 0);
     }
 
   if (options.data.dialog_image)
@@ -232,6 +232,8 @@ create_dialog ()
 	  gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
 	}
     }
+  else
+    gtk_widget_hide (gtk_dialog_get_action_area (GTK_DIALOG (dlg)));
 
   gtk_widget_show_all (dlg);
 
