@@ -198,10 +198,8 @@ typedef struct {
   guint height;
   guint timeout;
   gchar *to_indicator;
-#if GTK_CHECK_VERSION (2, 14, 0) 
-  guint indicator_height;
-#endif
   gboolean rules_hint;
+  gboolean always_selected;
   gchar *menu_sep;
   gboolean dlg_sep;
   gboolean combo_always_editable;

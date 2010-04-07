@@ -432,6 +432,16 @@ list_create_widget (GtkWidget *dlg)
     }
 
   fill_data (n_columns);
+  
+  if (settings.always_selected)
+    {
+      GtkTreeIter it;
+      GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+      GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+
+      gtk_tree_model_get_iter_first (model, &it);
+      gtk_tree_selection_select_iter (sel, &it);
+    }
 
   return w;
 }
