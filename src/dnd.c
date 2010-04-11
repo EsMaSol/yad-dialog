@@ -67,10 +67,14 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	  g_free (action);
 	}
       else
-	g_printf ("%s\n", str);
+	{
+	  g_printf ("%s\n", str);
+	  fflush (stdout);
+	}
 
       g_free (str);
     }
+  
 }
 
 void
