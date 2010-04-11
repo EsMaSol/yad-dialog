@@ -45,7 +45,7 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 
         str1 = g_string_new (NULL);
         char_data = (const guint16 *) gtk_selection_data_get_data (sel);
-	length = strlen ((const guchar *) char_data);
+	length = gtk_selection_data_get_length (sel);
         while (i < (length / 2))
           {
             if (char_data[i] == '\n')
