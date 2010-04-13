@@ -198,6 +198,7 @@ typedef struct {
   guint height;
   guint timeout;
   gchar *to_indicator;
+  gboolean show_remain;
   gboolean rules_hint;
   gboolean always_selected;
   gchar *menu_sep;

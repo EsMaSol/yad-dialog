@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 15:40+0300\n"
+"POT-Creation-Date: 2010-04-13 11:53+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team:  <ananasik@gmail.com>\n"
@@ -65,20 +65,25 @@ msgstr ""
 "\n"
 "Основан на коде Zenity\n"
 
-#: ../src/main.c:63
+#: ../src/main.c:33 ../src/main.c:140
+#, c-format
+msgid "%d sec"
+msgstr "%d сек"
+
+#: ../src/main.c:69
 #, c-format
 msgid "Error loading window icon %s: %s\n"
-msgstr "Ошибка при загрузки иконки окна %s: %s\n"
+msgstr "Ошибка при загрузке иконки окна %s: %s\n"
 
-#: ../src/main.c:313
+#: ../src/main.c:327
 #, c-format
 msgid "Unable parse command line: %s\n"
-msgstr "Не могу разобрать командную строку: %s\n"
+msgstr "Не удается разобрать командную строку: %s\n"
 
 #: ../src/notification.c:49
 #, c-format
 msgid "Could not load notification icon '%s': %s"
-msgstr "Не могу загрузить иконку '%s': %s"
+msgstr "Не удается загрузить иконку '%s': %s"
 
 #: ../src/notification.c:178
 #, c-format

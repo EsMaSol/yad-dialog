@@ -30,6 +30,8 @@ create_settings (gchar *filename)
   g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
   g_key_file_set_integer (kf, "General", "timeout_indicator", settings.timeout);
   g_key_file_set_comment (kf, "General", "timeout_indicator", "Position of timeout indicator (top, bottom, left, right, none)", NULL);
+  g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
+  g_key_file_set_comment (kf, "General", "show_remain", "Show remain seconds in timeout indicator", NULL);
   g_key_file_set_boolean (kf, "General", "rules_hint", settings.rules_hint);
   g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
   g_key_file_set_boolean (kf, "General", "always_selected", settings.always_selected);
@@ -59,6 +61,7 @@ read_settings (void)
   settings.width = settings.height = -1;
   settings.timeout = 0;
   settings.to_indicator = "none";
+  settings.show_remain = FALSE;
   settings.rules_hint = TRUE;
   settings.always_selected = FALSE;
   settings.menu_sep = "!";
@@ -90,6 +93,8 @@ read_settings (void)
 	    settings.timeout = g_key_file_get_integer (kf, "General", "timeout", NULL);
 	  if (g_key_file_has_key (kf, "General", "timeout_indicator", NULL))
 	    settings.to_indicator = g_key_file_get_string (kf, "General", "timeout_indicator", NULL);
+	  if (g_key_file_has_key (kf, "General", "show_remain", NULL))
+	    settings.show_remain = g_key_file_get_boolean (kf, "General", "show_remain", NULL);
 	  if (g_key_file_has_key (kf, "General", "rules_hint", NULL))
 	    settings.rules_hint = g_key_file_get_boolean (kf, "General", "rules_hint", NULL);
 	  if (g_key_file_has_key (kf, "General", "always_selected", NULL))

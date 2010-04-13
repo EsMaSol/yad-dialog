@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 15:40+0300\n"
+"POT-Creation-Date: 2010-04-13 11:53+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -62,12 +62,17 @@ msgstr ""
 "\n"
 "Basiert auf Zenity-Code\n"
 
-#: ../src/main.c:63
+#: ../src/main.c:33 ../src/main.c:140
+#, c-format
+msgid "%d sec"
+msgstr ""
+
+#: ../src/main.c:69
 #, c-format
 msgid "Error loading window icon %s: %s\n"
 msgstr "Fehler beim Laden von Fenster-Symbol %s: %s\n"
 
-#: ../src/main.c:313
+#: ../src/main.c:327
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
