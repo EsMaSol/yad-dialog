@@ -28,6 +28,12 @@ timeout_indicator_cb (gpointer data)
 
   percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
+  if (settings.show_remain)
+    {
+      gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout - count);
+      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w), lbl);
+      g_free (lbl);
+    }
   count++;
 
   return TRUE;
@@ -128,6 +134,12 @@ create_dialog ()
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
 					    GTK_PROGRESS_BOTTOM_TO_TOP);
 	  gtk_box_pack_end (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
+	}
+      if (settings.show_remain)
+	{
+	  gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
+	  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (topb), lbl);
+	  g_free (lbl);
 	}
     }
 

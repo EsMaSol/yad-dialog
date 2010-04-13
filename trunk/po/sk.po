@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-09 20:51+0200\n"
+"POT-Creation-Date: 2010-04-13 11:53+0300\n"
 "PO-Revision-Date: 2010-04-09 21:56+0200\n"
 "Last-Translator: Slavko <slavino@slavino.sk>\n"
 "Language-Team: Slovenský <nomail>\n"
@@ -62,12 +62,17 @@ msgstr ""
 "\n"
 "Založený na kóde Zenity\n"
 
-#: ../src/main.c:63
+#: ../src/main.c:33 ../src/main.c:140
+#, c-format
+msgid "%d sec"
+msgstr ""
+
+#: ../src/main.c:69
 #, c-format
 msgid "Error loading window icon %s: %s\n"
 msgstr "Chyba načítania ikony okna %s: %s\n"
 
-#: ../src/main.c:313
+#: ../src/main.c:327
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Nemožno spracovať príkazový riadok: %s\n"
@@ -684,12 +689,8 @@ msgstr "Farba"
 msgid "Name"
 msgstr "Meno"
 
-#: ../src/text.c:97
-#, c-format
-msgid "Cannot open file '%s': %s\n"
-msgstr "Nemožno otvoriť súbor '%s': %s\n"
+#~ msgid "Cannot open file '%s': %s\n"
+#~ msgstr "Nemožno otvoriť súbor '%s': %s\n"
 
-#: ../src/text.c:127
-#, c-format
-msgid "Invalid UTF-8 data encountered reading file %s\n"
-msgstr "Pri čítaní súboru %s zistené neplatné UTF-8 dáta\n"
+#~ msgid "Invalid UTF-8 data encountered reading file %s\n"
+#~ msgstr "Pri čítaní súboru %s zistené neplatné UTF-8 dáta\n"
