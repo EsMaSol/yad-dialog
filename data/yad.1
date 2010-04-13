@@ -82,14 +82,16 @@ Set the dialog text.
 .TP
 .B \-\-image=IMAGE
 Set the dialog image which appears on the left side of dialog.
-IMAGE might be file name or icon name from current icon theme.
+\fIIMAGE\fP might be file name or icon name from current icon theme.
 .TP
 .B \-\-image-on-top
 Show image above main widget instead of left.
 .TP
 .B \-\-button=BUTTON:ID
-Add the dialog button. May be used several times. ID is an exit code.
-If no buttons specified OK and Cancel button used.
+Add the dialog button. May be used several times. \fIID\fP is an exit code.
+\fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or simple text label. 
+Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP. 
+If no buttons specified \fIOK\fP and \fICancel\fP button used.
 .TP
 .B \-\-no-buttons
 Don't show buttons.
@@ -141,7 +143,7 @@ Show extra information about color in returned string.
 .TP
 .B \-\-palette[=FILENAME]
 Show palette ans set predefined colors from given filename.
-By default used /etc/X11/rgb.txt.
+By default used \fI/etc/X11/rgb.txt\fP.
 
 .PP
 Drag-and-Drop box options
@@ -278,7 +280,7 @@ Set foreground color of text
 Set background color of text
 .TP
 .B \-\-font=FONT
-Set text font. FONT must be in a Pango font description format.
+Set text font. \fIFONT\fP must be in a Pango font description format.
 .TP
 .B \-\-wrap
 Enable text wrapping.
