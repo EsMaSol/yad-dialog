@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-13 11:53+0300\n"
+"POT-Creation-Date: 2010-04-24 10:25+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -693,6 +693,16 @@ msgstr ""
 
 #: ../src/color.c:159
 msgid "Name"
+msgstr ""
+
+#: ../src/text.c:97
+#, c-format
+msgid "Cannot open file '%s': %s\n"
+msgstr ""
+
+#: ../src/text.c:127
+#, c-format
+msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr ""
 
 #~ msgid "Set the column header"
