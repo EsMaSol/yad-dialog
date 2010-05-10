@@ -346,12 +346,12 @@ static GOptionEntry icons_options[] = {
     &options.icons_data.stdin,
     N_("Read data from stdin"),
     NULL },
-  { "separator", 0,
-    G_OPTION_FLAG_NOALIAS,
-    G_OPTION_ARG_STRING,
-    &options.common_data.separator,
-    N_("Set output separator character"),
-    N_("SEPARATOR") },
+  { "dnd", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.icons_data.dnd,
+    N_("Enable drag-n-drop support"),
+    NULL },
   { NULL }
 };
 

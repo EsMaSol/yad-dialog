@@ -122,6 +122,7 @@ typedef struct {
 typedef struct {
   gchar *directory;
   gboolean stdin;
+  gboolean dnd;
 } YadIconsData;
 
 typedef struct {
