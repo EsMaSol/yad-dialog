@@ -4,17 +4,32 @@
 static GtkWidget *icon_view;
 
 enum {
-  COL_PATH,
-  COL_DISPLAY_NAME,
+  COL_NAME,
+  COL_TOOLTIP,
   COL_PIXBUF,
   COL_COMMAND,
   NUM_COLS
 };
 
+typedef struct {
+  gchar *name;
+  gchar *comment;
+  GdkPixbuf *pixbuf;
+  gchar *command;
+} DEntry;
+
 static gboolean
 handle_stdin (GIOChannel * channel,
               GIOCondition condition, gpointer data)
 {
+}
+
+static DEntry *
+parse_desktop_file (gchar *filename)
+{
+  DEntry *ent;
+
+  return ent;
 }
 
 static void
@@ -40,6 +55,9 @@ icons_create_widget (GtkWidget *dlg)
 			      G_TYPE_STRING);
 
   icon_view = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
+  gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
+  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
+  gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
 
   /* handle directory */
   if (options.icons_data.directory)
