@@ -1,3 +1,54 @@
+2010-05-10 13:32  ananasik
+
+	* src/list.c: Press return submits data in list dialog
+
+2010-05-10 13:14  ananasik
+
+	* src/entry.c, src/form.c: pressing return submits form data
+
+2010-04-24 07:29  ananasik
+
+	* po/POTFILES.in, po/de.po, po/ru.po, po/sk.po: Update translation
+
+2010-04-14 06:32  ananasik
+
+	* configure, configure.ac: bump version to 0.2.1
+
+2010-04-13 09:22  ananasik
+
+	* data/yad.1: update man page
+
+2010-04-13 08:56  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, src/main.c, src/util.c, src/yad.h:
+	  add timeout indicator label. update translation
+
+2010-04-11 09:01  ananasik
+
+	* src/dnd.c: flush stduot when print dnd data to stdout
+
+2010-04-11 08:49  ananasik
+
+	* data/yad.1, src/dnd.c: fix TARGET_MOZ_URL in dnd
+
+2010-04-10 05:32  ananasik
+
+	* NEWS, po/LINGUAS, po/sk.po: Add slovak translation from Slavko
+	  <slavino@slavino.sk>
+
+2010-04-07 13:24  ananasik
+
+	* src/main.c: polish widget placement
+
+2010-04-07 13:14  ananasik
+
+	* src/list.c, src/util.c, src/yad.h: add always_selected option to
+	  config file
+
+2010-04-05 13:05  ananasik
+
+	* ChangeLog, NEWS: release 0.2.0
+
 2010-04-05 12:42  ananasik
 
 	* configure, configure.ac, data/yad.1, po/de.po, po/ru.po,

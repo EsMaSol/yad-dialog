@@ -1,3 +1,10 @@
+Version 0.2.1
+    - improve keyboard navigation
+    - update man page
+    - add slovak translation
+    - add label to timeout indicator
+    - some fixes in dnd dialog
+
 Version 0.2.0
     - add drag-and-drop box dialog
     - fix --confirm-overwrite option for fileselection dialog
