@@ -15,6 +15,7 @@ static gboolean dnd_mode = FALSE;
 static gboolean entry_mode = FALSE;
 static gboolean file_mode = FALSE;
 static gboolean form_mode = FALSE;
+static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
 static gboolean notification_mode = FALSE;
 static gboolean progress_mode = FALSE;
@@ -301,7 +302,7 @@ static GOptionEntry file_selection_options[] = {
     &options.file_data.filter,
     N_("Sets a filename filter"),
     N_("NAME | PATTERN1 PATTERN2 ...") },
-  { NULL}
+  { NULL }
 };
 
 static GOptionEntry form_options[] = {
@@ -323,7 +324,35 @@ static GOptionEntry form_options[] = {
     &options.common_data.separator,
     N_("Set output separator character"),
     N_("SEPARATOR") },
-  { NULL}
+  { NULL }
+};
+
+static GOptionEntry icons_options[] = {
+  { "icons", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &icons_mode,
+    N_("Display icons box dialog"),
+    NULL },
+  { "directory", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.icons_data.directory,
+    N_("Read data from .desktop files in specified directory"),
+    N_("DIRECTORY") },
+  { "stdin", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.icons_data.stdin,
+    N_("Read data from stdin"),
+    NULL },
+  { "separator", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.separator,
+    N_("Set output separator character"),
+    N_("SEPARATOR") },
+  { NULL }
 };
 
 static GOptionEntry list_options[] = {
@@ -700,6 +729,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_FILE;
   else if (form_mode)
     options.mode = YAD_MODE_FORM;
+  else if (icons_mode)
+    options.mode = YAD_MODE_ICONS;
   else if (list_mode)
     options.mode = YAD_MODE_LIST;
   else if (notification_mode)
@@ -781,6 +812,10 @@ yad_options_init (void)
 
   /* Initialize form data */
   options.form_data.fields = NULL;
+
+  /* Initialize icons data */
+  options.icons_data.directory = NULL;
+  options.icons_data.stdin = FALSE;
 
   /* Initialize list data */
   options.list_data.columns = NULL;
@@ -872,6 +907,13 @@ yad_create_context (void)
   a_group = g_option_group_new ("form", _("Form options"),
 				_("Show form options"), NULL, NULL);
   g_option_group_add_entries (a_group, form_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Add icons option entries */
+  a_group = g_option_group_new ("icons", _("Icons box options"),
+				_("Show icons box options"), NULL, NULL);
+  g_option_group_add_entries (a_group, icons_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

@@ -22,6 +22,7 @@ typedef enum {
   YAD_MODE_ENTRY,
   YAD_MODE_FILE,
   YAD_MODE_FORM,
+  YAD_MODE_ICONS,
   YAD_MODE_LIST,
   YAD_MODE_NOTIFICATION,
   YAD_MODE_PROGRESS,
@@ -115,9 +116,13 @@ typedef struct {
 } YadFileData;
 
 typedef struct {
-  gchar *separator;
   GSList *fields;
 } YadFormData;
+
+typedef struct {
+  gchar *directory;
+  gboolean stdin;
+} YadIconsData;
 
 typedef struct {
   GSList *columns;
@@ -181,6 +186,7 @@ typedef struct
   YadEntryData entry_data;
   YadFileData file_data;
   YadFormData form_data;
+  YadIconsData icons_data;
   YadListData list_data;
   YadNotificationData notification_data;
   YadProgressData progress_data;
@@ -221,6 +227,7 @@ GtkWidget * color_create_widget (GtkWidget *dlg);
 GtkWidget * entry_create_widget (GtkWidget *dlg);
 GtkWidget * file_create_widget (GtkWidget *dlg);
 GtkWidget * form_create_widget (GtkWidget *dlg);
+GtkWidget * icons_create_widget (GtkWidget *dlg);
 GtkWidget * list_create_widget (GtkWidget *dlg);
 GtkWidget * progress_create_widget (GtkWidget *dlg);
 GtkWidget * scale_create_widget (GtkWidget *dlg);
