@@ -2,9 +2,22 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <gdk/gdkkeysyms.h>
+
 #include "yad.h"
 
 static GtkWidget *list_view;
+
+static gboolean
+list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
+{
+  if (event->keyval == GDK_Return || event->keyval == GDK_KP_Enter)
+    {
+      gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      return TRUE;
+    }
+  return FALSE;
+}
 
 static void
 toggled_cb (GtkCellRendererToggle *cell,
@@ -429,6 +442,12 @@ list_create_widget (GtkWidget *dlg)
       /* add popup menu */
       g_signal_connect_swapped (G_OBJECT (list_view), "button_press_event",
 				G_CALLBACK (popup_menu_cb), NULL);
+    }
+  else
+    {
+      /* Return submits data */
+      g_signal_connect (G_OBJECT (list_view), "key-press-event", 
+			G_CALLBACK (list_activate_cb), dlg);
     }
 
   fill_data (n_columns);
