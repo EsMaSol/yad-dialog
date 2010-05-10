@@ -3,6 +3,12 @@
 
 GSList *fields = NULL;
 
+static void
+form_activate_cb (GtkEntry *entry, gpointer data)
+{
+  gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+}
+
 GtkWidget *
 form_create_widget (GtkWidget *dlg)
 {
@@ -25,6 +31,7 @@ form_create_widget (GtkWidget *dlg)
 	  gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
 	  
 	  e = gtk_entry_new ();
+	  g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 	  if (fld->type == YAD_FIELD_HIDDEN)
 	    gtk_entry_set_visibility (GTK_ENTRY (e), FALSE);
 	  if (fld->type == YAD_FIELD_READ_ONLY)
