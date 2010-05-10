@@ -103,7 +103,8 @@ entry_create_widget (GtkWidget *dlg)
 	}
     }
   if (!is_combo)
-    g_signal_connect (entry, "activate", G_CALLBACK (entry_activate_cb), dlg);
+    g_signal_connect (G_OBJECT (entry), "activate", 
+		      G_CALLBACK (entry_activate_cb), dlg);
 
   gtk_box_pack_start (GTK_BOX (w), c, TRUE, TRUE, 1);
 
