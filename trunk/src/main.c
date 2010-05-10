@@ -197,6 +197,9 @@ create_dialog ()
     case YAD_MODE_FORM:
       main_widget = form_create_widget (dlg);
       break;
+    case YAD_MODE_ICONS:
+      main_widget = icons_create_widget (dlg);
+      break;
     case YAD_MODE_LIST:
       main_widget = list_create_widget (dlg);
       break;

@@ -12,6 +12,7 @@ yad_SOURCES = 		\
 	entry.c		\
 	fileselection.c	\
 	form.c		\
+	icons.c		\
 	list.c		\
 	notification.c	\
 	option.c	\
