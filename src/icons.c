@@ -18,6 +18,11 @@ typedef struct {
   gchar *command;
 } DEntry;
 
+static void
+activate_cb (GtkIconView *view, GtkTreePath *path, gpointer data)
+{
+}
+
 static gboolean
 handle_stdin (GIOChannel * channel,
               GIOCondition condition, gpointer data)
@@ -28,6 +33,34 @@ static DEntry *
 parse_desktop_file (gchar *filename)
 {
   DEntry *ent;
+  GKeyFile *kf;
+  GError *err = NULL;
+
+  ent = g_new0 (DEntry, 1);
+  kf = g_key_file_new ();
+
+  if (g_key_file_load_from_file (kf, filename, 0, &err))
+    {
+      gchar *icon;
+
+      if (g_key_file_has_group (kf, "Desktop Entry"))
+	{
+	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Exec", NULL, NULL);
+	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
+	  if (icon)
+	    {
+	      ent->pixbuf = gtk_icon_theme_load_icon (settings.icon_theme, icon, 48, 
+						      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+	      g_free (icon);
+	    }
+	}
+    }
+  else
+    g_warning (_("Unable to parse file %s, %s"), filename, err->message);
+  
+  g_key_file_free (kf);
 
   return ent;
 }
@@ -35,6 +68,52 @@ parse_desktop_file (gchar *filename)
 static void
 read_dir (GtkListStore *store)
 {
+  GDir *dir;
+  const gchar *filename;
+  GError *err = NULL;
+
+  dir = g_dir_open (options.icons_data.directory, 0, &err);
+  if (!dir)
+    {
+      g_warning (_("Unable to open directory %s: %s"), 
+		 options.icons_data.directory, err->message);
+      return;
+    }
+
+  while ((filename = g_dir_read_name (dir)) != NULL)
+    {
+      DEntry *ent;
+      GtkTreeIter iter;
+      gchar *fullname;
+
+      if (!g_str_has_suffix (filename, ".desktop"))
+	continue;
+
+      fullname = g_build_filename (options.icons_data.directory, filename, NULL);
+      ent = parse_desktop_file (fullname);
+      g_free (fullname);
+
+      if (ent->name)
+	{
+	  gtk_list_store_append (store, &iter);
+	  gtk_list_store_set (store, &iter,
+			  COL_NAME, ent->name,
+			  COL_TOOLTIP, ent->comment ? ent->comment : "",
+			  COL_PIXBUF, ent->pixbuf,
+			  COL_COMMAND, ent->command ? ent->command : "",
+			  -1);
+	}
+
+      /* free desktop entry */
+      g_free (ent->name);
+      g_free (ent->comment);
+      g_free (ent->command);
+      if (ent->pixbuf)
+	g_object_unref (ent->pixbuf);
+      g_free (ent);
+    }
+
+  g_dir_close (dir);
 }
 
 GtkWidget *
@@ -59,6 +138,7 @@ icons_create_widget (GtkWidget *dlg)
   gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
   gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
 
+
   /* handle directory */
   if (options.icons_data.directory)
     read_dir (store);
@@ -76,6 +156,8 @@ icons_create_widget (GtkWidget *dlg)
       g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
     }
 
+  g_signal_connect (G_OBJECT (icon_view), "item-activated",
+		    G_CALLBACK (activate_cb), NULL);
   gtk_container_add (GTK_CONTAINER (w), icon_view);
 
   return w;
