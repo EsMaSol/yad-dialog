@@ -132,7 +132,7 @@ get_pixbuf (gchar *name)
       pb = gdk_pixbuf_new_from_file (name, &err);
       if (!pb)
 	{
-	  g_warning ("yad_get_pixbuf(): %s", err->message);
+	  g_printerr ("yad_get_pixbuf(): %s", err->message);
 	  g_error_free (err);
 	}
     }
