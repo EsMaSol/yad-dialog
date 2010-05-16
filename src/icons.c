@@ -8,6 +8,7 @@ enum {
   COL_TOOLTIP,
   COL_PIXBUF,
   COL_COMMAND,
+  COL_TERM,
   NUM_COLS
 };
 
@@ -16,11 +17,33 @@ typedef struct {
   gchar *comment;
   GdkPixbuf *pixbuf;
   gchar *command;
+  gboolean in_term;
 } DEntry;
 
 static void
 activate_cb (GtkIconView *view, GtkTreePath *path, gpointer data)
 {
+  GtkTreeIter iter;
+  GtkTreeModel *model = gtk_icon_view_get_model (view);
+  gchar *cmd;
+  gboolean *in_term;
+
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter,
+		      COL_COMMAND, &cmd,
+		      COL_TERM, &in_term,
+		      -1);
+
+  if (in_term)
+    {
+      gchar *tcmd;
+      
+      tcmd = g_strdup_printf (options.icons_data.term, cmd);
+      g_spawn_command_line_async (tcmd, NULL);
+      g_free (tcmd);
+    }
+  else
+    g_spawn_command_line_async (cmd, NULL);
 }
 
 static gboolean
@@ -35,6 +58,12 @@ parse_desktop_file (gchar *filename)
   DEntry *ent;
   GKeyFile *kf;
   GError *err = NULL;
+  static GdkPixbuf *fb = NULL;
+
+  if (!fb)
+    fb = gtk_icon_theme_load_icon (settings.icon_theme, "unknown",
+				   48, GTK_ICON_LOOKUP_GENERIC_FALLBACK,
+				   NULL);
 
   ent = g_new0 (DEntry, 1);
   kf = g_key_file_new ();
@@ -45,20 +74,34 @@ parse_desktop_file (gchar *filename)
 
       if (g_key_file_has_group (kf, "Desktop Entry"))
 	{
+	  gint i;
+
 	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
-	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
-	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Exec", NULL, NULL);
+	  ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+	  ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
+	  /* remove possible arguments patterns */
+	  for (i = strlen (ent->command); i > 0; i--)
+	    {
+	      if (ent->command[i] == '%')
+		{
+		  ent->command[i] = '\0';
+		  break;
+		}
+	    }
+	  ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
 	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
 	  if (icon)
 	    {
 	      ent->pixbuf = gtk_icon_theme_load_icon (settings.icon_theme, icon, 48, 
 						      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+	      if (!ent->pixbuf)
+		ent->pixbuf = fb;
 	      g_free (icon);
 	    }
 	}
     }
   else
-    g_warning (_("Unable to parse file %s, %s"), filename, err->message);
+    g_warning (_("Unable to parse file %s: %s"), filename, err->message);
   
   g_key_file_free (kf);
 
@@ -97,11 +140,12 @@ read_dir (GtkListStore *store)
 	{
 	  gtk_list_store_append (store, &iter);
 	  gtk_list_store_set (store, &iter,
-			  COL_NAME, ent->name,
-			  COL_TOOLTIP, ent->comment ? ent->comment : "",
-			  COL_PIXBUF, ent->pixbuf,
-			  COL_COMMAND, ent->command ? ent->command : "",
-			  -1);
+			      COL_NAME, ent->name,
+			      COL_TOOLTIP, ent->comment ? ent->comment : "",
+			      COL_PIXBUF, ent->pixbuf,
+			      COL_COMMAND, ent->command ? ent->command : "",
+			      COL_TERM, ent->in_term,
+			      -1);
 	}
 
       /* free desktop entry */
@@ -131,13 +175,13 @@ icons_create_widget (GtkWidget *dlg)
 			      G_TYPE_STRING,
 			      G_TYPE_STRING,
 			      GDK_TYPE_PIXBUF,
-			      G_TYPE_STRING);
+			      G_TYPE_STRING,
+			      G_TYPE_BOOLEAN);
 
   icon_view = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
   gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
   gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
   gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
-
 
   /* handle directory */
   if (options.icons_data.directory)

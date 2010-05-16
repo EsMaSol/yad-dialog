@@ -346,12 +346,18 @@ static GOptionEntry icons_options[] = {
     &options.icons_data.stdin,
     N_("Read data from stdin"),
     NULL },
-  { "dnd", 0,
-    G_OPTION_FLAG_NOALIAS,
+  { "drop", 0,
+    0,
     G_OPTION_ARG_NONE,
     &options.icons_data.dnd,
     N_("Enable drag-n-drop support"),
     NULL },
+  { "term", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.icons_data.term,
+    N_("Use specified command for launch command in terminal (default: xterm -e %s)"),
+    N_("PATTERN") },
   { NULL }
 };
 
@@ -816,6 +822,8 @@ yad_options_init (void)
   /* Initialize icons data */
   options.icons_data.directory = NULL;
   options.icons_data.stdin = FALSE;
+  options.icons_data.dnd = FALSE;
+  options.icons_data.term = settings.term;
 
   /* Initialize list data */
   options.list_data.columns = NULL;

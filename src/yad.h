@@ -123,6 +123,7 @@ typedef struct {
   gchar *directory;
   gboolean stdin;
   gboolean dnd;
+  gchar *term;
 } YadIconsData;
 
 typedef struct {
@@ -215,6 +216,7 @@ typedef struct {
   GtkIconTheme *icon_theme;
   GdkPixbuf *fallback_image;
   guint icon_size;
+  gchar *term;
 } YadSettings;
 
 extern YadSettings settings;
