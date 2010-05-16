@@ -49,11 +49,16 @@ cell_edited_cb (GtkCellRendererText * cell,
   GtkTreeIter iter;                                         
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);;
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+  YadColumn *col;
                                 
   column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
-  gtk_tree_model_get_iter (model, &iter, path);                           
+  gtk_tree_model_get_iter (model, &iter, path);
+  col = (YadColumn *) g_slist_nth_data (options.list_data.columns, column);
 
-  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, new_text, -1);
+  if (col->type == YAD_COLUMN_NUM)
+    gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, g_ascii_strtoll (new_text, NULL, 10), -1);
+  else
+    gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, new_text, -1);
 
   gtk_tree_path_free (path);                                               
 }
