@@ -165,17 +165,7 @@ parse_desktop_file (gchar *filename)
 
 	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
 	  ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
-	  ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
-	  /* remove possible arguments patterns */
-	  for (i = strlen (ent->command); i > 0; i--)
-	    {
-	      if (ent->command[i] == '%')
-		{
-		  ent->command[i] = '\0';
-		  break;
-		}
-	    }
-	  ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
+	  ent->command = g_key_file_get_locale_string (kf, "Desktop Entry", "Exec", NULL, NULL);
 	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
 	  if (icon)
 	    {
@@ -287,9 +277,14 @@ icons_create_widget (GtkWidget *dlg)
       g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
     }
 
+  if (options.icons_data.dnd)
+    {
+      printf ("dnd ok\n");
+    }
+
   g_signal_connect (G_OBJECT (icon_view), "item-activated",
 		    G_CALLBACK (activate_cb), NULL);
   gtk_container_add (GTK_CONTAINER (w), icon_view);
-
+  
   return w;
 }
