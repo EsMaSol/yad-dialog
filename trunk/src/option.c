@@ -346,8 +346,13 @@ static GOptionEntry icons_options[] = {
     &options.icons_data.stdin,
     N_("Read data from stdin"),
     NULL },
+<<<<<<< .mine
+  { "drag", 0,
+    0,
+=======
   { "drop", 0,
     0,
+>>>>>>> .r93
     G_OPTION_ARG_NONE,
     &options.icons_data.dnd,
     N_("Enable drag-n-drop support"),
