@@ -97,10 +97,6 @@ typedef struct {
 } YadColorData;
 
 typedef struct {
-  gchar *command;
-} YadDndData;
-
-typedef struct {
   gchar *entry_text;
   gchar *entry_label;
   gboolean hide_text;
@@ -135,7 +131,6 @@ typedef struct {
 } YadListData;
 
 typedef struct {
-  gchar *command;
   gboolean listen;
 } YadNotificationData;
 
@@ -170,6 +165,7 @@ typedef struct {
   gchar *separator;
   gboolean editable;
   gboolean multi;
+  gchar *command;
 } YadCommonData;
 
 typedef struct {
@@ -184,7 +180,6 @@ typedef struct
 
   YadCalendarData calendar_data;
   YadColorData color_data;
-  YadDndData dnd_data;
   YadEntryData entry_data;
   YadFileData file_data;
   YadFormData form_data;

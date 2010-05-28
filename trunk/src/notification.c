@@ -292,8 +292,8 @@ yad_notification_run ()
 
   if (options.data.dialog_image)
     icon = g_strdup (options.data.dialog_image);
-  if (options.notification_data.command)
-    action = g_strdup (options.notification_data.command);
+  if (options.common_data.command)
+    action = g_strdup (options.common_data.command);
   menu_data = NULL;
 
   g_signal_connect (status_icon, "activate",

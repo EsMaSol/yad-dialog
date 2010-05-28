@@ -60,9 +60,9 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 
   if (str)
     {
-      if (options.dnd_data.command)
+      if (options.common_data.command)
 	{
-	  gchar *action = g_strdup_printf ("%s '%s'", options.dnd_data.command, str);
+	  gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, str);
 	  g_spawn_command_line_async (action, NULL);
 	  g_free (action);
 	}

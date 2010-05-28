@@ -205,9 +205,9 @@ static GOptionEntry dnd_options[] = {
     N_("Display drag-n-drop box"),
     NULL },
   { "command", 0,
-    0,
+    G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
-    &options.dnd_data.command,
+    &options.common_data.command,
     N_("Set command for process d-n-d data"),
     N_("CMD") },
   { NULL }
@@ -434,9 +434,9 @@ static GOptionEntry notification_options[] = {
     N_("Display notification"),
     NULL},
   { "command", 0,
-    0,
+    G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
-    &options.notification_data.command,
+    &options.common_data.command,
     N_("Set left-click action"),
     N_("CMD") },
   { "listen", 0,
@@ -786,7 +786,8 @@ yad_options_init (void)
   options.common_data.uri = NULL;
   options.common_data.separator = settings.sep;
   options.common_data.multi = FALSE;
-  options.common_data.editable = FALSE;  
+  options.common_data.editable = FALSE;
+  options.common_data.command = NULL;
 
   /* Initialize calendar data */
   options.calendar_data.date_format = NULL;
@@ -799,9 +800,6 @@ yad_options_init (void)
   options.color_data.use_palette = FALSE;
   options.color_data.palette = NULL;
   options.color_data.extra = FALSE;
-
-  /* Initialize dnd data */
-  options.dnd_data.command = NULL;
 
   /* Initialize entry data */
   options.entry_data.entry_text = NULL;
@@ -833,7 +831,6 @@ yad_options_init (void)
   options.list_data.hide_column = 0;
 
   /* Initialize notification data */
-  options.notification_data.command = NULL;
   options.notification_data.listen = FALSE;
 
   /* Initialize progress data */
