@@ -295,7 +295,7 @@ static GOptionEntry file_selection_options[] = {
     G_OPTION_ARG_CALLBACK,
     add_confirm_overwrite,
     N_("Confirm file selection if filename already exists"),
-    N_("TEXT") },
+    N_("[TEXT]") },
   { "file-filter", 0,
     0,
     G_OPTION_ARG_STRING_ARRAY,
@@ -443,7 +443,7 @@ static GOptionEntry notification_options[] = {
     0,
     G_OPTION_ARG_NONE,
     &options.notification_data.listen,
-    N_("Listen for commands on stdin"),
+    N_("Listen for commands on file or stdin"),
     NULL },
   { NULL }
 };
@@ -710,8 +710,8 @@ add_palette (const gchar *option_name,
 
 static gboolean
 add_confirm_overwrite (const gchar *option_name,
-	     const gchar *value,
-	     gpointer data, GError **err)
+		       const gchar *value,
+		       gpointer data, GError **err)
 {
   options.file_data.confirm_overwrite = TRUE;
   if (value)
