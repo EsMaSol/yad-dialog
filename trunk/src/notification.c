@@ -1,9 +1,14 @@
 
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <time.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include "yad.h"
+
+
 
 typedef struct {
   gchar *name;
@@ -59,7 +64,7 @@ set_icon (void)
 	gtk_status_icon_set_from_icon_name (status_icon, "yad");
     }
   else
-    gtk_status_icon_set_from_icon_name (status_icon, icon);  
+    gtk_status_icon_set_from_icon_name (status_icon, icon);
 }
 
 static gboolean
@@ -147,7 +152,7 @@ handle_stdin (GIOChannel * channel,
       do
         {
           gint status;
-          gchar *command, *value, *colon;
+          gchar *command, *value, **args;
 
           do
             {
@@ -172,16 +177,10 @@ handle_stdin (GIOChannel * channel,
               continue;
             }
 
-          colon = strchr (string->str, ':');
-          if (colon == NULL)
-            {
-              g_printerr (_("Could not parse command from stdin\n"));
-              continue;
-            }
-          /* split off the command and value */
-          command = g_strstrip (g_strndup (string->str, colon - string->str));
-
-          value = colon + 1;
+	  args = g_strsplit (string->str, ":", 2);
+          command = g_strdup (args[0]);
+          value = g_strdup (args[1]);
+	  g_strfreev (args);
 
           if (!g_ascii_strcasecmp (command, "icon"))
             {
@@ -203,7 +202,7 @@ handle_stdin (GIOChannel * channel,
 #if GTK_CHECK_VERSION(2,16,0)
                   gtk_status_icon_set_tooltip_markup (status_icon, message);
 #else
-                  gtk_status_icon_set_tooltip (status_icon, message);
+                  gtk_status_icon_set_tooltip_text (status_icon, message);
 #endif
                   g_free (message);
                 }
@@ -261,12 +260,13 @@ handle_stdin (GIOChannel * channel,
 	    g_printerr (_("Unknown command '%s'\n"), command);
 
           g_free (command);
+	  g_free (value);
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
     }
 
-  if ((condition & G_IO_HUP) != 0)
+  if ((condition & G_IO_HUP) != 0 && !options.notification_data.filename)
     {
       g_io_channel_shutdown (channel, TRUE, NULL);
       gtk_main_quit ();
@@ -286,9 +286,15 @@ yad_notification_run ()
                     G_CALLBACK (icon_size_changed_cb), NULL);
 
   if (options.data.dialog_text)
-    gtk_status_icon_set_tooltip (status_icon, options.data.dialog_text);
+    {
+#if GTK_CHECK_VERSION(2,16,0)
+      gtk_status_icon_set_tooltip_markup (status_icon, options.data.dialog_text);
+#else
+      gtk_status_icon_set_tooltip_text (status_icon, options.data.dialog_text);
+#endif
+    }
   else
-    gtk_status_icon_set_tooltip (status_icon, _("Yad notification"));
+    gtk_status_icon_set_tooltip_text (status_icon, _("Yad notification"));
 
   if (options.data.dialog_image)
     icon = g_strdup (options.data.dialog_image);
