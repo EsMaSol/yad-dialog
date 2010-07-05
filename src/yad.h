@@ -118,7 +118,6 @@ typedef struct {
 typedef struct {
   gchar *directory;
   gboolean stdin;
-  gboolean dnd;
   gchar *term;
 } YadIconsData;
 
