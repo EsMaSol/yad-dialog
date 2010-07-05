@@ -312,19 +312,21 @@ icons_create_widget (GtkWidget *dlg)
   /* handle directory */
   if (options.icons_data.directory)
     read_dir (store);
-
-  g_object_unref (store);
-
-  /* read from stdin */
-  if (options.icons_data.stdin)
+  else if (options.icons_data.stdin)
     {
+      /* read from stdin */
       GIOChannel *channel;
 
       channel = g_io_channel_unix_new (0);
-      g_io_channel_set_encoding (channel, NULL, NULL);
-      g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
-      g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
+      if (channel)
+        {
+          g_io_channel_set_encoding (channel, NULL, NULL);
+          g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
+          g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
+        }
     }
+
+  g_object_unref (store);
 
   g_signal_connect (G_OBJECT (icon_view), "item-activated",
 		    G_CALLBACK (activate_cb), NULL);
