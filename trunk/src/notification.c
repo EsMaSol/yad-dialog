@@ -284,7 +284,7 @@ handle_stdin (GIOChannel * channel,
       g_string_free (string, TRUE);
     }
 
-  if ((condition & G_IO_HUP) != 0 && !options.notification_data.filename)
+  if ((condition & G_IO_HUP) != 0)
     {
       g_io_channel_shutdown (channel, TRUE, NULL);
       gtk_main_quit ();
