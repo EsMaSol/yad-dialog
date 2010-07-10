@@ -360,18 +360,30 @@ static GOptionEntry icons_options[] = {
     &options.icons_data.directory,
     N_("Read data from .desktop files in specified directory"),
     N_("DIRECTORY") },
+  { "generic", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.icons_data.generic,
+    N_("Use GenericName field instead of Name for icon label"),
+    NULL },
   { "stdin", 0,
     0,
     G_OPTION_ARG_NONE,
     &options.icons_data.stdin,
     N_("Read data from stdin"),
     NULL },
+  { "item-width", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.icons_data.width,
+    N_("Set the width of dialog items"),
+    NULL },
   { "term", 0,
     0,
     G_OPTION_ARG_STRING,
     &options.icons_data.term,
     /* xgettext: no-c-format */
-    N_("Use specified command for launch command in terminal (default: xterm -e %s)"),
+    N_("Use specified pattern for launch command in terminal (default: xterm -e %s)"),
     N_("PATTERN") },
   { NULL }
 };
@@ -834,7 +846,9 @@ yad_options_init (void)
 
   /* Initialize icons data */
   options.icons_data.directory = NULL;
+  options.icons_data.generic = FALSE;
   options.icons_data.stdin = FALSE;
+  options.icons_data.width = -1;
   options.icons_data.term = settings.term;
 
   /* Initialize list data */

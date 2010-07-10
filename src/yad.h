@@ -45,6 +45,11 @@ typedef enum {
   YAD_COLUMN_IMAGE,
 } YadColumnType;
 
+typedef enum {
+  YAD_BIG_ICON = 0,
+  YAD_SMALL_ICON,
+} YadIconSize;
+
 typedef struct {
   gchar *name;
   gint response;
@@ -117,7 +122,9 @@ typedef struct {
 
 typedef struct {
   gchar *directory;
+  gboolean generic;
   gboolean stdin;
+  guint width;
   gchar *term;
 } YadIconsData;
 
@@ -208,8 +215,8 @@ typedef struct {
   gboolean combo_always_editable;
   gboolean expand_palette;
   GtkIconTheme *icon_theme;
-  GdkPixbuf *fallback_image;
-  guint icon_size;
+  GdkPixbuf *big_fallback_image;
+  GdkPixbuf *small_fallback_image;
   gchar *term;
 } YadSettings;
 
@@ -250,7 +257,7 @@ gint yad_about (void);
 
 void read_settings (void);
 
-GdkPixbuf * get_pixbuf (gchar *name);
+GdkPixbuf * get_pixbuf (gchar *name, YadIconSize size);
 
 inline void strip_new_line (gchar *str);
 
