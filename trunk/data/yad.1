@@ -1,4 +1,4 @@
-.TH YAD 1 "April 10, 2010"
+.TH YAD 1 "July 10, 2010"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
@@ -29,6 +29,9 @@ Display drag-and-drop box.
 .TP
 .B \-\-entry
 Display text entry dialog.
+.TP
+.B \-\-icons
+Display box with shortcut icons.
 .TP
 .B \-\-file\-selection
 Display file selection dialog.
@@ -91,7 +94,7 @@ Show image above main widget instead of left.
 Add the dialog button. May be used several times. \fIID\fP is an exit code.
 \fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or simple text label. 
 Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP. 
-If no buttons specified \fIOK\fP and \fICancel\fP button used.
+If no buttons specified \fIOK\fP and \fICancel\fP buttons used.
 .TP
 .B \-\-no-buttons
 Don't show buttons.
@@ -166,6 +169,26 @@ Use completion instead of combo-box.
 .TP
 .B \-\-editable
 Allow changes to text in combo-box.
+
+.PP
+Iconbox options
+.TP
+.B \-\-read-dir=DIRECTORY
+Read .desktop files from specified directory.
+.TP
+.B \-\-generic
+Use field GenericName instead of Name for shortcut label.
+.TP
+.B \-\-stdin
+Read data from stdin. Data must bi in order - \fIName\fP, \fITooltip\fP, \fIIcon\fP, \fICommand\fP, \fIInTerm\fP  separated by newline. \fIInTerm\fP is a case insensitive boolean value (true or false).
+.TP
+.B \-\-width
+Set item width.
+.TP
+.B \-\-term
+Pattern for terminal. By default use `xterm -e %s' where %s replaced by the command.
+
+If both directory and stdin specified, content of iconbox will be read from directory.
 
 .PP
 File selection options
@@ -409,6 +432,10 @@ yad \-\-list \-\-checklist \-\-column "Buy" \-\-column "Item" TRUE Apples TRUE O
 Display a progress dialog while searching for all the postscript files in your home directory
 .IP
 find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
+.PP
+Display a box with all of the installed desktop applications
+.IP
+yad \-\-icons \-\-read-dir=/usr/share/applications
 
 .SH AUTHOR
 \fBYad\fP was written by Victor Ananjevsky <ananasik@gmail.com>.

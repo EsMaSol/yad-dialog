@@ -60,8 +60,6 @@ create_settings (gchar *filename)
   g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
   g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
   g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
-  g_key_file_set_integer (kf, "General", "icon_size", settings.icon_size);
-  g_key_file_set_comment (kf, "General", "icon_size", "Default icon size for list widget", NULL);
   g_key_file_set_string (kf, "General", "terminal", settings.term);
   g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
 
@@ -91,7 +89,6 @@ read_settings (void)
   settings.dlg_sep = FALSE;
   settings.combo_always_editable = FALSE;
   settings.expand_palette = FALSE;
-  settings.icon_size = 16;
   settings.term = "xterm -e %s";
 
   filename = g_build_filename (g_get_user_config_dir (), 
@@ -127,8 +124,6 @@ read_settings (void)
 	    settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
 	  if (g_key_file_has_key (kf, "General", "expand_palette", NULL))
 	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
-	  if (g_key_file_has_key (kf, "General", "icon_size", NULL))
-	    settings.icon_size = g_key_file_get_integer (kf, "General", "icon_size", NULL);
 	  if (g_key_file_has_key (kf, "General", "terminal", NULL))
 	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
 	}
@@ -142,9 +137,10 @@ read_settings (void)
 }
 
 GdkPixbuf * 
-get_pixbuf (gchar *name)
+get_pixbuf (gchar *name, YadIconSize size)
 {
   GdkPixbuf *pb;
+  gint w, h;
   GError *err = NULL;
 
   if (g_file_test (name, G_FILE_TEST_EXISTS))
@@ -158,12 +154,22 @@ get_pixbuf (gchar *name)
     }
   else
     {
-      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, settings.icon_size, 
+      if (size == YAD_BIG_ICON)
+	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
+      else
+	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+
+      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h), 
 				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
     }
 
   if (!pb)
-    pb = settings.fallback_image;
+    {
+      if (size == YAD_BIG_ICON)
+	pb = settings.big_fallback_image;
+      else
+	pb = settings.small_fallback_image;
+    }
 
   return pb;
 }

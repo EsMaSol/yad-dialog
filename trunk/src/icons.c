@@ -143,7 +143,7 @@ handle_stdin (GIOChannel * channel,
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
 	      break;
 	    case COL_PIXBUF:
-	      pb = get_pixbuf (string->str);
+	      pb = get_pixbuf (string->str, YAD_BIG_ICON);
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
 	      g_object_unref (pb);
 	      break;
@@ -184,12 +184,6 @@ parse_desktop_file (gchar *filename)
   DEntry *ent;
   GKeyFile *kf;
   GError *err = NULL;
-  static GdkPixbuf *fb = NULL;
-
-  if (!fb)
-    fb = gtk_icon_theme_load_icon (settings.icon_theme, "unknown",
-				   48, GTK_ICON_LOOKUP_GENERIC_FALLBACK,
-				   NULL);
 
   ent = g_new0 (DEntry, 1);
   kf = g_key_file_new ();
@@ -202,7 +196,14 @@ parse_desktop_file (gchar *filename)
 	{
 	  gint i;
 
-	  ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+	  if (options.icons_data.generic)
+	    {
+	      ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "GenericName", NULL, NULL);
+	      if (!ent->name)
+		ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+	    }
+	  else
+	    ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
 	  ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
 	  ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
 	  /* remove possible arguments patterns */
@@ -218,10 +219,7 @@ parse_desktop_file (gchar *filename)
 	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
 	  if (icon)
 	    {
-	      ent->pixbuf = gtk_icon_theme_load_icon (settings.icon_theme, icon, 48, 
-						      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
-	      if (!ent->pixbuf)
-		ent->pixbuf = fb;
+	      ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
 	      g_free (icon);
 	    }
 	}
@@ -308,6 +306,7 @@ icons_create_widget (GtkWidget *dlg)
   gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
   gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
   gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
+  gtk_icon_view_set_item_width (GTK_ICON_VIEW (icon_view), options.icons_data.width);
 
   /* handle directory */
   if (options.icons_data.directory)

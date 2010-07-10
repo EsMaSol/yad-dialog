@@ -174,11 +174,12 @@ create_dialog ()
 
   if (options.data.dialog_image)
     {
-      if (g_file_test (options.data.dialog_image, G_FILE_TEST_EXISTS))
-	image = gtk_image_new_from_file (options.data.dialog_image);
-      else
-	image = gtk_image_new_from_icon_name (options.data.dialog_image,
-					      GTK_ICON_SIZE_DIALOG);
+      GdkPixbuf *pb = NULL;
+
+      pb = get_pixbuf (options.data.dialog_image, YAD_BIG_ICON);
+      image = gtk_image_new_from_pixbuf (pb);
+      g_object_unref (pb);
+
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
       gtk_misc_set_padding (GTK_MISC (image), 5, 5);
       gtk_box_pack_start (GTK_BOX (hbox2), image, FALSE, FALSE, 2);
@@ -320,6 +321,7 @@ main (gint argc, gchar ** argv)
   GOptionContext *ctx;
   GError *err = NULL;
   GtkWidget *dialog;
+  gint w, h;
   gint ret = 0;
 
   setlocale (LC_ALL, "");
@@ -336,11 +338,15 @@ main (gint argc, gchar ** argv)
 
   yad_options_init ();
 
-  /* set default icon and icon theme */
+  /* set default icons and icon theme */
   settings.icon_theme = gtk_icon_theme_get_default ();
-  settings.fallback_image =
-    gtk_icon_theme_load_icon (settings.icon_theme, "unknown",
-			      settings.icon_size,
+  gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
+  settings.big_fallback_image =
+    gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),
+			      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);  
+  settings.small_fallback_image =
+    gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),
 			      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   ctx = yad_create_context ();

@@ -2,6 +2,7 @@ src/about.c
 src/calendar.c
 src/entry.c
 src/fileselection.c
+src/icons.c
 src/main.c
 src/notification.c
 src/scale.c
