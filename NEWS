@@ -1,3 +1,9 @@
+Version 0.3.0
+    - add iconbox dialog
+    - fix option parsing
+    - improvements in notification icon and list dialog
+    - update translations
+
 Version 0.2.1
     - improve keyboard navigation
     - update man page
