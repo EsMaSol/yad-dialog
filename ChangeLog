@@ -1,3 +1,100 @@
+2010-07-10 09:28  ananasik
+
+	* Makefile.in, aclocal.m4, config.sub, configure, configure.ac,
+	  data/Makefile.in, data/yad.1, depcomp, install-sh, missing,
+	  mkinstalldirs, po/POTFILES.in, po/de.po, po/ru.po, po/sk.po,
+	  src/Makefile.in, src/icons.c, src/list.c, src/main.c,
+	  src/option.c, src/util.c, src/yad.h: prepare to release 0.3.0.
+	  cleanup svn tree
+
+2010-07-05 04:05  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, src/option.c, src/yad.h: update
+	  translation
+
+2010-07-05 03:45  ananasik
+
+	* src/notification.c: cleanups
+
+2010-07-05 03:33  ananasik
+
+	* aclocal.m4, configure, configure.ac, src/icons.c: some cleanups
+
+2010-07-05 03:18  ananasik
+
+	* README, src/about.c, src/calendar.c, src/color.c, src/dnd.c,
+	  src/entry.c, src/fileselection.c, src/form.c, src/icons.c,
+	  src/list.c, src/main.c, src/notification.c, src/option.c,
+	  src/progress.c, src/scale.c, src/text.c, src/util.c: update
+	  license information
+
+2010-07-05 03:01  ananasik
+
+	* data/yad.1, src/notification.c, src/option.c: improve
+	  notification icon dialog
+
+2010-05-30 13:01  ananasik
+
+	* configure, configure.ac, src/icons.c, src/list.c: busy cursor in
+	  list and icons dialogs
+
+2010-05-28 12:31  ananasik
+
+	* configure, configure.ac, src/dnd.c, src/notification.c,
+	  src/option.c, src/yad.h: Fix options parsing
+
+2010-05-20 04:39  ananasik
+
+	* po/POTFILES.in: New line at the end of POTFILES.in
+
+2010-05-17 09:34  ananasik
+
+	* src/icons.c, src/option.c:
+
+2010-05-17 09:31  ananasik
+
+	* Makefile.in, aclocal.m4, configure, configure.ac,
+	  data/Makefile.in, src/Makefile.in, src/icons.c, src/option.c:
+	  Bump version
+
+2010-05-16 13:43  ananasik
+
+	* src/icons.c, src/util.c: Working changes
+
+2010-05-16 09:15  ananasik
+
+	* src/icons.c, src/option.c, src/util.c, src/yad.h: working changes
+
+2010-05-16 07:06  ananasik
+
+	* src/list.c: Fix bug with editing numeric columns
+
+2010-05-11 14:35  ananasik
+
+	* src/icons.c, src/option.c: working changes
+
+2010-05-10 16:29  ananasik
+
+	* src/icons.c:
+
+2010-05-10 16:17  ananasik
+
+	* src/option.c, src/yad.h:
+
+2010-05-10 16:05  ananasik
+
+	* src/icons.c:
+
+2010-05-10 15:55  ananasik
+
+	* src/Makefile.am, src/Makefile.in, src/about.c, src/icons.c,
+	  src/main.c, src/option.c, src/yad.h: add initial template for
+	  iconbox dialog
+
+2010-05-10 13:54  ananasik
+
+	* ChangeLog, NEWS: release 0.2.1
+
 2010-05-10 13:32  ananasik
 
 	* src/list.c: Press return submits data in list dialog
