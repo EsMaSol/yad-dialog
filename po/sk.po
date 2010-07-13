@@ -1,15 +1,16 @@
-# Slovak translations for YAD package
-# Slovenské preklady pre balík YAD.
+# Slovak translation for YAD package
+# Slovenský preklad balíka YAD.
 # Copyright (C) 2010 THE YAD'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the YAD package.
-# Slavko <slavino@slavino.sk>, 2010.
+# Slavko <linux@slavino.sk>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-10 12:13+0300\n"
-"PO-Revision-Date: 2010-04-09 21:56+0200\n"
-"Last-Translator: Slavko <slavino@slavino.sk>\n"
+"PO-Revision-Date: 2010-07-11 11:40+0200\n"
+"Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovenský <nomail>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,6 @@ msgid "translator-credits"
 msgstr "Slavko <linux@slavino.sk>"
 
 #: ../src/about.c:34
-#, fuzzy
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -40,7 +40,7 @@ msgid ""
 msgstr ""
 "Tento program je slobodný softvér; môžete ho redistribuovať a/alebo "
 "modifikovať podľa podmienok GNU General Public License ako je zverejnená "
-"Free Software Foundation; buď verzie 2 Licencie alebo (ak chcete) akejkoľvek "
+"Free Software Foundation; buď verzie 3 Licencie alebo (ak chcete) akejkoľvek "
 "novšej verzie.\n"
 "\n"
 "Tento program je distribuovaný v nádeji, že bude užitočný, ale BEZ "
@@ -65,19 +65,19 @@ msgstr ""
 "Založený na kóde Zenity\n"
 
 #: ../src/icons.c:228
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to parse file %s: %s"
-msgstr "Nemožno otvoriť súbor %s: %s"
+msgstr "Nemožno spracovať súbor %s: %s"
 
 #: ../src/icons.c:245
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open directory %s: %s"
-msgstr "Nemožno otvoriť súbor %s: %s"
+msgstr "Nemožno otvoriť adresár %s: %s"
 
 #: ../src/main.c:53 ../src/main.c:160
 #, c-format
 msgid "%d sec"
-msgstr ""
+msgstr "%d s"
 
 #: ../src/main.c:89
 #, c-format
@@ -369,9 +369,8 @@ msgid "Confirm file selection if filename already exists"
 msgstr "Potvrdiť výber, ak už súbor existuje"
 
 #: ../src/option.c:318
-#, fuzzy
 msgid "[TEXT]"
-msgstr "TEXT"
+msgstr "[TEXT]"
 
 #: ../src/option.c:323
 msgid "Sets a filename filter"
@@ -394,37 +393,34 @@ msgid "LABEL[:TYPE]"
 msgstr "NÁVESTIE[:TYP]"
 
 #: ../src/option.c:355
-#, fuzzy
 msgid "Display icons box dialog"
-msgstr "Zobraziť dialóg Zoznam"
+msgstr "Zobraziť dialóg ikon"
 
 #: ../src/option.c:361
 msgid "Read data from .desktop files in specified directory"
-msgstr ""
+msgstr "Čítať dáta zo súborov .desktop v zadanom adresári"
 
 #: ../src/option.c:362
 msgid "DIRECTORY"
-msgstr ""
+msgstr "ADRESÁR"
 
 #: ../src/option.c:367
 msgid "Use GenericName field instead of Name for icon label"
-msgstr ""
+msgstr "Pre menovku ikony použiť pole GenericName namiesto Name"
 
 #: ../src/option.c:373
-#, fuzzy
 msgid "Read data from stdin"
-msgstr "Zobraziť všetky dáta zoznamu"
+msgstr "Čítať dáta zo štandardného vstupu"
 
 #: ../src/option.c:379
-#, fuzzy
 msgid "Set the width of dialog items"
-msgstr "Nastaviť názov dialógu"
+msgstr "Nastaviť šírku položiek dialógu"
 
 #: ../src/option.c:386
 #, no-c-format
 msgid ""
 "Use specified pattern for launch command in terminal (default: xterm -e %s)"
-msgstr ""
+msgstr "Vzor pre spustenie príkazu v termináli (predvolené: xterm -e %s)"
 
 #: ../src/option.c:396
 msgid "Display list dialog"
@@ -462,8 +458,7 @@ msgstr "Zobraziť všetky dáta zoznamu"
 msgid ""
 "Print a specific column (Default is 1. 0 can be used to print all columns)"
 msgstr ""
-"Zobraziť zadaný stĺpec (Predvolene je 1; 0 možno použiť pre zobrazenie "
-"všetkých stĺpcov)"
+"Zobraziť zadaný stĺpec (predvolené 1; 0 pre zobrazenie všetkých stĺpcov)"
 
 #: ../src/option.c:446 ../src/option.c:452
 msgid "NUMBER"
@@ -482,9 +477,8 @@ msgid "Set left-click action"
 msgstr "Nastaviť akciu ľavého tlačidla myši"
 
 #: ../src/option.c:473
-#, fuzzy
 msgid "Listen for commands on stdin"
-msgstr "Čakať na príkaz zo štandardného vstupu"
+msgstr "Prijímať príkazy zo štandardného vstupu"
 
 #: ../src/option.c:483
 msgid "Display progress indication dialog"
@@ -665,14 +659,12 @@ msgstr "Zobraziť voľby formulára"
 
 #. Add icons option entries
 #: ../src/option.c:947
-#, fuzzy
 msgid "Icons box options"
-msgstr "Voľby farby"
+msgstr "Voľby dialógu ikon"
 
 #: ../src/option.c:948
-#, fuzzy
 msgid "Show icons box options"
-msgstr "Zobraziť voľby farby"
+msgstr "Zobraziť voľby dialógu ikon"
 
 #. Adds list option entries
 #: ../src/option.c:954
