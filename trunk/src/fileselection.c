@@ -48,7 +48,7 @@ confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data)
 
 	  d = gtk_message_dialog_new (GTK_WINDOW (dlg), GTK_DIALOG_DESTROY_WITH_PARENT,
 				      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
-				      options.file_data.confirm_text);
+				      "%s", options.file_data.confirm_text);
 	  r = gtk_dialog_run (GTK_DIALOG (d));
 	  gtk_widget_destroy (d);
 	  if (r != GTK_RESPONSE_YES)
