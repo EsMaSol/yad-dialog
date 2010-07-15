@@ -487,12 +487,10 @@ list_create_widget (GtkWidget *dlg)
       g_signal_connect_swapped (G_OBJECT (list_view), "button_press_event",
 				G_CALLBACK (popup_menu_cb), NULL);
     }
-  else
-    {
-      /* Return submits data */
-      g_signal_connect (G_OBJECT (list_view), "key-press-event", 
-			G_CALLBACK (list_activate_cb), dlg);
-    }
+
+  /* Return submits data */
+  g_signal_connect (G_OBJECT (list_view), "key-press-event", 
+	            G_CALLBACK (list_activate_cb), dlg);
 
   fill_data (n_columns);
   
