@@ -178,19 +178,8 @@ handle_stdin (GIOChannel * channel,
   static gint column_count = 0;
   static gint row_count = 0;
   static gboolean first_time = TRUE;
-  GdkCursor *cursor;
   gint n_columns = GPOINTER_TO_INT (data);
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
-
-  /* set cursor to busy */
-  cursor = gdk_cursor_new_from_name (gdk_display_get_default (), "watch");
-  if (!cursor)
-    cursor = gdk_cursor_new (GDK_WATCH);
-#if GTK_CHECK_VERSION(2,14,0)
-  gdk_window_set_cursor (gtk_widget_get_window (list_view), cursor);
-#else
-  gdk_window_set_cursor (list_view->widnow, cursor);
-#endif
 
   if (first_time)
     {
@@ -273,14 +262,6 @@ handle_stdin (GIOChannel * channel,
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
     }
-
-  /* set cursor to default */
-#if GTK_CHECK_VERSION(2,14,0)
-  gdk_window_set_cursor (gtk_widget_get_window (list_view), NULL);
-#else
-  gdk_window_set_cursor (list_view->widnow, NULL);
-#endif
-  gdk_cursor_unref (cursor);
 
   if ((condition != G_IO_IN) && (condition != G_IO_IN + G_IO_HUP))
     {
