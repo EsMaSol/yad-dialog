@@ -1,5 +1,5 @@
 AC_INIT([YAD], [0.3.1], [http://code.google.com/p/yad/issues/entry], yad, [http://code.google.com/p/yad])
-AM_INIT_AUTOMAKE([1.11 foreign dist-bzip2 no-dist-gzip])
+AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
 AM_SILENT_RULES([yes])
 
 AC_PREREQ([2.59])
