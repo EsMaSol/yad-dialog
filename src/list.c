@@ -282,7 +282,7 @@ handle_stdin (GIOChannel * channel,
 #endif
   gdk_cursor_unref (cursor);
 
-  if (condition != G_IO_IN)
+  if ((condition != G_IO_IN) && (condition != G_IO_IN + G_IO_HUP))
     {
       g_io_channel_shutdown (channel, TRUE, NULL);
       return FALSE;
