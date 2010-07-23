@@ -49,7 +49,7 @@ form_create_widget (GtkWidget *dlg)
 	  l = gtk_label_new (fld->name);
 	  gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
 	  gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
-	  
+
 	  e = gtk_entry_new ();
 	  g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 	  if (fld->type == YAD_FIELD_HIDDEN)
@@ -82,8 +82,8 @@ form_print_result (void)
 
   for (i = 0; i < g_slist_length (fields); i++)
     {
-      g_printf ("%s%s", 
-		gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, i))), 
+      g_printf ("%s%s",
+		gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, i))),
 		options.common_data.separator);
     }
   g_printf ("\n");

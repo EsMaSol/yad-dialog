@@ -344,7 +344,7 @@ main (gint argc, gchar ** argv)
   settings.big_fallback_image =
     gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),
 			      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
-  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);  
+  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
   settings.small_fallback_image =
     gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),
 			      GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);

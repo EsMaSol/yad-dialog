@@ -39,11 +39,11 @@ calendar_create_widget (GtkWidget *dlg)
   /* FIXME: add "show details" to widget */
 
   if (options.calendar_data.month > 0 || options.calendar_data.year > 0)
-    gtk_calendar_select_month (GTK_CALENDAR (w), 
+    gtk_calendar_select_month (GTK_CALENDAR (w),
 			       options.calendar_data.month - 1,
 			       options.calendar_data.year);
   if (options.calendar_data.day > 0)
-    gtk_calendar_select_day (GTK_CALENDAR (w), 
+    gtk_calendar_select_day (GTK_CALENDAR (w),
 			     options.calendar_data.day);
 
   g_signal_connect (w, "day-selected-double-click",

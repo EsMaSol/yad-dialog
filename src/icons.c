@@ -57,7 +57,7 @@ activate_cb (GtkIconView *view, GtkTreePath *path, gpointer data)
   if (in_term)
     {
       gchar *tcmd;
-      
+
       tcmd = g_strdup_printf (options.icons_data.term, cmd);
       g_spawn_command_line_async (tcmd, NULL);
       g_free (tcmd);
@@ -76,7 +76,7 @@ handle_stdin (GIOChannel * channel,
   static gboolean first_time = TRUE;
   GdkCursor *cursor;
   GtkTreeModel *model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
-                                                            
+
   /* set cursor to busy */
   cursor = gdk_cursor_new_from_name (gdk_display_get_default (), "watch");
   if (!cursor)
@@ -86,55 +86,55 @@ handle_stdin (GIOChannel * channel,
 #else
   gdk_window_set_cursor (list_view->widnow, cursor);
 #endif
-                                                           
-  if (first_time)                                                 
-    {                                                       
-      first_time = FALSE;                                         
+
+  if (first_time)
+    {
+      first_time = FALSE;
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-    }                                                             
-                                          
+    }
+
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
-    {                                     
-      GError *err = NULL;                 
-      GString *string = g_string_new (NULL);       
+    {
+      GError *err = NULL;
+      GString *string = g_string_new (NULL);
 
       while (channel->is_readable != TRUE) ;
 
-      do              
-        {                                                                   
+      do
+        {
 	  GdkPixbuf *pb;
-          gint status;                
-                                                                            
-          do                          
-            {                                                               
-              status =                
+          gint status;
+
+          do
+            {
+              status =
                 g_io_channel_read_line_string (channel, string, NULL, &err);
 
-              while (gtk_events_pending ())   
+              while (gtk_events_pending ())
                 gtk_main_iteration ();
-            }                               
-          while (status == G_IO_STATUS_AGAIN);              
+            }
+          while (status == G_IO_STATUS_AGAIN);
 	  strip_new_line (string->str);
-                                            
-          if (status != G_IO_STATUS_NORMAL)                 
-            {                               
-              if (err)                                      
-                {                           
+
+          if (status != G_IO_STATUS_NORMAL)
+            {
+              if (err)
+                {
                   g_printerr ("yad_icons_handle_stdin(): %s", err->message);
                   g_error_free (err);
 		  err = NULL;
-                }                           
-              continue;                                             
+                }
+              continue;
             }
 
-          if (column_count == NUM_COLS)                                    
-            {                               
-              /* We're starting a new row */                                
-              column_count = 0;             
-              row_count++;                                                  
+          if (column_count == NUM_COLS)
+            {
+              /* We're starting a new row */
+              column_count = 0;
+              row_count++;
               gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-            }                                                               
-	  
+            }
+
 	  switch (column_count)
 	    {
 	    case COL_NAME:
@@ -156,10 +156,10 @@ handle_stdin (GIOChannel * channel,
 	    }
 
 	  column_count++;
-        }                                                                           
-      while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);                     
-      g_string_free (string, TRUE);                                                 
-    }                                                                                     
+        }
+      while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
+      g_string_free (string, TRUE);
+    }
 
   /* set cursor to default */
 #if GTK_CHECK_VERSION(2,14,0)
@@ -169,13 +169,13 @@ handle_stdin (GIOChannel * channel,
 #endif
   gdk_cursor_unref (cursor);
 
-  if (condition != G_IO_IN)                                                               
-    {                                                                               
-      g_io_channel_shutdown (channel, TRUE, NULL);                                        
-      return FALSE;                                                                 
-    }                                                                                     
+  if (condition != G_IO_IN)
+    {
+      g_io_channel_shutdown (channel, TRUE, NULL);
+      return FALSE;
+    }
 
-  return TRUE;                                                                      
+  return TRUE;
 }
 
 static DEntry *
@@ -226,7 +226,7 @@ parse_desktop_file (gchar *filename)
     }
   else
     g_printerr (_("Unable to parse file %s: %s"), filename, err->message);
-  
+
   g_key_file_free (kf);
 
   return ent;
@@ -242,7 +242,7 @@ read_dir (GtkListStore *store)
   dir = g_dir_open (options.icons_data.directory, 0, &err);
   if (!dir)
     {
-      g_printerr (_("Unable to open directory %s: %s"), 
+      g_printerr (_("Unable to open directory %s: %s"),
 		  options.icons_data.directory, err->message);
       return;
     }

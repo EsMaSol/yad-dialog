@@ -30,7 +30,7 @@ yad_about (void)
     NULL
   };
   gchar *translators = _("translator-credits");
-  gchar *license = 
+  gchar *license =
     _("This program is free software; you can redistribute it and/or modify "
       "it under the terms of the GNU General Public License as published by "
       "the Free Software Foundation; either version 3 of the License, or "
@@ -42,9 +42,9 @@ yad_about (void)
       "You should have received a copy of the GNU General Public License "
       "along with this program; if not, write to the Free Software "
       "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.");
-  
+
   dialog = gtk_about_dialog_new ();
-  
+
   g_object_set (G_OBJECT (dialog),
 		"name", PACKAGE_NAME,
 		"version", PACKAGE_VERSION,
@@ -53,7 +53,7 @@ yad_about (void)
 		"authors", authors,
 		"website", PACKAGE_URL,
 		"translator-credits", translators,
-		"wrap-license", TRUE, "license", license, 
+		"wrap-license", TRUE, "license", license,
 		NULL);
   gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (dialog), "yad");
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");

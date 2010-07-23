@@ -47,8 +47,8 @@ scale_create_widget (GtkWidget *dlg)
       return NULL;
     }
 
-  w = scale = gtk_hscale_new_with_range (options.scale_data.min_value, 
-					 options.scale_data.max_value, 
+  w = scale = gtk_hscale_new_with_range (options.scale_data.min_value,
+					 options.scale_data.max_value,
 					 options.scale_data.step);
   gtk_range_set_value (GTK_RANGE (w), options.scale_data.value);
 
