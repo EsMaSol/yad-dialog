@@ -38,7 +38,7 @@ create_settings (gchar *filename)
   g_key_file_set_string (kf, "General", "separator", settings.sep);
   g_key_file_set_comment (kf, "General", "separator", "Default separator for output", NULL);
   g_key_file_set_string (kf, "General", "menu_separator", settings.menu_sep);
-  g_key_file_set_comment (kf, "General", "menu_separator", 
+  g_key_file_set_comment (kf, "General", "menu_separator",
 			  "Default separator for notification icon menu (single char)", NULL);
   g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
   g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
@@ -91,7 +91,7 @@ read_settings (void)
   settings.expand_palette = FALSE;
   settings.term = "xterm -e %s";
 
-  filename = g_build_filename (g_get_user_config_dir (), 
+  filename = g_build_filename (g_get_user_config_dir (),
 			       SETTINGS_FILE, NULL);
 
   if (g_file_test (filename, G_FILE_TEST_EXISTS))
@@ -136,7 +136,7 @@ read_settings (void)
   g_free (filename);
 }
 
-GdkPixbuf * 
+GdkPixbuf *
 get_pixbuf (gchar *name, YadIconSize size)
 {
   GdkPixbuf *pb;
@@ -159,7 +159,7 @@ get_pixbuf (gchar *name, YadIconSize size)
       else
 	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
 
-      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h), 
+      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h),
 				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
     }
 
@@ -174,11 +174,11 @@ get_pixbuf (gchar *name, YadIconSize size)
   return pb;
 }
 
-inline void 
+inline void
 strip_new_line (gchar *str)
 {
   gint nl = strlen (str) - 1;
 
   if (str[nl] == '\n')
-    str[nl] = '\0';                                      
+    str[nl] = '\0';
 }

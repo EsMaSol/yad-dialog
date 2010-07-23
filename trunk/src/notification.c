@@ -50,7 +50,7 @@ timeout_cb (gpointer data)
   gtk_main_quit ();
 }
 
-static void 
+static void
 set_icon (void)
 {
   GdkPixbuf *pixbuf;
@@ -151,7 +151,7 @@ popup_menu_cb (GtkStatusIcon * icon, guint button,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
     }
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  gtk_status_icon_position_menu, 
+                  gtk_status_icon_position_menu,
 		  icon, button, activate_time);
 }
 
@@ -332,7 +332,7 @@ yad_notification_run ()
 	  g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
 	  g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
 
-	  g_signal_connect (status_icon, "popup_menu", 
+	  g_signal_connect (status_icon, "popup_menu",
 			    G_CALLBACK (popup_menu_cb), NULL);
 	}
     }

@@ -60,17 +60,17 @@ toggled_cb (GtkCellRendererToggle *cell,
   gtk_tree_path_free (path);
 }
 
-static void                                            
-cell_edited_cb (GtkCellRendererText * cell,       
+static void
+cell_edited_cb (GtkCellRendererText * cell,
                 const gchar * path_string,
                 const gchar * new_text, gpointer data)
-{    
+{
   gint column;
-  GtkTreeIter iter;                                         
+  GtkTreeIter iter;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);;
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
   YadColumn *col;
-                                
+
   column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
   gtk_tree_model_get_iter (model, &iter, path);
   col = (YadColumn *) g_slist_nth_data (options.list_data.columns, column);
@@ -80,7 +80,7 @@ cell_edited_cb (GtkCellRendererText * cell,
   else
     gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, new_text, -1);
 
-  gtk_tree_path_free (path);                                               
+  gtk_tree_path_free (path);
 }
 
 static GtkTreeModel *
@@ -91,7 +91,7 @@ create_model (gint n_columns)
   gint i;
 
   ctypes = g_new0 (GType, n_columns);
-  
+
   if (options.list_data.checkbox)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, 0);
@@ -101,7 +101,7 @@ create_model (gint n_columns)
   for (i = 0; i < n_columns; i++)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
-      
+
       switch (col->type)
 	{
 	case YAD_COLUMN_CHECK:
@@ -131,7 +131,7 @@ add_columns (gint n_columns)
   gint i;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
-  
+
   for (i = 0; i < n_columns; i++)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
@@ -142,12 +142,12 @@ add_columns (gint n_columns)
 	  renderer = gtk_cell_renderer_toggle_new ();
 	  g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
 	  g_signal_connect (renderer, "toggled", G_CALLBACK (toggled_cb), NULL);
-	  column = gtk_tree_view_column_new_with_attributes 
+	  column = gtk_tree_view_column_new_with_attributes
 	    (col->name, renderer, "active", i, NULL);
 	  break;
 	case YAD_COLUMN_IMAGE:
 	  renderer = gtk_cell_renderer_pixbuf_new ();
-	  column = gtk_tree_view_column_new_with_attributes 
+	  column = gtk_tree_view_column_new_with_attributes
 	    (col->name, renderer, "pixbuf", i, NULL);
 	  break;
 	case YAD_COLUMN_NUM:
@@ -160,7 +160,7 @@ add_columns (gint n_columns)
 	      g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
 	      g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
 	    }
-	  column = gtk_tree_view_column_new_with_attributes      
+	  column = gtk_tree_view_column_new_with_attributes
 	    (col->name, renderer, "text", i, NULL);
 	  gtk_tree_view_column_set_sort_column_id (column, i);
 	  gtk_tree_view_column_set_resizable  (column, TRUE);
@@ -181,7 +181,7 @@ handle_stdin (GIOChannel * channel,
   GdkCursor *cursor;
   gint n_columns = GPOINTER_TO_INT (data);
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
- 
+
   /* set cursor to busy */
   cursor = gdk_cursor_new_from_name (gdk_display_get_default (), "watch");
   if (!cursor)
@@ -191,58 +191,58 @@ handle_stdin (GIOChannel * channel,
 #else
   gdk_window_set_cursor (list_view->widnow, cursor);
 #endif
-                                                           
-  if (first_time)                                                 
-    {                                                       
-      first_time = FALSE;                                         
+
+  if (first_time)
+    {
+      first_time = FALSE;
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-    }                                                             
-                                          
+    }
+
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
-    {                                     
-      GError *err = NULL;                 
-      GString *string = g_string_new (NULL);       
+    {
+      GError *err = NULL;
+      GString *string = g_string_new (NULL);
 
       while (channel->is_readable != TRUE) ;
 
-      do              
-        {                                                                   
+      do
+        {
 	  YadColumn *col;
 	  GdkPixbuf *pb;
-          gint status;                
-                                                                            
-          do                          
-            {                                                               
-              status =                
+          gint status;
+
+          do
+            {
+              status =
                 g_io_channel_read_line_string (channel, string, NULL, &err);
 
-              while (gtk_events_pending ())   
+              while (gtk_events_pending ())
                 gtk_main_iteration ();
-            }                               
-          while (status == G_IO_STATUS_AGAIN);              
+            }
+          while (status == G_IO_STATUS_AGAIN);
 	  strip_new_line (string->str);
-                                            
-          if (status != G_IO_STATUS_NORMAL)                 
-            {                               
-              if (err)                                      
-                {                           
+
+          if (status != G_IO_STATUS_NORMAL)
+            {
+              if (err)
+                {
                   g_printerr ("yad_list_handle_stdin(): %s", err->message);
                   g_error_free (err);
 		  err = NULL;
-                }                           
-              continue;                                             
+                }
+              continue;
             }
 
-          if (column_count == n_columns)                                    
-            {                               
-              /* We're starting a new row */                                
-              column_count = 0;             
-              row_count++;                                                  
+          if (column_count == n_columns)
+            {
+              /* We're starting a new row */
+              column_count = 0;
+              row_count++;
               gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-            }                                                               
+            }
 
 	  col = (YadColumn *) g_slist_nth_data (options.list_data.columns, column_count);
-	  
+
 	  switch (col->type)
 	    {
 	    case YAD_COLUMN_CHECK:
@@ -252,27 +252,27 @@ handle_stdin (GIOChannel * channel,
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
 	      break;
 	    case YAD_COLUMN_NUM:
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, 
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count,
 				  g_ascii_strtoll (string->str, NULL, 10), -1);
 	      break;
 	    case YAD_COLUMN_IMAGE:
 	      pb = get_pixbuf (string->str, YAD_SMALL_ICON);
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 				  column_count, pb, -1);
 	      g_object_unref (pb);
 	      break;
 	    case YAD_COLUMN_TEXT:
 	    default:
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 				  column_count, string->str, -1);
 	      break;
 	    }
 
 	  column_count++;
-        }                                                                           
-      while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);                     
-      g_string_free (string, TRUE);                                                 
-    }                                                                                     
+        }
+      while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
+      g_string_free (string, TRUE);
+    }
 
   /* set cursor to default */
 #if GTK_CHECK_VERSION(2,14,0)
@@ -282,20 +282,20 @@ handle_stdin (GIOChannel * channel,
 #endif
   gdk_cursor_unref (cursor);
 
-  if (condition != G_IO_IN)                                                               
-    {                                                                               
-      g_io_channel_shutdown (channel, TRUE, NULL);                                        
-      return FALSE;                                                                 
-    }                                                                                     
+  if (condition != G_IO_IN)
+    {
+      g_io_channel_shutdown (channel, TRUE, NULL);
+      return FALSE;
+    }
 
-  return TRUE;                                                                      
+  return TRUE;
 }
 
 static void
 fill_data (gint n_columns)
 {
   GtkTreeIter iter;
-  GtkListStore *model = 
+  GtkListStore *model =
     GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (list_view)));
 
   if (options.extra_data && *options.extra_data)
@@ -308,11 +308,11 @@ fill_data (gint n_columns)
 	  gint j;
 
 	  gtk_list_store_append (model, &iter);
-	  for (j = 0; j < n_columns; j++)                       
+	  for (j = 0; j < n_columns; j++)
 	    {
 	      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, j);
 	      GdkPixbuf *pb;
-	      
+
 	      if (args[i] == NULL)
 		break;
 
@@ -325,7 +325,7 @@ fill_data (gint n_columns)
 		    gtk_list_store_set (model, &iter, j, FALSE, -1);
 		  break;
 		case YAD_COLUMN_NUM:
-		  gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, 
+		  gtk_list_store_set (GTK_LIST_STORE (model), &iter, j,
 				      g_ascii_strtoll (args[i], NULL, 10), -1);
 		  break;
 		case YAD_COLUMN_IMAGE:
@@ -349,7 +349,7 @@ fill_data (gint n_columns)
       channel = g_io_channel_unix_new (0);
       g_io_channel_set_encoding (channel, NULL, NULL);
       g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
-      g_io_add_watch (channel, G_IO_IN | G_IO_HUP, 
+      g_io_add_watch (channel, G_IO_IN | G_IO_HUP,
 		      handle_stdin, GINT_TO_POINTER (n_columns));
     }
 }
@@ -414,7 +414,7 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
 
       item = gtk_image_menu_item_new_with_label (_("Add row"));
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-				     gtk_image_new_from_stock 
+				     gtk_image_new_from_stock
 				     (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU));
       gtk_widget_show (item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -423,13 +423,13 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
 
       item = gtk_image_menu_item_new_with_label (_("Delete row"));
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-				     gtk_image_new_from_stock 
+				     gtk_image_new_from_stock
 				     (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU));
       gtk_widget_show (item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       g_signal_connect (G_OBJECT (item), "activate",
 			G_CALLBACK (del_row_cb), NULL);
-      
+
       gtk_widget_show (menu);
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL,
 		      NULL, ev->button, 0);
@@ -470,17 +470,17 @@ list_create_widget (GtkWidget *dlg)
 
   if (options.common_data.multi && !options.list_data.checkbox)
     {
-      GtkTreeSelection *sel = 
+      GtkTreeSelection *sel =
 	gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
       gtk_tree_selection_set_mode (sel, GTK_SELECTION_MULTIPLE);
     }
 
   if (options.list_data.checkbox)
     {
-      g_signal_connect (G_OBJECT (list_view), "row-activated", 
+      g_signal_connect (G_OBJECT (list_view), "row-activated",
 			G_CALLBACK (double_click_cb), NULL);
     }
-  
+
   if (options.common_data.editable)
     {
       /* add popup menu */
@@ -489,11 +489,11 @@ list_create_widget (GtkWidget *dlg)
     }
 
   /* Return submits data */
-  g_signal_connect (G_OBJECT (list_view), "key-press-event", 
+  g_signal_connect (G_OBJECT (list_view), "key-press-event",
 	            G_CALLBACK (list_activate_cb), dlg);
 
   fill_data (n_columns);
-  
+
   if (settings.always_selected)
     {
       GtkTreeIter it;
@@ -635,7 +635,7 @@ list_print_result (void)
     }
   else
     {
-      GtkTreeSelection *sel = 
+      GtkTreeSelection *sel =
 	gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
 
       gtk_tree_selection_selected_foreach (sel, print_selected, NULL);

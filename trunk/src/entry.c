@@ -36,7 +36,7 @@ create_completion_model (void)
   GtkListStore *store;
   GtkTreeIter iter;
   gint i = 0;
-  
+
   store = gtk_list_store_new (1, G_TYPE_STRING);
 
   if (options.extra_data)
@@ -48,7 +48,7 @@ create_completion_model (void)
 	  i++;
 	}
     }
-  
+
   return GTK_TREE_MODEL (store);
 }
 
@@ -65,7 +65,7 @@ entry_create_widget (GtkWidget *dlg)
       gtk_box_pack_start (GTK_BOX (w), l, FALSE, FALSE, 1);
     }
 
-  if (!options.entry_data.completion && 
+  if (!options.entry_data.completion &&
       options.extra_data && *options.extra_data)
     {
       gint i = 0;
@@ -111,19 +111,19 @@ entry_create_widget (GtkWidget *dlg)
 	  GtkEntryCompletion *completion;
 	  GtkTreeModel *completion_model;
 
-	  completion = gtk_entry_completion_new ();  
+	  completion = gtk_entry_completion_new ();
 	  gtk_entry_set_completion (GTK_ENTRY (entry), completion);
 	  g_object_unref (completion);
-	  
+
 	  completion_model = create_completion_model ();
 	  gtk_entry_completion_set_model (completion, completion_model);
 	  g_object_unref (completion_model);
-	  
+
 	  gtk_entry_completion_set_text_column (completion, 0);
 	}
     }
   if (!is_combo)
-    g_signal_connect (G_OBJECT (entry), "activate", 
+    g_signal_connect (G_OBJECT (entry), "activate",
 		      G_CALLBACK (entry_activate_cb), dlg);
 
   gtk_box_pack_start (GTK_BOX (w), c, TRUE, TRUE, 1);

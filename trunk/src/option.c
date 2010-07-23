@@ -637,28 +637,28 @@ static GOptionEntry misc_options[] = {
 };
 
 static GOptionEntry rest_options[] = {
-  { G_OPTION_REMAINING, 0, 
-    0, 
-    G_OPTION_ARG_STRING_ARRAY, 
+  { G_OPTION_REMAINING, 0,
+    0,
+    G_OPTION_ARG_STRING_ARRAY,
     &options.extra_data,
     NULL, NULL },
   { NULL }
 };
 
-static gboolean 
+static gboolean
 add_button (const gchar *option_name,
 	    const gchar *value,
 	    gpointer data, GError **err)
 {
   YadButton *btn;
   gchar **bstr = g_strsplit (value, ":", 2);
-  
+
   btn = g_new0 (YadButton, 1);
   btn->name = g_strdup (bstr[0]);
   if (bstr[1])
     btn->response = g_ascii_strtoll (bstr[1], NULL, 10);
   options.data.buttons = g_slist_append (options.data.buttons, btn);
-  
+
   g_strfreev (bstr);
 
   return TRUE;
@@ -683,7 +683,7 @@ add_column (const gchar *option_name,
       else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
 	col->type = YAD_COLUMN_IMAGE;
       else
-	col->type = YAD_COLUMN_TEXT;      
+	col->type = YAD_COLUMN_TEXT;
     }
   else
     col->type = YAD_COLUMN_TEXT;
@@ -743,7 +743,7 @@ add_confirm_overwrite (const gchar *option_name,
   options.file_data.confirm_overwrite = TRUE;
   if (value)
     options.file_data.confirm_text = g_strdup (value);
-    
+
   return TRUE;
 }
 
@@ -893,7 +893,7 @@ yad_create_context (void)
 
   tmp_ctx = g_option_context_new (_("Yet another dialoging program"));
   g_option_context_add_main_entries (tmp_ctx, rest_options, GETTEXT_PACKAGE);
- 
+
   /* Adds general option entries */
   a_group = g_option_group_new ("general", _("General options"),
 				_("Show general options"), NULL, NULL);

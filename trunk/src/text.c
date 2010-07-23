@@ -114,7 +114,7 @@ fill_buffer_from_file ()
 
   if (f == NULL)
     {
-      g_printerr (_("Cannot open file '%s': %s\n"), 
+      g_printerr (_("Cannot open file '%s': %s\n"),
 		  options.common_data.uri, g_strerror (errno));
       return;
     }
@@ -182,7 +182,7 @@ text_create_widget (GtkWidget * dlg)
   text_view = gtk_text_view_new ();
   text_buffer = gtk_text_buffer_new (NULL);
   gtk_text_view_set_buffer (GTK_TEXT_VIEW (text_view), text_buffer);
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), 
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view),
 			      options.common_data.editable);
   if (!options.common_data.editable)
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
@@ -208,10 +208,10 @@ text_create_widget (GtkWidget * dlg)
 
   if (options.text_data.font)
     {
-      PangoFontDescription *fd = 
+      PangoFontDescription *fd =
 	pango_font_description_from_string (options.text_data.font);
       gtk_widget_modify_font (text_view, fd);
-      pango_font_description_free (fd);      
+      pango_font_description_free (fd);
     }
 
   /* Add submit on ctrl+enter */
@@ -233,10 +233,10 @@ text_print_result (void)
 {
   GtkTextIter start, end;
   gchar *text;
-  
+
   if (!options.common_data.editable)
     return;
-  
+
   gtk_text_buffer_get_bounds (text_buffer, &start, &end);
   text = gtk_text_buffer_get_text (text_buffer, &start, &end, 0);
   g_print ("%s", text);

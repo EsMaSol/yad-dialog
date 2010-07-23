@@ -34,13 +34,13 @@ confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data)
 {
   if (id != YAD_RESPONSE_OK)
     return;
-  
-  if (options.file_data.save && 
+
+  if (options.file_data.save &&
       options.file_data.confirm_overwrite &&
       !options.common_data.multi)
     {
       gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
-      
+
       if (g_file_test (filename, G_FILE_TEST_EXISTS))
 	{
 	  GtkWidget *d;
@@ -57,7 +57,7 @@ confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data)
     }
 }
 
-GtkWidget * 
+GtkWidget *
 file_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;

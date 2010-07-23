@@ -25,7 +25,7 @@
 
 static GtkWidget *color;
 
-static GtkTreeModel * 
+static GtkTreeModel *
 create_palette ()
 {
   FILE *fp;
@@ -34,7 +34,7 @@ create_palette ()
   GtkListStore *store;
   GdkPixbuf *pb;
   GtkTreeIter iter;
-  
+
   gchar *cxpm[] = {
     "16 14 1 1",
     ". c #FFFFFF",
@@ -60,7 +60,7 @@ create_palette ()
     filename = RGB_FILE;
 
   if ((fp = fopen (filename, "r")) == NULL)
-    {  
+    {
       g_printerr (_("Can't open file %s: %s"), filename, strerror (errno));
       return NULL;
     }
@@ -107,7 +107,7 @@ palette_changed (GtkTreeSelection *sel, gpointer data)
 
       gtk_tree_model_get (model, &iter, 1, &clr, -1);
       if (gdk_color_parse (clr, &c))
-	gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (color), &c);      
+	gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (color), &c);
     }
 }
 
@@ -122,7 +122,7 @@ color_create_widget (GtkWidget *dlg)
   if (options.color_data.init_color)
     {
       GdkColor c;
-      
+
       if (gdk_color_parse (options.color_data.init_color, &c))
 	gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (w), &c);
     }

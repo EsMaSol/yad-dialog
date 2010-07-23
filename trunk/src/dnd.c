@@ -94,7 +94,7 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 
       g_free (str);
     }
-  
+
 }
 
 void
