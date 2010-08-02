@@ -395,6 +395,12 @@ static GOptionEntry list_options[] = {
     &list_mode,
     N_("Display list dialog"),
     NULL },
+  { "no-headers", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.list_data.no_headers,
+    N_("Don't show column headers"),
+    NULL },
   { "column", 0,
     0,
     G_OPTION_ARG_CALLBACK,
@@ -853,6 +859,7 @@ yad_options_init (void)
 
   /* Initialize list data */
   options.list_data.columns = NULL;
+  options.list_data.no_headers = FALSE;
   options.list_data.checkbox = FALSE;
   options.list_data.print_all = FALSE;
   options.list_data.print_column = 0;
