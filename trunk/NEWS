@@ -1,3 +1,9 @@
+Version 0.3.1
+    - update slovak translation
+    - fix key handling in editable lists
+    - fix format string vulnerability in file dialog
+    - fix handling quickly piped lots of data from stdin
+
 Version 0.3.0
     - add iconbox dialog
     - fix option parsing

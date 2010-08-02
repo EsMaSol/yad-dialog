@@ -130,6 +130,7 @@ typedef struct {
 
 typedef struct {
   GSList *columns;
+  gboolean no_headers;
   gboolean checkbox;
   gboolean print_all;
   gint print_column;
