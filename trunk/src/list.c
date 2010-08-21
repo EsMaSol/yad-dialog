@@ -113,6 +113,7 @@ create_model (gint n_columns)
 	case YAD_COLUMN_IMAGE:
 	  ctypes[i] = GDK_TYPE_PIXBUF;
 	  break;
+	case YAD_COLUMN_TOOLTIP:
 	case YAD_COLUMN_TEXT:
 	default:
 	  ctypes[i] = G_TYPE_STRING;
@@ -152,6 +153,7 @@ add_columns (gint n_columns)
 	  break;
 	case YAD_COLUMN_NUM:
 	case YAD_COLUMN_TEXT:
+	case YAD_COLUMN_TOOLTIP:
 	default:
 	  renderer = gtk_cell_renderer_text_new ();
 	  if (options.common_data.editable)
@@ -423,7 +425,7 @@ list_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;
   GtkTreeModel *model;
-  gint n_columns;
+  gint i, n_columns;
 
   n_columns = g_slist_length (options.list_data.columns);
 
@@ -484,6 +486,18 @@ list_create_widget (GtkWidget *dlg)
 
       gtk_tree_model_get_iter_first (model, &it);
       gtk_tree_selection_select_iter (sel, &it);
+    }
+
+  /* add tooltip column, if present */
+  for (i = 0; i < n_columns; i++)
+    {
+      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
+
+      if (col->type = YAD_COLUMN_TOOLTIP)
+	{
+	  gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (list_view), i);
+	  break;
+	}
     }
 
   return w;

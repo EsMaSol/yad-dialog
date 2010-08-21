@@ -688,6 +688,8 @@ add_column (const gchar *option_name,
 	col->type = YAD_COLUMN_CHECK;
       else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
 	col->type = YAD_COLUMN_IMAGE;
+      else if (g_ascii_strcasecmp (cstr[1], "TIP") == 0)
+	col->type = YAD_COLUMN_TOOLTIP;
       else
 	col->type = YAD_COLUMN_TEXT;
     }

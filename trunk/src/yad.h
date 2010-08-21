@@ -43,6 +43,7 @@ typedef enum {
   YAD_COLUMN_NUM,
   YAD_COLUMN_CHECK,
   YAD_COLUMN_IMAGE,
+  YAD_COLUMN_TOOLTIP,
 } YadColumnType;
 
 typedef enum {
