@@ -1,6 +1,6 @@
 
-#ifndef __YAD_H_
-#define __YAD_H_
+#ifndef _YAD_H_
+#define _YAD_H_
 
 #include <config.h>
 
@@ -177,10 +177,6 @@ typedef struct {
 } YadCommonData;
 
 typedef struct {
-} YadWindowData;
-
-typedef struct
-{
   YadDialogMode mode;
 
   YadData data;
@@ -265,4 +261,4 @@ inline void strip_new_line (gchar *str);
 
 G_END_DECLS
 
-#endif /* __YAD_H_ */
+#endif /* _YAD_H_ */
