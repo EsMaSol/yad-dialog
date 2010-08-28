@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-21 15:50+0300\n"
+"POT-Creation-Date: 2010-08-28 12:07+0300\n"
 "PO-Revision-Date: 2010-07-11 11:40+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovenský <nomail>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: UTF-8\n"
+"Language: \n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../src/about.c:32
@@ -432,9 +432,8 @@ msgid "Don't show column headers"
 msgstr "Nezobrazovať tlačidlá"
 
 #: ../src/option.c:408
-#, fuzzy
 msgid "Set the column header (TYPE - TEXT, NUM, CHK, IMG or TIP)"
-msgstr "Nastaviť hlavičku stĺpca (TYP - TEXT, NUM, CHK alebo IMG)"
+msgstr "Nastaviť hlavičku stĺpca (TYP - TEXT, NUM, CHK, IMG alebo TIP)"
 
 #: ../src/option.c:409
 msgid "COLUMN[:TYPE]"
@@ -744,12 +743,12 @@ msgstr "Farba"
 msgid "Name"
 msgstr "Meno"
 
-#: ../src/text.c:117
+#: ../src/text.c:122
 #, c-format
 msgid "Cannot open file '%s': %s\n"
 msgstr "Nemožno otvoriť súbor '%s': %s\n"
 
-#: ../src/text.c:147
+#: ../src/text.c:152
 #, c-format
 msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr "Pri čítaní súboru %s zistené neplatné UTF-8 dáta\n"

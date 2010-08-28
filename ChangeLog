@@ -1,3 +1,75 @@
+2010-08-28 07:40  ananasik
+
+	* po/ru.po, src/text.c: fix tail mode in text dialog
+
+2010-08-28 07:22  ananasik
+
+	* src/text.c: fix tail mode in text dialog
+
+2010-08-27 04:44  ananasik
+
+	* NEWS, src/yad.h: cleanup
+
+2010-08-21 12:51  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, src/option.c: update
+	  documentation
+
+2010-08-21 12:09  ananasik
+
+	* configure.ac: bump version to 0.4.0
+
+2010-08-21 12:03  ananasik
+
+	* data/yad.1, src/list.c, src/option.c, src/yad.h: add support for
+	  tooltip column in list dialog
+
+2010-08-02 05:09  ananasik
+
+	* NEWS, po/de.po, po/ru.po, po/sk.po, src/list.c, src/option.c,
+	  src/yad.h: Add no-headers option to list dialog
+
+2010-07-23 10:55  ananasik
+
+	* src/icons.c, src/list.c: remove cursor code due to
+	  implementational reasons
+
+2010-07-23 05:26  ananasik
+
+	* src/icons.c, src/list.c, src/progress.c: fix issue 23
+
+2010-07-23 05:12  ananasik
+
+	* configure.ac: use xz as a default compression for dist tarball
+
+2010-07-23 05:10  ananasik
+
+	* src/about.c, src/calendar.c, src/color.c, src/dnd.c, src/entry.c,
+	  src/fileselection.c, src/form.c, src/icons.c, src/list.c,
+	  src/main.c, src/notification.c, src/option.c, src/scale.c,
+	  src/text.c, src/util.c: cleanups
+
+2010-07-15 03:58  ananasik
+
+	* configure.ac, src/list.c: enter activate item in editable lists
+
+2010-07-13 04:05  ananasik
+
+	* po/sk.po, src/fileselection.c: update slovak translation.
+	  fix format string vulnerability in fileselection
+
+2010-07-10 09:38  ananasik
+
+	* NEWS:
+
+2010-07-10 09:35  ananasik
+
+	* ChangeLog: release 0.3.0
+
+2010-07-10 09:30  ananasik
+
+	* config.h.in: cleanup svn tree
+
 2010-07-10 09:28  ananasik
 
 	* Makefile.in, aclocal.m4, config.sub, configure, configure.ac,

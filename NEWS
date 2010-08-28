@@ -1,6 +1,7 @@
 Version 0.4.0
     - add --no-headers option in list dialog
     - add tooltip column type for list dialog
+    - fix tail mode in text dialog
     - code cleanups
 
 Version 0.3.1
