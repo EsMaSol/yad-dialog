@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-21 15:50+0300\n"
+"POT-Creation-Date: 2010-08-28 12:07+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: PoEdit 1.4.2\n"
 
 #: ../src/about.c:32
@@ -757,12 +757,12 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../src/text.c:117
+#: ../src/text.c:122
 #, c-format
 msgid "Cannot open file '%s': %s\n"
 msgstr ""
 
-#: ../src/text.c:147
+#: ../src/text.c:152
 #, c-format
 msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr ""
