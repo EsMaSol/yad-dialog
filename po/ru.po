@@ -581,7 +581,7 @@ msgstr "Разрешить перенос текста"
 
 #: ../src/option.c:612
 msgid "Autoscroll to end of text"
-msgstr "Автопрокрутка в коней текста"
+msgstr "Автопрокрутка в конец текста"
 
 #: ../src/option.c:618
 msgid "Open file"

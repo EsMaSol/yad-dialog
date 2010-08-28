@@ -73,7 +73,7 @@ handle_stdin (GIOChannel * channel,
 
       if (len > 0)
         {
-          GtkTextIter end;
+	  GtkTextIter end;
           gchar *utftext;
           gsize localelen;
           gsize utflen;
@@ -93,12 +93,14 @@ handle_stdin (GIOChannel * channel,
 
 	  if (options.text_data.tail)
 	    {
+	      while (gtk_events_pending ())
+		gtk_main_iteration ();
 	      gtk_text_buffer_get_end_iter (text_buffer, &end);
 	      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
-            }
+	    }
         }
     }
-
+            
   return TRUE;
 }
 
