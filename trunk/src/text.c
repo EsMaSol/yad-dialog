@@ -92,7 +92,10 @@ handle_stdin (GIOChannel * channel,
 	    gtk_text_buffer_insert (text_buffer, &end, buf, len);
 
 	  if (options.text_data.tail)
-	    gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
+	    {
+	      gtk_text_buffer_get_end_iter (text_buffer, &end);
+	      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
+            }
         }
     }
 
