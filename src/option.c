@@ -196,7 +196,7 @@ static GOptionEntry color_options[] = {
     &color_mode,
     N_("Display color selection dialog"),
     NULL },
-  { "value", 0,
+  { "init-color", 0,
     0,
     G_OPTION_ARG_STRING,
     &options.color_data.init_color,
