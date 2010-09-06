@@ -524,6 +524,7 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
 	g_printf ("%d", nval);
 	break;
       }
+    case YAD_COLUMN_TOOLTIP:
     case YAD_COLUMN_TEXT:
       {
 	gchar *cval;
