@@ -109,6 +109,12 @@ static GOptionEntry general_options[] = {
     &options.data.no_buttons,
     N_("Don't show buttons"),
     NULL },
+  { "no-markup", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.no_markup,
+    N_("Don't use pango markup language in dialog's text"),
+    NULL },
   { "dialog-sep", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -808,6 +814,7 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.dialog_sep = settings.dlg_sep;
+  options.data.no_markup = FALSE;
 
   /* Initialize window options */
   options.data.sticky = FALSE;
