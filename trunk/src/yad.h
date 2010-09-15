@@ -36,6 +36,9 @@ typedef enum {
   YAD_FIELD_SIMPLE = 0,
   YAD_FIELD_HIDDEN,
   YAD_FIELD_READ_ONLY,
+  YAD_FIELD_NUM,
+  YAD_FIELD_CHECK,
+  YAD_FIELD_COMBO,
 } YadFieldType;
 
 typedef enum {

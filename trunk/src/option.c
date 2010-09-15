@@ -342,7 +342,7 @@ static GOptionEntry form_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_field,
-    N_("Add field to form (TYPE - H for hidden, RO for readonly)"),
+    N_("Add field to form (TYPE - H, RO, NUM, CHK or CB)"),
     N_("LABEL[:TYPE]") },
   { "separator", 0,
     G_OPTION_FLAG_NOALIAS,
@@ -725,6 +725,12 @@ add_field (const gchar *option_name,
 	fld->type = YAD_FIELD_HIDDEN;
       else if (g_ascii_strcasecmp (fstr[1], "RO") == 0)
 	fld->type = YAD_FIELD_READ_ONLY;
+      else if (g_ascii_strcasecmp (fstr[1], "NUM") == 0)
+	fld->type = YAD_FIELD_NUM;
+      else if (g_ascii_strcasecmp (fstr[1], "CHK") == 0)
+	fld->type = YAD_FIELD_CHECK;
+      else if (g_ascii_strcasecmp (fstr[1], "CB") == 0)
+	fld->type = YAD_FIELD_COMBO;
       else
 	fld->type = YAD_FIELD_SIMPLE;
     }
