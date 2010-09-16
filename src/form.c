@@ -99,6 +99,8 @@ form_create_widget (GtkWidget *dlg)
 	  i = 0;
 	  while (options.extra_data[i] && i < fc)
 	    {
+	      gchar **s;
+	      guint j = 0;
 	      YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
 	      switch (fld->type)
@@ -108,8 +110,32 @@ form_create_widget (GtkWidget *dlg)
 		case YAD_FIELD_READ_ONLY:
 		  gtk_entry_set_text (GTK_ENTRY (g_slist_nth_data (fields, i)), options.extra_data[i]);
 		  break;
+
 		case YAD_FIELD_NUM:
+		  s = g_strsplit (options.extra_data[i], settings.menu_sep, -1);
+		  if (s[0])
+		    {
+		      gdouble val = g_strtod (s[0], NULL);
+		      e = g_slist_nth_data (fields, i);
+		      gtk_spin_button_set_value (GTK_SPIN_BUTTON (e), val);
+		      if (s[1])
+			{
+			  gdouble min, max;
+			  gchar **s1 = g_strsplit (s[1], "..", 2);
+			  min = g_strtod (s1[0], NULL);
+			  max = g_strtod (s1[1], NULL);
+			  g_strfreev (s1);
+			  gtk_spin_button_set_range (GTK_SPIN_BUTTON (e), min, max);
+			  if (s[2])
+			    {
+			      gdouble step = g_strtod (s[2], NULL);
+			      gtk_spin_button_set_increments (GTK_SPIN_BUTTON (e), step, step);
+			    }
+			}		      
+		    }
+		  g_strfreev (s);
 		  break;
+
 		case YAD_FIELD_CHECK:
 		  if (g_ascii_strcasecmp (options.extra_data[i], "TRUE") == 0)
 		    {
@@ -117,7 +143,16 @@ form_create_widget (GtkWidget *dlg)
 						    TRUE);
 		    }
 		  break;
+
 		case YAD_FIELD_COMBO:
+		  s = g_strsplit (options.extra_data[i], settings.menu_sep, -1);
+		  while (s[j])
+		    {
+		      gtk_combo_box_append_text (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), s[j]);
+		      j++;
+		    }
+		  gtk_combo_box_set_active (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), 0);
+		  g_strfreev (s);
 		  break;	  
 		}
 	      i++;
@@ -148,13 +183,13 @@ form_print_result (void)
 	  break;
 	case YAD_FIELD_NUM:
 	  g_printf ("%f%s",
-		    gtk_spin_button_get_value (GTK_SPI_BUTTON (g_slist_nth_data (fields, i))),
+		    gtk_spin_button_get_value (GTK_SPIN_BUTTON (g_slist_nth_data (fields, i))),
 		    options.common_data.separator);
 	  break;
 	case YAD_FIELD_CHECK:
 	  g_printf ("%s%s",
-		    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (fields, i)) ? "TRUE" : "FALSE",
-		    options.common_data.separator);
+		    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, i))) ? "TRUE" : "FALSE",
+						  options.common_data.separator);
 	  break;
 	case YAD_FIELD_COMBO:
 	  g_printf ("%s%s",
