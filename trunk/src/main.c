@@ -73,9 +73,16 @@ create_dialog ()
   /* create dialog window */
   dlg = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
-  gtk_window_set_default_size (GTK_WINDOW (dlg),
-			       options.data.width, options.data.height);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
+
+  /* set window size */
+  gtk_widget_show (dlg);
+  if (options.data.geometry)
+    gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
+  else
+    gtk_window_set_default_size (GTK_WINDOW (dlg),
+				 options.data.width, options.data.height);
+
 
   /* set window icon */
   if (options.data.window_icon)

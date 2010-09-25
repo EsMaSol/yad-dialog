@@ -74,6 +74,7 @@ typedef struct {
   gchar *window_icon;
   gint width;
   gint height;
+  gchar *geometry;
   guint timeout;
   gchar *to_indicator;
   gchar *dialog_text;

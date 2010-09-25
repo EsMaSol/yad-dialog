@@ -67,6 +67,12 @@ static GOptionEntry general_options[] = {
     &options.data.height,
     N_("Set the height"),
     N_("HEIGHT") },
+  { "geometry", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.data.geometry,
+    N_("Set the window geometry"),
+    N_("WxH+X+Y") },
   { "timeout", 0,
     0,
     G_OPTION_ARG_INT,
@@ -812,6 +818,7 @@ yad_options_init (void)
   options.data.window_icon = "yad";
   options.data.width = settings.width;
   options.data.height = settings.height;
+  options.data.geometry = NULL;
   options.data.dialog_text = NULL;
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
