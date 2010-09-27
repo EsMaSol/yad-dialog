@@ -77,7 +77,6 @@ create_dialog ()
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 
-
   /* set window icon */
   if (options.data.window_icon)
     {
@@ -282,11 +281,13 @@ create_dialog ()
   else
     gtk_widget_hide (gtk_dialog_get_action_area (GTK_DIALOG (dlg)));
 
-  gtk_widget_show_all (dlg);
+  gtk_widget_show_all (hbox);
 
   /* parse geometry, if given. must be after showing widget */
   if (options.data.geometry)
     gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
+ 
+  gtk_widget_show_all (dlg);
 
   /* set timeout */
   if (options.data.timeout)
