@@ -460,7 +460,7 @@ static GOptionEntry list_options[] = {
     0,
     G_OPTION_ARG_INT,
     &options.list_data.print_column,
-    N_("Print a specific column (Default is 1. 0 can be used to print all columns)"),
+    N_("Print a specific column. By default or if 0 is specified will be printed all columns"),
     N_("NUMBER") },
   { "hide-column", 0,
     0,
