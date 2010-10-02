@@ -86,8 +86,7 @@ set_icon (void)
 }
 
 static gboolean
-icon_size_changed_cb (GtkStatusIcon * icon,
-		      gint size, gpointer user_data)
+icon_size_changed_cb (GtkStatusIcon * icon, gint size, gpointer data)
 {
   icon_size = size;
   set_icon ();
@@ -108,8 +107,21 @@ activate_cb (GtkWidget * widget, YadData * data)
   return TRUE;
 }
 
+static gboolean
+middle_quit_cb (GtkStatusIcon * icon, GdkEventButton * ev, 
+		gpointer data)
+{
+  if (ev->button == 2)
+    {
+      exit_code = YAD_RESPONSE_ESC;
+      gtk_main_quit ();
+    }
+
+  return FALSE;
+}
+
 static void
-popup_menu_item_activate_cb (GtkWidget * w, gpointer * data)
+popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
 {
   gchar *cmd = (gchar *) data;
 
@@ -157,7 +169,7 @@ popup_menu_cb (GtkStatusIcon * icon, guint button,
 
 static gboolean
 handle_stdin (GIOChannel * channel,
-	      GIOCondition condition, gpointer user_data)
+	      GIOCondition condition, gpointer data)
 {
   if ((condition & G_IO_IN) != 0)
     {
@@ -325,6 +337,10 @@ yad_notification_run ()
 
   g_signal_connect (status_icon, "activate",
 		    G_CALLBACK (activate_cb), NULL);
+
+  /* quit on middle click (like press Esc) */
+  g_signal_connect (status_icon, "button-press-event",
+		    G_CALLBACK (middle_quit_cb), NULL); 
 
   if (options.notification_data.listen)
     {
