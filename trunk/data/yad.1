@@ -1,4 +1,4 @@
-.TH YAD 1 "July 10, 2010"
+.TH YAD 1 "October 3, 2010"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
@@ -394,7 +394,17 @@ Empty name add separator to menu.
 .TP
 .B
 quit
-Exit the program.
+Exit the program. Middle click on icon also send \fIquit\fP command.
+
+.SH USER DEFINED SIGNALS
+.TP
+.B
+SIGUSR1
+Close dialog with 0 exit code.
+.TP
+.B
+SIGUSR2
+Close dialog with 1 exit code.
 
 .SH EXIT STATUS
 .TP
