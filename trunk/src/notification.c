@@ -243,15 +243,18 @@ handle_stdin (GIOChannel * channel,
             }
           else if (!g_ascii_strcasecmp (command, "visible"))
             {
+#if !GTK_CHECK_VERSION(2,91,0)
               if (!g_ascii_strcasecmp (value, "blink"))
                 {
                   gboolean state = gtk_status_icon_get_blinking (status_icon);
                   gtk_status_icon_set_blinking (status_icon, !state);
                 }
-              else if (!g_ascii_strcasecmp (value, "false"))
-		gtk_status_icon_set_visible (status_icon, FALSE);
-              else
-		gtk_status_icon_set_visible (status_icon, TRUE);
+              else 
+#endif
+		if (!g_ascii_strcasecmp (value, "false"))
+		  gtk_status_icon_set_visible (status_icon, FALSE);
+		else
+		  gtk_status_icon_set_visible (status_icon, TRUE);
             }
           else if (!g_ascii_strcasecmp (command, "action"))
             {

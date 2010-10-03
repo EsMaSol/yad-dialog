@@ -80,7 +80,9 @@ typedef struct {
   gchar *dialog_text;
   gchar *dialog_image;
   gboolean image_on_top;
+#if !GTK_CHECK_VERSION (2,91,0)
   gboolean dialog_sep;
+#endif
   GSList *buttons;
   gboolean no_buttons;
   gboolean no_markup;
@@ -214,7 +216,9 @@ typedef struct {
   gboolean rules_hint;
   gboolean always_selected;
   gchar *menu_sep;
+#if !GTK_CHECK_VERSION (2,91,0)
   gboolean dlg_sep;
+#endif
   gboolean combo_always_editable;
   gboolean expand_palette;
   GtkIconTheme *icon_theme;

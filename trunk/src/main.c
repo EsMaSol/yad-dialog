@@ -89,7 +89,9 @@ create_dialog ()
   /* create dialog window */
   dlg = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
+#if !GTK_CHECK_VERSION (2,91,0)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
+#endif
 
   /* set window icon */
   if (options.data.window_icon)
@@ -153,29 +155,13 @@ create_dialog ()
   if (topb)
     {
       if (g_ascii_strcasecmp (options.data.to_indicator, "top") == 0)
-        {
-          gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
-                                            GTK_PROGRESS_LEFT_TO_RIGHT);
-          gtk_box_pack_start (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
-        }
+	gtk_box_pack_start (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
       else if (g_ascii_strcasecmp (options.data.to_indicator, "bottom") == 0)
-        {
-          gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
-                                            GTK_PROGRESS_LEFT_TO_RIGHT);
-          gtk_box_pack_end (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
-        }
+	gtk_box_pack_end (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
       else if (g_ascii_strcasecmp (options.data.to_indicator, "left") == 0)
-        {
-          gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
-                                            GTK_PROGRESS_BOTTOM_TO_TOP);
-          gtk_box_pack_start (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
-        }
+	gtk_box_pack_start (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
       else if (g_ascii_strcasecmp (options.data.to_indicator, "right") == 0)
-        {
-          gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb),
-                                            GTK_PROGRESS_BOTTOM_TO_TOP);
-          gtk_box_pack_end (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
-        }
+	gtk_box_pack_end (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
       if (settings.show_remain)
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
