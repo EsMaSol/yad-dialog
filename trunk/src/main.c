@@ -21,10 +21,24 @@
 
 #include <locale.h>
 #include <stdlib.h>
+#include <signal.h>
 
 #include "yad.h"
 
 YadOptions options;
+GtkWidget *dialog = NULL;
+
+static void
+sa_usr1 (gint sig)
+{
+  gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_OK);
+}
+
+static void
+sa_usr2 (gint sig)
+{
+  gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_CANCEL);
+}
 
 static gboolean
 timeout_cb (gpointer data)
@@ -336,10 +350,10 @@ main (gint argc, gchar ** argv)
 {
   GOptionContext *ctx;
   GError *err = NULL;
-  GtkWidget *dialog;
   gint w, h;
   gint ret = 0;
-
+  struct sigaction sa;
+  
   setlocale (LC_ALL, "");
 
 #ifdef ENABLE_NLS
@@ -373,6 +387,13 @@ main (gint argc, gchar ** argv)
       return -1;
     }
   yad_set_mode ();
+
+  /* set signal handlers */
+  bzero (&sa, sizeof (struct sigaction));
+  sa.sa_handler = sa_usr1;
+  sigaction (SIGUSR1, &sa, NULL);
+  sa.sa_handler = sa_usr2;
+  sigaction (SIGUSR2, &sa, NULL);
 
   switch (options.mode)
     {
