@@ -121,12 +121,14 @@ static GOptionEntry general_options[] = {
     &options.data.no_markup,
     N_("Don't use pango markup language in dialog's text"),
     NULL },
+#if !GTK_CHECK_VERSION (2,91,0)
   { "dialog-sep", 0,
     0,
     G_OPTION_ARG_NONE,
     &options.data.dialog_sep,
     N_("Add separator between dialog and buttons"),
     NULL },
+#endif
   /* window settings */
   { "sticky", 0,
     0,
@@ -826,7 +828,9 @@ yad_options_init (void)
   options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
+#if !GTK_CHECK_VERSION (2,91,0)
   options.data.dialog_sep = settings.dlg_sep;
+#endif
   options.data.no_markup = FALSE;
 
   /* Initialize window options */

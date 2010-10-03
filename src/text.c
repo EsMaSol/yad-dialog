@@ -32,7 +32,13 @@ static GtkTextBuffer *text_buffer;
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
 {
-  if (key->keyval == GDK_Return && (key->state & GDK_CONTROL_MASK))
+#if GTK_CHECK_VERSION (2,91,0)
+  if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) &&
+      (key->state & GDK_CONTROL_MASK))
+#else
+    if ((ey->keyval == GDK_Return || event->keyval == GDK_KP_Enter) && 
+	(key->state & GDK_CONTROL_MASK))
+#endif
     gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 
   return FALSE;

@@ -40,8 +40,10 @@ create_settings (gchar *filename)
   g_key_file_set_string (kf, "General", "menu_separator", settings.menu_sep);
   g_key_file_set_comment (kf, "General", "menu_separator",
 			  "Default separator for notification icon menu (single char)", NULL);
+#if !GTK_CHECK_VERSION (2,91,0)
   g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
   g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
+#endif
   g_key_file_set_integer (kf, "General", "width", settings.width);
   g_key_file_set_comment (kf, "General", "width", "Default dialog width", NULL);
   g_key_file_set_integer (kf, "General", "height", settings.height);
@@ -86,7 +88,9 @@ read_settings (void)
   settings.rules_hint = TRUE;
   settings.always_selected = FALSE;
   settings.menu_sep = "!";
+#if !GTK_CHECK_VERSION (2,91,0)
   settings.dlg_sep = FALSE;
+#endif
   settings.combo_always_editable = FALSE;
   settings.expand_palette = FALSE;
   settings.term = "xterm -e %s";
@@ -104,8 +108,10 @@ read_settings (void)
 	    settings.sep = g_key_file_get_string (kf, "General", "separator", NULL);
 	  if (g_key_file_has_key (kf, "General", "menu_separator", NULL))
 	    settings.menu_sep = g_key_file_get_string (kf, "General", "menu_separator", NULL);
+#if !GTK_CHECK_VERSION (2,91,0)
 	  if (g_key_file_has_key (kf, "General", "dialog_separator", NULL))
 	    settings.dlg_sep = g_key_file_get_boolean (kf, "General", "dialog_separator", NULL);
+#endif
 	  if (g_key_file_has_key (kf, "General", "width", NULL))
 	    settings.width = g_key_file_get_integer (kf, "General", "width", NULL);
 	  if (g_key_file_has_key (kf, "General", "height", NULL))

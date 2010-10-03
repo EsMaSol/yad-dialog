@@ -31,7 +31,11 @@ static GtkWidget *list_view;
 static gboolean
 list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
+#if GTK_CHECK_VERSION (2,91,0)
+  if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter)
+#else
   if (event->keyval == GDK_Return || event->keyval == GDK_KP_Enter)
+#endif
     {
       gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
       return TRUE;

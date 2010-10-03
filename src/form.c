@@ -60,7 +60,7 @@ form_create_widget (GtkWidget *dlg)
 	      if (fld->type == YAD_FIELD_HIDDEN)
 		gtk_entry_set_visibility (GTK_ENTRY (e), FALSE);
 	      else if (fld->type == YAD_FIELD_READ_ONLY)
-		gtk_entry_set_editable (GTK_ENTRY (e), FALSE);
+		gtk_widget_set_sensitive (e, FALSE);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
