@@ -16,10 +16,9 @@ AC_PROG_CC
 GTK2_REQUIRED=2.12.0
 GTK3_REQUIRED=2.91.0
 
-if pkg-config --exists gtk+-3.0
+PKG_CHECK_MODULES([YAD], [gtk+-3.0 >= $GTK3_REQUIRED], [gtk3=yes], [gtk3=no])
+if test x$gtk3 = xno
 then
-    PKG_CHECK_MODULES([YAD], [gtk+-3.0 >= $GTK3_REQUIRED])
-else
     PKG_CHECK_MODULES([YAD], [gtk+-2.0 >= $GTK2_REQUIRED])
 fi
 AC_SUBST([YAD_CFLAGS])
