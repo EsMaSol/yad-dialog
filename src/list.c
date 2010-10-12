@@ -106,6 +106,9 @@ create_model (gint n_columns)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
 
+      //if (options.list_data.checkbox)
+      //col->type = YAD_COLUMN_CHECK;
+
       switch (col->type)
 	{
 	case YAD_COLUMN_CHECK:
@@ -511,6 +514,9 @@ static void
 print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
 {
   YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, num);
+
+  if (options.list_data.checkbox && num == 0)
+    col->type = YAD_COLUMN_CHECK;
 
   switch (col->type)
     {
