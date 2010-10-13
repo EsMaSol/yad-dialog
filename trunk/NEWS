@@ -1,4 +1,7 @@
-Vrsion 0.5.0
+Version 0.5.1
+    - fix segfault in --checklist
+
+Version 0.5.0
     - add --no-markup option
     - add --geometry option
     - new filed types in form dialog
