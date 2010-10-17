@@ -231,10 +231,12 @@ handle_stdin (GIOChannel * channel,
                   gchar *message = g_strcompress (value);
 #if GTK_CHECK_VERSION(2,16,0)
 		  if (options.data.no_markup)
-		    gtk_status_icon_set_tooltip_markup (status_icon, options.data.dialog_text);
+		    gtk_status_icon_set_tooltip_markup (status_icon, message);
 		  else
-#endif
 		    gtk_status_icon_set_tooltip_text (status_icon, message);
+#else
+                  gtk_status_icon_set_tooltip (status_icon, message);
+#endif
 
                   g_free (message);
                 }
@@ -326,8 +328,10 @@ yad_notification_run ()
       if (options.data.no_markup)
 	gtk_status_icon_set_tooltip_markup (status_icon, options.data.dialog_text);
       else
-#endif
 	gtk_status_icon_set_tooltip_text (status_icon, options.data.dialog_text);
+#else
+      gtk_status_icon_set_tooltip (status_icon, options.data.dialog_text);
+#endif
     }
   else
     gtk_status_icon_set_tooltip_text (status_icon, _("Yad notification"));
