@@ -1,3 +1,6 @@
+Version 0.5.2
+    - fix build with gtk+ < 2.16.x
+
 Version 0.5.1
     - fix segfault in --checklist
 
