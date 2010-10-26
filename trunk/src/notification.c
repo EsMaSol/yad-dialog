@@ -334,7 +334,11 @@ yad_notification_run ()
 #endif
     }
   else
+#if GTK_CHECK_VERSION(2,16,0)
     gtk_status_icon_set_tooltip_text (status_icon, _("Yad notification"));
+#else
+    gtk_status_icon_set_tooltip (status_icon, _("Yad notification"));
+#endif
 
   if (options.data.dialog_image)
     icon = g_strdup (options.data.dialog_image);
