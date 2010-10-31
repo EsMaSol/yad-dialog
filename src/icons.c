@@ -41,12 +41,17 @@ typedef struct {
 } DEntry;
 
 static void
-activate_cb (GtkIconView *view, GtkTreePath *path, gpointer data)
+activate_cb (GtkWidget *view, GtkTreePath *path, gpointer data)
 {
   GtkTreeIter iter;
-  GtkTreeModel *model = gtk_icon_view_get_model (view);
+  GtkTreeModel *model;
   gchar *cmd;
   gboolean *in_term;
+
+  if (!options.icons_data.compact)
+    model = gtk_icon_view_get_model (GTK_ICON_VIEW (view));
+  else
+    model = gtk_tree_view_get_model (GTK_TREE_VIEW (view));
 
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_model_get (model, &iter,
@@ -132,7 +137,10 @@ handle_stdin (GIOChannel * channel,
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
 	      break;
 	    case COL_PIXBUF:
-	      pb = get_pixbuf (string->str, YAD_BIG_ICON);
+	      if (options.icons_data.compact)
+		pb = get_pixbuf (string->str, YAD_BIG_ICON);
+	      else
+		pb = get_pixbuf (string->str, YAD_SMALL_ICON);
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
 	      g_object_unref (pb);
 	      break;
@@ -200,7 +208,10 @@ parse_desktop_file (gchar *filename)
 	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
 	  if (icon)
 	    {
-	      ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
+	      if (!options.icons_data.compact)
+		ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
+	      else
+		ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
 	      g_free (icon);
 	    }
 	}
@@ -283,11 +294,34 @@ icons_create_widget (GtkWidget *dlg)
 			      G_TYPE_STRING,
 			      G_TYPE_BOOLEAN);
 
-  icon_view = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
-  gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
-  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
-  gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
-  gtk_icon_view_set_item_width (GTK_ICON_VIEW (icon_view), options.icons_data.width);
+  if (!options.icons_data.compact) 
+    {
+      icon_view = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
+      gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
+      gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
+      gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
+      gtk_icon_view_set_item_width (GTK_ICON_VIEW (icon_view), options.icons_data.width);
+    }
+  else
+    {
+      GtkCellRenderer *r;
+      GtkTreeViewColumn *col;
+
+      icon_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+
+      col = gtk_tree_view_column_new ();
+      r = gtk_cell_renderer_pixbuf_new ();
+      gtk_tree_view_column_pack_start (col, r, FALSE);
+      gtk_tree_view_column_set_attributes (col, r, "pixbuf", COL_PIXBUF, NULL);
+      r = gtk_cell_renderer_text_new ();
+      gtk_tree_view_column_pack_start (col, r, FALSE);
+      gtk_tree_view_column_set_attributes (col, r, "text", COL_NAME, NULL);
+      gtk_tree_view_column_set_resizable (col, TRUE);
+      gtk_tree_view_column_set_expand (col, TRUE);
+      gtk_tree_view_append_column (GTK_TREE_VIEW (icon_view), col);
+
+      gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (icon_view), COL_TOOLTIP);
+    }
 
   /* handle directory */
   if (options.icons_data.directory)
@@ -308,8 +342,17 @@ icons_create_widget (GtkWidget *dlg)
 
   g_object_unref (store);
 
-  g_signal_connect (G_OBJECT (icon_view), "item-activated",
-		    G_CALLBACK (activate_cb), NULL);
+  if (!options.icons_data.compact) 
+    {
+      g_signal_connect (G_OBJECT (icon_view), "item-activated",
+			G_CALLBACK (activate_cb), NULL);
+    }
+  else
+    {
+      g_signal_connect (G_OBJECT (icon_view), "row-activated",
+			G_CALLBACK (activate_cb), NULL);
+    }
+
   gtk_container_add (GTK_CONTAINER (w), icon_view);
 
   return w;
