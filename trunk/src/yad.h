@@ -130,6 +130,7 @@ typedef struct {
 
 typedef struct {
   gchar *directory;
+  gboolean compact;
   gboolean generic;
   gboolean stdin;
   guint width;

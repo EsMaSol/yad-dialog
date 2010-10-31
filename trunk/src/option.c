@@ -374,6 +374,12 @@ static GOptionEntry icons_options[] = {
     &options.icons_data.directory,
     N_("Read data from .desktop files in specified directory"),
     N_("DIRECTORY") },
+  { "compact", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.icons_data.compact,
+    N_("Use compact (list) view"),
+    NULL },
   { "generic", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -878,6 +884,7 @@ yad_options_init (void)
 
   /* Initialize icons data */
   options.icons_data.directory = NULL;
+  options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
   options.icons_data.stdin = FALSE;
   options.icons_data.width = -1;
