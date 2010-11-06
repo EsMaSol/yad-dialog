@@ -802,7 +802,7 @@ set_justify (const gchar *option_name,
   else if (g_ascii_strcasecmp (value, "fill") == 0)
     options.text_data.justify = GTK_JUSTIFY_FILL;
   else
-    g_printerr ("unknown justification type: %s", value);
+    g_printerr (_("Unknown justification type: %s\n"), value);
 
   return TRUE;
 }
