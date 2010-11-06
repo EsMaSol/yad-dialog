@@ -26,6 +26,7 @@ static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -625,6 +626,12 @@ static GOptionEntry text_options[] = {
     &options.text_data.wrap,
     N_("Enable text wrapping"),
     NULL },
+  { "justify", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    set_justify,
+    N_("Set justification (TYPE - left, right, center or fill)"),
+    N_("TYPE") },
   { "tail", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -781,6 +788,23 @@ add_confirm_overwrite (const gchar *option_name,
   return TRUE;
 }
 
+static gboolean
+set_justify (const gchar *option_name,
+	     const gchar *value,
+	     gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "left") == 0)
+    options.text_data.justify = GTK_JUSTIFY_LEFT;
+  else if (g_ascii_strcasecmp (value, "right") == 0)
+    options.text_data.justify = GTK_JUSTIFY_RIGHT;
+  else if (g_ascii_strcasecmp (value, "center") == 0)
+    options.text_data.justify = GTK_JUSTIFY_CENTER;
+  else if (g_ascii_strcasecmp (value, "fill") == 0)
+    options.text_data.justify = GTK_JUSTIFY_FILL;
+
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -922,6 +946,7 @@ yad_options_init (void)
   options.text_data.back = NULL;
   options.text_data.font = NULL;
   options.text_data.wrap = FALSE;
+  options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.tail = FALSE;
 }
 
