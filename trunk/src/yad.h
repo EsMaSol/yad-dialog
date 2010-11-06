@@ -173,6 +173,7 @@ typedef struct {
   gchar *back;
   gchar *font;
   gboolean wrap;
+  GtkJustification justify;
   gboolean tail;
 } YadTextData;
 

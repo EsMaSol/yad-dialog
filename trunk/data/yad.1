@@ -188,7 +188,7 @@ Read .desktop files from specified directory.
 Use field GenericName instead of Name for shortcut label.
 .TP
 .B \-\-stdin
-Read data from stdin. Data must bi in order - \fIName\fP, \fITooltip\fP, \fIIcon\fP, \fICommand\fP, \fIInTerm\fP
+Read data from stdin. Data must be in order - \fIName\fP, \fITooltip\fP, \fIIcon\fP, \fICommand\fP, \fIInTerm\fP
 separated by newline. \fIInTerm\fP is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
 .TP
 .B \-\-width
@@ -325,6 +325,10 @@ Set text font. \fIFONT\fP must be in a Pango font description format.
 .TP
 .B \-\-wrap
 Enable text wrapping.
+.TP
+.B \-\-justify=TYPE
+Set justification. \fITYPE\fP may be \fIleft\fP, \fIright\fP, \fIcenter\fP or \fIfill\fP.
+Default is \fIleft\fP.
 .TP
 .B \-\-tail
 Autoscroll to end when new text appears. Works only when text is read from stdin.
