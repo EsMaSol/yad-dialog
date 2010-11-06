@@ -348,18 +348,23 @@ static void
 double_click_cb (GtkTreeView *view, GtkTreePath *path,
 		 GtkTreeViewColumn *column, gpointer data)
 {
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-
-  model = gtk_tree_view_get_model (view);
-  if (gtk_tree_model_get_iter (model, &iter, path))
+  if (options.list_data.checkbox)
     {
-      gboolean chk;
+      GtkTreeModel *model;
+      GtkTreeIter iter;
 
-      gtk_tree_model_get (model, &iter, 0, &chk, -1);
-      chk = !chk;
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, chk, -1);
+      model = gtk_tree_view_get_model (view);
+      if (gtk_tree_model_get_iter (model, &iter, path))
+	{
+	  gboolean chk;
+
+	  gtk_tree_model_get (model, &iter, 0, &chk, -1);
+	  chk = !chk;
+	  gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, chk, -1);
+	}
     }
+  else
+    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);     
 }
 
 void
@@ -466,10 +471,10 @@ list_create_widget (GtkWidget *dlg)
       gtk_tree_selection_set_mode (sel, GTK_SELECTION_MULTIPLE);
     }
 
-  if (options.list_data.checkbox)
+  if (options.list_data.checkbox || !options.common_data.multi)
     {
       g_signal_connect (G_OBJECT (list_view), "row-activated",
-			G_CALLBACK (double_click_cb), NULL);
+			G_CALLBACK (double_click_cb), dlg);
     }
 
   if (options.common_data.editable)
