@@ -194,6 +194,8 @@ text_create_widget (GtkWidget * dlg)
   text_buffer = gtk_text_buffer_new (NULL);
   gtk_text_view_set_buffer (GTK_TEXT_VIEW (text_view), text_buffer);
   gtk_text_view_set_justification (GTK_TEXT_VIEW (text_view), options.text_data.justify);
+  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view), options.text_data.margins);
+  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view), options.text_data.margins);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), options.common_data.editable);
   if (!options.common_data.editable)
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
