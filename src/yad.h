@@ -172,8 +172,9 @@ typedef struct {
   gchar *fore;
   gchar *back;
   gchar *font;
-  gboolean wrap;
+  gboolean wrap; 
   GtkJustification justify;
+  gint margins;
   gboolean tail;
 } YadTextData;
 
