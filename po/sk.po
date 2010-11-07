@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YAD 0.2.0\n"
+"Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-07 10:15+0200\n"
-"PO-Revision-Date: 2010-10-04 18:53+0200\n"
+"POT-Creation-Date: 2010-11-07 11:04+0100\n"
+"PO-Revision-Date: 2010-11-07 11:07+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
 "Language: \n"
@@ -418,7 +418,7 @@ msgstr "ADRESÁR"
 
 #: ../src/option.c:382
 msgid "Use compact (list) view"
-msgstr ""
+msgstr "Použiť kompaktný (list) pohľad"
 
 #: ../src/option.c:388
 msgid "Use GenericName field instead of Name for icon label"
@@ -594,19 +594,19 @@ msgstr "Zapnúť zalamovanie textu"
 
 #: ../src/option.c:633
 msgid "Set justification (TYPE - left, right, center or fill)"
-msgstr ""
+msgstr "Nastaviť zarovnanie (TYP - left, right, center alebo fill)"
 
 #: ../src/option.c:634
 msgid "TYPE"
-msgstr ""
+msgstr "TYP"
 
 #: ../src/option.c:639
 msgid "Set text margins"
-msgstr ""
+msgstr "Nastaviť okraje textu"
 
 #: ../src/option.c:640
 msgid "SIZE"
-msgstr ""
+msgstr "VEĽKOSŤ"
 
 #: ../src/option.c:645
 msgid "Autoscroll to end of text"
@@ -627,7 +627,7 @@ msgstr "Verzia pre tlač"
 #: ../src/option.c:811
 #, c-format
 msgid "Unknown justification type: %s\n"
-msgstr ""
+msgstr "Neznámy typ zarovnania: %s\n"
 
 #: ../src/option.c:911
 msgid "File exist. Overwrite?"
