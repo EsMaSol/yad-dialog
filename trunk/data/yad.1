@@ -195,7 +195,7 @@ separated by newline. \fIInTerm\fP is a case insensitive boolean constant (\fITR
 Set item width.
 .TP
 .B \-\-term
-Pattern for terminal. By default use `xterm -e %s' where %s replaced by the command.
+Pattern for terminal. By default use `xterm \-e %s' where %s replaced by the command.
 
 If both directory and stdin specified, content of iconbox will be read from directory.
 
@@ -283,9 +283,9 @@ Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 .PP
 Progress options
 .PP
-When the --progress option is used, yad reads lines of progress data from stdin. 
-When the lines begin with \fI#\fP the text after \fI#\fP is displayed in the progress 
-bar label. Numeric values treats like a persents for progress bar.    
+When the \-\-progress option is used, yad reads lines of progress data from stdin.
+When the lines begin with \fI#\fP the text after \fI#\fP is displayed in the progress
+bar label. Numeric values treats like a persents for progress bar.
 .TP
 .B \-\-progress-text=STRING
 Set text in progress bar to STRING.
@@ -458,7 +458,7 @@ find . \-name '*.h' | yad \-\-list \-\-title "Search Results" \-\-text "Finding 
 .PP
 Show an icon in the notification area
 .IP
-yad \-\-notification \-\-image=update.png \-\-text "System update necessary!" \-\-command "xterm -e apt-get upgrade"
+yad \-\-notification \-\-image=update.png \-\-text "System update necessary!" \-\-command "xterm \-e apt-get upgrade"
 .PP
 Display a weekly shopping list in a check list dialog with \fIApples\fP and \fIOranges\fP pre selected
 .IP
