@@ -405,7 +405,7 @@ main (gint argc, gchar ** argv)
         print_result ();
       else if (ret == YAD_RESPONSE_OK && options.data.buttons == NULL)
         print_result ();
-      else if (options.data.buttons && !(ret & 1))
+      else if (options.data.buttons && !(ret & 1) && ret != YAD_RESPONSE_TIMEOUT)
         print_result ();
     }
 
