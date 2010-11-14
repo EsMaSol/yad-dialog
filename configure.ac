@@ -45,8 +45,8 @@ AM_GLIB_GNU_GETTEXT
 
 # *******************************
 
-AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_CFLAGS])
+AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_LDFLAGS])
 
 # *******************************

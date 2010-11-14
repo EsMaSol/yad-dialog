@@ -130,6 +130,12 @@ static GOptionEntry general_options[] = {
     N_("Add separator between dialog and buttons"),
     NULL },
 #endif
+  { "always-print-result", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.always_print,
+    N_("Always print result"),
+    NULL },
   /* window settings */
   { "sticky", 0,
     0,
@@ -870,6 +876,7 @@ yad_options_init (void)
   options.data.dialog_sep = settings.dlg_sep;
 #endif
   options.data.no_markup = FALSE;
+  options.data.always_print = FALSE;
 
   /* Initialize window options */
   options.data.sticky = FALSE;
