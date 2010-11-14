@@ -401,10 +401,11 @@ main (gint argc, gchar ** argv)
                             G_CALLBACK (confirm_overwrite_cb), NULL);
         }
       ret = gtk_dialog_run (GTK_DIALOG (dialog));
-      if (ret >= 0 && ret != YAD_RESPONSE_TIMEOUT &&
-          (options.data.buttons == NULL && ret != YAD_RESPONSE_CANCEL))
+      if (options.data.always_print)
         print_result ();
-      else if (options.data.buttons && ret == YAD_RESPONSE_OK)
+      else if (ret == YAD_RESPONSE_OK && options.data.buttons == NULL)
+        print_result ();
+      else if (options.data.buttons && !(ret & 1))
         print_result ();
     }
 

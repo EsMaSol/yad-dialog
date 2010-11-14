@@ -102,6 +102,9 @@ Don't show buttons.
 .B \-\-no-markup
 Don't use pango markup in dialog's text.
 .TP
+.B \-\-always-print-result
+Always print result. 
+.TP
 .B \-\-dialog-sep
 Show separator between dialog and buttons.
 .TP
@@ -431,7 +434,7 @@ The dialog has been closed because the timeout has been reached.
 252
 The dialog has been closed by pressing \fIEsc\fP or used the window functions to close the dialog
 .TP
-Exit codes for user-specified buttons must be specified in command line.
+Exit codes for user-specified buttons must be specified in command line. Even exit code mean to print result, odd just return exit code.
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to

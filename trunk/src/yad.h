@@ -86,6 +86,7 @@ typedef struct {
   GSList *buttons;
   gboolean no_buttons;
   gboolean no_markup;
+  gboolean always_print;
   /* window settings */
   gboolean sticky;
   gboolean fixed;
