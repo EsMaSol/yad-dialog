@@ -416,7 +416,7 @@ msgstr "Отобразить диалог со значками быстрого
 
 #: ../src/option.c:382
 msgid "Read data from .desktop files in specified directory"
-msgstr "ЧИтать данные из .desktop файлов в определенном каталоге"
+msgstr "Читать данные из .desktop файлов в определенном каталоге"
 
 #: ../src/option.c:383
 msgid "DIRECTORY"
