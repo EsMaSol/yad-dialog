@@ -193,6 +193,17 @@ parse_desktop_file (gchar *filename)
 	    }
 	  else
 	    ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+	  /* use filename as a fallback */
+	  if (!ent->name)
+	    {
+	      gchar *ext_pos, *nm = g_path_get_basename (filename);
+
+	      ext_pos = g_strrstr (nm, ".desktop");
+	      if (ext_pos)
+		*ext_pos = '\000';
+	      ent->name = g_strdup (nm);
+	      g_free (nm);
+	    }
 	  ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
 	  ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
 	  /* remove possible arguments patterns */
