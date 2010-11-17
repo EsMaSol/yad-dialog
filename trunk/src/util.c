@@ -145,8 +145,8 @@ read_settings (void)
 GdkPixbuf *
 get_pixbuf (gchar *name, YadIconSize size)
 {
-  GdkPixbuf *pb;
   gint w, h;
+  GdkPixbuf *pb = NULL;
   GError *err = NULL;
 
   if (g_file_test (name, G_FILE_TEST_EXISTS))

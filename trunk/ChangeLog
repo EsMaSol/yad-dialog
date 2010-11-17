@@ -1,7 +1,193 @@
+2010-11-17 07:35  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
+	  src/icons.c, src/option.c, src/yad.h: add sorting in icons dialog
+
+2010-11-15 19:32  ananasik
+
+	* src/icons.c: add fallback name for .desktop files in icons dialog
+
+2010-11-15 19:19  ananasik
+
+	* po/ru.po: fix typo in russian translation
+
+2010-11-14 06:26  ananasik
+
+	* src/main.c: do not print result when custom buttons specified and
+	  timeout reached
+
+2010-11-14 06:22  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
+	  src/main.c, src/option.c, src/yad.h: changes in printing dialog
+	  data
+
+2010-11-13 07:44  ananasik
+
+	* configure.ac, data/yad.1:
+
+2010-11-07 10:39  ananasik
+
+	* po/sk.po: update slovak translation
+
+2010-11-07 08:16  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, src/option.c,
+	  src/text.c, src/yad.h: add margins to text dialog
+
+2010-11-06 13:38  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, src/option.c: update translation
+
+2010-11-06 13:35  ananasik
+
+	* src/option.c: print error message for wrong justification type
+
+2010-11-06 11:04  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, src/option.c,
+	  src/text.c, src/yad.h: add justification in text-info dialog
+
+2010-11-06 06:55  ananasik
+
+	* configure.ac: bump version to 0.6.0. prepare to release
+
+2010-11-06 06:52  ananasik
+
+	* src/list.c: double clict in simple list works as OK button
+
+2010-10-31 13:16  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, src/icons.c, src/option.c,
+	  src/yad.h: add compact view to icons dialog
+
+2010-10-26 11:36  ananasik
+
+	* src/notification.c: fix issue 30
+
+2010-10-18 08:28  ananasik
+
+	* NEWS: update NEWS
+
+2010-10-18 08:13  ananasik
+
+	* configure.ac: bump version to 0.5.2
+
+2010-10-17 05:57  ananasik
+
+	* src/notification.c: fix issue 29
+
+2010-10-13 03:53  ananasik
+
+	* NEWS, README, TODO: release 0.5.1
+
+2010-10-12 15:39  ananasik
+
+	* configure.ac: bump version to 0.5.1 due to (possible) bugfix
+
+2010-10-12 15:26  ananasik
+
+	* src/list.c: fix segfault in list dialog
+
+2010-10-09 15:58  ananasik
+
+	* NEWS: update NEWS
+
+2010-10-04 17:24  ananasik
+
+	* configure.ac, po/de.po, po/ru.po, po/sk.po, src/text.c: update
+	  translation and fix build under gtk-2.0
+
+2010-10-03 10:17  ananasik
+
+	* configure.ac: bump version to 0.5.0
+
+2010-10-03 09:44  ananasik
+
+	* configure.ac, src/form.c, src/list.c, src/main.c,
+	  src/notification.c, src/option.c, src/progress.c, src/text.c,
+	  src/util.c, src/yad.h: build with gtk+-3.0
+
+2010-10-03 08:31  ananasik
+
+	* data/yad.1: update documentation
+
+2010-10-03 08:26  ananasik
+
+	* src/main.c: add SIGUSR1 and SIGUSR2 handlers
+
+2010-10-02 21:47  ananasik
+
+	* src/notification.c: close notification icon on middle click
+
+2010-09-28 06:10  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po: update translation
+
+2010-09-28 06:04  ananasik
+
+	* src/option.c: fix mistake in list options descriptions
+
+2010-09-27 14:54  ananasik
+
+	* data/yad.1: update documentation
+
+2010-09-27 14:35  ananasik
+
+	* src/main.c: some fixes in --geometry option
+
+2010-09-27 14:30  ananasik
+
+	* src/main.c: some fixes in --geometry option
+
+2010-09-25 04:43  ananasik
+
+	* src/main.c, src/option.c, src/yad.h: add --geometry option
+
+2010-09-16 10:20  ananasik
+
+	* data/yad.1: Update documentation
+
+2010-09-16 09:30  ananasik
+
+	* src/form.c: add new field types to form dialog
+
+2010-09-15 11:51  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, src/form.c, src/option.c,
+	  src/yad.h: !!!broken commit!!!
+
+2010-09-11 17:40  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po: update russian
+	  translation and man page
+
+2010-09-11 17:00  ananasik
+
+	* src/fileselection.c: recognize escaped characters in overwrite
+	  confirmation message of file dialog
+
+2010-09-11 16:54  ananasik
+
+	* src/main.c, src/notification.c, src/option.c, src/yad.h: fix
+	  issue 24
+
+2010-09-06 09:23  ananasik
+
+	* src/list.c: add tooltip to printable columns in list dialog
+
+2010-08-31 12:26  ananasik
+
+	* data/yad.1:
+
+2010-08-31 12:22  ananasik
+
+	* ChangeLog, NEWS: release 0.4.0
+
 2010-08-31 12:12  ananasik
 
 	* po/de.po, po/ru.po, po/sk.po, src/option.c: set name of initial
-	  color value to --init-color for avoid set aliased parameter
+	  color value to --init-color to avfor avoid set aliased parameter
 	  in scale dialog (e.g. --scale-value instead of --value)
 
 2010-08-30 09:11  ananasik
