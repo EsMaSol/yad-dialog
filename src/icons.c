@@ -140,11 +140,15 @@ handle_stdin (GIOChannel * channel,
 	      break;
 	    case COL_PIXBUF:
 	      if (options.icons_data.compact)
-		pb = get_pixbuf (string->str, YAD_BIG_ICON);
+		if (*string->str)
+		  pb = get_pixbuf (string->str, YAD_SMALL_ICON);
+		else
+		  pb = NULL;
 	      else
-		pb = get_pixbuf (string->str, YAD_SMALL_ICON);
+		pb = get_pixbuf (string->str, YAD_BIG_ICON);
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
-	      g_object_unref (pb);
+	      if (pb)
+		g_object_unref (pb);
 	      break;
 	    case COL_TERM:
 	      if (g_ascii_strcasecmp (string->str, "true") == 0)
@@ -221,10 +225,10 @@ parse_desktop_file (gchar *filename)
 	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
 	  if (icon)
 	    {
-	      if (!options.icons_data.compact)
-		ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
-	      else
+	      if (options.icons_data.compact)
 		ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
+	      else
+		ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
 	      g_free (icon);
 	    }
 	}
