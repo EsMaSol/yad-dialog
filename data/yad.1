@@ -1,4 +1,4 @@
-.TH YAD 1 "October 3, 2010"
+.TH YAD 1 "November 17, 2010"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
@@ -190,12 +190,18 @@ Read .desktop files from specified directory.
 .B \-\-generic
 Use field GenericName instead of Name for shortcut label.
 .TP
+.B \-\-sort-by-name
+Use field Name instead of filename for sorting items.
+.TP
+.B \-\-descend
+Sort items in descending order. If data reads from stdin this option is useless without \fI\-\-sort-by-name\fP.
+.TP
 .B \-\-stdin
 Read data from stdin. Data must be in order - \fIName\fP, \fITooltip\fP, \fIIcon\fP, \fICommand\fP, \fIInTerm\fP
 separated by newline. \fIInTerm\fP is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
 .TP
 .B \-\-width
-Set item width.
+Set items width.
 .TP
 .B \-\-term
 Pattern for terminal. By default use `xterm \-e %s' where %s replaced by the command.
