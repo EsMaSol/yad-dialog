@@ -133,6 +133,8 @@ typedef struct {
   gchar *directory;
   gboolean compact;
   gboolean generic;
+  gboolean descend;
+  gboolean sort_by_name;
   gboolean stdin;
   guint width;
   gchar *term;

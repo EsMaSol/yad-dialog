@@ -24,6 +24,7 @@
 static GtkWidget *icon_view;
 
 enum {
+  COL_FILENAME = 0,
   COL_NAME,
   COL_TOOLTIP,
   COL_PIXBUF,
@@ -124,9 +125,10 @@ handle_stdin (GIOChannel * channel,
           if (column_count == NUM_COLS)
             {
               /* We're starting a new row */
-              column_count = 0;
+              column_count = 1;
               row_count++;
               gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, COL_FILENAME, "", -1);
             }
 
 	  switch (column_count)
@@ -267,6 +269,7 @@ read_dir (GtkListStore *store)
 	{
 	  gtk_list_store_append (store, &iter);
 	  gtk_list_store_set (store, &iter,
+			      COL_FILENAME, filename,
 			      COL_NAME, ent->name,
 			      COL_TOOLTIP, ent->comment ? ent->comment : "",
 			      COL_PIXBUF, ent->pixbuf,
@@ -301,9 +304,13 @@ icons_create_widget (GtkWidget *dlg)
   store = gtk_list_store_new (NUM_COLS,
 			      G_TYPE_STRING,
 			      G_TYPE_STRING,
+			      G_TYPE_STRING,
 			      GDK_TYPE_PIXBUF,
 			      G_TYPE_STRING,
 			      G_TYPE_BOOLEAN);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
+					options.icons_data.sort_by_name ? COL_NAME : COL_FILENAME, 
+					options.icons_data.descend ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
 
   if (!options.icons_data.compact) 
     {

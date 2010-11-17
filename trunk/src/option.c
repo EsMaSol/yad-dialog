@@ -412,6 +412,18 @@ static GOptionEntry icons_options[] = {
     /* xgettext: no-c-format */
     N_("Use specified pattern for launch command in terminal (default: xterm -e %s)"),
     N_("PATTERN") },
+  { "sort-by-name", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.icons_data.sort_by_name,
+    N_("Sort items by name instead of filename"),
+    NULL },
+  { "descend", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.icons_data.descend,
+    N_("Sort items in descending order"),
+    NULL },
   { NULL }
 };
 
@@ -928,6 +940,8 @@ yad_options_init (void)
   options.icons_data.stdin = FALSE;
   options.icons_data.width = -1;
   options.icons_data.term = settings.term;
+  options.icons_data.sort_by_name = FALSE;
+  options.icons_data.descend = FALSE;
 
   /* Initialize list data */
   options.list_data.columns = NULL;
