@@ -167,6 +167,14 @@ fill_buffer_from_file ()
   gtk_text_buffer_get_end_iter (text_buffer, &end);
   gtk_text_buffer_delete (text_buffer, &iter, &end);
   gtk_text_buffer_set_modified (text_buffer, FALSE);
+
+  if (options.text_data.tail)
+    {
+      while (gtk_events_pending ())
+	gtk_main_iteration ();
+      gtk_text_buffer_get_end_iter (text_buffer, &end);
+      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
+    }
 }
 
 static void
