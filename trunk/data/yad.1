@@ -234,18 +234,22 @@ Optional argument is a text for confirmation dialog.
 Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP or \fICB\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fIFL\fP, \fIDIR\fP, \fIFN\fP or \fICLR\fP.
 \fIH\fP - hidden field type. All characters are displayed as the invisible char.
 \fIRO\fP - field is in read-only mode.
 \fINUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP]]\fP,
 where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a separator, the same as in \fImenu\fP command for notification icon, and may be changed in the config file.
 \fICHK\fP - checkbox field. Initial value is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
 \fICB\fP - combo-box field. Initial value is a list \fIVAL1!VAL2!...\fP. The separator is the same as in \fINUM\fP field.
+\fIFL\fP - file selection button.
+\fIDIR\fP - directory selection button.
+\fIFN\fP - font selection button.
+\fICLR\fP - color selection button.
 .TP
 .B \-\-separator=STRING
 Set output separator characters.
 .PP
-Additional data in command line interpret as a default values for form fields.
+Additional data in command line interprets as a default values for form fields.
 
 .PP
 List options
