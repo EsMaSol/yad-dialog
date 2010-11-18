@@ -11,3 +11,4 @@ src/option.c
 src/progress.c
 src/color.c
 src/text.c
+src/form.c

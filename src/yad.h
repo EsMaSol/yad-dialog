@@ -39,6 +39,10 @@ typedef enum {
   YAD_FIELD_NUM,
   YAD_FIELD_CHECK,
   YAD_FIELD_COMBO,
+  YAD_FIELD_FILE,
+  YAD_FIELD_DIR,
+  YAD_FIELD_FONT,
+  YAD_FIELD_COLOR,
 } YadFieldType;
 
 typedef enum {

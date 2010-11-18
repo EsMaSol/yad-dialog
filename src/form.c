@@ -21,7 +21,7 @@
 
 #include "yad.h"
 
-GSList *fields = NULL;
+static GSList *fields = NULL;
 
 static void
 form_activate_cb (GtkEntry *entry, gpointer data)
@@ -90,6 +90,46 @@ form_create_widget (GtkWidget *dlg)
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
+
+	    case YAD_FIELD_FILE:
+	      l = gtk_label_new (fld->name);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+
+	      e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
+
+	    case YAD_FIELD_DIR:
+	      l = gtk_label_new (fld->name);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+
+	      e = gtk_file_chooser_button_new (_("Select folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
+
+	    case YAD_FIELD_FONT:
+	      l = gtk_label_new (fld->name);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+
+	      e = gtk_font_button_new ();
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
+
+	    case YAD_FIELD_COLOR:
+	      l = gtk_label_new (fld->name);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+
+	      e = gtk_color_button_new ();
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
 	    }
 	}
 
@@ -154,6 +194,26 @@ form_create_widget (GtkWidget *dlg)
 		  gtk_combo_box_set_active (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), 0);
 		  g_strfreev (s);
 		  break;	  
+
+		case YAD_FIELD_FILE:
+		case YAD_FIELD_DIR:
+		  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)), 
+						 options.extra_data[i]);
+		  break;
+
+		case YAD_FIELD_FONT:
+		  gtk_font_button_set_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, i)), 
+						 options.extra_data[i]);
+		  break;
+
+		case YAD_FIELD_COLOR:
+		  {
+		    GdkColor c;
+
+		    gdk_color_parse (options.extra_data[i], &c);
+		    gtk_color_button_set_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, i)), &c);
+		    break;
+		  }
 		}
 	      i++;
 	    }
@@ -195,7 +255,26 @@ form_print_result (void)
 	  g_printf ("%s%s",
 		    gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, i))),
 		    options.common_data.separator);
-	  break;	  
+	  break;
+	case YAD_FIELD_FILE:
+	case YAD_FIELD_DIR:
+	  g_printf ("%s%s",
+		    gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i))),
+		    options.common_data.separator);
+	  break; 
+	case YAD_FIELD_FONT:
+	  g_printf ("%s%s",
+		    gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, i))),
+		    options.common_data.separator);
+	  break;
+	case YAD_FIELD_COLOR:
+	  {
+	    GdkColor c;
+
+	    gtk_color_button_get_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, i)), &c);
+	    g_printf ("%s%s", gdk_color_to_string (&c), options.common_data.separator);
+	    break;
+	  }
 	}
     }
   g_printf ("\n");

@@ -357,7 +357,7 @@ static GOptionEntry form_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_field,
-    N_("Add field to form (TYPE - H, RO, NUM, CHK or CB)"),
+    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, FL, DIR, FN or CLR)"),
     N_("LABEL[:TYPE]") },
   { "separator", 0,
     G_OPTION_FLAG_NOALIAS,
@@ -776,6 +776,14 @@ add_field (const gchar *option_name,
 	fld->type = YAD_FIELD_CHECK;
       else if (g_ascii_strcasecmp (fstr[1], "CB") == 0)
 	fld->type = YAD_FIELD_COMBO;
+      else if (g_ascii_strcasecmp (fstr[1], "FL") == 0)
+	fld->type = YAD_FIELD_FILE;
+      else if (g_ascii_strcasecmp (fstr[1], "DIR") == 0)
+	fld->type = YAD_FIELD_DIR;
+      else if (g_ascii_strcasecmp (fstr[1], "FN") == 0)
+	fld->type = YAD_FIELD_FONT;
+      else if (g_ascii_strcasecmp (fstr[1], "CLR") == 0)
+	fld->type = YAD_FIELD_COLOR;
       else
 	fld->type = YAD_FIELD_SIMPLE;
     }
