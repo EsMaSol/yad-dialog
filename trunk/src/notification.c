@@ -280,7 +280,7 @@ handle_stdin (GIOChannel * channel,
               while (menu_vals[i] != NULL)
                 {
                   mdata = g_new0 (MenuData, 1);
-                  s = strchr (menu_vals[i], settings.menu_sep[0]);
+                  s = strchr (menu_vals[i], options.common_data.item_separator[0]);
                   if (s != NULL)
                     {
                       mdata->name =

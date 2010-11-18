@@ -365,6 +365,12 @@ static GOptionEntry form_options[] = {
     &options.common_data.separator,
     N_("Set output separator character"),
     N_("SEPARATOR") },
+  { "item-separator", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.item_separator,
+    N_("Set separator character for combobox or scale data"),
+    N_("SEPARATOR") },
   { NULL }
 };
 
@@ -517,6 +523,18 @@ static GOptionEntry notification_options[] = {
     &options.notification_data.listen,
     N_("Listen for commands on stdin"),
     NULL },
+  { "separator", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.item_separator,
+    N_("Set separator character for menu values"),
+    N_("SEPARATOR") },
+  { "item-separator", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.item_separator,
+    N_("Set separator character for menu items"),
+    N_("SEPARATOR") },
   { NULL }
 };
 
@@ -908,7 +926,8 @@ yad_options_init (void)
 
   /* Initialize common data */
   options.common_data.uri = NULL;
-  options.common_data.separator = settings.sep;
+  options.common_data.separator = "|";
+  options.common_data.item_separator = "!";
   options.common_data.multi = FALSE;
   options.common_data.editable = FALSE;
   options.common_data.command = NULL;
