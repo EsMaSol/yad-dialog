@@ -152,7 +152,7 @@ form_create_widget (GtkWidget *dlg)
 		  break;
 
 		case YAD_FIELD_NUM:
-		  s = g_strsplit (options.extra_data[i], settings.menu_sep, -1);
+		  s = g_strsplit (options.extra_data[i], options.common_data.item_separator, -1);
 		  if (s[0])
 		    {
 		      gdouble val = g_strtod (s[0], NULL);
@@ -185,7 +185,7 @@ form_create_widget (GtkWidget *dlg)
 		  break;
 
 		case YAD_FIELD_COMBO:
-		  s = g_strsplit (options.extra_data[i], settings.menu_sep, -1);
+		  s = g_strsplit (options.extra_data[i], options.common_data.item_separator, -1);
 		  while (s[j])
 		    {
 		      gtk_combo_box_append_text (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), s[j]);

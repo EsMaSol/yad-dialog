@@ -247,7 +247,10 @@ where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a separator, the same a
 \fICLR\fP - color selection button.
 .TP
 .B \-\-separator=STRING
-Set output separator characters.
+Set output separator character. Default is `|'.
+.TP
+.B \-\-item-separator=STRING
+Set separator character for combo-box or scale values. Default is `!'.
 .PP
 Additional data in command line interprets as a default values for form fields.
 
@@ -292,6 +295,14 @@ Set the command running when clicked on the icon.
 .TP
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
+.TP
+.B \-\-separator=STRING
+Set separator character for menu values. Default is `|'.
+.TP
+.B \-\-item-separator=STRING
+Set separator character for menu items. Default is `!'.
+.PP
+See \fBNOTIFICATION\fP section for more about separators. 
 
 .PP
 Progress options
@@ -411,6 +422,8 @@ menu:STRING
 Set popup menu for notification icon.
 STRING must be in form \fIname1!action1|name2!action2...\fP.
 Empty name add separator to menu.
+Separator character for values (e.g. `|') sets with \-\-separator argument.
+Separator character for menu items (e.g. `!') sets with \-\-item-separator argument.
 .TP
 .B
 quit

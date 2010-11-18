@@ -188,6 +188,7 @@ typedef struct {
 typedef struct {
   gchar *uri;
   gchar *separator;
+  gchar *item_separator;
   gboolean editable;
   gboolean multi;
   gchar *command;
@@ -217,7 +218,6 @@ typedef struct {
 extern YadOptions options;
 
 typedef struct {
-  gchar *sep;
   guint width;
   guint height;
   guint timeout;
@@ -225,7 +225,6 @@ typedef struct {
   gboolean show_remain;
   gboolean rules_hint;
   gboolean always_selected;
-  gchar *menu_sep;
 #if !GTK_CHECK_VERSION (2,91,0)
   gboolean dlg_sep;
 #endif
