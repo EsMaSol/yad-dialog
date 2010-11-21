@@ -1,3 +1,8 @@
+2010-11-21 09:36  ananasik
+
+	* ChangeLog, configure.ac, src/color.c, src/util.c, src/yad.h:
+	  fixes in color dialog
+
 2010-11-18 09:52  ananasik
 
 	* data/yad.1, po/de.po, po/ru.po, po/sk.po, src/form.c,
