@@ -119,12 +119,13 @@ color_create_widget (GtkWidget *dlg)
   w = gtk_vbox_new (FALSE, 2);
 
   color = gtk_color_selection_new ();
+  gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (color), settings.show_gtk_palette);
   if (options.color_data.init_color)
     {
       GdkColor c;
 
       if (gdk_color_parse (options.color_data.init_color, &c))
-	gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (w), &c);
+	gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (color), &c);
     }
   gtk_box_pack_start (GTK_BOX (w), color, FALSE, FALSE, 2);
 

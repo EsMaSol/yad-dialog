@@ -229,6 +229,7 @@ typedef struct {
   gboolean dlg_sep;
 #endif
   gboolean combo_always_editable;
+  gboolean show_gtk_palette;
   gboolean expand_palette;
   GtkIconTheme *icon_theme;
   GdkPixbuf *big_fallback_image;
