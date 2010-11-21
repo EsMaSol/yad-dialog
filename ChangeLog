@@ -1,3 +1,24 @@
+2010-11-18 09:52  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, src/form.c,
+	  src/notification.c, src/option.c, src/util.c, src/yad.h:
+	  separators may only be set from command-line
+
+2010-11-18 09:26  ananasik
+
+	* data/yad.1, po/POTFILES.in, po/de.po, po/ru.po, po/sk.po,
+	  src/form.c, src/option.c, src/yad.h: add new field types to form
+	  dialog
+
+2010-11-17 13:15  ananasik
+
+	* src/text.c: make --tail work for file
+
+2010-11-17 10:34  ananasik
+
+	* ChangeLog, src/icons.c, src/util.c: fix icons handling in icons
+	  dialog reading from stdin
+
 2010-11-17 07:35  ananasik
 
 	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
