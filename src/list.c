@@ -71,7 +71,7 @@ cell_edited_cb (GtkCellRendererText * cell,
 {
   gint column;
   GtkTreeIter iter;
-  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);;
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
   YadColumn *col;
 
@@ -105,9 +105,6 @@ create_model (gint n_columns)
   for (i = 0; i < n_columns; i++)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
-
-      //if (options.list_data.checkbox)
-      //col->type = YAD_COLUMN_CHECK;
 
       switch (col->type)
 	{
@@ -386,15 +383,7 @@ del_row_cb (GtkMenuItem *item, gpointer data)
   GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
 
   if (gtk_tree_selection_get_selected (sel, NULL, &iter))
-    {
-      gint i;
-      GtkTreePath *path;
-
-      path = gtk_tree_model_get_path (model, &iter);
-      i = gtk_tree_path_get_indices (path)[0];
-      gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-      gtk_tree_path_free (path);
-    }
+    gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 }
 
 static gboolean
