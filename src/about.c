@@ -44,6 +44,7 @@ yad_about (void)
       "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.");
 
   dialog = gtk_about_dialog_new ();
+  gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
 
   g_object_set (G_OBJECT (dialog),
 		"name", PACKAGE_NAME,
@@ -54,9 +55,8 @@ yad_about (void)
 		"website", PACKAGE_URL,
 		"translator-credits", translators,
 		"wrap-license", TRUE, "license", license,
+		"logo-icon-name", "yad",
 		NULL);
-  gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (dialog), "yad");
-  gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
 
   return gtk_dialog_run (GTK_DIALOG (dialog));
 }
