@@ -377,10 +377,8 @@ main (gint argc, gchar ** argv)
 
   /* correct separators */
   tmp_sep = g_strcompress (options.common_data.separator);
-  g_free (options.common_data.separator);
   options.common_data.separator = tmp_sep;
   tmp_sep = g_strcompress (options.common_data.item_separator);
-  g_free (options.common_data.item_separator);
   options.common_data.item_separator = tmp_sep;  
 
   /* set signal handlers */
