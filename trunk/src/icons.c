@@ -47,7 +47,7 @@ activate_cb (GtkWidget *view, GtkTreePath *path, gpointer data)
   GtkTreeIter iter;
   GtkTreeModel *model;
   gchar *cmd;
-  gboolean *in_term;
+  gboolean in_term;
 
   if (!options.icons_data.compact)
     model = gtk_icon_view_get_model (GTK_ICON_VIEW (view));
@@ -330,6 +330,7 @@ icons_create_widget (GtkWidget *dlg)
       GtkTreeViewColumn *col;
 
       icon_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+      gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (icon_view), FALSE);
 
       col = gtk_tree_view_column_new ();
       r = gtk_cell_renderer_pixbuf_new ();
