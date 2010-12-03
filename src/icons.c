@@ -77,7 +77,7 @@ handle_stdin (GIOChannel * channel,
               GIOCondition condition, gpointer data)
 {
   static GtkTreeIter iter;
-  static gint column_count = 0;
+  static gint column_count = 1;
   static gint row_count = 0;
   static gboolean first_time = TRUE;
   GtkTreeModel *model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
@@ -86,6 +86,7 @@ handle_stdin (GIOChannel * channel,
     {
       first_time = FALSE;
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter, COL_FILENAME, "", -1);
     }
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
