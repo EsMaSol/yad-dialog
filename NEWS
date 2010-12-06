@@ -1,3 +1,22 @@
+Version 0.7.2
+    - fix bug with launching commands in icons dialog
+    - remove column title from compact view in icons dialog
+
+Version 0.7.1
+    - fix bug with memory corruption
+
+Version 0.7.0
+    - improvements in printing data with custom buttons
+    - add sorting in icon dialog
+    - --tail option in text fialog now working for files too
+    - add new field types in form dialog
+    - separators sets from command-line only
+
+Version 0.6.0
+    - add compact view in icons dialog
+    - add justifications and margins to text dialog
+    - make double-click works in simple lists
+
 Version 0.5.2
     - fix build with gtk+ < 2.16.x
 

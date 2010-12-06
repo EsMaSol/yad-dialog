@@ -1,3 +1,28 @@
+2010-12-03 12:37  ananasik
+
+	* src/icons.c: fix handling stdin in icons dialog
+
+2010-12-03 12:09  ananasik
+
+	* src/icons.c: fixes in icons dialog
+
+2010-12-03 11:52  ananasik
+
+	* data/yad.1: fix man page
+
+2010-12-03 10:37  ananasik
+
+	* configure.ac, src/about.c: some cleanups
+
+2010-12-03 09:05  ananasik
+
+	* src/main.c: fix memory corruption on i386
+
+2010-11-28 19:47  ananasik
+
+	* ChangeLog, configure.ac, src/main.c: handle special characters in
+	  separators. bump version to 0.7.0
+
 2010-11-27 13:02  ananasik
 
 	* src/list.c: cleanup in list dialog
