@@ -356,7 +356,14 @@ main (gint argc, gchar ** argv)
   yad_options_init ();
 
   /* set default icons and icon theme */
-  settings.icon_theme = gtk_icon_theme_get_default ();
+  if (options.data.icon_theme)
+    {
+      settings.icon_theme = gtk_icon_theme_new ();
+      gtk_icon_theme_set_custom_theme (settings.icon_theme, 
+				       options.data.icon_theme);
+    }
+  else
+    settings.icon_theme = gtk_icon_theme_get_default ();
   gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
   settings.big_fallback_image =
     gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),

@@ -104,6 +104,12 @@ static GOptionEntry general_options[] = {
     &options.data.image_on_top,
     N_("Show image above main widget"),
     NULL },
+  { "icon-theme", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.data.icon_theme,
+    N_("Use specified icon theme instead of default"),
+    N_("THEME") },
   { "button", 0,
     0,
     G_OPTION_ARG_CALLBACK,
@@ -906,6 +912,7 @@ yad_options_init (void)
   options.data.dialog_text = NULL;
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
+  options.data.icon_theme = NULL;
   options.data.timeout = settings.timeout;
   options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;

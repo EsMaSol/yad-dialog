@@ -84,6 +84,7 @@ typedef struct {
   gchar *dialog_text;
   gchar *dialog_image;
   gboolean image_on_top;
+  gchar *icon_theme;
 #if !GTK_CHECK_VERSION (2,91,0)
   gboolean dialog_sep;
 #endif
