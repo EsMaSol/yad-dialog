@@ -26,7 +26,14 @@ AC_SUBST([YAD_LIBS])
 
 GTK_DISABLE_DEPRECATED
 
-# rgb.txt
+dnl icon browser
+AC_ARG_ENABLE([icon-browser],
+	[AS_HELP_STRING([--enable-icon-browser],
+			[Build YAD icon browser])],
+	[build_ib=$enableval], [build_ib=no])
+AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
+
+dnl rgb.txt
 AC_ARG_WITH([rgb],
 	[AS_HELP_STRING([--with-rgb=PATH],
 			[set path to rgb.txt file (default - /etc/X11/rgb.txt)])],
@@ -60,3 +67,7 @@ data/yad.spec
 ])
 
 AC_OUTPUT
+
+echo
+echo "Build icon browser - $build_ib"
+echo
