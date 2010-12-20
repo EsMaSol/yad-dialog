@@ -262,6 +262,7 @@ main (gint argc, gchar *argv[])
   gtk_container_add (GTK_CONTAINER (w), data->icon_list);
 
   col = gtk_tree_view_column_new ();
+  gtk_tree_view_column_set_title (col, _("Icons"));
   r = gtk_cell_renderer_pixbuf_new ();
   gtk_tree_view_column_pack_start (col, r, FALSE);
   gtk_tree_view_column_set_attributes (col, r, "pixbuf", 0, NULL);
