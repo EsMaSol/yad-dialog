@@ -417,10 +417,15 @@ main (gint argc, gchar ** argv)
       ret = gtk_dialog_run (GTK_DIALOG (dialog));
       if (options.data.always_print)
         print_result ();
-      else if (ret == YAD_RESPONSE_OK && options.data.buttons == NULL)
-        print_result ();
-      else if (options.data.buttons && !(ret & 1) && ret != YAD_RESPONSE_TIMEOUT)
-        print_result ();
+      else if (ret != YAD_RESPONSE_TIMEOUT && ret != YAD_RESPONSE_ESC)
+	{
+	  /* standard OK button pressed */
+	  if (ret == YAD_RESPONSE_OK && options.data.buttons == NULL)
+	    print_result ();
+	  /* custom even button pressed */
+	  else if (options.data.buttons && !(ret & 1))
+	    print_result ();
+	}
     }
 
   return ret;
