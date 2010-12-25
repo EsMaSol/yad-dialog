@@ -114,31 +114,32 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
   info = gtk_icon_theme_lookup_icon (data->theme, icon, sz[0], 0);
 
   if (info)
+    file = (gchar *) gtk_icon_info_get_filename (info);
+  else
+    file = NULL;
+
+  /* create sizes string */
+  i = 0;
+  sizes = g_string_new ("");
+  while (sz[i])
     {
-      /* create sizes string */
-      i = 0;
-      sizes = g_string_new ("");
-      while (sz[i])
-	{
-	  if (sz[i] == -1)
-	    g_string_append (sizes, _("scalable "));
-	  else
-	    g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
-	  i++;
-	}
-      /* free memory */
-      g_free (sz);
-
-      file = (gchar *) gtk_icon_info_get_filename (info);
-
-      lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
-			     icon, sizes->str, file ? file : _("built-in"));
-      gtk_label_set_markup (GTK_LABEL (data->label), lbl);
-      g_string_free (sizes, TRUE);
-      g_free (lbl);
-
-      gtk_icon_info_free (info);
+      if (sz[i] == -1)
+	g_string_append (sizes, _("scalable "));
+      else
+	g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
+      i++;
     }
+  /* free memory */
+  g_free (sz);
+
+  lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
+			 icon, sizes->str, file ? file : _("built-in"));
+  gtk_label_set_markup (GTK_LABEL (data->label), lbl);
+  g_string_free (sizes, TRUE);
+  g_free (lbl);
+
+  if (info)
+    gtk_icon_info_free (info);
 }
 
 static void
