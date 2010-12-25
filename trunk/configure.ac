@@ -63,6 +63,7 @@ Makefile
 po/Makefile.in
 src/Makefile
 data/Makefile
+data/yad.m4
 data/yad.spec
 ])
 
