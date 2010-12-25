@@ -87,8 +87,9 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
   GtkTreeModel *model;
   GtkTreeIter iter;
   GtkIconInfo *info;
-  gint *sz, i = 0;
-  gchar *icon, *lbl, *sizes = NULL, **s = NULL;
+  gint *sz, i;
+  gchar *icon, *lbl;
+  GString *sizes;
 
   if (!gtk_tree_selection_get_selected (sel, &model, &iter))
     return;
@@ -98,34 +99,26 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
   gtk_image_set_from_icon_name (GTK_IMAGE (data->image), icon, GTK_ICON_SIZE_DIALOG);
 
   sz = gtk_icon_theme_get_icon_sizes (data->theme, icon);
-  info = gtk_icon_theme_lookup_icon (data->theme, icon, sz[0], 0);
+  info = gtk_icon_theme_lookup_icon (data->theme, icon, -1, 0);
   
   /* create sizes string */
+  i = 0;
+  sizes = g_string_new ("");
   while (sz[i])
     {
       if (sz[i] == -1)
-	{
-	  sizes = g_strdup (_("scalable"));
-	  break;
-	}
-      s = g_realloc (s, (i + 1) * sizeof (gchar *));
-      s[i] = g_strdup_printf ("%dx%d", sz[i], sz[i]);
+	g_string_append (sizes, _("scalable "));
+      else
+	g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
       i++;
-      s[i] = NULL;
     }
-  if (!sizes)
-    sizes = g_strjoinv (" ", s);
   /* free memory */
   g_free (sz);
-  i = 0;
-  while (s && s[i])
-    g_free (s[i++]);
-  g_free (s);
 
   lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
-			 icon, sizes, gtk_icon_info_get_filename (info));
+			 icon, sizes->str, gtk_icon_info_get_filename (info));
   gtk_label_set_markup (GTK_LABEL (data->label), lbl);
-  g_free (sizes);
+  g_string_free (sizes, TRUE);
   g_free (lbl);
 }
 
@@ -194,7 +187,7 @@ main (gint argc, gchar *argv[])
   data->win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (data->win), _("Icon browser"));
   gtk_window_set_icon_name (GTK_WINDOW (data->win), "gtk-info");
-  gtk_window_set_default_size (GTK_WINDOW (data->win), 400, 300);
+  gtk_window_set_default_size (GTK_WINDOW (data->win), 500, 400);
   g_signal_connect (G_OBJECT (data->win), "delete-event", gtk_main_quit, NULL);
 
   box = gtk_vbox_new (FALSE, 5);
@@ -203,17 +196,17 @@ main (gint argc, gchar *argv[])
 
   /* create icon info box */
   w = gtk_hbox_new (FALSE, 5);
-  gtk_box_pack_start (GTK_BOX (box), w, FALSE, TRUE, 2);
-
+  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 2);
   data->image = gtk_image_new ();
-  gtk_box_pack_start (GTK_BOX (w), data->image, FALSE, TRUE, 2);
+  gtk_box_pack_start (GTK_BOX (w), data->image, FALSE, FALSE, 2);
   
   data->label = gtk_label_new ("");
+  gtk_misc_set_alignment (GTK_MISC (data->label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (w), data->label, TRUE, TRUE, 2);
   
   /* create icon browser */
   p = gtk_hpaned_new ();
-  gtk_paned_set_position (GTK_PANED (p), 100);
+  gtk_paned_set_position (GTK_PANED (p), 150);
   gtk_box_pack_start (GTK_BOX (box), p, TRUE, TRUE, 2);
 
   /* create category list */
@@ -230,9 +223,11 @@ main (gint argc, gchar *argv[])
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (data->cat_list), TRUE);
   gtk_container_add (GTK_CONTAINER (w), data->cat_list);
   
+  sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->cat_list));
+  g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_cat), data);
+
   r = gtk_cell_renderer_text_new ();
   col = gtk_tree_view_column_new_with_attributes (_("Category"), r, "text", 0, NULL);
-  gtk_tree_view_column_set_resizable (col, TRUE);
   gtk_tree_view_column_set_expand (col, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (data->cat_list), col);
 
@@ -261,25 +256,24 @@ main (gint argc, gchar *argv[])
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (data->icon_list), TRUE);
   gtk_container_add (GTK_CONTAINER (w), data->icon_list);
 
+  sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->icon_list));
+  g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_icon), data);
+
   col = gtk_tree_view_column_new ();
   gtk_tree_view_column_set_title (col, _("Icons"));
+  gtk_tree_view_column_set_sort_column_id (col, 1);
   r = gtk_cell_renderer_pixbuf_new ();
   gtk_tree_view_column_pack_start (col, r, FALSE);
   gtk_tree_view_column_set_attributes (col, r, "pixbuf", 0, NULL);
   r = gtk_cell_renderer_text_new ();
   gtk_tree_view_column_pack_start (col, r, FALSE);
   gtk_tree_view_column_set_attributes (col, r, "text", 1, NULL);
-  gtk_tree_view_column_set_resizable (col, TRUE);
   gtk_tree_view_column_set_expand (col, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (data->icon_list), col);
 
   gtk_widget_show_all (data->win);
 
   /* add callbacks for category and icon lists */
-  sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->cat_list));
-  g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_cat), data);
-  sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->icon_list));
-  g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_icon), data);
 
   /* run it */
   gtk_main ();
