@@ -15,7 +15,7 @@
  * along with YAD; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * Copyright (C) 2008-2010, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2010, Victor Ananjevsky <ananasik@gmail.com>
  *
  */
 
@@ -23,6 +23,7 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gdk/gdkkeysyms.h>
 
 typedef struct {
   GtkWidget *win;
@@ -35,6 +36,17 @@ typedef struct {
 
   GHashTable *icons;
 } IconBrowserData;
+
+static gboolean
+key_press_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
+{
+  if (ev->keyval == GDK_Escape)
+    {
+      gtk_main_quit ();
+      return TRUE;
+    }
+  return FALSE;
+}
 
 static GtkListStore *
 load_icon_cat (IconBrowserData *data, gchar *cat)
@@ -88,7 +100,7 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
   GtkTreeIter iter;
   GtkIconInfo *info;
   gint *sz, i;
-  gchar *icon, *lbl;
+  gchar *icon, *file, *lbl;
   GString *sizes;
 
   if (!gtk_tree_selection_get_selected (sel, &model, &iter))
@@ -99,27 +111,34 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
   gtk_image_set_from_icon_name (GTK_IMAGE (data->image), icon, GTK_ICON_SIZE_DIALOG);
 
   sz = gtk_icon_theme_get_icon_sizes (data->theme, icon);
-  info = gtk_icon_theme_lookup_icon (data->theme, icon, -1, 0);
-  
-  /* create sizes string */
-  i = 0;
-  sizes = g_string_new ("");
-  while (sz[i])
-    {
-      if (sz[i] == -1)
-	g_string_append (sizes, _("scalable "));
-      else
-	g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
-      i++;
-    }
-  /* free memory */
-  g_free (sz);
+  info = gtk_icon_theme_lookup_icon (data->theme, icon, sz[0], 0);
 
-  lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
-			 icon, sizes->str, gtk_icon_info_get_filename (info));
-  gtk_label_set_markup (GTK_LABEL (data->label), lbl);
-  g_string_free (sizes, TRUE);
-  g_free (lbl);
+  if (info)
+    {
+      /* create sizes string */
+      i = 0;
+      sizes = g_string_new ("");
+      while (sz[i])
+	{
+	  if (sz[i] == -1)
+	    g_string_append (sizes, _("scalable "));
+	  else
+	    g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
+	  i++;
+	}
+      /* free memory */
+      g_free (sz);
+
+      file = (gchar *) gtk_icon_info_get_filename (info);
+
+      lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
+			     icon, sizes->str, file ? file : _("built-in"));
+      gtk_label_set_markup (GTK_LABEL (data->label), lbl);
+      g_string_free (sizes, TRUE);
+      g_free (lbl);
+
+      gtk_icon_info_free (info);
+    }
 }
 
 static void
@@ -188,7 +207,8 @@ main (gint argc, gchar *argv[])
   gtk_window_set_title (GTK_WINDOW (data->win), _("Icon browser"));
   gtk_window_set_icon_name (GTK_WINDOW (data->win), "gtk-info");
   gtk_window_set_default_size (GTK_WINDOW (data->win), 500, 400);
-  g_signal_connect (G_OBJECT (data->win), "delete-event", gtk_main_quit, NULL);
+  g_signal_connect (G_OBJECT (data->win), "delete-event", G_CALLBACK (gtk_main_quit), NULL);
+  g_signal_connect (G_OBJECT (data->win), "key-press-event", G_CALLBACK (key_press_cb), NULL);
 
   box = gtk_vbox_new (FALSE, 5);
   gtk_container_add (GTK_CONTAINER (data->win), box);
