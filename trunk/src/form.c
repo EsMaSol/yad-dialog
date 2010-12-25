@@ -52,8 +52,8 @@ form_create_widget (GtkWidget *dlg)
 	    case YAD_FIELD_HIDDEN:
 	    case YAD_FIELD_READ_ONLY:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_entry_new ();
 	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
@@ -67,8 +67,8 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_NUM:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -83,8 +83,8 @@ form_create_widget (GtkWidget *dlg)
 	      
 	    case YAD_FIELD_COMBO:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_combo_box_new_text ();
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -93,8 +93,8 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_FILE:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -103,8 +103,8 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_DIR:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_file_chooser_button_new (_("Select folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -113,8 +113,8 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_FONT:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_font_button_new ();
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -123,8 +123,8 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_COLOR:
 	      l = gtk_label_new (fld->name);
-	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, 0, 0, 5, 5);
+	      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
 
 	      e = gtk_color_button_new ();
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
