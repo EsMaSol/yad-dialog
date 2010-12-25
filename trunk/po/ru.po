@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-20 08:16+0200\n"
+"POT-Creation-Date: 2010-12-25 14:56+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team:  <ananasik@gmail.com>\n"
@@ -837,11 +837,11 @@ msgstr "Выбрать файл"
 msgid "Select folder"
 msgstr "Выбрать каталог"
 
-#: ../src/browser.c:108
-msgid "scalable"
-msgstr "масштабируемый"
+#: ../src/browser.c:110
+msgid "scalable "
+msgstr "масштабируемый "
 
-#: ../src/browser.c:125
+#: ../src/browser.c:118
 #, c-format
 msgid ""
 "<b>Name:</b> %s\n"
@@ -853,19 +853,19 @@ msgstr ""
 "<b>Имя файла:</b> %s"
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:182
+#: ../src/browser.c:175
 msgid "- Icon browser"
 msgstr "- Броузер иконок"
 
-#: ../src/browser.c:195
+#: ../src/browser.c:188
 msgid "Icon browser"
 msgstr "Броузер иконок"
 
-#: ../src/browser.c:234
+#: ../src/browser.c:230
 msgid "Category"
 msgstr "Категория"
 
-#: ../src/browser.c:265
+#: ../src/browser.c:263
 msgid "Icons"
 msgstr "Иконки"
 

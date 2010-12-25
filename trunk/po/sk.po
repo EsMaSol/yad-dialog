@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-20 08:16+0200\n"
+"POT-Creation-Date: 2010-12-25 14:56+0200\n"
 "PO-Revision-Date: 2010-11-07 11:07+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
@@ -837,11 +837,11 @@ msgstr "Otvoriť súbor"
 msgid "Select folder"
 msgstr ""
 
-#: ../src/browser.c:108
-msgid "scalable"
+#: ../src/browser.c:110
+msgid "scalable "
 msgstr ""
 
-#: ../src/browser.c:125
+#: ../src/browser.c:118
 #, c-format
 msgid ""
 "<b>Name:</b> %s\n"
@@ -850,19 +850,19 @@ msgid ""
 msgstr ""
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:182
+#: ../src/browser.c:175
 msgid "- Icon browser"
 msgstr ""
 
-#: ../src/browser.c:195
+#: ../src/browser.c:188
 msgid "Icon browser"
 msgstr ""
 
-#: ../src/browser.c:234
+#: ../src/browser.c:230
 msgid "Category"
 msgstr ""
 
-#: ../src/browser.c:265
+#: ../src/browser.c:263
 msgid "Icons"
 msgstr ""
 
