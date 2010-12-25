@@ -1,16 +1,16 @@
-.TH YAD 1 "November 17, 2010"
+.TH YAD 1 "December 25, 2010"
 .SH NAME
 yad \- display GTK+ dialogs
 .SH SYNOPSIS
 .B yad
 .RI [ options ]
 .SH DESCRIPTION
-\fBYad\fP is a program that will display GTK+ dialogs, and return
+\fBYAD\fP is a program that will display GTK+ dialogs, and return
 (either in the return code, or on standard output) the users
 input. This allows you to present information, and ask for information
 from the user, from all manner of shell scripts.
 .PP
-\fBYad\fP is the fork of \fBZenity\fP program.
+\fBYAD\fP is the fork of \fBZenity\fP program.
 .SH OPTIONS
 This program follows the usual GNU command line syntax, with long
 options starting with two dashes (`-').
@@ -78,7 +78,7 @@ Set the dialog timeout in seconds.
 .B \-\-timeout-indicator=POSITION
 Show timeout indicator in given position. Positions are \fItop\fP, \fIbottom\fP, \fIleft\fP or \fIright\fP.
 Style of indicator may be set through the gtkrc file. 
-See http://code.google.com/p/yad/wiki/TimeoutIndicator for details.
+See \fIhttp://code.google.com/p/yad/wiki/TimeoutIndicator\fP for details.
 .TP
 .B \-\-text=STRING
 Set the dialog text.
@@ -502,6 +502,18 @@ find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
 Display a box with all of the installed desktop applications
 .IP
 yad \-\-icons \-\-read-dir=/usr/share/applications
+
+.SH DEVELOPMENT
+There are some developers features providing with YAD.
+.TP
+\fIYAD icon browser\fP is a graphical tool for discover icons in current or user-specifies GTK+ icon theme. Launch it as
+.IP
+yad-icon-browser [theme]
+.PP
+When using autoconf you may use special m4 macro \fIAM_PATH_YAD\fP for fooking for yad and check it version. Usage of this mnacro is
+.IP
+AM_PATH_YAD([MINIMUM-VERSION],[ACTION-IF-FOUND],[ACTION-IF-NOT-FOUND])
+.PP
 
 .SH AUTHOR
 \fBYad\fP was written by Victor Ananjevsky <ananasik@gmail.com>.
