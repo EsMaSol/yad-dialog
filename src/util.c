@@ -182,3 +182,23 @@ strip_new_line (gchar *str)
   if (str[nl] == '\n')
     str[nl] = '\0';
 }
+
+gchar **
+split_arg (const gchar *str)
+{
+  gchar **res;
+  gchar *p_col;
+
+  res = g_new0 (gchar*, 3);
+
+  p_col =  g_strrstr (str, ":");
+  if (p_col && p_col[1])
+    {
+      res[0] = g_strndup (str, p_col - str);
+      res[1] = g_strdup (p_col + 1);
+    }
+  else
+    res[0] = g_strdup (str);
+
+  return res;
+}

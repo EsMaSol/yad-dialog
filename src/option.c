@@ -732,7 +732,7 @@ add_button (const gchar *option_name,
 	    gpointer data, GError **err)
 {
   YadButton *btn;
-  gchar **bstr = g_strsplit (value, ":", 2);
+  gchar **bstr = split_arg (value);
 
   btn = g_new0 (YadButton, 1);
   btn->name = g_strdup (bstr[0]);
@@ -751,7 +751,7 @@ add_column (const gchar *option_name,
 	    gpointer data, GError **err)
 {
   YadColumn *col;
-  gchar **cstr = g_strsplit (value, ":", 2);
+  gchar **cstr = split_arg (value);
 
   col = g_new0 (YadColumn, 1);
   col->name = g_strdup (cstr[0]);
@@ -784,7 +784,7 @@ add_field (const gchar *option_name,
 	   gpointer data, GError **err)
 {
   YadField *fld;
-  gchar **fstr = g_strsplit (value, ":", 2);
+  gchar **fstr = split_arg (value);
 
   fld = g_new0 (YadField, 1);
   fld->name = g_strdup (fstr[0]);
