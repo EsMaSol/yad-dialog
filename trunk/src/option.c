@@ -26,6 +26,7 @@ static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
@@ -365,6 +366,12 @@ static GOptionEntry form_options[] = {
     add_field,
     N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, FL, DIR, FN or CLR)"),
     N_("LABEL[:TYPE]") },
+  { "align", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    set_align,
+    N_("Set alignment of fileds labels (left, center or right)"),
+    N_("TYPE") },
   { "separator", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
@@ -845,6 +852,23 @@ add_confirm_overwrite (const gchar *option_name,
 }
 
 static gboolean
+set_align (const gchar *option_name,
+	   const gchar *value,
+	   gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "left") == 0)
+    options.form_data.align = 0.0;
+  else if (g_ascii_strcasecmp (value, "right") == 0)
+    options.form_data.align = 1.0;
+  else if (g_ascii_strcasecmp (value, "center") == 0)
+    options.form_data.align = 0.5;
+  else
+    g_printerr (_("Unknown align type: %s\n"), value);
+
+  return TRUE;
+}
+
+static gboolean
 set_justify (const gchar *option_name,
 	     const gchar *value,
 	     gpointer data, GError **err)
@@ -966,6 +990,7 @@ yad_options_init (void)
 
   /* Initialize form data */
   options.form_data.fields = NULL;
+  options.form_data.align = 0.0;
 
   /* Initialize icons data */
   options.icons_data.directory = NULL;
