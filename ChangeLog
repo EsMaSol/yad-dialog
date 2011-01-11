@@ -1,3 +1,69 @@
+2011-01-11 09:52  ananasik
+
+	* data/yad.m4.in: fix formatting
+
+2011-01-10 08:03  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
+	  src/form.c, src/option.c, src/yad.h: add alignment to form fields
+	  labels. prepare to the next 0.8.0 release
+
+2011-01-09 14:31  ananasik
+
+	* src/option.c, src/util.c, src/yad.h: fix handling colons when
+	  parse button, column or field type
+
+2010-12-25 18:56  ananasik
+
+	* src/main.c, src/yad.h: fix ESC handling
+
+2010-12-25 18:35  ananasik
+
+	* src/form.c: fix labels alignment in form dialog
+
+2010-12-25 18:12  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po: update translation
+
+2010-12-25 18:10  ananasik
+
+	* src/browser.c: fix in icon info for icon browser
+
+2010-12-25 18:04  ananasik
+
+	* src/browser.c: fix memory corruption in icon browser
+
+2010-12-25 12:57  ananasik
+
+	* README, data/yad.1, po/de.po, po/ru.po, po/sk.po: update man and
+	  translation
+
+2010-12-25 12:35  ananasik
+
+	* configure.ac, src/browser.c: some fixes in icon browser
+
+2010-12-25 11:35  ananasik
+
+	* configure.ac, data/Makefile.am, data/yad.m4.in: add yad.m4
+
+2010-12-20 06:20  ananasik
+
+	* configure.ac, data/Makefile.am, data/yad-icon-browser.desktop.in,
+	  data/yad.1, po/POTFILES.in, po/de.po, po/ru.po, po/sk.po,
+	  src/browser.c: update translation and man
+
+2010-12-19 19:33  ananasik
+
+	* configure.ac, src/Makefile.am, src/browser.c: add icon browser
+
+2010-12-19 17:13  ananasik
+
+	* src/main.c, src/option.c, src/yad.h: add custom icon theme
+
+2010-12-06 07:54  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.7.2
+
 2010-12-03 12:37  ananasik
 
 	* src/icons.c: fix handling stdin in icons dialog
