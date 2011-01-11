@@ -27,7 +27,7 @@ AC_DEFUN([AM_PATH_YAD],[
   ])
 
   if test "$YAD" = :; then
-  dnl Run any user-specified action, or abort.
+    dnl Run any user-specified action, or abort.
     m4_default([$3], [AC_MSG_ERROR([Yad not found])])
   else
     dnl Run any user-specified action.
