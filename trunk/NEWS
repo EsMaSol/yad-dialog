@@ -1,3 +1,14 @@
+Version 0.8.0
+    - add --icon-theme option for use specific icon theme 
+      instead of default
+    - add --align option for label alignment in form dialog
+    - fix handling ESC for return proper exit code
+    - fix handling colons in options
+    - add yad-icon-browser, a separate tool for exploring GTK icon 
+      themes
+    - add autoconf macros AM_PATH_YAD for easily check for yad when
+      use autotools
+
 Version 0.7.2
     - fix bug with launching commands in icons dialog
     - remove column title from compact view in icons dialog
