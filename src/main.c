@@ -426,6 +426,11 @@ main (gint argc, gchar ** argv)
 	  else if (options.data.buttons && !(ret & 1))
 	    print_result ();
 	}
+      /* autokill option for progress dialog */
+      if (options.mode == YAD_MODE_PROGRESS && 
+	  options.progress_data.autokill &&
+	  ret != YAD_RESPONSE_OK)
+	kill (getppid (), 1);
     }
 
   return ret;
