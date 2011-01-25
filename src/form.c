@@ -195,8 +195,10 @@ form_create_widget (GtkWidget *dlg)
 		  g_strfreev (s);
 		  break;	  
 
-		case YAD_FIELD_FILE:
 		case YAD_FIELD_DIR:
+		  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)), 
+						 options.extra_data[i]);		  
+		case YAD_FIELD_FILE:
 		  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)), 
 						 options.extra_data[i]);
 		  break;
