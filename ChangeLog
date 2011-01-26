@@ -1,3 +1,15 @@
+2011-01-25 09:34  ananasik
+
+	* src/form.c: fixes in form dialog
+
+2011-01-14 04:27  ananasik
+
+	* src/main.c: fix autokill option in progress dialog
+
+2011-01-11 10:03  ananasik
+
+	* ChangeLog, NEWS: release 0.8.0
+
 2011-01-11 09:52  ananasik
 
 	* data/yad.m4.in: fix formatting
