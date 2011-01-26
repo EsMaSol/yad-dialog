@@ -1,3 +1,7 @@
+Version 0.8.1
+    - fix --auto-kill option in progress dialog
+    - fix setting initial value in DIR field of form dialog
+
 Version 0.8.0
     - add --icon-theme option for use specific icon theme 
       instead of default
