@@ -514,6 +514,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.hide_column,
     N_("Hide a specific column"),
     N_("NUMBER") },
+  { "expand-column", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.list_data.expand_column,
+    N_("Set the column expandable by default. 0 sets all column expandable"),
+    N_("NUMBER") },
   { NULL }
 };
 
