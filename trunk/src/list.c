@@ -141,6 +141,9 @@ add_columns (gint n_columns)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
 
+      if (i == options.list_data.hide_column - 1)
+	continue;
+
       switch (col->type)
 	{
 	case YAD_COLUMN_CHECK:
