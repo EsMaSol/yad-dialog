@@ -176,6 +176,10 @@ add_columns (gint n_columns)
 	  break;
 	}
       gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
+
+      if (i == options.list_data.expand_column - 1 || 
+	  options.list_data.expand_column == 0)
+	gtk_tree_view_column_set_expand (column, TRUE);
     }
 }
 

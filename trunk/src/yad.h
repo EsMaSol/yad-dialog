@@ -173,6 +173,7 @@ typedef struct {
   gboolean print_all;
   gint print_column;
   gint hide_column;
+  gint expand_column;
 } YadListData;
 
 typedef struct {
