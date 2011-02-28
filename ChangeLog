@@ -1,3 +1,34 @@
+2011-02-28 10:50  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
+	  src/option.c, src/scale.c, src/yad.h: fix set initial value in
+	  scale dialog
+
+2011-02-08 16:26  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, src/option.c: add alias for --color
+
+2011-02-02 08:31  ananasik
+
+	* data/yad.1, src/list.c, src/option.c, src/yad.h: add
+	  --expand-column option in list dialog
+
+2011-02-02 04:56  ananasik
+
+	* src/list.c: fix --hide-column option in list dialog
+
+2011-01-30 07:04  ananasik
+
+	* data/yad.1: update man page
+
+2011-01-30 06:41  ananasik
+
+	* data/yad.1: update man page
+
+2011-01-26 05:22  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.8.1
+
 2011-01-25 09:34  ananasik
 
 	* src/form.c: fixes in form dialog
