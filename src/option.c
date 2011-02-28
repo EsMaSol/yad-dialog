@@ -28,6 +28,7 @@ static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -524,7 +525,7 @@ static GOptionEntry list_options[] = {
     0,
     G_OPTION_ARG_INT,
     &options.list_data.expand_column,
-    N_("Set the column expandable by default. 0 sets all column expandable"),
+    N_("Set the column expandable by default. 0 sets all columns expandable"),
     N_("NUMBER") },
   { NULL }
 };
@@ -619,8 +620,8 @@ static GOptionEntry scale_options[] = {
     NULL },
   { "value", 0,
     0,
-    G_OPTION_ARG_INT,
-    &options.scale_data.value,
+    G_OPTION_ARG_CALLBACK,
+    set_scale_value,
     N_("Set initial value"),
     N_("VALUE") },
   { "min-value", 0,
@@ -899,6 +900,17 @@ set_justify (const gchar *option_name,
   return TRUE;
 }
 
+static gboolean
+set_scale_value (const gchar *option_name,
+		 const gchar *value,
+		 gpointer data, GError **err)
+{
+  options.scale_data.value = atoi (value);
+  options.scale_data.have_value = TRUE;
+
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -1040,6 +1052,7 @@ yad_options_init (void)
   options.scale_data.step = 1;
   options.scale_data.print_partial = FALSE;
   options.scale_data.hide_value = FALSE;
+  options.scale_data.have_value = FALSE;
 
   /* Initialize text data */
   options.text_data.fore = NULL;
