@@ -40,12 +40,22 @@ scale_create_widget (GtkWidget *dlg)
       return NULL;
     }
 
-  if (options.scale_data.value < options.scale_data.min_value ||
-      options.scale_data.value > options.scale_data.max_value)
+  /* check for initial value */
+  if (options.scale_data.have_value)
     {
-      g_printerr (_("Value out of range.\n"));
-      return NULL;
+      if (options.scale_data.value < options.scale_data.min_value)
+	{
+	  g_printerr (_("Initial value less than minimal.\n"));
+	  options.scale_data.value = options.scale_data.min_value;
+	}
+      else if (options.scale_data.value > options.scale_data.max_value)
+	{
+	  g_printerr (_("Initial value greater than maximum.\n"));
+	  options.scale_data.value = options.scale_data.max_value;
+	}
     }
+  else
+    options.scale_data.value = options.scale_data.min_value;
 
   w = scale = gtk_hscale_new_with_range (options.scale_data.min_value,
 					 options.scale_data.max_value,

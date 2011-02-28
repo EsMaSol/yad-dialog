@@ -196,6 +196,7 @@ typedef struct {
   gint step;
   gboolean print_partial;
   gboolean hide_value;
+  gboolean have_value;
 } YadScaleData;
 
 typedef struct {
