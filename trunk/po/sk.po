@@ -2,14 +2,14 @@
 # Slovenský preklad balíka YAD.
 # Copyright (C) 2010 THE YAD'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the YAD package.
-# Slavko <linux@slavino.sk>, 2010.
+# Slavko <linux@slavino.sk>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-28 12:49+0200\n"
-"PO-Revision-Date: 2010-11-07 11:07+0100\n"
+"PO-Revision-Date: 2011-02-28 18:50+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
 "Language: \n"
@@ -116,12 +116,12 @@ msgstr "Maximálna hodnota musí byť väčšia ako minimálna.\n"
 #: ../src/scale.c:48
 #, c-format
 msgid "Initial value less than minimal.\n"
-msgstr ""
+msgstr "Počiatočná hodnota je menšia ako minimálna.\n"
 
 #: ../src/scale.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Initial value greater than maximum.\n"
-msgstr "Maximálna hodnota musí byť väčšia ako minimálna.\n"
+msgstr "Maximálna hodnota je väčšia ako minimálna.\n"
 
 #: ../src/list.c:406
 msgid "Add row"
@@ -215,11 +215,11 @@ msgstr "Zobraziť obrázok nad hlavným widgetom"
 
 #: ../src/option.c:113
 msgid "Use specified icon theme instead of default"
-msgstr ""
+msgstr "Použiť zadanú tému ikon, namiesto predvolenej"
 
 #: ../src/option.c:114
 msgid "THEME"
-msgstr ""
+msgstr "TÉMA"
 
 #: ../src/option.c:119
 msgid "Add dialog button (may be used multiple times)"
@@ -243,7 +243,7 @@ msgstr "Pridať oddeľovač medzi dialóg a tlačidlá"
 
 #: ../src/option.c:145
 msgid "Always print result"
-msgstr ""
+msgstr "Vždy vypísať výsledok"
 
 #: ../src/option.c:152
 msgid "Set window sticky"
@@ -311,7 +311,7 @@ msgstr "Zobraziť dialóg Výber farby"
 
 #: ../src/option.c:232
 msgid "Alias for --color"
-msgstr ""
+msgstr "Alias pre --color"
 
 #: ../src/option.c:238
 msgid "Set initial color value"
@@ -419,9 +419,9 @@ msgid "Display form dialog"
 msgstr "Zobraziť dialóg Formulár"
 
 #: ../src/option.c:374
-#, fuzzy
 msgid "Add field to form (TYPE - H, RO, NUM, CHK, CB, FL, DIR, FN or CLR)"
-msgstr "Pridať do formulára pole (TYP - H RO, NUM, CHK alebo CB)"
+msgstr ""
+"Pridať do formulára pole (TYP – H RO, NUM, CHK, CB, FL, DIR, FN alebo CLR)"
 
 #: ../src/option.c:375
 msgid "LABEL[:TYPE]"
@@ -429,16 +429,15 @@ msgstr "NÁVESTIE[:TYP]"
 
 #: ../src/option.c:380
 msgid "Set alignment of fileds labels (left, center or right)"
-msgstr ""
+msgstr "Nastaviť zarovnanie menoviek poli (left, center alebo right)"
 
 #: ../src/option.c:381 ../src/option.c:696
 msgid "TYPE"
 msgstr "TYP"
 
 #: ../src/option.c:392
-#, fuzzy
 msgid "Set separator character for combobox or scale data"
-msgstr "nastaviť znak výstupného oddeľovača"
+msgstr "Nastaviť znak oddeľovača dát rozbaľovacieho zoznamu alebo zväčšenia"
 
 #: ../src/option.c:402
 msgid "Display icons box dialog"
@@ -476,11 +475,11 @@ msgstr "Vzor pre spustenie príkazu v termináli (predvolené: xterm -e %s)"
 
 #: ../src/option.c:445
 msgid "Sort items by name instead of filename"
-msgstr ""
+msgstr "Radiť položky podľa mena namiesto mena súboru"
 
 #: ../src/option.c:451
 msgid "Sort items in descending order"
-msgstr ""
+msgstr "Zoradiť položky zostupne"
 
 #: ../src/option.c:461
 msgid "Display list dialog"
@@ -537,6 +536,8 @@ msgstr "Skryť zadaný stĺpec"
 #: ../src/option.c:528
 msgid "Set the column expandable by default. 0 sets all columns expandable"
 msgstr ""
+"Nastaviť stĺpec predvolene ako rozšíriteľný. 0 nastavuje všetky stĺpce ako "
+"rozšíriteľné"
 
 #: ../src/option.c:538
 msgid "Display notification"
@@ -551,14 +552,12 @@ msgid "Listen for commands on stdin"
 msgstr "Prijímať príkazy zo štandardného vstupu"
 
 #: ../src/option.c:556
-#, fuzzy
 msgid "Set separator character for menu values"
-msgstr "nastaviť znak výstupného oddeľovača"
+msgstr "Nastaviť znak oddeľovača hodnôt menu"
 
 #: ../src/option.c:562
-#, fuzzy
 msgid "Set separator character for menu items"
-msgstr "nastaviť znak výstupného oddeľovača"
+msgstr "Nastaviť znak oddeľovača položiek menu"
 
 #: ../src/option.c:572
 msgid "Display progress indication dialog"
@@ -679,7 +678,7 @@ msgid "Print version"
 msgstr "Verzia pre tlač"
 
 #: ../src/option.c:879
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown align type: %s\n"
 msgstr "Neznámy typ zarovnania: %s\n"
 
@@ -851,17 +850,16 @@ msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr "Pri čítaní súboru %s zistené neplatné UTF-8 dáta\n"
 
 #: ../src/form.c:99
-#, fuzzy
 msgid "Select file"
-msgstr "Otvoriť súbor"
+msgstr "Vyberte súbor"
 
 #: ../src/form.c:109
 msgid "Select folder"
-msgstr ""
+msgstr "Vyberte pole"
 
 #: ../src/browser.c:127
 msgid "scalable "
-msgstr ""
+msgstr "scalable "
 
 #: ../src/browser.c:135
 #, c-format
@@ -870,35 +868,38 @@ msgid ""
 "<b>Sizes:</b> %s\n"
 "<b>Filename:</b> %s"
 msgstr ""
+"<b>Meno:</b> %s\n"
+"<b>Veľkosť:</b> %s\n"
+"<b>Meno súboru:</b> %s"
 
 #: ../src/browser.c:136
 msgid "built-in"
-msgstr ""
+msgstr "zabudované"
 
 #. initialize GTK+ and parse the command line arguments
 #: ../src/browser.c:195
 msgid "- Icon browser"
-msgstr ""
+msgstr "– Prezerač ikon"
 
 #: ../src/browser.c:208
 msgid "Icon browser"
-msgstr ""
+msgstr "Prezerač ikon"
 
 #: ../src/browser.c:251
 msgid "Category"
-msgstr ""
+msgstr "Kategória"
 
 #: ../src/browser.c:284
 msgid "Icons"
-msgstr ""
+msgstr "Ikony"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
-msgstr ""
+msgstr "Prezerač ikon"
 
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
-msgstr ""
+msgstr "Preskúmať GTK tému ikon"
 
 #~ msgid "Value out of range.\n"
 #~ msgstr "Hodnota mimo rozsah.\n"
