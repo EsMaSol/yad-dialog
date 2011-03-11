@@ -241,6 +241,7 @@ unescape_markup (gchar *str)
 	      res[i] = '\'';
 	      buf += 5;
 	    }
+	  /* FIXME: need to parse &x0FFF;-like values here */
 	}	
       else
 	res[i] = *buf++;
