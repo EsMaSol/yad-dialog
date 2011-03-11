@@ -321,7 +321,7 @@ fill_data (gint n_columns)
 	    {
 	      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, j);
 	      GdkPixbuf *pb;
-	      g_char *val;
+	      gchar *val;
 
 	      if (args[i] == NULL)
 		break;
