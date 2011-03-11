@@ -159,6 +159,18 @@ add_columns (gint n_columns)
 	    (col->name, renderer, "pixbuf", i, NULL);
 	  break;
 	case YAD_COLUMN_NUM:
+	  renderer = gtk_cell_renderer_text_new ();
+	  if (options.common_data.editable)
+	    {
+	      g_object_set (G_OBJECT (renderer), "editable", TRUE, NULL);
+	      g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
+	      g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
+	    }
+	  column = gtk_tree_view_column_new_with_attributes
+	    (col->name, renderer, "text", i, NULL);
+	  gtk_tree_view_column_set_sort_column_id (column, i);
+	  gtk_tree_view_column_set_resizable  (column, TRUE);
+	  break;
 	case YAD_COLUMN_TEXT:
 	case YAD_COLUMN_TOOLTIP:
 	default:
@@ -170,7 +182,7 @@ add_columns (gint n_columns)
 	      g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
 	    }
 	  column = gtk_tree_view_column_new_with_attributes
-	    (col->name, renderer, "text", i, NULL);
+	    (col->name, renderer, "markup", i, NULL);
 	  gtk_tree_view_column_set_sort_column_id (column, i);
 	  gtk_tree_view_column_set_resizable  (column, TRUE);
 	  break;
@@ -212,6 +224,7 @@ handle_stdin (GIOChannel * channel,
 	  YadColumn *col;
 	  GdkPixbuf *pb;
           gint status;
+	  gchar *val;
 
           do
             {
@@ -264,9 +277,11 @@ handle_stdin (GIOChannel * channel,
 	      g_object_unref (pb);
 	      break;
 	    case YAD_COLUMN_TEXT:
+	    case YAD_COLUMN_TOOLTIP:
 	    default:
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				  column_count, string->str, -1);
+	      val = g_markup_escape_text (string->str, string->len);
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
+	      g_free (val);
 	      break;
 	    }
 
@@ -306,6 +321,7 @@ fill_data (gint n_columns)
 	    {
 	      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, j);
 	      GdkPixbuf *pb;
+	      g_char *val;
 
 	      if (args[i] == NULL)
 		break;
@@ -328,8 +344,11 @@ fill_data (gint n_columns)
 		  g_object_unref (pb);
 		  break;
 		case YAD_COLUMN_TEXT:
+		case YAD_COLUMN_TOOLTIP:
 		default:
-		  gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
+		  val = g_markup_escape_text (args[i], -1);
+		  gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, val, -1);
+		  g_free (val);
 		  break;
 		}
 	      i++;
@@ -538,9 +557,11 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
     case YAD_COLUMN_TOOLTIP:
     case YAD_COLUMN_TEXT:
       {
-	gchar *cval;
+	gchar *cval, *mval;
 	gtk_tree_model_get (model, iter, num, &cval, -1);
-	g_printf ("%s", cval);
+	mval = g_markup_printf_escaped ("%s", cval);
+	g_printf ("%s", mval);
+	g_free (mval);
 	break;
       }
     }
