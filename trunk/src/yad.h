@@ -302,6 +302,7 @@ GdkPixbuf * get_pixbuf (gchar *name, YadIconSize size);
 
 inline void strip_new_line (gchar *str);
 gchar **split_arg (const gchar *str);
+gchar *unescape_markup (gchar *str);
 
 G_END_DECLS
 

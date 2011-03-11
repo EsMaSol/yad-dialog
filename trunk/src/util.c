@@ -202,3 +202,50 @@ split_arg (const gchar *str)
 
   return res;
 }
+
+gchar *
+unescape_markup (gchar *str)
+{
+  gchar *res, *buf = str;
+  guint i = 0;
+
+  res = g_new0 (gchar, strlen (str)); 
+
+  while (*buf)
+    {
+      if (*buf == '&')
+	{
+	  buf++;
+	  if (strncmp (buf, "lt;", 3) == 0)
+	    {
+	      res[i] = '<';
+	      buf += 3;
+	    }
+	  else if (strncmp (buf, "gt;", 3) == 0)
+	    {
+	      res[i] = '>';
+	      buf += 3;
+	    }
+	  else if (strncmp (buf, "amp;", 4) == 0)
+	    {
+	      res[i] = '&';
+	      buf += 4;
+	    }
+	  else if (strncmp (buf, "quot;", 5) == 0)
+	    {
+	      res[i] = '"';
+	      buf += 5;
+	    }
+	  else if (strncmp (buf, "apos;", 5) == 0)
+	    {
+	      res[i] = '\'';
+	      buf += 5;
+	    }
+	}	
+      else
+	res[i] = *buf++;
+      i++;
+    }
+
+  return res;
+}
