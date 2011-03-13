@@ -1,3 +1,46 @@
+2011-03-13 07:33  ananasik
+
+	* src/icons.c, src/list.c, src/util.c, src/yad.h: fix markup
+	  tooltips in icons dialog
+
+2011-03-11 12:36  ananasik
+
+	* configure.ac: increase version in configure.ac
+
+2011-03-11 08:33  ananasik
+
+	* src/util.c:
+
+2011-03-11 08:31  ananasik
+
+	* src/list.c, src/util.c, src/yad.h: fix printing result in list
+	  dialog
+
+2011-03-11 07:39  ananasik
+
+	* src/list.c:
+
+2011-03-11 05:42  ananasik
+
+	* src/list.c: fix markup text in list dialog
+
+2011-03-08 07:23  ananasik
+
+	* po/LINGUAS, po/ru.po, po/uk.po: add ukrainian translation
+
+2011-03-08 05:53  ananasik
+
+	* po/sk.po: update slovak translation
+
+2011-03-07 19:41  ananasik
+
+	* src/entry.c, src/form.c: use GtkComboBoxText in form end entry
+	  dialogs if gtk >= 2.24.x
+
+2011-02-28 10:54  ananasik
+
+	* ChangeLog, NEWS: release 0.9.0
+
 2011-02-28 10:50  ananasik
 
 	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,

@@ -1,3 +1,8 @@
+Version 0.9.1
+    - fix handle markup for tooltips in list and icons dialogs
+    - add ukrainian and update slovak translations
+    - use GtkComboBoxText in entry and form dialogs when gtk+ >= 2.24.x is used
+
 Version 0.9.0
     - fix --hide-column option in list dialog
     - fix settting up initial value in scale dialog
