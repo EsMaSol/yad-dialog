@@ -19,6 +19,7 @@
  *
  */
 
+#include <stdlib.h>
 #include <string.h>
 
 #include "yad.h"
@@ -204,6 +205,61 @@ split_arg (const gchar *str)
 }
 
 gchar *
+escape_markup (gchar *str)
+{
+  gchar *res, *buf = str;
+  guint i = 0, len;
+
+  len = strlen (str);
+  res = malloc (len); 
+
+  while (*buf)
+    {
+      switch (*buf)
+        {
+        case '&':
+          len += 4;
+          res = realloc (res, len);
+          strcpy (res + i, "&amp;");
+          i += 5;
+          break;
+        case '<':
+          len += 3;
+          res = realloc (res, len);
+          strcpy (res + i, "&lt;");
+          i += 4;
+          break;
+        case '>':
+          len += 3;
+          res = realloc (res, len);
+          strcpy (res + i, "&gt;");
+          i += 4;
+          break;
+        case '"':
+          len += 5;
+          res = realloc (res, len);
+          strcpy (res + i, "&quot;");
+          i += 6;
+          break;
+        case '\'':
+          len += 5;
+          res = realloc (res, len);
+          strcpy (res + i, "&apos;");
+          i += 6;
+          break;
+        default:
+          *(res + i) = *buf;
+          i++;
+          break;
+        }
+      buf++;
+    }
+  res[i] = '\0';
+
+  return res;
+}
+
+gchar *
 unescape_markup (gchar *str)
 {
   gchar *res, *buf = str;
@@ -241,7 +297,6 @@ unescape_markup (gchar *str)
 	      res[i] = '\'';
 	      buf += 5;
 	    }
-	  /* FIXME: need to parse &x0FFF;-like values here */
 	}	
       else
 	res[i] = *buf++;
