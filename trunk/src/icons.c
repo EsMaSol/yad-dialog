@@ -135,10 +135,18 @@ handle_stdin (GIOChannel * channel,
 	  switch (column_count)
 	    {
 	    case COL_NAME:
-	    case COL_TOOLTIP:
 	    case COL_COMMAND:
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
 	      break;
+	    case COL_TOOLTIP:
+	      {
+		gchar *val;
+
+		val = escape_markup (string->str);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
+		g_free (val);
+		break;
+	      }
 	    case COL_PIXBUF:
 	      if (options.icons_data.compact)
 		if (*string->str)
@@ -191,6 +199,7 @@ parse_desktop_file (gchar *filename)
       if (g_key_file_has_group (kf, "Desktop Entry"))
 	{
 	  gint i;
+	  gchar *val;
 
 	  if (options.icons_data.generic)
 	    {
@@ -211,7 +220,9 @@ parse_desktop_file (gchar *filename)
 	      ent->name = g_strdup (nm);
 	      g_free (nm);
 	    }
-	  ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+	  val = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+	  ent->comment = escape_markup (val);
+	  g_free (val);
 	  ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
 	  /* remove possible arguments patterns */
 	  for (i = strlen (ent->command); i > 0; i--)

@@ -279,7 +279,7 @@ handle_stdin (GIOChannel * channel,
             case YAD_COLUMN_TEXT:
             case YAD_COLUMN_TOOLTIP:
             default:
-              val = g_markup_escape_text (string->str, string->len);
+              val = escape_markup (string->str);
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
               g_free (val);
               break;
@@ -346,7 +346,7 @@ fill_data (gint n_columns)
                 case YAD_COLUMN_TEXT:
                 case YAD_COLUMN_TOOLTIP:
                 default:
-                  val = g_markup_escape_text (args[i], -1);
+                  val = escape_markup (args[i]);
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, val, -1);
                   g_free (val);
                   break;
