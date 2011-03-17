@@ -204,14 +204,14 @@ split_arg (const gchar *str)
   return res;
 }
 
-gchar *
-escape_markup (gchar *str)
+char *
+escape_markup (char *str)
 {
-  gchar *res, *buf = str;
-  guint i = 0, len;
+  char *res, *buf = str;
+  unsigned i = 0, len;
 
   len = strlen (str);
-  res = malloc (len); 
+  res = (char *) calloc (len, sizeof (char)); 
 
   while (*buf)
     {
@@ -219,31 +219,31 @@ escape_markup (gchar *str)
         {
         case '&':
           len += 4;
-          res = realloc (res, len);
+          res = (char *) realloc (res, len + 1);
           strcpy (res + i, "&amp;");
           i += 5;
           break;
         case '<':
           len += 3;
-          res = realloc (res, len);
+          res = (char *) realloc (res, len + 1);
           strcpy (res + i, "&lt;");
           i += 4;
           break;
         case '>':
           len += 3;
-          res = realloc (res, len);
+          res = (char *) realloc (res, len + 1);
           strcpy (res + i, "&gt;");
           i += 4;
           break;
         case '"':
           len += 5;
-          res = realloc (res, len);
+          res = (char *) realloc (res, len + 1);
           strcpy (res + i, "&quot;");
           i += 6;
           break;
         case '\'':
           len += 5;
-          res = realloc (res, len);
+          res = (char *) realloc (res, len + 1);
           strcpy (res + i, "&apos;");
           i += 6;
           break;
