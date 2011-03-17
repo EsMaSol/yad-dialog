@@ -211,7 +211,7 @@ escape_markup (char *str)
   unsigned i = 0, len;
 
   len = strlen (str);
-  res = (char *) calloc (len, sizeof (char)); 
+  res = (char *) calloc (len + 1, sizeof (char)); 
 
   while (*buf)
     {
