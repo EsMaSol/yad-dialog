@@ -33,8 +33,11 @@ Display text entry dialog.
 .B \-\-icons
 Display box with shortcut icons.
 .TP
-.B \-\-file\-selection
+.B \-\-file
 Display file selection dialog.
+.TP
+.B \-\-font
+Display font selection dialog.
 .TP
 .B \-\-form
 Display form dialog
@@ -147,7 +150,7 @@ Set the calendar year.
 Set the format for the returned date.
 
 .PP 
-Color options
+Color selection options
 .TP
 .B \-\-init\-color=COLOR
 Set initial color value.
@@ -237,6 +240,15 @@ Specify separator character when returning multiple filenames.
 .B \-\-confirm\-overwrite[=TEXT]
 Confirm file selection if filename already exists. 
 Optional argument is a text for confirmation dialog.
+
+.PP
+Font selection options
+.TP
+.B \-\-fontname=FILENAME
+Set the initial font.
+.TP
+.B \-\-preview
+Set the preview text.
 
 .PP
 Form options
@@ -361,7 +373,7 @@ Set foreground color of text
 .B \-\-back=COLOR
 Set background color of text
 .TP
-.B \-\-font=FONT
+.B \-\-fontname=FONT
 Set text font. \fIFONT\fP must be in a Pango font description format.
 .TP
 .B \-\-wrap
