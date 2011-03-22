@@ -1155,7 +1155,7 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   /* Adds color option entries */
-  a_group = g_option_group_new ("color", _("Color selction options"),
+  a_group = g_option_group_new ("color", _("Color selection options"),
 				_("Show color selection options"), NULL, NULL);
   g_option_group_add_entries (a_group, color_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
