@@ -253,6 +253,11 @@ handle_stdin (GIOChannel * channel,
               /* We're starting a new row */
               column_count = 0;
               row_count++;
+	      if (options.list_data.limit && row_count >= options.list_data.limit)
+		{
+		  gtk_tree_model_get_iter_first (model, &iter);
+		  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+		}
               gtk_list_store_append (GTK_LIST_STORE (model), &iter);
             }
 
