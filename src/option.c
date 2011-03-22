@@ -834,21 +834,30 @@ add_column (const gchar *option_name,
 
   col = g_new0 (YadColumn, 1);
   col->name = g_strdup (cstr[0]);
-  if (cstr[1])
+  if (g_ascii_strcasecmp (cstr[0], "@fore@") == 0)
+    col->type = YAD_COLUMN_ATTR_FORE;
+  else if (g_ascii_strcasecmp (cstr[0], "@back@") == 0)
+    col->type = YAD_COLUMN_ATTR_BACK;
+  else if (g_ascii_strcasecmp (cstr[0], "@font@") == 0)
+    col->type = YAD_COLUMN_ATTR_FONT;
+  else
     {
-      if (g_ascii_strcasecmp (cstr[1], "NUM") == 0)
-	col->type = YAD_COLUMN_NUM ;
-      else if (g_ascii_strcasecmp (cstr[1], "CHK") == 0)
-	col->type = YAD_COLUMN_CHECK;
-      else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
-	col->type = YAD_COLUMN_IMAGE;
-      else if (g_ascii_strcasecmp (cstr[1], "TIP") == 0)
-	col->type = YAD_COLUMN_TOOLTIP;
+      if (cstr[1])
+	{
+	  if (g_ascii_strcasecmp (cstr[1], "NUM") == 0)
+	    col->type = YAD_COLUMN_NUM ;
+	  else if (g_ascii_strcasecmp (cstr[1], "CHK") == 0)
+	    col->type = YAD_COLUMN_CHECK;
+	  else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
+	    col->type = YAD_COLUMN_IMAGE;
+	  else if (g_ascii_strcasecmp (cstr[1], "TIP") == 0)
+	    col->type = YAD_COLUMN_TOOLTIP;
+	  else
+	    col->type = YAD_COLUMN_TEXT;
+	}
       else
 	col->type = YAD_COLUMN_TEXT;
     }
-  else
-    col->type = YAD_COLUMN_TEXT;
   options.list_data.columns =
     g_slist_append (options.list_data.columns, col);
 
@@ -1099,6 +1108,7 @@ yad_options_init (void)
   options.list_data.print_all = FALSE;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
+  options.list_data.expand_column = -1;
   options.list_data.limit = 0;
 
   /* Initialize notification data */
