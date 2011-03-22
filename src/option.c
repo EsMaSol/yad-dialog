@@ -37,6 +37,7 @@ static gboolean color_mode = FALSE;
 static gboolean dnd_mode = FALSE;
 static gboolean entry_mode = FALSE;
 static gboolean file_mode = FALSE;
+static gboolean font_mode = FALSE;
 static gboolean form_mode = FALSE;
 static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
@@ -314,7 +315,7 @@ static GOptionEntry entry_options[] = {
   { NULL }
 };
 
-static GOptionEntry file_selection_options[] = {
+static GOptionEntry file_options[] = {
   { "file", 0,
     G_OPTION_FLAG_IN_MAIN,
     G_OPTION_ARG_NONE,
@@ -369,6 +370,34 @@ static GOptionEntry file_selection_options[] = {
     &options.file_data.filter,
     N_("Sets a filename filter"),
     N_("NAME | PATTERN1 PATTERN2 ...") },
+  { NULL }
+};
+
+static GOptionEntry font_options[] = {
+  { "font", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &font_mode,
+    N_("Display font selection dialog"),
+    NULL },
+  { "font-selection", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &font_mode,
+    N_("Alias for --font"),
+    NULL },
+  { "fontname", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.font,
+    N_("Set initial font"),
+    N_("FONTNAME") },
+  { "preview", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.font_data.preview,
+    N_("Set preview text"),
+    N_("TEXT") },
   { NULL }
 };
 
@@ -706,10 +735,10 @@ static GOptionEntry text_options[] = {
     &options.text_data.back,
     N_("Use specified color for background"),
     N_("COLOR") },
-  { "font", 0,
-    0,
+  { "fontname", 0,
+    G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
-    &options.text_data.font,
+    &options.common_data.font,
     N_("Use specified font"),
     N_("FONTNAME") },
   { "wrap", 0,
@@ -954,6 +983,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_ENTRY;
   else if (file_mode)
     options.mode = YAD_MODE_FILE;
+  else if (font_mode)
+    options.mode = YAD_MODE_FONT;
   else if (form_mode)
     options.mode = YAD_MODE_FORM;
   else if (icons_mode)
@@ -1011,6 +1042,7 @@ yad_options_init (void)
 
   /* Initialize common data */
   options.common_data.uri = NULL;
+  options.common_data.font = NULL;
   options.common_data.separator = "|";
   options.common_data.item_separator = "!";
   options.common_data.multi = FALSE;
@@ -1042,6 +1074,9 @@ yad_options_init (void)
   options.file_data.confirm_overwrite = FALSE;
   options.file_data.confirm_text = N_("File exist. Overwrite?");
   options.file_data.filter = NULL;
+
+  /* Initialize font data */
+  options.font_data.preview = NULL;
 
   /* Initialize form data */
   options.form_data.fields = NULL;
@@ -1091,7 +1126,6 @@ yad_options_init (void)
   /* Initialize text data */
   options.text_data.fore = NULL;
   options.text_data.back = NULL;
-  options.text_data.font = NULL;
   options.text_data.wrap = FALSE;
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.tail = FALSE;
@@ -1121,8 +1155,8 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   /* Adds color option entries */
-  a_group = g_option_group_new ("color", _("Color options"),
-				_("Show color options"), NULL, NULL);
+  a_group = g_option_group_new ("color", _("Color selction options"),
+				_("Show color selection options"), NULL, NULL);
   g_option_group_add_entries (a_group, color_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
@@ -1144,7 +1178,14 @@ yad_create_context (void)
   /* Adds file selection option entries */
   a_group = g_option_group_new ("file", _("File selection options"),
 				_("Show file selection options"), NULL, NULL);
-  g_option_group_add_entries (a_group, file_selection_options);
+  g_option_group_add_entries (a_group, file_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Add font selection option entries */
+  a_group = g_option_group_new ("font", _("Font selection options"),
+				_("Show font selection options"), NULL, NULL);
+  g_option_group_add_entries (a_group, font_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

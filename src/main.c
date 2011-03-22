@@ -225,6 +225,9 @@ create_dialog ()
     case YAD_MODE_FILE:
       main_widget = file_create_widget (dlg);
       break;
+    case YAD_MODE_FONT:
+      main_widget = font_create_widget (dlg);
+      break;
     case YAD_MODE_FORM:
       main_widget = form_create_widget (dlg);
       break;
@@ -315,6 +318,9 @@ print_result (void)
       break;
     case YAD_MODE_FILE:
       file_print_result ();
+      break;
+    case YAD_MODE_FONT:
+      font_print_result ();
       break;
     case YAD_MODE_FORM:
       form_print_result ();

@@ -227,10 +227,10 @@ text_create_widget (GtkWidget * dlg)
 	gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
     }
 
-  if (options.text_data.font)
+  if (options.common_data.font)
     {
       PangoFontDescription *fd =
-	pango_font_description_from_string (options.text_data.font);
+	pango_font_description_from_string (options.common_data.font);
       gtk_widget_modify_font (text_view, fd);
       pango_font_description_free (fd);
     }

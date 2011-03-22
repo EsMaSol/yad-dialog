@@ -41,6 +41,7 @@ typedef enum {
   YAD_MODE_DND,
   YAD_MODE_ENTRY,
   YAD_MODE_FILE,
+  YAD_MODE_FONT,
   YAD_MODE_FORM,
   YAD_MODE_ICONS,
   YAD_MODE_LIST,
@@ -152,6 +153,10 @@ typedef struct {
 } YadFileData;
 
 typedef struct {
+  gchar *preview;
+} YadFontData;
+
+typedef struct {
   GSList *fields;
   gdouble align;
 } YadFormData;
@@ -206,7 +211,6 @@ typedef struct {
 typedef struct {
   gchar *fore;
   gchar *back;
-  gchar *font;
   gboolean wrap; 
   GtkJustification justify;
   gint margins;
@@ -215,6 +219,7 @@ typedef struct {
 
 typedef struct {
   gchar *uri;
+  gchar *font;
   gchar *separator;
   gchar *item_separator;
   gboolean editable;
@@ -232,6 +237,7 @@ typedef struct {
   YadColorData color_data;
   YadEntryData entry_data;
   YadFileData file_data;
+  YadFontData font_data;
   YadFormData form_data;
   YadIconsData icons_data;
   YadListData list_data;
@@ -275,6 +281,7 @@ GtkWidget * calendar_create_widget (GtkWidget *dlg);
 GtkWidget * color_create_widget (GtkWidget *dlg);
 GtkWidget * entry_create_widget (GtkWidget *dlg);
 GtkWidget * file_create_widget (GtkWidget *dlg);
+GtkWidget * font_create_widget (GtkWidget *dlg);
 GtkWidget * form_create_widget (GtkWidget *dlg);
 GtkWidget * icons_create_widget (GtkWidget *dlg);
 GtkWidget * list_create_widget (GtkWidget *dlg);
@@ -288,6 +295,7 @@ void calendar_print_result (void);
 void color_print_result (void);
 void entry_print_result (void);
 void file_print_result (void);
+void font_print_result (void);
 void form_print_result (void);
 void list_print_result (void);
 void progress_print_result (void);
