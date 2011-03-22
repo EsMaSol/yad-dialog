@@ -666,6 +666,18 @@ static GOptionEntry scale_options[] = {
     &options.scale_data.hide_value,
     N_("Hide value"),
     NULL },
+  { "vertical", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.scale_data.vertical,
+    N_("Show vertical scale"),
+    NULL },
+  { "invert", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.scale_data.invert,
+    N_("Invert direction"),
+    NULL },
   { NULL }
 };
 
@@ -1067,6 +1079,8 @@ yad_options_init (void)
   options.scale_data.print_partial = FALSE;
   options.scale_data.hide_value = FALSE;
   options.scale_data.have_value = FALSE;
+  options.scale_data.vertical = FALSE;
+  options.scale_data.invert = FALSE;
 
   /* Initialize text data */
   options.text_data.fore = NULL;
