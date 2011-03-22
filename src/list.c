@@ -83,6 +83,8 @@ cell_edited_cb (GtkCellRendererText * cell,
 
   if (col->type == YAD_COLUMN_NUM)
     gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, g_ascii_strtoll (new_text, NULL, 10), -1);
+  else if (col->type == YAD_COLUMN_FLOAT)
+    gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, g_ascii_strtod (new_text, NULL), -1);
   else
     gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, new_text, -1);
 
@@ -115,6 +117,9 @@ create_model (gint n_columns)
           break;
         case YAD_COLUMN_NUM:
           ctypes[i] = G_TYPE_INT64;
+          break;
+        case YAD_COLUMN_FLOAT:
+          ctypes[i] = G_TYPE_DOUBLE;
           break;
         case YAD_COLUMN_IMAGE:
           ctypes[i] = GDK_TYPE_PIXBUF;
@@ -176,6 +181,7 @@ add_columns (gint n_columns)
 	    gtk_tree_view_column_add_attribute (column, renderer, "cell-background", back_col);
           break;
         case YAD_COLUMN_NUM:
+        case YAD_COLUMN_FLOAT:
           renderer = gtk_cell_renderer_text_new ();
           if (options.common_data.editable)
             {
@@ -305,6 +311,10 @@ handle_stdin (GIOChannel * channel,
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, 
 				  g_ascii_strtoll (string->str, NULL, 10), -1);
               break;
+            case YAD_COLUMN_FLOAT:
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, 
+				  g_ascii_strtod (string->str, NULL), -1);
+              break;
             case YAD_COLUMN_IMAGE:
               pb = get_pixbuf (string->str, YAD_SMALL_ICON);
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
@@ -376,6 +386,10 @@ fill_data (gint n_columns)
                 case YAD_COLUMN_NUM:
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j,
                                       g_ascii_strtoll (args[i], NULL, 10), -1);
+                  break;
+                case YAD_COLUMN_FLOAT:
+                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, j,
+                                      g_ascii_strtod (args[i], NULL), -1);
                   break;
                 case YAD_COLUMN_IMAGE:
                   pb = get_pixbuf (args[i], YAD_SMALL_ICON);
@@ -601,6 +615,13 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
         gint64 nval;
         gtk_tree_model_get (model, iter, num, &nval, -1);
         g_printf ("%d", nval);
+        break;
+      }
+    case YAD_COLUMN_FLOAT:
+      {
+        gdouble nval;
+        gtk_tree_model_get (model, iter, num, &nval, -1);
+        g_printf ("%lf", nval);
         break;
       }
     case YAD_COLUMN_TOOLTIP:
