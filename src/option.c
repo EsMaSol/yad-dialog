@@ -315,11 +315,17 @@ static GOptionEntry entry_options[] = {
 };
 
 static GOptionEntry file_selection_options[] = {
-  { "file-selection", 0,
+  { "file", 0,
     G_OPTION_FLAG_IN_MAIN,
     G_OPTION_ARG_NONE,
     &file_mode,
     N_("Display file selection dialog"),
+    NULL },
+  { "file-selection", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &file_mode,
+    N_("Alias for --file"),
     NULL },
   { "filename", 0,
     G_OPTION_FLAG_NOALIAS,
