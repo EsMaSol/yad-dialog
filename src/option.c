@@ -15,7 +15,7 @@
  * along with YAD; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * Copyright (C) 2008-2010, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  *
  */
 
@@ -776,6 +776,12 @@ static GOptionEntry text_options[] = {
     G_OPTION_ARG_NONE,
     &options.common_data.editable,
     N_("Allow changes to text"),
+    NULL },
+  { "show-uri", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.text_data.uri,
+    N_("Make URI clickable"),
     NULL },
   { NULL }
 };

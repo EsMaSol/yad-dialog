@@ -15,7 +15,7 @@
  * along with YAD; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * Copyright (C) 2008-2010, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  *
  */
 
@@ -49,7 +49,7 @@ yad_about (void)
   g_object_set (G_OBJECT (dialog),
 		"name", PACKAGE_NAME,
 		"version", PACKAGE_VERSION,
-		"copyright", "Copyright \xc2\xa9 2008-2010 Victor Ananjevsky <ananasik@gmail.com>",
+		"copyright", "Copyright \xc2\xa9 2008-2011 Victor Ananjevsky <ananasik@gmail.com>",
 		"comments", _("Yet Another Dialog\n(show dialog boxes from shell scripts)\n\nBased on Zenity code\n"),
 		"authors", authors,
 		"website", PACKAGE_URL,

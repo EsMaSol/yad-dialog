@@ -15,7 +15,7 @@
  * along with YAD; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * Copyright (C) 2010, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2010-2011, Victor Ananjevsky <ananasik@gmail.com>
  *
  */
 
