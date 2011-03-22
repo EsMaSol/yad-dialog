@@ -140,6 +140,7 @@ typedef struct {
   gchar *entry_label;
   gboolean hide_text;
   gboolean completion;
+  gboolean numeric;
 } YadEntryData;
 
 typedef struct {

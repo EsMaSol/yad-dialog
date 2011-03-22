@@ -65,7 +65,46 @@ entry_create_widget (GtkWidget *dlg)
       gtk_box_pack_start (GTK_BOX (w), l, FALSE, FALSE, 1);
     }
 
-  if (!options.entry_data.completion &&
+  if (options.entry_data.numeric)
+    {
+      gdouble min, max, step, val;
+
+      min = 0.0;
+      max = 65535.0;
+      step = 1.0;
+
+      if (options.extra_data && *options.extra_data)
+	{
+	  min = g_strtod (options.extra_data[0], NULL);
+	  if (options.extra_data[1])
+	    {
+	      max = g_strtod (options.extra_data[1], NULL);
+	      if (options.extra_data[2])
+		step = g_strtod (options.extra_data[2], NULL);
+	    }
+	}
+
+      c = entry = gtk_spin_button_new_with_range (min, max, step);
+
+      if (options.entry_data.entry_text)
+	{
+	  val = g_strtod (options.entry_data.entry_text, NULL);
+
+	  if (val < min)
+	    {
+	      g_printerr (_("Initial value less than minimal.\n"));
+	      val = min;
+	    }
+	  else if (val > max)
+	    {
+	      g_printerr (_("Initial value greater than maximum.\n"));
+	      val = max;
+	    }
+
+	  gtk_spin_button_set_value (GTK_SPIN_BUTTON (c), val);
+	}
+    }
+  else if (!options.entry_data.completion &&
       options.extra_data && *options.extra_data)
     {
       gint i = 0;
@@ -151,7 +190,9 @@ entry_create_widget (GtkWidget *dlg)
 void
 entry_print_result (void)
 {
-  if (is_combo)
+  if (options.entry_data.numeric)
+    g_print ("%lf\n", gtk_spin_button_get_value (GTK_SPIN_BUTTON (entry)));
+  else if (is_combo)
 #if GTK_CHECK_VERSION(2,24,0)
     g_print ("%s\n", gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (entry)));
 #else

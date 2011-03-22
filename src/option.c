@@ -299,6 +299,12 @@ static GOptionEntry entry_options[] = {
     &options.entry_data.completion,
     N_("Use completion instead of combo-box"),
     NULL },
+  { "numeric", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.entry_data.numeric,
+    N_("Use spin button for text entry"),
+    NULL },
   { "editable", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_NONE,
@@ -1010,6 +1016,7 @@ yad_options_init (void)
   options.entry_data.entry_label = NULL;
   options.entry_data.hide_text = FALSE;
   options.entry_data.completion = FALSE;
+  options.entry_data.numeric = FALSE;
 
   /* Initialize file data */
   options.file_data.directory = FALSE;
