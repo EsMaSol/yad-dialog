@@ -10,7 +10,8 @@ yad_SOURCES = 		\
 	color.c		\
 	dnd.c           \
 	entry.c		\
-	fileselection.c	\
+	file.c	\
+	font.c		\
 	form.c		\
 	icons.c		\
 	list.c		\
