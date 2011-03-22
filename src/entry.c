@@ -69,9 +69,7 @@ entry_create_widget (GtkWidget *dlg)
     {
       gdouble min, max, step, val;
 
-      min = 0.0;
-      max = 65535.0;
-      step = 1.0;
+      min = 0.0; max = 65535.0; step = 1.0;
 
       if (options.extra_data && *options.extra_data)
 	{
@@ -90,7 +88,13 @@ entry_create_widget (GtkWidget *dlg)
 	{
 	  val = g_strtod (options.entry_data.entry_text, NULL);
 
-	  if (val < min)
+	  if (min >= max)
+	    {
+	      g_printerr (_("Maximum value must be greater than minimum value.\n"));
+	      min = 0.0; max = 65535.0;
+	    }
+
+ 	  if (val < min)
 	    {
 	      g_printerr (_("Initial value less than minimal.\n"));
 	      val = min;
