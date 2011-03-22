@@ -74,29 +74,28 @@ uri_tag_event_cb (GtkTextTag *tag, GObject *object, GdkEvent *event,
 static gboolean
 motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
 {
-  GSList *tag_list;
+  GSList *tag_list_p;
   GtkTextIter iter;
   GtkTextTag *tag = NULL;
-  GdkModifierType state;
   gint x, y;
 
   if (!GTK_IS_TEXT_VIEW (w))
     return FALSE;
 
-  gdk_window_get_pointer (ev->window, &x, &y, &state);
+  gdk_window_get_pointer (ev->window, &x, &y, NULL);
   gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (w), &iter, x, y);
-  tag_list = gtk_text_iter_get_tags (&iter);
+  tag_list_p = tag_list = gtk_text_iter_get_tags (&iter);
 
-  while (tag_list != NULL) 
+  while (tag_list_p != NULL) 
     {
       if (g_object_get_data (G_OBJECT (tag_list->data), "is_link") != NULL) 
 	{
-	  tag = GTK_TEXT_TAG (tag_list->data);
+	  tag = GTK_TEXT_TAG (tag_list_p->data);
 	  break;
 	}
-      tag_list = tag_list->next;
+      tag_list_p = tag_list_p->next;
     }
-  g_slist_free(tag_list);
+  g_slist_free (tag_list);
 
   if (tag != NULL) 
     {
