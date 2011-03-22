@@ -15,7 +15,7 @@
  * along with YAD; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * Copyright (C) 2008-2010, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  *
  */
 
@@ -28,6 +28,8 @@
 
 static GtkWidget *text_view;
 static GtkTextBuffer *text_buffer;
+static GtkTextTag *uri_tag;
+static GRegex *regex;
 
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
@@ -39,9 +41,120 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
     if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) && 
 	(key->state & GDK_CONTROL_MASK))
 #endif
-    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 
   return FALSE;
+}
+
+static gboolean
+uri_tag_event_cb (GtkTextTag *tag, GObject *object, GdkEvent *event,
+		  GtkTextIter *iter, gpointer user_data)
+{
+  GtkTextIter start = *iter;
+  GtkTextIter end = *iter;
+  gchar *url, *cmdline;
+        
+  if (event->type == GDK_BUTTON_PRESS) 
+    {
+      gtk_text_iter_backward_to_tag_toggle (&start, tag);
+      gtk_text_iter_forward_to_tag_toggle (&end, tag);
+                
+      url = gtk_text_iter_get_text (&start, &end);
+      cmdline = g_strdup_printf ("xdg-open '%s'", url);
+      g_free (url);
+
+      g_spawn_command_line_async (cmdline, NULL);
+
+      g_free (cmdline);
+    }
+                
+  return TRUE;
+}
+
+static gboolean
+motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
+{
+  GSList *tag_list;
+  GtkTextIter iter;
+  GtkTextTag *tag = NULL;
+  GdkModifierType state;
+  gint x, y;
+
+  if (!GTK_IS_TEXT_VIEW (w))
+    return FALSE;
+
+  gdk_window_get_pointer (ev->window, &x, &y, &state);
+  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (w), &iter, x, y);
+  tag_list = gtk_text_iter_get_tags (&iter);
+
+  while (tag_list != NULL) 
+    {
+      if (g_object_get_data (G_OBJECT (tag_list->data), "is_link") != NULL) 
+	{
+	  tag = GTK_TEXT_TAG (tag_list->data);
+	  break;
+	}
+      tag_list = tag_list->next;
+    }
+  g_slist_free(tag_list);
+
+  if (tag != NULL) 
+    {
+      GdkCursor *cursor = gdk_cursor_new( GDK_HAND2);
+      gdk_window_set_cursor (ev->window, cursor);
+      gdk_cursor_unref (cursor);
+    } 
+  else
+    {
+      GdkCursor *cursor = gdk_cursor_new (GDK_XTERM);
+      gdk_window_set_cursor (ev->window, cursor);
+      gdk_cursor_unref (cursor);
+    }
+        
+  return FALSE;
+}
+
+static void
+linkify_buffer ()
+{
+  gchar *text;
+  GtkTextIter start, end;
+  GMatchInfo *match;
+  gint i, err;
+
+  gtk_text_buffer_get_bounds (text_buffer, &start, &end);
+  text = gtk_text_buffer_get_text (text_buffer, &start, &end, FALSE);
+
+  gtk_text_buffer_remove_all_tags (text_buffer, &start, &end);
+
+  err = g_regex_match_all (regex, text, G_REGEX_MATCH_NOTEMPTY, &match);
+
+  for (i = 1;  i < g_match_info_get_match_count (match); i++)
+    {
+      gint sp, ep;
+
+      g_match_info_fetch_pos (match, i, &sp, &ep);
+
+      gtk_text_buffer_get_iter_at_offset (text_buffer, &start, sp);
+      gtk_text_buffer_get_iter_at_offset (text_buffer, &end, ep);
+
+      gtk_text_buffer_apply_tag (text_buffer, uri_tag, &start, &end);
+    }
+
+  g_match_info_free (match);
+  g_free(text);
+}
+
+static void
+insert_text_cb (GtkTextBuffer *tb, GtkTextIter *loc, gchar *text, gint len, gpointer d)
+{
+  linkify_buffer ();
+}
+
+static void
+delete_text_cb (GtkTextBuffer *tb, GtkTextIter *start, GtkTextIter *end, gpointer d)
+{
+  linkify_buffer ();
 }
 
 static gboolean
@@ -156,7 +269,7 @@ fill_buffer_from_file ()
   if (remaining)
     {
       g_printerr (_("Invalid UTF-8 data encountered reading file %s\n"),
-                 options.common_data.uri);
+		  options.common_data.uri);
       return;
     }
 
@@ -238,6 +351,31 @@ text_create_widget (GtkWidget * dlg)
   /* Add submit on ctrl+enter */
   g_signal_connect (text_view, "key-press-event",
 		    G_CALLBACK (key_press_cb), dlg);
+
+  if (options.text_data.uri)
+    {
+      /* Create text tag for URI */
+      uri_tag = gtk_text_buffer_create_tag (text_buffer, NULL,
+					    "foreground", "blue",
+					    "underline", PANGO_UNDERLINE_SINGLE,
+					    NULL);
+      g_object_set_data (G_OBJECT(uri_tag), "is_link", GINT_TO_POINTER (TRUE));
+      g_signal_connect (G_OBJECT (uri_tag), "event", G_CALLBACK (uri_tag_event_cb), NULL);
+      
+      regex = g_regex_new (YAD_URL_REGEX, 
+			   G_REGEX_CASELESS | G_REGEX_OPTIMIZE | G_REGEX_EXTENDED,
+			   G_REGEX_MATCH_NOTEMPTY,
+			   NULL);
+	
+      g_signal_connect_after (G_OBJECT (text_buffer), "insert-text", 
+			      G_CALLBACK (insert_text_cb), NULL);
+      
+      if (options.common_data.editable)
+	{
+	  g_signal_connect_after (G_OBJECT (text_buffer), "delete-range",
+				  G_CALLBACK (delete_text_cb), NULL);
+	}
+    }
 
   gtk_container_add (GTK_CONTAINER (w), text_view);
 

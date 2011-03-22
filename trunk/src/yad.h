@@ -34,6 +34,8 @@ G_BEGIN_DECLS
 #define YAD_RESPONSE_TIMEOUT   	70
 #define YAD_RESPONSE_ESC        -4  /* 252 */
 
+#define YAD_URL_REGEX "\\b(((ht|f)tp[s]?://[a-zA-Z0-9]+[a-zA-Z0-9\\.-]*|www[\\.]+([a-zA-Z0-9-]+[\\.])+[a-zA-Z]{2,})([/?#]+[^ \t\r\n]*)*)"
+
 typedef enum {
   YAD_MODE_MESSAGE,
   YAD_MODE_CALENDAR,
@@ -219,6 +221,7 @@ typedef struct {
   GtkJustification justify;
   gint margins;
   gboolean tail;
+  gboolean uri;
 } YadTextData;
 
 typedef struct {
