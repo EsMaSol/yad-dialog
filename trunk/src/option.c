@@ -527,6 +527,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.expand_column,
     N_("Set the column expandable by default. 0 sets all columns expandable"),
     N_("NUMBER") },
+  { "limit", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.list_data.limit,
+    N_("Set the limit of rows in list"),
+    N_("NUMBER") },
   { NULL }
 };
 
@@ -1033,6 +1039,7 @@ yad_options_init (void)
   options.list_data.print_all = FALSE;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
+  options.list_data.limit = 0;
 
   /* Initialize notification data */
   options.notification_data.listen = FALSE;

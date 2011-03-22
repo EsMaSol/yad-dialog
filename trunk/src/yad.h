@@ -171,9 +171,10 @@ typedef struct {
   gboolean no_headers;
   gboolean checkbox;
   gboolean print_all;
-  gint print_column;
-  gint hide_column;
-  gint expand_column;
+  guint print_column;
+  guint hide_column;
+  guint expand_column;
+  guint limit;
 } YadListData;
 
 typedef struct {
