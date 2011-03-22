@@ -183,8 +183,11 @@ Use completion instead of combo-box.
 .TP
 .B \-\-editable
 Allow changes to text in combo-box.
+.TP
+.B \-\-numeric
+Use spin button instead of text entry. Additional parameters in command line treats as minimum and maximum values and step value (in that order). All this values are optional. Default range is from 0 to 65535 with step 1.
 
-Any extra data specified in commndline adds as an items of combo-box entry
+Any extra data specified in command line adds as an items of combo-box entry, except of numeric mode.
 
 .PP
 Iconbox options
