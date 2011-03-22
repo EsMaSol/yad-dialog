@@ -199,6 +199,8 @@ typedef struct {
   gboolean print_partial;
   gboolean hide_value;
   gboolean have_value;
+  gboolean vertical;
+  gboolean invert;
 } YadScaleData;
 
 typedef struct {

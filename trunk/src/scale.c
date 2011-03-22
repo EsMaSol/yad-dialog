@@ -57,9 +57,20 @@ scale_create_widget (GtkWidget *dlg)
   else
     options.scale_data.value = options.scale_data.min_value;
 
-  w = scale = gtk_hscale_new_with_range (options.scale_data.min_value,
-					 options.scale_data.max_value,
-					 options.scale_data.step);
+  if (options.scale_data.vertical)
+    {
+      w = scale = gtk_vscale_new_with_range (options.scale_data.min_value,
+					     options.scale_data.max_value,
+					     options.scale_data.step);
+      gtk_range_set_inverted (GTK_RANGE (w), !options.scale_data.invert);
+    }
+  else
+    {
+      w = scale = gtk_hscale_new_with_range (options.scale_data.min_value,
+					     options.scale_data.max_value,
+					     options.scale_data.step);
+      gtk_range_set_inverted (GTK_RANGE (w), options.scale_data.invert);
+    }
   gtk_range_set_value (GTK_RANGE (w), options.scale_data.value);
 
   if (options.scale_data.print_partial)
