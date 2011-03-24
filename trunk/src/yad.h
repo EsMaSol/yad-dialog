@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 #define YAD_RESPONSE_TIMEOUT   	70
 #define YAD_RESPONSE_ESC        -4  /* 252 */
 
-#define YAD_URL_REGEX "\\b(((ht|f)tp[s]?://[a-zA-Z0-9]+[a-zA-Z0-9\\.-]*|www[\\.]+([a-zA-Z0-9-]+[\\.])+[a-zA-Z]{2,})([/?#]+[^ \t\r\n]*)*)"
+#define YAD_URL_REGEX "(http|https|ftp)://[a-zA-Z0-9./_%#&-]+"
 
 typedef enum {
   YAD_MODE_MESSAGE,
