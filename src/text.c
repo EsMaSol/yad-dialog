@@ -70,10 +70,11 @@ tag_event_cb (GtkTextTag *tag, GObject *obj, GdkEvent *ev,
           g_spawn_command_line_async (cmdline, NULL);
           
           g_free (cmdline);
+	  return TRUE;
         }
     }
                 
-  return TRUE;
+  return FALSE;
 }
 
 static gboolean hovering_over_link = FALSE;
@@ -86,11 +87,10 @@ motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
   GtkTextIter iter;
   gboolean hovering = FALSE;
 
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
-                                         GTK_TEXT_WINDOW_WIDGET,
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (w), GTK_TEXT_WINDOW_WIDGET,
                                          ev->x, ev->y, &x, &y);
 
-  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
+  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (w), &iter, x, y);
   
   tags = gtk_text_iter_get_tags (&iter);
   for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
@@ -110,15 +110,15 @@ motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
       hovering_over_link = hovering;
 
       if (hovering_over_link)
-        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (text_view), GTK_TEXT_WINDOW_TEXT), hand);
+        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (w), GTK_TEXT_WINDOW_TEXT), hand);
       else
-        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (text_view), GTK_TEXT_WINDOW_TEXT), normal);
+        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (w), GTK_TEXT_WINDOW_TEXT), normal);
     }
 
   if (tags) 
     g_slist_free (tags);
 
-  gdk_window_get_pointer (text_view->window, NULL, NULL, NULL);
+  gdk_window_get_pointer (gtk_widget_get_window (w), NULL, NULL, NULL);
 
   return FALSE;
 }
@@ -369,7 +369,7 @@ text_create_widget (GtkWidget * dlg)
                                         "foreground", "blue",
                                         "underline", PANGO_UNDERLINE_SINGLE,
                                         NULL);
-      g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (TRUE));
+      g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (1));
       g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
       
       /* Create cursors */
