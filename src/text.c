@@ -124,16 +124,16 @@ motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
 }
 
 static void
-linkify_buffer (GRegex *regex)
+linkify_cb (GtkTextBuffer *buf, GRegex *regex)
 {
   gchar *text;
   GtkTextIter start, end;
   GMatchInfo *match;
 
-  gtk_text_buffer_get_bounds (text_buffer, &start, &end);
-  text = gtk_text_buffer_get_text (text_buffer, &start, &end, FALSE);
+  gtk_text_buffer_get_bounds (buf, &start, &end);
+  text = gtk_text_buffer_get_text (buf, &start, &end, FALSE);
 
-  gtk_text_buffer_remove_all_tags (text_buffer, &start, &end);
+  gtk_text_buffer_remove_all_tags (buf, &start, &end);
 
   if (g_regex_match (regex, text, G_REGEX_MATCH_NOTEMPTY, &match))
     {
@@ -143,28 +143,16 @@ linkify_buffer (GRegex *regex)
 	  
 	  g_match_info_fetch_pos (match, 0, &sp, &ep);
 	  
-	  gtk_text_buffer_get_iter_at_offset (text_buffer, &start, sp);
-	  gtk_text_buffer_get_iter_at_offset (text_buffer, &end, ep);
+	  gtk_text_buffer_get_iter_at_offset (buf, &start, sp);
+	  gtk_text_buffer_get_iter_at_offset (buf, &end, ep);
 	  
-	  gtk_text_buffer_apply_tag (text_buffer, tag, &start, &end);
+	  gtk_text_buffer_apply_tag (buf, tag, &start, &end);
 	}
       while (g_match_info_next (match, NULL));
     }
   g_match_info_free (match);
 
   g_free(text);
-}
-
-static void
-insert_text_cb (GtkTextBuffer *tb, GtkTextIter *loc, gchar *text, gint len, gpointer d)
-{
-  linkify_buffer (d);
-}
-
-static void
-delete_text_cb (GtkTextBuffer *tb, GtkTextIter *start, GtkTextIter *end, gpointer d)
-{
-  linkify_buffer (d);
 }
 
 static gboolean
@@ -386,17 +374,7 @@ text_create_widget (GtkWidget * dlg)
       g_signal_connect (G_OBJECT (text_view), "motion-notify-event", 
                         G_CALLBACK (motion_cb), NULL);
 
-      g_signal_connect_after (G_OBJECT (text_buffer), "changed",
-       			      G_CALLBACK (insert_text_cb), regex);
-      
-      /* g_signal_connect_after (G_OBJECT (text_buffer), "insert-text",  */
-      /* 			      G_CALLBACK (insert_text_cb), regex); */
-      
-      /* if (options.common_data.editable) */
-      /* 	{ */
-      /* 	  g_signal_connect_after (G_OBJECT (text_buffer), "delete-range", */
-      /* 				  G_CALLBACK (delete_text_cb), regex); */
-      /* 	} */
+      g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);
     }
 
   gtk_container_add (GTK_CONTAINER (w), text_view);
