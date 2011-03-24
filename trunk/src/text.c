@@ -139,12 +139,16 @@ linkify_cb (GtkTextBuffer *buf, GRegex *regex)
     {
       do
 	{
-	  gint sp, ep;
+	  gint sp, ep, pos, len;
 	  
 	  g_match_info_fetch_pos (match, 0, &sp, &ep);
 	  
-	  gtk_text_buffer_get_iter_at_offset (buf, &start, sp);
-	  gtk_text_buffer_get_iter_at_offset (buf, &end, ep);
+	  /* positions are in bytes, not character, so here we must normalize it*/
+	  len = ep - sp; // calculate length
+	  pos = g_utf8_pointer_to_offset (text, text + sp);
+
+	  gtk_text_buffer_get_iter_at_offset (buf, &start, pos);
+	  gtk_text_buffer_get_iter_at_offset (buf, &end, pos + len);
 	  
 	  gtk_text_buffer_apply_tag (buf, tag, &start, &end);
 	}
