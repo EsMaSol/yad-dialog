@@ -28,6 +28,7 @@
 
 static GtkWidget *text_view;
 static GtkTextBuffer *text_buffer;
+static GtkTextTag *tag;
 static GdkCursor *hand, *normal;
 
 static gboolean
@@ -58,18 +59,18 @@ tag_event_cb (GtkTextTag *tag, GObject *obj, GdkEvent *ev,
       GdkEventButton *bev = (GdkEventButton *) ev; 
 
       if (bev->button == 1)
-	{
-	  gtk_text_iter_backward_to_tag_toggle (&start, tag);
-	  gtk_text_iter_forward_to_tag_toggle (&end, tag);
-	  
-	  url = gtk_text_iter_get_text (&start, &end);
-	  cmdline = g_strdup_printf ("xdg-open '%s'", url);
-	  g_free (url);
-	  
-	  g_spawn_command_line_async (cmdline, NULL);
-	  
-	  g_free (cmdline);
-	}
+        {
+          gtk_text_iter_backward_to_tag_toggle (&start, tag);
+          gtk_text_iter_forward_to_tag_toggle (&end, tag);
+          
+          url = gtk_text_iter_get_text (&start, &end);
+          cmdline = g_strdup_printf ("xdg-open '%s'", url);
+          g_free (url);
+          
+          g_spawn_command_line_async (cmdline, NULL);
+          
+          g_free (cmdline);
+        }
     }
                 
   return TRUE;
@@ -128,39 +129,29 @@ linkify_buffer (GRegex *regex)
   gchar *text;
   GtkTextIter start, end;
   GMatchInfo *match;
-  gint i, err;
 
   gtk_text_buffer_get_bounds (text_buffer, &start, &end);
   text = gtk_text_buffer_get_text (text_buffer, &start, &end, FALSE);
 
   gtk_text_buffer_remove_all_tags (text_buffer, &start, &end);
 
-  err = g_regex_match_all (regex, text, G_REGEX_MATCH_NOTEMPTY, &match);
-
-  for (i = 1;  i < g_match_info_get_match_count (match); i++)
+  if (g_regex_match (regex, text, G_REGEX_MATCH_NOTEMPTY, &match))
     {
-      GtkTextTag *tag;
-      gint sp, ep;
-
-      /* Create text tag for URI */
-      tag = gtk_text_buffer_create_tag (text_buffer, NULL,
-					"foreground", "blue",
-					"underline", PANGO_UNDERLINE_SINGLE,
-					NULL);
-      g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (TRUE));
-      g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
-      
-      g_match_info_fetch_pos (match, i, &sp, &ep);
-
-      gtk_text_buffer_get_iter_at_offset (text_buffer, &start, sp);
-      gtk_text_buffer_get_iter_at_offset (text_buffer, &end, ep);
-
-      gtk_text_buffer_apply_tag (text_buffer, tag, &start, &end);
-
-      g_object_unref (tag);
+      do
+	{
+	  gint sp, ep;
+	  
+	  g_match_info_fetch_pos (match, 0, &sp, &ep);
+	  
+	  gtk_text_buffer_get_iter_at_offset (text_buffer, &start, sp);
+	  gtk_text_buffer_get_iter_at_offset (text_buffer, &end, ep);
+	  
+	  gtk_text_buffer_apply_tag (text_buffer, tag, &start, &end);
+	}
+      while (g_match_info_next (match, NULL));
     }
-
   g_match_info_free (match);
+
   g_free(text);
 }
 
@@ -326,9 +317,9 @@ text_create_widget (GtkWidget * dlg)
   GtkWidget *w;
 
   w = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w),
-				  GTK_POLICY_AUTOMATIC,
-				  GTK_POLICY_AUTOMATIC);
+				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   text_view = gtk_text_view_new ();
   text_buffer = gtk_text_buffer_new (NULL);
@@ -371,6 +362,7 @@ text_create_widget (GtkWidget * dlg)
   g_signal_connect (text_view, "key-press-event",
 		    G_CALLBACK (key_press_cb), dlg);
 
+  /* Initialize linkifying */
   if (options.text_data.uri)
     {
       GRegex *regex;
@@ -380,19 +372,31 @@ text_create_widget (GtkWidget * dlg)
 			   G_REGEX_MATCH_NOTEMPTY,
 			   NULL);
 	
+      /* Create text tag for URI */
+      tag = gtk_text_buffer_create_tag (text_buffer, NULL,
+                                        "foreground", "blue",
+                                        "underline", PANGO_UNDERLINE_SINGLE,
+                                        NULL);
+      g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (TRUE));
+      g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
+      
+      /* Create cursors */
       hand = gdk_cursor_new (GDK_HAND2);
       normal= gdk_cursor_new (GDK_XTERM);
       g_signal_connect (G_OBJECT (text_view), "motion-notify-event", 
                         G_CALLBACK (motion_cb), NULL);
 
-      g_signal_connect_after (G_OBJECT (text_buffer), "insert-text", 
-			      G_CALLBACK (insert_text_cb), regex);
+      g_signal_connect_after (G_OBJECT (text_buffer), "changed",
+       			      G_CALLBACK (insert_text_cb), regex);
       
-      if (options.common_data.editable)
-	{
-	  g_signal_connect_after (G_OBJECT (text_buffer), "delete-range",
-				  G_CALLBACK (delete_text_cb), regex);
-	}
+      /* g_signal_connect_after (G_OBJECT (text_buffer), "insert-text",  */
+      /* 			      G_CALLBACK (insert_text_cb), regex); */
+      
+      /* if (options.common_data.editable) */
+      /* 	{ */
+      /* 	  g_signal_connect_after (G_OBJECT (text_buffer), "delete-range", */
+      /* 				  G_CALLBACK (delete_text_cb), regex); */
+      /* 	} */
     }
 
   gtk_container_add (GTK_CONTAINER (w), text_view);

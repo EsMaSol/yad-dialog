@@ -313,9 +313,9 @@ icons_create_widget (GtkWidget *dlg)
   GtkListStore *store;
 
   w = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w),
-				  GTK_POLICY_AUTOMATIC,
-				  GTK_POLICY_AUTOMATIC);
+				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   store = gtk_list_store_new (NUM_COLS,
 			      G_TYPE_STRING,
@@ -378,15 +378,9 @@ icons_create_widget (GtkWidget *dlg)
   g_object_unref (store);
 
   if (!options.icons_data.compact) 
-    {
-      g_signal_connect (G_OBJECT (icon_view), "item-activated",
-			G_CALLBACK (activate_cb), NULL);
-    }
+    g_signal_connect (G_OBJECT (icon_view), "item-activated", G_CALLBACK (activate_cb), NULL);
   else
-    {
-      g_signal_connect (G_OBJECT (icon_view), "row-activated",
-			G_CALLBACK (activate_cb), NULL);
-    }
+    g_signal_connect (G_OBJECT (icon_view), "row-activated", G_CALLBACK (activate_cb), NULL);
 
   gtk_container_add (GTK_CONTAINER (w), icon_view);
 
