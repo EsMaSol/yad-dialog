@@ -143,12 +143,8 @@ create_dialog ()
 
   /* add top label widgets */
   hbox = hbox2 = gtk_hbox_new (FALSE, 0);
-#if GTK_CHECK_VERSION (2, 14, 0)
   gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area
                                     (GTK_DIALOG (dlg))), hbox);
-#else
-  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox), hbox);
-#endif
   vbox = gtk_vbox_new (FALSE, 0);
 
   /* add timeout indicator */
@@ -267,14 +263,12 @@ create_dialog ()
         }
       else
         {
-#if GTK_CHECK_VERSION (2, 14, 0)
           if (gtk_alternative_dialog_button_order (NULL))
             gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                                     GTK_STOCK_OK, YAD_RESPONSE_OK,
                                     GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
                                     NULL);
           else
-#endif
             gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                                     GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
                                     GTK_STOCK_OK, YAD_RESPONSE_OK, NULL);

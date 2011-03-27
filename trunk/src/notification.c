@@ -229,19 +229,14 @@ handle_stdin (GIOChannel * channel,
               if (g_utf8_validate (value, -1, NULL))
                 {
                   gchar *message = g_strcompress (value);
-#if GTK_CHECK_VERSION(2,16,0)
-		  if (options.data.no_markup)
-		    gtk_status_icon_set_tooltip_markup (status_icon, message);
-		  else
-		    gtk_status_icon_set_tooltip_text (status_icon, message);
-#else
-                  gtk_status_icon_set_tooltip (status_icon, message);
-#endif
-
+                  if (!options.data.no_markup)
+                    gtk_status_icon_set_tooltip_markup (status_icon, message);
+                  else
+                    gtk_status_icon_set_tooltip_text (status_icon, message);
                   g_free (message);
                 }
               else
-		g_printerr (_("Invalid UTF-8 in tooltip!\n"));
+                g_printerr (_("Invalid UTF-8 in tooltip!\n"));
             }
           else if (!g_ascii_strcasecmp (command, "visible"))
             {
@@ -324,21 +319,13 @@ yad_notification_run ()
 
   if (options.data.dialog_text)
     {
-#if GTK_CHECK_VERSION(2,16,0)
-      if (options.data.no_markup)
-	gtk_status_icon_set_tooltip_markup (status_icon, options.data.dialog_text);
+      if (!options.data.no_markup)
+        gtk_status_icon_set_tooltip_markup (status_icon, options.data.dialog_text);
       else
-	gtk_status_icon_set_tooltip_text (status_icon, options.data.dialog_text);
-#else
-      gtk_status_icon_set_tooltip (status_icon, options.data.dialog_text);
-#endif
+        gtk_status_icon_set_tooltip_text (status_icon, options.data.dialog_text);
     }
   else
-#if GTK_CHECK_VERSION(2,16,0)
     gtk_status_icon_set_tooltip_text (status_icon, _("Yad notification"));
-#else
-    gtk_status_icon_set_tooltip (status_icon, _("Yad notification"));
-#endif
 
   if (options.data.dialog_image)
     icon = g_strdup (options.data.dialog_image);
