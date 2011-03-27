@@ -1,3 +1,111 @@
+2011-03-27 05:34  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/main.c,
+	  src/option.c, src/yad.h: add --kil-parent option
+
+2011-03-24 09:50  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po:
+	  update man and translation. prepare to release
+
+2011-03-24 09:37  ananasik
+
+	* src/text.c: fix handling cursor in text dialog
+
+2011-03-24 09:06  ananasik
+
+	* src/text.c:
+
+2011-03-24 08:58  ananasik
+
+	* src/text.c: fix handling utf-8 when linkifying text in text
+	  dialog
+
+2011-03-24 06:12  ananasik
+
+	* src/text.c: fixes in uri linkifying. wrong work with non-ascii
+	  characters
+
+2011-03-24 06:03  ananasik
+
+	* src/icons.c, src/list.c, src/text.c, src/yad.h:
+
+2011-03-23 11:41  ananasik
+
+	* src/text.c: some updates to uri linkify
+
+2011-03-22 18:49  ananasik
+
+	* src/text.c:
+
+2011-03-22 18:41  ananasik
+
+	* data/yad.1, data/yad.m4.in, po/uk.po, src/about.c, src/browser.c,
+	  src/calendar.c, src/color.c, src/dnd.c, src/entry.c, src/file.c,
+	  src/font.c, src/icons.c, src/list.c, src/main.c,
+	  src/notification.c, src/option.c, src/progress.c, src/scale.c,
+	  src/text.c, src/util.c, src/yad.h: add --show-uri option to text
+	  dialog (still little broken), update copyright info in sources
+
+2011-03-22 15:30  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/entry.c,
+	  src/list.c, src/option.c, src/yad.h: add FLT type for columns in
+	  list dialog
+
+2011-03-22 15:17  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/list.c,
+	  src/option.c, src/yad.h: add special columns to list dialog
+
+2011-03-22 12:59  ananasik
+
+	* data/yad.1, po/POTFILES.in, po/de.po, po/ru.po, po/sk.po,
+	  po/uk.po, src/option.c: some updates to previous commit
+
+2011-03-22 12:49  ananasik
+
+	* configure.ac, src/Makefile.am, src/file.c, src/fileselection.c,
+	  src/font.c, src/main.c, src/option.c, src/text.c, src/yad.h: add
+	  font dialog. --font option in text dialog changed to fontname
+
+2011-03-22 11:57  ananasik
+
+	* src/option.c: add short option --file for file selection dialog
+
+2011-03-22 11:50  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/option.c,
+	  src/scale.c, src/yad.h: add --vertical and --invert options to
+	  scale dialog
+
+2011-03-22 11:06  ananasik
+
+	* src/entry.c: add additional check for range values in numeric
+	  entry dialog
+
+2011-03-22 10:44  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/entry.c,
+	  src/option.c, src/yad.h: add --numeric option for entry dialog
+
+2011-03-22 08:39  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/list.c,
+	  src/option.c, src/yad.h: add --limit option to list dialog
+
+2011-03-17 16:02  ananasik
+
+	* src/util.c:
+
+2011-03-17 15:49  ananasik
+
+	* src/util.c:
+
+2011-03-13 07:39  ananasik
+
+	* ChangeLog, NEWS: release 0.9.1
+
 2011-03-13 07:33  ananasik
 
 	* src/icons.c, src/list.c, src/util.c, src/yad.h: fix markup

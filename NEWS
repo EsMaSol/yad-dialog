@@ -1,3 +1,13 @@
+Version 0.10.0
+    - fix in markup tooltips in list and icons dialogs
+    - limits for number of rows in lists
+    - support for settings row attributes in lists
+    - vertical and invert scale dialog
+    - numeric entry
+    - new font selection dialog
+    - tagging URIs in text dialog 
+    - new option --kill-parent for send SIGTERM to parent process
+
 Version 0.9.1
     - fix handle markup for tooltips in list and icons dialogs
     - add ukrainian and update slovak translations
