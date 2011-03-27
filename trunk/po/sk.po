@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-03-27 08:31+0300\n"
-"PO-Revision-Date: 2011-02-28 18:50+0100\n"
+"PO-Revision-Date: 2011-03-27 18:30+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
 "Language: \n"
@@ -279,7 +279,7 @@ msgstr "Odobrať dekorácie okna"
 
 #: ../src/option.c:189
 msgid "Send TERM to parent"
-msgstr ""
+msgstr "Poslať TERM rodičovi"
 
 #: ../src/option.c:199
 msgid "Display calendar dialog"
@@ -378,9 +378,8 @@ msgid "Use completion instead of combo-box"
 msgstr "Použiť dopĺňanie namiesto rozbaľovacieho zoznamu"
 
 #: ../src/option.c:313
-#, fuzzy
 msgid "Use spin button for text entry"
-msgstr "Použiť zadanú farbu textu"
+msgstr "Použiť číselník (spin button) pre textovú položku"
 
 #: ../src/option.c:319
 msgid "Allow changes to text in combo-box"
@@ -391,9 +390,8 @@ msgid "Display file selection dialog"
 msgstr "Zobraziť dialóg Výber súboru"
 
 #: ../src/option.c:335
-#, fuzzy
 msgid "Alias for --file"
-msgstr "Alias pre --color"
+msgstr "Alias pre --file"
 
 #: ../src/option.c:341
 msgid "Set the filename"
@@ -437,28 +435,24 @@ msgid "NAME | PATTERN1 PATTERN2 ..."
 msgstr "MENO | VZOR1 VZOR2 ..."
 
 #: ../src/option.c:387
-#, fuzzy
 msgid "Display font selection dialog"
-msgstr "Zobraziť dialóg Výber súboru"
+msgstr "Zobraziť dialóg na Výber písma"
 
 #: ../src/option.c:393
-#, fuzzy
 msgid "Alias for --font"
-msgstr "Alias pre --color"
+msgstr "Alias pre --font"
 
 #: ../src/option.c:399
-#, fuzzy
 msgid "Set initial font"
-msgstr "Nastaviť počiatočné precentá"
+msgstr "Nastaviť počiatočné písmo"
 
 #: ../src/option.c:400 ../src/option.c:749
 msgid "FONTNAME"
 msgstr "MENO_FONTU"
 
 #: ../src/option.c:405
-#, fuzzy
 msgid "Set preview text"
-msgstr "Nastaviť text postupu"
+msgstr "Nastaviť vzorový text"
 
 #: ../src/option.c:415
 msgid "Display form dialog"
@@ -536,9 +530,8 @@ msgid "Don't show column headers"
 msgstr "Nezobrazovať hlavičky stĺpcov"
 
 #: ../src/option.c:520
-#, fuzzy
 msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, IMG or TIP)"
-msgstr "Nastaviť hlavičku stĺpca (TYP – TEXT, NUM, CHK, IMG alebo TIP)"
+msgstr "Nastaviť hlavičku stĺpca (TYP – TEXT, NUM, FLT, CHK, IMG alebo TIP)"
 
 #: ../src/option.c:521
 msgid "COLUMN[:TYPE]"
@@ -588,9 +581,8 @@ msgstr ""
 "rozšíriteľné"
 
 #: ../src/option.c:581
-#, fuzzy
 msgid "Set the limit of rows in list"
-msgstr "Nastaviť šírku položiek dialógu"
+msgstr "Nastaviť limit na počet riadkov zoznamu"
 
 #: ../src/option.c:591
 msgid "Display notification"
@@ -647,7 +639,7 @@ msgstr "Indikátor priebehu zprava doľava"
 
 #: ../src/option.c:672
 msgid "Display scale dialog"
-msgstr "Zobraziť dialóg Zväčšenia"
+msgstr "Zobraziť dialóg zväčšenia"
 
 #: ../src/option.c:678
 msgid "Set initial value"
@@ -680,11 +672,11 @@ msgstr "Skryť hodnotu"
 
 #: ../src/option.c:714
 msgid "Show vertical scale"
-msgstr ""
+msgstr "Zobraziť zvislé zväčšenie"
 
 #: ../src/option.c:720
 msgid "Invert direction"
-msgstr ""
+msgstr "Obrátiť smer"
 
 #: ../src/option.c:730
 msgid "Display text information dialog"
@@ -728,7 +720,7 @@ msgstr "Otvoriť súbor"
 
 #: ../src/option.c:790
 msgid "Make URI clickable"
-msgstr ""
+msgstr "Urobiť URI klikateľné"
 
 #: ../src/option.c:800
 msgid "Show about dialog"
@@ -776,14 +768,12 @@ msgstr "Zobraziť voľby kalendára"
 
 #. Adds color option entries
 #: ../src/option.c:1183
-#, fuzzy
 msgid "Color selection options"
-msgstr "Voľby výberu súboru"
+msgstr "Voľby výberu farby"
 
 #: ../src/option.c:1184
-#, fuzzy
 msgid "Show color selection options"
-msgstr "Zobraziť voľby výberu súboru"
+msgstr "Zobraziť voľby výberu farby"
 
 #. Adds dnd option entries
 #: ../src/option.c:1190
@@ -814,14 +804,12 @@ msgstr "Zobraziť voľby výberu súboru"
 
 #. Add font selection option entries
 #: ../src/option.c:1211
-#, fuzzy
 msgid "Font selection options"
-msgstr "Voľby výberu súboru"
+msgstr "Voľby výberu písma"
 
 #: ../src/option.c:1212
-#, fuzzy
 msgid "Show font selection options"
-msgstr "Zobraziť voľby výberu súboru"
+msgstr "Zobraziť voľby výberu písma"
 
 #. Add form option entries
 #: ../src/option.c:1218
