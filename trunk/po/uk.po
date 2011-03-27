@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 08:31+0300\n"
+"POT-Creation-Date: 2011-03-27 19:15+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -88,13 +88,13 @@ msgstr "Обрати каталог"
 
 #: ../src/icons.c:249
 #, c-format
-msgid "Unable to parse file %s: %s"
-msgstr "Не можу розібрати файл %s: %s"
+msgid "Unable to parse file %s: %s\n"
+msgstr "Не можу розібрати файл %s: %s\n"
 
 #: ../src/icons.c:266
 #, c-format
-msgid "Unable to open directory %s: %s"
-msgstr "Не можу відкрити каталог %s: %s"
+msgid "Unable to open directory %s: %s\n"
+msgstr "Не можу відкрити каталог %s: %s\n"
 
 #: ../src/main.c:69 ../src/main.c:167
 #, c-format
@@ -113,8 +113,8 @@ msgstr "Не вдається розібрати командну строку: 
 
 #: ../src/notification.c:72
 #, c-format
-msgid "Could not load notification icon '%s': %s"
-msgstr "Не вдається завантажити іконку '%s': %s"
+msgid "Could not load notification icon '%s': %s\n"
+msgstr "Не вдається завантажити іконку '%s': %s\n"
 
 #: ../src/notification.c:244
 #, c-format
