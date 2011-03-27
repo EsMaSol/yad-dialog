@@ -80,18 +80,19 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 
   if (str)
     {
+      gchar *dstr = g_uri_unescape_string (str, NULL);
       if (options.common_data.command)
 	{
-	  gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, str);
+	  gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
 	  g_spawn_command_line_async (action, NULL);
 	  g_free (action);
 	}
       else
 	{
-	  g_printf ("%s\n", str);
+	  g_printf ("%s\n", dstr);
 	  fflush (stdout);
 	}
-
+      g_free (dstr);
       g_free (str);
     }
 
