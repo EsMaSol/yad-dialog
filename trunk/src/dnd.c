@@ -61,12 +61,12 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
       {
         GString *str1;
         const guint16 *char_data;
-	guint length;
+        guint length;
         int i = 0;
 
         str1 = g_string_new (NULL);
         char_data = (const guint16 *) gtk_selection_data_get_data (sel);
-	length = gtk_selection_data_get_length (sel);
+        length = gtk_selection_data_get_length (sel);
         while (i < (length / 2))
           {
             if (char_data[i] == '\n')
@@ -77,6 +77,8 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
         g_string_free (str1, TRUE);
         break;
       }
+    default:
+      ;
     }
 
   if (str)
