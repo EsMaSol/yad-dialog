@@ -19,24 +19,18 @@
  *
  */
 
+/* code for working with dnd targets gets from gnome-terminal */
+
 #include "yad.h"
 
 enum {
-  TARGET_UTF8_STRING,
-  TARGET_STRING,
-  TARGET_TEXT,
-  TARGET_COMPOUND_TEXT,
-  TARGET_TEXT_PLAIN,
-  TARGET_MOZ_URL
+  TARGET_MOZ_URL,
+  TARGET_NS_URL
 };
 
 static GtkTargetEntry tgt[] = {
-  {"text/x-moz-url", 0, TARGET_MOZ_URL},
-  {"UTF8_STRING", 0, TARGET_UTF8_STRING},
-  {"COMPOUND_TEXT", 0, TARGET_COMPOUND_TEXT},
-  {"TEXT", 0, TARGET_TEXT},
-  {"STRING", 0, TARGET_STRING},
-  {"text/plain", 0, TARGET_TEXT_PLAIN},
+  { "text/x-moz-url",  0, TARGET_MOZ_URL },
+  { "_NETSCAPE_URL", 0, TARGET_NS_URL }
 };
 
 static void
@@ -44,39 +38,49 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	      GtkSelectionData *sel, guint info, guint t, gpointer data)
 {
   gchar *str = NULL;
+  GdkAtom stgt;
+  gint i;
 
-  switch (info)
+  stgt = gtk_selection_data_get_target (sel);
+
+  if (gtk_targets_include_uri (&stgt, 1))
     {
-    case TARGET_TEXT_PLAIN:
-      str = g_strdup (gtk_selection_data_get_data (sel));
-      break;
-    case TARGET_MOZ_URL:
-      {
-        GString *str1;
-        const guint16 *char_data;
-        guint length;
-        int i = 0;
+      gchar **uris;
 
-        str1 = g_string_new (NULL);
-        char_data = (const guint16 *) gtk_selection_data_get_data (sel);
-        length = gtk_selection_data_get_length (sel);
-        while (i < (length / 2))
-          {
-            if (char_data[i] == '\n')
-              break;
-            g_string_append_unichar (str1, (gunichar) char_data[i++]);
-          }
-        str = g_strdup (str1->str);
-        g_string_free (str1, TRUE);
-        break;
-      }
-    case TARGET_STRING:
-    case TARGET_UTF8_STRING:
-    case TARGET_COMPOUND_TEXT:
-    case TARGET_TEXT:
-    default:
-      str = gtk_selection_data_get_text (sel);
-      break;
+      uris = gtk_selection_data_get_uris (sel);
+      if (uris && uris[0])
+	{
+	  str = g_strdup (uris[0]);
+	  g_strfreev (uris);
+	}
+    }
+  else if (gtk_targets_include_text (&stgt, 1))
+    str = gtk_selection_data_get_text (sel);
+  else
+    {
+      switch (info)
+	{
+	case TARGET_MOZ_URL:
+	  {
+	    gunichar2 *sdata = (gunichar2 *) gtk_selection_data_get_data (sel);
+
+	    str = g_utf16_to_utf8 (sdata, strlen ((gchar *) sdata) / 2, NULL, NULL, NULL);
+	    /* remove newline */
+	    while (str[i] || str[i] != '\n') i++;
+	    if (str[i])
+	      str[i] = 0;
+	    break;
+	  }
+	case TARGET_NS_URL:
+	  {
+	    str = g_strdup ((gchar *) gtk_selection_data_get_data (sel));
+	    /* remove newline */
+	    while (str[i] || str[i] != '\n') i++;
+	    if (str[i])
+	      str[i] = 0;
+	    break;
+	  }
+	}
     }
 
   if (str)
@@ -96,14 +100,27 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
       g_free (dstr);
       g_free (str);
     }
-
 }
 
 void
 dnd_init (GtkWidget *w)
 {
-  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
-                     tgt, G_N_ELEMENTS (tgt), GDK_ACTION_COPY);
+  GtkTargetList *tlist;
+  GtkTargetEntry *tgts;
+  gint ntgts;
+
+  tlist = gtk_target_list_new (NULL, 0);
+  gtk_target_list_add_uri_targets (tlist, 0);
+  gtk_target_list_add_text_targets (tlist, 0);
+  gtk_target_list_add_table (tlist, tgt, G_N_ELEMENTS (tgt));
+
+  tgts = gtk_target_table_new_from_list (tlist, &ntgts);
+
+  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL, tgts, ntgts, 
+		     GDK_ACTION_COPY | GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (w), "drag_data_received",
                     G_CALLBACK (drop_data_cb), NULL);
+
+  gtk_target_table_free (tgts, ntgts);
+  gtk_target_list_unref (tlist);
 }
