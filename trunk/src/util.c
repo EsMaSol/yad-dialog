@@ -210,6 +210,9 @@ escape_markup (char *str)
   char *res, *buf = str;
   unsigned i = 0, len;
 
+  if (!str)
+    return NULL;
+  
   len = strlen (str);
   res = (char *) calloc (len + 1, sizeof (char)); 
 
@@ -265,6 +268,9 @@ unescape_markup (gchar *str)
   gchar *res, *buf = str;
   guint i = 0;
 
+  if (!str)
+    return NULL;
+  
   res = g_new0 (gchar, strlen (str)); 
 
   while (*buf)
