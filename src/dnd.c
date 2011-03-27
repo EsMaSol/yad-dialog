@@ -27,17 +27,16 @@ enum {
   TARGET_TEXT,
   TARGET_COMPOUND_TEXT,
   TARGET_TEXT_PLAIN,
-  TARGET_URL
+  TARGET_MOZ_URL
 };
 
 static GtkTargetEntry tgt[] = {
-  {"text/x-moz-url", 0, TARGET_URL},
-  {"text/uri-list", 0, TARGET_URL},
+  {"text/x-moz-url", 0, TARGET_MOZ_URL},
   {"UTF8_STRING", 0, TARGET_UTF8_STRING},
   {"COMPOUND_TEXT", 0, TARGET_COMPOUND_TEXT},
   {"TEXT", 0, TARGET_TEXT},
   {"STRING", 0, TARGET_STRING},
-  {"text/plain", 0, TARGET_TEXT_PLAIN}
+  {"text/plain", 0, TARGET_TEXT_PLAIN},
 };
 
 static void
@@ -48,16 +47,10 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 
   switch (info)
     {
-    case TARGET_STRING:
-    case TARGET_UTF8_STRING:
-    case TARGET_COMPOUND_TEXT:
-    case TARGET_TEXT:
-      str = gtk_selection_data_get_text (sel);
-      break;
     case TARGET_TEXT_PLAIN:
       str = g_strdup (gtk_selection_data_get_data (sel));
       break;
-    case TARGET_URL:
+    case TARGET_MOZ_URL:
       {
         GString *str1;
         const guint16 *char_data;
@@ -77,8 +70,13 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
         g_string_free (str1, TRUE);
         break;
       }
+    case TARGET_STRING:
+    case TARGET_UTF8_STRING:
+    case TARGET_COMPOUND_TEXT:
+    case TARGET_TEXT:
     default:
-      ;
+      str = gtk_selection_data_get_text (sel);
+      break;
     }
 
   if (str)
