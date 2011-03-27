@@ -27,11 +27,12 @@ enum {
   TARGET_TEXT,
   TARGET_COMPOUND_TEXT,
   TARGET_TEXT_PLAIN,
-  TARGET_MOZ_URL
+  TARGET_URL
 };
 
 static GtkTargetEntry tgt[] = {
-  {"text/x-moz-url", 0, TARGET_MOZ_URL},
+  {"text/x-moz-url", 0, TARGET_URL},
+  {"text/uri-list", 0, TARGET_URL},
   {"UTF8_STRING", 0, TARGET_UTF8_STRING},
   {"COMPOUND_TEXT", 0, TARGET_COMPOUND_TEXT},
   {"TEXT", 0, TARGET_TEXT},
@@ -56,7 +57,7 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
     case TARGET_TEXT_PLAIN:
       str = g_strdup (gtk_selection_data_get_data (sel));
       break;
-    case TARGET_MOZ_URL:
+    case TARGET_URL:
       {
         GString *str1;
         const guint16 *char_data;
