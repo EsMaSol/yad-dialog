@@ -182,6 +182,12 @@ static GOptionEntry general_options[] = {
     &options.data.undecorated,
     N_("Set window undecorated"),
     NULL },
+  { "kill-parent", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.kill_parent,
+    N_("Send TERM to parent"),
+    NULL },
   { NULL }
 };
 
@@ -1028,6 +1034,7 @@ yad_options_init (void)
   /* Set default mode */
   options.mode = YAD_MODE_MESSAGE;
   options.extra_data = NULL;
+  options.kill_parent = FALSE;
 
   /* Initialize general data */
   options.data.dialog_title = NULL;
