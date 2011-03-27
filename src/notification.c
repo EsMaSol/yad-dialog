@@ -69,7 +69,7 @@ set_icon (void)
                                            TRUE, &err);
       if (err)
         {
-          g_printerr (_("Could not load notification icon '%s': %s"),
+          g_printerr (_("Could not load notification icon '%s': %s\n"),
                      icon, err->message);
           g_clear_error (&err);
         }

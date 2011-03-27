@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 08:31+0300\n"
+"POT-Creation-Date: 2011-03-27 19:15+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -90,13 +90,13 @@ msgstr ""
 
 #: ../src/icons.c:249
 #, fuzzy, c-format
-msgid "Unable to parse file %s: %s"
+msgid "Unable to parse file %s: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
 #: ../src/icons.c:266
-#, c-format
-msgid "Unable to open directory %s: %s"
-msgstr ""
+#, fuzzy, c-format
+msgid "Unable to open directory %s: %s\n"
+msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
 #: ../src/main.c:69 ../src/main.c:167
 #, c-format
@@ -114,8 +114,8 @@ msgid "Unable parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
 #: ../src/notification.c:72
-#, c-format
-msgid "Could not load notification icon '%s': %s"
+#, fuzzy, c-format
+msgid "Could not load notification icon '%s': %s\n"
 msgstr "Kann Benachrichtigungs-Symbol '%s' nicht laden: %s"
 
 #: ../src/notification.c:244

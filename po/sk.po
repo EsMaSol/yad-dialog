@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 08:31+0300\n"
+"POT-Creation-Date: 2011-03-27 19:15+0300\n"
 "PO-Revision-Date: 2011-03-27 18:30+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
@@ -89,13 +89,13 @@ msgstr "Vyberte pole"
 
 #: ../src/icons.c:249
 #, c-format
-msgid "Unable to parse file %s: %s"
-msgstr "Nemožno spracovať súbor %s: %s"
+msgid "Unable to parse file %s: %s\n"
+msgstr "Nemožno spracovať súbor %s: %s\n"
 
 #: ../src/icons.c:266
 #, c-format
-msgid "Unable to open directory %s: %s"
-msgstr "Nemožno otvoriť adresár %s: %s"
+msgid "Unable to open directory %s: %s\n"
+msgstr "Nemožno otvoriť adresár %s: %s\n"
 
 #: ../src/main.c:69 ../src/main.c:167
 #, c-format
@@ -114,8 +114,8 @@ msgstr "Nemožno spracovať príkazový riadok: %s\n"
 
 #: ../src/notification.c:72
 #, c-format
-msgid "Could not load notification icon '%s': %s"
-msgstr "Nemožno načítať ikonu upozornenia '%s': %s"
+msgid "Could not load notification icon '%s': %s\n"
+msgstr "Nemožno načítať ikonu upozornenia '%s': %s\n"
 
 #: ../src/notification.c:244
 #, c-format

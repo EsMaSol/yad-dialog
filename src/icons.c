@@ -116,9 +116,9 @@ handle_stdin (GIOChannel * channel,
             {
               if (err)
                 {
-                  g_printerr ("yad_icons_handle_stdin(): %s", err->message);
+                  g_printerr ("yad_icons_handle_stdin(): %s\n", err->message);
                   g_error_free (err);
-		  err = NULL;
+                  err = NULL;
                 }
               continue;
             }
@@ -246,7 +246,7 @@ parse_desktop_file (gchar *filename)
 	}
     }
   else
-    g_printerr (_("Unable to parse file %s: %s"), filename, err->message);
+    g_printerr (_("Unable to parse file %s: %s\n"), filename, err->message);
 
   g_key_file_free (kf);
 
@@ -263,7 +263,7 @@ read_dir (GtkListStore *store)
   dir = g_dir_open (options.icons_data.directory, 0, &err);
   if (!dir)
     {
-      g_printerr (_("Unable to open directory %s: %s"),
+      g_printerr (_("Unable to open directory %s: %s\n"),
 		  options.icons_data.directory, err->message);
       return;
     }
