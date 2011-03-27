@@ -254,6 +254,8 @@ typedef struct {
   YadTextData text_data;
 
   gchar **extra_data;
+
+  gboolean kill_parent;
 } YadOptions;
 
 extern YadOptions options;
