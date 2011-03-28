@@ -1,3 +1,46 @@
+2011-03-28 10:34  ananasik
+
+	* src/dnd.c: fix dnd behavior
+
+2011-03-27 20:13  ananasik
+
+	* configure.ac, src/main.c, src/notification.c: now minimum gtk+
+	  version is 2.16.0
+
+2011-03-27 20:09  ananasik
+
+	* src/dnd.c: dnd broken
+
+2011-03-27 17:58  ananasik
+
+	* src/dnd.c: some changes in dnd
+
+2011-03-27 17:19  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, po/uk.po, src/icons.c, src/list.c,
+	  src/notification.c, src/text.c, src/util.c: add newline char in
+	  error messages
+
+2011-03-27 17:08  ananasik
+
+	* src/util.c: check for an empty args in (un)escape_markup
+
+2011-03-27 16:36  ananasik
+
+	* po/sk.po: update slovak translation
+
+2011-03-27 15:48  ananasik
+
+	* src/dnd.c:
+
+2011-03-27 15:40  ananasik
+
+	* src/dnd.c: add text/uri-list to dnd targets
+
+2011-03-27 12:15  ananasik
+
+	* ChangeLog, NEWS:
+
 2011-03-27 12:12  ananasik
 
 	* ChangeLog, NEWS, src/dnd.c: unescape text in dnd

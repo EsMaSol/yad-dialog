@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 19:15+0300\n"
+"POT-Creation-Date: 2011-03-28 13:36+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -96,7 +96,7 @@ msgstr "Не можу розібрати файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталог %s: %s\n"
 
-#: ../src/main.c:69 ../src/main.c:167
+#: ../src/main.c:69 ../src/main.c:163
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
@@ -106,7 +106,7 @@ msgstr "%d сек"
 msgid "Error loading window icon %s: %s\n"
 msgstr "Помилка при загрузці іконки вікна %s: %s\n"
 
-#: ../src/main.c:386
+#: ../src/main.c:380
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Не вдається розібрати командну строку: %s\n"
@@ -116,17 +116,17 @@ msgstr "Не вдається розібрати командну строку: 
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Не вдається завантажити іконку '%s': %s\n"
 
-#: ../src/notification.c:244
+#: ../src/notification.c:239
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Неправильна послідовність UTF-8 у підказці!\n"
 
-#: ../src/notification.c:297
+#: ../src/notification.c:292
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Невідома команда '%s'\n"
 
-#: ../src/notification.c:338 ../src/notification.c:340
+#: ../src/notification.c:328
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 

@@ -7,7 +7,7 @@ Version 0.10.0
     - new font selection dialog
     - tagging URIs in text dialog 
     - new option --kill-parent for send SIGTERM to parent process
-    - unescape output text in dnd dialog
+    - fix URI handling in dnd dialog
 
 Version 0.9.1
     - fix handle markup for tooltips in list and icons dialogs

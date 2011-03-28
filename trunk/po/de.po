@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 19:15+0300\n"
+"POT-Creation-Date: 2011-03-28 13:36+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -98,7 +98,7 @@ msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
-#: ../src/main.c:69 ../src/main.c:167
+#: ../src/main.c:69 ../src/main.c:163
 #, c-format
 msgid "%d sec"
 msgstr ""
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Error loading window icon %s: %s\n"
 msgstr "Fehler beim Laden von Fenster-Symbol %s: %s\n"
 
-#: ../src/main.c:386
+#: ../src/main.c:380
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
@@ -118,17 +118,17 @@ msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Kann Benachrichtigungs-Symbol '%s' nicht laden: %s"
 
-#: ../src/notification.c:244
+#: ../src/notification.c:239
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Ungültiger UTF-8 Eintrag im Tool-Tip!\n"
 
-#: ../src/notification.c:297
+#: ../src/notification.c:292
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/notification.c:338 ../src/notification.c:340
+#: ../src/notification.c:328
 msgid "Yad notification"
 msgstr "Yad Benachrichtigung"
 
