@@ -38,67 +38,129 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	      GtkSelectionData *sel, guint info, guint t, gpointer data)
 {
   gchar *str = NULL;
+  const guchar *sdata;
   GdkAtom stgt;
-  gint i;
+  gint slen, sfmt;
 
+  sdata = gtk_selection_data_get_data (sel);
   stgt = gtk_selection_data_get_target (sel);
+  slen = gtk_selection_data_get_length (sel);
+  sfmt = gtk_selection_data_get_format (sel);
 
   if (gtk_targets_include_uri (&stgt, 1))
     {
       gchar **uris;
-
+      gint i = 0;
+      
       uris = gtk_selection_data_get_uris (sel);
-      if (uris && uris[0])
+      if (!uris)
+	return;
+
+      while (uris[i])
 	{
-	  str = g_strdup (uris[0]);
-	  g_strfreev (uris);
+	  gchar *dstr = g_uri_unescape_string (uris[i], NULL);
+	  if (options.common_data.command)
+	    {
+	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
+	      g_spawn_command_line_async (action, NULL);
+	      g_free (action);
+	    }
+	  else
+	    {
+	      g_printf ("%s\n", dstr);
+	      fflush (stdout);
+	    }
+	  g_free (dstr);
+	  i++;
 	}
+      g_strfreev (uris);
     }
   else if (gtk_targets_include_text (&stgt, 1))
-    str = gtk_selection_data_get_text (sel);
+    {
+      gchar *str, *dstr;
+      
+      str = gtk_selection_data_get_text (sel);
+      if (str)
+	{
+	  dstr = g_uri_unescape_string (str, NULL);
+	  if (options.common_data.command)
+	    {
+	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
+	      g_spawn_command_line_async (action, NULL);
+	      g_free (action);
+	    }
+	  else
+	    {
+	      g_printf ("%s\n", dstr);
+	      fflush (stdout);
+	    }
+	  g_free (dstr);
+	  g_free(str);
+	}
+    }
   else
     {
+      gchar *str = NULL;
+
       switch (info)
 	{
 	case TARGET_MOZ_URL:
 	  {
-	    gunichar2 *sdata = (gunichar2 *) gtk_selection_data_get_data (sel);
+	    gchar *nl;
+	    gsize len;
 
-	    str = g_utf16_to_utf8 (sdata, strlen ((gchar *) sdata) / 2, NULL, NULL, NULL);
-	    /* remove newline */
-	    while (str[i] || str[i] != '\n') i++;
-	    if (str[i])
-	      str[i] = 0;
+	    /* MOZ_URL is in UCS-2 but in format 8. BROKEN!
+	     *
+	     * The data contains the URL, a \n, then the title of the web page.
+	     */
+	    if (sfmt != 8 || slen == 0 || (slen % 2) != 0)
+	      return;
+
+	    if ((str = g_utf16_to_utf8 ((const gunichar2*) sdata, slen / 2, 
+					NULL, NULL, NULL)) == NULL)
+	      return;
+
+	    nl = strchr (str, '\n');
+	    if (nl) *nl = '\0';
+
 	    break;
 	  }
 	case TARGET_NS_URL:
 	  {
-	    str = g_strdup ((gchar *) gtk_selection_data_get_data (sel));
-	    /* remove newline */
-	    while (str[i] || str[i] != '\n') i++;
-	    if (str[i])
-	      str[i] = 0;
+	    gchar *nl;
+	    gsize len;
+
+	    /* The data contains the URL, a \n, then the
+	     * title of the web page.
+	     */
+	    if (slen < 0 || sfmt != 8)
+	      return;
+
+	    str = g_strndup ((char *) sdata, slen);
+	    nl = strchr (str, '\n');
+	    if (nl) *nl = '\0';
+
 	    break;
 	  }
 	}
-    }
 
-  if (str)
-    {
-      gchar *dstr = g_uri_unescape_string (str, NULL);
-      if (options.common_data.command)
+      if (str)
 	{
-	  gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
-	  g_spawn_command_line_async (action, NULL);
-	  g_free (action);
+	  gchar *dstr = g_uri_unescape_string (str, NULL);
+	  if (options.common_data.command)
+	    {
+	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
+	      g_spawn_command_line_async (action, NULL);
+	      g_free (action);
+	    }
+	  else
+	    {
+	      g_printf ("%s\n", dstr);
+	      fflush (stdout);
+	    }
+	  g_free (dstr);
+	  g_free (str);
 	}
-      else
-	{
-	  g_printf ("%s\n", dstr);
-	  fflush (stdout);
-	}
-      g_free (dstr);
-      g_free (str);
     }
 }
 
