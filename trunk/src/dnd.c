@@ -77,12 +77,10 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
     }
   else if (gtk_targets_include_text (&stgt, 1))
     {
-      gchar *str, *dstr;
-      
       str = gtk_selection_data_get_text (sel);
       if (str)
 	{
-	  dstr = g_uri_unescape_string (str, NULL);
+	  gchar *dstr = g_uri_unescape_string (str, NULL);
 	  if (options.common_data.command)
 	    {
 	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
@@ -100,14 +98,11 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
     }
   else
     {
-      gchar *str = NULL;
-
       switch (info)
 	{
 	case TARGET_MOZ_URL:
 	  {
 	    gchar *nl;
-	    gsize len;
 
 	    /* MOZ_URL is in UCS-2 but in format 8. BROKEN!
 	     *
@@ -128,7 +123,6 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	case TARGET_NS_URL:
 	  {
 	    gchar *nl;
-	    gsize len;
 
 	    /* The data contains the URL, a \n, then the
 	     * title of the web page.
