@@ -16,22 +16,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
- *
  */
 
 /* code for working with dnd targets gets from gnome-terminal */
 
 #include "yad.h"
-
-enum {
-  TARGET_MOZ_URL,
-  TARGET_NS_URL
-};
-
-static GtkTargetEntry tgt[] = {
-  { "text/x-moz-url",  0, TARGET_MOZ_URL },
-  { "_NETSCAPE_URL", 0, TARGET_NS_URL }
-};
 
 static void
 drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
@@ -54,7 +43,7 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
       
       uris = gtk_selection_data_get_uris (sel);
       if (!uris)
-	return;
+        return;
 
       while (uris[i])
 	{
@@ -96,66 +85,6 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	  g_free(str);
 	}
     }
-  else
-    {
-      switch (info)
-	{
-	case TARGET_MOZ_URL:
-	  {
-	    gchar *nl;
-
-	    /* MOZ_URL is in UCS-2 but in format 8. BROKEN!
-	     *
-	     * The data contains the URL, a \n, then the title of the web page.
-	     */
-	    if (sfmt != 8 || slen == 0 || (slen % 2) != 0)
-	      return;
-
-	    if ((str = g_utf16_to_utf8 ((const gunichar2*) sdata, slen / 2, 
-					NULL, NULL, NULL)) == NULL)
-	      return;
-
-	    nl = strchr (str, '\n');
-	    if (nl) *nl = '\0';
-
-	    break;
-	  }
-	case TARGET_NS_URL:
-	  {
-	    gchar *nl;
-
-	    /* The data contains the URL, a \n, then the
-	     * title of the web page.
-	     */
-	    if (slen < 0 || sfmt != 8)
-	      return;
-
-	    str = g_strndup ((char *) sdata, slen);
-	    nl = strchr (str, '\n');
-	    if (nl) *nl = '\0';
-
-	    break;
-	  }
-	}
-
-      if (str)
-	{
-	  gchar *dstr = g_uri_unescape_string (str, NULL);
-	  if (options.common_data.command)
-	    {
-	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
-	      g_spawn_command_line_async (action, NULL);
-	      g_free (action);
-	    }
-	  else
-	    {
-	      g_printf ("%s\n", dstr);
-	      fflush (stdout);
-	    }
-	  g_free (dstr);
-	  g_free (str);
-	}
-    }
 }
 
 void
@@ -168,7 +97,6 @@ dnd_init (GtkWidget *w)
   tlist = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_uri_targets (tlist, 0);
   gtk_target_list_add_text_targets (tlist, 0);
-  gtk_target_list_add_table (tlist, tgt, G_N_ELEMENTS (tgt));
 
   tgts = gtk_target_table_new_from_list (tlist, &ntgts);
 
