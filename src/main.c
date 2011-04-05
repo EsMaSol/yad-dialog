@@ -143,8 +143,8 @@ create_dialog ()
 
   /* add top label widgets */
   hbox = hbox2 = gtk_hbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area
-                                    (GTK_DIALOG (dlg))), hbox);
+  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 
+                      hbox, TRUE, TRUE, 5);
   vbox = gtk_vbox_new (FALSE, 0);
 
   /* add timeout indicator */
@@ -284,7 +284,7 @@ create_dialog ()
   if (options.data.geometry)
     gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
  
-  gtk_widget_show_all (dlg);
+  gtk_widget_show (dlg);
 
   /* set timeout */
   if (options.data.timeout)
