@@ -1,3 +1,7 @@
+Version 0.10.1
+    - fix URI handling in dnd dialog for non-gtk applications
+    - fix sizing for gtk3 builds
+
 Version 0.10.0
     - fix in markup tooltips in list and icons dialogs
     - limits for number of rows in lists

@@ -1,3 +1,20 @@
+2011-04-05 04:10  ananasik
+
+	* src/main.c: fix issue 51
+
+2011-04-04 10:38  ananasik
+
+	* configure.ac, src/dnd.c: fix issue 50
+
+2011-03-29 04:05  ananasik
+
+	* src/dnd.c: some cleanups
+
+2011-03-28 10:39  ananasik
+
+	* ChangeLog, NEWS, po/de.po, po/ru.po, po/sk.po, po/uk.po: release
+	  0.10.0
+
 2011-03-28 10:34  ananasik
 
 	* src/dnd.c: fix dnd behavior
