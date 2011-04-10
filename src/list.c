@@ -412,6 +412,16 @@ fill_data (gint n_columns)
               i++;
             }
         }
+
+      if (settings.always_selected)
+	{
+	  GtkTreeIter it;
+	  GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+	  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+
+	  gtk_tree_model_get_iter_first (model, &it);
+	  gtk_tree_selection_select_iter (sel, &it);
+	}
     }
   else
     {
@@ -564,16 +574,6 @@ list_create_widget (GtkWidget *dlg)
                     G_CALLBACK (list_activate_cb), dlg);
 
   fill_data (n_columns);
-
-  if (settings.always_selected)
-    {
-      GtkTreeIter it;
-      GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
-      GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
-
-      gtk_tree_model_get_iter_first (model, &it);
-      gtk_tree_selection_select_iter (sel, &it);
-    }
 
   /* add tooltip column, if present */
   for (i = 0; i < n_columns; i++)
