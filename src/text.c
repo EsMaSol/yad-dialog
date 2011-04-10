@@ -163,19 +163,18 @@ static gboolean
 handle_stdin (GIOChannel * channel,
 	      GIOCondition condition, gpointer data)
 {
-  gchar buf[1024];
-  gsize len;
-
   if ((condition & G_IO_IN) || (condition & (G_IO_IN | G_IO_HUP)))
     {
+      GString *string;
       GError *err = NULL;
       gint status;
 
+      string = g_string_new (NULL);
       while (channel->is_readable != TRUE) ;
 
       do
         {
-          status = g_io_channel_read_chars (channel, buf, 1024, &len, &err);
+          status = g_io_channel_read_line_string (channel, string, NULL, &err);
           while (gtk_events_pending ())
             gtk_main_iteration ();
         }
@@ -192,25 +191,24 @@ handle_stdin (GIOChannel * channel,
           return FALSE;
         }
 
-      if (len > 0)
+      if (string->len > 0)
         {
-	  GtkTextIter end;
+          GtkTextIter end;
           gchar *utftext;
-          gsize localelen;
           gsize utflen;
 
           gtk_text_buffer_get_end_iter (text_buffer, &end);
 
-          if (!g_utf8_validate (buf, len, NULL))
+          if (!g_utf8_validate (string->str, string->len, NULL))
             {
               utftext =
-                g_convert_with_fallback (buf, len, "UTF-8", "ISO-8859-1",
-                                         NULL, &localelen, &utflen, NULL);
+                g_convert_with_fallback (string->str, string->len, "UTF-8", "ISO-8859-1",
+                                         NULL, NULL, &utflen, NULL);
               gtk_text_buffer_insert (text_buffer, &end, utftext, utflen);
               g_free (utftext);
             }
           else
-	    gtk_text_buffer_insert (text_buffer, &end, buf, len);
+	    gtk_text_buffer_insert (text_buffer, &end, string->str, string->len);
 
 	  if (options.text_data.tail)
 	    {
@@ -220,6 +218,8 @@ handle_stdin (GIOChannel * channel,
 	      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
 	    }
         }
+
+      g_string_free (string, TRUE);
     }
             
   return TRUE;
