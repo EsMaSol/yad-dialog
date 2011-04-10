@@ -257,57 +257,56 @@ escape_markup (char *str)
         }
       buf++;
     }
-  res[i] = '\0';
 
   return res;
 }
 
-gchar *
-unescape_markup (gchar *str)
+char *
+unescape_markup (char *str)
 {
-  gchar *res, *buf = str;
-  guint i = 0;
+  char *res, *buf = str;
+  int i = 0;
 
   if (!str)
     return NULL;
   
-  res = g_new0 (gchar, strlen (str)); 
+  res = calloc (strlen (str) + 1, sizeof (char)); 
 
   while (*buf)
     {
       if (*buf == '&')
-	{
-	  buf++;
-	  if (strncmp (buf, "lt;", 3) == 0)
-	    {
-	      res[i] = '<';
-	      buf += 3;
-	    }
-	  else if (strncmp (buf, "gt;", 3) == 0)
-	    {
-	      res[i] = '>';
-	      buf += 3;
-	    }
-	  else if (strncmp (buf, "amp;", 4) == 0)
-	    {
-	      res[i] = '&';
-	      buf += 4;
-	    }
-	  else if (strncmp (buf, "quot;", 5) == 0)
-	    {
-	      res[i] = '"';
-	      buf += 5;
-	    }
-	  else if (strncmp (buf, "apos;", 5) == 0)
-	    {
-	      res[i] = '\'';
-	      buf += 5;
-	    }
-	}	
+        {
+          buf++;
+          if (strncmp (buf, "lt;", 3) == 0)
+            {
+              res[i] = '<';
+              buf += 3;
+            }
+          else if (strncmp (buf, "gt;", 3) == 0)
+            {
+              res[i] = '>';
+              buf += 3;
+            }
+          else if (strncmp (buf, "amp;", 4) == 0)
+            {
+              res[i] = '&';
+              buf += 4;
+            }
+          else if (strncmp (buf, "quot;", 5) == 0)
+            {
+              res[i] = '"';
+              buf += 5;
+            }
+          else if (strncmp (buf, "apos;", 5) == 0)
+            {
+              res[i] = '\'';
+              buf += 5;
+            }
+        }	
       else
-	res[i] = *buf++;
+        res[i] = *buf++;
       i++;
     }
-
+  
   return res;
 }
