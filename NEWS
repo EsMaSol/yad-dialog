@@ -1,3 +1,9 @@
+Version 0.10.2
+    - fix wrong memory allocation when handling makrup text
+    - fix reading data from stdin in text dialogs
+    - 'always selected' settings in list dialog works only for command-line data
+    - update README and manual page
+
 Version 0.10.1
     - fix URI handling in dnd dialog for non-gtk applications
     - fix sizing for gtk3 builds
