@@ -27,14 +27,9 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	      GtkSelectionData *sel, guint info, guint t, gpointer data)
 {
   gchar *str = NULL;
-  const guchar *sdata;
   GdkAtom stgt;
-  gint slen, sfmt;
 
-  sdata = gtk_selection_data_get_data (sel);
   stgt = gtk_selection_data_get_target (sel);
-  slen = gtk_selection_data_get_length (sel);
-  sfmt = gtk_selection_data_get_format (sel);
 
   if (gtk_targets_include_uri (&stgt, 1))
     {
