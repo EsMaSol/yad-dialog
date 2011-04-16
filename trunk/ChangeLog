@@ -1,3 +1,35 @@
+2011-04-16 08:45  ananasik
+
+	* NEWS:
+
+2011-04-16 08:41  ananasik
+
+	* configure.ac: bump version to 0.10.2
+
+2011-04-16 08:36  ananasik
+
+	* data/yad.1: update man page
+
+2011-04-12 04:36  ananasik
+
+	* README: update README
+
+2011-04-10 09:37  ananasik
+
+	* src/util.c: fix wrong memory allocation
+
+2011-04-10 06:30  ananasik
+
+	* src/list.c: fix "always selected" setting
+
+2011-04-10 06:10  ananasik
+
+	* src/text.c: fix reading data from stdin in text dialog
+
+2011-04-06 08:07  ananasik
+
+	* ChangeLog, NEWS: release 0.10.1
+
 2011-04-05 04:10  ananasik
 
 	* src/main.c: fix issue 51
