@@ -182,6 +182,12 @@ static GOptionEntry general_options[] = {
     &options.data.undecorated,
     N_("Set window undecorated"),
     NULL },
+  { "skip-taskbar", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.skip_taskbar,
+    N_("Don't show window in taskbar"),
+    NULL },
   { "kill-parent", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -1063,6 +1069,7 @@ yad_options_init (void)
   options.data.center = FALSE;
   options.data.mouse = FALSE;
   options.data.undecorated = FALSE;
+  options.data.skip_taskbar = FALSE;
 
   /* Initialize common data */
   options.common_data.uri = NULL;

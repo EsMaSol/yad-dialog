@@ -126,6 +126,7 @@ typedef struct {
   gboolean center;
   gboolean mouse;
   gboolean undecorated;
+  gboolean skip_taskbar;
 } YadData;
 
 typedef struct {
