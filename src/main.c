@@ -117,6 +117,8 @@ create_dialog ()
   gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
   gtk_window_set_keep_above (GTK_WINDOW (dlg), options.data.ontop);
   gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
+  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
+  gtk_window_set_skip_pager_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
   
   /* set window size and position */
   if (!options.data.geometry)
