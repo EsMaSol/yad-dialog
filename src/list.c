@@ -98,7 +98,7 @@ create_model (gint n_columns)
   GType *ctypes;
   gint i;
 
-  ctypes = g_new0 (GType, n_columns);
+  ctypes = g_new0 (GType, n_columns + 1);
 
   if (options.list_data.checkbox)
     {
@@ -143,8 +143,9 @@ create_model (gint n_columns)
           break;
         }
     }
+  ctypes[n_columns] = PANGO_TYPE_ELLIPSIZE_MODE;
 
-  store = gtk_list_store_newv (n_columns, ctypes);
+  store = gtk_list_store_newv (n_columns + 1, ctypes);
 
   return GTK_TREE_MODEL (store);
 }
@@ -210,6 +211,7 @@ add_columns (gint n_columns)
               g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
             }
           column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "markup", i, NULL);
+	  gtk_tree_view_column_add_attribute (column, renderer, "ellipsize", n_columns);
 	  if (fore_col != -1)
 	    gtk_tree_view_column_add_attribute (column, renderer, "foreground", fore_col);
 	  if (back_col != -1)
@@ -217,7 +219,7 @@ add_columns (gint n_columns)
 	  if (font_col != -1)
 	    gtk_tree_view_column_add_attribute (column, renderer, "font", font_col);
           gtk_tree_view_column_set_sort_column_id (column, i);
-          gtk_tree_view_column_set_resizable  (column, TRUE);
+          gtk_tree_view_column_set_resizable (column, TRUE);
           break;
         }
       gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
@@ -286,6 +288,9 @@ handle_stdin (GIOChannel * channel,
 
           if (column_count == n_columns)
             {
+	      /* add eliipsize */
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, 
+				  options.list_data.ellipsize, -1);              
               /* We're starting a new row */
               column_count = 0;
               row_count++;
@@ -411,6 +416,8 @@ fill_data (gint n_columns)
                 }
               i++;
             }
+	  /* set ellipsize */
+	  gtk_list_store_set (GTK_LIST_STORE (model), &iter, n_columns, options.list_data.ellipsize, -1);
         }
 
       if (settings.always_selected)
@@ -649,7 +656,7 @@ print_selected (GtkTreeModel *model, GtkTreePath *path,
     print_col (model, iter, col - 1);
   else
     {
-      for (i = 0; i < gtk_tree_model_get_n_columns (model); i++)
+      for (i = 0; i < gtk_tree_model_get_n_columns (model) - 1; i++)
         print_col (model, iter, i);
     }
   g_printf ("\n");
@@ -659,7 +666,7 @@ static void
 print_all (GtkTreeModel *model)
 {
   GtkTreeIter iter;
-  gint i, cols = gtk_tree_model_get_n_columns (model);
+  gint i, cols = gtk_tree_model_get_n_columns (model) - 1;
 
   if (gtk_tree_model_get_iter_first (model, &iter))
     {
@@ -722,7 +729,7 @@ list_print_result (void)
                   if (chk)
                     {
                       gint i;
-                      for (i = 0; i < gtk_tree_model_get_n_columns (model); i++)
+                      for (i = 0; i < gtk_tree_model_get_n_columns (model) - 1; i++)
                         print_col (model, &iter, i);
                       g_printf ("\n");
                     }

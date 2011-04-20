@@ -188,6 +188,7 @@ typedef struct {
   guint hide_column;
   guint expand_column;
   guint limit;
+  PangoEllipsizeMode ellipsize;
 } YadListData;
 
 typedef struct {
