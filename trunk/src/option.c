@@ -29,6 +29,7 @@ static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, G
 static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -562,6 +563,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.print_all,
     N_("Print all data from list"),
     NULL },
+  { "ellipsize", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    set_ellipsize,
+    N_("Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"),
+    N_("TYPE") },
   { "print-column", 0,
     0,
     G_OPTION_ARG_INT,
@@ -999,6 +1006,25 @@ set_scale_value (const gchar *option_name,
   return TRUE;
 }
 
+static gboolean
+set_ellipsize (const gchar *option_name,
+	       const gchar *value,
+	       gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "none") == 0)
+    options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
+  else if (g_ascii_strcasecmp (value, "start") == 0)
+    options.list_data.ellipsize = PANGO_ELLIPSIZE_START;
+  else if (g_ascii_strcasecmp (value, "middle") == 0)
+    options.list_data.ellipsize = PANGO_ELLIPSIZE_MIDDLE;
+  else if (g_ascii_strcasecmp (value, "end") == 0)
+    options.list_data.ellipsize = PANGO_ELLIPSIZE_END;
+  else
+    g_printerr (_("Unknown ellipsize type: %s\n"), value);
+
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -1132,6 +1158,7 @@ yad_options_init (void)
   options.list_data.hide_column = 0;
   options.list_data.expand_column = -1;
   options.list_data.limit = 0;
+  options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
 
   /* Initialize notification data */
   options.notification_data.listen = FALSE;
