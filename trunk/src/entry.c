@@ -61,7 +61,11 @@ entry_create_widget (GtkWidget *dlg)
 
   if (options.entry_data.entry_label)
     {
-      GtkWidget *l = gtk_label_new (options.entry_data.entry_label);
+      GtkWidget *l = gtk_label_new (NULL);
+      if (!options.data.no_markup)
+	gtk_label_set_markup (GTK_LABEL (l), options.entry_data.entry_label);
+      else
+	gtk_label_set_text (GTK_LABEL (l), options.entry_data.entry_label);
       gtk_box_pack_start (GTK_BOX (w), l, FALSE, FALSE, 1);
     }
 
@@ -161,7 +165,7 @@ entry_create_widget (GtkWidget *dlg)
       gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
 
       if (options.entry_data.entry_text)
-  	gtk_entry_set_text (GTK_ENTRY (entry), options.entry_data.entry_text);
+	gtk_entry_set_text (GTK_ENTRY (entry), options.entry_data.entry_text);
 
       if (options.entry_data.hide_text)
   	g_object_set (G_OBJECT (entry), "visibility", FALSE, NULL);
