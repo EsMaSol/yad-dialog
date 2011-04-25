@@ -587,6 +587,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.expand_column,
     N_("Set the column expandable by default. 0 sets all columns expandable"),
     N_("NUMBER") },
+  { "search-column", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.list_data.search_column,
+    N_("Set the quick search column. Default is first column. Set it to 0 for disable searching"),
+    N_("NUMBER") },
   { "limit", 0,
     0,
     G_OPTION_ARG_INT,
@@ -1156,7 +1162,8 @@ yad_options_init (void)
   options.list_data.print_all = FALSE;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
-  options.list_data.expand_column = -1;
+  options.list_data.expand_column = -1;    // must be -1 for disable expand by default (keep the original behavior)
+  options.list_data.search_column = 0;
   options.list_data.limit = 0;
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
 
