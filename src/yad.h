@@ -184,9 +184,10 @@ typedef struct {
   gboolean no_headers;
   gboolean checkbox;
   gboolean print_all;
-  guint print_column;
-  guint hide_column;
-  guint expand_column;
+  gint print_column;
+  gint hide_column;
+  gint expand_column;
+  gint search_column;
   guint limit;
   PangoEllipsizeMode ellipsize;
 } YadListData;

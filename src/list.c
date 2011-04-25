@@ -231,6 +231,14 @@ add_columns (gint n_columns)
 	    gtk_tree_view_column_set_expand (column, TRUE);
 	}
     }
+
+  if (options.list_data.checkbox && !options.list_data.search_column)
+    options.list_data.search_column += 1;
+  if (options.list_data.search_column <= n_columns)
+    {
+      options.list_data.search_column -= 1;
+      gtk_tree_view_set_search_column (GTK_TREE_VIEW (list_view), options.list_data.search_column);
+    }
 }
 
 static gboolean
