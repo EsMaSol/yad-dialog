@@ -91,6 +91,87 @@ cell_edited_cb (GtkCellRendererText * cell,
   gtk_tree_path_free (path);
 }
 
+static void
+tooltip_cb (GtkWidget * w, gint x, gint y,
+	    gboolean kmode, GtkTooltip * tip,
+	    gpointer data)
+{
+  GtkTreeModel *model = NULL;
+  GtkTreePath *path = NULL;
+  GtkTreeIter iter;
+
+  if (gtk_tree_view_get_tooltip_context (GTK_TREE_VIEW (list_view), &x, &y, kmode,
+					 &model, &path, &iter))
+    {
+      GtkTreeViewColumn *col = NULL;
+      GList *cols, *node;
+      guint colx = 0;
+
+      /* find current column */
+      cols = gtk_tree_view_get_columns (GTK_TREE_VIEW (list_view));
+      for (node = cols;  node != NULL && col == NULL;  node = node->next)
+	{
+	  GtkTreeViewColumn *checkcol = (GtkTreeViewColumn*) node->data;
+
+	  if (x >= colx  &&  x < (colx + checkcol->width))
+	    col = checkcol;
+	  else
+	    colx += checkcol->width;
+	}
+      g_list_free(cols);
+
+      /* set tolltip */
+      if (col)
+	{
+	  gint cnum;
+	  GList *cells;
+	  GtkCellRenderer *cell;
+	  YadColumn *yc;
+	  gchar *text = NULL;
+
+	  cells = gtk_tree_view_column_get_cell_renderers (col);
+	  cell = GTK_CELL_RENDERER (g_list_nth_data (cells, 0));
+	  cnum = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
+	  g_list_free (cells);
+
+	  yc = (YadColumn *) g_slist_nth_data (options.list_data.columns, cnum);
+	  switch (yc->type)
+	    {
+	    case YAD_COLUMN_NUM:
+	      {
+		gint64 nval;
+		gtk_tree_model_get (model, &iter, cnum, &nval, -1);
+		text = g_strdup_printf ("%d", nval);
+		break;
+	      }
+	    case YAD_COLUMN_FLOAT:
+	      {
+		gdouble nval;
+		gtk_tree_model_get (model, &iter, cnum, &nval, -1);
+		text = g_strdup_printf ("%lf", nval);
+		break;
+	      }
+	    case YAD_COLUMN_TOOLTIP:
+	    case YAD_COLUMN_TEXT:
+	      {
+		gchar *cval, *uval;
+		gtk_tree_model_get (model, &iter, cnum, &cval, -1);
+		uval = unescape_markup (cval);
+		text = g_strdup_printf ("%s", uval);
+		g_free (uval);
+		break;
+	      }
+	    }
+
+	  if (text)
+	    {
+	      gtk_tooltip_set_markup (tip, text);
+	      g_free (text);
+	    }
+	}
+    }
+}
+
 static GtkTreeModel *
 create_model (gint n_columns)
 {
@@ -600,6 +681,13 @@ list_create_widget (GtkWidget *dlg)
           gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (list_view), i);
           break;
         }
+    }
+  /* set tooltip callback if no tooltip column */
+  if (i == n_columns)
+    {
+      gtk_widget_set_has_tooltip (list_view, TRUE);
+      g_signal_connect (G_OBJECT (list_view), "query-tooltip",
+			G_CALLBACK (tooltip_cb), NULL);
     }
 
   return w;
