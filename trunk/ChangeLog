@@ -1,3 +1,32 @@
+2011-04-25 13:12  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/list.c,
+	  src/option.c, src/yad.h: add --search-column option to list
+	  dialog
+
+2011-04-24 06:50  ananasik
+
+	* src/entry.c, src/form.c, src/main.c: add markup to entry and form
+	  labels
+
+2011-04-20 18:04  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/list.c,
+	  src/option.c, src/yad.h: add --elipsize option to list dialog
+
+2011-04-20 07:47  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/main.c, src/option.c, src/yad.h: add --skip-taskbar option
+
+2011-04-16 11:13  ananasik
+
+	* src/dnd.c, src/main.c: cleanups
+
+2011-04-16 08:46  ananasik
+
+	* ChangeLog: release 0.10.2
+
 2011-04-16 08:45  ananasik
 
 	* NEWS:
