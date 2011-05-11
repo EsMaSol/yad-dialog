@@ -129,7 +129,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	  YadColumn *yc;
 	  gchar *text = NULL;
 
-	  cells = gtk_tree_view_column_get_cell_renderers (col);
+	  cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (col));
 	  cell = GTK_CELL_RENDERER (g_list_nth_data (cells, 0));
 	  cnum = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
 	  g_list_free (cells);
