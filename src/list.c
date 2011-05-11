@@ -113,10 +113,10 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	{
 	  GtkTreeViewColumn *checkcol = (GtkTreeViewColumn*) node->data;
 
-	  if (x >= colx  &&  x < (colx + checkcol->width))
+	  if (x >= colx  &&  x < (colx + gtk_tree_view_column_get_width (checkcol)))
 	    col = checkcol;
 	  else
-	    colx += checkcol->width;
+	    colx += gtk_tree_view_column_get_width (checkcol);
 	}
       g_list_free(cols);
 
