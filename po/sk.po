@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-25 16:09+0300\n"
+"POT-Creation-Date: 2011-05-08 10:41+0300\n"
 "PO-Revision-Date: 2011-03-27 18:30+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
@@ -131,15 +131,15 @@ msgstr "Neznámy príkaz '%s'\n"
 msgid "Yad notification"
 msgstr "Yad upozornenie"
 
-#: ../src/list.c:508
+#: ../src/list.c:589
 msgid "Add row"
 msgstr "Pridať riadok"
 
-#: ../src/list.c:517
+#: ../src/list.c:598
 msgid "Delete row"
 msgstr "Odstrániť riadok"
 
-#: ../src/list.c:546
+#: ../src/list.c:627
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Neboli zadané mená stĺpcov pre dialóg Zoznam.\n"
