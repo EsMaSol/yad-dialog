@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-25 16:09+0300\n"
+"POT-Creation-Date: 2011-05-08 10:41+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -132,15 +132,15 @@ msgstr "Befehl '%s' unbekannt\n"
 msgid "Yad notification"
 msgstr "Yad Benachrichtigung"
 
-#: ../src/list.c:508
+#: ../src/list.c:589
 msgid "Add row"
 msgstr "Reihe hinzufügen"
 
-#: ../src/list.c:517
+#: ../src/list.c:598
 msgid "Delete row"
 msgstr "Reihe löschen"
 
-#: ../src/list.c:546
+#: ../src/list.c:627
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Keine Spaltentitel für Listendialog angegeben\n"

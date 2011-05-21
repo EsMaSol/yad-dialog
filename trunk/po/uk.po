@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-25 16:09+0300\n"
+"POT-Creation-Date: 2011-05-08 10:41+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -130,15 +130,15 @@ msgstr "Невідома команда '%s'\n"
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
-#: ../src/list.c:508
+#: ../src/list.c:589
 msgid "Add row"
 msgstr "Добавити строку"
 
-#: ../src/list.c:517
+#: ../src/list.c:598
 msgid "Delete row"
 msgstr "Видалити строку"
 
-#: ../src/list.c:546
+#: ../src/list.c:627
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовоки колонок для діалога зі списком\n"
