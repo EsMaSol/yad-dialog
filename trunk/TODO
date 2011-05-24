@@ -1,2 +1,6 @@
 - Parse ESC sequences in text-info dialog
+- Add multifile field in form (GtkEntry with icon)
+- Add icons to entry dialog
+- Add double-click action to list dialog
+
 
