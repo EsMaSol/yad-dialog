@@ -13,6 +13,6 @@ images_DATA = yad.png
 m4dir = $(datadir)/aclocal
 m4_DATA = yad.m4
 
-EXTRA_DIST = $(man_MANS) $(images_DATA) yad.spec.in yad.m4.in $(desktop_in_files)
+EXTRA_DIST = $(man_MANS) $(images_DATA) yad.spec.in yad.m4.in $(desktop_in_files) zenity.sh
 
 DISTCLEAN_FILES = $(desktop_DATA) $(m4_DATA) yad.spec
