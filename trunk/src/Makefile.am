@@ -3,6 +3,7 @@ INCLUDES = 					\
 	@DISABLE_DEPRECATED@
 
 bin_PROGRAMS = yad
+bin_SCRIPTS = yad-zenity.sh
 
 yad_SOURCES = 		\
 	about.c		\
