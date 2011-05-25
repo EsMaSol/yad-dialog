@@ -174,7 +174,7 @@ typedef struct {
   gboolean generic;
   gboolean descend;
   gboolean sort_by_name;
-  gboolean stdin;
+  gboolean stdinput;
   guint width;
   gchar *term;
 } YadIconsData;
@@ -200,7 +200,9 @@ typedef struct {
   gchar *progress_text;
   gboolean pulsate;
   gboolean autoclose;
+#if !defined(_WIN32)
   gboolean autokill;
+#endif  
   gdouble percentage;
   gboolean rtl;
 } YadProgressData;
@@ -258,7 +260,9 @@ typedef struct {
 
   gchar **extra_data;
 
+#if !defined(_WIN32)
   gboolean kill_parent;
+#endif  
 } YadOptions;
 
 extern YadOptions options;

@@ -361,7 +361,7 @@ icons_create_widget (GtkWidget *dlg)
   /* handle directory */
   if (options.icons_data.directory)
     read_dir (store);
-  else if (options.icons_data.stdin)
+  else if (options.icons_data.stdinput)
     {
       /* read from stdin */
       GIOChannel *channel;
