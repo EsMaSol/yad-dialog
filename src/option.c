@@ -189,12 +189,14 @@ static GOptionEntry general_options[] = {
     &options.data.skip_taskbar,
     N_("Don't show window in taskbar"),
     NULL },
+#if !defined(_WIN32)
   { "kill-parent", 0,
     0,
     G_OPTION_ARG_NONE,
     &options.kill_parent,
     N_("Send TERM to parent"),
     NULL },
+#endif  
   { NULL }
 };
 
@@ -476,7 +478,7 @@ static GOptionEntry icons_options[] = {
   { "stdin", 0,
     0,
     G_OPTION_ARG_NONE,
-    &options.icons_data.stdin,
+    &options.icons_data.stdinput,
     N_("Read data from stdin"),
     NULL },
   { "item-width", 0,
@@ -668,12 +670,14 @@ static GOptionEntry progress_options[] = {
     /* xgettext: no-c-format */
     N_("Dismiss the dialog when 100% has been reached"),
     NULL },
+#if !defined(_WIN32)
   { "auto-kill", 0,
     0,
     G_OPTION_ARG_NONE,
     &options.progress_data.autokill,
     N_("Kill parent process if cancel button is pressed"),
     NULL },
+#endif
   { "rtl", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -1072,8 +1076,10 @@ yad_options_init (void)
   /* Set default mode */
   options.mode = YAD_MODE_MESSAGE;
   options.extra_data = NULL;
+#if !defined(_WIN32)
   options.kill_parent = FALSE;
-
+#endif
+  
   /* Initialize general data */
   options.data.dialog_title = NULL;
   options.data.window_icon = "yad";
@@ -1149,7 +1155,7 @@ yad_options_init (void)
   options.icons_data.directory = NULL;
   options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
-  options.icons_data.stdin = FALSE;
+  options.icons_data.stdinput = FALSE;
   options.icons_data.width = -1;
   options.icons_data.term = settings.term;
   options.icons_data.sort_by_name = FALSE;
@@ -1175,7 +1181,9 @@ yad_options_init (void)
   options.progress_data.percentage = 0;
   options.progress_data.pulsate = FALSE;
   options.progress_data.autoclose = FALSE;
+#if !defined(_WIN32)
   options.progress_data.autokill = FALSE;
+#endif
   options.progress_data.rtl = FALSE;
 
   /* Initialize scale data */

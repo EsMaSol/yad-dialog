@@ -28,6 +28,7 @@
 YadOptions options;
 GtkWidget *dialog = NULL;
 
+#if !defined(_WIN32)
 static void
 sa_usr1 (gint sig)
 {
@@ -39,6 +40,7 @@ sa_usr2 (gint sig)
 {
   gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_CANCEL);
 }
+#endif
 
 static gboolean
 timeout_cb (gpointer data)
@@ -390,13 +392,15 @@ main (gint argc, gchar ** argv)
   tmp_sep = g_strcompress (options.common_data.item_separator);
   options.common_data.item_separator = tmp_sep;  
 
+#if !defined(_WIN32)
   /* set signal handlers */
   bzero (&sa, sizeof (struct sigaction));
   sa.sa_handler = sa_usr1;
   sigaction (SIGUSR1, &sa, NULL);
   sa.sa_handler = sa_usr2;
   sigaction (SIGUSR2, &sa, NULL);
-
+#endif
+  
   switch (options.mode)
     {
     case YAD_MODE_ABOUT:
@@ -428,6 +432,7 @@ main (gint argc, gchar ** argv)
 	  else if (options.data.buttons && !(ret & 1))
 	    print_result ();
 	}
+#if !defined(_WIN32)
       /* autokill option for progress dialog */
       if (!options.kill_parent)
 	{
@@ -436,10 +441,13 @@ main (gint argc, gchar ** argv)
 	      ret != YAD_RESPONSE_OK)
 	    kill (getppid (), 1);
 	}
+#endif
     }
 
+#if !defined(_WIN32)
   if (options.kill_parent)
     kill (getppid (), SIGTERM);    
-
+#endif
+  
   return ret;
 }
