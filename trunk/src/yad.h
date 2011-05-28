@@ -151,6 +151,10 @@ typedef struct {
   gboolean hide_text;
   gboolean completion;
   gboolean numeric;
+  gchar *licon;
+  gchar *licon_action;
+  gchar *ricon;
+  gchar *ricon_action;
 } YadEntryData;
 
 typedef struct {

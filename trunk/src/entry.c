@@ -30,6 +30,50 @@ entry_activate_cb (GtkEntry *entry, gpointer data)
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
+static void
+icon_cb (GtkEntry *entry, GtkEntryIconPosition pos,
+	 GdkEventButton *event, gpointer data)
+{
+  if (event->button == 1)
+    {
+      gchar *cmd = NULL;
+
+      switch (pos)
+	{
+	case GTK_ENTRY_ICON_PRIMARY:
+	  cmd = options.entry_data.licon_action;
+	  break;
+	case GTK_ENTRY_ICON_SECONDARY:
+	  cmd = options.entry_data.ricon_action;
+	  break;
+	}
+
+      if (cmd)
+	{
+	  FILE *pf;
+	  gchar buf[1024];
+	  GString *str;
+	      
+	  str = g_string_new ("");
+	  pf = popen (cmd, "r");
+	  while (fgets (buf, sizeof (buf), pf))
+	    g_string_append (str, buf);
+	  if (pclose (pf) == 0)
+	    {
+	      if (str->str[str->len - 1] == '\n')
+		str->str[str->len - 1] = '\0';
+	      gtk_entry_set_text (GTK_ENTRY (entry), str->str);
+	    }
+	  g_string_free (str, TRUE);
+	}
+      else
+	gtk_entry_set_text (GTK_ENTRY (entry), "");
+
+      /* move cursor to the end of text */
+      gtk_editable_set_position (GTK_EDITABLE (entry), -1);
+    }
+}
+
 static GtkTreeModel *
 create_completion_model (void)
 {
@@ -185,10 +229,31 @@ entry_create_widget (GtkWidget *dlg)
 
 	  gtk_entry_completion_set_text_column (completion, 0);
 	}
+
+      if (options.entry_data.licon)
+	{
+	  GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
+	  
+	  if (pb)
+	    {
+	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
+	      g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
+	    }
+	}
+      if (options.entry_data.ricon)
+	{
+	  GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
+	  
+	  if (pb)
+	    {
+	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
+	      g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
+	    }
+	}
     }
+
   if (!is_combo)
-    g_signal_connect (G_OBJECT (entry), "activate",
-		      G_CALLBACK (entry_activate_cb), dlg);
+    g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (entry_activate_cb), dlg);
 
   gtk_box_pack_start (GTK_BOX (w), c, TRUE, TRUE, 1);
 
