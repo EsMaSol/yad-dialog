@@ -108,7 +108,7 @@ activate_cb (GtkWidget * widget, YadData * data)
 }
 
 static gboolean
-middle_quit_cb (GtkStatusIcon * icon, GdkEventButton * ev, 
+middle_quit_cb (GtkStatusIcon * icon, GdkEventButton * ev,
 		gpointer data)
 {
   if (ev->button == 2)
@@ -246,7 +246,7 @@ handle_stdin (GIOChannel * channel,
                   gboolean state = gtk_status_icon_get_blinking (status_icon);
                   gtk_status_icon_set_blinking (status_icon, !state);
                 }
-              else 
+              else
 #endif
 		if (!g_ascii_strcasecmp (value, "false"))
 		  gtk_status_icon_set_visible (status_icon, FALSE);
@@ -338,7 +338,7 @@ yad_notification_run ()
 
   /* quit on middle click (like press Esc) */
   g_signal_connect (status_icon, "button-press-event",
-		    G_CALLBACK (middle_quit_cb), NULL); 
+		    G_CALLBACK (middle_quit_cb), NULL);
 
   if (options.notification_data.listen)
     {

@@ -212,9 +212,9 @@ escape_markup (char *str)
 
   if (!str)
     return NULL;
-  
+
   len = strlen (str);
-  res = (char *) calloc (len + 1, sizeof (char)); 
+  res = (char *) calloc (len + 1, sizeof (char));
 
   while (*buf)
     {
@@ -269,8 +269,8 @@ unescape_markup (char *str)
 
   if (!str)
     return NULL;
-  
-  res = calloc (strlen (str) + 1, sizeof (char)); 
+
+  res = calloc (strlen (str) + 1, sizeof (char));
 
   while (*buf)
     {
@@ -302,11 +302,11 @@ unescape_markup (char *str)
               res[i] = '\'';
               buf += 5;
             }
-        }	
+        }
       else
         res[i] = *buf++;
       i++;
     }
-  
+
   return res;
 }

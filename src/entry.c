@@ -53,7 +53,7 @@ icon_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 	  FILE *pf;
 	  gchar buf[1024];
 	  GString *str;
-	      
+
 	  str = g_string_new ("");
 	  pf = popen (cmd, "r");
 	  while (fgets (buf, sizeof (buf), pf))
@@ -233,7 +233,7 @@ entry_create_widget (GtkWidget *dlg)
       if (options.entry_data.licon)
 	{
 	  GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
-	  
+
 	  if (pb)
 	    {
 	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
@@ -243,7 +243,7 @@ entry_create_widget (GtkWidget *dlg)
       if (options.entry_data.ricon)
 	{
 	  GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
-	  
+
 	  if (pb)
 	    {
 	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);

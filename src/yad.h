@@ -209,7 +209,7 @@ typedef struct {
   gboolean autoclose;
 #if !defined(_WIN32)
   gboolean autokill;
-#endif  
+#endif
   gdouble percentage;
   gboolean rtl;
 } YadProgressData;
@@ -229,7 +229,7 @@ typedef struct {
 typedef struct {
   gchar *fore;
   gchar *back;
-  gboolean wrap; 
+  gboolean wrap;
   GtkJustification justify;
   gint margins;
   gboolean tail;
@@ -270,7 +270,7 @@ typedef struct {
 
 #if !defined(_WIN32)
   gboolean kill_parent;
-#endif  
+#endif
 } YadOptions;
 
 extern YadOptions options;

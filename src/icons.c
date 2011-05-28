@@ -325,10 +325,10 @@ icons_create_widget (GtkWidget *dlg)
 			      G_TYPE_STRING,
 			      G_TYPE_BOOLEAN);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
-					options.icons_data.sort_by_name ? COL_NAME : COL_FILENAME, 
+					options.icons_data.sort_by_name ? COL_NAME : COL_FILENAME,
 					options.icons_data.descend ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
 
-  if (!options.icons_data.compact) 
+  if (!options.icons_data.compact)
     {
       icon_view = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
       gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
@@ -377,7 +377,7 @@ icons_create_widget (GtkWidget *dlg)
 
   g_object_unref (store);
 
-  if (!options.icons_data.compact) 
+  if (!options.icons_data.compact)
     g_signal_connect (G_OBJECT (icon_view), "item-activated", G_CALLBACK (activate_cb), NULL);
   else
     g_signal_connect (G_OBJECT (icon_view), "row-activated", G_CALLBACK (activate_cb), NULL);

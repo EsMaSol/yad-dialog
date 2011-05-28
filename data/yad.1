@@ -298,7 +298,7 @@ where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separato
 \fIFL\fP - file selection button.
 \fIDIR\fP - directory selection button.
 \fIFN\fP - font selection button.
-\fMFL\fP - select multiple files.
+\fMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
 \fDT\fP - date field.
 \fICLR\fP - color selection button.
 .TP
@@ -363,6 +363,9 @@ Set the number of rows in list dialog. Will be shown only the last \fINUMBER\fP 
 .TP
 .B \-\-ellipsize=TYPE
 Set ellipsize mode for text columns. \fITYPE\fP may be \fINONE\fP, \fISTART\fP, \fIMIDDLE\fP or \fIEND\fP.
+.TP
+.B \-\-dclick-action=CMD
+Set the \fICMD\fP as a double-click command. When user double-clicked on row, CMD will be launched with values of all columns as an arguments.
 
 .PP
 Notification options

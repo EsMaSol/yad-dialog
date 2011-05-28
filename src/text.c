@@ -38,7 +38,7 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
   if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) &&
       (key->state & GDK_CONTROL_MASK))
 #else
-    if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) && 
+    if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) &&
 	(key->state & GDK_CONTROL_MASK))
 #endif
       gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
@@ -54,26 +54,26 @@ tag_event_cb (GtkTextTag *tag, GObject *obj, GdkEvent *ev,
   GtkTextIter end = *iter;
   gchar *url, *cmdline;
 
-  if (ev->type == GDK_BUTTON_PRESS) 
+  if (ev->type == GDK_BUTTON_PRESS)
     {
-      GdkEventButton *bev = (GdkEventButton *) ev; 
+      GdkEventButton *bev = (GdkEventButton *) ev;
 
       if (bev->button == 1)
         {
           gtk_text_iter_backward_to_tag_toggle (&start, tag);
           gtk_text_iter_forward_to_tag_toggle (&end, tag);
-          
+
           url = gtk_text_iter_get_text (&start, &end);
           cmdline = g_strdup_printf ("xdg-open '%s'", url);
           g_free (url);
-          
+
           g_spawn_command_line_async (cmdline, NULL);
-          
+
           g_free (cmdline);
 	  return TRUE;
         }
     }
-                
+
   return FALSE;
 }
 
@@ -91,14 +91,14 @@ motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
                                          ev->x, ev->y, &x, &y);
 
   gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (w), &iter, x, y);
-  
+
   tags = gtk_text_iter_get_tags (&iter);
   for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
     {
       GtkTextTag *tag = tagp->data;
       gint link = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "is_link"));
 
-      if (link) 
+      if (link)
         {
           hovering = TRUE;
           break;
@@ -115,7 +115,7 @@ motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
         gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (w), GTK_TEXT_WINDOW_TEXT), normal);
     }
 
-  if (tags) 
+  if (tags)
     g_slist_free (tags);
 
   gdk_window_get_pointer (gtk_widget_get_window (w), NULL, NULL, NULL);
@@ -140,16 +140,16 @@ linkify_cb (GtkTextBuffer *buf, GRegex *regex)
       do
 	{
 	  gint sp, ep, spos, epos;
-	  
+
 	  g_match_info_fetch_pos (match, 0, &sp, &ep);
-	  
+
 	  /* positions are in bytes, not character, so here we must normalize it*/
 	  spos = g_utf8_pointer_to_offset (text, text + sp);
 	  epos = g_utf8_pointer_to_offset (text, text + ep);
 
 	  gtk_text_buffer_get_iter_at_offset (buf, &start, spos);
 	  gtk_text_buffer_get_iter_at_offset (buf, &end, epos);
-	  
+
 	  gtk_text_buffer_apply_tag (buf, tag, &start, &end);
 	}
       while (g_match_info_next (match, NULL));
@@ -221,7 +221,7 @@ handle_stdin (GIOChannel * channel,
 
       g_string_free (string, TRUE);
     }
-            
+
   return TRUE;
 }
 
@@ -358,12 +358,12 @@ text_create_widget (GtkWidget * dlg)
   if (options.text_data.uri)
     {
       GRegex *regex;
-      
-      regex = g_regex_new (YAD_URL_REGEX, 
+
+      regex = g_regex_new (YAD_URL_REGEX,
 			   G_REGEX_CASELESS | G_REGEX_OPTIMIZE | G_REGEX_EXTENDED,
 			   G_REGEX_MATCH_NOTEMPTY,
 			   NULL);
-	
+
       /* Create text tag for URI */
       tag = gtk_text_buffer_create_tag (text_buffer, NULL,
                                         "foreground", "blue",
@@ -371,11 +371,11 @@ text_create_widget (GtkWidget * dlg)
                                         NULL);
       g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (1));
       g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
-      
+
       /* Create cursors */
       hand = gdk_cursor_new (GDK_HAND2);
       normal= gdk_cursor_new (GDK_XTERM);
-      g_signal_connect (G_OBJECT (text_view), "motion-notify-event", 
+      g_signal_connect (G_OBJECT (text_view), "motion-notify-event",
                         G_CALLBACK (motion_cb), NULL);
 
       g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);
