@@ -28,7 +28,7 @@ static GtkWidget *font;
 static void
 realize_cb (GtkWidget *w, gpointer d)
 {
-  gtk_font_selection_set_font_name (GTK_FONT_SELECTION (w), options.common_data.font);	
+  gtk_font_selection_set_font_name (GTK_FONT_SELECTION (w), options.common_data.font);
 }
 
 GtkWidget *

@@ -47,9 +47,9 @@ parse_details ()
   while (!feof (f))
     {
       gchar buf[4096], **dtl;
- 
+
       /* read string */
-      memset (buf, 0, 4096); 
+      memset (buf, 0, 4096);
       fgets (buf, 4096, f);
       if (strlen (buf) > 0)
 	{
@@ -58,11 +58,11 @@ parse_details ()
 	}
     }
 
-  fclose (f);  
+  fclose (f);
 }
 
 static gchar *
-get_details (GtkCalendar *cal, 
+get_details (GtkCalendar *cal,
 	     guint year, guint month, guint day,
 	     gpointer data)
 {

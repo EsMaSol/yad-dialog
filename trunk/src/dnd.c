@@ -35,7 +35,7 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
     {
       gchar **uris;
       gint i = 0;
-      
+
       uris = gtk_selection_data_get_uris (sel);
       if (!uris)
         return;
@@ -95,7 +95,7 @@ dnd_init (GtkWidget *w)
 
   tgts = gtk_target_table_new_from_list (tlist, &ntgts);
 
-  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL, tgts, ntgts, 
+  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL, tgts, ntgts,
 		     GDK_ACTION_COPY | GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (w), "drag_data_received",
                     G_CALLBACK (drop_data_cb), NULL);

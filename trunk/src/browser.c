@@ -66,9 +66,9 @@ load_icon_cat (IconBrowserData *data, gchar *cat)
       GtkTreeIter iter;
       GdkPixbuf *pb, *spb;
 
-      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size, 
+      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size,
 					   GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
-      
+
       if (pb)
 	{
 	  /* scale pixbuf if needed */
@@ -89,7 +89,7 @@ load_icon_cat (IconBrowserData *data, gchar *cat)
       g_free (i->data);
     }
   g_list_free (icons);
-  
+
   return store;
 }
 
@@ -164,7 +164,7 @@ select_cat (GtkTreeSelection *sel, IconBrowserData *data)
   gtk_tree_view_set_model (GTK_TREE_VIEW (data->icon_list), GTK_TREE_MODEL (store));
 }
 
-gint 
+gint
 main (gint argc, gchar *argv[])
 {
   IconBrowserData *data;
@@ -220,11 +220,11 @@ main (gint argc, gchar *argv[])
   gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 2);
   data->image = gtk_image_new ();
   gtk_box_pack_start (GTK_BOX (w), data->image, FALSE, FALSE, 2);
-  
+
   data->label = gtk_label_new ("");
   gtk_misc_set_alignment (GTK_MISC (data->label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (w), data->label, TRUE, TRUE, 2);
-  
+
   /* create icon browser */
   p = gtk_hpaned_new ();
   gtk_paned_set_position (GTK_PANED (p), 150);
@@ -243,7 +243,7 @@ main (gint argc, gchar *argv[])
   data->cat_list = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (data->cat_list), TRUE);
   gtk_container_add (GTK_CONTAINER (w), data->cat_list);
-  
+
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->cat_list));
   g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_cat), data);
 

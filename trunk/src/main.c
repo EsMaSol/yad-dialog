@@ -121,7 +121,7 @@ create_dialog ()
   gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
   gtk_window_set_skip_pager_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
-  
+
   /* set window size and position */
   if (!options.data.geometry)
     {
@@ -147,7 +147,7 @@ create_dialog ()
 
   /* add top label widgets */
   hbox = hbox2 = gtk_hbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 
+  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
                       hbox, TRUE, TRUE, 5);
   vbox = gtk_vbox_new (FALSE, 0);
 
@@ -287,7 +287,7 @@ create_dialog ()
   /* parse geometry, if given. must be after showing widget */
   if (options.data.geometry)
     gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
- 
+
   gtk_widget_show (dlg);
 
   /* set timeout */
@@ -344,7 +344,7 @@ main (gint argc, gchar ** argv)
   gint ret = 0;
   gchar *tmp_sep;
   struct sigaction sa;
-  
+
   setlocale (LC_ALL, "");
 
 #ifdef ENABLE_NLS
@@ -363,7 +363,7 @@ main (gint argc, gchar ** argv)
   if (options.data.icon_theme)
     {
       settings.icon_theme = gtk_icon_theme_new ();
-      gtk_icon_theme_set_custom_theme (settings.icon_theme, 
+      gtk_icon_theme_set_custom_theme (settings.icon_theme,
 				       options.data.icon_theme);
     }
   else
@@ -390,7 +390,7 @@ main (gint argc, gchar ** argv)
   tmp_sep = g_strcompress (options.common_data.separator);
   options.common_data.separator = tmp_sep;
   tmp_sep = g_strcompress (options.common_data.item_separator);
-  options.common_data.item_separator = tmp_sep;  
+  options.common_data.item_separator = tmp_sep;
 
 #if !defined(_WIN32)
   /* set signal handlers */
@@ -400,7 +400,7 @@ main (gint argc, gchar ** argv)
   sa.sa_handler = sa_usr2;
   sigaction (SIGUSR2, &sa, NULL);
 #endif
-  
+
   switch (options.mode)
     {
     case YAD_MODE_ABOUT:
@@ -436,7 +436,7 @@ main (gint argc, gchar ** argv)
       /* autokill option for progress dialog */
       if (!options.kill_parent)
 	{
-	  if (options.mode == YAD_MODE_PROGRESS && 
+	  if (options.mode == YAD_MODE_PROGRESS &&
 	      options.progress_data.autokill &&
 	      ret != YAD_RESPONSE_OK)
 	    kill (getppid (), 1);
@@ -446,8 +446,8 @@ main (gint argc, gchar ** argv)
 
 #if !defined(_WIN32)
   if (options.kill_parent)
-    kill (getppid (), SIGTERM);    
+    kill (getppid (), SIGTERM);
 #endif
-  
+
   return ret;
 }

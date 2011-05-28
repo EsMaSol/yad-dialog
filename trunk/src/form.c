@@ -99,7 +99,7 @@ select_date_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 	{
 	  gtk_calendar_select_day (GTK_CALENDAR (cal), g_date_get_day (d));
 	  gtk_calendar_select_month (GTK_CALENDAR (cal),
-				     g_date_get_month (d) - 1, 
+				     g_date_get_month (d) - 1,
 				     g_date_get_year (d));
 	}
       g_date_free (d);
@@ -172,15 +172,15 @@ form_create_widget (GtkWidget *dlg)
 	    case YAD_FIELD_NUM:
 	      e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
-	      fields = g_slist_append (fields, e);	      
+	      fields = g_slist_append (fields, e);
 	      break;
-	      
+
 	    case YAD_FIELD_CHECK:
 	      e = gtk_check_button_new_with_label (fld->name);
 	      gtk_table_attach (GTK_TABLE (w), e, 0, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
-	      fields = g_slist_append (fields, e);	      
+	      fields = g_slist_append (fields, e);
 	      break;
-	      
+
 	    case YAD_FIELD_COMBO:
 #if GTK_CHECK_VERSION(2,24,0)
 	      e = gtk_combo_box_text_new ();
@@ -217,7 +217,7 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_MFILE:
 	      e = gtk_entry_new ();
-	      gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, 
+	      gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY,
 					     "gtk-directory");
 	      g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), e);
 	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
@@ -278,7 +278,7 @@ form_create_widget (GtkWidget *dlg)
 			      gdouble step = g_strtod (s[2], NULL);
 			      gtk_spin_button_set_increments (GTK_SPIN_BUTTON (e), step, step);
 			    }
-			}		      
+			}
 		    }
 		  g_strfreev (s);
 		  break;
@@ -304,18 +304,18 @@ form_create_widget (GtkWidget *dlg)
 		    }
 		  gtk_combo_box_set_active (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), 0);
 		  g_strfreev (s);
-		  break;	  
+		  break;
 
 		case YAD_FIELD_DIR:
-		  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)), 
-						 options.extra_data[i]);		  
+		  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)),
+						 options.extra_data[i]);
 		case YAD_FIELD_FILE:
-		  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)), 
+		  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)),
 						 options.extra_data[i]);
 		  break;
 
 		case YAD_FIELD_FONT:
-		  gtk_font_button_set_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, i)), 
+		  gtk_font_button_set_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, i)),
 						 options.extra_data[i]);
 		  break;
 
@@ -344,7 +344,7 @@ form_print_result (void)
   for (i = 0; i < g_slist_length (fields); i++)
     {
       YadField *fld = g_slist_nth_data (options.form_data.fields, i);
-      
+
       switch (fld->type)
 	{
 	case YAD_FIELD_SIMPLE:
@@ -380,7 +380,7 @@ form_print_result (void)
 	  g_printf ("%s%s",
 		    gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i))),
 		    options.common_data.separator);
-	  break; 
+	  break;
 	case YAD_FIELD_FONT:
 	  g_printf ("%s%s",
 		    gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, i))),

@@ -196,7 +196,7 @@ static GOptionEntry general_options[] = {
     &options.kill_parent,
     N_("Send TERM to parent"),
     NULL },
-#endif  
+#endif
   { NULL }
 };
 
@@ -637,6 +637,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.limit,
     N_("Set the limit of rows in list"),
     N_("NUMBER") },
+  { "dclick-action", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.list_data.dclick_action,
+    N_("Set double-click action"),
+    N_("CMD") },
   { NULL }
 };
 
@@ -1119,7 +1125,7 @@ yad_options_init (void)
 #if !defined(_WIN32)
   options.kill_parent = FALSE;
 #endif
-  
+
   /* Initialize general data */
   options.data.dialog_title = NULL;
   options.data.window_icon = "yad";
@@ -1217,6 +1223,7 @@ yad_options_init (void)
   options.list_data.search_column = 0;
   options.list_data.limit = 0;
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
+  options.list_data.dclick_action = NULL;
 
   /* Initialize notification data */
   options.notification_data.listen = FALSE;

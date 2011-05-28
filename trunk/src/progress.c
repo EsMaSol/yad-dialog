@@ -155,7 +155,7 @@ progress_create_widget (GtkWidget * dlg)
     gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
 			       options.progress_data.progress_text);
 #if GTK_CHECK_VERSION (2,91,0)
-  gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w), 
+  gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w),
 				 options.progress_data.rtl);
 #else
   if (options.progress_data.rtl)
