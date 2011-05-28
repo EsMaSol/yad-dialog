@@ -135,6 +135,7 @@ typedef struct {
   gint day;
   gint month;
   gint year;
+  gchar *details;
 } YadCalendarData;
 
 typedef struct {

@@ -156,7 +156,17 @@ Set the calendar month.
 Set the calendar year.
 .TP
 .B \-\-date-format=PATTERN
-Set the format for the returned date.
+Set the format for the returned date. By default is `%x'. See \fIstrftime(3)\fP for more details.
+.TP
+.B \-\-details=FILENAME
+Read days description from \IFILENAME\P. 
+.PP
+File with days details must be in following format:
+.IP
+<date> <description>
+.PP
+\fIdate\fP field is date in format, specified with \fI\-\-date-format\fP option. \fIdescription\fP
+is a string with date details, which may include Pango markup.
 
 .PP 
 Color selection options
