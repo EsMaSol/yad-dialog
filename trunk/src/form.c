@@ -21,12 +21,106 @@
 
 #include "yad.h"
 
+#include "calendar.xpm"
+
 static GSList *fields = NULL;
 
 static void
 form_activate_cb (GtkEntry *entry, gpointer data)
 {
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+}
+
+static void
+select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
+		 GdkEventButton *event, gpointer data)
+{
+  GtkWidget *dlg;
+
+  if (event->button == 1)
+    {
+      dlg = gtk_file_chooser_dialog_new (_("Select files"),
+					 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
+					 GTK_FILE_CHOOSER_ACTION_OPEN,
+					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					 GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+					 NULL );
+      gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
+
+      if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
+	{
+	  GSList *files, *ptr;
+
+	  gtk_entry_set_text (entry, "");
+	  files = ptr = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dlg));
+	  while (ptr)
+	    {
+	      gchar *fn;
+
+	      if (ptr->data)
+		{
+		  fn = g_filename_from_uri ((gchar *) ptr->data, NULL, NULL);
+		  gtk_entry_append_text (entry, fn);
+		  gtk_entry_append_text (entry, options.common_data.item_separator);
+		  g_free (fn);
+		}
+	      ptr = ptr->next;
+	    }
+	  g_slist_free (files);
+	}
+      gtk_widget_destroy (dlg);
+    }
+}
+
+static void
+select_date_cb (GtkEntry *entry, GtkEntryIconPosition pos,
+		GdkEventButton *event, gpointer data)
+{
+  GtkWidget *dlg, *cal;
+
+  if (event->button == 1)
+    {
+      GDate *d;
+
+      dlg = gtk_dialog_new_with_buttons (_("Select date"),
+					 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					 GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+					 NULL );
+      cal = gtk_calendar_new ();
+      gtk_widget_show (cal);
+      gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
+			  cal, TRUE, TRUE, 5);
+
+      d = g_date_new ();
+      g_date_set_parse (d, gtk_entry_get_text (entry));
+      if (g_date_valid (d))
+	{
+	  gtk_calendar_select_day (GTK_CALENDAR (cal), g_date_get_day (d));
+	  gtk_calendar_select_month (GTK_CALENDAR (cal),
+				     g_date_get_month (d) - 1, 
+				     g_date_get_year (d));
+	}
+      g_date_free (d);
+
+      if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
+	{
+	  guint day, month, year;
+	  gchar *format = options.common_data.date_format;
+	  gchar time_string[128];
+
+	  if (format == NULL)
+	    format = "%x";
+
+	  gtk_calendar_get_date (GTK_CALENDAR (cal), &day, &month, &year);
+	  d = g_date_new_dmy (year, month + 1, day);
+	  g_date_strftime (time_string, 127, format, d);
+	  gtk_entry_set_text (entry, time_string);
+	  g_date_free (d);
+	}
+      gtk_widget_destroy (dlg);
+    }
 }
 
 GtkWidget *
@@ -37,6 +131,7 @@ form_create_widget (GtkWidget *dlg)
   if (options.form_data.fields)
     {
       GtkWidget *l, *e;
+      GdkPixbuf *pb;
       guint i, fc = g_slist_length (options.form_data.fields);
 
       w = gtk_table_new (fc, 2, FALSE);
@@ -119,6 +214,27 @@ form_create_widget (GtkWidget *dlg)
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
+
+	    case YAD_FIELD_MFILE:
+	      e = gtk_entry_new ();
+	      gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, 
+					     "gtk-directory");
+	      g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), e);
+	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
+
+	    case YAD_FIELD_DATE:
+	      e = gtk_entry_new ();
+	      pb = gdk_pixbuf_new_from_xpm_data (calendar_xpm);
+	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, pb);
+	      g_object_unref (pb);
+	      g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_date_cb), e);
+	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
 	    }
 	}
 
@@ -137,6 +253,8 @@ form_create_widget (GtkWidget *dlg)
 		case YAD_FIELD_SIMPLE:
 		case YAD_FIELD_HIDDEN:
 		case YAD_FIELD_READ_ONLY:
+		case YAD_FIELD_MFILE:
+		case YAD_FIELD_DATE:
 		  gtk_entry_set_text (GTK_ENTRY (g_slist_nth_data (fields, i)), options.extra_data[i]);
 		  break;
 
@@ -232,6 +350,8 @@ form_print_result (void)
 	case YAD_FIELD_SIMPLE:
 	case YAD_FIELD_HIDDEN:
 	case YAD_FIELD_READ_ONLY:
+	case YAD_FIELD_MFILE:
+	case YAD_FIELD_DATE:
 	  g_printf ("%s%s",
 		    gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, i))),
 		    options.common_data.separator);

@@ -56,7 +56,7 @@ void
 calendar_print_result (void)
 {
   guint day, month, year;
-  gchar *format = options.calendar_data.date_format;
+  gchar *format = options.common_data.date_format;
   gchar time_string[128];
   GDate *date = NULL;
 

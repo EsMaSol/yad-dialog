@@ -66,6 +66,8 @@ typedef enum {
   YAD_FIELD_DIR,
   YAD_FIELD_FONT,
   YAD_FIELD_COLOR,
+  YAD_FIELD_MFILE,
+  YAD_FIELD_DATE,
 } YadFieldType;
 
 typedef enum {
@@ -133,7 +135,6 @@ typedef struct {
   gint day;
   gint month;
   gint year;
-  gchar *date_format;
 } YadCalendarData;
 
 typedef struct {
@@ -190,6 +191,7 @@ typedef struct {
   gint search_column;
   guint limit;
   PangoEllipsizeMode ellipsize;
+  gchar *dclick_action;
 } YadListData;
 
 typedef struct {
@@ -237,6 +239,7 @@ typedef struct {
   gboolean editable;
   gboolean multi;
   gchar *command;
+  gchar *date_format;
 } YadCommonData;
 
 typedef struct {

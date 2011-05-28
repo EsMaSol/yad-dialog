@@ -263,7 +263,7 @@ Set the preview text.
 Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fIFL\fP, \fIDIR\fP, \fIFN\fP or \fICLR\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fIFL\fP, \fIDIR\fP, \fIFN\fP, \fIMFL\fP, \fIDT\fP or \fICLR\fP.
 \fIH\fP - hidden field type. All characters are displayed as the invisible char.
 \fIRO\fP - field is in read-only mode.
 \fINUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP]]\fP,
@@ -273,6 +273,8 @@ where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separato
 \fIFL\fP - file selection button.
 \fIDIR\fP - directory selection button.
 \fIFN\fP - font selection button.
+\fMFL\fP - select multiple files.
+\fDT\fP - date field.
 \fICLR\fP - color selection button.
 .TP
 .B \-\-align=TYPE
@@ -283,6 +285,9 @@ Set output separator character. Default is `|'.
 .TP
 .B \-\-item-separator=STRING
 Set separator character for combo-box or scale values. Default is `!'.
+.TP
+.B \-\-date-format=PATTERN
+Set the format for the date fields (same as in calendar dialog).
 .PP
 Additional data in command line interprets as a default values for form fields.
 

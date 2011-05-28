@@ -226,9 +226,9 @@ static GOptionEntry calendar_options[] = {
     N_("Set the calendar year"),
     N_("YEAR") },
   { "date-format", 0,
-    0,
+    G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
-    &options.calendar_data.date_format,
+    &options.common_data.date_format,
     N_("Set the format for the returned date"),
     N_("PATTERN") },
   { NULL }
@@ -427,7 +427,7 @@ static GOptionEntry form_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_field,
-    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, FL, DIR, FN or CLR)"),
+    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, FL, DIR, FN, MFL, DT or CLR)"),
     N_("LABEL[:TYPE]") },
   { "align", 0,
     0,
@@ -447,6 +447,12 @@ static GOptionEntry form_options[] = {
     &options.common_data.item_separator,
     N_("Set separator character for combobox or scale data"),
     N_("SEPARATOR") },
+  { "date-format", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.date_format,
+    N_("Set the format for the returned date"),
+    N_("PATTERN") },
   { NULL }
 };
 
@@ -933,6 +939,10 @@ add_field (const gchar *option_name,
 	fld->type = YAD_FIELD_FONT;
       else if (g_ascii_strcasecmp (fstr[1], "CLR") == 0)
 	fld->type = YAD_FIELD_COLOR;
+      else if (g_ascii_strcasecmp (fstr[1], "MFL") == 0)
+	fld->type = YAD_FIELD_MFILE;
+      else if (g_ascii_strcasecmp (fstr[1], "DT") == 0)
+	fld->type = YAD_FIELD_DATE;
       else
 	fld->type = YAD_FIELD_SIMPLE;
     }
@@ -1117,9 +1127,9 @@ yad_options_init (void)
   options.common_data.multi = FALSE;
   options.common_data.editable = FALSE;
   options.common_data.command = NULL;
+  options.common_data.date_format = NULL;
 
   /* Initialize calendar data */
-  options.calendar_data.date_format = NULL;
   options.calendar_data.day = -1;
   options.calendar_data.month = -1;
   options.calendar_data.year = -1;
