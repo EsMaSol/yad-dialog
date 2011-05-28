@@ -231,6 +231,12 @@ static GOptionEntry calendar_options[] = {
     &options.common_data.date_format,
     N_("Set the format for the returned date"),
     N_("PATTERN") },
+  { "details", 0,
+    0,
+    G_OPTION_ARG_FILENAME,
+    &options.calendar_data.details,
+    N_("Set the filename with dates details"),
+    N_("FILENAME") },
   { NULL }
 };
 
@@ -1127,12 +1133,13 @@ yad_options_init (void)
   options.common_data.multi = FALSE;
   options.common_data.editable = FALSE;
   options.common_data.command = NULL;
-  options.common_data.date_format = NULL;
+  options.common_data.date_format = "%x";
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
   options.calendar_data.month = -1;
   options.calendar_data.year = -1;
+  options.calendar_data.details = NULL;
 
   /* Initialize color data */
   options.color_data.init_color = NULL;

@@ -19,9 +19,69 @@
  *
  */
 
+#include <errno.h>
+
 #include "yad.h"
 
 static GtkWidget *calendar;
+
+static GHashTable *details;
+
+static void
+parse_details ()
+{
+  FILE *f;
+
+  details = g_hash_table_new (g_str_hash, g_str_equal);
+
+  /* open details file */
+  f = fopen (options.calendar_data.details, "r");
+  if (f == NULL)
+    {
+      g_printerr (_("Cannot open file '%s': %s\n"),
+		  options.common_data.uri, g_strerror (errno));
+      return;
+    }
+
+  /* read details file */
+  while (!feof (f))
+    {
+      gchar buf[4096], **dtl;
+ 
+      /* read string */
+      memset (buf, 0, 4096); 
+      fgets (buf, 4096, f);
+      if (strlen (buf) > 0)
+	{
+	  dtl = g_strsplit (buf, " ", 2);
+	  g_hash_table_insert (details, dtl[0], dtl[1]);
+	}
+    }
+
+  fclose (f);  
+}
+
+static gchar *
+get_details (GtkCalendar *cal, 
+	     guint year, guint month, guint day,
+	     gpointer data)
+{
+  GDate *d;
+  gchar time_string[128];
+  gchar *str = NULL;
+
+  d = g_date_new_dmy (day, month + 1, year);
+  if (g_date_valid (d))
+    {
+      g_date_strftime (time_string, 127, options.common_data.date_format, d);
+      str = (gchar *) g_hash_table_lookup (details, time_string);
+    }
+  g_date_free (d);
+
+  if (str)
+    return g_strdup (str);
+  return str;
+}
 
 static void
 double_click_cb (GtkWidget *w, gpointer data)
@@ -36,8 +96,6 @@ calendar_create_widget (GtkWidget *dlg)
 
   w = calendar = gtk_calendar_new ();
 
-  /* FIXME: add "show details" to widget */
-
   if (options.calendar_data.month > 0 || options.calendar_data.year > 0)
     gtk_calendar_select_month (GTK_CALENDAR (w),
 			       options.calendar_data.month - 1,
@@ -45,6 +103,17 @@ calendar_create_widget (GtkWidget *dlg)
   if (options.calendar_data.day > 0)
     gtk_calendar_select_day (GTK_CALENDAR (w),
 			     options.calendar_data.day);
+
+  if (options.calendar_data.details)
+    {
+      parse_details ();
+      gtk_calendar_set_detail_func (GTK_CALENDAR (w), get_details, NULL, NULL);
+    }
+
+  gtk_calendar_set_display_options (GTK_CALENDAR (w),
+				    GTK_CALENDAR_SHOW_HEADING |
+				    GTK_CALENDAR_SHOW_DAY_NAMES |
+				    GTK_CALENDAR_SHOW_WEEK_NUMBERS);
 
   g_signal_connect (w, "day-selected-double-click",
   		    G_CALLBACK (double_click_cb), dlg);
@@ -56,15 +125,11 @@ void
 calendar_print_result (void)
 {
   guint day, month, year;
-  gchar *format = options.common_data.date_format;
   gchar time_string[128];
   GDate *date = NULL;
 
-  if (format == NULL)
-    format = "%x";
-
-  gtk_calendar_get_date (GTK_CALENDAR (calendar), &day, &month, &year);
-  date = g_date_new_dmy (year, month + 1, day);
-  g_date_strftime (time_string, 127, format, date);
+  gtk_calendar_get_date (GTK_CALENDAR (calendar), &year, &month, &day);
+  date = g_date_new_dmy (day, month + 1, year);
+  g_date_strftime (time_string, 127, options.common_data.date_format, date);
   g_print ("%s\n", time_string);
 }
