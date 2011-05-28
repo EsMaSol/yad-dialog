@@ -208,8 +208,23 @@ Allow changes to text in combo-box.
 .TP
 .B \-\-numeric
 Use spin button instead of text entry. Additional parameters in command line treats as minimum and maximum values and step value (in that order). All this values are optional. Default range is from 0 to 65535 with step 1.
+.TP
+.B \-\-licon
+Set an icon on a left side of entry.
+.TP
+.B \-\-licon-action
+Specify a command which will be run when the left icon clicked. Output of command will be set as entry text.
+.TP
+.B \-\-ricon
+Set an icon on a right side of entry.
+.TP
+.B \-\-ricon-action
+Specify a command which will be run when the right icon clicked. Output of command will be set as entry text.
 
 Any extra data specified in command line adds as an items of combo-box entry, except of numeric mode.
+
+If icon specified and icon action is not given, click on icon just clear the entry. 
+Icons are available only for entry field. Numeric field or combo-boxes will ignore the icons.
 
 .PP
 Iconbox options

@@ -333,6 +333,30 @@ static GOptionEntry entry_options[] = {
     &options.common_data.editable,
     N_("Allow changes to text in combo-box"),
     NULL },
+  { "licon", 0,
+    0,
+    G_OPTION_ARG_FILENAME,
+    &options.entry_data.licon,
+    N_("Set the left entry icon"),
+    N_("IMAGE") },
+  { "licon-action", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.entry_data.licon_action,
+    N_("Set the left entry icon action"),
+    N_("CMD") },
+  { "ricon", 0,
+    0,
+    G_OPTION_ARG_FILENAME,
+    &options.entry_data.ricon,
+    N_("Set the right entry icon"),
+    N_("IMAGE") },
+  { "ricon-action", 0,
+    0,
+    G_OPTION_ARG_STRING,
+    &options.entry_data.ricon_action,
+    N_("Set the right entry icon action"),
+    N_("CMD") },
   { NULL }
 };
 
@@ -1153,6 +1177,10 @@ yad_options_init (void)
   options.entry_data.hide_text = FALSE;
   options.entry_data.completion = FALSE;
   options.entry_data.numeric = FALSE;
+  options.entry_data.licon = NULL;
+  options.entry_data.licon_action = NULL;
+  options.entry_data.ricon = NULL;
+  options.entry_data.ricon_action = NULL;
 
   /* Initialize file data */
   options.file_data.directory = FALSE;
