@@ -191,6 +191,16 @@ form_create_widget (GtkWidget *dlg)
 	      fields = g_slist_append (fields, e);
 	      break;
 
+	    case YAD_FIELD_COMBO_ENTRY:
+#if GTK_CHECK_VERSION(2,24,0)
+	      e = gtk_combo_box_text_new_with_entry ();
+#else
+	      e = gtk_combo_box_entry_new_text ();
+#endif
+	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);
+	      break;
+
 	    case YAD_FIELD_FILE:
 	      e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -292,6 +302,7 @@ form_create_widget (GtkWidget *dlg)
 		  break;
 
 		case YAD_FIELD_COMBO:
+		case YAD_FIELD_COMBO_ENTRY:
 		  s = g_strsplit (options.extra_data[i], options.common_data.item_separator, -1);
 		  while (s[j])
 		    {
@@ -367,6 +378,7 @@ form_print_result (void)
 						  options.common_data.separator);
 	  break;
 	case YAD_FIELD_COMBO:
+	case YAD_FIELD_COMBO_ENTRY:
 	  g_printf ("%s%s",
 #if GTK_CHECK_VERSION(2,24,0)
 		    gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, i))),
