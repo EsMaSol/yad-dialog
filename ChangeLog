@@ -1,3 +1,83 @@
+2011-05-30 07:04  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/form.c, src/option.c, src/yad.h: add editable combo-box field
+	  to form dialog
+
+2011-05-28 17:55  ananasik
+
+	* TODO, configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
+	  po/uk.po, src/browser.c, src/calendar.c, src/dnd.c, src/entry.c,
+	  src/font.c, src/form.c, src/icons.c, src/list.c, src/main.c,
+	  src/notification.c, src/option.c, src/progress.c, src/text.c,
+	  src/util.c, src/yad.h: add double-click action for list dialog
+
+2011-05-28 17:21  ananasik
+
+	* TODO, configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po,
+	  po/uk.po, src/calendar.xpm, src/entry.c, src/option.c, src/yad.h:
+	  add icons to entry dialog
+
+2011-05-28 16:26  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/calendar.c, src/option.c, src/yad.h: add --details to
+	  calendar dialog
+
+2011-05-28 11:08  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/calendar.c, src/form.c, src/option.c, src/yad.h: add multiple
+	  files selection and date fields to form dialog
+
+2011-05-25 03:53  ananasik
+
+	* src/icons.c, src/main.c, src/option.c, src/yad.h: add patch for
+	  build yad under windows
+
+2011-05-24 14:32  ananasik
+
+	* data/Makefile.am, data/zenity.sh, src/Makefile.am,
+	  src/yad-zenity.sh: move zenity wrapper to data
+
+2011-05-24 14:26  ananasik
+
+	* src/yad-zenity.sh: add zenity wrapper
+
+2011-05-24 13:50  ananasik
+
+	* TODO: update TODO
+
+2011-05-24 13:48  ananasik
+
+	* src/Makefile.am, src/yad-zenity.sh: add template for zenity
+	  wrapper
+
+2011-05-21 05:18  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po: fix typo in
+	  man page
+
+2011-05-16 10:46  ananasik
+
+	* data/yad.1: update man page
+
+2011-05-11 09:31  ananasik
+
+	* src/list.c: remove deprecated functions
+
+2011-05-11 09:23  ananasik
+
+	* ChangeLog, src/list.c:
+
+2011-05-08 07:37  ananasik
+
+	* configure.ac: bump version to 0.11.0
+
+2011-05-08 07:36  ananasik
+
+	* src/list.c: add tooltips to list dialog
+
 2011-04-25 13:12  ananasik
 
 	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/list.c,

@@ -38,6 +38,6 @@ endif
 
 DISTCLEANFILES =
 
-EXTRA_DIST =
+EXTRA_DIST = calendar.xpm
 
 

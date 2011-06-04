@@ -1,3 +1,20 @@
+Version 0.12.0
+    - add icons to entry dialog
+    - add --details option to calendar dialog
+    - add new field types to form dialog: CBE for editable combo-boxes, DT for date field 
+      and MFL for choose multiple files
+    - add user-specified doubleclick actions to list dialog
+    - makes YAD buildable under MS Windows
+    - code cleanups
+
+Version 0.11.0
+    - new --skip-taskbar option for hiding yad window from taskbar and pager
+    - add --search-column option to list dialog for set quicksearch column number
+    - add --elipsize option to list dialog for shortened long text in text columns
+    - add tooltips for list dialog. when tooltip column is not specified tooltips 
+      shows content of cell under mouse
+    - add markup for entry labels in entry and form dialogs
+
 Version 0.10.2
     - fix wrong memory allocation when handling makrup text
     - fix reading data from stdin in text dialogs
