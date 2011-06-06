@@ -50,24 +50,29 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
       if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
 	{
 	  GSList *files, *ptr;
+	  GString *str;
 
-	  gtk_entry_set_text (entry, "");
+	  str = g_string_new ("");
 	  files = ptr = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dlg));
+
 	  while (ptr)
 	    {
-	      gchar *fn;
-
 	      if (ptr->data)
 		{
-		  fn = g_filename_from_uri ((gchar *) ptr->data, NULL, NULL);
-		  gtk_entry_append_text (entry, fn);
-		  gtk_entry_append_text (entry, options.common_data.item_separator);
+		  gchar *fn = g_filename_from_uri ((gchar *) ptr->data, NULL, NULL);
+		  g_string_append (str, fn);
+		  g_string_append (str, options.common_data.item_separator);
 		  g_free (fn);
 		}
 	      ptr = ptr->next;
 	    }
+
+	  gtk_entry_set_text (entry, str->str);
+
 	  g_slist_free (files);
+	  g_string_free (str, TRUE);
 	}
+
       gtk_widget_destroy (dlg);
     }
 }
