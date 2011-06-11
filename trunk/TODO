@@ -1,3 +1,4 @@
 - Parse ESC sequences in text-info dialog
+- Add ability to cutomize yad's look&feel through gtkrc
 
 
