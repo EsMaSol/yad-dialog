@@ -142,7 +142,8 @@ popup_menu_cb (GtkStatusIcon * icon, guint button,
   GtkWidget *item;
   int i;
 
-  g_return_if_fail (menu_data != NULL);
+  if (!menu_data)
+    return;
 
   menu = gtk_menu_new ();
   for (i = 0; i < g_slist_length (menu_data); i++)
@@ -214,11 +215,7 @@ handle_stdin (GIOChannel * channel,
 
           if (!g_ascii_strcasecmp (command, "icon"))
             {
-              while (*value && g_ascii_isspace (*value))
-                value++;
-
-              g_free (icon);
-              icon = g_strdup (value);
+              icon = g_strstrip (value);
 
               if (gtk_status_icon_get_visible (status_icon) &&
 		  gtk_status_icon_is_embedded (status_icon))
