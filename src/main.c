@@ -200,7 +200,7 @@ create_dialog ()
       else
         gtk_label_set_text (GTK_LABEL (text), buf);
       gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
-      if (option.data.geometry || option.f=data.width != -1)
+      if (options.data.geometry || options.data.width != -1)
         gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
       if (options.data.image_on_top)
         gtk_box_pack_start (GTK_BOX (hbox2), text, FALSE, FALSE, 2);
