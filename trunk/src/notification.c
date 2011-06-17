@@ -41,7 +41,7 @@ static gchar *action = NULL;
 static GSList *menu_data;
 
 static gint exit_code;
-static gint icon_size;
+static gint icon_size = 16;
 
 static void
 timeout_cb (gpointer data)
@@ -329,6 +329,8 @@ yad_notification_run ()
   if (options.common_data.command)
     action = g_strdup (options.common_data.command);
   menu_data = NULL;
+  
+  set_icon ();
 
   g_signal_connect (status_icon, "activate",
 		    G_CALLBACK (activate_cb), NULL);
