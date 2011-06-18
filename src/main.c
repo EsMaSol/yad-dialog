@@ -155,22 +155,30 @@ create_dialog ()
     {
       if (g_ascii_strcasecmp (options.data.to_indicator, "top") == 0)
 	{
+#if !GTK_CHECK_VERSION (2,91,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_LEFT_TO_RIGHT);
+#endif
 	  gtk_box_pack_start (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
 	}
       else if (g_ascii_strcasecmp (options.data.to_indicator, "bottom") == 0)
 	{
+#if !GTK_CHECK_VERSION (2,91,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_LEFT_TO_RIGHT);
+#endif
 	  gtk_box_pack_end (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
 	}
       else if (g_ascii_strcasecmp (options.data.to_indicator, "left") == 0)
 	{
+#if !GTK_CHECK_VERSION (2,91,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_BOTTOM_TO_TOP);
+#endif
 	  gtk_box_pack_start (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
 	}
       else if (g_ascii_strcasecmp (options.data.to_indicator, "right") == 0)
 	{
+#if !GTK_CHECK_VERSION (2,91,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_BOTTOM_TO_TOP);
+#endif
 	  gtk_box_pack_end (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
 	}
       if (settings.show_remain)
