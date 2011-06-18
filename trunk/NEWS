@@ -1,6 +1,6 @@
 Version 0.12.2
     - wrap dialog text when width or geometry specified
-    - fix initial setup of motification icon
+    - fix icon handling in motification
     - fix timeout indicator orientation
     - fix typo in man page and russian translation
 
