@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-30 10:02+0300\n"
+"POT-Creation-Date: 2011-06-18 20:38+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -89,17 +89,17 @@ msgstr "Der Maximalwert muß kleiner als der Minimalwert sein.\n"
 msgid "Select files"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:85
+#: ../src/form.c:90
 #, fuzzy
 msgid "Select date"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:205
+#: ../src/form.c:210
 #, fuzzy
 msgid "Select file"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:211
+#: ../src/form.c:216
 msgid "Select folder"
 msgstr ""
 
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Error loading window icon %s: %s\n"
 msgstr "Fehler beim Laden von Fenster-Symbol %s: %s\n"
 
-#: ../src/main.c:384
+#: ../src/main.c:386
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
@@ -133,17 +133,17 @@ msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Kann Benachrichtigungs-Symbol '%s' nicht laden: %s"
 
-#: ../src/notification.c:239
+#: ../src/notification.c:236
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Ungültiger UTF-8 Eintrag im Tool-Tip!\n"
 
-#: ../src/notification.c:292
+#: ../src/notification.c:289
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/notification.c:328
+#: ../src/notification.c:325
 msgid "Yad notification"
 msgstr "Yad Benachrichtigung"
 
