@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-30 10:02+0300\n"
+"POT-Creation-Date: 2011-06-18 20:38+0300\n"
 "PO-Revision-Date: 2011-03-27 18:30+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
@@ -89,16 +89,16 @@ msgstr "Maximálna hodnota je väčšia ako minimálna.\n"
 msgid "Select files"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:85
+#: ../src/form.c:90
 #, fuzzy
 msgid "Select date"
 msgstr "Vyberte pole"
 
-#: ../src/form.c:205
+#: ../src/form.c:210
 msgid "Select file"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:211
+#: ../src/form.c:216
 msgid "Select folder"
 msgstr "Vyberte pole"
 
@@ -122,7 +122,7 @@ msgstr "%d s"
 msgid "Error loading window icon %s: %s\n"
 msgstr "Chyba načítania ikony okna %s: %s\n"
 
-#: ../src/main.c:384
+#: ../src/main.c:386
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Nemožno spracovať príkazový riadok: %s\n"
@@ -132,17 +132,17 @@ msgstr "Nemožno spracovať príkazový riadok: %s\n"
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Nemožno načítať ikonu upozornenia '%s': %s\n"
 
-#: ../src/notification.c:239
+#: ../src/notification.c:236
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Neplatné UTF-8 v nástrojovom tipe!\n"
 
-#: ../src/notification.c:292
+#: ../src/notification.c:289
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Neznámy príkaz '%s'\n"
 
-#: ../src/notification.c:328
+#: ../src/notification.c:325
 msgid "Yad notification"
 msgstr "Yad upozornenie"
 
