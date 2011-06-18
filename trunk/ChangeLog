@@ -1,3 +1,52 @@
+2011-06-18 17:57  ananasik
+
+	* src/main.c: fix previous commit
+
+2011-06-18 17:50  ananasik
+
+	* src/main.c: fix timeout indication orientation
+
+2011-06-18 17:39  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, po/uk.po: fix typo in russian
+	  translation
+
+2011-06-18 17:36  ananasik
+
+	* data/yad.1: fix markup in man page
+
+2011-06-17 10:59  ananasik
+
+	* src/notification.c: fix initial set of notification icon
+
+2011-06-16 13:54  ananasik
+
+	* src/notification.c: fix icon handling in notification
+
+2011-06-16 13:12  ananasik
+
+	* src/main.c: fix previous commit
+
+2011-06-16 13:11  ananasik
+
+	* src/main.c: enable text wrap when geometry specified
+
+2011-06-11 05:34  ananasik
+
+	* TODO: update TODO
+
+2011-06-07 15:37  ananasik
+
+	* configure.ac: fix builds with gtk3
+
+2011-06-06 03:46  ananasik
+
+	* src/form.c: remove deprecated functions for build with gtk+-3
+
+2011-06-04 05:51  ananasik
+
+	* ChangeLog, NEWS, configure.ac, src/Makefile.am: release 0.12.0
+
 2011-05-30 07:04  ananasik
 
 	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,

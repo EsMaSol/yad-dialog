@@ -1,3 +1,12 @@
+Version 0.12.2
+    - wrap dialog text when width or geometry specified
+    - fix initial setup of motification icon
+    - fix timeout indicator orientation
+    - fix typo in man page and russian translation
+
+Version 0.12.1
+    - fix builds with gtk3
+
 Version 0.12.0
     - add icons to entry dialog
     - add --details option to calendar dialog
