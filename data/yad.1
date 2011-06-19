@@ -278,8 +278,8 @@ Optional argument is a text for confirmation dialog.
 .PP
 Font selection options
 .TP
-.B \-\-fontname=FILENAME
-Set the initial font.
+.B \-\-fontname=FONTNAME
+Set the initial font. \fIFONTNAME\fP is a string with font representation in the form \fI[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]\fP.
 .TP
 .B \-\-preview
 Set the preview text.
@@ -298,7 +298,7 @@ where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separato
 \fICBE\fP - editable combo-box field. Initial value same as for combo-box.
 \fIFL\fP - file selection button.
 \fIDIR\fP - directory selection button.
-\fIFN\fP - font selection button.
+\fIFN\fP - font selection button. Initial value same as in font dialog.
 \fIMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
 \fIDT\fP - date field.
 \fICLR\fP - color selection button.
