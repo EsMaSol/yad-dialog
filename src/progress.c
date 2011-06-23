@@ -91,6 +91,9 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 	    {
 	      gchar *match;
 
+#if GTK_CHECK_VERSION (2,91,0)
+	      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
+#endif
 	      /* We have a comment, so let's try to change the label */
 	      match = g_strstr_len (string->str, string->len, "#");
 	      match++;
@@ -151,12 +154,14 @@ progress_create_widget (GtkWidget * dlg)
   if (options.progress_data.percentage > -1)
     gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
 				   options.progress_data.percentage / 100.0);
-#if GTK_CHECK_VERSION (2,91,0)
-  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
-#endif
   if (options.progress_data.progress_text)
-    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
-			       options.progress_data.progress_text);
+    {
+#if GTK_CHECK_VERSION (2,91,0)
+      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
+#endif
+      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
+				 options.progress_data.progress_text);
+    }
 #if GTK_CHECK_VERSION (2,91,0)
   gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w),
 				 options.progress_data.rtl);
