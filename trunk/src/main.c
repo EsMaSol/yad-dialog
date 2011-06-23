@@ -184,6 +184,9 @@ create_dialog ()
       if (settings.show_remain)
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
+#if GTK_CHECK_VERSION (2,91,0)
+	  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
+#endif
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (topb), lbl);
           g_free (lbl);
         }
