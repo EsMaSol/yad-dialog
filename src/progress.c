@@ -92,7 +92,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 	      gchar *match;
 
 #if GTK_CHECK_VERSION (2,91,0)
-	      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
+	      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress_bar), TRUE);
 #endif
 	      /* We have a comment, so let's try to change the label */
 	      match = g_strstr_len (string->str, string->len, "#");
