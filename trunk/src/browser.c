@@ -40,7 +40,11 @@ typedef struct {
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
 {
+#if GTK_CHECK_VERSION (2,91,0)
+  if (ev->keyval == GDK_KEY_Escape)
+#else
   if (ev->keyval == GDK_Escape)
+#endif
     {
       gtk_main_quit ();
       return TRUE;
