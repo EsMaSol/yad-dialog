@@ -1,3 +1,40 @@
+2011-06-24 05:36  ananasik
+
+	* src/browser.c, src/progress.c: fix build with gtk-3.0
+
+2011-06-23 15:12  ananasik
+
+	* configure.ac: bump version to 0.12.3
+
+2011-06-23 15:11  ananasik
+
+	* src/progress.c: some updates for previous commit
+
+2011-06-23 14:58  ananasik
+
+	* data/yad.1, src/main.c, src/progress.c: fix progressbar text on
+	  gtk-3.0
+
+2011-06-19 10:10  ananasik
+
+	* data/yad.1: update man page
+
+2011-06-19 09:48  ananasik
+
+	* data/yad.1: fix issue 58
+
+2011-06-19 09:44  ananasik
+
+	* data/yad.1: fix typo in man page
+
+2011-06-18 18:03  ananasik
+
+	* NEWS:
+
+2011-06-18 18:01  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.12.2
+
 2011-06-18 17:57  ananasik
 
 	* src/main.c: fix previous commit
