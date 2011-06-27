@@ -12,7 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  */
@@ -33,12 +33,12 @@ yad_about (void)
       "it under the terms of the GNU General Public License as published by "
       "the Free Software Foundation; either version 3 of the License, or "
       "(at your option) any later version.\n\n"
-      "This program is distributed in the hope that it will be useful, "
+      "YAD is distributed in the hope that it will be useful, "
       "but WITHOUT ANY WARRANTY; without even the implied warranty of "
       "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the "
       "GNU General Public License for more details.\n\n"
       "You should have received a copy of the GNU General Public License "
-      "along with this program. If not, see <http://www.gnu.org/licenses/>.");
+      "along with YAD. If not, see <http://www.gnu.org/licenses/>.");
 
   dialog = gtk_about_dialog_new ();
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
