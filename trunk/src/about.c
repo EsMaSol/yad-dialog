@@ -12,11 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with YAD; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
- *
  */
 
 #include "yad.h"
@@ -31,7 +29,7 @@ yad_about (void)
   };
   gchar *translators = _("translator-credits");
   gchar *license =
-    _("This program is free software; you can redistribute it and/or modify "
+    _("YAD is free software; you can redistribute it and/or modify "
       "it under the terms of the GNU General Public License as published by "
       "the Free Software Foundation; either version 3 of the License, or "
       "(at your option) any later version.\n\n"
@@ -40,8 +38,7 @@ yad_about (void)
       "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the "
       "GNU General Public License for more details.\n\n"
       "You should have received a copy of the GNU General Public License "
-      "along with this program; if not, write to the Free Software "
-      "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.");
+      "along with this program. If not, see <http://www.gnu.org/licenses/>.");
 
   dialog = gtk_about_dialog_new ();
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
