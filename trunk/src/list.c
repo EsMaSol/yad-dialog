@@ -417,8 +417,6 @@ handle_stdin (GIOChannel * channel,
 	    case YAD_COLUMN_ATTR_FONT:
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
 	      break;
-            case YAD_COLUMN_TEXT:
-            case YAD_COLUMN_TOOLTIP:
             default:
               val = escape_markup (string->str);
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
@@ -493,8 +491,6 @@ fill_data (gint n_columns)
 		case YAD_COLUMN_ATTR_FONT:
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
 		  break;
-                case YAD_COLUMN_TEXT:
-                case YAD_COLUMN_TOOLTIP:
                 default:
                   val = escape_markup (args[i]);
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, val, -1);
@@ -574,6 +570,15 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 		    g_string_append_printf (cmd, " %lf", nval);
 		    break;
 		  }
+		case YAD_COLUMN_IMAGE:
+		  {
+		    g_string_append_printf (cmd, " ''");
+		    break;
+		  }
+		case YAD_COLUMN_ATTR_FORE:
+		case YAD_COLUMN_ATTR_BACK:
+		case YAD_COLUMN_ATTR_FONT:
+		  break;
 		default:
 		  {
 		    gchar *cval, *uval;
@@ -752,7 +757,7 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
 {
   YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, num);
 
-  /* don't print image or attributes */
+  /* don't print attributes */
   if (col->type == YAD_COLUMN_ATTR_FORE ||
       col->type == YAD_COLUMN_ATTR_BACK ||
       col->type == YAD_COLUMN_ATTR_FONT)
@@ -781,8 +786,8 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
         g_printf ("%lf", nval);
         break;
       }
-    case YAD_COLUMN_TOOLTIP:
-    case YAD_COLUMN_TEXT:
+    case YAD_COLUMN_IMAGE:
+      break;
     default:
       {
         gchar *cval, *uval;
