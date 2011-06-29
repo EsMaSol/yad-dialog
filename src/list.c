@@ -37,7 +37,17 @@ list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
   if (event->keyval == GDK_Return || event->keyval == GDK_KP_Enter)
 #endif
     {
-      gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      if (options.list_data.dclick_action)
+	{
+	  /* FIXME: check this under gtk-3.0 */
+	  if (event->state & GDK_CONTROL_MASK)
+	    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+	  else
+	    return FALSE;
+	}
+      else
+	gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      
       return TRUE;
     }
   return FALSE;
