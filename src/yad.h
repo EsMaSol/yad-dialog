@@ -113,7 +113,7 @@ typedef struct {
   gchar *dialog_image;
   gboolean image_on_top;
   gchar *icon_theme;
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
   gboolean dialog_sep;
 #endif
   GSList *buttons;
@@ -282,7 +282,7 @@ typedef struct {
   gboolean show_remain;
   gboolean rules_hint;
   gboolean always_selected;
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
   gboolean dlg_sep;
 #endif
   gboolean combo_always_editable;
