@@ -32,7 +32,7 @@ static GdkCursor *hand, *normal;
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
 {
-#if GTK_CHECK_VERSION (2,91,0)
+#if GTK_CHECK_VERSION(3,0,0)
   if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) &&
       (key->state & GDK_CONTROL_MASK))
 #else

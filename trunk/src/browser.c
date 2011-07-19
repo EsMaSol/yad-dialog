@@ -38,7 +38,7 @@ typedef struct {
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
 {
-#if GTK_CHECK_VERSION (2,91,0)
+#if GTK_CHECK_VERSION(3,0,0)
   if (ev->keyval == GDK_KEY_Escape)
 #else
   if (ev->keyval == GDK_Escape)
@@ -213,12 +213,20 @@ main (gint argc, gchar *argv[])
   g_signal_connect (G_OBJECT (data->win), "delete-event", G_CALLBACK (gtk_main_quit), NULL);
   g_signal_connect (G_OBJECT (data->win), "key-press-event", G_CALLBACK (key_press_cb), NULL);
 
+#if !GTK_CHECK_VERSION(3,0,0)
   box = gtk_vbox_new (FALSE, 5);
+#else
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
+#endif
   gtk_container_add (GTK_CONTAINER (data->win), box);
   gtk_container_set_border_width (GTK_CONTAINER (data->win), 5);
 
   /* create icon info box */
+#if !GTK_CHECK_VERSION(3,0,0)
   w = gtk_hbox_new (FALSE, 5);
+#else
+  w = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
+#endif
   gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 2);
   data->image = gtk_image_new ();
   gtk_box_pack_start (GTK_BOX (w), data->image, FALSE, FALSE, 2);

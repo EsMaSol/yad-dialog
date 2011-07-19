@@ -34,7 +34,7 @@ create_settings (gchar *filename)
 
   kf = g_key_file_new ();
 
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
   g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
   g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
 #endif
@@ -82,7 +82,7 @@ read_settings (void)
   settings.show_remain = FALSE;
   settings.rules_hint = TRUE;
   settings.always_selected = FALSE;
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
   settings.dlg_sep = FALSE;
 #endif
   settings.combo_always_editable = FALSE;
@@ -99,7 +99,7 @@ read_settings (void)
 
       if (g_key_file_load_from_file (kf, filename, G_KEY_FILE_NONE, NULL))
 	{
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
 	  if (g_key_file_has_key (kf, "General", "dialog_separator", NULL))
 	    settings.dlg_sep = g_key_file_get_boolean (kf, "General", "dialog_separator", NULL);
 #endif

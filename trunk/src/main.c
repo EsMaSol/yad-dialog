@@ -89,7 +89,7 @@ create_dialog ()
   /* create dialog window */
   dlg = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 #endif
 
@@ -144,38 +144,46 @@ create_dialog ()
     }
 
   /* add top label widgets */
+#if !GTK_CHECK_VERSION(3,0,0)
   hbox = hbox2 = gtk_hbox_new (FALSE, 0);
+#else
+  hbox = hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#endif
   gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
                       hbox, TRUE, TRUE, 5);
+#if !GTK_CHECK_VERSION(3,0,0)
   vbox = gtk_vbox_new (FALSE, 0);
+#else
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#endif
 
   /* add timeout indicator */
   if (topb)
     {
       if (g_ascii_strcasecmp (options.data.to_indicator, "top") == 0)
 	{
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_LEFT_TO_RIGHT);
 #endif
 	  gtk_box_pack_start (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
 	}
       else if (g_ascii_strcasecmp (options.data.to_indicator, "bottom") == 0)
 	{
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_LEFT_TO_RIGHT);
 #endif
 	  gtk_box_pack_end (GTK_BOX (vbox), topb, FALSE, FALSE, 2);
 	}
       else if (g_ascii_strcasecmp (options.data.to_indicator, "left") == 0)
 	{
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_BOTTOM_TO_TOP);
 #endif
 	  gtk_box_pack_start (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
 	}
       else if (g_ascii_strcasecmp (options.data.to_indicator, "right") == 0)
 	{
-#if !GTK_CHECK_VERSION (2,91,0)
+#if !GTK_CHECK_VERSION(3,0,0)
 	  gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (topb), GTK_PROGRESS_BOTTOM_TO_TOP);
 #endif
 	  gtk_box_pack_end (GTK_BOX (hbox), topb, FALSE, FALSE, 2);
@@ -183,7 +191,7 @@ create_dialog ()
       if (settings.show_remain)
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
-#if GTK_CHECK_VERSION (2,91,0)
+#if GTK_CHECK_VERSION(3,0,0)
 	  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
 #endif
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (topb), lbl);
@@ -196,7 +204,11 @@ create_dialog ()
 
   if (options.data.image_on_top)
     {
+#if !GTK_CHECK_VERSION(3,0,0)
       hbox2 = gtk_hbox_new (FALSE, 0);
+#else
+      hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#endif
       gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 0);
     }
 
@@ -393,11 +405,11 @@ main (gint argc, gchar ** argv)
     settings.icon_theme = gtk_icon_theme_get_default ();
   gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
   settings.big_fallback_image =
-    gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),
+    gtk_icon_theme_load_icon (settings.icon_theme, "yad", MIN (w, h),
                               GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
   gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
   settings.small_fallback_image =
-    gtk_icon_theme_load_icon (settings.icon_theme, "unknown", MIN (w, h),
+    gtk_icon_theme_load_icon (settings.icon_theme, "yad", MIN (w, h),
                               GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   ctx = yad_create_context ();

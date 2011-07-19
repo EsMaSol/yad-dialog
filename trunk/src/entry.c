@@ -30,42 +30,42 @@ entry_activate_cb (GtkEntry *entry, gpointer data)
 
 static void
 icon_cb (GtkEntry *entry, GtkEntryIconPosition pos,
-	 GdkEventButton *event, gpointer data)
+         GdkEventButton *event, gpointer data)
 {
   if (event->button == 1)
     {
       gchar *cmd = NULL;
 
       switch (pos)
-	{
-	case GTK_ENTRY_ICON_PRIMARY:
-	  cmd = options.entry_data.licon_action;
-	  break;
-	case GTK_ENTRY_ICON_SECONDARY:
-	  cmd = options.entry_data.ricon_action;
-	  break;
-	}
+        {
+        case GTK_ENTRY_ICON_PRIMARY:
+          cmd = options.entry_data.licon_action;
+          break;
+        case GTK_ENTRY_ICON_SECONDARY:
+          cmd = options.entry_data.ricon_action;
+          break;
+        }
 
       if (cmd)
-	{
-	  FILE *pf;
-	  gchar buf[1024];
-	  GString *str;
+        {
+          FILE *pf;
+          gchar buf[1024];
+          GString *str;
 
-	  str = g_string_new ("");
-	  pf = popen (cmd, "r");
-	  while (fgets (buf, sizeof (buf), pf))
-	    g_string_append (str, buf);
-	  if (pclose (pf) == 0)
-	    {
-	      if (str->str[str->len - 1] == '\n')
-		str->str[str->len - 1] = '\0';
-	      gtk_entry_set_text (GTK_ENTRY (entry), str->str);
-	    }
-	  g_string_free (str, TRUE);
-	}
+          str = g_string_new ("");
+          pf = popen (cmd, "r");
+          while (fgets (buf, sizeof (buf), pf))
+            g_string_append (str, buf);
+          if (pclose (pf) == 0)
+            {
+              if (str->str[str->len - 1] == '\n')
+                str->str[str->len - 1] = '\0';
+              gtk_entry_set_text (GTK_ENTRY (entry), str->str);
+            }
+          g_string_free (str, TRUE);
+        }
       else
-	gtk_entry_set_text (GTK_ENTRY (entry), "");
+        gtk_entry_set_text (GTK_ENTRY (entry), "");
 
       /* move cursor to the end of text */
       gtk_editable_set_position (GTK_EDITABLE (entry), -1);
@@ -84,11 +84,11 @@ create_completion_model (void)
   if (options.extra_data)
     {
       while (options.extra_data[i] != NULL)
-	{
-	  gtk_list_store_append (store, &iter);
-	  gtk_list_store_set (store, &iter, 0, options.extra_data[i], -1);
-	  i++;
-	}
+        {
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter, 0, options.extra_data[i], -1);
+          i++;
+        }
     }
 
   return GTK_TREE_MODEL (store);
@@ -99,15 +99,19 @@ entry_create_widget (GtkWidget *dlg)
 {
   GtkWidget *c, *w = NULL;
 
+#if !GTK_CHECK_VERSION(3,0,0)
   w = gtk_hbox_new (FALSE, 5);
+#else
+  w = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
+#endif
 
   if (options.entry_data.entry_label)
     {
       GtkWidget *l = gtk_label_new (NULL);
       if (!options.data.no_markup)
-	gtk_label_set_markup (GTK_LABEL (l), options.entry_data.entry_label);
+        gtk_label_set_markup (GTK_LABEL (l), options.entry_data.entry_label);
       else
-	gtk_label_set_text (GTK_LABEL (l), options.entry_data.entry_label);
+        gtk_label_set_text (GTK_LABEL (l), options.entry_data.entry_label);
       gtk_box_pack_start (GTK_BOX (w), l, FALSE, FALSE, 1);
     }
 
@@ -118,41 +122,41 @@ entry_create_widget (GtkWidget *dlg)
       min = 0.0; max = 65535.0; step = 1.0;
 
       if (options.extra_data && *options.extra_data)
-	{
-	  min = g_ascii_strtod (options.extra_data[0], NULL);
-	  if (options.extra_data[1])
-	    {
-	      max = g_ascii_strtod (options.extra_data[1], NULL);
-	      if (options.extra_data[2])
-		step = g_ascii_strtod (options.extra_data[2], NULL);
-	    }
-	}
+        {
+          min = g_ascii_strtod (options.extra_data[0], NULL);
+          if (options.extra_data[1])
+            {
+              max = g_ascii_strtod (options.extra_data[1], NULL);
+              if (options.extra_data[2])
+                step = g_ascii_strtod (options.extra_data[2], NULL);
+            }
+        }
 
       c = entry = gtk_spin_button_new_with_range (min, max, step);
 
       if (options.entry_data.entry_text)
-	{
-	  val = g_ascii_strtod (options.entry_data.entry_text, NULL);
+        {
+          val = g_ascii_strtod (options.entry_data.entry_text, NULL);
 
-	  if (min >= max)
-	    {
-	      g_printerr (_("Maximum value must be greater than minimum value.\n"));
-	      min = 0.0; max = 65535.0;
-	    }
+          if (min >= max)
+            {
+              g_printerr (_("Maximum value must be greater than minimum value.\n"));
+              min = 0.0; max = 65535.0;
+            }
 
- 	  if (val < min)
-	    {
-	      g_printerr (_("Initial value less than minimal.\n"));
-	      val = min;
-	    }
-	  else if (val > max)
-	    {
-	      g_printerr (_("Initial value greater than maximum.\n"));
-	      val = max;
-	    }
+          if (val < min)
+            {
+              g_printerr (_("Initial value less than minimal.\n"));
+              val = min;
+            }
+          else if (val > max)
+            {
+              g_printerr (_("Initial value greater than maximum.\n"));
+              val = max;
+            }
 
-	  gtk_spin_button_set_value (GTK_SPIN_BUTTON (c), val);
-	}
+          gtk_spin_button_set_value (GTK_SPIN_BUTTON (c), val);
+        }
     }
   else if (!options.entry_data.completion &&
       options.extra_data && *options.extra_data)
@@ -160,45 +164,45 @@ entry_create_widget (GtkWidget *dlg)
       gint i = 0;
 
       if (options.common_data.editable || settings.combo_always_editable)
-	{
+        {
 #if GTK_CHECK_VERSION(2,24,0)
-	  c = gtk_combo_box_text_new_with_entry ();
+          c = gtk_combo_box_text_new_with_entry ();
 #else
-	  c = gtk_combo_box_entry_new_text ();
+          c = gtk_combo_box_entry_new_text ();
 #endif
-	  entry = gtk_bin_get_child (GTK_BIN (c));
-	}
+          entry = gtk_bin_get_child (GTK_BIN (c));
+        }
       else
-	{
+        {
 #if GTK_CHECK_VERSION(2,24,0)
-	  c = entry = gtk_combo_box_text_new ();
+          c = entry = gtk_combo_box_text_new ();
 #else
-	  c = entry = gtk_combo_box_new_text ();
+          c = entry = gtk_combo_box_new_text ();
 #endif
-	  is_combo = TRUE;
-	}
+          is_combo = TRUE;
+        }
 
       while (options.extra_data[i] != NULL)
-	{
+        {
 #if GTK_CHECK_VERSION(2,24,0)
-	  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (c), options.extra_data[i]);
+          gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (c), options.extra_data[i]);
 #else
-	  gtk_combo_box_append_text (GTK_COMBO_BOX (c), options.extra_data[i]);
+          gtk_combo_box_append_text (GTK_COMBO_BOX (c), options.extra_data[i]);
 #endif
-	  i++;
-	}
+          i++;
+        }
 
       if (options.entry_data.entry_text)
-  	{
+        {
 #if GTK_CHECK_VERSION(2,24,0)
-  	  gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (c),
-  				      options.entry_data.entry_text);
+          gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (c),
+                                      options.entry_data.entry_text);
 #else
-  	  gtk_combo_box_prepend_text (GTK_COMBO_BOX (c),
-  				      options.entry_data.entry_text);
+          gtk_combo_box_prepend_text (GTK_COMBO_BOX (c),
+                                      options.entry_data.entry_text);
 #endif
-  	  gtk_combo_box_set_active (GTK_COMBO_BOX (c), 0);
-  	}
+          gtk_combo_box_set_active (GTK_COMBO_BOX (c), 0);
+        }
     }
   else
     {
@@ -207,47 +211,47 @@ entry_create_widget (GtkWidget *dlg)
       gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
 
       if (options.entry_data.entry_text)
-	gtk_entry_set_text (GTK_ENTRY (entry), options.entry_data.entry_text);
+        gtk_entry_set_text (GTK_ENTRY (entry), options.entry_data.entry_text);
 
       if (options.entry_data.hide_text)
-  	g_object_set (G_OBJECT (entry), "visibility", FALSE, NULL);
+        g_object_set (G_OBJECT (entry), "visibility", FALSE, NULL);
 
       if (options.entry_data.completion)
-	{
-	  GtkEntryCompletion *completion;
-	  GtkTreeModel *completion_model;
+        {
+          GtkEntryCompletion *completion;
+          GtkTreeModel *completion_model;
 
-	  completion = gtk_entry_completion_new ();
-	  gtk_entry_set_completion (GTK_ENTRY (entry), completion);
-	  g_object_unref (completion);
+          completion = gtk_entry_completion_new ();
+          gtk_entry_set_completion (GTK_ENTRY (entry), completion);
 
-	  completion_model = create_completion_model ();
-	  gtk_entry_completion_set_model (completion, completion_model);
-	  g_object_unref (completion_model);
+          completion_model = create_completion_model ();
+          gtk_entry_completion_set_model (completion, completion_model);
+          g_object_unref (completion_model);
 
-	  gtk_entry_completion_set_text_column (completion, 0);
-	}
+          gtk_entry_completion_set_text_column (completion, 0);
+          g_object_unref (completion);
+        }
 
       if (options.entry_data.licon)
-	{
-	  GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
+        {
+          GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
 
-	  if (pb)
-	    {
-	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
-	      g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
-	    }
-	}
+          if (pb)
+            {
+              gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
+              g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
+            }
+        }
       if (options.entry_data.ricon)
-	{
-	  GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
+        {
+          GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
 
-	  if (pb)
-	    {
-	      gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
-	      g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
-	    }
-	}
+          if (pb)
+            {
+              gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
+              g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
+            }
+        }
     }
 
   if (!is_combo)
