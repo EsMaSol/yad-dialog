@@ -145,7 +145,7 @@ form_create_widget (GtkWidget *dlg)
 	  YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
 	  /* add field label */
-	  if (fld->type != YAD_FIELD_CHECK)
+	  if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_LABEL)
 	    {
 	      l = gtk_label_new (NULL);
 	      if (!options.data.no_markup)
@@ -247,6 +247,28 @@ form_create_widget (GtkWidget *dlg)
 	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
+	      break;
+
+	    case YAD_FIELD_LABEL:
+	      if (fld->name[0])
+		{
+		  e = gtk_label_new (NULL);
+		  if (!options.data.no_markup)
+		    gtk_label_set_markup (GTK_LABEL (e), fld->name);
+		  else
+		    gtk_label_set_text (GTK_LABEL (e), fld->name);
+		  gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
+		}
+	      else
+		{
+#if GTK_CHECK_VERSION(3,0,0)
+		  e = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+		  e = gtk_hseparator_new ();
+#endif
+		}
+	      gtk_table_attach (GTK_TABLE (w), e, 0, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);      
 	      break;
 	    }
 	}
@@ -409,6 +431,9 @@ form_print_result (void)
 	    g_printf ("%s%s", gdk_color_to_string (&c), options.common_data.separator);
 	    break;
 	  }
+	case YAD_FIELD_LABEL:
+	  g_printf ("%s", options.common_data.separator);
+	  break;
 	}
     }
   g_printf ("\n");
