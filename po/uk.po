@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 09:03+0300\n"
+"POT-Creation-Date: 2011-07-24 09:52+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -81,19 +81,19 @@ msgstr "Початкове значення менше за мінімальне
 msgid "Initial value greater than maximum.\n"
 msgstr "Початкове значенння більше за маскимальне.\n"
 
-#: ../src/form.c:40
+#: ../src/form.c:47
 msgid "Select files"
 msgstr "Обрати файли"
 
-#: ../src/form.c:88
+#: ../src/form.c:95
 msgid "Select date"
 msgstr "Обрати дату"
 
-#: ../src/form.c:208
+#: ../src/form.c:217
 msgid "Select file"
 msgstr "Обрати файл"
 
-#: ../src/form.c:214
+#: ../src/form.c:223
 msgid "Select folder"
 msgstr "Обрати каталог"
 
@@ -497,10 +497,10 @@ msgstr "Відобразити діалог форми вводу"
 #: ../src/option.c:458
 msgid ""
 "Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, DIR, FN, MFL, DT, "
-"CLR or LBL)"
+"CLR, BTN or LBL)"
 msgstr ""
 "Додати поле до форми (Тип поля: Н, RO, NUM, CHK, CB, CBE, FL, DIR, FN. MFL, "
-"DT, CLR або LBL)"
+"DT, CLR, BTN або LBL)"
 
 #: ../src/option.c:459
 msgid "LABEL[:TYPE]"
@@ -787,161 +787,161 @@ msgstr "Показати діалог 'Про програму'"
 msgid "Print version"
 msgstr "Вивести версію"
 
-#: ../src/option.c:1032
+#: ../src/option.c:1034
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "Невідомий тип вирівнювання: %s\n"
 
-#: ../src/option.c:1051
+#: ../src/option.c:1053
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "Невідомий тип вирівнювання: %s\n"
 
-#: ../src/option.c:1081
+#: ../src/option.c:1083
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "Невідомий тип усікання: %s\n"
 
-#: ../src/option.c:1197
+#: ../src/option.c:1199
 msgid "File exist. Overwrite?"
 msgstr "Файл існує. Перезаписати?"
 
-#: ../src/option.c:1268
+#: ../src/option.c:1270
 msgid "Yet another dialoging program"
 msgstr "Програма для відображення діалогів"
 
 #. Adds general option entries
-#: ../src/option.c:1272
+#: ../src/option.c:1274
 msgid "General options"
 msgstr "Основні параметри"
 
-#: ../src/option.c:1273
+#: ../src/option.c:1275
 msgid "Show general options"
 msgstr "Показувати основні параметри"
 
 #. Adds calendar option entries
-#: ../src/option.c:1279
+#: ../src/option.c:1281
 msgid "Calendar options"
 msgstr "Параметри календаря"
 
-#: ../src/option.c:1280
+#: ../src/option.c:1282
 msgid "Show calendar options"
 msgstr "Показувати параметри календаря"
 
 #. Adds color option entries
-#: ../src/option.c:1286
+#: ../src/option.c:1288
 msgid "Color selection options"
 msgstr "Параметри діалога вибору коліра"
 
-#: ../src/option.c:1287
+#: ../src/option.c:1289
 msgid "Show color selection options"
 msgstr "Показувати параметри діалога вибору коліра"
 
 #. Adds dnd option entries
-#: ../src/option.c:1293
+#: ../src/option.c:1295
 msgid "DND options"
 msgstr "Параметри DND"
 
-#: ../src/option.c:1294
+#: ../src/option.c:1296
 msgid "Show drag-n-drop options"
 msgstr "Показувати параметри dnd"
 
 #. Adds entry option entries
-#: ../src/option.c:1300
+#: ../src/option.c:1302
 msgid "Text entry options"
 msgstr "Параметри вводу текста"
 
-#: ../src/option.c:1301
+#: ../src/option.c:1303
 msgid "Show text entry options"
 msgstr "Показувати параметри вводу текста"
 
 #. Adds file selection option entries
-#: ../src/option.c:1307
+#: ../src/option.c:1309
 msgid "File selection options"
 msgstr "Параметри діалога вибору файла"
 
-#: ../src/option.c:1308
+#: ../src/option.c:1310
 msgid "Show file selection options"
 msgstr "Показувати параметри діалога вибору файлів"
 
 #. Add font selection option entries
-#: ../src/option.c:1314
+#: ../src/option.c:1316
 msgid "Font selection options"
 msgstr "Параметри діалога вибору шрифта"
 
-#: ../src/option.c:1315
+#: ../src/option.c:1317
 msgid "Show font selection options"
 msgstr "Показувати параметри діалога вибору шрифта"
 
 #. Add form option entries
-#: ../src/option.c:1321
+#: ../src/option.c:1323
 msgid "Form options"
 msgstr "Параметри діалога форми"
 
-#: ../src/option.c:1322
+#: ../src/option.c:1324
 msgid "Show form options"
 msgstr "Показувати параметри діалога форми"
 
 #. Add icons option entries
-#: ../src/option.c:1328
+#: ../src/option.c:1330
 msgid "Icons box options"
 msgstr "Параметри діалога іконок"
 
-#: ../src/option.c:1329
+#: ../src/option.c:1331
 msgid "Show icons box options"
 msgstr "Показувати параметри діалога іконок швидкого доступа"
 
 #. Adds list option entries
-#: ../src/option.c:1335
+#: ../src/option.c:1337
 msgid "List options"
 msgstr "Параметри списка"
 
-#: ../src/option.c:1336
+#: ../src/option.c:1338
 msgid "Show list options"
 msgstr "Показувати параметри списка"
 
 #. Adds notification option entries
-#: ../src/option.c:1342
+#: ../src/option.c:1344
 msgid "Notification icon options"
 msgstr "Параметри іконки повідомлення"
 
-#: ../src/option.c:1343
+#: ../src/option.c:1345
 msgid "Show notification icon options"
 msgstr "Показувати параметри іконки повідомленнь"
 
 #. Adds progress option entries
-#: ../src/option.c:1349
+#: ../src/option.c:1351
 msgid "Progress options"
 msgstr "Параметри ходу прогреса"
 
-#: ../src/option.c:1350
+#: ../src/option.c:1352
 msgid "Show progress options"
 msgstr "Показувати параметри ходу прогреса"
 
 #. Adds scale option entries
-#: ../src/option.c:1356
+#: ../src/option.c:1358
 msgid "Scale options"
 msgstr "Параметри масштаба"
 
-#: ../src/option.c:1357
+#: ../src/option.c:1359
 msgid "Show scale options"
 msgstr "Показувати параметри масштаба"
 
 #. Adds text option entries
-#: ../src/option.c:1363
+#: ../src/option.c:1365
 msgid "Text information options"
 msgstr "Параметри текстової інформації"
 
-#: ../src/option.c:1364
+#: ../src/option.c:1366
 msgid "Show text information options"
 msgstr "Показувати параметри текстової інформації"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:1370
+#: ../src/option.c:1372
 msgid "Miscellaneous options"
 msgstr "Додаткові параметри"
 
-#: ../src/option.c:1371
+#: ../src/option.c:1373
 msgid "Show miscellaneous options"
 msgstr "Показувати додаткові параметри"
 
