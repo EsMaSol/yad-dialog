@@ -171,6 +171,20 @@ entry_create_widget (GtkWidget *dlg)
           c = gtk_combo_box_entry_new_text ();
 #endif
           entry = gtk_bin_get_child (GTK_BIN (c));
+	  if (options.entry_data.licon)
+	    {
+	      GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
+
+	      if (pb)
+		gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
+	    }
+	  if (options.entry_data.ricon)
+	    {
+	      GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
+
+	      if (pb)
+		gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
+	    }
         }
       else
         {
@@ -237,25 +251,21 @@ entry_create_widget (GtkWidget *dlg)
           GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
 
           if (pb)
-            {
-              gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
-              g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
-            }
+	    gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
         }
       if (options.entry_data.ricon)
         {
           GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
 
           if (pb)
-            {
-              gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
-              g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
-            }
+	    gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
         }
     }
 
   if (!is_combo)
     g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (entry_activate_cb), dlg);
+  if (options.entry_data.licon || options.entry_data.ricon)
+    g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
 
   gtk_box_pack_start (GTK_BOX (w), c, TRUE, TRUE, 1);
 
