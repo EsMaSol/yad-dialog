@@ -67,6 +67,7 @@ typedef enum {
   YAD_FIELD_FONT,
   YAD_FIELD_COLOR,
   YAD_FIELD_DATE,
+  YAD_FIELD_BUTTON,
   YAD_FIELD_LABEL,
 } YadFieldType;
 

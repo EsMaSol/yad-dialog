@@ -24,6 +24,13 @@
 static GSList *fields = NULL;
 
 static void
+button_clicked_cb (GtkButton *b, gchar *action)
+{
+  if (action && action[0])
+    g_spawn_command_line_async (action, NULL);
+}
+
+static void
 form_activate_cb (GtkEntry *entry, gpointer data)
 {
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
@@ -145,7 +152,9 @@ form_create_widget (GtkWidget *dlg)
 	  YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
 	  /* add field label */
-	  if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_LABEL)
+	  if (fld->type != YAD_FIELD_CHECK && 
+	      fld->type != YAD_FIELD_BUTTON &&
+	      fld->type != YAD_FIELD_LABEL)
 	    {
 	      l = gtk_label_new (NULL);
 	      if (!options.data.no_markup)
@@ -249,6 +258,12 @@ form_create_widget (GtkWidget *dlg)
 	      fields = g_slist_append (fields, e);
 	      break;
 
+	    case YAD_FIELD_BUTTON:
+	      e = gtk_button_new_from_stock (fld->name);
+	      gtk_table_attach (GTK_TABLE (w), e, 0, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      fields = g_slist_append (fields, e);      
+	      break;
+	      
 	    case YAD_FIELD_LABEL:
 	      if (fld->name[0])
 		{
@@ -363,6 +378,11 @@ form_create_widget (GtkWidget *dlg)
 		    gtk_color_button_set_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, i)), &c);
 		    break;
 		  }
+
+		case YAD_FIELD_BUTTON:
+		  g_signal_connect (G_OBJECT (g_slist_nth_data (fields, i)), "clicked", 
+				    G_CALLBACK (button_clicked_cb), options.extra_data[i]);
+		  break;
 		}
 	      i++;
 	    }
@@ -431,6 +451,7 @@ form_print_result (void)
 	    g_printf ("%s%s", gdk_color_to_string (&c), options.common_data.separator);
 	    break;
 	  }
+	case YAD_FIELD_BUTTON:
 	case YAD_FIELD_LABEL:
 	  g_printf ("%s", options.common_data.separator);
 	  break;
