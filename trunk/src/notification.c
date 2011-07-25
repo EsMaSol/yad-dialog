@@ -216,8 +216,8 @@ handle_stdin (GIOChannel * channel,
               icon = g_strstrip (value);
 
               if (gtk_status_icon_get_visible (status_icon) &&
-		  gtk_status_icon_is_embedded (status_icon))
-		set_icon ();
+                  gtk_status_icon_is_embedded (status_icon))
+                set_icon ();
             }
           else if (!g_ascii_strcasecmp (command, "tooltip"))
             {
@@ -243,21 +243,31 @@ handle_stdin (GIOChannel * channel,
                 }
               else
 #endif
-		if (!g_ascii_strcasecmp (value, "false"))
-		  gtk_status_icon_set_visible (status_icon, FALSE);
-		else
-		  gtk_status_icon_set_visible (status_icon, TRUE);
+                if (!g_ascii_strcasecmp (value, "false"))
+                  {
+                    gtk_status_icon_set_visible (status_icon, FALSE);
+#if !GTK_CHECK_VERSION(3,0,0)
+                    gtk_status_icon_set_blinking (status_icon, FALSE);
+#endif
+                  }
+              else
+                {
+                  gtk_status_icon_set_visible (status_icon, TRUE);
+#if !GTK_CHECK_VERSION(3,0,0)
+                  gtk_status_icon_set_blinking (status_icon, FALSE);
+#endif
+                }
             }
           else if (!g_ascii_strcasecmp (command, "action"))
             {
               g_free (action);
               action = g_strdup (value);
             }
-	  else if (!g_ascii_strcasecmp (command, "quit"))
-	    {
-	      exit_code = YAD_RESPONSE_OK;
-	      gtk_main_quit ();
-	    }
+          else if (!g_ascii_strcasecmp (command, "quit"))
+            {
+              exit_code = YAD_RESPONSE_OK;
+              gtk_main_quit ();
+            }
           else if (!g_ascii_strcasecmp (command, "menu"))
             {
               MenuData *mdata;
