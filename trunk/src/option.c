@@ -463,6 +463,12 @@ static GOptionEntry form_options[] = {
     set_align,
     N_("Set alignment of fileds labels (left, center or right)"),
     N_("TYPE") },
+  { "columns", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.form_data.columns,
+    N_("Set number of columns in form"),
+    N_("NUMBER") },
   { "separator", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
@@ -1205,6 +1211,7 @@ yad_options_init (void)
   /* Initialize form data */
   options.form_data.fields = NULL;
   options.form_data.align = 0.0;
+  options.form_data.columns = 1;
 
   /* Initialize icons data */
   options.icons_data.directory = NULL;

@@ -173,6 +173,7 @@ typedef struct {
 typedef struct {
   GSList *fields;
   gdouble align;
+  guint columns;
 } YadFormData;
 
 typedef struct {

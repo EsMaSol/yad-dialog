@@ -142,9 +142,14 @@ form_create_widget (GtkWidget *dlg)
     {
       GtkWidget *l, *e;
       GdkPixbuf *pb;
-      guint i, fc = g_slist_length (options.form_data.fields);
+      guint i, col, row, rows;
+      guint fc = g_slist_length (options.form_data.fields);
 
-      w = gtk_table_new (fc, 2, FALSE);
+      row = col = 0;
+      rows = (fc + 1) / options.form_data.columns;
+      printf ("rows %d\n", rows);
+
+      w = gtk_table_new (fc, 2 * options.form_data.columns, FALSE);
 
       /* create form */
       for (i = 0; i < fc; i++)
@@ -162,7 +167,7 @@ form_create_widget (GtkWidget *dlg)
 	      else
 		gtk_label_set_text (GTK_LABEL (l), fld->name);
 	      gtk_misc_set_alignment (GTK_MISC (l), options.form_data.align, 0.5);
-	      gtk_table_attach (GTK_TABLE (w), l, 0, 1, i, i + 1, GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), l, 0 + col * 2, 1 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
 	    }
 
 	  /* add field entry */
@@ -177,19 +182,19 @@ form_create_widget (GtkWidget *dlg)
 		gtk_entry_set_visibility (GTK_ENTRY (e), FALSE);
 	      else if (fld->type == YAD_FIELD_READ_ONLY)
 		gtk_widget_set_sensitive (e, FALSE);
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_NUM:
 	      e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_CHECK:
 	      e = gtk_check_button_new_with_label (fld->name);
-	      gtk_table_attach (GTK_TABLE (w), e, 0, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
@@ -199,7 +204,7 @@ form_create_widget (GtkWidget *dlg)
 #else
 	      e = gtk_combo_box_new_text ();
 #endif
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
@@ -209,41 +214,40 @@ form_create_widget (GtkWidget *dlg)
 #else
 	      e = gtk_combo_box_entry_new_text ();
 #endif
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_FILE:
 	      e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_DIR:
 	      e = gtk_file_chooser_button_new (_("Select folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_FONT:
 	      e = gtk_font_button_new ();
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_COLOR:
 	      e = gtk_color_button_new ();
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_MFILE:
 	      e = gtk_entry_new ();
-	      gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY,
-					     "gtk-directory");
+	      gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
 	      g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), e);
 	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
@@ -254,13 +258,13 @@ form_create_widget (GtkWidget *dlg)
 	      g_object_unref (pb);
 	      g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_date_cb), e);
 	      g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
-	      gtk_table_attach (GTK_TABLE (w), e, 1, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);
 	      break;
 
 	    case YAD_FIELD_BUTTON:
 	      e = gtk_button_new_from_stock (fld->name);
-	      gtk_table_attach (GTK_TABLE (w), e, 0, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);      
 	      break;
 	      
@@ -282,9 +286,17 @@ form_create_widget (GtkWidget *dlg)
 		  e = gtk_hseparator_new ();
 #endif
 		}
-	      gtk_table_attach (GTK_TABLE (w), e, 0, 2, i, i + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+	      gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);      
 	      break;
+	    }
+
+	  /* increase row and column */
+	  row++;
+	  if (i == rows - 1)
+	    {
+	      row = 0;
+	      col++;
 	    }
 	}
 
