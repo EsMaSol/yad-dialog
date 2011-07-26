@@ -264,6 +264,7 @@ form_create_widget (GtkWidget *dlg)
 
 	    case YAD_FIELD_BUTTON:
 	      e = gtk_button_new_from_stock (fld->name);
+          gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 	      gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 	      fields = g_slist_append (fields, e);      
 	      break;
