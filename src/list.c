@@ -546,9 +546,10 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 
   if (options.list_data.dclick_action)
     {
-      GString *cmd;
+      gchar *cmd;
+      GString *args;
 
-      cmd = g_string_new (options.list_data.dclick_action);
+      args = g_string_new ("");
 
       if (gtk_tree_model_get_iter (model, &iter, path))
 	{
@@ -563,26 +564,26 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 		  {
 		    gboolean bval;
 		    gtk_tree_model_get (model, &iter, i, &bval, -1);
-		    g_string_append_printf (cmd, " %s", bval ? "TRUE" : "FALSE");
+		    g_string_append_printf (args, " %s", bval ? "TRUE" : "FALSE");
 		    break;
 		  }
 		case YAD_COLUMN_NUM:
 		  {
 		    gint64 nval;
 		    gtk_tree_model_get (model, &iter, i, &nval, -1);
-		    g_string_append_printf (cmd, " %d", nval);
+		    g_string_append_printf (args, " %d", nval);
 		    break;
 		  }
 		case YAD_COLUMN_FLOAT:
 		  {
 		    gdouble nval;
 		    gtk_tree_model_get (model, &iter, i, &nval, -1);
-		    g_string_append_printf (cmd, " %lf", nval);
+		    g_string_append_printf (args, " %lf", nval);
 		    break;
 		  }
 		case YAD_COLUMN_IMAGE:
 		  {
-		    g_string_append_printf (cmd, " ''");
+		    g_string_append_printf (args, " ''");
 		    break;
 		  }
 		case YAD_COLUMN_ATTR_FORE:
@@ -594,7 +595,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 		    gchar *cval, *uval;
 		    gtk_tree_model_get (model, &iter, i, &cval, -1);
 		    uval = unescape_markup (cval);
-		    g_string_append_printf (cmd, " %s", uval);
+		    g_string_append_printf (args, " '%s'", uval);
 		    g_free (uval);
 		    break;
 		  }
@@ -602,8 +603,20 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 	    }
 	}
 
-      g_spawn_command_line_async (cmd->str, NULL);
-      g_string_free (cmd, TRUE);
+      if (g_strstr_len (options.list_data.dclick_action, -1, "%s"))
+	{
+	  static GRegex *regex = NULL;
+
+	  if (!regex)
+	    regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
+	  cmd = g_regex_replace_literal (regex, options.list_data.dclick_action, -1, 0, args->str, 0, NULL);
+	}
+      else
+	cmd = g_strdup_printf ("%s %s", options.list_data.dclick_action, args->str);
+      g_string_free (args, TRUE);
+
+      g_spawn_command_line_async (cmd, NULL);
+      g_free (cmd);
     }
   else
     {
