@@ -232,6 +232,7 @@ create_dialog ()
         gtk_label_set_markup (GTK_LABEL (text), buf);
       else
         gtk_label_set_text (GTK_LABEL (text), buf);
+      gtk_label_set_selectable (GTK_LABEL (text), TRUE);
       gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
       if (options.data.image_on_top)
         gtk_box_pack_start (GTK_BOX (hbox2), text, FALSE, FALSE, 2);
