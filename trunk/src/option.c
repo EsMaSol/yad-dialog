@@ -148,7 +148,7 @@ static GOptionEntry general_options[] = {
     0,
     G_OPTION_ARG_NONE,
     &options.data.selectable_labels,
-    N_("Text in labels can be selected"),
+    N_("Dialog text can be selected"),
     NULL },
   /* window settings */
   { "sticky", 0,
