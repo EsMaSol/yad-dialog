@@ -144,6 +144,12 @@ static GOptionEntry general_options[] = {
     &options.data.always_print,
     N_("Always print result"),
     NULL },
+  { "selectable-labels", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.data.selectable_labels,
+    N_("Text in labels can be selected"),
+    NULL },
   /* window settings */
   { "sticky", 0,
     0,
@@ -1155,6 +1161,7 @@ yad_options_init (void)
 #endif
   options.data.no_markup = FALSE;
   options.data.always_print = FALSE;
+  options.data.selectable_labels = FALSE;
 
   /* Initialize window options */
   options.data.sticky = FALSE;
