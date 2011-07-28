@@ -107,6 +107,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
   GtkTreeModel *model = NULL;
   GtkTreePath *path = NULL;
   GtkTreeIter iter;
+  gint cnum = -1;
 
   if (gtk_tree_view_get_tooltip_context (GTK_TREE_VIEW (list_view), &x, &y, kmode,
 					 &model, &path, &iter))
@@ -121,26 +122,20 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	{
 	  GtkTreeViewColumn *checkcol = (GtkTreeViewColumn*) node->data;
 
+	  cnum++;
 	  if (x >= colx  &&  x < (colx + gtk_tree_view_column_get_width (checkcol)))
 	    col = checkcol;
 	  else
 	    colx += gtk_tree_view_column_get_width (checkcol);
+	  
 	}
       g_list_free(cols);
 
       /* set tolltip */
       if (col)
 	{
-	  gint cnum;
-	  GList *cells;
-	  GtkCellRenderer *cell;
 	  YadColumn *yc;
 	  gchar *text = NULL;
-
-	  cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (col));
-	  cell = GTK_CELL_RENDERER (g_list_nth_data (cells, 0));
-	  cnum = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
-	  g_list_free (cells);
 
 	  yc = (YadColumn *) g_slist_nth_data (options.list_data.columns, cnum);
 	  switch (yc->type)
