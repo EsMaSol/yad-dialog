@@ -75,19 +75,6 @@ timeout_indicator_cb (gpointer data)
   return TRUE;
 }
 
-static void
-activate_link_cb (GtkWidget *w, const gchar *uri, gpointer data)
-{
-  gchar *cmd;
-
-  if (!uri || !uri[0])
-    return;
-
-  cmd = g_strdup_printf ("xdg-open '%s'", uri);
-  g_spawn_command_line_async (cmd, NULL);
-  g_free (cmd);
-}
-
 GtkWidget *
 create_dialog ()
 {
@@ -241,14 +228,10 @@ create_dialog ()
       gchar *buf = g_strcompress (options.data.dialog_text);
       text = gtk_label_new (NULL);
       if (!options.data.no_markup)
-	{
-	  gtk_label_set_markup (GTK_LABEL (text), buf);
-	  g_signal_connect (G_OBJECT (text), "activate-link",
-	  		    G_CALLBACK (activate_link_cb), NULL);
-	}
+	gtk_label_set_markup (GTK_LABEL (text), buf);
       else
         gtk_label_set_text (GTK_LABEL (text), buf);
-      gtk_label_set_selectable (GTK_LABEL (text), TRUE);
+      gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
       gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
       if (options.data.image_on_top)
         gtk_box_pack_start (GTK_BOX (hbox2), text, FALSE, FALSE, 2);

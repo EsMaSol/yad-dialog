@@ -133,19 +133,6 @@ select_date_cb (GtkEntry *entry, GtkEntryIconPosition pos,
     }
 }
 
-static void
-activate_link_cb (GtkWidget *w, const gchar *uri, gpointer data)
-{
-  gchar *cmd;
-
-  if (!uri || !uri[0])
-    return;
-
-  cmd = g_strdup_printf ("xdg-open '%s'", uri);
-  g_spawn_command_line_async (cmd, NULL);
-  g_free (cmd);
-}
-
 GtkWidget *
 form_create_widget (GtkWidget *dlg)
 {
@@ -287,14 +274,10 @@ form_create_widget (GtkWidget *dlg)
                 {
                   e = gtk_label_new (NULL);
                   if (!options.data.no_markup)
-                    {
-                      gtk_label_set_markup (GTK_LABEL (e), fld->name);
-                      g_signal_connect (G_OBJECT (e), "activate-link", 
-                                        G_CALLBACK (activate_link_cb), NULL);
-                    }
+		    gtk_label_set_markup (GTK_LABEL (e), fld->name);
                   else
                     gtk_label_set_text (GTK_LABEL (e), fld->name);
-                  gtk_label_set_selectable (GTK_LABEL (e), TRUE);
+                  gtk_label_set_selectable (GTK_LABEL (e), options.data.selectable_labels);
                   gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
                 }
               else
