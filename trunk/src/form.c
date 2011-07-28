@@ -277,6 +277,7 @@ form_create_widget (GtkWidget *dlg)
 		    gtk_label_set_markup (GTK_LABEL (e), fld->name);
 		  else
 		    gtk_label_set_text (GTK_LABEL (e), fld->name);
+          gtk_label_set_selectable (GTK_LABEL (e), TRUE);
 		  gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
 		}
 	      else
