@@ -36,6 +36,12 @@ form_activate_cb (GtkEntry *entry, gpointer data)
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
+static void 
+text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data) 
+{
+  gtk_widget_set_size_request (w, al->width, -1);
+}
+
 static void
 select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
                  GdkEventButton *event, gpointer data)
@@ -147,7 +153,6 @@ form_create_widget (GtkWidget *dlg)
 
       row = col = 0;
       rows = (fc + 1) / options.form_data.columns;
-      printf ("rows %d\n", rows);
 
       w = gtk_table_new (fc, 2 * options.form_data.columns, FALSE);
 
@@ -277,8 +282,11 @@ form_create_widget (GtkWidget *dlg)
 		    gtk_label_set_markup (GTK_LABEL (e), fld->name);
                   else
                     gtk_label_set_text (GTK_LABEL (e), fld->name);
+		  gtk_label_set_line_wrap (GTK_LABEL (e), TRUE);
                   gtk_label_set_selectable (GTK_LABEL (e), options.data.selectable_labels);
                   gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
+		  g_signal_connect_after (G_OBJECT (e), "size-allocate",
+					  G_CALLBACK (text_size_allocate_cb), NULL);
                 }
               else
                 {
