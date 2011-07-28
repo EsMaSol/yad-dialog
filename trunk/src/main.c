@@ -234,7 +234,6 @@ create_dialog ()
       g_object_unref (pb);
 
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
-      gtk_misc_set_padding (GTK_MISC (image), 5, 5);
       gtk_box_pack_start (GTK_BOX (hbox2), image, FALSE, FALSE, 2);
     }
   if (options.data.dialog_text)
