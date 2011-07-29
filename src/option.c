@@ -143,7 +143,7 @@ static GOptionEntry general_options[] = {
     G_OPTION_ARG_INT,
     &options.data.borders,
     N_("Set window borders"),
-    N_("NUM") },
+    N_("NUMBER") },
   { "always-print-result", 0,
     0,
     G_OPTION_ARG_NONE,

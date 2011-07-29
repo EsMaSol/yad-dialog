@@ -115,7 +115,10 @@ Don't use pango markup in dialog's text.
 Always print result. 
 .TP
 .B \-\-dialog-sep
-Show separator between dialog and buttons.
+Show separator between dialog and buttons. Works only with gtk+-2.0.
+.TP
+.B \-\-borders=NUM
+Set dialog window borders.
 .TP
 .B \-\-sticky
 Make window visible on all desktops.
@@ -559,6 +562,51 @@ The dialog has been closed because the timeout has been reached.
 The dialog has been closed by pressing \fIEsc\fP or used the window functions to close the dialog
 .TP
 Exit codes for user-specified buttons must be specified in command line. Even exit code mean to print result, odd just return exit code.
+
+.SH WIDGETS NAMES
+.TP
+The look and feel of yad's dialogs can be customized through gtkrc file. Here is the names of yad's widgets:
+
+.TS
+tab (@);
+l l l.
+.B 
+Widget name@Widget type@Description
+_
+yad-dialog-window@GtkDialog@Dialog window
+yad-dialog-image@GtkImage@Dialog image
+yad-dialog-label@GtkLabel@Dialog text
+yad-calendar-widget@GtkCalendar@Calendar widget
+yad-color-widget@GtkColorChooser@Color selection widget
+yad-color-palette@GtkTreeView@Predefined colors list
+yad-entry-label@GtkLabel@Entry label
+yad-entry-widget@GtkEntry@Entry widget
+yad-entry-spin@GtkSpinButton@Entry widget for numeric values
+yad-entry-combo@GtkComboBox@Entry widget with combo
+yad-entry-edit-combo@GtkComboBoxEntry@Entry widget with editable combo
+yad-file-widget@GtkFileChooser@File selection widget
+yad-font-widget@GtkFontChooser@Font selection widget
+yad-form-flabel@GtkLabel@Field label in form
+yad-form-button@GtkButton@Button field in form
+yad-form-entry@GtkEntrfy@Entry field in form
+yad-form-spin@GtkSpinButton@Numeric entry field in form
+yad-form-check@GtkCheckButton@Checkbox field in form
+yad-form-combo@GtkComboBox@Combo field in form
+yad-form-edit-combo@GtkComboBoxEntry@Editable combo field in form
+yad-form-file@GtkFileChooserButton@File or directory field in form
+yad-form-font@GtkFontChooserButton@Font field in form
+yad-form-color@GtkColorChooserButton@Color field in form
+yad-form-label@GtkLabel@Label field in form
+yad-form-separator@GtkHSeparator@ Separator in form
+yad-icons-full@GtkIconView@Icons widget for normal mode
+yad-icons-compact@GtkTreeView@Icons widget for compact mode
+yad-list-widget@GtkTreeView@List widget
+yad-progress-widget@GtkProgressBar@Progressbar widget
+yad-vscale-widget@GtkScale@Vertical scale widget
+yad-hscale-widget@GtkScale@Horizontal scale widget
+yad-text-widget@GtkTextView@Text info widget
+yad-timeout-indicator@GtkProgreeBar@Timeout indicator
+.TE
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to
