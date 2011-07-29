@@ -713,6 +713,7 @@ list_create_widget (GtkWidget *dlg)
   model = create_model (n_columns);
 
   list_view = gtk_tree_view_new_with_model (model);
+  gtk_widget_set_name (list_view, "yad-list-widget");
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list_view), !options.list_data.no_headers);
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list_view), settings.rules_hint);
   gtk_tree_view_set_reorderable (GTK_TREE_VIEW (list_view), options.common_data.editable);

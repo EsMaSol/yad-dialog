@@ -79,6 +79,7 @@ file_create_widget (GtkWidget *dlg)
     }
 
   w = filechooser = gtk_file_chooser_widget_new (action);
+  gtk_widget_set_name (w, "yad-file-widget");
 
   if (options.common_data.uri)
     {

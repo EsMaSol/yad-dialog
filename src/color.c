@@ -121,6 +121,7 @@ color_create_widget (GtkWidget *dlg)
 #endif
 
   color = gtk_color_selection_new ();
+  gtk_widget_set_name (color, "yad-color-widget");
   gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (color), settings.show_gtk_palette);
   if (options.color_data.init_color)
     {
@@ -156,6 +157,7 @@ color_create_widget (GtkWidget *dlg)
 	  gtk_container_add (GTK_CONTAINER (exp), sw);
 
 	  list = gtk_tree_view_new_with_model (model);
+	  gtk_widget_set_name (list, "yad-color-palette");
 	  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), settings.rules_hint);
 	  g_object_unref (model);
 	  gtk_container_add (GTK_CONTAINER (sw), list);

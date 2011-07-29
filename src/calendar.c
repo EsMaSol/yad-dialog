@@ -93,6 +93,7 @@ calendar_create_widget (GtkWidget *dlg)
   GtkWidget *w;
 
   w = calendar = gtk_calendar_new ();
+  gtk_widget_set_name (w, "yad-calendar-widget");
 
   if (options.calendar_data.month > 0 || options.calendar_data.year > 0)
     gtk_calendar_select_month (GTK_CALENDAR (w),

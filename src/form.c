@@ -171,6 +171,7 @@ form_create_widget (GtkWidget *dlg)
                 gtk_label_set_markup (GTK_LABEL (l), fld->name);
               else
                 gtk_label_set_text (GTK_LABEL (l), fld->name);
+	      gtk_widget_set_name (l, "yad-form-flabel");
               gtk_misc_set_alignment (GTK_MISC (l), options.form_data.align, 0.5);
               gtk_table_attach (GTK_TABLE (w), l, 0 + col * 2, 1 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
             }
@@ -182,6 +183,7 @@ form_create_widget (GtkWidget *dlg)
             case YAD_FIELD_HIDDEN:
             case YAD_FIELD_READ_ONLY:
               e = gtk_entry_new ();
+	      gtk_widget_set_name (e, "yad-form-entry");
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
               if (fld->type == YAD_FIELD_HIDDEN)
                 gtk_entry_set_visibility (GTK_ENTRY (e), FALSE);
@@ -193,12 +195,14 @@ form_create_widget (GtkWidget *dlg)
 
             case YAD_FIELD_NUM:
               e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
+	      gtk_widget_set_name (e, "yad-form-spin");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
 
             case YAD_FIELD_CHECK:
               e = gtk_check_button_new_with_label (fld->name);
+	      gtk_widget_set_name (e, "yad-form-check");
               gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
@@ -209,6 +213,7 @@ form_create_widget (GtkWidget *dlg)
 #else
               e = gtk_combo_box_new_text ();
 #endif
+	      gtk_widget_set_name (e, "yad-form-combo");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
@@ -219,36 +224,42 @@ form_create_widget (GtkWidget *dlg)
 #else
               e = gtk_combo_box_entry_new_text ();
 #endif
+      	      gtk_widget_set_name (e, "yad-form-edit-combo");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
 
             case YAD_FIELD_FILE:
               e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+	      gtk_widget_set_name (e, "yad-form-file");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
 
             case YAD_FIELD_DIR:
               e = gtk_file_chooser_button_new (_("Select folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+	      gtk_widget_set_name (e, "yad-form-file");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
 
             case YAD_FIELD_FONT:
               e = gtk_font_button_new ();
+	      gtk_widget_set_name (e, "yad-form-font");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
 
             case YAD_FIELD_COLOR:
               e = gtk_color_button_new ();
+	      gtk_widget_set_name (e, "yad-form-color");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
 
             case YAD_FIELD_MFILE:
               e = gtk_entry_new ();
+	      gtk_widget_set_name (e, "yad-form-entry");
               gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
               g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), e);
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
@@ -258,6 +269,7 @@ form_create_widget (GtkWidget *dlg)
 
             case YAD_FIELD_DATE:
               e = gtk_entry_new ();
+	      gtk_widget_set_name (e, "yad-form-entry");
               pb = gdk_pixbuf_new_from_xpm_data (calendar_xpm);
               gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, pb);
               g_object_unref (pb);
@@ -269,6 +281,7 @@ form_create_widget (GtkWidget *dlg)
 
             case YAD_FIELD_BUTTON:
               e = gtk_button_new_from_stock (fld->name);
+	      gtk_widget_set_name (e, "yad-form-button");
               gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
               gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);      
@@ -278,6 +291,7 @@ form_create_widget (GtkWidget *dlg)
               if (fld->name[0])
                 {
                   e = gtk_label_new (NULL);
+		  gtk_widget_set_name (e, "yad-form-label");
                   if (!options.data.no_markup)
 		    gtk_label_set_markup (GTK_LABEL (e), fld->name);
                   else
@@ -295,6 +309,7 @@ form_create_widget (GtkWidget *dlg)
 #else
                   e = gtk_hseparator_new ();
 #endif
+		  gtk_widget_set_name (e, "yad-form-separator");
                 }
               gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);      

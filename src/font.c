@@ -35,6 +35,7 @@ font_create_widget (GtkWidget *dlg)
   GtkWidget *w;
 
   w = font = gtk_font_selection_new ();
+  gtk_widget_set_name (w, "yad-font-widget");
 
   if (options.font_data.preview)
     gtk_font_selection_set_preview_text (GTK_FONT_SELECTION (w), options.font_data.preview);
