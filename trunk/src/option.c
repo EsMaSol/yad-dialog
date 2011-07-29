@@ -138,6 +138,12 @@ static GOptionEntry general_options[] = {
     N_("Add separator between dialog and buttons"),
     NULL },
 #endif
+  { "borders", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.data.borders,
+    N_("Set window borders"),
+    N_("NUM") },
   { "always-print-result", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -1159,6 +1165,7 @@ yad_options_init (void)
 #if !GTK_CHECK_VERSION(3,0,0)
   options.data.dialog_sep = settings.dlg_sep;
 #endif
+  options.data.borders = -1;
   options.data.no_markup = FALSE;
   options.data.always_print = FALSE;
   options.data.selectable_labels = FALSE;
