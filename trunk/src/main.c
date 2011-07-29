@@ -98,6 +98,7 @@ create_dialog ()
 #if !GTK_CHECK_VERSION(3,0,0)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 #endif
+  gtk_widget_set_name (dlg, "yad-dialog-window");
 
   /* set window icon */
   if (options.data.window_icon)
@@ -231,6 +232,7 @@ create_dialog ()
       image = gtk_image_new_from_pixbuf (pb);
       g_object_unref (pb);
 
+      gtk_widget_set_name (image, "yad-dialog-image");
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
       gtk_box_pack_start (GTK_BOX (hbox2), image, FALSE, FALSE, 2);
     }
@@ -243,6 +245,7 @@ create_dialog ()
 	gtk_label_set_markup (GTK_LABEL (text), buf);
       else
         gtk_label_set_text (GTK_LABEL (text), buf);
+      gtk_widget_set_name (text, "yad-dialog-label");
       gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
       gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
       if (options.data.geometry || options.data.width != -1)

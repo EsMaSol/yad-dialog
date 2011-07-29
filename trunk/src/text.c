@@ -312,6 +312,7 @@ text_create_widget (GtkWidget * dlg)
 				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   text_view = gtk_text_view_new ();
+  gtk_widget_set_name (text_view, "yad-text-widget");
   text_buffer = gtk_text_buffer_new (NULL);
   gtk_text_view_set_buffer (GTK_TEXT_VIEW (text_view), text_buffer);
   gtk_text_view_set_justification (GTK_TEXT_VIEW (text_view), options.text_data.justify);

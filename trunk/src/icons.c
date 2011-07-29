@@ -329,6 +329,7 @@ icons_create_widget (GtkWidget *dlg)
   if (!options.icons_data.compact)
     {
       icon_view = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
+      gtk_widget_set_name (icon_view, "yad-icons-full");
       gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view), COL_NAME);
       gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
       gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
@@ -340,6 +341,7 @@ icons_create_widget (GtkWidget *dlg)
       GtkTreeViewColumn *col;
 
       icon_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+      gtk_widget_set_name (icon_view, "yad-icons-compact");
       gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (icon_view), FALSE);
 
       col = gtk_tree_view_column_new ();

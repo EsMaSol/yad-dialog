@@ -60,6 +60,7 @@ scale_create_widget (GtkWidget *dlg)
       w = scale = gtk_vscale_new_with_range (options.scale_data.min_value,
 					     options.scale_data.max_value,
 					     options.scale_data.step);
+      gtk_widget_set_name (w, "yad-vscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), !options.scale_data.invert);
     }
   else
@@ -67,6 +68,7 @@ scale_create_widget (GtkWidget *dlg)
       w = scale = gtk_hscale_new_with_range (options.scale_data.min_value,
 					     options.scale_data.max_value,
 					     options.scale_data.step);
+      gtk_widget_set_name (w, "yad-hscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), options.scale_data.invert);
     }
   gtk_range_set_value (GTK_RANGE (w), options.scale_data.value);

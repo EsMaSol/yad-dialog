@@ -148,6 +148,7 @@ progress_create_widget (GtkWidget * dlg)
   GIOChannel *channel;
 
   w = progress_bar = gtk_progress_bar_new ();
+  gtk_widget_set_name (w, "yad-progress-widget");
 
   if (options.progress_data.percentage > -1)
     gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),

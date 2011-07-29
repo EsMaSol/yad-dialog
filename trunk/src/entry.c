@@ -112,6 +112,7 @@ entry_create_widget (GtkWidget *dlg)
         gtk_label_set_markup (GTK_LABEL (l), options.entry_data.entry_label);
       else
         gtk_label_set_text (GTK_LABEL (l), options.entry_data.entry_label);
+      gtk_widget_set_name (l, "yad-entry-label");
       gtk_box_pack_start (GTK_BOX (w), l, FALSE, FALSE, 1);
     }
 
@@ -133,6 +134,7 @@ entry_create_widget (GtkWidget *dlg)
         }
 
       c = entry = gtk_spin_button_new_with_range (min, max, step);
+      gtk_widget_set_name (entry, "yad-entry-spin");
 
       if (options.entry_data.entry_text)
         {
@@ -170,6 +172,7 @@ entry_create_widget (GtkWidget *dlg)
 #else
           c = gtk_combo_box_entry_new_text ();
 #endif
+	  gtk_widget_set_name (c, "yad-entry-edit-combo");
           entry = gtk_bin_get_child (GTK_BIN (c));
 	  if (options.entry_data.licon)
 	    {
@@ -193,6 +196,7 @@ entry_create_widget (GtkWidget *dlg)
 #else
           c = entry = gtk_combo_box_new_text ();
 #endif
+	  gtk_widget_set_name (c, "yad-entry-combo");
           is_combo = TRUE;
         }
 
@@ -221,6 +225,7 @@ entry_create_widget (GtkWidget *dlg)
   else
     {
       c = entry = gtk_entry_new ();
+      gtk_widget_set_name (c, "yad-entry-widget");
 
       gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
 
