@@ -117,6 +117,11 @@ create_dialog ()
         gtk_window_set_icon_name (GTK_WINDOW (dlg), options.data.window_icon);
     }
 
+  /* set window borders */
+  if (options.data.borders == -1)
+    options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (dlg));
+  gtk_container_set_border_width (GTK_CONTAINER (dlg), (guint) options.data.borders);
+
   /* set window behavior */
   if (options.data.sticky)
     gtk_window_stick (GTK_WINDOW (dlg));
