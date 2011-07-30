@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YAD 0.6.0\n"
+"Project-Id-Version: YAD 0.12.90\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-29 18:04+0300\n"
-"PO-Revision-Date: 2011-03-27 18:30+0200\n"
+"PO-Revision-Date: 2011-07-30 07:41+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <nomail>\n"
 "Language: \n"
@@ -23,7 +23,6 @@ msgid "translator-credits"
 msgstr "Slavko <linux@slavino.sk>"
 
 #: ../src/about.c:32
-#, fuzzy
 msgid ""
 "YAD is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -38,19 +37,17 @@ msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "YAD. If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"Tento program je slobodný softvér; môžete ho redistribuovať a/alebo "
-"modifikovať podľa podmienok GNU General Public License ako je zverejnená "
-"Free Software Foundation; buď verzie 3 Licencie alebo (ak chcete) akejkoľvek "
-"novšej verzie.\n"
+"YAD je slobodný softvér; môžete ho redistribuovať a/alebo modifikovať podľa "
+"podmienok GNU General Public License ako je zverejnená Free Software "
+"Foundation; buď verzie 3 Licencie alebo (ak chcete) akejkoľvek novšej "
+"verzie.\n"
 "\n"
-"Tento program je distribuovaný v nádeji, že bude užitočný, ale BEZ "
-"AKEJKOĽVEK ZÁRUKY; dokonca bez implicitnej záruky POUŽITEĽNOSTI alebo "
-"VHODNOSTI PRE PRÍSLUŠNÝ CIEĽ.  Ďalšie detaily hľadajte v GNU General Public "
-"License.\n"
+"YAD je distribuovaný v nádeji, že bude užitočný, ale BEZ AKEJKOĽVEK ZÁRUKY; "
+"dokonca bez implicitnej záruky POUŽITEĽNOSTI alebo VHODNOSTI PRE PRÍSLUŠNÝ "
+"CIEĽ.  Ďalšie detaily hľadajte v GNU General Public License.\n"
 "\n"
-"Kópiu GNU General Public License musíte dostať s týmto programom; ak nie, "
-"napíšte si o ňu Free Software Foundation, Inc., 51 Franklin Street, Fifth "
-"Floor, Boston, MA 02110-1301, USA."
+"Kópiu GNU General Public License by ste mali dostať spolu s YAD. Ak nie, "
+"pozrite si <http://www.gnu.org/licenses/>."
 
 #: ../src/about.c:50
 msgid ""
@@ -85,14 +82,12 @@ msgid "Initial value greater than maximum.\n"
 msgstr "Maximálna hodnota je väčšia ako minimálna.\n"
 
 #: ../src/form.c:53
-#, fuzzy
 msgid "Select files"
-msgstr "Vyberte súbor"
+msgstr "Vyberte súbory"
 
 #: ../src/form.c:101
-#, fuzzy
 msgid "Select date"
-msgstr "Vyberte pole"
+msgstr "Vyberte dátum"
 
 #: ../src/form.c:233
 msgid "Select file"
@@ -265,9 +260,8 @@ msgid "Add separator between dialog and buttons"
 msgstr "Pridať oddeľovač medzi dialóg a tlačidlá"
 
 #: ../src/option.c:145
-#, fuzzy
 msgid "Set window borders"
-msgstr "Nastaviť pevnú veľkosť okna"
+msgstr "Nastaviť okraje okna"
 
 #: ../src/option.c:146 ../src/option.c:483 ../src/option.c:631
 #: ../src/option.c:637 ../src/option.c:643 ../src/option.c:649
@@ -281,7 +275,7 @@ msgstr "Vždy vypísať výsledok"
 
 #: ../src/option.c:157
 msgid "Dialog text can be selected"
-msgstr ""
+msgstr "Text dialógu môže byť vybratý"
 
 #: ../src/option.c:164
 msgid "Set window sticky"
@@ -308,9 +302,8 @@ msgid "Set window undecorated"
 msgstr "Odobrať dekorácie okna"
 
 #: ../src/option.c:200
-#, fuzzy
 msgid "Don't show window in taskbar"
-msgstr "Nezobrazovať tlačidlá"
+msgstr "Nezobrazovať okno v paneli úloh"
 
 #: ../src/option.c:207
 msgid "Send TERM to parent"
@@ -353,9 +346,8 @@ msgid "PATTERN"
 msgstr "VZOR"
 
 #: ../src/option.c:248
-#, fuzzy
 msgid "Set the filename with dates details"
-msgstr "Nastaviť meno súboru"
+msgstr "Nastaviť meno súboru s podrobnosťami dátumu"
 
 #: ../src/option.c:249 ../src/option.c:277 ../src/option.c:391
 #: ../src/option.c:860
@@ -428,24 +420,20 @@ msgid "Allow changes to text in combo-box"
 msgstr "Povoliť zmeny textu v rozbaľovacom zozname"
 
 #: ../src/option.c:350
-#, fuzzy
 msgid "Set the left entry icon"
-msgstr "Nastaviť položku textu"
+msgstr "Nastaviť ikonu ľavého tlačidla"
 
 #: ../src/option.c:356
-#, fuzzy
 msgid "Set the left entry icon action"
-msgstr "Nastaviť akciu ľavého tlačidla myši"
+msgstr "Nastaviť ikonu akcie ľavého tlačidla"
 
 #: ../src/option.c:362
-#, fuzzy
 msgid "Set the right entry icon"
-msgstr "Nastaviť ikonu okna"
+msgstr "Nastaviť ikonu pravého tlačidla"
 
 #: ../src/option.c:368
-#, fuzzy
 msgid "Set the right entry icon action"
-msgstr "Zobraziť voľby textovej položky"
+msgstr "Nastaviť ikonu akcie pravého tlačidla"
 
 #: ../src/option.c:378
 msgid "Display file selection dialog"
@@ -521,12 +509,12 @@ msgid "Display form dialog"
 msgstr "Zobraziť dialóg Formulár"
 
 #: ../src/option.c:470
-#, fuzzy
 msgid ""
 "Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, DIR, FN, MFL, DT, "
 "CLR, BTN or LBL)"
 msgstr ""
-"Pridať do formulára pole (TYP – H RO, NUM, CHK, CB, FL, DIR, FN alebo CLR)"
+"Pridať pole do formulára (TYP – H RO, NUM, CHK, CB, CBE, FL, DIR, FN, MFL, "
+"DT, CLR, BTN alebo LBL)"
 
 #: ../src/option.c:471
 msgid "LABEL[:TYPE]"
@@ -542,7 +530,7 @@ msgstr "TYP"
 
 #: ../src/option.c:482
 msgid "Set number of columns in form"
-msgstr ""
+msgstr "Nastaviť počet stĺpcov formulára"
 
 #: ../src/option.c:494
 msgid "Set separator character for combobox or scale data"
@@ -624,18 +612,19 @@ msgstr "Dovoliť zmeny textu"
 
 #: ../src/option.c:618
 msgid "Print all data from list"
-msgstr "Zobraziť všetky dáta zoznamu"
+msgstr "Vypísať všetky dáta zoznamu"
 
 #: ../src/option.c:624
 msgid "Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"
 msgstr ""
+"Nastaviť režim výpustky textových polí (TYP - NONE, START, MIDDLE alebo END)"
 
 #: ../src/option.c:630
 msgid ""
 "Print a specific column. By default or if 0 is specified will be printed all "
 "columns"
 msgstr ""
-"Zobraziť zadaný stĺpec Predvolene alebo ak je zadaná 0 budú zobrazené všetky "
+"Vypísať zadaný stĺpec. Predvolene alebo ak je zadaná 0 budú vypísané všetky "
 "stĺpce"
 
 #: ../src/option.c:636
@@ -653,15 +642,16 @@ msgid ""
 "Set the quick search column. Default is first column. Set it to 0 for "
 "disable searching"
 msgstr ""
+"Nastaviť rýchle vyhľadávacie pole. Predvolene je to prvý stĺpec. Nastavenie "
+"na 0 zakáže vyhľadávanie"
 
 #: ../src/option.c:654
 msgid "Set the limit of rows in list"
-msgstr "Nastaviť limit na počet riadkov zoznamu"
+msgstr "Nastaviť limit počtu riadkov zoznamu"
 
 #: ../src/option.c:660
-#, fuzzy
 msgid "Set double-click action"
-msgstr "Nastaviť akciu ľavého tlačidla myši"
+msgstr "Nastaviť akciu dvojitého kliknutia"
 
 #: ../src/option.c:670
 msgid "Display notification"
@@ -689,7 +679,7 @@ msgstr "Zobraziť dialóg Indikátor priebehu"
 
 #: ../src/option.c:710
 msgid "Set progress text"
-msgstr "Nastaviť text postupu"
+msgstr "Nastaviť text ukazovateľa"
 
 #: ../src/option.c:716
 msgid "Set initial percentage"
@@ -714,7 +704,7 @@ msgstr "Ukončiť rodičovský proces, ak je stlačený kláves Zrušiť"
 
 #: ../src/option.c:743
 msgid "Right-To-Left progress bar direction"
-msgstr "Indikátor priebehu zprava doľava"
+msgstr "Indikátor priebehu sprava doľava"
 
 #: ../src/option.c:753
 msgid "Display scale dialog"
@@ -807,7 +797,7 @@ msgstr "Zobrazí dialóg O programe"
 
 #: ../src/option.c:887
 msgid "Print version"
-msgstr "Verzia pre tlač"
+msgstr "Vypísať verziu"
 
 #: ../src/option.c:1052
 #, c-format
@@ -820,9 +810,9 @@ msgid "Unknown justification type: %s\n"
 msgstr "Neznámy typ zarovnania: %s\n"
 
 #: ../src/option.c:1101
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown ellipsize type: %s\n"
-msgstr "Neznámy typ zarovnania: %s\n"
+msgstr "Neznámy typ výpustky: %s%s\n"
 
 #: ../src/option.c:1219
 msgid "File exist. Overwrite?"
