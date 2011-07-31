@@ -85,19 +85,14 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 	      continue;
 	    }
 
-	  if (!g_ascii_strncasecmp (string->str, "#", 1))
+	  if (string->str[0] == '#')
 	    {
 	      gchar *match;
 
-#if GTK_CHECK_VERSION(3,0,0)
-	      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress_bar), TRUE);
-#endif
 	      /* We have a comment, so let's try to change the label */
-	      match = g_strstr_len (string->str, string->len, "#");
-	      match++;
-	      /* FIXME: g_strcompress() return newly allocated string. so there is a little memory leak */
-	      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar),
-					 g_strcompress (g_strstrip (match)));
+	      match = g_strcompress (g_strstrip (string->str + 1));
+	      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
+          g_free (match);
 	    }
 	  else
 	    {
@@ -149,15 +144,15 @@ progress_create_widget (GtkWidget * dlg)
 
   w = progress_bar = gtk_progress_bar_new ();
   gtk_widget_set_name (w, "yad-progress-widget");
+#if GTK_CHECK_VERSION(3,0,0)
+  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
+#endif
 
   if (options.progress_data.percentage > -1)
     gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
 				   options.progress_data.percentage / 100.0);
   if (options.progress_data.progress_text)
     {
-#if GTK_CHECK_VERSION(3,0,0)
-      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
-#endif
       gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
 				 options.progress_data.progress_text);
     }
