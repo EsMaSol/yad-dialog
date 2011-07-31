@@ -104,7 +104,7 @@ create_dialog ()
     {
       GdkPixbuf *pb;
       
-      icon = get_pixbuf (options.data.window_icon, YAD_SMALL_ICON);
+      pb = get_pixbuf (options.data.window_icon, YAD_SMALL_ICON);
       gtk_window_set_icon (GTK_WINDOW (dlg), pb);
       g_object_unref (pb);
     }
