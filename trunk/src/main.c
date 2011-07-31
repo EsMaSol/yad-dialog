@@ -90,7 +90,6 @@ create_dialog ()
   GtkWidget *text;
   GtkWidget *main_widget = NULL;
   GtkWidget *topb = NULL;
-  GError *err = NULL;
 
   /* create dialog window */
   dlg = gtk_dialog_new ();
@@ -103,19 +102,11 @@ create_dialog ()
   /* set window icon */
   if (options.data.window_icon)
     {
-      if (g_file_test (options.data.window_icon, G_FILE_TEST_EXISTS))
-        {
-          gtk_window_set_icon_from_file (GTK_WINDOW (dlg),
-                                         options.data.window_icon, &err);
-          if (err)
-            {
-              g_printerr (_("Error loading window icon %s: %s\n"),
-                          options.data.window_icon, err->message);
-              g_error_free (err);
-            }
-        }
-      else
-        gtk_window_set_icon_name (GTK_WINDOW (dlg), options.data.window_icon);
+      GdkPixbuf *pb;
+      
+      icon = get_pixbuf (options.data.window_icon, YAD_SMALL_ICON);
+      gtk_window_set_icon (GTK_WINDOW (dlg), pb);
+      g_object_unref (pb);
     }
 
   /* set window borders */
