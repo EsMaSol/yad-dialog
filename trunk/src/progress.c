@@ -51,68 +51,68 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       string = g_string_new (NULL);
 
       if (options.progress_data.pulsate)
-	{
-	  if (pulsate_timeout == -1)
-	    pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
-	}
+        {
+          if (pulsate_timeout == -1)
+            pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
+        }
 
       while (channel->is_readable != TRUE);
 
       do
-	{
-	  gint status;
+        {
+          gint status;
 
-	  do
-	    {
-	      status =
-		g_io_channel_read_line_string (channel, string, NULL, &err);
+          do
+            {
+              status =
+                g_io_channel_read_line_string (channel, string, NULL, &err);
 
-	      while (gtk_events_pending ())
-		gtk_main_iteration ();
+              while (gtk_events_pending ())
+                gtk_main_iteration ();
 
-	    }
-	  while (status == G_IO_STATUS_AGAIN);
+            }
+          while (status == G_IO_STATUS_AGAIN);
 
-	  if (status != G_IO_STATUS_NORMAL)
-	    {
-	      if (err)
-		{
-		  g_printerr ("yad_progress_handle_stdin(): %s",
-			      err->message);
-		  g_error_free (err);
-		  err = NULL;
-		}
-	      continue;
-	    }
+          if (status != G_IO_STATUS_NORMAL)
+            {
+              if (err)
+                {
+                  g_printerr ("yad_progress_handle_stdin(): %s",
+                              err->message);
+                  g_error_free (err);
+                  err = NULL;
+                }
+              continue;
+            }
 
-	  if (string->str[0] == '#')
-	    {
-	      gchar *match;
+          if (string->str[0] == '#')
+            {
+              gchar *match;
 
-	      /* We have a comment, so let's try to change the label */
-	      match = g_strcompress (g_strstrip (string->str + 1));
-	      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
-          g_free (match);
-	    }
-	  else
-	    {
-	      if (!g_ascii_isdigit (*(string->str)))
-		continue;
+              /* We have a comment, so let's try to change the label */
+              match = g_strcompress (g_strstrip (string->str + 1));
+              gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
+              g_free (match);
+            }
+          else
+            {
+              if (!g_ascii_isdigit (*(string->str)))
+                continue;
 
-	      /* Now try to convert the thing to a number */
-	      percentage = atoi (string->str);
-	      if (percentage >= 100)
-		{
-		  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
-		  if (options.progress_data.autoclose)
-		    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
-		}
-	      else
-		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
-					       percentage / 100.0);
-	    }
+              /* Now try to convert the thing to a number */
+              percentage = atoi (string->str);
+              if (percentage >= 100)
+                {
+                  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
+                  if (options.progress_data.autoclose)
+                    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+                }
+              else
+                gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
+                                               percentage / 100.0);
+            }
 
-	}
+        }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
     }
@@ -122,13 +122,13 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
 
       if (options.progress_data.pulsate)
-	{
-	  g_source_remove (pulsate_timeout);
-	  pulsate_timeout = -1;
-	}
+        {
+          g_source_remove (pulsate_timeout);
+          pulsate_timeout = -1;
+        }
 
       if (options.progress_data.autoclose)
-	gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 
       g_io_channel_shutdown (channel, TRUE, NULL);
       return FALSE;
@@ -150,19 +150,19 @@ progress_create_widget (GtkWidget * dlg)
 
   if (options.progress_data.percentage > -1)
     gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
-				   options.progress_data.percentage / 100.0);
+                                   options.progress_data.percentage / 100.0);
   if (options.progress_data.progress_text)
     {
       gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
-				 options.progress_data.progress_text);
+                                 options.progress_data.progress_text);
     }
 #if GTK_CHECK_VERSION(3,0,0)
   gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w),
-				 options.progress_data.rtl);
+                                 options.progress_data.rtl);
 #else
   if (options.progress_data.rtl)
     gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w),
-				      GTK_PROGRESS_RIGHT_TO_LEFT);
+                                      GTK_PROGRESS_RIGHT_TO_LEFT);
 #endif
 
   channel = g_io_channel_unix_new (0);
