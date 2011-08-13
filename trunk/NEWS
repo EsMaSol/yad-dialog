@@ -1,3 +1,17 @@
+Version 0.13.0
+    - fixes for icons in entry dialog
+    - add icons for editable combo-boxes in entry dialog
+    - add new field types for form dialog - labels and buttons
+    - fix blinking behavior in notification icon 
+    - some improvements in user-defined double-click action for list dialog
+    - dialog text can be selected if --selectable-labels specified
+    - fix image clipping in gtk+-3.0
+    - fix tooltips in list dialog
+    - fix wrapping dialog's text
+    - add --border option for set margins around dialog widgets
+    - add names for widgets for customize dialog look&feel through .gtkrc
+    - fix handling window icon
+
 Version 0.12.4
     - fix output for image fields in list dialog
     - fix Enter behavior in list dialog

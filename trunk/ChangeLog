@@ -1,3 +1,144 @@
+2011-07-31 17:59  ananasik
+
+	* src/main.c:
+
+2011-07-31 14:36  ananasik
+
+	* src/main.c: fix handling window icon
+
+2011-07-31 08:30  ananasik
+
+	* src/progress.c: fix formatting
+
+2011-07-31 08:29  ananasik
+
+	* src/progress.c: fix leaks in progressbar
+
+2011-07-30 11:11  ananasik
+
+	* po/sk.po: update slovak translation
+
+2011-07-29 15:13  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/option.c:
+	  update man and translations
+
+2011-07-29 14:27  ananasik
+
+	* src/calendar.c, src/color.c, src/entry.c, src/file.c, src/font.c,
+	  src/form.c, src/icons.c, src/list.c, src/main.c, src/progress.c,
+	  src/scale.c, src/text.c: add names to widgets
+
+2011-07-29 13:51  ananasik
+
+	* src/main.c, src/option.c, src/yad.h: add --borders option
+
+2011-07-28 12:51  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/option.c:
+	  update man and translation
+
+2011-07-28 12:41  ananasik
+
+	* src/form.c, src/main.c: fix wrapping text in dialog text and form
+	  label field
+
+2011-07-28 11:27  ananasik
+
+	* src/list.c: fix tooltips in list dialog
+
+2011-07-28 10:57  ananasik
+
+	* src/form.c, src/main.c, src/option.c, src/yad.h: selectable text
+	  in labels enabled through comman-line
+
+2011-07-28 10:33  ananasik
+
+	* src/main.c: fix image clipping with gtk+-3.0
+
+2011-07-28 05:28  ananasik
+
+	* src/form.c, src/main.c: add uri's handler to labels
+
+2011-07-28 05:10  ananasik
+
+	* src/form.c: set labels fileds selectable in form dialog
+
+2011-07-28 04:43  ananasik
+
+	* src/main.c: set dialog text selectable
+
+2011-07-26 04:32  ananasik
+
+	* src/form.c: remove relief for button fields in form dialog
+
+2011-07-26 04:29  ananasik
+
+	* data/yad.1, src/list.c: extend format of double-click command in
+	  list dialog
+
+2011-07-25 07:01  ananasik
+
+	* src/notification.c: fix blinking behavior in notification icon
+
+2011-07-25 06:01  ananasik
+
+	* src/main.c:
+
+2011-07-25 05:20  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/form.c, src/option.c, src/yad.h: add --column option in form
+	  dialog
+
+2011-07-24 06:53  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/form.c,
+	  src/option.c, src/yad.h: add button field to form
+
+2011-07-24 06:07  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/form.c,
+	  src/option.c, src/yad.h: add label field to form
+
+2011-07-24 05:43  ananasik
+
+	* src/entry.c: fix double action in entry icons
+
+2011-07-19 09:37  ananasik
+
+	* src/browser.c, src/color.c, src/entry.c, src/list.c, src/main.c,
+	  src/notification.c, src/option.c, src/progress.c, src/text.c,
+	  src/util.c, src/yad.h: small fix in entry
+
+2011-06-29 05:01  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.12.4
+
+2011-06-29 04:56  ananasik
+
+	* data/yad.1, src/list.c: fix Enter behavior in list dialog
+
+2011-06-29 04:28  ananasik
+
+	* src/list.c: fix handling image fileds values in output
+
+2011-06-27 06:10  ananasik
+
+	* src/about.c, src/browser.c, src/calendar.c, src/color.c,
+	  src/dnd.c, src/entry.c, src/file.c, src/font.c, src/form.c,
+	  src/icons.c, src/list.c, src/main.c, src/notification.c,
+	  src/option.c, src/progress.c, src/scale.c, src/text.c,
+	  src/util.c, src/yad.h: update source license information
+
+2011-06-27 06:03  ananasik
+
+	* src/about.c, src/browser.c, src/calendar.c, src/color.c,
+	  src/dnd.c, src/entry.c, src/file.c, src/font.c, src/form.c,
+	  src/icons.c, src/list.c, src/main.c, src/notification.c,
+	  src/option.c, src/progress.c, src/scale.c, src/text.c,
+	  src/util.c, src/yad.h: update source license information
+
 2011-06-24 17:14  ananasik
 
 	* ChangeLog, NEWS: release 0.12.3
