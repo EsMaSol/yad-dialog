@@ -157,11 +157,9 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	    case YAD_COLUMN_TOOLTIP:
 	    case YAD_COLUMN_TEXT:
 	      {
-		gchar *cval, *uval;
+		gchar *cval;
 		gtk_tree_model_get (model, &iter, cnum, &cval, -1);
-		uval = unescape_markup (cval);
-		text = g_strdup_printf ("%s", uval);
-		g_free (uval);
+		text = g_strdup_printf ("%s", cval);
 		break;
 	      }
 	    }
