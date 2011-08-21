@@ -292,7 +292,19 @@ create_dialog ()
       break;
     }
   if (main_widget)
-    gtk_box_pack_start (GTK_BOX (vbox), main_widget, TRUE, TRUE, 2);
+    {
+      if (options.data.expander)
+	{
+	  GtkWidget *exp;
+	  
+	  exp = gtk_expander_new_with_mnemonic (options.data.expander);
+	  gtk_expander_set_expanded (GTK_EXPANDER (exp), FALSE);
+	  gtk_container_add (GTK_CONTAINER (exp), main_widget);
+	  gtk_box_pack_start (GTK_BOX (vbox), exp, TRUE, TRUE, 2);	  
+	}
+      else
+	gtk_box_pack_start (GTK_BOX (vbox), main_widget, TRUE, TRUE, 2);
+    }
 
   /* add buttons */
   if (!options.data.no_buttons)

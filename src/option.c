@@ -28,6 +28,7 @@ static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -112,6 +113,12 @@ static GOptionEntry general_options[] = {
     &options.data.icon_theme,
     N_("Use specified icon theme instead of default"),
     N_("THEME") },
+  { "expander", 0,
+    G_OPTION_FLAG_OPTIONAL_ARG,
+    G_OPTION_ARG_CALLBACK,
+    set_expander,
+    N_("Hide main widget with expander"),
+    N_("TEXT") },
   { "button", 0,
     0,
     G_OPTION_ARG_CALLBACK,
@@ -1074,6 +1081,18 @@ set_justify (const gchar *option_name,
 }
 
 static gboolean
+set_expander (const gchar *option_name,
+	      const gchar *value,
+	      gpointer data, GError **err)
+{
+  if (value)
+    options.data.expander = g_strdup (value);
+  else
+    options.data.expander = "";
+  return TRUE;
+}
+
+static gboolean
 set_scale_value (const gchar *option_name,
 		 const gchar *value,
 		 gpointer data, GError **err)
@@ -1158,6 +1177,7 @@ yad_options_init (void)
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
   options.data.icon_theme = NULL;
+  options.data.expander = NULL;
   options.data.timeout = settings.timeout;
   options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;
