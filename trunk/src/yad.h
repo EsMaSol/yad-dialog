@@ -118,6 +118,7 @@ typedef struct {
 #if !GTK_CHECK_VERSION(3,0,0)
   gboolean dialog_sep;
 #endif
+  gchar *expander;
   gint borders;
   GSList *buttons;
   gboolean no_buttons;
