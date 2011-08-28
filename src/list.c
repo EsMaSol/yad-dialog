@@ -413,7 +413,8 @@ handle_stdin (GIOChannel * channel,
             case YAD_COLUMN_IMAGE:
               pb = get_pixbuf (string->str, YAD_SMALL_ICON);
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
-              g_object_unref (pb);
+              if (pb)
+                g_object_unref (pb);
               break;
 	    case YAD_COLUMN_ATTR_FORE:
 	    case YAD_COLUMN_ATTR_BACK:
@@ -487,7 +488,8 @@ fill_data (gint n_columns)
                 case YAD_COLUMN_IMAGE:
                   pb = get_pixbuf (args[i], YAD_SMALL_ICON);
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, pb, -1);
-                  g_object_unref (pb);
+                  if (pb)
+                    g_object_unref (pb);
                   break;
 		case YAD_COLUMN_ATTR_FORE:
 		case YAD_COLUMN_ATTR_BACK:
