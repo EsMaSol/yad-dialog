@@ -202,6 +202,7 @@ typedef struct {
   guint limit;
   PangoEllipsizeMode ellipsize;
   gchar *dclick_action;
+  gboolean regex_search;
 } YadListData;
 
 typedef struct {

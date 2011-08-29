@@ -666,6 +666,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.dclick_action,
     N_("Set double-click action"),
     N_("CMD") },
+  { "regex-search", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.list_data.regex_search,
+    N_("Use regex in search"),
+    NULL },
   { NULL }
 };
 
@@ -1269,6 +1275,7 @@ yad_options_init (void)
   options.list_data.limit = 0;
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
   options.list_data.dclick_action = NULL;
+  options.list_data.regex_search = FALSE;
 
   /* Initialize notification data */
   options.notification_data.listen = FALSE;

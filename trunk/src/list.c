@@ -173,6 +173,28 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
     }
 }
 
+static gboolean
+regex_search (GtkTreeModel *model, gint col, const gchar *key,
+	      GtkTreeIter *iter, gpointer data)
+{
+  static GRegex *pattern = NULL;
+  static guint pos = 0;
+  gchar *str;
+
+  if (key[pos])
+    {
+      if (pattern)
+	g_regex_unref (pattern);
+      pattern = g_regex_new (key, G_REGEX_CASELESS | G_REGEX_EXTENDED | G_REGEX_OPTIMIZE,
+			     G_REGEX_MATCH_NOTEMPTY, NULL);
+      pos = strlen (key);
+    }
+
+  gtk_tree_model_get (model, iter, col, &str, -1);
+  printf ("search for %s in %s\n", key, str);
+  return !g_regex_match (pattern, str, G_REGEX_MATCH_NOTEMPTY, NULL);
+}
+
 static GtkTreeModel *
 create_model (gint n_columns)
 {
@@ -766,6 +788,17 @@ list_create_widget (GtkWidget *dlg)
       gtk_widget_set_has_tooltip (list_view, TRUE);
       g_signal_connect (G_OBJECT (list_view), "query-tooltip",
 			G_CALLBACK (tooltip_cb), NULL);
+    }
+
+  /* set search function for regex search */
+  if (options.list_data.search_column != -1 && options.list_data.regex_search)
+    {
+      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, 
+						       options.list_data.search_column);
+
+      if (col->type == YAD_COLUMN_TEXT || col->type == YAD_COLUMN_TOOLTIP)
+	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (list_view), 
+					     regex_search, NULL, NULL);
     }
 
   return w;
