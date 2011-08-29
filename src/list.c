@@ -197,12 +197,11 @@ regex_search (GtkTreeModel *model, gint col, const gchar *key,
       gtk_tree_model_get (model, iter, col, &str, -1);
       
       ret = g_regex_match (pattern, str, G_REGEX_MATCH_NOTEMPTY, NULL);
-      
       /* if get it, clear key end position */
       if (!ret)
         pos = 0;
         
-      return ret;
+      return !ret;
     }
   else
     return TRUE;
