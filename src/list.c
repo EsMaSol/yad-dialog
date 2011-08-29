@@ -190,9 +190,13 @@ regex_search (GtkTreeModel *model, gint col, const gchar *key,
       pos = strlen (key);
     }
 
-  gtk_tree_model_get (model, iter, col, &str, -1);
-  printf ("search for %s in %s\n", key, str);
-  return !g_regex_match (pattern, str, G_REGEX_MATCH_NOTEMPTY, NULL);
+  if (pattern)
+    {
+      gtk_tree_model_get (model, iter, col, &str, -1);
+      return !g_regex_match (pattern, str, G_REGEX_MATCH_NOTEMPTY, NULL);
+    }
+  else
+    return TRUE;
 }
 
 static GtkTreeModel *
