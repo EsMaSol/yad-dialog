@@ -104,6 +104,11 @@ typedef struct {
 } YadColumn;
 
 typedef struct {
+  gchar *name;
+  gint value;
+} YadScaleMark;
+
+typedef struct {
   gchar *dialog_title;
   gchar *window_icon;
   gint width;
@@ -230,6 +235,7 @@ typedef struct {
   gboolean have_value;
   gboolean vertical;
   gboolean invert;
+  GSList *marks;
 } YadScaleData;
 
 typedef struct {
