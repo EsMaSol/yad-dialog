@@ -22,6 +22,7 @@
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
@@ -813,6 +814,12 @@ static GOptionEntry scale_options[] = {
     &options.scale_data.invert,
     N_("Invert direction"),
     NULL },
+  { "mark", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    add_scale_mark,
+    N_("Add mark to scale (may be used multiple times)"),
+    N_("NAME:VALUE") },
   { NULL }
 };
 
@@ -923,6 +930,8 @@ add_button (const gchar *option_name,
   btn->name = g_strdup (bstr[0]);
   if (bstr[1])
     btn->response = g_ascii_strtoll (bstr[1], NULL, 10);
+  else
+    btn->response = g_slist_length (options.data.buttons);
   options.data.buttons = g_slist_append (options.data.buttons, btn);
 
   g_strfreev (bstr);
@@ -1023,6 +1032,33 @@ add_field (const gchar *option_name,
     g_slist_append (options.form_data.fields, fld);
 
   g_strfreev (fstr);
+
+  return TRUE;
+}
+
+static gboolean
+add_scale_mark (const gchar *option_name,
+		const gchar *value,
+		gpointer data, GError **err)
+{
+  YadScaleMark *mark;
+  gchar **mstr = split_arg (value);
+
+  mark = g_new0 (YadScaleMark, 1);
+  mark->name = g_strdup (mstr[0]);
+  if (mstr[1])
+    {
+      mark->value = g_ascii_strtoll (mstr[1], NULL, 10);
+      options.scale_data.marks = g_slist_append (options.scale_data.marks, mark);
+    }
+  else
+    {
+      g_printerr (_("Mark %s doesn't have a value\n"), mark->name);
+      g_free (mark->name);
+      g_free (mark);
+    }
+
+  g_strfreev (mstr);
 
   return TRUE;
 }
@@ -1300,6 +1336,7 @@ yad_options_init (void)
   options.scale_data.have_value = FALSE;
   options.scale_data.vertical = FALSE;
   options.scale_data.invert = FALSE;
+  options.scale_data.marks = NULL;
 
   /* Initialize text data */
   options.text_data.fore = NULL;

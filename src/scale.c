@@ -80,6 +80,21 @@ scale_create_widget (GtkWidget *dlg)
   if (options.scale_data.hide_value)
     gtk_scale_set_draw_value (GTK_SCALE (w), FALSE);
 
+  /* add marks */
+  if (options.scale_data.marks)
+    {
+      GtkPositionType pos;
+      GSList *m = options.scale_data.marks;
+
+      pos = options.scale_data.vertical ? GTK_POS_LEFT : GTK_POS_BOTTOM;
+
+      for (; m; m = m->next)
+	{
+	  YadScaleMark *mark = (YadScaleMark *) m->data;
+	  gtk_scale_add_mark (GTK_SCALE (w), mark->value, pos, mark->name);
+	}
+    }
+
   return w;
 }
 
