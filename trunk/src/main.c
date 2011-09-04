@@ -85,7 +85,7 @@ GtkWidget *
 create_dialog ()
 {
   GtkWidget *dlg;
-  GtkWidget *hbox, *vbox, *hbox2;
+  GtkWidget *hbox, *vbox, *hbox2, *evbox;
   GtkWidget *image;
   GtkWidget *text;
   GtkWidget *main_widget = NULL;
@@ -242,11 +242,11 @@ create_dialog ()
       if (options.data.geometry || options.data.width != -1)
         gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
       if (options.data.image_on_top)
-        gtk_box_pack_start (GTK_BOX (hbox2), text, FALSE, FALSE, 2);
+        gtk_box_pack_start (GTK_BOX (hbox2), text, TRUE, TRUE, 2);
       else
-        gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
-      g_signal_connect_after (G_OBJECT (text), "size-allocate",
-			      G_CALLBACK (text_size_allocate_cb), NULL);
+        gtk_box_pack_start (GTK_BOX (vbox), text, TRUE, TRUE, 2);
+      g_signal_connect (G_OBJECT (text), "size-allocate",
+			G_CALLBACK (text_size_allocate_cb), NULL);
 
       g_free (buf);
     }
