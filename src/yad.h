@@ -230,6 +230,7 @@ typedef struct {
   gint min_value;
   gint max_value;
   gint step;
+  gint page;
   gboolean print_partial;
   gboolean hide_value;
   gboolean have_value;
