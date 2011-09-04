@@ -85,7 +85,7 @@ GtkWidget *
 create_dialog ()
 {
   GtkWidget *dlg;
-  GtkWidget *hbox, *vbox, *hbox2, *evbox;
+  GtkWidget *hbox, *vbox, *hbox2;
   GtkWidget *image;
   GtkWidget *text;
   GtkWidget *main_widget = NULL;
