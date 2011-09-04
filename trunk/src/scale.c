@@ -31,6 +31,8 @@ GtkWidget *
 scale_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;
+  GtkObject *adj;
+  gint page;
 
   if (options.scale_data.min_value >= options.scale_data.max_value)
     {
@@ -55,23 +57,26 @@ scale_create_widget (GtkWidget *dlg)
   else
     options.scale_data.value = options.scale_data.min_value;
 
+
+  page = options.scale_data.page == -1 ? options.scale_data.step * 10 : options.scale_data.page;
+  adj = gtk_adjustment_new ((double) options.scale_data.value,
+			    (double) options.scale_data.min_value,
+			    (double) options.scale_data.max_value,
+			    (double) options.scale_data.step,
+			    (double) page, 0.0);
   if (options.scale_data.vertical)
     {
-      w = scale = gtk_vscale_new_with_range (options.scale_data.min_value,
-					     options.scale_data.max_value,
-					     options.scale_data.step);
+      w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
       gtk_widget_set_name (w, "yad-vscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), !options.scale_data.invert);
     }
   else
     {
-      w = scale = gtk_hscale_new_with_range (options.scale_data.min_value,
-					     options.scale_data.max_value,
-					     options.scale_data.step);
+      w = scale = gtk_hscale_new (GTK_ADJUSTMENT (adj));
       gtk_widget_set_name (w, "yad-hscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), options.scale_data.invert);
     }
-  gtk_range_set_value (GTK_RANGE (w), options.scale_data.value);
+  gtk_scale_set_digits (GTK_SCALE (w), 0);
 
   if (options.scale_data.print_partial)
     g_signal_connect (G_OBJECT (w), "value-changed",
