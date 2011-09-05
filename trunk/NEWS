@@ -1,3 +1,10 @@
+Version 0.14.0
+    - add regex search to list dialog
+    - add --page option for scale dialog
+    - add marks to scale dialog
+    - add expander for main widget
+    - bug fixes
+
 Version 0.13.0
     - fixes for icons in entry dialog
     - add icons for editable combo-boxes in entry dialog
