@@ -1,6 +1,6 @@
 Yet Another Dialog
 =======================
-Program allows you to display GTK+ dialog boxes from commandline or 
+Program allows you to display GTK+ dialog boxes from command line or 
 shell scripts. YAD depends on GTK+ only. Minimal GTK+ version is 2.16.0
 
 This software is licensed under the GPL v.3
