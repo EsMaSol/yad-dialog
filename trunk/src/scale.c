@@ -31,7 +31,7 @@ GtkWidget *
 scale_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;
-  GtkObject *adj;
+  GtkAdjustment *adj;
   gint page;
 
   if (options.scale_data.min_value >= options.scale_data.max_value)
@@ -59,10 +59,10 @@ scale_create_widget (GtkWidget *dlg)
 
 
   page = options.scale_data.page == -1 ? options.scale_data.step * 10 : options.scale_data.page;
-  adj = gtk_adjustment_new ((double) options.scale_data.value,
-			    (double) options.scale_data.min_value,
-			    (double) options.scale_data.max_value,
-			    (double) options.scale_data.step,
+  adj = (GtkAdjustment *) gtk_adjustment_new ((double) options.scale_data.value,
+			      (double) options.scale_data.min_value,
+			      (double) options.scale_data.max_value,
+			      (double) options.scale_data.step,
 			    (double) page, 0.0);
   if (options.scale_data.vertical)
     {
