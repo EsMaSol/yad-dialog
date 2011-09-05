@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YAD 0.13.0\n"
+"Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-04 11:21+0300\n"
-"PO-Revision-Date: 2011-08-31 11:33+0200\n"
+"POT-Creation-Date: 2011-09-04 21:54+0300\n"
+"PO-Revision-Date: 2011-09-05 07:57+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <debian-l10n-slovak@lists.debian.org>\n"
 "Language: \n"
@@ -237,7 +237,7 @@ msgstr "TÉMA"
 
 #: ../src/option.c:121
 msgid "Hide main widget with expander"
-msgstr ""
+msgstr "Skryť hlavný widget s expanderom"
 
 #: ../src/option.c:127
 msgid "Add dialog button (may be used multiple times)"
@@ -655,7 +655,7 @@ msgstr "Nastaví akciu dvojitého kliknutia"
 
 #: ../src/option.c:674
 msgid "Use regex in search"
-msgstr ""
+msgstr "Použije regulárny výraz v hľadaní"
 
 #: ../src/option.c:684
 msgid "Display notification"
@@ -736,9 +736,8 @@ msgid "Set step size"
 msgstr "Nastaví veľkosť kroku"
 
 #: ../src/option.c:797
-#, fuzzy
 msgid "Set paging size"
-msgstr "Nastaví veľkosť kroku"
+msgstr "Nastaví veľkosť skoku"
 
 #: ../src/option.c:803
 msgid "Print partial values"
@@ -757,14 +756,12 @@ msgid "Invert direction"
 msgstr "Obráti smer"
 
 #: ../src/option.c:827
-#, fuzzy
 msgid "Add mark to scale (may be used multiple times)"
-msgstr "Pridá tlačidlo dialógu (možno použiť viackrát)"
+msgstr "Pridá značku do posuvníka (možno použiť viackrát)"
 
 #: ../src/option.c:828
-#, fuzzy
 msgid "NAME:VALUE"
-msgstr "HODNOTA"
+msgstr "MENO:HODNOTA"
 
 #: ../src/option.c:837
 msgid "Display text information dialog"
@@ -821,7 +818,7 @@ msgstr "Vypíše verziu"
 #: ../src/option.c:1062
 #, c-format
 msgid "Mark %s doesn't have a value\n"
-msgstr ""
+msgstr "Značka %s nemá hodnotu\n"
 
 #: ../src/option.c:1107
 #, c-format
