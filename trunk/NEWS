@@ -1,3 +1,6 @@
+Version 0.14.1
+    - fix build with gtk3
+
 Version 0.14.0
     - add regex search to list dialog
     - add --page option for scale dialog
