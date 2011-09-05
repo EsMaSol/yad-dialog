@@ -1,3 +1,71 @@
+2011-09-05 07:09  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, po/uk.po: update translations
+
+2011-09-04 18:53  ananasik
+
+	* configure.ac: bump version to 0.14.0. prepare to next release
+
+2011-09-04 08:22  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/option.c,
+	  src/scale.c, src/yad.h: add --page option to scale dialog
+
+2011-09-04 07:22  ananasik
+
+	* src/main.c: remove unneeded variable
+
+2011-09-04 07:21  ananasik
+
+	* src/main.c: fix placing dialog text
+
+2011-08-31 13:08  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/option.c,
+	  src/scale.c, src/yad.h: add marks to scale dialog
+
+2011-08-31 09:48  ananasik
+
+	* po/de.po, po/ru.po, po/sk.po, po/uk.po: update translations
+
+2011-08-31 09:47  ananasik
+
+	* po/sk.po: update slovak translation
+
+2011-08-29 18:29  ananasik
+
+	* src/list.c:
+
+2011-08-29 18:03  ananasik
+
+	* src/list.c:
+
+2011-08-29 11:16  ananasik
+
+	* src/list.c: some fixes for regex search
+
+2011-08-29 11:01  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/list.c,
+	  src/option.c, src/yad.h: add regex search for list
+
+2011-08-28 14:16  ananasik
+
+	* src/list.c: some fixes
+
+2011-08-21 12:38  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/main.c,
+	  src/option.c, src/yad.h: add expander to main widget
+
+2011-08-19 05:26  ananasik
+
+	* src/list.c: fix lists tootltips
+
+2011-08-13 11:20  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.13.0
+
 2011-07-31 17:59  ananasik
 
 	* src/main.c:
