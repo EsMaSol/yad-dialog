@@ -59,11 +59,12 @@ scale_create_widget (GtkWidget *dlg)
 
 
   page = options.scale_data.page == -1 ? options.scale_data.step * 10 : options.scale_data.page;
+  /* this type conversion needs only for gtk-2.0 */
   adj = (GtkAdjustment *) gtk_adjustment_new ((double) options.scale_data.value,
-			      (double) options.scale_data.min_value,
-			      (double) options.scale_data.max_value,
-			      (double) options.scale_data.step,
-			    (double) page, 0.0);
+					      (double) options.scale_data.min_value,
+					      (double) options.scale_data.max_value,
+					      (double) options.scale_data.step,
+					      (double) page, 0.0);
   if (options.scale_data.vertical)
     {
       w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
