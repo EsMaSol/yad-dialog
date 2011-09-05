@@ -1,4 +1,4 @@
-- Parse ESC sequences in text-info dialog
-- Add ability to cutomize yad's look&feel through gtkrc
-
-
+- Parse ESC sequences in text-info dialog (or something like wiki syntax)
+- Add multiple progressbars
+- DBus support (?)
+- Common search dialog for list and text dialogs
