@@ -87,7 +87,7 @@ create_dialog ()
   GtkWidget *dlg;
   GtkWidget *hbox, *vbox, *hbox2;
   GtkWidget *image;
-  GtkWidget *text;
+  GtkWidget *text = NULL;
   GtkWidget *main_widget = NULL;
   GtkWidget *topb = NULL;
 
@@ -133,6 +133,13 @@ create_dialog ()
       else if (options.data.mouse)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
     }
+  else
+    {
+      /* parse geometry, if given. must be after showing widget */
+      gtk_widget_realize (dlg);     
+      gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
+    }
+
 
   /* create timeout indicator widget */
   if (options.data.timeout)
@@ -244,7 +251,7 @@ create_dialog ()
       if (options.data.image_on_top)
         gtk_box_pack_start (GTK_BOX (hbox2), text, TRUE, TRUE, 2);
       else
-        gtk_box_pack_start (GTK_BOX (vbox), text, TRUE, TRUE, 2);
+        gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
       g_signal_connect (G_OBJECT (text), "size-allocate",
 			G_CALLBACK (text_size_allocate_cb), NULL);
 
@@ -338,13 +345,9 @@ create_dialog ()
   else
     gtk_widget_hide (gtk_dialog_get_action_area (GTK_DIALOG (dlg)));
 
-  gtk_widget_show_all (hbox);
-
-  /* parse geometry, if given. must be after showing widget */
-  if (options.data.geometry)
-    gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
-
-  gtk_widget_show (dlg);
+  gtk_widget_show_all (dlg);
+  if (text)
+    gtk_widget_queue_resize (text);
 
   /* set timeout */
   if (options.data.timeout)
