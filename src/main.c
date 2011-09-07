@@ -87,7 +87,7 @@ create_dialog ()
   GtkWidget *dlg;
   GtkWidget *hbox, *vbox, *hbox2;
   GtkWidget *image;
-  GtkWidget *text = NULL;
+  GtkWidget *text;
   GtkWidget *main_widget = NULL;
   GtkWidget *topb = NULL;
 
@@ -346,8 +346,6 @@ create_dialog ()
     gtk_widget_hide (gtk_dialog_get_action_area (GTK_DIALOG (dlg)));
 
   gtk_widget_show_all (dlg);
-  if (text)
-    gtk_widget_queue_resize (text);
 
   /* set timeout */
   if (options.data.timeout)
