@@ -351,7 +351,6 @@ form_create_widget (GtkWidget *dlg)
                     {
                       gdouble val = g_strtod (s[0], NULL);
                       e = g_slist_nth_data (fields, i);
-                      gtk_spin_button_set_value (GTK_SPIN_BUTTON (e), val);
                       if (s[1])
                         {
                           gdouble min, max;
@@ -366,6 +365,7 @@ form_create_widget (GtkWidget *dlg)
                               gtk_spin_button_set_increments (GTK_SPIN_BUTTON (e), step, step);
                             }
                         }
+                      gtk_spin_button_set_value (GTK_SPIN_BUTTON (e), val);
                     }
                   g_strfreev (s);
                   break;
