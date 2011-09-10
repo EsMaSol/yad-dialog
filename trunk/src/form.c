@@ -365,6 +365,7 @@ form_create_widget (GtkWidget *dlg)
                               gtk_spin_button_set_increments (GTK_SPIN_BUTTON (e), step, step);
                             }
                         }
+                      /* set initial value must be after setting range and step */
                       gtk_spin_button_set_value (GTK_SPIN_BUTTON (e), val);
                     }
                   g_strfreev (s);
