@@ -21,6 +21,10 @@
 #include <stdlib.h>
 #include <signal.h>
 
+#if !defined(_WIN32)
+# include <gdk/gdkx.h>
+#endif
+
 #include "yad.h"
 
 YadOptions options;
@@ -353,6 +357,12 @@ create_dialog ()
       g_timeout_add_seconds (options.data.timeout, timeout_cb, dlg);
       g_timeout_add_seconds (1, timeout_indicator_cb, topb);
     }
+
+  /* print xid */
+#if !defined(_WIN32)
+  if (options.print_xid)
+    g_printerr ("0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+#endif
 
   return dlg;
 }

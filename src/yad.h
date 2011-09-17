@@ -283,6 +283,7 @@ typedef struct {
 
 #if !defined(_WIN32)
   gboolean kill_parent;
+  gboolean print_xid;
 #endif
 } YadOptions;
 

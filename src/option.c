@@ -214,6 +214,12 @@ static GOptionEntry general_options[] = {
     &options.kill_parent,
     N_("Send TERM to parent"),
     NULL },
+  { "print-xid", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.print_xid,
+    N_("Print X Window Id to the stderr"),
+    NULL },
 #endif
   { NULL }
 };
@@ -1213,6 +1219,7 @@ yad_options_init (void)
   options.extra_data = NULL;
 #if !defined(_WIN32)
   options.kill_parent = FALSE;
+  options.print_xid = FALSE;
 #endif
 
   /* Initialize general data */
