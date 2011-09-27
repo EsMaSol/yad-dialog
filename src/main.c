@@ -235,7 +235,8 @@ create_dialog ()
 
       pb = get_pixbuf (options.data.dialog_image, YAD_BIG_ICON);
       image = gtk_image_new_from_pixbuf (pb);
-      g_object_unref (pb);
+      if (pb)
+        g_object_unref (pb);
 
       gtk_widget_set_name (image, "yad-dialog-image");
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
