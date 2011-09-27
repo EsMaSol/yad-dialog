@@ -89,6 +89,47 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 }
 
 static void
+create_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
+                 GdkEventButton *event, gpointer data)
+{
+  GtkWidget *dlg;
+
+  if (event->button == 1)
+    {
+      YadFieldType type = GPOINTER_TO_INT (data);
+
+      if (type = YAD_FIELD_FILE_SAVE)
+	{
+	  dlg = gtk_file_chooser_dialog_new (_("Select or create file"),
+					     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
+					     GTK_FILE_CHOOSER_ACTION_SAVE,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+					     NULL );
+	}
+      else
+	{
+	  dlg = gtk_file_chooser_dialog_new (_("Select or create folder"),
+					     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
+					     GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+					     NULL );
+	}
+
+      if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
+        {
+	  gchar *file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dlg));
+
+          gtk_entry_set_text (entry, file);
+	  g_free (file);
+        }
+
+      gtk_widget_destroy (dlg);
+    }
+}
+
+static void
 select_date_cb (GtkEntry *entry, GtkEntryIconPosition pos,
                 GdkEventButton *event, gpointer data)
 {
@@ -230,7 +271,7 @@ form_create_widget (GtkWidget *dlg)
               break;
 
             case YAD_FIELD_FILE:
-              e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+	      e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
 	      gtk_widget_set_name (e, "yad-form-file");
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
@@ -261,7 +302,18 @@ form_create_widget (GtkWidget *dlg)
               e = gtk_entry_new ();
 	      gtk_widget_set_name (e, "yad-form-entry");
               gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
-              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), e);
+              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), NULL);
+              g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
+              gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+              fields = g_slist_append (fields, e);
+              break;
+
+            case YAD_FIELD_FILE_SAVE:
+	    case YAD_FIELD_DIR_CREATE:
+              e = gtk_entry_new ();
+	      gtk_widget_set_name (e, "yad-form-entry");
+              gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
+              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (create_files_cb), GINT_TO_POINTER (fld->type));
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
@@ -341,6 +393,8 @@ form_create_widget (GtkWidget *dlg)
                 case YAD_FIELD_HIDDEN:
                 case YAD_FIELD_READ_ONLY:
                 case YAD_FIELD_MFILE:
+                case YAD_FIELD_FILE_SAVE:
+                case YAD_FIELD_DIR_CREATE:
                 case YAD_FIELD_DATE:
                   gtk_entry_set_text (GTK_ENTRY (g_slist_nth_data (fields, i)), options.extra_data[i]);
                   break;
@@ -445,6 +499,8 @@ form_print_result (void)
         case YAD_FIELD_HIDDEN:
         case YAD_FIELD_READ_ONLY:
         case YAD_FIELD_MFILE:
+        case YAD_FIELD_FILE_SAVE:
+        case YAD_FIELD_DIR_CREATE:
         case YAD_FIELD_DATE:
           g_printf ("%s%s",
                     gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, i))),

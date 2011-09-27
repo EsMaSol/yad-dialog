@@ -301,7 +301,7 @@ Set the preview text.
 Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fIDIR\fP, \fIFN\fP, \fIMFL\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
 \fIH\fP - hidden field type. All characters are displayed as the invisible char.
 \fIRO\fP - field is in read-only mode.
 \fINUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP]]\fP,
@@ -310,7 +310,9 @@ where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separato
 \fICB\fP - combo-box field. Initial value is a list \fIVAL1!VAL2!...\fP. The separator is the same as in \fINUM\fP field.
 \fICBE\fP - editable combo-box field. Initial value same as for combo-box.
 \fIFL\fP - file selection button.
+\fISFL\fp - field for create file.
 \fIDIR\fP - directory selection button.
+\fICDIR\fp - field for create folder.
 \fIFN\fP - font selection button. Initial value same as in font dialog.
 \fIMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
 \fIDT\fP - date field.
