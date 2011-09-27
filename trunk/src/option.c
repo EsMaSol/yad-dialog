@@ -481,7 +481,7 @@ static GOptionEntry form_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_field,
-    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, DIR, FN, MFL, DT, CLR, BTN or LBL)"),
+    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, DIR, CDIR, FN, MFL, DT, CLR, BTN or LBL)"),
     N_("LABEL[:TYPE]") },
   { "align", 0,
     0,
@@ -1021,8 +1021,12 @@ add_field (const gchar *option_name,
 	fld->type = YAD_FIELD_COMBO_ENTRY;
       else if (g_ascii_strcasecmp (fstr[1], "FL") == 0)
 	fld->type = YAD_FIELD_FILE;
+      else if (g_ascii_strcasecmp (fstr[1], "SFL") == 0)
+	fld->type = YAD_FIELD_FILE_SAVE;
       else if (g_ascii_strcasecmp (fstr[1], "DIR") == 0)
 	fld->type = YAD_FIELD_DIR;
+      else if (g_ascii_strcasecmp (fstr[1], "CDIR") == 0)
+	fld->type = YAD_FIELD_DIR_CREATE;
       else if (g_ascii_strcasecmp (fstr[1], "FN") == 0)
 	fld->type = YAD_FIELD_FONT;
       else if (g_ascii_strcasecmp (fstr[1], "CLR") == 0)
