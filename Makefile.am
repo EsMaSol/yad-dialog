@@ -1,15 +1,6 @@
 
-SUBDIRS = \
-	src	\
-	po	\
-	data
+SUBDIRS = src po data
 
-EXTRA_DIST = \
-	COPYING			\
-	ChangeLog		\
-	NEWS			\
-	README			\
-	AUTHORS
+EXTRA_DIST = COPYING ChangeLog NEWS README AUTHORS TODO THANKS
 
-DISTCLEANFILES =
 
