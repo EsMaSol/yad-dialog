@@ -244,26 +244,30 @@ create_dialog ()
     }
   if (options.data.dialog_text)
     {
-      gchar *buf = g_strcompress (options.data.dialog_text);
+      /* for dnd's tooltip we don't need text label */
+      if (options.mode != YAD_MODE_DND || !options.dnd_data.tooltip)
+	{
+	  gchar *buf = g_strcompress (options.data.dialog_text);
 
-      text = gtk_label_new (NULL);
-      if (!options.data.no_markup)
-	gtk_label_set_markup (GTK_LABEL (text), buf);
-      else
-        gtk_label_set_text (GTK_LABEL (text), buf);
-      gtk_widget_set_name (text, "yad-dialog-label");
-      gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
-      gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
-      if (options.data.geometry || options.data.width != -1)
-        gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
-      if (options.data.image_on_top)
-        gtk_box_pack_start (GTK_BOX (hbox2), text, TRUE, TRUE, 2);
-      else
-        gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
-      g_signal_connect (G_OBJECT (text), "size-allocate",
-			G_CALLBACK (text_size_allocate_cb), NULL);
+	  text = gtk_label_new (NULL);
+	  if (!options.data.no_markup)
+	    gtk_label_set_markup (GTK_LABEL (text), buf);
+	  else
+	    gtk_label_set_text (GTK_LABEL (text), buf);
+	  gtk_widget_set_name (text, "yad-dialog-label");
+	  gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
+	  gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
+	  if (options.data.geometry || options.data.width != -1)
+	    gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
+	  if (options.data.image_on_top)
+	    gtk_box_pack_start (GTK_BOX (hbox2), text, TRUE, TRUE, 2);
+	  else
+	    gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
+	  g_signal_connect (G_OBJECT (text), "size-allocate",
+			    G_CALLBACK (text_size_allocate_cb), NULL);
 
-      g_free (buf);
+	  g_free (buf);
+	}
     }
 
   /* add main widget */

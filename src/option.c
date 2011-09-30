@@ -305,6 +305,12 @@ static GOptionEntry dnd_options[] = {
     &dnd_mode,
     N_("Display drag-n-drop box"),
     NULL },
+  { "tooltip", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.dnd_data.tooltip,
+    N_("Use dialog text as tooltip"),
+    NULL },
   { "command", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
@@ -1279,6 +1285,9 @@ yad_options_init (void)
   options.color_data.use_palette = FALSE;
   options.color_data.palette = NULL;
   options.color_data.extra = FALSE;
+
+  /* Initialize DND data */
+  options.dnd_data.tooltip = FALSE;
 
   /* Initialize entry data */
   options.entry_data.entry_text = NULL;
