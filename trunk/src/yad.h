@@ -157,6 +157,10 @@ typedef struct {
 } YadColorData;
 
 typedef struct {
+  gboolean tooltip;
+} YadDNDData;
+
+typedef struct {
   gchar *entry_text;
   gchar *entry_label;
   gboolean hide_text;
@@ -270,6 +274,7 @@ typedef struct {
 
   YadCalendarData calendar_data;
   YadColorData color_data;
+  YadDNDData dnd_data;
   YadEntryData entry_data;
   YadFileData file_data;
   YadFontData font_data;

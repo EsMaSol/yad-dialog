@@ -99,4 +99,16 @@ dnd_init (GtkWidget *w)
 
   gtk_target_table_free (tgts, ntgts);
   gtk_target_list_unref (tlist);
+
+  /* set tooltip */
+  if (options.dnd_data.tooltip)
+    {
+      GtkWidget *box;
+
+      box = gtk_dialog_get_content_area (GTK_DIALOG (w));
+      if (!options.data.no_markup)
+	gtk_widget_set_tooltip_markup (box, options.data.dialog_text);
+      else
+	gtk_widget_set_tooltip_text (box, options.data.dialog_text);
+    }
 }
