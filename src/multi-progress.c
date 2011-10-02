@@ -26,8 +26,8 @@
 
 #include "yad.h"
 
-static GSList *progress_bars;
-static guint nbars;
+static GSList *progress_bars = NULL;
+static guint nbars = 0;
 
 static gboolean
 handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
@@ -74,9 +74,10 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             }
 
 	  value = g_strsplit(string->str, ":", 2);
-	  num = atoi (value[0]);
-	  if (num < 1 || num > nbars)
+	  num = atoi (value[0]) - 1;
+	  if (num < 0 || num > nbars)
 	    continue;
+
 	  pb = GTK_PROGRESS_BAR (g_slist_nth_data (progress_bars, num));
 	  b = (YadProgressBar *) g_slist_nth_data (options.multi_progress_data.bars, num);
 	  
@@ -202,6 +203,8 @@ multi_progress_create_widget (GtkWidget * dlg)
 	gtk_table_attach (GTK_TABLE (table), w, i, i + 1, 0, 1, 0, GTK_FILL | GTK_EXPAND, 2, 2);
       else
 	gtk_table_attach (GTK_TABLE (table), w, 1, 2, i, i + 1, GTK_FILL | GTK_EXPAND, 0, 2, 2);
+	
+      progress_bars = g_slist_append (progress_bars, w);
 
       i++;
     }
