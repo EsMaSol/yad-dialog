@@ -65,7 +65,7 @@ scale_create_widget (GtkWidget *dlg)
 					      (double) options.scale_data.max_value,
 					      (double) options.scale_data.step,
 					      (double) page, 0.0);
-  if (options.scale_data.vertical)
+  if (options.common_data.vertical)
     {
       w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
       gtk_widget_set_name (w, "yad-vscale-widget");
@@ -92,8 +92,7 @@ scale_create_widget (GtkWidget *dlg)
       GtkPositionType pos;
       GSList *m = options.scale_data.marks;
 
-      pos = options.scale_data.vertical ? GTK_POS_LEFT : GTK_POS_BOTTOM;
-
+      pos = options.common_data.vertical ? GTK_POS_LEFT : GTK_POS_BOTTOM;
       for (; m; m = m->next)
 	{
 	  YadScaleMark *mark = (YadScaleMark *) m->data;

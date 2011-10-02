@@ -47,7 +47,7 @@ list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 	}
       else
 	gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
-      
+
       return TRUE;
     }
   return FALSE;
@@ -127,7 +127,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	    col = checkcol;
 	  else
 	    colx += gtk_tree_view_column_get_width (checkcol);
-	  
+
 	}
       g_list_free(cols);
 
@@ -193,14 +193,14 @@ regex_search (GtkTreeModel *model, gint col, const gchar *key,
   if (pattern)
     {
       gboolean ret;
-      
+
       gtk_tree_model_get (model, iter, col, &str, -1);
-      
+
       ret = g_regex_match (pattern, str, G_REGEX_MATCH_NOTEMPTY, NULL);
       /* if get it, clear key end position */
       if (!ret)
         pos = 0;
-        
+
       return !ret;
     }
   else
@@ -805,11 +805,11 @@ list_create_widget (GtkWidget *dlg)
   /* set search function for regex search */
   if (options.list_data.search_column != -1 && options.list_data.regex_search)
     {
-      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, 
+      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns,
 						       options.list_data.search_column);
 
       if (col->type == YAD_COLUMN_TEXT || col->type == YAD_COLUMN_TOOLTIP)
-	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (list_view), 
+	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (list_view),
 					     regex_search, NULL, NULL);
     }
 

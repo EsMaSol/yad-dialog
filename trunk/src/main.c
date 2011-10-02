@@ -80,8 +80,8 @@ timeout_indicator_cb (gpointer data)
   return TRUE;
 }
 
-static void 
-text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data) 
+static void
+text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
 }
@@ -108,7 +108,7 @@ create_dialog ()
   if (options.data.window_icon)
     {
       GdkPixbuf *pb;
-      
+
       pb = get_pixbuf (options.data.window_icon, YAD_SMALL_ICON);
       if (pb)
 	{
@@ -144,7 +144,7 @@ create_dialog ()
   else
     {
       /* parse geometry, if given. must be after showing widget */
-      gtk_widget_realize (dlg);     
+      gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
     }
 
@@ -301,6 +301,9 @@ create_dialog ()
     case YAD_MODE_LIST:
       main_widget = list_create_widget (dlg);
       break;
+    case YAD_MODE_MULTI_PROGRESS:
+      main_widget = multi_progress_create_widget (dlg);
+      break;
     case YAD_MODE_PROGRESS:
       main_widget = progress_create_widget (dlg);
       break;
@@ -316,11 +319,11 @@ create_dialog ()
       if (options.data.expander)
 	{
 	  GtkWidget *exp;
-	  
+
 	  exp = gtk_expander_new_with_mnemonic (options.data.expander);
 	  gtk_expander_set_expanded (GTK_EXPANDER (exp), FALSE);
 	  gtk_container_add (GTK_CONTAINER (exp), main_widget);
-	  gtk_box_pack_start (GTK_BOX (vbox), exp, TRUE, TRUE, 2);	  
+	  gtk_box_pack_start (GTK_BOX (vbox), exp, TRUE, TRUE, 2);
 	}
       else
 	gtk_box_pack_start (GTK_BOX (vbox), main_widget, TRUE, TRUE, 2);
@@ -343,15 +346,24 @@ create_dialog ()
         }
       else
         {
-          if (gtk_alternative_dialog_button_order (NULL))
-            gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                                    GTK_STOCK_OK, YAD_RESPONSE_OK,
-                                    GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
-                                    NULL);
-          else
-            gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                                    GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
-                                    GTK_STOCK_OK, YAD_RESPONSE_OK, NULL);
+	  if (options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS)
+	    {
+	      gtk_dialog_add_buttons (GTK_DIALOG (dlg),
+				      GTK_STOCK_CLOSE, YAD_RESPONSE_OK,
+				      NULL);
+	    }
+	  else
+	    {
+	      if (gtk_alternative_dialog_button_order (NULL))
+		gtk_dialog_add_buttons (GTK_DIALOG (dlg),
+					GTK_STOCK_OK, YAD_RESPONSE_OK,
+					GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
+					NULL);
+	      else
+		gtk_dialog_add_buttons (GTK_DIALOG (dlg),
+					GTK_STOCK_CANCEL, YAD_RESPONSE_CANCEL,
+					GTK_STOCK_OK, YAD_RESPONSE_OK, NULL);
+	    }
           gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
         }
     }

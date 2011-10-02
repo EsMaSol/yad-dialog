@@ -10,6 +10,7 @@ src/notification.c
 src/scale.c
 src/list.c
 src/option.c
+src/multi-progress.c
 src/progress.c
 src/color.c
 src/text.c

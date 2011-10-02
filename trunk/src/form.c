@@ -66,11 +66,11 @@ expand_action (gchar *cmd)
 		  g_string_append (xcmd, gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, num))));
 		  break;
 		case YAD_FIELD_NUM:
-		  g_string_append_printf (xcmd, "%f", gtk_spin_button_get_value 
+		  g_string_append_printf (xcmd, "%f", gtk_spin_button_get_value
 					  (GTK_SPIN_BUTTON (g_slist_nth_data (fields, num))));
 		  break;
 		case YAD_FIELD_CHECK:
-		  g_string_append (xcmd, gtk_toggle_button_get_active 
+		  g_string_append (xcmd, gtk_toggle_button_get_active
 				   (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, num))) ? "TRUE" : "FALSE");
 		  break;
 		case YAD_FIELD_COMBO:
@@ -137,8 +137,8 @@ form_activate_cb (GtkEntry *entry, gpointer data)
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
-static void 
-text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data) 
+static void
+text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
 }
@@ -304,7 +304,7 @@ form_create_widget (GtkWidget *dlg)
           YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
           /* add field label */
-          if (fld->type != YAD_FIELD_CHECK && 
+          if (fld->type != YAD_FIELD_CHECK &&
               fld->type != YAD_FIELD_BUTTON &&
               fld->type != YAD_FIELD_LABEL)
             {
@@ -450,7 +450,7 @@ form_create_widget (GtkWidget *dlg)
 		g_strfreev (buf);
 		break;
 	      }
-              
+
             case YAD_FIELD_LABEL:
               if (fld->name[0])
                 {
@@ -476,7 +476,7 @@ form_create_widget (GtkWidget *dlg)
 		  gtk_widget_set_name (e, "yad-form-separator");
                 }
               gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
-              fields = g_slist_append (fields, e);      
+              fields = g_slist_append (fields, e);
               break;
             }
 
@@ -584,7 +584,7 @@ form_create_widget (GtkWidget *dlg)
                   }
 
                 case YAD_FIELD_BUTTON:
-                  g_signal_connect (G_OBJECT (g_slist_nth_data (fields, i)), "clicked", 
+                  g_signal_connect (G_OBJECT (g_slist_nth_data (fields, i)), "clicked",
                                     G_CALLBACK (button_clicked_cb), options.extra_data[i]);
                   break;
                 }
