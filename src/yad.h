@@ -45,6 +45,7 @@ typedef enum {
   YAD_MODE_FORM,
   YAD_MODE_ICONS,
   YAD_MODE_LIST,
+  YAD_MODE_MULTI_PROGRESS,
   YAD_MODE_NOTIFICATION,
   YAD_MODE_PROGRESS,
   YAD_MODE_SCALE,
@@ -86,6 +87,12 @@ typedef enum {
 } YadColumnType;
 
 typedef enum {
+  YAD_PROGRESS_NORMAL = 0,
+  YAD_PROGRESS_RTL,
+  YAD_PROGRESS_PULSE,
+} YadProgressType;
+
+typedef enum {
   YAD_BIG_ICON = 0,
   YAD_SMALL_ICON,
 } YadIconSize;
@@ -104,6 +111,11 @@ typedef struct {
   gchar *name;
   YadColumnType type;
 } YadColumn;
+
+typedef struct {
+  gchar *name;
+  YadProgressType type;
+} YadProgressBar;
 
 typedef struct {
   gchar *name;
@@ -217,6 +229,10 @@ typedef struct {
 } YadListData;
 
 typedef struct {
+  GSList *bars;
+} YadMultiProgressData;
+
+typedef struct {
   gboolean listen;
 } YadNotificationData;
 
@@ -240,7 +256,6 @@ typedef struct {
   gboolean print_partial;
   gboolean hide_value;
   gboolean have_value;
-  gboolean vertical;
   gboolean invert;
   GSList *marks;
 } YadScaleData;
@@ -262,6 +277,7 @@ typedef struct {
   gchar *item_separator;
   gboolean editable;
   gboolean multi;
+  gboolean vertical;
   gchar *command;
   gchar *date_format;
 } YadCommonData;
@@ -281,6 +297,7 @@ typedef struct {
   YadFormData form_data;
   YadIconsData icons_data;
   YadListData list_data;
+  YadMultiProgressData multi_progress_data;
   YadNotificationData notification_data;
   YadProgressData progress_data;
   YadScaleData scale_data;
@@ -330,6 +347,7 @@ GtkWidget * font_create_widget (GtkWidget *dlg);
 GtkWidget * form_create_widget (GtkWidget *dlg);
 GtkWidget * icons_create_widget (GtkWidget *dlg);
 GtkWidget * list_create_widget (GtkWidget *dlg);
+GtkWidget * multi_progress_create_widget (GtkWidget *dlg);
 GtkWidget * progress_create_widget (GtkWidget *dlg);
 GtkWidget * scale_create_widget (GtkWidget *dlg);
 GtkWidget * text_create_widget (GtkWidget *dlg);
@@ -343,7 +361,6 @@ void file_print_result (void);
 void font_print_result (void);
 void form_print_result (void);
 void list_print_result (void);
-void progress_print_result (void);
 void scale_print_result (void);
 void text_print_result (void);
 

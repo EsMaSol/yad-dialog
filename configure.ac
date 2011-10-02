@@ -27,7 +27,7 @@ AC_MSG_RESULT([$with_gtk])
 case "$with_gtk" in
     gtk3) 
         GTK_MODULE="gtk+-3.0"
-        GTK_REQUIRED="2.91.0"
+        GTK_REQUIRED="3.0.0"
         ;;
     gtk2)
         GTK_MODULE="gtk+-2.0"

@@ -337,7 +337,7 @@ yad_notification_run ()
   if (options.common_data.command)
     action = g_strdup (options.common_data.command);
   menu_data = NULL;
-  
+
   set_icon ();
 
   g_signal_connect (status_icon, "activate",

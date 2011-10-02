@@ -4,28 +4,29 @@ INCLUDES = 					\
 
 bin_PROGRAMS = yad
 
-yad_SOURCES = 		\
-	about.c		\
-	calendar.c	\
-	color.c		\
-	dnd.c           \
-	entry.c		\
-	file.c	\
-	font.c		\
-	form.c		\
-	icons.c		\
-	list.c		\
-	notification.c	\
-	option.c	\
-	progress.c	\
-	scale.c		\
-	text.c		\
-	util.c		\
-	main.c		\
-	yad.h
+yad_SOURCES = 			\
+	about.c			\
+	calendar.c		\
+	color.c			\
+	dnd.c           	\
+	entry.c			\
+	file.c			\
+	font.c			\
+	form.c			\
+	icons.c			\
+	list.c			\
+	multi-progress.c	\
+	notification.c		\
+	option.c		\
+	progress.c		\
+	scale.c			\
+	text.c			\
+	util.c			\
+	main.c			\
+	yad.h			\
+	calendar.xpm
 
 yad_CFLAGS = $(YAD_CFLAGS)
-
 yad_LDADD = $(YAD_LIBS)
 
 if BUILD_IB
@@ -35,9 +36,3 @@ yad_icon_browser_SOURCES = browser.c
 yad_icon_browser_CFLAGS = $(YAD_CFLAGS)
 yad_icon_browser_LDADD = $(YAD_LIBS)
 endif
-
-DISTCLEANFILES =
-
-EXTRA_DIST = calendar.xpm
-
-

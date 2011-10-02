@@ -22,6 +22,7 @@
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
@@ -42,6 +43,7 @@ static gboolean font_mode = FALSE;
 static gboolean form_mode = FALSE;
 static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
+static gboolean multi_progress_mode = FALSE;
 static gboolean notification_mode = FALSE;
 static gboolean progress_mode = FALSE;
 static gboolean scale_mode = FALSE;
@@ -688,6 +690,28 @@ static GOptionEntry list_options[] = {
   { NULL }
 };
 
+static GOptionEntry multi_progress_options[] = {
+  { "multi-progress", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &multi_progress_mode,
+    N_("Display multi progress bars dialog"),
+    NULL },
+  { "bar", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    add_bar,
+    N_("Add the progress bar (TYPE - NORM, RTL or PULSE)"),
+    N_("LABEL[:TYPE]") },
+  { "vertical", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_NONE,
+    &options.common_data.vertical,
+    N_("Show vertical bars"),
+    NULL },
+  { NULL }
+};
+
 static GOptionEntry notification_options[] = {
   { "notification", 0,
     G_OPTION_FLAG_IN_MAIN,
@@ -821,9 +845,9 @@ static GOptionEntry scale_options[] = {
     N_("Hide value"),
     NULL },
   { "vertical", 0,
-    0,
+    G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_NONE,
-    &options.scale_data.vertical,
+    &options.common_data.vertical,
     N_("Show vertical scale"),
     NULL },
   { "invert", 0,
@@ -937,8 +961,7 @@ static GOptionEntry rest_options[] = {
 };
 
 static gboolean
-add_button (const gchar *option_name,
-	    const gchar *value,
+add_button (const gchar *option_name, const gchar *value,
 	    gpointer data, GError **err)
 {
   YadButton *btn;
@@ -958,8 +981,7 @@ add_button (const gchar *option_name,
 }
 
 static gboolean
-add_column (const gchar *option_name,
-	    const gchar *value,
+add_column (const gchar *option_name, const gchar *value,
 	    gpointer data, GError **err)
 {
   YadColumn *col;
@@ -1002,8 +1024,7 @@ add_column (const gchar *option_name,
 }
 
 static gboolean
-add_field (const gchar *option_name,
-	   const gchar *value,
+add_field (const gchar *option_name, const gchar *value,
 	   gpointer data, GError **err)
 {
   YadField *fld;
@@ -1059,8 +1080,35 @@ add_field (const gchar *option_name,
 }
 
 static gboolean
-add_scale_mark (const gchar *option_name,
-		const gchar *value,
+add_bar (const gchar *option_name, const gchar *value,
+	 gpointer data, GError **err)
+{
+  YadProgressBar *bar;
+  gchar **bstr = split_arg (value);
+
+  bar = g_new0 (YadProgressBar, 1);
+  bar->name = g_strdup (bstr[0]);
+  if (bstr[1])
+    {
+      if (g_ascii_strcasecmp (bstr[1], "RTL") == 0)
+	bar->type = YAD_PROGRESS_RTL;
+      else if (g_ascii_strcasecmp (bstr[1], "PULSE") == 0)
+	bar->type = YAD_PROGRESS_PULSE;
+      else
+	bar->type = YAD_PROGRESS_NORMAL;
+    }
+  else
+    bar->type = YAD_PROGRESS_NORMAL;
+  options.multi_progress_data.bars =
+    g_slist_append (options.multi_progress_data.bars, bar);
+
+  g_strfreev (bstr);
+
+  return TRUE;
+}
+
+static gboolean
+add_scale_mark (const gchar *option_name, const gchar *value,
 		gpointer data, GError **err)
 {
   YadScaleMark *mark;
@@ -1086,8 +1134,7 @@ add_scale_mark (const gchar *option_name,
 }
 
 static gboolean
-add_palette (const gchar *option_name,
-	     const gchar *value,
+add_palette (const gchar *option_name, const gchar *value,
 	     gpointer data, GError **err)
 {
   options.color_data.use_palette = TRUE;
@@ -1097,8 +1144,7 @@ add_palette (const gchar *option_name,
 }
 
 static gboolean
-add_confirm_overwrite (const gchar *option_name,
-		       const gchar *value,
+add_confirm_overwrite (const gchar *option_name, const gchar *value,
 		       gpointer data, GError **err)
 {
   options.file_data.confirm_overwrite = TRUE;
@@ -1109,8 +1155,7 @@ add_confirm_overwrite (const gchar *option_name,
 }
 
 static gboolean
-set_align (const gchar *option_name,
-	   const gchar *value,
+set_align (const gchar *option_name, const gchar *value,
 	   gpointer data, GError **err)
 {
   if (g_ascii_strcasecmp (value, "left") == 0)
@@ -1126,8 +1171,7 @@ set_align (const gchar *option_name,
 }
 
 static gboolean
-set_justify (const gchar *option_name,
-	     const gchar *value,
+set_justify (const gchar *option_name, const gchar *value,
 	     gpointer data, GError **err)
 {
   if (g_ascii_strcasecmp (value, "left") == 0)
@@ -1145,8 +1189,7 @@ set_justify (const gchar *option_name,
 }
 
 static gboolean
-set_expander (const gchar *option_name,
-	      const gchar *value,
+set_expander (const gchar *option_name, const gchar *value,
 	      gpointer data, GError **err)
 {
   if (value)
@@ -1157,8 +1200,7 @@ set_expander (const gchar *option_name,
 }
 
 static gboolean
-set_scale_value (const gchar *option_name,
-		 const gchar *value,
+set_scale_value (const gchar *option_name, const gchar *value,
 		 gpointer data, GError **err)
 {
   options.scale_data.value = atoi (value);
@@ -1168,8 +1210,7 @@ set_scale_value (const gchar *option_name,
 }
 
 static gboolean
-set_ellipsize (const gchar *option_name,
-	       const gchar *value,
+set_ellipsize (const gchar *option_name, const gchar *value,
 	       gpointer data, GError **err)
 {
   if (g_ascii_strcasecmp (value, "none") == 0)
@@ -1207,6 +1248,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_ICONS;
   else if (list_mode)
     options.mode = YAD_MODE_LIST;
+  else if (multi_progress_mode)
+    options.mode = YAD_MODE_MULTI_PROGRESS;
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
   else if (progress_mode)
@@ -1273,6 +1316,7 @@ yad_options_init (void)
   options.common_data.editable = FALSE;
   options.common_data.command = NULL;
   options.common_data.date_format = "%x";
+  options.common_data.vertical = FALSE;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
@@ -1339,6 +1383,9 @@ yad_options_init (void)
   options.list_data.dclick_action = NULL;
   options.list_data.regex_search = FALSE;
 
+  /* Initialize multiprogress data */
+  options.multi_progress_data.bars = NULL;
+
   /* Initialize notification data */
   options.notification_data.listen = FALSE;
 
@@ -1361,7 +1408,6 @@ yad_options_init (void)
   options.scale_data.print_partial = FALSE;
   options.scale_data.hide_value = FALSE;
   options.scale_data.have_value = FALSE;
-  options.scale_data.vertical = FALSE;
   options.scale_data.invert = FALSE;
   options.scale_data.marks = NULL;
 
@@ -1449,6 +1495,13 @@ yad_create_context (void)
   a_group = g_option_group_new ("list", _("List options"),
 				_("Show list options"), NULL, NULL);
   g_option_group_add_entries (a_group, list_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds multi progress option entries */
+  a_group = g_option_group_new ("multi-progress", _("Multi progress bars options"),
+				_("Show Multi progress bars options"), NULL, NULL);
+  g_option_group_add_entries (a_group, multi_progress_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
