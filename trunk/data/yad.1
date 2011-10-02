@@ -48,6 +48,9 @@ Display form dialog
 .B \-\-list
 Display list dialog
 .TP
+.B \-\-multi-progress
+Display multi progress bars dialog.
+.TP
 .B \-\-notification
 Display notification icon.
 .TP
@@ -395,6 +398,16 @@ When double-click specified \fIEnter\fP acts as a double-click and \fICtrl+Enter
 .TP
 .B \-\-regex-search
 Use regular expressions in search for text fields.
+
+.PP
+Multi progress bars dialog options
+.TP
+.B \-\-bar=LABEL[:TYPE]
+Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type. Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
+.B \-\-vertical
+Set vertical orientation of progress bars.
+
+Initial values for bars set as extra arguments. Each lines with progress data passed to stdin must be started from \fIN:\fP where \fIN\fP is a number of progress bar. Rest is same as in \fIprogress\fP dialog.
 
 .PP
 Notification options
