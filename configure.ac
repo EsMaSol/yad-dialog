@@ -13,14 +13,28 @@ IT_PROG_INTLTOOL([0.40.0])
 
 AC_PROG_CC
 
-GTK2_REQUIRED=2.16.0
-GTK3_REQUIRED=2.91.0
+AC_ARG_WITH([gtk],
+	[gtkver="$withval"], [gtkver="gtk2"])
+AC_ARG_WITH([gtk],
+	[AS_HELP_STRING([--with-gtk=gtk2|gtk3],[set the GTK+ version to use (default - gtk2)])],
+	[case "$with_gtk" in
+	    gtk2|gtk3) ;;
+	    	    *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+         esac],
+        [with_gtk=gtk2])
+AC_MSG_RESULT([$with_gtk])
 
-PKG_CHECK_MODULES([YAD], [gtk+-3.0 >= $GTK3_REQUIRED], [gtk3=yes], [gtk3=no])
-if test x$gtk3 = xno
-then
-    PKG_CHECK_MODULES([YAD], [gtk+-2.0 >= $GTK2_REQUIRED])
-fi
+case "$with_gtk" in
+    gtk3) 
+        GTK_MODULE="gtk+-3.0"
+        GTK_REQUIRED="2.91.0"
+        ;;
+    gtk2)
+        GTK_MODULE="gtk+-2.0"
+        GTK_REQUIRED="2.16.0"
+        ;;
+esac
+PKG_CHECK_MODULES([YAD], [$GTK_MODULE >= $GTK_REQUIRED])
 AC_SUBST([YAD_CFLAGS])
 AC_SUBST([YAD_LIBS])
 
