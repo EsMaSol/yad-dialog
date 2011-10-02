@@ -28,8 +28,6 @@
 
 static GtkWidget *progress_bar;
 
-gint pulsate_timeout (gpointer data);
-
 static gboolean
 pulsate_progress_bar (gpointer user_data)
 {
@@ -40,7 +38,7 @@ pulsate_progress_bar (gpointer user_data)
 static gboolean
 handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
-  static gint pulsate_timeout = -1;
+  static guint pulsate_timeout = 0;
   float percentage = 0.0;
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
@@ -52,7 +50,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
       if (options.progress_data.pulsate)
         {
-          if (pulsate_timeout == -1)
+          if (pulsate_timeout == 0)
             pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
         }
 
@@ -124,7 +122,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       if (options.progress_data.pulsate)
         {
           g_source_remove (pulsate_timeout);
-          pulsate_timeout = -1;
+          pulsate_timeout = 0;
         }
 
       if (options.progress_data.autoclose)
