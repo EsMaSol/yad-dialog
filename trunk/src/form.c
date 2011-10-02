@@ -332,12 +332,23 @@ form_create_widget (GtkWidget *dlg)
               break;
 
             case YAD_FIELD_BUTTON:
-              e = gtk_button_new_from_stock (fld->name);
-	      gtk_widget_set_name (e, "yad-form-button");
-              gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
-              gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
-              fields = g_slist_append (fields, e);      
-              break;
+	      {
+		gchar **buf = g_strsplit (fld->name, options.common_data.item_separator, 2);
+		e = gtk_button_new_from_stock (buf[0]);
+		if (buf[1])
+		  {
+		    if (options.data.no_markup)
+		      gtk_widget_set_tooltip_text (e, buf[1]);
+		    else
+		      gtk_widget_set_tooltip_markup (e, buf[1]);
+		  }
+		gtk_widget_set_name (e, "yad-form-button");
+		gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
+		gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+		fields = g_slist_append (fields, e);
+		g_strfreev (buf);
+		break;
+	      }
               
             case YAD_FIELD_LABEL:
               if (fld->name[0])

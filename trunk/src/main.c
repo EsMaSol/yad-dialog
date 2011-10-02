@@ -20,6 +20,7 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <stdio.h>
 
 #if !defined(_WIN32)
 # include <gdk/gdkx.h>
@@ -369,7 +370,7 @@ create_dialog ()
   /* print xid */
 #if !defined(_WIN32)
   if (options.print_xid)
-    g_printerr ("0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+    g_printf (stderr, "0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
 #endif
 
   return dlg;
