@@ -23,11 +23,111 @@
 
 static GSList *fields = NULL;
 
+static GString *
+expand_action (gchar *cmd)
+{
+  GString *xcmd;
+  guint i = 0;
+
+  xcmd = g_string_new ("");
+  while (cmd[i])
+    {
+      if (cmd[i] == '%')
+	{
+	  i++;
+	  if (g_ascii_isdigit (cmd[i]))
+	    {
+	      YadField *fld;
+	      gchar *buf;
+	      gint num, j = i;
+
+	      /* get field num */
+	      while (g_ascii_isdigit (cmd[j]))
+		j++;
+	      buf = g_strndup (cmd + i, j - i);
+	      num = strtol (buf, NULL);
+	      g_free (buf);
+	      if (num > 0 && num <= g_slist_length (fields))
+		num--;
+	      else
+		continue;
+	      /* get field value */
+	      fld = g_slist_nth_data (options.form_data.fields, num);
+	      switch (fld->type)
+		{
+		case YAD_FIELD_SIMPLE:
+		case YAD_FIELD_HIDDEN:
+		case YAD_FIELD_READ_ONLY:
+		case YAD_FIELD_MFILE:
+		case YAD_FIELD_FILE_SAVE:
+		case YAD_FIELD_DIR_CREATE:
+		case YAD_FIELD_DATE:
+		  g_string_append (xcmd, gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, num))));
+		  break;
+		case YAD_FIELD_NUM:
+		  g_string_append_printf (xcmd, "%f", gtk_spin_button_get_value 
+					  (GTK_SPIN_BUTTON (g_slist_nth_data (fields, num))));
+		  break;
+		case YAD_FIELD_CHECK:
+		  g_string_append (xcmd, gtk_toggle_button_get_active 
+				   (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, num))) ? "TRUE" : "FALSE");
+		  break;
+		case YAD_FIELD_COMBO:
+		case YAD_FIELD_COMBO_ENTRY:
+		  g_string_append (xcmd,
+#if GTK_CHECK_VERSION(2,24,0)
+				   gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, num)))
+#else
+				   gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, num)))
+#endif
+				   );
+		  break;
+		case YAD_FIELD_FILE:
+		case YAD_FIELD_DIR:
+		  g_string_append (xcmd, gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
+		  break;
+		case YAD_FIELD_FONT:
+		  g_string_append (xcmd, gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
+		  break;
+		case YAD_FIELD_COLOR:
+		  {
+		    GdkColor c;
+
+		    gtk_color_button_get_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, num)), &c);
+		    buf = gdk_color_to_string (&c);
+		    g_string_append (xcmd, buf);
+		    g_free (buf);
+		    break;
+		  }
+		}
+	      i = j;
+	    }
+	  else
+	    {
+	      g_string_append_c (xcmd, cmd[i]);
+	      i++;
+	    }
+	}
+      else
+	{
+	  g_string_append_c (xcmd, cmd[i]);
+	  i++;
+	}
+    }
+  g_string_append_c (xcmd, '\0');
+
+  return xcmd;
+}
+
 static void
 button_clicked_cb (GtkButton *b, gchar *action)
 {
   if (action && action[0])
-    g_spawn_command_line_async (action, NULL);
+    {
+      GString *cmd = expand_action (action);
+      g_spawn_command_line_async (cmd->str, NULL);
+      g_string_free (cmd, TRUE);
+    }
 }
 
 static void
