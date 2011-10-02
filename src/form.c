@@ -355,10 +355,10 @@ form_create_widget (GtkWidget *dlg)
                 {
                   e = gtk_label_new (NULL);
 		  gtk_widget_set_name (e, "yad-form-label");
-                  if (!options.data.no_markup)
-		    gtk_label_set_markup (GTK_LABEL (e), fld->name);
+                  if (options.data.no_markup)
+		    gtk_label_set_text (GTK_LABEL (e), fld->name);
                   else
-                    gtk_label_set_text (GTK_LABEL (e), fld->name);
+                    gtk_label_set_markup (GTK_LABEL (e), fld->name);
 		  gtk_label_set_line_wrap (GTK_LABEL (e), TRUE);
                   gtk_label_set_selectable (GTK_LABEL (e), options.data.selectable_labels);
                   gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
