@@ -23,6 +23,7 @@
 
 static GSList *fields = NULL;
 
+/* expand %N in command to fields values */
 static GString *
 expand_action (gchar *cmd)
 {
