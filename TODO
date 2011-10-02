@@ -2,4 +2,3 @@
 - Add multiple progressbars
 - DBus support (?)
 - Common search dialog for list and text dialogs
-- Add pattern for field values in form button's commands
