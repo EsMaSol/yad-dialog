@@ -40,14 +40,14 @@ expand_action (gchar *cmd)
 	    {
 	      YadField *fld;
 	      gchar *buf;
-	      gint num, j = i;
+	      guint num, j = i;
 
 	      /* get field num */
 	      while (g_ascii_isdigit (cmd[j]))
 		j++;
 	      buf = g_strndup (cmd + i, j - i);
-	      num = strtol (buf, NULL);
-	      g_free (buf);
+	      num = g_ascii_strtoll (buf, NULL, 10);
+	      g_free (buf); 
 	      if (num > 0 && num <= g_slist_length (fields))
 		num--;
 	      else
