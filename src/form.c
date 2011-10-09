@@ -22,6 +22,7 @@
 #include "calendar.xpm"
 
 static GSList *fields = NULL;
+static guint n_fields;
 
 /* expand %N in command to fields values */
 static GString *
@@ -48,7 +49,7 @@ expand_action (gchar *cmd)
 	      buf = g_strndup (cmd + i, j - i);
 	      num = g_ascii_strtoll (buf, NULL, 10);
 	      g_free (buf); 
-	      if (num > 0 && num <= g_slist_length (fields))
+	      if (num > 0 && num <= n_fields)
 		num--;
 	      else
 		continue;
@@ -291,15 +292,16 @@ form_create_widget (GtkWidget *dlg)
       GtkWidget *l, *e;
       GdkPixbuf *pb;
       guint i, col, row, rows;
-      guint fc = g_slist_length (options.form_data.fields);
+      
+      n_fields = g_slist_length (options.form_data.fields);
 
       row = col = 0;
-      rows = (fc + 1) / options.form_data.columns;
+      rows = (n_fields + 1) / options.form_data.columns;
 
-      w = gtk_table_new (fc, 2 * options.form_data.columns, FALSE);
+      w = gtk_table_new (n_fields, 2 * options.form_data.columns, FALSE);
 
       /* create form */
-      for (i = 0; i < fc; i++)
+      for (i = 0; i < n_fields; i++)
         {
           YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
@@ -493,7 +495,7 @@ form_create_widget (GtkWidget *dlg)
       if (options.extra_data)
         {
           i = 0;
-          while (options.extra_data[i] && i < fc)
+          while (options.extra_data[i] && i < n_fields)
             {
               gchar **s;
               guint j = 0;
@@ -601,7 +603,7 @@ form_print_result (void)
 {
   guint i;
 
-  for (i = 0; i < g_slist_length (fields); i++)
+  for (i = 0; i < n_fields; i++)
     {
       YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
