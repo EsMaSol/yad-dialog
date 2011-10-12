@@ -1,3 +1,159 @@
+2011-10-12 11:04  ananasik
+
+	* data/yad.1, src/form.c: set values of fields from button
+	  callbacks
+
+2011-10-12 09:58  ananasik
+
+	* src/form.c: keep path for auxiliary file dialogs in form dialog
+
+2011-10-09 05:18  ananasik
+
+	* src/form.c: some optimization in form dialog
+
+2011-10-09 05:10  ananasik
+
+	* src/form.c: fix parse field number in for buttons callbacks
+
+2011-10-02 16:03  ananasik
+
+	* src/multi-progress.c: fix reading data from stdin in
+	  multi-progress dialog
+
+2011-10-02 15:45  ananasik
+
+	* src/multi-progress.c: add multi-progress
+
+2011-10-02 12:43  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po: update
+	  translations and man page
+
+2011-10-02 12:25  ananasik
+
+	* configure.ac, po/POTFILES.in, src/Makefile.am, src/form.c,
+	  src/list.c, src/main.c, src/notification.c, src/option.c,
+	  src/scale.c, src/yad.h: add multi progress dialog. set gtk-close
+	  as a default button for progress dialogs
+
+2011-10-02 08:38  ananasik
+
+	* src/progress.c: cleanup
+
+2011-10-02 07:24  ananasik
+
+	* configure.ac: bump version to 0.14.90
+
+2011-10-02 07:19  ananasik
+
+	* configure.ac: add --with-gtk argument to configure script
+
+2011-10-02 06:46  ananasik
+
+	* src/form.c: cleanup
+
+2011-10-02 06:45  ananasik
+
+	* TODO: update TODO
+
+2011-10-02 06:45  ananasik
+
+	* data/yad.1, src/form.c: substitute field values in command for
+	  form buttons
+
+2011-10-02 05:31  ananasik
+
+	* src/form.c: cleanup
+
+2011-10-02 05:03  ananasik
+
+	* data/yad.1, src/form.c, src/main.c: add tooltips for form's
+	  button fields
+
+2011-09-30 06:26  ananasik
+
+	* TODO, data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/dnd.c, src/main.c, src/option.c, src/yad.h: add --tooltip for
+	  dnd dialog
+
+2011-09-27 16:26  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/form.c,
+	  src/option.c, src/yad.h: add SFL and CDIR field types for form
+	  dialog
+
+2011-09-27 04:39  ananasik
+
+	* src/main.c:
+
+2011-09-27 03:26  ananasik
+
+	* Makefile.am, configure.ac, data/Makefile.am, data/icons,
+	  data/icons/128x128, data/icons/128x128/Makefile.am,
+	  data/icons/128x128/yad.png, data/icons/16x16,
+	  data/icons/16x16/Makefile.am, data/icons/16x16/yad.png,
+	  data/icons/24x24, data/icons/24x24/Makefile.am,
+	  data/icons/24x24/yad.png, data/icons/32x32,
+	  data/icons/32x32/Makefile.am, data/icons/32x32/yad.png,
+	  data/icons/48x48, data/icons/48x48/Makefile.am,
+	  data/icons/48x48/yad.png, data/icons/96x96,
+	  data/icons/96x96/Makefile.am, data/icons/96x96/yad.png,
+	  data/icons/Makefile.am, data/yad.1, data/yad.png: add new icon
+	  and some extra files in distribution
+
+2011-09-27 02:38  ananasik
+
+	* src/main.c: fix setting window icon
+
+2011-09-17 09:19  ananasik
+
+	* data/yad.1, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/main.c,
+	  src/option.c, src/yad.h: add --print-xid option
+
+2011-09-10 08:20  ananasik
+
+	* src/form.c:
+
+2011-09-10 08:18  ananasik
+
+	* src/form.c: fix setting initial value for numeric field in form
+
+2011-09-07 13:12  ananasik
+
+	* NEWS, TODO, configure.ac: release 0.14.2
+
+2011-09-07 11:32  ananasik
+
+	* src/main.c: cleanup
+
+2011-09-07 11:29  ananasik
+
+	* src/main.c: fix dialog text placement
+
+2011-09-05 15:10  ananasik
+
+	* README, TODO: update TODO
+
+2011-09-05 15:06  ananasik
+
+	* NEWS:
+
+2011-09-05 12:49  ananasik
+
+	* src/scale.c: correct formatting
+
+2011-09-05 12:00  ananasik
+
+	* configure.ac: release 0.14.1
+
+2011-09-05 11:58  ananasik
+
+	* src/scale.c: fix build with gtk3
+
+2011-09-05 07:14  ananasik
+
+	* ChangeLog, NEWS: release 0.14.0
+
 2011-09-05 07:09  ananasik
 
 	* po/de.po, po/ru.po, po/sk.po, po/uk.po: update translations
