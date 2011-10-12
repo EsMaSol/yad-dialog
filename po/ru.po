@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 15:38+0300\n"
+"POT-Creation-Date: 2011-10-12 14:13+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -83,27 +83,27 @@ msgstr "Начальное значение меньше минимальног�
 msgid "Initial value greater than maximum.\n"
 msgstr "Начальное значение больше маскимального.\n"
 
-#: ../src/form.c:154
+#: ../src/form.c:303
 msgid "Select files"
 msgstr "Выбрать файлы"
 
-#: ../src/form.c:204
+#: ../src/form.c:367
 msgid "Select or create file"
 msgstr "Выбрать или создать файл"
 
-#: ../src/form.c:213
+#: ../src/form.c:376
 msgid "Select or create folder"
 msgstr "Выбрать или создать каталог"
 
-#: ../src/form.c:243
+#: ../src/form.c:409
 msgid "Select date"
 msgstr "Выбрать дату"
 
-#: ../src/form.c:375
+#: ../src/form.c:542
 msgid "Select file"
 msgstr "Выбрать файл"
 
-#: ../src/form.c:382
+#: ../src/form.c:549
 msgid "Select folder"
 msgstr "Выбрать каталог"
 

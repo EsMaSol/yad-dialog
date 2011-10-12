@@ -1,3 +1,16 @@
+Version 0.15.0
+    - add multiple progress bars dialog
+    - add field control for buttons in form dialog
+    - keep current directory in auxiliary file selectors in form dialog
+    - add tooltips for form buttons
+    - add new field types: SFL for create new file and CDIR for create new dir
+    - add --tooltip option for dnd dialog
+    - fix setting initial value for numeric field in form dialog
+    - add --print-xid option
+    - for progress dialog the default button is gtk-close now
+    - user can specify gtk version in ./configure script
+    - new yad icons (special thanks to Bogdan Lisovich)
+
 Version 0.14.2
     - fix broken dialog text placement
 

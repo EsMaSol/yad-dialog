@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 15:38+0300\n"
+"POT-Creation-Date: 2011-10-12 14:13+0300\n"
 "PO-Revision-Date: 2011-09-05 07:57+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <debian-l10n-slovak@lists.debian.org>\n"
@@ -81,29 +81,29 @@ msgstr "Počiatočná hodnota je menšia ako minimálna.\n"
 msgid "Initial value greater than maximum.\n"
 msgstr "Maximálna hodnota je väčšia ako minimálna.\n"
 
-#: ../src/form.c:154
+#: ../src/form.c:303
 msgid "Select files"
 msgstr "Vyberte súbory"
 
-#: ../src/form.c:204
+#: ../src/form.c:367
 #, fuzzy
 msgid "Select or create file"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:213
+#: ../src/form.c:376
 #, fuzzy
 msgid "Select or create folder"
 msgstr "Vyberte pole"
 
-#: ../src/form.c:243
+#: ../src/form.c:409
 msgid "Select date"
 msgstr "Vyberte dátum"
 
-#: ../src/form.c:375
+#: ../src/form.c:542
 msgid "Select file"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:382
+#: ../src/form.c:549
 msgid "Select folder"
 msgstr "Vyberte pole"
 
