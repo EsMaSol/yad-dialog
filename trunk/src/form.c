@@ -149,9 +149,20 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
                  GdkEventButton *event, gpointer data)
 {
   GtkWidget *dlg;
+  static gchar *path = NULL;
 
   if (event->button == 1)
     {
+      if (!path)
+	{
+	  const gchar *val = gtk_entry_get_text (entry);
+
+	  if (g_file_test (val, G_FILE_TEST_IS_DIR))
+	    path = g_strdup (val);
+	  else
+	    path = g_path_get_dirname (val);
+	}
+
       dlg = gtk_file_chooser_dialog_new (_("Select files"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                          GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -159,6 +170,7 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
                                          GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
                                          NULL );
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
+      gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);     
 
       if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
         {
@@ -186,6 +198,8 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
           g_string_free (str, TRUE);
         }
 
+      g_free (path);
+      path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
       gtk_widget_destroy (dlg);
     }
 }
@@ -195,10 +209,21 @@ create_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
                  GdkEventButton *event, gpointer data)
 {
   GtkWidget *dlg;
+  static gchar *path = NULL;
 
   if (event->button == 1)
     {
       YadFieldType type = GPOINTER_TO_INT (data);
+      
+      if (!path)
+	{
+	  const gchar *val = gtk_entry_get_text (entry);
+
+	  if (g_file_test (val, G_FILE_TEST_IS_DIR))
+	    path = g_strdup (val);
+	  else
+	    path = g_path_get_dirname (val);
+	}
 
       if (type = YAD_FIELD_FILE_SAVE)
 	{
@@ -218,6 +243,7 @@ create_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 					     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 					     NULL );
 	}
+      gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);     
 
       if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
         {
@@ -227,6 +253,8 @@ create_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 	  g_free (file);
         }
 
+      g_free (path);
+      path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
       gtk_widget_destroy (dlg);
     }
 }
