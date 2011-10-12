@@ -24,6 +24,8 @@
 static GSList *fields = NULL;
 static guint n_fields;
 
+static void button_clicked_cb (GtkButton *b, gchar *action);
+
 /* expand %N in command to fields values */
 static GString *
 expand_action (gchar *cmd)
@@ -122,13 +124,148 @@ expand_action (gchar *cmd)
 }
 
 static void
+set_field_value (guint num, gchar *value)
+{
+  gchar **s;
+  guint j = 0;
+  YadField *fld = g_slist_nth_data (options.form_data.fields, num);
+
+  switch (fld->type)
+    {
+    case YAD_FIELD_SIMPLE:
+    case YAD_FIELD_HIDDEN:
+    case YAD_FIELD_READ_ONLY:
+    case YAD_FIELD_MFILE:
+    case YAD_FIELD_FILE_SAVE:
+    case YAD_FIELD_DIR_CREATE:
+    case YAD_FIELD_DATE:
+      gtk_entry_set_text (GTK_ENTRY (g_slist_nth_data (fields, num)), value);
+      break;
+
+    case YAD_FIELD_NUM:
+      s = g_strsplit (value, options.common_data.item_separator, -1);
+      if (s[0])
+	{
+	  GtkWidget *w;
+	  gdouble val = g_strtod (s[0], NULL);
+	  w = g_slist_nth_data (fields, num);
+	  if (s[1])
+	    {
+	      gdouble min, max;
+	      gchar **s1 = g_strsplit (s[1], "..", 2);
+	      min = g_strtod (s1[0], NULL);
+	      max = g_strtod (s1[1], NULL);
+	      g_strfreev (s1);
+	      gtk_spin_button_set_range (GTK_SPIN_BUTTON (w), min, max);
+	      if (s[2])
+		{
+		  gdouble step = g_strtod (s[2], NULL);
+		  gtk_spin_button_set_increments (GTK_SPIN_BUTTON (w), step, step * 10);
+		}
+	    }
+	  /* set initial value must be after setting range and step */
+	  gtk_spin_button_set_value (GTK_SPIN_BUTTON (w), val);
+	}
+      g_strfreev (s);
+      break;
+
+    case YAD_FIELD_CHECK:
+      if (g_ascii_strcasecmp (value, "TRUE") == 0)
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, num)), TRUE);
+      else
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, num)), FALSE);
+      break;
+
+    case YAD_FIELD_COMBO:
+    case YAD_FIELD_COMBO_ENTRY:
+      s = g_strsplit (value, options.common_data.item_separator, -1);
+      while (s[j])
+	{
+#if GTK_CHECK_VERSION(2,24,0)
+	  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, num)), s[j]);
+#else
+	  gtk_combo_box_append_text (GTK_COMBO_BOX (g_slist_nth_data (fields, num)), s[j]);
+#endif
+	  j++;
+	}
+      gtk_combo_box_set_active (GTK_COMBO_BOX (g_slist_nth_data (fields, num)), 0);
+      g_strfreev (s);
+      break;
+
+    case YAD_FIELD_DIR:
+      gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num)),
+					   value);
+    case YAD_FIELD_FILE:
+      gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num)),
+				     value);
+      break;
+
+    case YAD_FIELD_FONT:
+      gtk_font_button_set_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num)),
+				     value);
+      break;
+
+    case YAD_FIELD_COLOR:
+      {
+	GdkColor c;
+
+	gdk_color_parse (value, &c);
+	gtk_color_button_set_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, num)), &c);
+	break;
+      }
+
+    case YAD_FIELD_BUTTON:
+      g_signal_connect (G_OBJECT (g_slist_nth_data (fields, num)), "clicked",
+			G_CALLBACK (button_clicked_cb), value);
+      break;
+    }
+}
+
+static void
 button_clicked_cb (GtkButton *b, gchar *action)
 {
+  static gchar *newline = NULL;
+
+  if (!newline)
+    newline = g_strcompress ("\n");
+
   if (action && action[0])
     {
-      GString *cmd = expand_action (action);
-      g_spawn_command_line_async (cmd->str, NULL);
-      g_string_free (cmd, TRUE);
+      if (action[0] == '@')
+	{
+	  gchar *data;
+	  gint exit = 1;
+	  GString *cmd = expand_action (action + 1);
+	  g_spawn_command_line_sync (cmd->str, &data, NULL, &exit, NULL);
+	  if (exit == 0)
+	    {
+	      guint i = 0;
+	      gchar **lines = g_strsplit (data, "\n", 0);
+	      while (lines[i] && lines[i][0])
+		{
+		  gint fn;
+		  gchar **ln;
+		  
+		  if (!lines[i][0])
+		    continue;
+
+		  ln = g_strsplit (lines[i], ":", 2);
+		  fn = g_ascii_strtoll (ln[0], NULL, 10);
+		  if (fn && ln[1])
+		    set_field_value (fn - 1, ln[1]);
+		  g_strfreev (ln);
+		  i++;
+		}
+	    }
+	  g_free (data);
+	  g_string_free (cmd, TRUE);
+	}
+      else
+	{
+	  GString *cmd = expand_action (action);
+	  g_spawn_command_line_async (cmd->str, NULL);
+	  g_string_free (cmd, TRUE);
+	}
     }
 }
 
@@ -524,102 +661,10 @@ form_create_widget (GtkWidget *dlg)
         {
           i = 0;
           while (options.extra_data[i] && i < n_fields)
-            {
-              gchar **s;
-              guint j = 0;
-              YadField *fld = g_slist_nth_data (options.form_data.fields, i);
-
-              switch (fld->type)
-                {
-                case YAD_FIELD_SIMPLE:
-                case YAD_FIELD_HIDDEN:
-                case YAD_FIELD_READ_ONLY:
-                case YAD_FIELD_MFILE:
-                case YAD_FIELD_FILE_SAVE:
-                case YAD_FIELD_DIR_CREATE:
-                case YAD_FIELD_DATE:
-                  gtk_entry_set_text (GTK_ENTRY (g_slist_nth_data (fields, i)), options.extra_data[i]);
-                  break;
-
-                case YAD_FIELD_NUM:
-                  s = g_strsplit (options.extra_data[i], options.common_data.item_separator, -1);
-                  if (s[0])
-                    {
-                      gdouble val = g_strtod (s[0], NULL);
-                      e = g_slist_nth_data (fields, i);
-                      if (s[1])
-                        {
-                          gdouble min, max;
-                          gchar **s1 = g_strsplit (s[1], "..", 2);
-                          min = g_strtod (s1[0], NULL);
-                          max = g_strtod (s1[1], NULL);
-                          g_strfreev (s1);
-                          gtk_spin_button_set_range (GTK_SPIN_BUTTON (e), min, max);
-                          if (s[2])
-                            {
-                              gdouble step = g_strtod (s[2], NULL);
-                              gtk_spin_button_set_increments (GTK_SPIN_BUTTON (e), step, step);
-                            }
-                        }
-                      /* set initial value must be after setting range and step */
-                      gtk_spin_button_set_value (GTK_SPIN_BUTTON (e), val);
-                    }
-                  g_strfreev (s);
-                  break;
-
-                case YAD_FIELD_CHECK:
-                  if (g_ascii_strcasecmp (options.extra_data[i], "TRUE") == 0)
-                    {
-                      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, i)),
-                                                    TRUE);
-                    }
-                  break;
-
-                case YAD_FIELD_COMBO:
-                case YAD_FIELD_COMBO_ENTRY:
-                  s = g_strsplit (options.extra_data[i], options.common_data.item_separator, -1);
-                  while (s[j])
-                    {
-#if GTK_CHECK_VERSION(2,24,0)
-                      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, i)), s[j]);
-#else
-                      gtk_combo_box_append_text (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), s[j]);
-#endif
-                      j++;
-                    }
-                  gtk_combo_box_set_active (GTK_COMBO_BOX (g_slist_nth_data (fields, i)), 0);
-                  g_strfreev (s);
-                  break;
-
-                case YAD_FIELD_DIR:
-                  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)),
-                                                 options.extra_data[i]);
-                case YAD_FIELD_FILE:
-                  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, i)),
-                                                 options.extra_data[i]);
-                  break;
-
-                case YAD_FIELD_FONT:
-                  gtk_font_button_set_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, i)),
-                                                 options.extra_data[i]);
-                  break;
-
-                case YAD_FIELD_COLOR:
-                  {
-                    GdkColor c;
-
-                    gdk_color_parse (options.extra_data[i], &c);
-                    gtk_color_button_set_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, i)), &c);
-                    break;
-                  }
-
-                case YAD_FIELD_BUTTON:
-                  g_signal_connect (G_OBJECT (g_slist_nth_data (fields, i)), "clicked",
-                                    G_CALLBACK (button_clicked_cb), options.extra_data[i]);
-                  break;
-                }
-              i++;
-            }
+	    {
+	      set_field_value (i, options.extra_data[i]);
+	      i++;
+	    }
         }
     }
 
