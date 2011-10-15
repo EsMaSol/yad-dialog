@@ -2,3 +2,4 @@
 - Add multiple progressbars
 - DBus support (?)
 - Common search dialog for list and text dialogs
+- Use item-separator in filters of file dialog
