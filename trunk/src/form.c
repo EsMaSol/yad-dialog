@@ -461,7 +461,9 @@ form_create_widget (GtkWidget *dlg)
       n_fields = g_slist_length (options.form_data.fields);
 
       row = col = 0;
-      rows = (n_fields + 1) / options.form_data.columns;
+      rows = n_fields / options.form_data.columns;
+      if (n_fields % options.form_data.columns > 0)
+	rows++;
 
       w = gtk_table_new (n_fields, 2 * options.form_data.columns, FALSE);
 
@@ -649,7 +651,7 @@ form_create_widget (GtkWidget *dlg)
 
           /* increase row and column */
           row++;
-          if (i == rows - 1)
+          if (row >= rows)
             {
               row = 0;
               col++;
