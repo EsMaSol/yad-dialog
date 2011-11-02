@@ -690,34 +690,36 @@ del_row_cb (GtkMenuItem *item, gpointer data)
 static gboolean
 popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
 {
+  static GtkWidget *menu = NULL;
   if (ev->button == 3)
     {
-      GtkWidget *menu;
       GtkWidget *item;
 
-      menu = gtk_menu_new ();
+      if (menu == NULL)
+        {
+          menu = gtk_menu_new ();
+ 
+          item = gtk_image_menu_item_new_with_label (_("Add row"));
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
+                                         gtk_image_new_from_stock
+					 (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU));
+          gtk_widget_show (item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          g_signal_connect (G_OBJECT (item), "activate",
+                            G_CALLBACK (add_row_cb), NULL);
 
-      item = gtk_image_menu_item_new_with_label (_("Add row"));
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-                                     gtk_image_new_from_stock
-                                     (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU));
-      gtk_widget_show (item);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      g_signal_connect (G_OBJECT (item), "activate",
-                        G_CALLBACK (add_row_cb), NULL);
-
-      item = gtk_image_menu_item_new_with_label (_("Delete row"));
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-                                     gtk_image_new_from_stock
-                                     (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU));
-      gtk_widget_show (item);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      g_signal_connect (G_OBJECT (item), "activate",
-                        G_CALLBACK (del_row_cb), NULL);
-
-      gtk_widget_show (menu);
+          item = gtk_image_menu_item_new_with_label (_("Delete row"));
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
+					 gtk_image_new_from_stock
+					 (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU));
+	  gtk_widget_show (item);
+	  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+	  g_signal_connect (G_OBJECT (item), "activate",
+			    G_CALLBACK (del_row_cb), NULL);
+	  gtk_widget_show (menu);
+        }
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL,
-                      NULL, ev->button, 0);
+                      NULL, ev->button, ev->time);
     }
   return FALSE;
 }
