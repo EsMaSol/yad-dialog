@@ -166,7 +166,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 
 	  if (text)
 	    {
-	      gtk_tooltip_set_markup (tip, text);
+	      gtk_tooltip_set_text (tip, text);
 	      g_free (text);
 	    }
 	}

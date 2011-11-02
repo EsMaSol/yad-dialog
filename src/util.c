@@ -255,6 +255,7 @@ escape_markup (char *str)
         }
       buf++;
     }
+  res[i] = '\0';
 
   return res;
 }
@@ -305,6 +306,7 @@ unescape_markup (char *str)
         res[i] = *buf++;
       i++;
     }
+  res[i] = '\0';
 
   return res;
 }
