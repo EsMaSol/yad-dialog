@@ -1,3 +1,9 @@
+Version 0.15.1
+    - fix grid placement in form dialog
+    - fix popup menu in editable lists
+    - fix escaping markup text
+    - update man page
+
 Version 0.15.0
     - add multiple progress bars dialog
     - add field control for buttons in form dialog

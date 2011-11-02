@@ -1,3 +1,24 @@
+2011-11-02 14:58  ananasik
+
+	* src/list.c:
+
+2011-10-18 05:09  ananasik
+
+	* configure.ac, data/yad.1: update man page. bump version to 0.15.1
+
+2011-10-17 08:01  ananasik
+
+	* src/form.c: fix grid placement in form dialog
+
+2011-10-15 11:18  ananasik
+
+	* TODO: update TODO
+
+2011-10-12 11:24  ananasik
+
+	* ChangeLog, NEWS, configure.ac, po/de.po, po/ru.po, po/sk.po,
+	  po/uk.po: release 0.15.0
+
 2011-10-12 11:04  ananasik
 
 	* data/yad.1, src/form.c: set values of fields from button
