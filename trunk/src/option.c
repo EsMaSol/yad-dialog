@@ -20,6 +20,7 @@
 #include "yad.h"
 
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_text_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
@@ -98,6 +99,12 @@ static GOptionEntry general_options[] = {
     &options.data.dialog_text,
     N_("Set the dialog text"),
     N_("TEXT") },
+  { "text-align", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_CALLBACK,
+    set_text_align,
+    N_("Set the dialog text alignment (left, center, right)"),
+    N_("TYPE") },
   { "image", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_FILENAME,
@@ -981,6 +988,22 @@ add_button (const gchar *option_name, const gchar *value,
 }
 
 static gboolean
+set_text_align (const gchar *option_name, const gchar *value,
+	    gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "left") == 0)
+    options.data.text_align = 0.0;
+  else if (g_ascii_strcasecmp (value, "right") == 0)
+    options.data.text_align = 1.0;
+  else if (g_ascii_strcasecmp (value, "center") == 0)
+    options.data.text_align = 0.5;
+  else
+    g_printerr (_("Unknown align type: %s\n"), value);
+
+  return TRUE;
+}
+
+static gboolean
 add_column (const gchar *option_name, const gchar *value,
 	    gpointer data, GError **err)
 {
@@ -1282,6 +1305,7 @@ yad_options_init (void)
   options.data.height = settings.height;
   options.data.geometry = NULL;
   options.data.dialog_text = NULL;
+  options.data.text_align = 0.0;
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
   options.data.icon_theme = NULL;
