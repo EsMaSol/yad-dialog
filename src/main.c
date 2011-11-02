@@ -257,7 +257,7 @@ create_dialog ()
 	    gtk_label_set_text (GTK_LABEL (text), buf);
 	  gtk_widget_set_name (text, "yad-dialog-label");
 	  gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
-	  gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
+	  gtk_misc_set_alignment (GTK_MISC (text), options.data.text_align, 0.5);
 	  if (options.data.geometry || options.data.width != -1)
 	    gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
 	  if (options.data.image_on_top)
