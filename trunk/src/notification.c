@@ -198,8 +198,7 @@ handle_stdin (GIOChannel * channel,
             {
               if (err)
                 {
-                  g_printerr ("yad_notification_handle_stdin(): %s\n",
-			      err->message);
+                  g_printerr ("yad_notification_handle_stdin(): %s\n", err->message);
                   g_error_free (err);
                   err = NULL;
                 }
