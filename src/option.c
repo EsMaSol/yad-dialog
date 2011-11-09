@@ -977,13 +977,17 @@ add_button (const gchar *option_name, const gchar *value,
   btn = g_new0 (YadButton, 1);
   btn->name = g_strdup (bstr[0]);
   if (bstr[1])
-    btn->response = g_ascii_strtoll (bstr[1], NULL, 10);
+    {
+      if (bstr[1][0] >= '0' && bstr[1][0] <= '9')
+	btn->response = g_ascii_strtoll (bstr[1], NULL, 10);
+      else
+	btn->cmd = g_strdup (bstr[1]);
+    }
   else
     btn->response = g_slist_length (options.data.buttons);
   options.data.buttons = g_slist_append (options.data.buttons, btn);
 
   g_strfreev (bstr);
-
   return TRUE;
 }
 
@@ -1042,7 +1046,6 @@ add_column (const gchar *option_name, const gchar *value,
     g_slist_append (options.list_data.columns, col);
 
   g_strfreev (cstr);
-
   return TRUE;
 }
 
@@ -1098,7 +1101,6 @@ add_field (const gchar *option_name, const gchar *value,
     g_slist_append (options.form_data.fields, fld);
 
   g_strfreev (fstr);
-
   return TRUE;
 }
 
@@ -1126,7 +1128,6 @@ add_bar (const gchar *option_name, const gchar *value,
     g_slist_append (options.multi_progress_data.bars, bar);
 
   g_strfreev (bstr);
-
   return TRUE;
 }
 
@@ -1152,7 +1153,6 @@ add_scale_mark (const gchar *option_name, const gchar *value,
     }
 
   g_strfreev (mstr);
-
   return TRUE;
 }
 
@@ -1163,6 +1163,7 @@ add_palette (const gchar *option_name, const gchar *value,
   options.color_data.use_palette = TRUE;
   if (value)
     options.color_data.palette = g_strdup (value);
+
   return TRUE;
 }
 

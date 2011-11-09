@@ -99,6 +99,7 @@ typedef enum {
 
 typedef struct {
   gchar *name;
+  gchar *cmd;
   gint response;
 } YadButton;
 
