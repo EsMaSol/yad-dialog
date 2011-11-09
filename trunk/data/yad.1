@@ -109,10 +109,13 @@ Use specified GTK icon theme instead of default.
 Hide main widget with expander. \fITEXT\fP is an optional argument with expander's label.
 .TP
 .B \-\-button=BUTTON:ID
-Add the dialog button. May be used several times. \fIID\fP is an exit code.
+Add the dialog button. May be used multiply times. \fIID\fP is an exit code or a command.
 \fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or simple text label. 
 Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP. 
 If no buttons specified \fIOK\fP and \fICancel\fP buttons used. See \fBEXIT STATUS\fP section for more.
+If \fIID\fP have a non-numeric value it treats like a command and click on such button doesn't close the dialog.
+\fIYAD\fP adds his pid as a last argument of this command.
+
 .TP
 .B \-\-no-buttons
 Don't show buttons.

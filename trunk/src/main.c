@@ -55,6 +55,21 @@ timeout_cb (gpointer data)
   return FALSE;
 }
 
+static void
+btn_cb (GtkButton *b, gchar *c)
+{
+  gchar *cmd;
+  gint pid;
+
+#if !defined(_WIN32)
+  pid = getpid ();
+#endif
+    
+  cmd = g_strdup_printf ("%s %d", c, pid);
+  g_spawn_command_line_async (cmd, NULL);
+  g_free (cmd);
+}
+
 static gboolean
 timeout_indicator_cb (gpointer data)
 {
@@ -334,12 +349,21 @@ create_dialog ()
     {
       if (options.data.buttons)
         {
+	  GtkWidget *btn, *box;
           GSList *tmp = options.data.buttons;
 
+	  box = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
           do
             {
               YadButton *b = (YadButton *) tmp->data;
-              gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
+	      if (b->cmd)
+		{
+		  btn = gtk_button_new_from_stock (b->name);
+		  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
+		  gtk_box_pack_start (GTK_BOX (box), btn, FALSE, FALSE, 0);
+		}
+	      else
+		gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
               tmp = tmp->next;
             }
           while (tmp != NULL);
