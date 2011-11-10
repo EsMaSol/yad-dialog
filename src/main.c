@@ -65,7 +65,7 @@ btn_cb (GtkButton *b, gchar *c)
   pid = getpid ();
 #endif
     
-  cmd = g_strdup_printf ("%s %d", c, pid);
+  cmd = g_strdup_printf (c, pid);
   g_spawn_command_line_async (cmd, NULL);
   g_free (cmd);
 }
