@@ -105,7 +105,7 @@ GtkWidget *
 create_dialog ()
 {
   GtkWidget *dlg;
-  GtkWidget *hbox, *vbox, *hbox2;
+  GtkWidget *hbox, *vbox, *hbox2, *bbox;
   GtkWidget *image;
   GtkWidget *text;
   GtkWidget *main_widget = NULL;
@@ -118,6 +118,9 @@ create_dialog ()
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 #endif
   gtk_widget_set_name (dlg, "yad-dialog-window");
+
+  /* get buttons container */
+  bbox = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
 
   /* set window icon */
   if (options.data.window_icon)
@@ -349,18 +352,15 @@ create_dialog ()
     {
       if (options.data.buttons)
         {
-	  GtkWidget *btn, *box;
           GSList *tmp = options.data.buttons;
-
-	  box = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
           do
             {
               YadButton *b = (YadButton *) tmp->data;
 	      if (b->cmd)
 		{
-		  btn = gtk_button_new_from_stock (b->name);
+		  GtkWidget *btn = gtk_button_new_from_stock (b->name);
 		  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
-		  gtk_box_pack_start (GTK_BOX (box), btn, FALSE, FALSE, 0);
+		  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
 		}
 	      else
 		gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
@@ -391,10 +391,11 @@ create_dialog ()
           gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
         }
     }
-  else
-    gtk_widget_hide (gtk_dialog_get_action_area (GTK_DIALOG (dlg)));
 
+  /* show widgets */
   gtk_widget_show_all (dlg);
+  if (options.data.no_buttons)
+    gtk_widget_hide (bbox);
 
   /* set timeout */
   if (options.data.timeout)
