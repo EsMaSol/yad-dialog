@@ -114,7 +114,7 @@ Add the dialog button. May be used multiply times. \fIID\fP is an exit code or a
 Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP. 
 If no buttons specified \fIOK\fP and \fICancel\fP buttons used. See \fBEXIT STATUS\fP section for more.
 If \fIID\fP have a non-numeric value it treats like a command and click on such button doesn't close the dialog.
-\fIYAD\fP adds his pid as a last argument of this command.
+If command have a `%d' template, \fIYAD\fP replace it with value of his pid.
 
 .TP
 .B \-\-no-buttons
