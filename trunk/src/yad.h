@@ -47,6 +47,7 @@ typedef enum {
   YAD_MODE_LIST,
   YAD_MODE_MULTI_PROGRESS,
   YAD_MODE_NOTIFICATION,
+  YAD_MODE_PRINT,
   YAD_MODE_PROGRESS,
   YAD_MODE_SCALE,
   YAD_MODE_TEXTINFO,
@@ -333,6 +334,7 @@ typedef struct {
   GdkPixbuf *big_fallback_image;
   GdkPixbuf *small_fallback_image;
   gchar *term;
+  GtkPrintSettings *print_settings;
 } YadSettings;
 
 extern YadSettings settings;
@@ -373,6 +375,7 @@ gint yad_notification_run (void);
 gint yad_about (void);
 
 void read_settings (void);
+void write_settings (void);
 
 GdkPixbuf * get_pixbuf (gchar *name, YadIconSize size);
 
