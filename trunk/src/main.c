@@ -526,6 +526,7 @@ main (gint argc, gchar ** argv)
       ret = yad_notification_run ();
       break;
     case YAD_MODE_PRINT:
+      ret = yad_print_run ();
       break;
     default:
       dialog = create_dialog ();

@@ -88,6 +88,12 @@ typedef enum {
 } YadColumnType;
 
 typedef enum {
+  YAD_PRINT_TEXT = 0,
+  YAD_PRINT_IMAGE,
+  YAD_PRINT_RAW,
+} YadPrintType;
+
+typedef enum {
   YAD_PROGRESS_NORMAL = 0,
   YAD_PROGRESS_RTL,
   YAD_PROGRESS_PULSE,
@@ -240,6 +246,11 @@ typedef struct {
 } YadNotificationData;
 
 typedef struct {
+  gboolean headers;
+  YadPrintType type;
+} YadPrintData;
+
+typedef struct {
   gchar *progress_text;
   gboolean pulsate;
   gboolean autoclose;
@@ -302,6 +313,7 @@ typedef struct {
   YadListData list_data;
   YadMultiProgressData multi_progress_data;
   YadNotificationData notification_data;
+  YadPrintData print_data;
   YadProgressData progress_data;
   YadScaleData scale_data;
   YadTextData text_data;
@@ -371,7 +383,7 @@ void text_print_result (void);
 void dnd_init (GtkWidget *w);
 
 gint yad_notification_run (void);
-
+gint yad_print_run (void);
 gint yad_about (void);
 
 void read_settings (void);

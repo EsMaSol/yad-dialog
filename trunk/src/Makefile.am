@@ -18,6 +18,7 @@ yad_SOURCES = 			\
 	multi-progress.c	\
 	notification.c		\
 	option.c		\
+	print.c			\
 	progress.c		\
 	scale.c			\
 	text.c			\
