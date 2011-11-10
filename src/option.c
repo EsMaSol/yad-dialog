@@ -32,6 +32,7 @@ static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -46,6 +47,7 @@ static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
 static gboolean multi_progress_mode = FALSE;
 static gboolean notification_mode = FALSE;
+static gboolean print_mode = FALSE;
 static gboolean progress_mode = FALSE;
 static gboolean scale_mode = FALSE;
 static gboolean text_mode = FALSE;
@@ -753,6 +755,34 @@ static GOptionEntry notification_options[] = {
   { NULL }
 };
 
+static GOptionEntry print_options[] = {
+  { "print", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &print_mode,
+    N_("Display printing dialog"),
+    NULL },
+  { "filename", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_FILENAME,
+    &options.common_data.uri,
+    N_("Source filename"),
+    N_("FILENAME") },
+  { "type", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    set_print_type,
+    N_("Set source type (TYPE - TEXT, IMAGE or RAW)"),
+    N_("TYPE") },
+  { "headers", 0,
+    0,
+    G_OPTION_ARG_NONE
+    &options.print_data.headers,
+    N_("Add headers to page"),
+    NULL },
+  { NULL }
+};
+
 static GOptionEntry progress_options[] = {
   { "progress", 0,
     G_OPTION_FLAG_IN_MAIN,
@@ -1251,6 +1281,22 @@ set_ellipsize (const gchar *option_name, const gchar *value,
   return TRUE;
 }
 
+static gboolean
+set_print_type (const gchar *option_name, const gchar *value,
+		gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "text") == 0)
+    options.print_data.type = YAD_PRINT_TEXT;
+  else if (g_ascii_strcasecmp (value, "image") == 0)
+    options.print_data.type = YAD_PRINT_IMAGE;
+  else if (g_ascii_strcasecmp (value, "raw") == 0)
+    options.print_data.type = YAD_PRINT_RAW;
+  else
+    g_printerr (_("Unknown source type: %s\n"), value);
+
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -1276,6 +1322,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_MULTI_PROGRESS;
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
+  else if (print_mode)
+    options.mode = YAD_MODE_PRINT;
   else if (progress_mode)
     options.mode = YAD_MODE_PROGRESS;
   else if (scale_mode)
@@ -1414,6 +1462,10 @@ yad_options_init (void)
   /* Initialize notification data */
   options.notification_data.listen = FALSE;
 
+  /* Initialize print data */
+  options.print_data.headers = FALSE;
+  options.print_data.type = YAD_PRINT_TEXT;
+
   /* Initialize progress data */
   options.progress_data.progress_text = NULL;
   options.progress_data.percentage = 0;
@@ -1534,6 +1586,13 @@ yad_create_context (void)
   a_group = g_option_group_new ("notification", _("Notification icon options"),
 				_("Show notification icon options"), NULL, NULL);
   g_option_group_add_entries (a_group, notification_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds print option entries */
+  a_group = g_option_group_new ("print", _("Print dialog options"),
+				_("Show print dialog options"), NULL, NULL);
+  g_option_group_add_entries (a_group, print_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
