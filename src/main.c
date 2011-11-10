@@ -525,6 +525,8 @@ main (gint argc, gchar ** argv)
     case YAD_MODE_NOTIFICATION:
       ret = yad_notification_run ();
       break;
+    case YAD_MODE_PRINT:
+      break;
     default:
       dialog = create_dialog ();
       if (options.mode == YAD_MODE_FILE)

@@ -19,55 +19,13 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include "yad.h"
 
 #define SETTINGS_FILE "yad.conf"
 
 YadSettings settings;
-
-static void
-create_settings (gchar *filename)
-{
-  GKeyFile *kf;
-  gchar *context;
-
-  kf = g_key_file_new ();
-
-#if !GTK_CHECK_VERSION(3,0,0)
-  g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
-  g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
-#endif
-  g_key_file_set_integer (kf, "General", "width", settings.width);
-  g_key_file_set_comment (kf, "General", "width", "Default dialog width", NULL);
-  g_key_file_set_integer (kf, "General", "height", settings.height);
-  g_key_file_set_comment (kf, "General", "height", "Default dialog height", NULL);
-  g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
-  g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
-  g_key_file_set_integer (kf, "General", "timeout_indicator", settings.timeout);
-  g_key_file_set_comment (kf, "General", "timeout_indicator", "Position of timeout indicator (top, bottom, left, right, none)", NULL);
-  g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
-  g_key_file_set_comment (kf, "General", "show_remain", "Show remain seconds in timeout indicator", NULL);
-  g_key_file_set_boolean (kf, "General", "rules_hint", settings.rules_hint);
-  g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
-  g_key_file_set_boolean (kf, "General", "always_selected", settings.always_selected);
-  g_key_file_set_comment (kf, "General", "always_selected", "List widget always have a selection", NULL);
-  g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
-  g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
-  g_key_file_set_boolean (kf, "General", "show_gtk_palette", settings.show_gtk_palette);
-  g_key_file_set_comment (kf, "General", "show_gtk_palette", "Show GtkColorSelection palette", NULL);
-  g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
-  g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
-  g_key_file_set_string (kf, "General", "terminal", settings.term);
-  g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
-
-  context = g_key_file_to_data (kf, NULL, NULL);
-
-  g_key_file_free (kf);
-
-  g_file_set_contents (filename, context, -1, NULL);
-  g_free (context);
-}
 
 void
 read_settings (void)
@@ -89,6 +47,8 @@ read_settings (void)
   settings.show_gtk_palette = FALSE;
   settings.expand_palette = FALSE;
   settings.term = "xterm -e %s";
+
+  settings.print_settings = gtk_print_settings_new ();
 
   filename = g_build_filename (g_get_user_config_dir (),
 			       SETTINGS_FILE, NULL);
@@ -125,14 +85,70 @@ read_settings (void)
 	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
 	  if (g_key_file_has_key (kf, "General", "terminal", NULL))
 	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
+
+	  gtk_print_settings_load_key_file (settings.print_settings, kf, NULL, NULL);
 	}
 
       g_key_file_free (kf);
     }
   else
-    create_settings (filename);
+    write_settings ();
 
   g_free (filename);
+}
+
+void
+write_settings (void)
+{
+  GKeyFile *kf;
+  gchar *context;
+
+  kf = g_key_file_new ();
+
+#if !GTK_CHECK_VERSION(3,0,0)
+  g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
+  g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
+#endif
+  g_key_file_set_integer (kf, "General", "width", settings.width);
+  g_key_file_set_comment (kf, "General", "width", "Default dialog width", NULL);
+  g_key_file_set_integer (kf, "General", "height", settings.height);
+  g_key_file_set_comment (kf, "General", "height", "Default dialog height", NULL);
+  g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
+  g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
+  g_key_file_set_integer (kf, "General", "timeout_indicator", settings.timeout);
+  g_key_file_set_comment (kf, "General", "timeout_indicator", 
+			  "Position of timeout indicator (top, bottom, left, right, none)", NULL);
+  g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
+  g_key_file_set_comment (kf, "General", "show_remain", "Show remain seconds in timeout indicator", NULL);
+  g_key_file_set_boolean (kf, "General", "rules_hint", settings.rules_hint);
+  g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
+  g_key_file_set_boolean (kf, "General", "always_selected", settings.always_selected);
+  g_key_file_set_comment (kf, "General", "always_selected", "List widget always have a selection", NULL);
+  g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
+  g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
+  g_key_file_set_boolean (kf, "General", "show_gtk_palette", settings.show_gtk_palette);
+  g_key_file_set_comment (kf, "General", "show_gtk_palette", "Show GtkColorSelection palette", NULL);
+  g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
+  g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
+  g_key_file_set_string (kf, "General", "terminal", settings.term);
+  g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
+
+  gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
+
+  context = g_key_file_to_data (kf, NULL, NULL);
+
+  g_key_file_free (kf);
+
+  if (g_mkdir_with_parents (g_get_user_config_dir (), 0644) != -1)
+    {
+      gchar *filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
+      g_file_set_contents (filename, context, -1, NULL);
+      g_free (filename);
+    }
+  else
+    g_printerr ("yad: cannot write settings file: %s\n", strerror (errno));
+
+  g_free (context);
 }
 
 GdkPixbuf *
