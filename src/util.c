@@ -86,7 +86,11 @@ read_settings (void)
 	  if (g_key_file_has_key (kf, "General", "terminal", NULL))
 	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
 
-	  gtk_print_settings_load_key_file (settings.print_settings, kf, NULL, NULL);
+	  /* load print settings */
+	  if (!gtk_print_settings_load_key_file (settings.print_settings, kf, NULL, NULL))
+	    settings.print_settings = NULL;
+	  if (!gtk_page_setup_load_key_file (settings.page_setup, kf, NULL, NULL))
+	    settings.page_setup = NULL;
 	}
 
       g_key_file_free (kf);
@@ -133,7 +137,11 @@ write_settings (void)
   g_key_file_set_string (kf, "General", "terminal", settings.term);
   g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
 
-  gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
+  /* save print settings */
+  if (settings.print_settings)
+    gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
+  if (settings.page_setup)
+    gtk_page_setup_to_key_file (settings.page_setup, kf, NULL);
 
   context = g_key_file_to_data (kf, NULL, NULL);
 
