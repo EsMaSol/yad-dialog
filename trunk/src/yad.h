@@ -347,6 +347,7 @@ typedef struct {
   GdkPixbuf *small_fallback_image;
   gchar *term;
   GtkPrintSettings *print_settings;
+  GtkPageSetup *page_setup;
 } YadSettings;
 
 extern YadSettings settings;
