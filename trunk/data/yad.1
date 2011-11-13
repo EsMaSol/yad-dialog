@@ -317,23 +317,38 @@ Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
 Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
-\fIH\fP - hidden field type. All characters are displayed as the invisible char.
-\fIRO\fP - field is in read-only mode.
-\fINUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP]]\fP,
-where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separator.
-\fICHK\fP - checkbox field. Initial value is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
-\fICB\fP - combo-box field. Initial value is a list \fIVAL1!VAL2!...\fP. The separator is the same as in \fINUM\fP field.
-\fICBE\fP - editable combo-box field. Initial value same as for combo-box.
-\fIFL\fP - file selection button.
-\fISFL\fp - field for create file.
-\fIDIR\fP - directory selection button.
-\fICDIR\fp - field for create folder.
-\fIFN\fP - font selection button. Initial value same as in font dialog.
-\fIMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
-\fIDT\fP - date field.
-\fICLR\fP - color selection button.
-\fIBTN\fP - button field. Label may be in form \fITEXT[!TOOLTIP]\fP. \fITEXT\fP is a text of button label or gtk stock id. \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fp in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with numeric will be treats as a new field values.
-\fILBL\fP - text label. If field name is empty, horisontal separator line will be shown.
+.br
+\fBH\fP - hidden field type. All characters are displayed as the invisible char.
+.br
+\fBRO\fP - field is in read-only mode.
+.br
+\fBNUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP]]\fP, where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separator.
+.br
+\fBCHK\fP - checkbox field. Initial value is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
+.br
+\fBCB\fP - combo-box field. Initial value is a list \fIVAL1!VAL2!...\fP. The separator is the same as in \fINUM\fP field.
+.br
+\fBCBE\fP - editable combo-box field. Initial value same as for combo-box.
+.br
+\fBFL\fP - file selection button.
+.br
+\fBSFL\fP - field for create file.
+.br
+\fBDIR\fP - directory selection button.
+.br
+\fBCDIR\fP - field for create folder.
+.br
+\fBFN\fP - font selection button. Initial value same as in font dialog.
+.br
+\fBMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
+.br
+\fBDT\fP - date field.
+.br
+\fBCLR\fP - color selection button.
+.br
+\fBBTN\fP - button field. Label may be in form \fITEXT[!TOOLTIP]\fP. \fITEXT\fP is a text of button label or gtk stock id. \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with numeric will be treats as a new field values.
+.br
+\fBLBL\fP - text label. If field name is empty, horisontal separator line will be shown.
 .TP
 .B \-\-align=TYPE
 Set alignment of fields labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
@@ -422,17 +437,16 @@ Initial values for bars set as extra arguments. Each lines with progress data pa
 Notification options
 .TP
 .B \-\-command=CMD
-Set the command running when clicked on the icon. Default action is to stop the icon.
-For keeping icon simply specify an empty command.
+Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified. 
 .TP
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 .TP
 .B \-\-separator=STRING
-Set separator character for menu values. Default is `|'.
+Set separator character for menu values. Default is \fI|\fP.
 .TP
 .B \-\-item-separator=STRING
-Set separator character for menu items. Default is `!'.
+Set separator character for menu items. Default is \fI!\fP.
 .PP
 See \fBNOTIFICATION\fP section for more about separators. 
 

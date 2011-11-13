@@ -94,12 +94,13 @@ icon_size_changed_cb (GtkStatusIcon * icon, gint size, gpointer data)
 static gboolean
 activate_cb (GtkWidget * widget, YadData * data)
 {
-  if (action == NULL || g_ascii_strcasecmp (action, "quit") == 0)
+  if ((action == NULL && !options.notification_data.listen) || 
+      (action && g_ascii_strcasecmp (action, "quit") == 0))
     {
       exit_code = YAD_RESPONSE_OK;
       gtk_main_quit ();
     }
-  else
+  else if (action)
     g_spawn_command_line_async (action, NULL);
 
   return TRUE;
