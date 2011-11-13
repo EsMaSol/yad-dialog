@@ -20,6 +20,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <glib/gprintf.h>
 #include <gdk/gdkkeysyms.h>
 
 #include "yad.h"
@@ -144,7 +145,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	      {
 		gint64 nval;
 		gtk_tree_model_get (model, &iter, cnum, &nval, -1);
-		text = g_strdup_printf ("%d", nval);
+		text = g_strdup_printf ("%ld", nval);
 		break;
 	      }
 	    case YAD_COLUMN_FLOAT:
@@ -600,7 +601,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 		  {
 		    gint64 nval;
 		    gtk_tree_model_get (model, &iter, i, &nval, -1);
-		    g_string_append_printf (args, " %d", nval);
+		    g_string_append_printf (args, " %ld", nval);
 		    break;
 		  }
 		case YAD_COLUMN_FLOAT:
@@ -842,7 +843,7 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
       {
         gint64 nval;
         gtk_tree_model_get (model, iter, num, &nval, -1);
-        g_printf ("%d", nval);
+        g_printf ("%ld", nval);
         break;
       }
     case YAD_COLUMN_FLOAT:
