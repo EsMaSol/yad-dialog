@@ -22,6 +22,31 @@
 #include "yad.h"
 
 static void
+begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
+{
+}
+
+static void
+draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
+{
+}
+
+static void
+draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
+{
+}
+
+static void
+begin_print_raw (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
+{
+}
+
+static void
+draw_page_raw (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
+{
+}
+
+static void
 text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
@@ -141,6 +166,21 @@ yad_print_run (void)
       settings.page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
       gtk_print_operation_set_default_page_setup (op, settings.page_setup);
       
+      switch (options.print_data.type)
+	{
+	case YAD_PRINT_TEXT:
+	  g_signal_connect (G_OBJECT (op), "begin-print", G_CALLBACK (begin_print_text), NULL);
+	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_text), NULL);
+	  break;
+	case YAD_PRINT_IMAGE:
+	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_image), NULL);
+	  break;
+	case YAD_PRINT_RAW:
+	  g_signal_connect (G_OBJECT (op), "begin-print", G_CALLBACK (begin_print_raw), NULL);
+	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_raw), NULL);
+	  break;
+	}
+
       if (gtk_print_operation_run (op, act, NULL, NULL) == GTK_PRINT_OPERATION_RESULT_APPLY)
 	write_settings ();
       else
