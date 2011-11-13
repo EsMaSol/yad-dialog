@@ -32,22 +32,25 @@ yad_print_run (void)
 {
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
+  GtkPrintOperation *op;
   gint ret = 0;
 
   /* create print dialog */
   dlg = gtk_print_unix_dialog_new (options.data.dialog_title, NULL);
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), TRUE);
+  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg),
+						 GTK_PRINT_CAPABILITY_PAGE_SET |
+						 GTK_PRINT_CAPABILITY_COPIES |
+						 GTK_PRINT_CAPABILITY_COLLATE |
+						 GTK_PRINT_CAPABILITY_REVERSE |
+						 GTK_PRINT_CAPABILITY_PREVIEW |
+						 GTK_PRINT_CAPABILITY_NUMBER_UP |
+						 GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT);
 
   if (settings.print_settings)
-    {
-      gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg),
-					  settings.print_settings);
-    }
+    gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), settings.print_settings);
   if (settings.page_setup)
-    {
-      gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg),
-					    settings.page_setup);
-    }
+    gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), settings.page_setup);
 
   /* set window behavior */
   gtk_widget_set_name (dlg, "yad-dialog-window");
@@ -125,7 +128,18 @@ yad_print_run (void)
     }
 
   gtk_widget_show_all (dlg);
-  ret = gtk_dialog_run (GTK_DIALOG (dlg));
+  switch (gtk_dialog_run (GTK_DIALOG (dlg)))
+    {
+    case GTK_RESPONSE_OK:                     /* run print */
+      ret = 0;
+      break;
+    case GTK_RESPONSE_APPLY:                  /* ask for preview */
+      ret = 0;
+      break;
+    case GTK_RESPONSE_CANCEL:                 /* cancel operation */
+      ret = 1;
+      break;
+    }
 
   return ret;
 }
