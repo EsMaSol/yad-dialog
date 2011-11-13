@@ -19,6 +19,8 @@
 
 #include <errno.h>
 
+#include <glib/gprintf.h>
+
 #include "yad.h"
 
 static GtkWidget *color;

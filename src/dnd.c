@@ -17,13 +17,14 @@
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <glib/gprintf.h>
+
 #include "yad.h"
 
 static void
 drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
 	      GtkSelectionData *sel, guint info, guint t, gpointer data)
 {
-  gchar *str = NULL;
   GdkAtom stgt;
 
   stgt = gtk_selection_data_get_target (sel);
@@ -58,10 +59,10 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
     }
   else if (gtk_targets_include_text (&stgt, 1))
     {
-      str = gtk_selection_data_get_text (sel);
+      guchar *str = gtk_selection_data_get_text (sel);
       if (str)
 	{
-	  gchar *dstr = g_uri_unescape_string (str, NULL);
+	  gchar *dstr = g_uri_unescape_string ((const gchar *) str, NULL);
 	  if (options.common_data.command)
 	    {
 	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);

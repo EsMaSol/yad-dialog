@@ -20,7 +20,7 @@
 #include "yad.h"
 
 static GtkWidget *entry;
-static is_combo = FALSE;
+static gboolean is_combo = FALSE;
 
 static void
 entry_activate_cb (GtkEntry *entry, gpointer data)

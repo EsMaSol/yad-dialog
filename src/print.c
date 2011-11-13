@@ -33,6 +33,7 @@ yad_print_run (void)
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
   GtkPrintOperation *op;
+  GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
   gint ret = 0;
 
   /* create print dialog */
@@ -130,13 +131,20 @@ yad_print_run (void)
   gtk_widget_show_all (dlg);
   switch (gtk_dialog_run (GTK_DIALOG (dlg)))
     {
+    case GTK_RESPONSE_APPLY:                  /* ask for preview */
+      act = GTK_PRINT_OPERATION_ACTION_PREVIEW;
     case GTK_RESPONSE_OK:                     /* run print */
       op = gtk_print_operation_new ();
-      ret = 0;
-      break;
-    case GTK_RESPONSE_APPLY:                  /* ask for preview */
-      op = gtk_print_operation_new ();
-      ret = 0;
+      gtk_print_operation_set_unit (op, options.print_data.unit);
+      settings.print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
+      gtk_print_operation_set_print_settings (op, settings.print_settings);
+      settings.page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
+      gtk_print_operation_set_default_page_setup (op, settings.page_setup);
+      
+      if (gtk_print_operation_run (op, act, NULL, NULL) == GTK_PRINT_OPERATION_RESULT_APPLY)
+	write_settings ();
+      else
+	ret = 1;
       break;
     case GTK_RESPONSE_CANCEL:                 /* cancel operation */
       ret = 1;
