@@ -17,6 +17,8 @@
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <glib/gprintf.h>
+
 #include "yad.h"
 
 #include "calendar.xpm"
