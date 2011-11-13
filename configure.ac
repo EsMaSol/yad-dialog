@@ -28,13 +28,15 @@ case "$with_gtk" in
     gtk3) 
         GTK_MODULE="gtk+-3.0"
         GTK_REQUIRED="3.0.0"
+        GTK_PRINT="gtk+-unix-print-3.0"
         ;;
     gtk2)
         GTK_MODULE="gtk+-2.0"
         GTK_REQUIRED="2.16.0"
+        GTK_PRINT="gtk+-unix-print-2.0"
         ;;
 esac
-PKG_CHECK_MODULES([YAD], [$GTK_MODULE >= $GTK_REQUIRED])
+PKG_CHECK_MODULES([YAD], [$GTK_MODULE >= $GTK_REQUIRED $GTK_PRINT])
 AC_SUBST([YAD_CFLAGS])
 AC_SUBST([YAD_LIBS])
 
