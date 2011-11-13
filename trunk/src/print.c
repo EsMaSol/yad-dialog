@@ -131,6 +131,7 @@ yad_print_run (void)
   switch (gtk_dialog_run (GTK_DIALOG (dlg)))
     {
     case GTK_RESPONSE_OK:                     /* run print */
+      op = 
       ret = 0;
       break;
     case GTK_RESPONSE_APPLY:                  /* ask for preview */
