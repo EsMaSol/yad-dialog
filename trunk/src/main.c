@@ -114,7 +114,7 @@ create_dialog ()
   /* create dialog window */
   dlg = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(2,22,0)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 #endif
   gtk_widget_set_name (dlg, "yad-dialog-window");
@@ -165,7 +165,6 @@ create_dialog ()
       gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
     }
-
 
   /* create timeout indicator widget */
   if (options.data.timeout)
@@ -466,10 +465,10 @@ main (gint argc, gchar ** argv)
   textdomain (GETTEXT_PACKAGE);
 #endif
 
+  g_type_init ();
   read_settings ();
 
   gtk_init (&argc, &argv);
-
   yad_options_init ();
 
   /* set default icons and icon theme */

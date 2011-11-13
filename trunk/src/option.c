@@ -17,6 +17,8 @@
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <stdlib.h>
+
 #include "yad.h"
 
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
@@ -149,7 +151,7 @@ static GOptionEntry general_options[] = {
     &options.data.no_markup,
     N_("Don't use pango markup language in dialog's text"),
     NULL },
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(2,22,0)
   { "dialog-sep", 0,
     0,
     G_OPTION_ARG_NONE,
