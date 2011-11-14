@@ -40,7 +40,7 @@ read_settings (void)
   settings.show_remain = FALSE;
   settings.rules_hint = TRUE;
   settings.always_selected = FALSE;
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(2,22,0)
   settings.dlg_sep = FALSE;
 #endif
   settings.combo_always_editable = FALSE;
@@ -48,10 +48,7 @@ read_settings (void)
   settings.expand_palette = FALSE;
   settings.term = "xterm -e %s";
 
-  settings.print_settings = gtk_print_settings_new ();
-
-  filename = g_build_filename (g_get_user_config_dir (),
-			       SETTINGS_FILE, NULL);
+  filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
 
   if (g_file_test (filename, G_FILE_TEST_EXISTS))
     {
@@ -59,7 +56,7 @@ read_settings (void)
 
       if (g_key_file_load_from_file (kf, filename, G_KEY_FILE_NONE, NULL))
 	{
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(2,22,0)
 	  if (g_key_file_has_key (kf, "General", "dialog_separator", NULL))
 	    settings.dlg_sep = g_key_file_get_boolean (kf, "General", "dialog_separator", NULL);
 #endif
@@ -85,12 +82,6 @@ read_settings (void)
 	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
 	  if (g_key_file_has_key (kf, "General", "terminal", NULL))
 	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
-
-	  /* load print settings */
-	  if (!gtk_print_settings_load_key_file (settings.print_settings, kf, NULL, NULL))
-	    settings.print_settings = NULL;
-	  if (!gtk_page_setup_load_key_file (settings.page_setup, kf, NULL, NULL))
-	    settings.page_setup = NULL;
 	}
 
       g_key_file_free (kf);
@@ -109,7 +100,7 @@ write_settings (void)
 
   kf = g_key_file_new ();
 
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(2,22,0)
   g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
   g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
 #endif
@@ -136,12 +127,6 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
   g_key_file_set_string (kf, "General", "terminal", settings.term);
   g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
-
-  /* save print settings */
-  if (settings.print_settings)
-    gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
-  if (settings.page_setup)
-    gtk_page_setup_to_key_file (settings.page_setup, kf, NULL);
 
   context = g_key_file_to_data (kf, NULL, NULL);
 

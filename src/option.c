@@ -221,7 +221,7 @@ static GOptionEntry general_options[] = {
     &options.data.skip_taskbar,
     N_("Don't show window in taskbar"),
     NULL },
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   { "kill-parent", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -824,7 +824,7 @@ static GOptionEntry progress_options[] = {
     /* xgettext: no-c-format */
     N_("Dismiss the dialog when 100% has been reached"),
     NULL },
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   { "auto-kill", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -1369,7 +1369,7 @@ yad_options_init (void)
   /* Set default mode */
   options.mode = YAD_MODE_MESSAGE;
   options.extra_data = NULL;
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   options.kill_parent = FALSE;
   options.print_xid = FALSE;
 #endif
@@ -1390,7 +1390,7 @@ yad_options_init (void)
   options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(2,22,0)
   options.data.dialog_sep = settings.dlg_sep;
 #endif
   options.data.borders = -1;
@@ -1499,7 +1499,7 @@ yad_options_init (void)
   options.progress_data.percentage = 0;
   options.progress_data.pulsate = FALSE;
   options.progress_data.autoclose = FALSE;
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   options.progress_data.autokill = FALSE;
 #endif
   options.progress_data.rtl = FALSE;

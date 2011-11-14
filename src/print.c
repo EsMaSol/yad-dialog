@@ -21,6 +21,12 @@
 
 #include "yad.h"
 
+#define HEADER_HEIGHT (10*72/25.4)
+#define HEADER_GAP (3*72/25.4)
+
+static GtkPrintSettings *print_settings = NULL;
+static GtkPageSetup *page_setup = NULL;
+
 static void
 begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
 {
@@ -34,6 +40,40 @@ draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer
 static void
 draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
 {
+  cairo_t *cr;
+  GdkPixbuf *pb, *spb;
+  guint iw, ih;
+  gdouble pw, ph;
+  gdouble factor;
+
+  cr = gtk_print_context_get_cairo_context (cnt);
+  pb = gdk_pixbuf_new_from_file (options.common_data.uri, NULL);
+
+  /* scale image to page size */
+  pw = gtk_page_setup_get_paper_width (page_setup, options.print_data.unit)
+    - gtk_page_setup_get_left_margin (page_setup, options.print_data.unit)
+    - gtk_page_setup_get_right_margin (page_setup, options.print_data.unit);
+  ph = gtk_page_setup_get_paper_height (page_setup, options.print_data.unit)
+    - gtk_page_setup_get_top_margin (page_setup, options.print_data.unit)
+    - gtk_page_setup_get_bottom_margin (page_setup, options.print_data.unit);
+
+  iw = gdk_pixbuf_get_width (pb);
+  ih = gdk_pixbuf_get_height (pb);
+
+  if (pw < iw || ph < ih)
+    {
+      factor = MIN (pw / iw, ph / ih);
+      factor = (factor > 1.0) ? 1.0 : factor;    
+      spb = gdk_pixbuf_scale_simple (pb, iw * factor, ih * factor, GDK_INTERP_HYPER);
+    }
+  else
+    spb = g_object_ref (pb);
+  g_object_unref (pb);
+
+  /* add image to surface */
+  gdk_cairo_set_source_pixbuf (cr, spb, (pw - iw) / 2, (ph - ih) / 2);
+  cairo_paint (cr);
+  g_object_unref (spb);
 }
 
 static void
@@ -47,7 +87,7 @@ draw_page_raw (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer 
 }
 
 static void
-text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
+size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
 }
@@ -60,6 +100,22 @@ yad_print_run (void)
   GtkPrintOperation *op;
   GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
   gint ret = 0;
+  GError *err = NULL;
+
+  /* check if file is exists */
+  if (options.common_data.uri && options.common_data.uri[0])
+    {
+      if (!g_file_test (options.common_data.uri, G_FILE_TEST_EXISTS))
+	{
+	  g_printerr (_("File %s not found.\n"), options.common_data.uri);
+	  return 1;
+	}
+    }
+  else
+    {
+      g_printerr (_("Filename is not specified.\n"));
+      return 1;
+    }
 
   /* create print dialog */
   dlg = gtk_print_unix_dialog_new (options.data.dialog_title, NULL);
@@ -73,10 +129,10 @@ yad_print_run (void)
 						 GTK_PRINT_CAPABILITY_NUMBER_UP |
 						 GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT);
 
-  if (settings.print_settings)
-    gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), settings.print_settings);
-  if (settings.page_setup)
-    gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), settings.page_setup);
+  if (print_settings)
+    gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);
+  if (page_setup)
+    gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), page_setup);
 
   /* set window behavior */
   gtk_widget_set_name (dlg, "yad-dialog-window");
@@ -141,8 +197,7 @@ yad_print_run (void)
 	  if (options.data.geometry || options.data.width != -1)
 	    gtk_label_set_line_wrap (GTK_LABEL (lbl), TRUE);
 	  gtk_box_pack_start (GTK_BOX (box), lbl, TRUE, TRUE, 2);
-	  g_signal_connect (G_OBJECT (lbl), "size-allocate",
-			    G_CALLBACK (text_size_allocate_cb), NULL);     
+	  g_signal_connect (G_OBJECT (lbl), "size-allocate", G_CALLBACK (size_allocate_cb), NULL);     
 	  g_free (buf);
 	}
 
@@ -161,11 +216,10 @@ yad_print_run (void)
       act = GTK_PRINT_OPERATION_ACTION_PREVIEW;
     case GTK_RESPONSE_OK:                     /* run print */
       op = gtk_print_operation_new ();
-      gtk_print_operation_set_unit (op, options.print_data.unit);
-      settings.print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
-      gtk_print_operation_set_print_settings (op, settings.print_settings);
-      settings.page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
-      gtk_print_operation_set_default_page_setup (op, settings.page_setup);
+      print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
+      gtk_print_operation_set_print_settings (op, print_settings);
+      page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
+      gtk_print_operation_set_default_page_setup (op, page_setup);
       
       switch (options.print_data.type)
 	{
@@ -182,12 +236,15 @@ yad_print_run (void)
 	  break;
 	}
 
-      if (gtk_print_operation_run (op, act, NULL, NULL) == GTK_PRINT_OPERATION_RESULT_APPLY)
-	write_settings ();
-      else
-	ret = 1;
+      gtk_print_operation_set_show_progress (op, TRUE);
+      gtk_print_operation_run (op, act, NULL, &err);
+      if (err)
+	{
+	  printf (_("Printing failed: %s\n"), err->message);
+	  ret = 1;
+	}
       break;
-    case GTK_RESPONSE_CANCEL:                 /* cancel operation */
+    default:
       ret = 1;
       break;
     }

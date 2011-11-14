@@ -22,7 +22,7 @@
 #include <signal.h>
 #include <stdio.h>
 
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
 # include <gdk/gdkx.h>
 #endif
 
@@ -31,7 +31,7 @@
 YadOptions options;
 GtkWidget *dialog = NULL;
 
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
 static void
 sa_usr1 (gint sig)
 {
@@ -404,7 +404,7 @@ create_dialog ()
     }
 
   /* print xid */
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   if (options.print_xid)
     {
       g_fprintf (stderr, "0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
@@ -507,7 +507,7 @@ main (gint argc, gchar ** argv)
   tmp_sep = g_strcompress (options.common_data.item_separator);
   options.common_data.item_separator = tmp_sep;
 
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   /* set signal handlers */
   bzero (&sa, sizeof (struct sigaction));
   sa.sa_handler = sa_usr1;
@@ -550,7 +550,7 @@ main (gint argc, gchar ** argv)
 	  else if (options.data.buttons && !(ret & 1))
 	    print_result ();
 	}
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
       /* autokill option for progress dialog */
       if (!options.kill_parent)
 	{
@@ -562,7 +562,7 @@ main (gint argc, gchar ** argv)
 #endif
     }
 
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   if (options.kill_parent)
     kill (getppid (), SIGTERM);
 #endif
