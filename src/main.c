@@ -472,6 +472,7 @@ main (gint argc, gchar ** argv)
   read_settings ();
 
   gtk_init (&argc, &argv);
+  g_set_application_name ("YAD");
   yad_options_init ();
 
   /* set default icons and icon theme */
