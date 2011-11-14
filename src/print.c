@@ -147,13 +147,14 @@ yad_print_run (void)
 	}
 
       /* add tob box to dialog */
+      gtk_widget_show_all (box);
       gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 			  box, TRUE, TRUE, 5);
       gtk_box_reorder_child (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 			     box, 0);
     }
 
-  gtk_widget_show_all (dlg);
+  gtk_widget_show (dlg);
   switch (gtk_dialog_run (GTK_DIALOG (dlg)))
     {
     case GTK_RESPONSE_APPLY:                  /* ask for preview */
