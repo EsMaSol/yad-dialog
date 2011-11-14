@@ -50,12 +50,12 @@ draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointe
   pb = gdk_pixbuf_new_from_file (options.common_data.uri, NULL);
 
   /* scale image to page size */
-  pw = gtk_page_setup_get_paper_width (page_setup, options.print_data.unit)
-    - gtk_page_setup_get_left_margin (page_setup, options.print_data.unit)
-    - gtk_page_setup_get_right_margin (page_setup, options.print_data.unit);
-  ph = gtk_page_setup_get_paper_height (page_setup, options.print_data.unit)
-    - gtk_page_setup_get_top_margin (page_setup, options.print_data.unit)
-    - gtk_page_setup_get_bottom_margin (page_setup, options.print_data.unit);
+  pw = gtk_page_setup_get_paper_width (page_setup, GTK_UNIT_POINTS)
+    - gtk_page_setup_get_left_margin (page_setup, GTK_UNIT_POINTS)
+    - gtk_page_setup_get_right_margin (page_setup, GTK_UNIT_POINTS);
+  ph = gtk_page_setup_get_paper_height (page_setup, GTK_UNIT_POINTS)
+    - gtk_page_setup_get_top_margin (page_setup, GTK_UNIT_POINTS)
+    - gtk_page_setup_get_bottom_margin (page_setup, GTK_UNIT_POINTS);
 
   iw = gdk_pixbuf_get_width (pb);
   ih = gdk_pixbuf_get_height (pb);
@@ -216,6 +216,7 @@ yad_print_run (void)
       act = GTK_PRINT_OPERATION_ACTION_PREVIEW;
     case GTK_RESPONSE_OK:                     /* run print */
       op = gtk_print_operation_new ();
+      gtk_print_operation_set_unit (op, GTK_UNIT_POINTS);
       print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
       gtk_print_operation_set_print_settings (op, print_settings);
       page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
@@ -228,6 +229,7 @@ yad_print_run (void)
 	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_text), NULL);
 	  break;
 	case YAD_PRINT_IMAGE:
+	  gtk_print_operation_set_n_pages (op, 1);
 	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_image), NULL);
 	  break;
 	case YAD_PRINT_RAW:
@@ -249,5 +251,6 @@ yad_print_run (void)
       break;
     }
 
+  gtk_widget_destroy (dlg);
   return ret;
 }
