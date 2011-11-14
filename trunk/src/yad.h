@@ -255,7 +255,7 @@ typedef struct {
   gchar *progress_text;
   gboolean pulsate;
   gboolean autoclose;
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   gboolean autokill;
 #endif
   gdouble percentage;
@@ -321,7 +321,7 @@ typedef struct {
 
   gchar **extra_data;
 
-#if !defined(_WIN32)
+#ifndef G_OS_WIN32
   gboolean kill_parent;
   gboolean print_xid;
 #endif
@@ -347,8 +347,6 @@ typedef struct {
   GdkPixbuf *big_fallback_image;
   GdkPixbuf *small_fallback_image;
   gchar *term;
-  GtkPrintSettings *print_settings;
-  GtkPageSetup *page_setup;
 } YadSettings;
 
 extern YadSettings settings;
