@@ -406,7 +406,10 @@ create_dialog ()
   /* print xid */
 #if !defined(_WIN32)
   if (options.print_xid)
-    g_printf (stderr, "0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+    {
+      fprintf (stderr, "0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+      fflush (stderr);
+    }
 #endif
 
   return dlg;
