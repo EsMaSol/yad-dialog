@@ -24,8 +24,14 @@
 #define HEADER_HEIGHT (10*72/25.4)
 #define HEADER_GAP (3*72/25.4)
 
+#define FONTNAME "Sans"
+#define FONTSIZE 12.0
+
 static GtkPrintSettings *print_settings = NULL;
 static GtkPageSetup *page_setup = NULL;
+
+static gchar **text;
+static gint nlines, npages;
 
 static void
 draw_header (GtkPrintContext *cnt, gint pn, gint pc)
@@ -80,11 +86,59 @@ draw_header (GtkPrintContext *cnt, gint pn, gint pc)
 static void
 begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
 {
+  gchar *buf;
+  gint i = 0;
+  gdouble ph;
+
+  g_file_get_contents (options.common_data.uri, &buf, NULL, NULL);
+  text = g_strsplit (buf, "\n", 0);
+  g_free (buf);
+
+  while (text[i] != NULL)
+    i++;
+
+  ph = gtk_print_context_get_height (cnt);
+  if (options.print_data.headers)
+    ph -= HEADER_HEIGHT + HEADER_GAP;
+
+  nlines = ph / FONTSIZE;
+  npages = i / nlines;
+  gtk_print_operation_set_n_pages (op, npages);
 }
 
 static void
 draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
 {
+  cairo_t *cr;
+  PangoFontDescription *desc;
+  PangoLayout *layout;
+  gint i, line;
+
+  cr = gtk_print_context_get_cairo_context (cnt);
+
+  /* create header */
+  if (options.print_data.headers)
+    draw_header (cnt, page + 1, npages + 1);
+
+  /* add text */
+  layout = gtk_print_context_create_pango_layout (cnt);
+
+  desc = pango_font_description_from_string (FONTNAME);
+  pango_font_description_set_size (desc, FONTSIZE * PANGO_SCALE);
+  pango_layout_set_font_description (layout, desc);
+  pango_font_description_free (desc);
+
+  cairo_move_to (cr, 0, HEADER_HEIGHT + HEADER_GAP);
+  line = page * nlines;
+  for (i = 0; i < nlines && text[i]; i++)
+    {
+      pango_layout_set_text (layout, text[line], -1);
+      pango_cairo_show_layout (cr, layout);
+      cairo_rel_move_to (cr, 0, FONTSIZE);
+      line++;
+    }
+
+  g_object_unref (layout); 
 }
 
 static void
