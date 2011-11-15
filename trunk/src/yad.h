@@ -248,7 +248,6 @@ typedef struct {
 typedef struct {
   gboolean headers;
   YadPrintType type;
-  GtkUnit unit;
 } YadPrintData;
 
 typedef struct {
