@@ -39,7 +39,7 @@ draw_header (GtkPrintContext *cnt, gint pn, gint pc)
   cairo_t *cr;
   PangoFontDescription *desc;
   PangoLayout *layout;
-  guint pw, tw, th;
+  gint pw, tw, th;
   gchar *page;
 
   cr = gtk_print_context_get_cairo_context (cnt);
@@ -53,7 +53,6 @@ draw_header (GtkPrintContext *cnt, gint pn, gint pc)
 
   pango_layout_set_text (layout, options.common_data.uri, -1);
   pango_layout_get_pixel_size (layout, &tw, &th);
-
   if (tw > pw)
     {
       pango_layout_set_width (layout, pw);
@@ -103,7 +102,7 @@ begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
 
   nlines = ph / FONTSIZE;
   npages = i / nlines;
-  gtk_print_operation_set_n_pages (op, npages);
+  gtk_print_operation_set_n_pages (op, npages + 1);
 }
 
 static void
@@ -112,9 +111,10 @@ draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer
   cairo_t *cr;
   PangoFontDescription *desc;
   PangoLayout *layout;
-  gint i, line;
+  gint i, line, pw;
 
   cr = gtk_print_context_get_cairo_context (cnt);
+  pw = gtk_print_context_get_width (cnt);
 
   /* create header */
   if (options.print_data.headers)
@@ -129,13 +129,15 @@ draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer
   pango_font_description_free (desc);
 
   cairo_move_to (cr, 0, HEADER_HEIGHT + HEADER_GAP);
+  
   line = page * nlines;
-  for (i = 0; i < nlines && text[i]; i++)
+  for (i = 0; i < nlines; i++)
     {
-      pango_layout_set_text (layout, text[line], -1);
+      if (text[line+i] == NULL)
+        break;
+      pango_layout_set_text (layout, text[line+i], -1);
       pango_cairo_show_layout (cr, layout);
       cairo_rel_move_to (cr, 0, FONTSIZE);
-      line++;
     }
 
   g_object_unref (layout); 
