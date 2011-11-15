@@ -28,6 +28,56 @@ static GtkPrintSettings *print_settings = NULL;
 static GtkPageSetup *page_setup = NULL;
 
 static void
+draw_header (GtkPrintContext *cnt, gint pn, gint pc)
+{
+  cairo_t *cr;
+  PangoFontDescription *desc;
+  PangoLayout *layout;
+  guint pw, tw, th;
+  gchar *page;
+
+  cr = gtk_print_context_get_cairo_context (cnt);
+  pw = gtk_print_context_get_width (cnt);
+
+  layout = gtk_print_context_create_pango_layout (cnt);
+
+  desc = pango_font_description_from_string ("Sans 12");
+  pango_layout_set_font_description (layout, desc);
+  pango_font_description_free (desc);
+
+  pango_layout_set_text (layout, options.common_data.uri, -1);
+  pango_layout_get_pixel_size (layout, &tw, &th);
+
+  if (tw > pw)
+    {
+      pango_layout_set_width (layout, pw);
+      pango_layout_set_ellipsize (layout, PANGO_ELLIPSIZE_START);
+      pango_layout_get_pixel_size (layout, &tw, &th);
+    }
+
+  cairo_move_to (cr, (pw - tw) / 2,  (HEADER_HEIGHT - th) / 2);
+  pango_cairo_show_layout (cr, layout);
+
+  page = g_strdup_printf ("%d/%d", pn, pc);
+  pango_layout_set_text (layout, page, -1);
+  g_free (page);
+
+  pango_layout_set_width (layout, -1);
+  pango_layout_get_pixel_size (layout, &tw, &th);
+  cairo_move_to (cr, pw - tw - 4, (HEADER_HEIGHT - th) / 2);
+  pango_cairo_show_layout (cr, layout);
+
+  g_object_unref (layout);
+
+  cairo_move_to (cr, 0.0, HEADER_HEIGHT);
+  cairo_line_to (cr, pw, HEADER_HEIGHT);
+
+  cairo_set_source_rgb (cr, 0, 0, 0);
+  cairo_set_line_width (cr, 1);
+  cairo_stroke (cr);
+}
+
+static void
 begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
 {
 }
@@ -47,16 +97,18 @@ draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointe
   gdouble factor;
 
   cr = gtk_print_context_get_cairo_context (cnt);
-  pb = gdk_pixbuf_new_from_file (options.common_data.uri, NULL);
+
+  pw = gtk_print_context_get_width (cnt);
+  ph = gtk_print_context_get_height (cnt);
+  if (options.print_data.headers)
+    ph -= HEADER_HEIGHT + HEADER_GAP;
+
+  /* create header */
+  if (options.print_data.headers)
+    draw_header (cnt, 1, 1);
 
   /* scale image to page size */
-  pw = gtk_page_setup_get_paper_width (page_setup, GTK_UNIT_POINTS)
-    - gtk_page_setup_get_left_margin (page_setup, GTK_UNIT_POINTS)
-    - gtk_page_setup_get_right_margin (page_setup, GTK_UNIT_POINTS);
-  ph = gtk_page_setup_get_paper_height (page_setup, GTK_UNIT_POINTS)
-    - gtk_page_setup_get_top_margin (page_setup, GTK_UNIT_POINTS)
-    - gtk_page_setup_get_bottom_margin (page_setup, GTK_UNIT_POINTS);
-
+  pb = gdk_pixbuf_new_from_file (options.common_data.uri, NULL);
   iw = gdk_pixbuf_get_width (pb);
   ih = gdk_pixbuf_get_height (pb);
 
@@ -71,7 +123,7 @@ draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointe
   g_object_unref (pb);
 
   /* add image to surface */
-  gdk_cairo_set_source_pixbuf (cr, spb, (pw - iw) / 2, (ph - ih) / 2);
+  gdk_cairo_set_source_pixbuf (cr, spb, 0.0, HEADER_HEIGHT + HEADER_GAP);
   cairo_paint (cr);
   g_object_unref (spb);
 }

@@ -35,7 +35,6 @@ static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError 
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
-static gboolean set_unit (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -777,15 +776,9 @@ static GOptionEntry print_options[] = {
     set_print_type,
     N_("Set source type (TYPE - TEXT, IMAGE or RAW)"),
     N_("TYPE") },
-  { "unit", 0,
-    0,
-    G_OPTION_ARG_CALLBACK,
-    set_unit,
-    N_("Set unit type (TYPE - PIXEL, POINTS, INCH or MM)"),
-    N_("TYPE") },
   { "headers", 0,
     0,
-    G_OPTION_ARG_NONE
+    G_OPTION_ARG_NONE,
     &options.print_data.headers,
     N_("Add headers to page"),
     NULL },
@@ -1306,24 +1299,6 @@ set_print_type (const gchar *option_name, const gchar *value,
   return TRUE;
 }
 
-static gboolean
-set_unit (const gchar *option_name, const gchar *value,
-		gpointer data, GError **err)
-{
-  if (g_ascii_strcasecmp (value, "pixel") == 0)
-    options.print_data.unit = GTK_UNIT_PIXEL;
-  else if (g_ascii_strcasecmp (value, "points") == 0)
-    options.print_data.unit = GTK_UNIT_POINTS;
-  else if (g_ascii_strcasecmp (value, "inch") == 0)
-    options.print_data.unit = GTK_UNIT_INCH;
-  else if (g_ascii_strcasecmp (value, "mm") == 0)
-    options.print_data.unit = GTK_UNIT_MM;
-  else
-    g_printerr (_("Unknown unit type: %s\n"), value);
-
-  return TRUE;
-}
-
 void
 yad_set_mode (void)
 {
@@ -1492,7 +1467,6 @@ yad_options_init (void)
   /* Initialize print data */
   options.print_data.headers = FALSE;
   options.print_data.type = YAD_PRINT_TEXT;
-  options.print_data.unit = GTK_UNIT_PIXEL;
 
   /* Initialize progress data */
   options.progress_data.progress_text = NULL;
