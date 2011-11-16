@@ -17,6 +17,9 @@
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <sys/types.h>
+#include <unistd.h>
+
 #include <gtk/gtkprintunixdialog.h>
 
 #include "yad.h"
@@ -194,6 +197,7 @@ yad_print_run (void)
 {
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
+  gchar *job_name = NULL;
   GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
   gint ret = 0;
   GError *err = NULL;
@@ -313,13 +317,16 @@ yad_print_run (void)
     case GTK_RESPONSE_OK:                     /* run print */
       print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
       page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
+      job_name = g_strdup_printf ("yad-%s-%d", g_basename (options.common_data.uri), getpid ());
       if (options.print_data.type != YAD_PRINT_RAW)
 	{
+	  /* print text or image */
 	  GtkPrintOperation *op = gtk_print_operation_new ();
 	  gtk_print_operation_set_unit (op, GTK_UNIT_POINTS);
 	  gtk_print_operation_set_print_settings (op, print_settings);
 	  gtk_print_operation_set_default_page_setup (op, page_setup);
-      
+	  gtk_print_operation_set_job_name (op, job_name);
+
 	  switch (options.print_data.type)
 	    {
 	    case YAD_PRINT_TEXT:
@@ -336,13 +343,36 @@ yad_print_run (void)
 	  gtk_print_operation_run (op, act, NULL, &err);
 	  if (err)
 	    {
-	      printf (_("Printing failed: %s\n"), err->message);
+	      g_printerr (_("Printing failed: %s\n"), err->message);
 	      ret = 1;
 	    }
 	}
       else
 	{
-	  /* GtkPrintJob *job = gtk_print_job_new (); */
+	  /* print raw ps or pdf data */
+	  GtkPrinter *prnt;
+	  GtkPrintJob *job;
+
+	  prnt = gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (dlg));
+	  
+
+	  job = gtk_print_job_new (job_name, prnt, print_settings, page_setup);
+	  if (gtk_print_job_set_source_file (job, options.common_data.uri, &err))
+	    {
+	      GtkPrintStatus st;
+
+	      gtk_print_job_send (job, NULL, NULL, NULL);
+	      do 
+		st = gtk_print_job_get_status (job);
+	      while (st != GTK_PRINT_STATUS_FINISHED || st != GTK_PRINT_STATUS_FINISHED_ABORTED);
+	      if (st == GTK_PRINT_STATUS_FINISHED_ABORTED)
+		ret = 1;
+	    }
+	  else
+	    {
+	      g_printerr (_("Load source file failed: %s\n"), err->message);
+	      ret = 1;
+	    }
 	}
       break;
     default:
