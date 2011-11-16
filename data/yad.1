@@ -54,6 +54,9 @@ Display multi progress bars dialog.
 .B \-\-notification
 Display notification icon.
 .TP
+.B \-\-print
+Display print dialog.
+.TP
 .B \-\-progress
 Display progress indication dialog.
 .TP
@@ -449,6 +452,24 @@ Set separator character for menu values. Default is \fI|\fP.
 Set separator character for menu items. Default is \fI!\fP.
 .PP
 See \fBNOTIFICATION\fP section for more about separators. 
+
+.PP
+Print options
+.TP
+.B \-\-type=TYPE
+Set source file type. \fITYPE\fP may be a \fITEXT\fP for text files, \fIIMAGE\fP for image files or \fIRAW\fP for files in postscript or pdf formats.
+.TP
+.B \-\-filename=FILENAME
+Set name or path to the source file.
+.TP
+.B \-\-headers
+Add headers to the top of page with filename and page number. This option doesn't work for \fIRAW\fP type.
+.TP
+.B \-\-add-preview
+Add \fIPreview\fP button to the print dialog. This option doesn't work for \fIRAW\fP type.
+.TP
+.B \-\-fontname=FONTNAME
+Set the font for printing text. \fIFONTNAME\fP is a string with font representation in the form \fI"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"\fP. This option works only for \fITEXT\fP type.
 
 .PP
 Progress options
