@@ -101,8 +101,8 @@ begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
     ph -= HEADER_HEIGHT + HEADER_GAP;
 
   nlines = ph / FONTSIZE;
-  npages = i / nlines;
-  gtk_print_operation_set_n_pages (op, npages + 1);
+  npages = i / nlines + 1;
+  gtk_print_operation_set_n_pages (op, npages);
 }
 
 static void
@@ -118,7 +118,7 @@ draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer
 
   /* create header */
   if (options.print_data.headers)
-    draw_header (cnt, page + 1, npages + 1);
+    draw_header (cnt, page + 1, npages);
 
   /* add text */
   layout = gtk_print_context_create_pango_layout (cnt);
