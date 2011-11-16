@@ -26,6 +26,7 @@
 
 #define HEADER_HEIGHT (10*72/25.4)
 #define HEADER_GAP (3*72/25.4)
+#define HEADER_FONT "Sans 11"
 
 #define FONTNAME "Sans"
 #define FONTSIZE 12.0
@@ -35,6 +36,8 @@ static GtkPageSetup *page_setup = NULL;
 
 static gchar **text;
 static gint nlines, npages;
+
+static PangoFontDescription *fdesc = NULL;
 
 static void
 draw_header (GtkPrintContext *cnt, gint pn, gint pc)
@@ -50,7 +53,7 @@ draw_header (GtkPrintContext *cnt, gint pn, gint pc)
 
   layout = gtk_print_context_create_pango_layout (cnt);
 
-  desc = pango_font_description_from_string ("Sans 12");
+  desc = pango_font_description_from_string (HEADER_FONT);
   pango_layout_set_font_description (layout, desc);
   pango_font_description_free (desc);
 
@@ -92,6 +95,7 @@ begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
   gint i = 0;
   gdouble ph;
 
+  /* load file */
   g_file_get_contents (options.common_data.uri, &buf, NULL, NULL);
   text = g_strsplit (buf, "\n", 0);
   g_free (buf);
@@ -106,13 +110,22 @@ begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
   nlines = ph / FONTSIZE;
   npages = i / nlines + 1;
   gtk_print_operation_set_n_pages (op, npages);
+
+  /* set font */
+  if (options.common_data.font)
+    fdesc = pango_font_description_from_string (options.common_data.font);
+  else
+    {
+      fdesc = pango_font_description_from_string (FONTNAME);
+      pango_font_description_set_size (fdesc, FONTSIZE * PANGO_SCALE);
+    }
+
 }
 
 static void
 draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
 {
   cairo_t *cr;
-  PangoFontDescription *desc;
   PangoLayout *layout;
   gint i, line;
 
@@ -124,11 +137,7 @@ draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer
 
   /* add text */
   layout = gtk_print_context_create_pango_layout (cnt);
-
-  desc = pango_font_description_from_string (FONTNAME);
-  pango_font_description_set_size (desc, FONTSIZE * PANGO_SCALE);
-  pango_layout_set_font_description (layout, desc);
-  pango_font_description_free (desc);
+  pango_layout_set_font_description (layout, fdesc);
 
   cairo_move_to (cr, 0, HEADER_HEIGHT + HEADER_GAP);
   
@@ -198,6 +207,7 @@ yad_print_run (void)
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
   gchar *job_name = NULL;
+  GtkPrintCapabilities pcap;
   GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
   gint ret = 0;
   GError *err = NULL;
@@ -220,14 +230,12 @@ yad_print_run (void)
   /* create print dialog */
   dlg = gtk_print_unix_dialog_new (options.data.dialog_title, NULL);
   gtk_print_unix_dialog_set_embed_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), TRUE);
-  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg),
-						 GTK_PRINT_CAPABILITY_PAGE_SET |
-						 GTK_PRINT_CAPABILITY_COPIES |
-						 GTK_PRINT_CAPABILITY_COLLATE |
-						 GTK_PRINT_CAPABILITY_REVERSE |
-						 GTK_PRINT_CAPABILITY_PREVIEW |
-						 GTK_PRINT_CAPABILITY_NUMBER_UP |
-						 GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT);
+  pcap = GTK_PRINT_CAPABILITY_PAGE_SET | GTK_PRINT_CAPABILITY_COPIES |
+    GTK_PRINT_CAPABILITY_COLLATE | GTK_PRINT_CAPABILITY_REVERSE |
+    GTK_PRINT_CAPABILITY_NUMBER_UP | GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT;
+  if (options.print_data.preview && options.print_data.type != YAD_PRINT_RAW)
+    pcap |= GTK_PRINT_CAPABILITY_PREVIEW;
+  gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg), pcap);
 
   if (print_settings)
     gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);

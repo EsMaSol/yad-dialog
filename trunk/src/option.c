@@ -782,6 +782,18 @@ static GOptionEntry print_options[] = {
     &options.print_data.headers,
     N_("Add headers to page"),
     NULL },
+  { "preview", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.print_data.preview,
+    N_("Enable preview in pint dialog"),
+    NULL },
+  { "fontname", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_STRING,
+    &options.common_data.font,
+    N_("Use specified font"),
+    N_("FONTNAME") },
   { NULL }
 };
 
@@ -1465,8 +1477,9 @@ yad_options_init (void)
   options.notification_data.listen = FALSE;
 
   /* Initialize print data */
-  options.print_data.headers = FALSE;
   options.print_data.type = YAD_PRINT_TEXT;
+  options.print_data.headers = FALSE;
+  options.print_data.preview = FALSE;
 
   /* Initialize progress data */
   options.progress_data.progress_text = NULL;
