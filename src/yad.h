@@ -246,8 +246,9 @@ typedef struct {
 } YadNotificationData;
 
 typedef struct {
-  gboolean headers;
   YadPrintType type;
+  gboolean headers;
+  gboolean preview;
 } YadPrintData;
 
 typedef struct {
