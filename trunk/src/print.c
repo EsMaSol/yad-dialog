@@ -111,10 +111,9 @@ draw_page_text (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer
   cairo_t *cr;
   PangoFontDescription *desc;
   PangoLayout *layout;
-  gint i, line, pw;
+  gint i, line;
 
   cr = gtk_print_context_get_cairo_context (cnt);
-  pw = gtk_print_context_get_width (cnt);
 
   /* create header */
   if (options.print_data.headers)
@@ -195,7 +194,6 @@ yad_print_run (void)
 {
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
-  GtkPrintOperation *op;
   GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
   gint ret = 0;
   GError *err = NULL;
@@ -313,33 +311,38 @@ yad_print_run (void)
     case GTK_RESPONSE_APPLY:                  /* ask for preview */
       act = GTK_PRINT_OPERATION_ACTION_PREVIEW;
     case GTK_RESPONSE_OK:                     /* run print */
-      op = gtk_print_operation_new ();
-      gtk_print_operation_set_unit (op, GTK_UNIT_POINTS);
       print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
-      gtk_print_operation_set_print_settings (op, print_settings);
       page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
-      gtk_print_operation_set_default_page_setup (op, page_setup);
+      if (options.print_data.type != YAD_PRINT_RAW)
+	{
+	  GtkPrintOperation *op = gtk_print_operation_new ();
+	  gtk_print_operation_set_unit (op, GTK_UNIT_POINTS);
+	  gtk_print_operation_set_print_settings (op, print_settings);
+	  gtk_print_operation_set_default_page_setup (op, page_setup);
       
-      switch (options.print_data.type)
-	{
-	case YAD_PRINT_TEXT:
-	  g_signal_connect (G_OBJECT (op), "begin-print", G_CALLBACK (begin_print_text), NULL);
-	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_text), NULL);
-	  break;
-	case YAD_PRINT_IMAGE:
-	  gtk_print_operation_set_n_pages (op, 1);
-	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_image), NULL);
-	  break;
-	case YAD_PRINT_RAW:
-	  break;
-	}
+	  switch (options.print_data.type)
+	    {
+	    case YAD_PRINT_TEXT:
+	      g_signal_connect (G_OBJECT (op), "begin-print", G_CALLBACK (begin_print_text), NULL);
+	      g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_text), NULL);
+	      break;
+	    case YAD_PRINT_IMAGE:
+	      gtk_print_operation_set_n_pages (op, 1);
+	      g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_image), NULL);
+	      break;
+	    }
 
-      gtk_print_operation_set_show_progress (op, TRUE);
-      gtk_print_operation_run (op, act, NULL, &err);
-      if (err)
+	  gtk_print_operation_set_show_progress (op, TRUE);
+	  gtk_print_operation_run (op, act, NULL, &err);
+	  if (err)
+	    {
+	      printf (_("Printing failed: %s\n"), err->message);
+	      ret = 1;
+	    }
+	}
+      else
 	{
-	  printf (_("Printing failed: %s\n"), err->message);
-	  ret = 1;
+	  /* GtkPrintJob *job = gtk_print_job_new (); */
 	}
       break;
     default:
