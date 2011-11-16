@@ -185,16 +185,6 @@ draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointe
 }
 
 static void
-begin_print_raw (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
-{
-}
-
-static void
-draw_page_raw (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointer data)
-{
-}
-
-static void
 size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
@@ -341,8 +331,6 @@ yad_print_run (void)
 	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_image), NULL);
 	  break;
 	case YAD_PRINT_RAW:
-	  g_signal_connect (G_OBJECT (op), "begin-print", G_CALLBACK (begin_print_raw), NULL);
-	  g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_raw), NULL);
 	  break;
 	}
 
