@@ -140,15 +140,6 @@ create_dialog ()
     options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (dlg));
   gtk_container_set_border_width (GTK_CONTAINER (dlg), (guint) options.data.borders);
 
-  /* set window behavior */
-  if (options.data.sticky)
-    gtk_window_stick (GTK_WINDOW (dlg));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
-  gtk_window_set_keep_above (GTK_WINDOW (dlg), options.data.ontop);
-  gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
-  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
-  gtk_window_set_skip_pager_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
-
   /* set window size and position */
   if (!options.data.geometry)
     {
@@ -158,6 +149,7 @@ create_dialog ()
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
       else if (options.data.mouse)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
+      gtk_widget_realize (dlg);
     }
   else
     {
@@ -165,6 +157,15 @@ create_dialog ()
       gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
     }
+
+  /* set window behavior */
+  if (options.data.sticky)
+    gtk_window_stick (GTK_WINDOW (dlg));
+  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+  gtk_window_set_keep_above (GTK_WINDOW (dlg), options.data.ontop);
+  gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
+  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
+  gtk_window_set_skip_pager_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
 
   /* create timeout indicator widget */
   if (options.data.timeout)
