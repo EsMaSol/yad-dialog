@@ -119,7 +119,6 @@ begin_print_text (GtkPrintOperation *op, GtkPrintContext *cnt, gpointer data)
       fdesc = pango_font_description_from_string (FONTNAME);
       pango_font_description_set_size (fdesc, FONTSIZE * PANGO_SCALE);
     }
-
 }
 
 static void
