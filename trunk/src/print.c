@@ -346,7 +346,6 @@ yad_print_run (void)
 	      break;
 	    }
 
-	  gtk_print_operation_set_show_progress (op, TRUE);
 	  gtk_print_operation_run (op, act, NULL, &err);
 	  if (err)
 	    {
@@ -395,7 +394,6 @@ yad_print_run (void)
 	      do
 		{
 		  st = gtk_print_job_get_status (job);
-		  printf ("status - %d\n", st);
 		}
 	      while (st != GTK_PRINT_STATUS_FINISHED || st != GTK_PRINT_STATUS_FINISHED_ABORTED);
 	      if (st == GTK_PRINT_STATUS_FINISHED_ABORTED)
