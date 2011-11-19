@@ -362,6 +362,29 @@ yad_print_run (void)
 
 	  prnt = gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG (dlg));
 	  
+	  if (g_str_has_suffix (options.common_data.uri, ".ps"))
+	    {
+	      if (!gtk_printer_accepts_ps (prnt))
+		{
+		  g_printerr (_("Printer doesn't support ps format.\n"));
+		  ret = 1;
+		}
+	    }
+	  else if (g_str_has_suffix (options.common_data.uri, ".pdf"))
+	    {
+	      if (!gtk_printer_accepts_pdf (prnt))
+		{
+		  g_printerr (_("Printer doesn't support pdf format.\n"));
+		  ret = 1;
+		}
+	    }
+	  else
+	    {
+	      g_printerr (_("This file type is not supported for raw printing.\n"));
+	      ret = 1;
+	    }
+	  if (ret == 1)
+	    break;
 
 	  job = gtk_print_job_new (job_name, prnt, print_settings, page_setup);
 	  if (gtk_print_job_set_source_file (job, options.common_data.uri, &err))
@@ -369,8 +392,11 @@ yad_print_run (void)
 	      GtkPrintStatus st;
 
 	      gtk_print_job_send (job, NULL, NULL, NULL);
-	      do 
-		st = gtk_print_job_get_status (job);
+	      do
+		{
+		  st = gtk_print_job_get_status (job);
+		  printf ("status - %d\n", st);
+		}
 	      while (st != GTK_PRINT_STATUS_FINISHED || st != GTK_PRINT_STATUS_FINISHED_ABORTED);
 	      if (st == GTK_PRINT_STATUS_FINISHED_ABORTED)
 		ret = 1;
