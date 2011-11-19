@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-16 13:02+0200\n"
+"POT-Creation-Date: 2011-11-19 11:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Yannou90 <windaube.non.merci@gmail.com>\n"
 "Language-Team: Français\n"
@@ -76,17 +76,17 @@ msgstr ""
 msgid "Cannot open file '%s': %s\n"
 msgstr "Impossible d'ouvrir le fichier '%s': %s\n"
 
-#: ../src/entry.c:145 ../src/scale.c:39
+#: ../src/entry.c:158 ../src/scale.c:39
 #, c-format
 msgid "Maximum value must be greater than minimum value.\n"
 msgstr "La valeur minimale doit être inférieure à la valeur maximale.\n"
 
-#: ../src/entry.c:151 ../src/scale.c:48
+#: ../src/entry.c:164 ../src/scale.c:48
 #, c-format
 msgid "Initial value less than minimal.\n"
 msgstr "Valeur initial inférieur à la minimal.\n"
 
-#: ../src/entry.c:156 ../src/scale.c:53
+#: ../src/entry.c:169 ../src/scale.c:53
 #, c-format
 msgid "Initial value greater than maximum.\n"
 msgstr "Valeur initial supérieur à la maximal.\n"
@@ -125,12 +125,12 @@ msgstr "Impossible d'analyser le fichier %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "impossible d'ouvrir le répertoire  %s: %s\n"
 
-#: ../src/main.c:89 ../src/main.c:228
+#: ../src/main.c:89 ../src/main.c:229
 #, c-format
 msgid "%d sec"
 msgstr "%d sec"
 
-#: ../src/main.c:500
+#: ../src/main.c:501
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Impossible d'analyser la ligne de commande: %s\n"
@@ -1078,22 +1078,37 @@ msgstr "Options diverses"
 msgid "Show miscellaneous options"
 msgstr "Afficher les options diverses"
 
-#: ../src/print.c:220
+#: ../src/print.c:219
 #, c-format
 msgid "File %s not found.\n"
 msgstr ""
 
-#: ../src/print.c:226
+#: ../src/print.c:225
 #, c-format
 msgid "Filename is not specified.\n"
 msgstr ""
 
-#: ../src/print.c:354
+#: ../src/print.c:353
 #, fuzzy, c-format
 msgid "Printing failed: %s\n"
 msgstr "Impossible d'ouvrir le fichier %s: %s"
 
-#: ../src/print.c:381
+#: ../src/print.c:369
+#, c-format
+msgid "Printer doesn't support ps format.\n"
+msgstr ""
+
+#: ../src/print.c:377
+#, c-format
+msgid "Printer doesn't support pdf format.\n"
+msgstr ""
+
+#: ../src/print.c:383
+#, c-format
+msgid "This file type is not supported for raw printing.\n"
+msgstr ""
+
+#: ../src/print.c:406
 #, c-format
 msgid "Load source file failed: %s\n"
 msgstr ""
