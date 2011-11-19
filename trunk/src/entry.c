@@ -17,6 +17,8 @@
  * Copyright (C) 2008-2011, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <gdk/gdkkeysyms.h>
+
 #include "yad.h"
 
 static GtkWidget *entry;
@@ -26,6 +28,17 @@ static void
 entry_activate_cb (GtkEntry *entry, gpointer data)
 {
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+}
+
+static gboolean
+combo_activate_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
+{
+  if (ev->keyval == GDK_Return || ev->keyval == GDK_KP_Enter)
+    {
+      gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      return TRUE;
+    }
+  return FALSE;
 }
 
 static void
@@ -269,6 +282,9 @@ entry_create_widget (GtkWidget *dlg)
 
   if (!is_combo)
     g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (entry_activate_cb), dlg);
+  else
+    g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (combo_activate_cb), dlg);
+    
   if (options.entry_data.licon || options.entry_data.ricon)
     g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
 
