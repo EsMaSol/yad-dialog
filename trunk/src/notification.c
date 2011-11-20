@@ -234,7 +234,8 @@ handle_stdin (GIOChannel * channel,
           command = g_strdup (args[0]);
           value = g_strdup (args[1]);
 	  g_strfreev (args);
-	  g_strstrip (value);
+	  if (value)
+	    g_strstrip (value);
 
           if (!g_ascii_strcasecmp (command, "icon"))
             {
