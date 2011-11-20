@@ -239,7 +239,8 @@ handle_stdin (GIOChannel * channel,
 
           if (!g_ascii_strcasecmp (command, "icon"))
             {
-              icon = g_strstrip (value);
+              g_free (icon);
+              icon = g_strdup (value);
 
               if (gtk_status_icon_get_visible (status_icon) &&
                   gtk_status_icon_is_embedded (status_icon))
