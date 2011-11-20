@@ -29,6 +29,7 @@
 typedef struct {
   gchar *name;
   gchar *action;
+  gchar *icon;
 } MenuData;
 
 static GtkStatusIcon *status_icon;
@@ -40,6 +41,17 @@ static GSList *menu_data;
 
 static gint exit_code;
 static gint icon_size = 16;
+
+static void
+free_menu_data (gpointer data, gpointer udata)
+{
+  MenuData *m = (MenuData *) data;
+  
+  g_free (m->name);
+  g_free (m->action);
+  g_free (m->icon);
+  g_free (m);
+}
 
 static void
 timeout_cb (gpointer data)
@@ -139,19 +151,31 @@ popup_menu_cb (GtkStatusIcon * icon, guint button,
 {
   GtkWidget *menu;
   GtkWidget *item;
-  int i;
+  GSList *m;
 
   if (!menu_data)
     return;
 
   menu = gtk_menu_new ();
-  for (i = 0; i < g_slist_length (menu_data); i++)
+  for (m = menu_data; m; m = m->next)
     {
-      MenuData *d = (MenuData *) g_slist_nth_data (menu_data, i);
+      MenuData *d = (MenuData *) m->data;
 
       if (d->name)
         {
-          item = gtk_menu_item_new_with_label (d->name);
+          if (d->icon)
+            {
+              GdkPixbuf *pb = get_pixbuf (d->icon, YAD_SMALL_ICON);
+              item = gtk_image_menu_item_new_with_mnemonic (d->name);
+              if (pb)
+                {
+                  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
+                                                 gtk_image_new_from_pixbuf (pb));
+                  g_object_unref (pb);
+                }
+            }
+          else
+            item = gtk_menu_item_new_with_mnemonic (d->name);
           g_signal_connect (GTK_MENU_ITEM (item), "activate",
                             G_CALLBACK (popup_menu_item_activate_cb),
                             (gpointer) d->action);
@@ -210,6 +234,7 @@ handle_stdin (GIOChannel * channel,
           command = g_strdup (args[0]);
           value = g_strdup (args[1]);
 	  g_strfreev (args);
+	  g_strstrip (value);
 
           if (!g_ascii_strcasecmp (command, "icon"))
             {
@@ -272,22 +297,21 @@ handle_stdin (GIOChannel * channel,
             {
               MenuData *mdata;
               int i = 0;
-              gchar *s, **menu_vals = g_strsplit (value, options.common_data.separator, -1);
+              gchar **menu_vals = g_strsplit (value, options.common_data.separator, -1);
 
+              g_slist_foreach (menu_data, free_menu_data, NULL);
               g_slist_free (menu_data);
               menu_data = NULL;
 
               while (menu_vals[i] != NULL)
                 {
+                  gchar **s = g_strsplit (menu_vals[i], options.common_data.item_separator, 3);
                   mdata = g_new0 (MenuData, 1);
-                  s = strchr (menu_vals[i], options.common_data.item_separator[0]);
-                  if (s != NULL)
-                    {
-                      mdata->name =
-                        g_strndup (menu_vals[i], s - menu_vals[i]);
-                      mdata->action = g_strdup (s + 1);
-                    }
+                  mdata->name = g_strdup (s[0]);
+                  mdata->action = g_strdup (s[1]);
+                  mdata->icon = g_strdup (s[2]);
                   menu_data = g_slist_append (menu_data, mdata);
+                  g_strfreev (s);
                   i++;
                 }
 
