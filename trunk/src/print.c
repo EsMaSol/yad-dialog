@@ -195,6 +195,17 @@ draw_page_image (GtkPrintOperation *op, GtkPrintContext *cnt, gint page, gpointe
 }
 
 static void
+raw_print_done (GtkPrintJob *job, gint *ret, GError *err)
+{
+  if (err)
+    {
+      g_printerr (_("Printing failed: %s\n"), err->message);
+      *ret = 1;
+    }
+  gtk_main_quit ();
+}
+
+static void
 size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
@@ -388,16 +399,8 @@ yad_print_run (void)
 	  job = gtk_print_job_new (job_name, prnt, print_settings, page_setup);
 	  if (gtk_print_job_set_source_file (job, options.common_data.uri, &err))
 	    {
-	      GtkPrintStatus st;
-
-	      gtk_print_job_send (job, NULL, NULL, NULL);
-	      do
-		{
-		  st = gtk_print_job_get_status (job);
-		}
-	      while (st != GTK_PRINT_STATUS_FINISHED || st != GTK_PRINT_STATUS_FINISHED_ABORTED);
-	      if (st == GTK_PRINT_STATUS_FINISHED_ABORTED)
-		ret = 1;
+	      gtk_print_job_send (job, (GtkPrintJobCompleteFunc) raw_print_done, &ret, NULL);
+	      gtk_main ();
 	    }
 	  else
 	    {
