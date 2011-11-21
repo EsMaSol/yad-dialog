@@ -1,3 +1,236 @@
+2011-11-21 15:48  ananasik
+
+	* configure.ac, src/print.c: prepare to release
+
+2011-11-21 12:50  ananasik
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po, src/print.c:
+
+2011-11-21 09:43  ananasik
+
+	* src/print.c: fix raw printing
+
+2011-11-20 19:56  ananasik
+
+	* configure.ac: bump version to 0.15.101
+
+2011-11-20 19:54  ananasik
+
+	* src/notification.c:
+
+2011-11-20 19:50  ananasik
+
+	* src/notification.c:
+
+2011-11-20 19:48  ananasik
+
+	* data/yad.1, src/notification.c: add icons to popup menu in
+	  notification
+
+2011-11-19 10:33  ananasik
+
+	* src/print.c:
+
+2011-11-19 09:40  ananasik
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po, src/print.c:
+	  add check file type for rwa printing
+
+2011-11-19 06:01  ananasik
+
+	* src/entry.c: make enter works for combobox in entry dialog
+
+2011-11-19 05:37  ananasik
+
+	* data/yad.1: update man page
+
+2011-11-18 14:51  ananasik
+
+	* src/print.c:
+
+2011-11-17 13:05  ananasik
+
+	* src/main.c:
+
+2011-11-16 11:24  ananasik
+
+	* configure.ac, data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po,
+	  po/uk.po, src/option.c: update translation and man page
+
+2011-11-16 09:51  ananasik
+
+	* src/option.c, src/print.c, src/yad.h: add preview and fontname
+	  options to print dialog
+
+2011-11-16 09:19  ananasik
+
+	* src/print.c: add raw type to print
+
+2011-11-16 06:18  ananasik
+
+	* src/print.c:
+
+2011-11-16 05:10  ananasik
+
+	* src/print.c:
+
+2011-11-16 04:58  ananasik
+
+	* src/print.c:
+
+2011-11-15 19:29  ananasik
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po: update
+	  translations
+
+2011-11-15 19:15  ananasik
+
+	* src/print.c: fix printing text
+
+2011-11-15 15:30  ananasik
+
+	* src/print.c:
+
+2011-11-15 14:47  ananasik
+
+	* src/option.c, src/print.c, src/yad.h:
+
+2011-11-14 15:59  ananasik
+
+	* src/print.c:
+
+2011-11-14 13:47  ananasik
+
+	* src/main.c: add application name
+
+2011-11-14 13:36  ananasik
+
+	* src/main.c, src/option.c, src/print.c, src/util.c, src/yad.h:
+
+2011-11-14 11:13  ananasik
+
+	* src/print.c: fix print dialog
+
+2011-11-14 11:04  ananasik
+
+	* src/main.c: fix --print-xid
+
+2011-11-14 10:56  ananasik
+
+	* src/main.c: fix --print-xid
+
+2011-11-13 17:12  ananasik
+
+	* data/yad.1, src/notification.c: don't close notification icon
+	  when --listen specified. update man page
+
+2011-11-13 16:34  ananasik
+
+	* data/yad.1: update man page
+
+2011-11-13 16:32  ananasik
+
+	* data/yad.1: update man page
+
+2011-11-13 16:28  ananasik
+
+	* po/LINGUAS, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po: add
+	  french translation
+
+2011-11-13 11:12  ananasik
+
+	* src/print.c:
+
+2011-11-13 11:05  ananasik
+
+	* src/form.c, src/notification.c, src/option.c: add --unit option
+	  to print dialog
+
+2011-11-13 10:58  ananasik
+
+	* src/color.c, src/dnd.c, src/entry.c, src/font.c, src/list.c,
+	  src/print.c, src/yad.h: add initial print dialog
+
+2011-11-13 10:24  ananasik
+
+	* src/print.c:
+
+2011-11-13 07:48  ananasik
+
+	* src/print.c:
+
+2011-11-13 07:48  ananasik
+
+	* src/print.c:
+
+2011-11-13 07:21  ananasik
+
+	* configure.ac, src/main.c, src/option.c, src/print.c:
+
+2011-11-12 02:22  ananasik
+
+	* data/yad.1: update man page
+
+2011-11-11 14:14  ananasik
+
+	* src/util.c, src/yad.h:
+
+2011-11-10 18:05  ananasik
+
+	* src/print.c: add print.c
+
+2011-11-10 12:42  ananasik
+
+	* po/POTFILES.in, src/Makefile.am, src/main.c, src/option.c,
+	  src/yad.h: prepare to add print dialog
+
+2011-11-10 12:06  ananasik
+
+	* src/main.c, src/util.c, src/yad.h: prepare to add print dialog
+
+2011-11-10 05:41  ananasik
+
+	* data/yad.1: update man page
+
+2011-11-10 05:38  ananasik
+
+	* src/main.c: fix adding pid to dialog buttons callback
+
+2011-11-10 04:49  ananasik
+
+	* src/main.c: cleanup
+
+2011-11-09 18:03  ananasik
+
+	* configure.ac: bump version to 0.15.91
+
+2011-11-09 18:02  ananasik
+
+	* data/yad.1, src/main.c, src/option.c, src/yad.h: add command to
+	  dialog buttons
+
+2011-11-08 11:32  ananasik
+
+	* src/color.c, src/multi-progress.c, src/notification.c,
+	  src/progress.c: fix errors messaging
+
+2011-11-08 11:28  ananasik
+
+	* src/color.c: add shadow to palette in color dialog
+
+2011-11-02 20:02  ananasik
+
+	* configure.ac, po/de.po, po/ru.po, po/sk.po, po/uk.po, src/main.c,
+	  src/option.c, src/yad.h: add --text-align options
+
+2011-11-02 17:49  ananasik
+
+	* ChangeLog, NEWS: release 0.15.1
+
+2011-11-02 17:45  ananasik
+
+	* src/list.c, src/util.c: fix in escaping markup
+
 2011-11-02 14:58  ananasik
 
 	* src/list.c:
