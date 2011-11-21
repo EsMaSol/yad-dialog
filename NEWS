@@ -1,3 +1,13 @@
+Version 0.16.0
+    - add printing dialog
+    - add callbacks for dialog buttons
+    - add icons for popup menu in notification icon
+    - add french translation
+    - make Return works for combo-boxes in entry dialog
+    - change notification behavior. if --listen is specified, left click on icon
+      doesn't close it
+    - add --text-align option for aligning dialog text
+
 Version 0.15.1
     - fix grid placement in form dialog
     - fix popup menu in editable lists
