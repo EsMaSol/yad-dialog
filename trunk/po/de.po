@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-19 11:37+0200\n"
+"POT-Creation-Date: 2011-11-21 11:42+0200\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -131,22 +131,22 @@ msgstr ""
 msgid "Unable parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
-#: ../src/notification.c:70
+#: ../src/notification.c:82
 #, fuzzy, c-format
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Kann Benachrichtigungs-Symbol '%s' nicht laden: %s"
 
-#: ../src/notification.c:234
+#: ../src/notification.c:261
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Ungültiger UTF-8 Eintrag im Tool-Tip!\n"
 
-#: ../src/notification.c:297
+#: ../src/notification.c:323
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/notification.c:333
+#: ../src/notification.c:359
 msgid "Yad notification"
 msgstr "Yad Benachrichtigung"
 
@@ -1098,37 +1098,37 @@ msgstr "Verschiedene Einstellungen"
 msgid "Show miscellaneous options"
 msgstr "Verschiedene Einstellungen anzeigen"
 
-#: ../src/print.c:219
-#, c-format
-msgid "File %s not found.\n"
-msgstr ""
-
-#: ../src/print.c:225
-#, c-format
-msgid "Filename is not specified.\n"
-msgstr ""
-
-#: ../src/print.c:353
+#: ../src/print.c:202 ../src/print.c:363
 #, fuzzy, c-format
 msgid "Printing failed: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
-#: ../src/print.c:369
+#: ../src/print.c:230
+#, c-format
+msgid "File %s not found.\n"
+msgstr ""
+
+#: ../src/print.c:236
+#, c-format
+msgid "Filename is not specified.\n"
+msgstr ""
+
+#: ../src/print.c:379
 #, c-format
 msgid "Printer doesn't support ps format.\n"
 msgstr ""
 
-#: ../src/print.c:377
+#: ../src/print.c:387
 #, c-format
 msgid "Printer doesn't support pdf format.\n"
 msgstr ""
 
-#: ../src/print.c:383
+#: ../src/print.c:393
 #, c-format
 msgid "This file type is not supported for raw printing.\n"
 msgstr ""
 
-#: ../src/print.c:406
+#: ../src/print.c:407
 #, c-format
 msgid "Load source file failed: %s\n"
 msgstr ""

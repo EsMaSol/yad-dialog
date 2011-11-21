@@ -357,8 +357,7 @@ yad_print_run (void)
 	      break;
 	    }
 
-	  gtk_print_operation_run (op, act, NULL, &err);
-	  if (err)
+	  if (gtk_print_operation_run (op, act, NULL, &err) == GTK_PRINT_OPERATION_RESULT_ERROR)
 	    {
 	      g_printerr (_("Printing failed: %s\n"), err->message);
 	      ret = 1;
