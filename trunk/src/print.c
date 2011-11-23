@@ -335,7 +335,7 @@ yad_print_run (void)
     case GTK_RESPONSE_OK:                     /* run print */
       print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
       page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
-      job_name = g_strdup_printf ("yad-%s-%d", g_basename (options.common_data.uri), getpid ());
+      job_name = g_strdup_printf ("yad-%s-%d", g_path_get_basename (options.common_data.uri), getpid ());
       gtk_print_settings_to_file (print_settings, "print-settings", NULL);
       if (options.print_data.type != YAD_PRINT_RAW)
 	{

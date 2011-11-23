@@ -92,6 +92,8 @@ load_icon_cat (IconBrowserData *data, gchar *cat)
     }
   g_list_free (icons);
 
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 1, GTK_SORT_ASCENDING);
+
   return store;
 }
 
@@ -303,8 +305,6 @@ main (gint argc, gchar *argv[])
   gtk_tree_view_append_column (GTK_TREE_VIEW (data->icon_list), col);
 
   gtk_widget_show_all (data->win);
-
-  /* add callbacks for category and icon lists */
 
   /* run it */
   gtk_main ();
