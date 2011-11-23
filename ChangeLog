@@ -1,3 +1,16 @@
+2011-11-23 19:47  ananasik
+
+	* configure.ac, src/browser.c, src/print.c: add initial sorting to
+	  icon browser. remove deprecated calls
+
+2011-11-22 05:04  ananasik
+
+	* src/entry.c: fix build with gtk3
+
+2011-11-21 15:56  ananasik
+
+	* ChangeLog, NEWS: release 0.16.0
+
 2011-11-21 15:48  ananasik
 
 	* configure.ac, src/print.c: prepare to release
