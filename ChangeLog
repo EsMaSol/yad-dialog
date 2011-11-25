@@ -1,3 +1,20 @@
+2011-11-25 14:56  ananasik
+
+	* src/entry.c: always set first item as active for combo-box in
+	  entry dialog
+
+2011-11-25 12:50  ananasik
+
+	* TODO: update TODO
+
+2011-11-25 04:56  ananasik
+
+	* src/print.c: fix include in print
+
+2011-11-23 19:49  ananasik
+
+	* ChangeLog, NEWS: release 0.16.1
+
 2011-11-23 19:47  ananasik
 
 	* configure.ac, src/browser.c, src/print.c: add initial sorting to

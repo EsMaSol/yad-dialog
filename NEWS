@@ -1,3 +1,7 @@
+Version 0.16.2
+    - always set first item as active for combo-box in entry dialog
+    - fix includes in print for build with gtk3
+
 Version 0.16.1
     - add initial sorting to yad icon browser
     - remove some deprecated calls
