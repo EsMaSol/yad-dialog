@@ -236,8 +236,11 @@ entry_create_widget (GtkWidget *dlg)
           gtk_combo_box_prepend_text (GTK_COMBO_BOX (c),
                                       options.entry_data.entry_text);
 #endif
-          gtk_combo_box_set_active (GTK_COMBO_BOX (c), 0);
         }
+
+      /* set first iter active */        
+      if (!options.common_data.editable)
+        gtk_combo_box_set_active (GTK_COMBO_BOX (c), 0);
     }
   else
     {
