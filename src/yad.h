@@ -258,7 +258,7 @@ typedef struct {
 #ifndef G_OS_WIN32
   gboolean autokill;
 #endif
-  gdouble percentage;
+  guint percentage;
   gboolean rtl;
 } YadProgressData;
 

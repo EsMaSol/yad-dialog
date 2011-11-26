@@ -54,7 +54,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
         }
 
-      while (channel->is_readable != TRUE);
+      while (channel->is_readable != TRUE) ;
 
       do
         {
@@ -62,12 +62,9 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
           do
             {
-              status =
-                g_io_channel_read_line_string (channel, string, NULL, &err);
-
+              status = g_io_channel_read_line_string (channel, string, NULL, &err);
               while (gtk_events_pending ())
                 gtk_main_iteration ();
-
             }
           while (status == G_IO_STATUS_AGAIN);
 
@@ -145,14 +142,13 @@ progress_create_widget (GtkWidget * dlg)
   gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
 #endif
 
-  if (options.progress_data.percentage > -1)
-    gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
-                                   options.progress_data.percentage / 100.0);
+  if (options.progress_data.percentage > 100)
+    options.progress_data.percentage = 100;
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w),
+                                 options.progress_data.percentage / 100.0);
   if (options.progress_data.progress_text)
-    {
-      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
-                                 options.progress_data.progress_text);
-    }
+    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
+                               options.progress_data.progress_text);
 #if GTK_CHECK_VERSION(3,0,0)
   gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w),
                                  options.progress_data.rtl);
