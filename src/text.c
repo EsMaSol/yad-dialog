@@ -327,25 +327,39 @@ text_create_widget (GtkWidget * dlg)
 
   if (options.text_data.fore)
     {
+#if GTK_CHECK_VERSION(3,0,0)
+      GdkRGBA clr;
+      if (gdk_rgba_parse (&clr, options.text_data.fore))
+	gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
+#else
       GdkColor clr;
-
       if (gdk_color_parse (options.text_data.fore, &clr))
 	gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
+#endif
     }
 
   if (options.text_data.back)
     {
+#if GTK_CHECK_VERSION(3,0,0)
+      GdkRGBA clr;
+      if (gdk_rgba_parse (&clr, options.text_data.fore))
+	gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
+#else
       GdkColor clr;
-
       if (gdk_color_parse (options.text_data.back, &clr))
 	gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
+#endif
     }
 
   if (options.common_data.font)
     {
       PangoFontDescription *fd =
 	pango_font_description_from_string (options.common_data.font);
+#if GTK_CHECK_VERSION(3,0,0)
+      gtk_widget_override_font (text_view, fd);
+#else
       gtk_widget_modify_font (text_view, fd);
+#endif
       pango_font_description_free (fd);
     }
 
