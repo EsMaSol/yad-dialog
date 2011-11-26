@@ -125,14 +125,10 @@ create_dialog ()
   /* set window icon */
   if (options.data.window_icon)
     {
-      GdkPixbuf *pb;
-
-      pb = get_pixbuf (options.data.window_icon, YAD_SMALL_ICON);
-      if (pb)
-	{
-	  gtk_window_set_icon (GTK_WINDOW (dlg), pb);
-	  g_object_unref (pb);
-	}
+      if (g_file_test (options.data.window_icon, G_FILE_TEST_EXISTS))
+	gtk_window_set_icon_from_file (GTK_WINDOW (dlg), options.data.window_icon, NULL);
+      else
+	gtk_window_set_icon_name (GTK_WINDOW (dlg), options.data.window_icon);
     }
 
   /* set window borders */
