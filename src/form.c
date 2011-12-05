@@ -479,14 +479,16 @@ form_create_widget (GtkWidget *dlg)
               fld->type != YAD_FIELD_BUTTON &&
               fld->type != YAD_FIELD_LABEL)
             {
+              gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
               if (!options.data.no_markup)
-                gtk_label_set_markup (GTK_LABEL (l), fld->name);
+                gtk_label_set_markup (GTK_LABEL (l), buf);
               else
-                gtk_label_set_text (GTK_LABEL (l), fld->name);
+                gtk_label_set_text (GTK_LABEL (l), buf);
 	      gtk_widget_set_name (l, "yad-form-flabel");
               gtk_misc_set_alignment (GTK_MISC (l), options.form_data.align, 0.5);
               gtk_table_attach (GTK_TABLE (w), l, 0 + col * 2, 1 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
+              g_free (buf);
             }
 
           /* add field entry */
@@ -514,10 +516,14 @@ form_create_widget (GtkWidget *dlg)
               break;
 
             case YAD_FIELD_CHECK:
-              e = gtk_check_button_new_with_label (fld->name);
-	      gtk_widget_set_name (e, "yad-form-check");
-              gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
-              fields = g_slist_append (fields, e);
+              {
+                gchar *buf = g_strcompress (fld->name);
+                e = gtk_check_button_new_with_label (buf);
+	        gtk_widget_set_name (e, "yad-form-check");
+                gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+                fields = g_slist_append (fields, e);
+                g_free (buf);
+              }
               break;
 
             case YAD_FIELD_COMBO:
@@ -625,17 +631,19 @@ form_create_widget (GtkWidget *dlg)
             case YAD_FIELD_LABEL:
               if (fld->name[0])
                 {
+                  gchar *buf = g_strcompress (fld->name);
                   e = gtk_label_new (NULL);
 		  gtk_widget_set_name (e, "yad-form-label");
                   if (options.data.no_markup)
-		    gtk_label_set_text (GTK_LABEL (e), fld->name);
+		    gtk_label_set_text (GTK_LABEL (e), buf);
                   else
-                    gtk_label_set_markup (GTK_LABEL (e), fld->name);
+                    gtk_label_set_markup (GTK_LABEL (e), buf);
 		  gtk_label_set_line_wrap (GTK_LABEL (e), TRUE);
                   gtk_label_set_selectable (GTK_LABEL (e), options.data.selectable_labels);
                   gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
 		  g_signal_connect_after (G_OBJECT (e), "size-allocate",
 					  G_CALLBACK (text_size_allocate_cb), NULL);
+                  g_free (buf);
                 }
               else
                 {
