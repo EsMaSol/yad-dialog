@@ -1,3 +1,21 @@
+2011-12-05 16:10  ananasik
+
+	* src/form.c: recognize special characters like \n in form labels
+
+2011-11-26 13:17  ananasik
+
+	* src/progress.c, src/yad.h: fix --percentage option in progress
+	  dialog
+
+2011-11-26 06:17  ananasik
+
+	* src/main.c, src/text.c: fix settings in text-info dialog for
+	  gtk3. change in window-icon settings algorythm
+
+2011-11-25 14:58  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.16.2
+
 2011-11-25 14:56  ananasik
 
 	* src/entry.c: always set first item as active for combo-box in

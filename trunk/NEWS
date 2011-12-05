@@ -1,3 +1,8 @@
+Version 0.16.3
+    - fix text settings in text-info dialog on gtk3
+    - fix --percentage option in progress dialog
+    - recognize special characters like \n in form labels
+
 Version 0.16.2
     - always set first item as active for combo-box in entry dialog
     - fix includes in print for build with gtk3
