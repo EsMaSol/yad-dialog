@@ -18,8 +18,7 @@ from the user, from all manner of shell scripts.
 This program follows the usual GNU command line syntax, with long
 options starting with two dashes (`-').
 
-.PP
-Dialog options
+.SS Dialog options
 .TP
 .B \-\-calendar
 Display calendar dialog.
@@ -66,8 +65,7 @@ Display text information dialog.
 .B \-\-scale
 Display scale dialog.
 
-.PP
-General options
+.SS General options
 .TP
 .B \-\-title=TITLE
 Set the dialog title.
@@ -118,7 +116,6 @@ Full list of stock items may be found in gtk-demo program, in snippet called \fI
 If no buttons specified \fIOK\fP and \fICancel\fP buttons used. See \fBEXIT STATUS\fP section for more.
 If \fIID\fP have a non-numeric value it treats like a command and click on such button doesn't close the dialog.
 If command have a `%d' template, \fIYAD\fP replace it with value of his pid.
-
 .TP
 .B \-\-no-buttons
 Don't show buttons.
@@ -165,8 +162,7 @@ ignored.
 If set, user can select dialog's text and copy it to clipboard. 
 This option also affects on label fields in form dialog. 
 
-.PP 
-Calendar options
+.SS Calendar options
 .TP
 .B \-\-day=INT
 Set the calendar day.
@@ -190,8 +186,7 @@ File with days details must be in following format:
 \fIdate\fP field is date in format, specified with \fI\-\-date-format\fP option. \fIdescription\fP
 is a string with date details, which may include Pango markup.
 
-.PP 
-Color selection options
+.SS Color selection options
 .TP
 .B \-\-init\-color=COLOR
 Set initial color value.
@@ -203,8 +198,7 @@ Show extra information about color in returned string.
 Show palette ans set predefined colors from given filename.
 By default used \fI/etc/X11/rgb.txt\fP.
 
-.PP
-Drag-and-Drop box options
+.SS Drag-and-Drop box options
 .TP
 .B \-\-tooltip
 Use dialog text as a tooltip for Drag-and-Drop box.
@@ -213,8 +207,7 @@ Use dialog text as a tooltip for Drag-and-Drop box.
 Run command when data received. Data strings pass to command as an agrument. 
 By default data just prints to stdout.
 
-.PP
-Text entry options
+.SS Text entry options
 .TP
 .B \-\-entry-label=STRING
 Set the entry label text.
@@ -245,14 +238,13 @@ Set an icon on a right side of entry.
 .TP
 .B \-\-ricon-action
 Specify a command which will be run when the right icon clicked. Output of command will be set as entry text.
-
+.PP
 Any extra data specified in command line adds as an items of combo-box entry, except of numeric mode.
 
 If icon specified and icon action is not given, click on icon just clear the entry. 
 Numeric fields will ignore the icons.
 
-.PP
-Iconbox options
+.SS Iconbox options
 .TP
 .B \-\-read-dir=DIRECTORY
 Read .desktop files from specified directory.
@@ -275,11 +267,10 @@ Set items width.
 .TP
 .B \-\-term
 Pattern for terminal. By default use `xterm \-e %s' where %s replaced by the command.
-
+.PP
 If both directory and stdin specified, content of iconbox will be read from directory.
 
-.PP
-File selection options
+.SS File selection options
 .TP
 .B \-\-filename=FILENAME
 Set the filename.
@@ -305,8 +296,7 @@ Add a filename filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
 is a shell-style filename pattern (for example *.txt). This option may be
 used multiply times.
 
-.PP
-Font selection options
+.SS Font selection options
 .TP
 .B \-\-fontname=FONTNAME
 Set the initial font. \fIFONTNAME\fP is a string with font representation in the 
@@ -315,8 +305,7 @@ form \fI"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"\fP.
 .B \-\-preview
 Set the preview text.
 
-.PP
-Form options
+.SS Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
 Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
@@ -370,8 +359,7 @@ Set the format for the date fields (same as in calendar dialog).
 .PP
 Additional data in command line interprets as a default values for form fields.
 
-.PP
-List options
+.SS List options
 .TP
 .B \-\-column=STRING[:TYPE]
 Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fIFLT\fP, \fICHK\fP, \fIIMG\fP or \fITIP\fP. 
@@ -426,18 +414,17 @@ When double-click specified \fIEnter\fP acts as a double-click and \fICtrl+Enter
 .B \-\-regex-search
 Use regular expressions in search for text fields.
 
-.PP
-Multi progress bars dialog options
+.SS Multi progress bars dialog options
 .TP
 .B \-\-bar=LABEL[:TYPE]
 Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type. Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
 .B \-\-vertical
 Set vertical orientation of progress bars.
-
-Initial values for bars set as extra arguments. Each lines with progress data passed to stdin must be started from \fIN:\fP where \fIN\fP is a number of progress bar. Rest is same as in \fIprogress\fP dialog.
-
 .PP
-Notification options
+Initial values for bars set as extra arguments. Each lines with progress data passed to stdin must be started from \fIN:\fP where \fIN\fP is a number of progress bar. Rest is
+the same as in \fIprogress\fP dialog.
+
+.SS Notification options
 .TP
 .B \-\-command=CMD
 Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified. 
@@ -453,8 +440,7 @@ Set separator character for menu items. Default is \fI!\fP.
 .PP
 See \fBNOTIFICATION\fP section for more about separators. 
 
-.PP
-Print options
+.SS Print options
 .TP
 .B \-\-type=TYPE
 Set source file type. \fITYPE\fP may be a \fITEXT\fP for text files, \fIIMAGE\fP for image files or \fIRAW\fP for files in postscript or pdf formats.
@@ -471,8 +457,7 @@ Add \fIPreview\fP button to the print dialog. This option doesn't work for \fIRA
 .B \-\-fontname=FONTNAME
 Set the font for printing text. \fIFONTNAME\fP is a string with font representation in the form \fI"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"\fP. This option works only for \fITEXT\fP type.
 
-.PP
-Progress options
+.SS Progress options
 .PP
 When the \-\-progress option is used, yad reads lines of progress data from stdin.
 When the lines begin with \fI#\fP the text after \fI#\fP is displayed in the progress
@@ -496,8 +481,7 @@ Kill parent process if cancel button is pressed.
 .B \-\-pulsate
 Pulsate progress bar.
 
-.PP
-Text options
+.SS Text options
 .TP
 .B \-\-filename=FILENAME
 Open specified file.
@@ -530,8 +514,7 @@ Autoscroll to end when new text appears. Works only when text is read from stdin
 .B \-\-show-uri
 Make URI in text clickable. Links opens with \fIxdg-open\fP command. 
 
-.PP
-Scale options
+.SS Scale options
 .TP
 .B \-\-value=VALUE
 Set initial value.
@@ -563,8 +546,7 @@ Invert scale direction.
 .B \-\-mark=[NAME]:VALUE
 Add a mark to scale. May be used multiply times. \fINAME\fP is an optional arguments for set label to mark.
 
-.PP
-Miscellaneous options
+.SS Miscellaneous options
 .TP
 .B \-?, \-\-help
 Show summary of options.
@@ -582,61 +564,49 @@ Also the standard GTK+ options are accepted.
 Allows commands to be sent to yad in the form \fBcommand:args\fP.
 Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP, \fImenu\fP and \fIquit\fP.
 .TP
-.B
-icon:ICONNAME
+.B icon:ICONNAME
 Set notification icon to ICONNAME.
 .TP
-.B
-tooltip:STRING
+.B tooltip:STRING
 Set notification tooltip.
 .TP
-.B
-visible:[true|false|blink]
+.B visible:[true|false|blink]
 Set notification icon to visible, invisible or blinking states.
 .TP
-.B
-action:COMMAND
+.B action:COMMAND
 Specify the command running when click on the icon. 
 Special string \fI"quit"\fP exit the program.
 .TP
-.B
-menu:STRING
+.B menu:STRING
 Set popup menu for notification icon.
 STRING must be in form \fIname1[!action1[!icon1]]|name2[!action2[!icon2]]...\fP.
 Empty name add separator to menu.
 Separator character for values (e.g. `|') sets with \-\-separator argument.
 Separator character for menu items (e.g. `!') sets with \-\-item-separator argument.
 .TP
-.B
-quit
+.B quit
 Exit the program. Middle click on icon also send \fIquit\fP command.
 
 .SH USER DEFINED SIGNALS
 .TP
-.B
-SIGUSR1
+.B SIGUSR1
 Close dialog with 0 exit code.
 .TP
-.B
-SIGUSR2
+.B SIGUSR2
 Close dialog with 1 exit code.
 
 .SH EXIT STATUS
 .TP
-.B
-0
+.B 0
 The user has pressed \fIOK\fP button
 .TP
-.B
-1
+.B 1
 The user has pressed \fICancel\fP button
 .TP
-.B
-70
+.B 70
 The dialog has been closed because the timeout has been reached.
 .TP
-.B
-252
+.B 252
 The dialog has been closed by pressing \fIEsc\fP or used the window functions to close the dialog
 .TP
 Exit codes for user-specified buttons must be specified in command line. Even exit code mean to print result, odd just return exit code.
@@ -685,6 +655,13 @@ yad-hscale-widget@GtkScale@Horizontal scale widget
 yad-text-widget@GtkTextView@Text info widget
 yad-timeout-indicator@GtkProgreeBar@Timeout indicator
 .TE
+
+.SH FILES
+.TP
+.B yad.conf
+YAD default settings. \fIyad.conf\fP placed in \fI$XDG_CONFIG_HOME\fP or \fI$HOME/.config\fP
+directory. This file contain comments on every settings and will be automatically
+recreated on yad'd start if it doesn't exists.
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to
