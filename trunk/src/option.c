@@ -1644,7 +1644,7 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
-  g_option_context_set_ignore_unknown_options (tmp_ctx, FALSE);
+  g_option_context_set_ignore_unknown_options (tmp_ctx, settings.ignore_unknown);
 
   return tmp_ctx;
 }

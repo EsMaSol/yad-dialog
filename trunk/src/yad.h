@@ -343,6 +343,7 @@ typedef struct {
   gboolean combo_always_editable;
   gboolean show_gtk_palette;
   gboolean expand_palette;
+  gboolean ignore_unknown;
   GtkIconTheme *icon_theme;
   GdkPixbuf *big_fallback_image;
   GdkPixbuf *small_fallback_image;

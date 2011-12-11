@@ -47,6 +47,7 @@ read_settings (void)
   settings.show_gtk_palette = FALSE;
   settings.expand_palette = FALSE;
   settings.term = "xterm -e %s";
+  settings.ignore_unknown = TRUE;
 
   filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
 
@@ -82,6 +83,8 @@ read_settings (void)
 	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
 	  if (g_key_file_has_key (kf, "General", "terminal", NULL))
 	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
+	  if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
+	    settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
 	}
 
       g_key_file_free (kf);
@@ -127,6 +130,8 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
   g_key_file_set_string (kf, "General", "terminal", settings.term);
   g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
+  g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
+  g_key_file_set_comment (kf, "General", "ignore_unknown_options", "Ingnore unknown command-line options", NULL);
 
   context = g_key_file_to_data (kf, NULL, NULL);
 
