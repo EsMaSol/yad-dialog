@@ -29,17 +29,38 @@ static GtkTextBuffer *text_buffer;
 static GtkTextTag *tag;
 static GdkCursor *hand, *normal;
 
+/* searching */
+static void
+do_search ()
+{
+}
+
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
 {
-#if GTK_CHECK_VERSION(3,0,0)
+#if GTK_CHECK_VERSION(2,24,0)
   if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) &&
       (key->state & GDK_CONTROL_MASK))
 #else
-    if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) &&
-	(key->state & GDK_CONTROL_MASK))
+  if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) &&
+      (key->state & GDK_CONTROL_MASK))
 #endif
+    {
       gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      return TRUE;
+    }
+
+#if GTK_CHECK_VERSION(2,24,0)
+  if ((key->state & GDK_CONTROL_MASK) && 
+      (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
+#else
+  if ((key->state & GDK_CONTROL_MASK) && 
+      (key->keyval == GDK_S || key->keyval == GDK_s))
+#endif
+    {
+      do_search ();
+      return TRUE;
+    }
 
   return FALSE;
 }

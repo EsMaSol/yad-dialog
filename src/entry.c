@@ -33,7 +33,7 @@ entry_activate_cb (GtkEntry *entry, gpointer data)
 static gboolean
 combo_activate_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
 {
-#if GTK_CHECK_VERSION(3,0,0)
+#if GTK_CHECK_VERSION(2,24,0)
   if (ev->keyval == GDK_KEY_Return || ev->keyval == GDK_KEY_KP_Enter)
 #else
   if (ev->keyval == GDK_Return || ev->keyval == GDK_KP_Enter)

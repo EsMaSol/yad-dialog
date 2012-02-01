@@ -32,7 +32,7 @@ static gint fore_col, back_col, font_col;
 static gboolean
 list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
-#if GTK_CHECK_VERSION(3,0,0)
+#if GTK_CHECK_VERSION(2,24,0)
   if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter)
 #else
   if (event->keyval == GDK_Return || event->keyval == GDK_KP_Enter)
