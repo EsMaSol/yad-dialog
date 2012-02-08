@@ -28,16 +28,58 @@ static GtkWidget *text_view;
 static GtkTextBuffer *text_buffer;
 static GtkTextTag *tag;
 static GdkCursor *hand, *normal;
-static gchar *pattern = NULL; 
+static gchar *pattern = NULL;
+static gboolean new_search = TRUE;
 
 /* searching */
 static void 
 do_search (GtkWidget *e, GtkWidget *w)
 {
+  gchar *text;
+  GtkTextIter begin, end;
+  static gint line;
+  static GRegex *regex = NULL;
+  GMatchInfo *match;
+
   g_free (pattern);
   pattern = g_strdup (gtk_entry_get_text (GTK_ENTRY (e)));
   gtk_widget_destroy (w);
-  printf ("Search pattern - %s\n", pattern);  
+
+  if (new_search)
+    {
+      new_search = FALSE;
+      line = 0;
+      if (regex)
+	g_object_unref (regex);
+      regex = g_regex_new (pattern, G_REGEX_OPTIMIZE, G_REGEX_MATCH_NOTEMPTY, NULL);
+    }
+   
+  /* get the text */
+  gtk_text_buffer_get_bounds (text_buffer, &begin, &end);
+  gtk_text_buffer_get_iter_at_line (text_buffer, &begin, line);
+  text = gtk_text_buffer_get_text (text_buffer, &begin, &end, FALSE);
+
+  /* search and select if found */
+  if (g_regex_match (regex, text, G_REGEX_MATCH_NOTEMPTY, &match))
+    {
+      gint sp, ep, spos, epos;
+
+      g_match_info_fetch_pos (match, 0, &sp, &ep);
+
+      /* positions are in bytes, not character, so here we must normalize it*/
+      spos = g_utf8_pointer_to_offset (text, text + sp);
+      epos = g_utf8_pointer_to_offset (text, text + ep);
+
+      gtk_text_buffer_get_iter_at_offset (text_buffer, &begin, spos);
+      gtk_text_buffer_get_iter_at_offset (text_buffer, &end, epos);
+
+      gtk_text_buffer_select_range (text_buffer, &begin, &end);
+      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &begin, 0, FALSE, 0, 0);
+      line = gtk_text_iter_get_line (&end);
+    }
+  g_match_info_free (match);
+  
+  g_free (text);  
 }
 
 static gboolean 
@@ -53,6 +95,12 @@ search_key_cb (GtkWidget *w, GdkEventKey *key, GtkWidget *win)
       return TRUE;
     }
   return FALSE;
+}
+
+static void
+search_changed (GtkWidget *w, gpointer d)
+{
+  new_search = TRUE;
 }
 
 static void
@@ -74,6 +122,7 @@ show_search ()
     gtk_entry_set_text (GTK_ENTRY (e), pattern);
     
   g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (do_search), w);
+  g_signal_connect (G_OBJECT (e), "changed", G_CALLBACK (search_changed), NULL);
   g_signal_connect (G_OBJECT (e), "key-press-event", G_CALLBACK (search_key_cb), w);
 
   gtk_container_set_border_width (GTK_CONTAINER (w), 5);
