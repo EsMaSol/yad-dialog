@@ -308,7 +308,7 @@ Set the preview text.
 .SS Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP, \fILBL\fP or \fITXT\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -343,6 +343,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBBTN\fP - button field. Label may be in form \fITEXT[!TOOLTIP]\fP. \fITEXT\fP is a text of button label or gtk stock id. \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with numeric will be treats as a new field values.
 .br
 \fBLBL\fP - text label. If field name is empty, horisontal separator line will be shown.
+.br
+\fBTXT\fP - multiline text entry. This field is always occupy all of form width.
 .TP
 .B \-\-align=TYPE
 Set alignment of fields labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
