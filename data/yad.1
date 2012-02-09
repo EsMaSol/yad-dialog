@@ -308,7 +308,7 @@ Set the preview text.
 .SS Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP or \fILBL\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -333,6 +333,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBFN\fP - font selection button. Initial value same as in font dialog.
 .br
 \fBMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
+.br
+\fBMFL\fP - select multiple folders. Value of this field is a list of folders separated by \fIitem-separator\fP.
 .br
 \fBDT\fP - date field.
 .br
@@ -512,7 +514,9 @@ Set text margins to SIZE.
 Autoscroll to end when new text appears. Works only when text is read from stdin.
 .TP
 .B \-\-show-uri
-Make URI in text clickable. Links opens with \fIxdg-open\fP command. 
+Make URI in text clickable. Links opens with \fIxdg-open\fP command.
+
+Pressing \fICtrl+S\fP popups the search entry in text dialog.
 
 .SS Scale options
 .TP
