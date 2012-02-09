@@ -107,6 +107,7 @@ static void
 show_search ()
 {
   GtkWidget *w, *e;
+  GdkEvent *fev;
   
   w = gtk_window_new (GTK_WINDOW_POPUP);
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (gtk_widget_get_toplevel (text_view)));
@@ -129,7 +130,16 @@ show_search ()
   gtk_container_add (GTK_CONTAINER (w), e);
 
   gtk_widget_show_all (w);
-  gtk_widget_grab_focus (e);
+
+  /* send focus event to search entry (so complex due to popup window) */
+  fev = gdk_event_new (GDK_FOCUS_CHANGE);
+  fev->focus_change.type = GDK_FOCUS_CHANGE;
+  fev->focus_change.in = TRUE;
+  fev->focus_change.window = gtk_widget_get_window (e);
+  if (fev->focus_change.window != NULL)
+    g_object_ref (fev->focus_change.window);
+  gtk_widget_send_focus_change (e, fev);
+  gdk_event_free (fev);
 }
 
 static gboolean
