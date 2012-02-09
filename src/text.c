@@ -35,51 +35,51 @@ static gboolean new_search = TRUE;
 static void 
 do_search (GtkWidget *e, GtkWidget *w)
 {
-  gchar *text;
-  GtkTextIter begin, end;
-  static gint line;
+  static gchar *text = NULL;
+  static guint offset;
   static GRegex *regex = NULL;
   GMatchInfo *match;
+  GtkTextIter begin, end;
 
   g_free (pattern);
   pattern = g_strdup (gtk_entry_get_text (GTK_ENTRY (e)));
   gtk_widget_destroy (w);
+  gtk_widget_queue_draw (text_view);
 
-  if (new_search)
+  if (new_search || gtk_text_buffer_get_modified (text_buffer))
     {
-      new_search = FALSE;
-      line = 0;
+      /* get the text */
+      g_free (text);
+      gtk_text_buffer_get_bounds (text_buffer, &begin, &end);
+      text = gtk_text_buffer_get_text (text_buffer, &begin, &end, FALSE);
+      offset = 0;
+      /* compile new regex */
       if (regex)
 	g_object_unref (regex);
-      regex = g_regex_new (pattern, G_REGEX_OPTIMIZE, G_REGEX_MATCH_NOTEMPTY, NULL);
+      regex = g_regex_new (pattern, G_REGEX_EXTENDED | G_REGEX_OPTIMIZE, G_REGEX_MATCH_NOTEMPTY, NULL);
+      new_search = FALSE;
     }
-   
-  /* get the text */
-  gtk_text_buffer_get_bounds (text_buffer, &begin, &end);
-  gtk_text_buffer_get_iter_at_line (text_buffer, &begin, line);
-  text = gtk_text_buffer_get_text (text_buffer, &begin, &end, FALSE);
 
   /* search and select if found */
-  if (g_regex_match (regex, text, G_REGEX_MATCH_NOTEMPTY, &match))
+  if (g_regex_match (regex, text + offset, G_REGEX_MATCH_NOTEMPTY, &match))
     {
       gint sp, ep, spos, epos;
 
       g_match_info_fetch_pos (match, 0, &sp, &ep);
 
       /* positions are in bytes, not character, so here we must normalize it*/
-      spos = g_utf8_pointer_to_offset (text, text + sp);
-      epos = g_utf8_pointer_to_offset (text, text + ep);
+      spos = g_utf8_pointer_to_offset (text, text + sp + offset);
+      epos = g_utf8_pointer_to_offset (text, text + ep + offset);
 
       gtk_text_buffer_get_iter_at_offset (text_buffer, &begin, spos);
       gtk_text_buffer_get_iter_at_offset (text_buffer, &end, epos);
 
       gtk_text_buffer_select_range (text_buffer, &begin, &end);
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &begin, 0, FALSE, 0, 0);
-      line = gtk_text_iter_get_line (&end);
+
+      offset += epos;
     }
   g_match_info_free (match);
-  
-  g_free (text);  
 }
 
 static gboolean 
@@ -129,7 +129,7 @@ show_search ()
   gtk_container_add (GTK_CONTAINER (w), e);
 
   gtk_widget_show_all (w);
-  gtk_window_set_focus (GTK_WINDOW (w), e);
+  gtk_widget_grab_focus (e);
 }
 
 static gboolean
