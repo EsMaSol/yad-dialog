@@ -75,7 +75,6 @@ typedef enum {
   YAD_FIELD_BUTTON,
   YAD_FIELD_LABEL,
   YAD_FIELD_TEXT,
-  YAD_FIELD_WIDE_TEXT,
 } YadFieldType;
 
 typedef enum {

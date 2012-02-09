@@ -102,9 +102,22 @@ expand_action (gchar *cmd)
 
 		    gtk_color_button_get_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, num)), &c);
 		    buf = gdk_color_to_string (&c);
-		    g_string_append (xcmd, buf);
 		    g_free (buf);
 		    break;
+		  }
+		case YAD_FIELD_TEXT:
+		  {
+		    gchar *txt;
+		    GtkTextBuffer *tb;
+		    GtkTextIter b, e;
+		    
+		    tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, num)));
+		    gtk_text_buffer_get_bounds (tb, &b, &e);
+		    buf = gtk_text_buffer_get_text (tb, &b, &e, FALSE);
+		    txt = g_strescape (buf, NULL);
+		    g_string_append (xcmd, txt);
+		    g_free (txt); 
+		    g_free (buf);
 		  }
 		}
 	      i = j;
@@ -222,6 +235,15 @@ set_field_value (guint num, gchar *value)
       g_signal_connect (G_OBJECT (g_slist_nth_data (fields, num)), "clicked",
 			G_CALLBACK (button_clicked_cb), value);
       break;
+
+    case YAD_FIELD_TEXT:
+      {
+	GtkTextBuffer *tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, num)));
+	gchar *txt = g_strcompress (value);
+	gtk_text_buffer_set_text (tb, txt, -1);
+	g_free (txt);
+	break;
+      }
     }
 }
 
@@ -493,7 +515,8 @@ form_create_widget (GtkWidget *dlg)
           /* add field label */
           if (fld->type != YAD_FIELD_CHECK &&
               fld->type != YAD_FIELD_BUTTON &&
-              fld->type != YAD_FIELD_LABEL)
+              fld->type != YAD_FIELD_LABEL &&
+	      fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
@@ -674,8 +697,39 @@ form_create_widget (GtkWidget *dlg)
               gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
               break;
-            }
 
+	    case YAD_FIELD_TEXT:
+	      {
+		GtkWidget *l, *sw, *b;
+		gchar *ltxt = g_strcompress (fld->name);
+
+		b = gtk_vbox_new (FALSE, 2);
+
+		l = gtk_label_new ("");
+		gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+		if (options.data.no_markup)
+		  gtk_label_set_text (GTK_LABEL (l), ltxt);
+		else
+		  gtk_label_set_markup (GTK_LABEL (l), ltxt);
+		g_free (ltxt);
+		gtk_box_pack_start (GTK_BOX (b), l, FALSE, FALSE, 0);
+		
+		sw = gtk_scrolled_window_new (NULL, NULL);
+		gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+		gtk_box_pack_start (GTK_BOX (b), sw, TRUE, TRUE, 0);
+
+		e = gtk_text_view_new ();
+		gtk_widget_set_name (e, "yad-form-text");
+		gtk_container_add (GTK_CONTAINER (sw), e);
+
+		gtk_table_attach (GTK_TABLE (w), b, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 5, 5);
+		fields = g_slist_append (fields, e);
+
+		break;
+	      }
+            }
+	  
           /* increase row and column */
           row++;
           if (row >= rows)
@@ -766,6 +820,18 @@ form_print_result (void)
         case YAD_FIELD_LABEL:
           g_printf ("%s", options.common_data.separator);
           break;
+	case YAD_FIELD_TEXT:
+	  {
+	    gchar *txt;
+	    GtkTextBuffer *tb;
+	    GtkTextIter b, e;
+	    
+	    tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, i)));
+	    gtk_text_buffer_get_bounds (tb, &b, &e);
+	    txt = g_strescape (gtk_text_buffer_get_text (tb, &b, &e, FALSE), NULL);
+	    g_printf ("%s%s", txt, options.common_data.separator);
+	    g_free (txt);
+	  }
         }
     }
   g_printf ("\n");
