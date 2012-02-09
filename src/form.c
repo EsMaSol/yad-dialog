@@ -64,9 +64,10 @@ expand_action (gchar *cmd)
 		case YAD_FIELD_SIMPLE:
 		case YAD_FIELD_HIDDEN:
 		case YAD_FIELD_READ_ONLY:
-		case YAD_FIELD_MFILE:
 		case YAD_FIELD_FILE_SAVE:
 		case YAD_FIELD_DIR_CREATE:
+		case YAD_FIELD_MFILE:
+		case YAD_FIELD_MDIR:
 		case YAD_FIELD_DATE:
 		  g_string_append (xcmd, gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, num))));
 		  break;
@@ -138,6 +139,7 @@ set_field_value (guint num, gchar *value)
     case YAD_FIELD_HIDDEN:
     case YAD_FIELD_READ_ONLY:
     case YAD_FIELD_MFILE:
+    case YAD_FIELD_MDIR:
     case YAD_FIELD_FILE_SAVE:
     case YAD_FIELD_DIR_CREATE:
     case YAD_FIELD_DATE:
@@ -292,6 +294,8 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 
   if (event->button == 1)
     {
+      YadFieldType type = GPOINTER_TO_INT (data);      
+
       if (!path)
 	{
 	  const gchar *val = gtk_entry_get_text (entry);
@@ -302,12 +306,24 @@ select_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 	    path = g_path_get_dirname (val);
 	}
 
-      dlg = gtk_file_chooser_dialog_new (_("Select files"),
-                                         GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
-                                         GTK_FILE_CHOOSER_ACTION_OPEN,
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-                                         NULL );
+      if (type == YAD_FIELD_MFILE)
+	{
+	  dlg = gtk_file_chooser_dialog_new (_("Select files"),
+					     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
+					     GTK_FILE_CHOOSER_ACTION_OPEN,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+					     NULL );
+	}
+      else
+	{
+	  dlg = gtk_file_chooser_dialog_new (_("Select folders"),
+					     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
+					     GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+					     NULL );
+	}
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);     
 
@@ -577,10 +593,11 @@ form_create_widget (GtkWidget *dlg)
               break;
 
             case YAD_FIELD_MFILE:
+            case YAD_FIELD_MDIR:
               e = gtk_entry_new ();
 	      gtk_widget_set_name (e, "yad-form-entry");
               gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
-              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), NULL);
+              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), GINT_TO_POINTER (fld->type));
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
               gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
               fields = g_slist_append (fields, e);
@@ -698,6 +715,7 @@ form_print_result (void)
         case YAD_FIELD_HIDDEN:
         case YAD_FIELD_READ_ONLY:
         case YAD_FIELD_MFILE:
+        case YAD_FIELD_MDIR:
         case YAD_FIELD_FILE_SAVE:
         case YAD_FIELD_DIR_CREATE:
         case YAD_FIELD_DATE:

@@ -500,7 +500,7 @@ static GOptionEntry form_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_field,
-    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, DIR, CDIR, FN, MFL, DT, CLR, BTN or LBL)"),
+    N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, MDIR, FN, DT, CLR, BTN, LBL, TXT or WTXT)"),
     N_("LABEL[:TYPE]") },
   { "align", 0,
     0,
@@ -1130,12 +1130,18 @@ add_field (const gchar *option_name, const gchar *value,
 	fld->type = YAD_FIELD_COLOR;
       else if (g_ascii_strcasecmp (fstr[1], "MFL") == 0)
 	fld->type = YAD_FIELD_MFILE;
+      else if (g_ascii_strcasecmp (fstr[1], "MDIR") == 0)
+	fld->type = YAD_FIELD_MDIR;
       else if (g_ascii_strcasecmp (fstr[1], "DT") == 0)
 	fld->type = YAD_FIELD_DATE;
       else if (g_ascii_strcasecmp (fstr[1], "BTN") == 0)
 	fld->type = YAD_FIELD_BUTTON;
       else if (g_ascii_strcasecmp (fstr[1], "LBL") == 0)
 	fld->type = YAD_FIELD_LABEL;
+      else if (g_ascii_strcasecmp (fstr[1], "TXT") == 0)
+	fld->type = YAD_FIELD_TEXT;
+      else if (g_ascii_strcasecmp (fstr[1], "WTXT") == 0)
+	fld->type = YAD_FIELD_WIDE_TEXT;
       else
 	fld->type = YAD_FIELD_SIMPLE;
     }
