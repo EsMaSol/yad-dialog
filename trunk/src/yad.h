@@ -321,6 +321,7 @@ typedef struct {
   YadScaleData scale_data;
   YadTextData text_data;
 
+  gchar *rest_file;
   gchar **extra_data;
 
 #ifndef G_OS_WIN32
