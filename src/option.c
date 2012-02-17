@@ -1003,6 +1003,12 @@ static GOptionEntry misc_options[] = {
 };
 
 static GOptionEntry rest_options[] = {
+  { "rest", 0,
+    0,
+    G_OPTION_ARG_FILENAME,
+    &options.rest_file,
+    N_("Load extra arguments from file"),
+    N_("FILENAME") },
   { G_OPTION_REMAINING, 0,
     0,
     G_OPTION_ARG_STRING_ARRAY,
@@ -1359,6 +1365,7 @@ yad_options_init (void)
 {
   /* Set default mode */
   options.mode = YAD_MODE_MESSAGE;
+  options.rest_file = NULL;
   options.extra_data = NULL;
 #ifndef G_OS_WIN32
   options.kill_parent = FALSE;

@@ -504,6 +504,40 @@ main (gint argc, gchar ** argv)
   options.common_data.separator = tmp_sep;
   tmp_sep = g_strcompress (options.common_data.item_separator);
   options.common_data.item_separator = tmp_sep;
+  
+  /* loads an extra arguments, if specified */
+  if (options.rest_file)
+    {
+      GIOChannel *ioc;
+      gchar *buf;
+      guint len, line = 0;
+     
+      g_strfreev (options.extra_data);
+      options.extra_data = NULL;
+
+      ioc = g_io_channel_new_file (options.rest_file, "r", NULL);
+      while (TRUE)
+	{
+	  gint status = g_io_channel_read_line (ioc, &buf, NULL, NULL, NULL);
+	  
+	  if (status != G_IO_STATUS_NORMAL)
+	    break;
+
+	  /* remove \n at the end of string */
+	  len = strlen (buf);
+	  if (buf[len - 1] == '\n')
+	    buf[len - 1] = '\0';
+
+	  /* add line to arguments array */
+	  options.extra_data = g_realloc (options.extra_data, (line + 2) * sizeof (gchar *));  
+	  options.extra_data[line] = g_strcompress (buf);
+	  options.extra_data[line + 1] = NULL;
+
+	  g_free (buf);
+	  line++;
+	}      
+      g_io_channel_shutdown (ioc, FALSE, NULL);
+    }
 
 #ifndef G_OS_WIN32
   /* set signal handlers */
