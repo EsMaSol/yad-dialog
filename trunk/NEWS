@@ -1,3 +1,12 @@
+Version 0.17.0
+    - add search in --text-info dialog (activate by pressing Ctrl+S)
+    - add multiline text field to form dialog
+    - add multiply directory selection to form dialog
+    - add --rest option for specify extra command-line options through the external file
+    - add new setting "ignore_unknown_options"
+    - list dialog now can handle command-line and stdin data at the same time
+    - sending "^L" to list dialog will clear the list
+
 Version 0.16.3
     - fix text settings in text-info dialog on gtk3
     - fix --percentage option in progress dialog

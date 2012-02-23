@@ -1,3 +1,93 @@
+2012-02-23 14:52  ananasik
+
+	* data/yad.1: update man page
+
+2012-02-23 14:31  ananasik
+
+	* src/list.c: send ^L cleanup the list data
+
+2012-02-23 12:49  ananasik
+
+	* src/list.c: handle both command line and stdin data in list
+	  dialog
+
+2012-02-17 11:45  ananasik
+
+	* src/about.c, src/browser.c, src/calendar.c, src/color.c,
+	  src/dnd.c, src/entry.c, src/file.c, src/font.c, src/form.c,
+	  src/icons.c, src/list.c, src/main.c, src/multi-progress.c,
+	  src/notification.c, src/option.c, src/print.c, src/progress.c,
+	  src/scale.c, src/text.c, src/util.c, src/yad.h: update copyright
+	  years
+
+2012-02-17 11:42  ananasik
+
+	* data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po,
+	  src/main.c, src/option.c, src/yad.h: add --rest option
+
+2012-02-10 06:18  ananasik
+
+	* data/yad.1: update man page
+
+2012-02-09 19:51  ananasik
+
+	* src/text.c: add frame to search window in text dialog
+
+2012-02-09 15:17  ananasik
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po: update
+	  translations
+
+2012-02-09 14:48  ananasik
+
+	* data/yad.1: update man page
+
+2012-02-09 14:45  ananasik
+
+	* configure.ac, src/form.c, src/option.c, src/yad.h: add TXT field
+	  to form
+
+2012-02-09 11:25  ananasik
+
+	* data/yad.1: update man page
+
+2012-02-09 11:22  ananasik
+
+	* src/form.c, src/option.c, src/yad.h: add MDIR field type to form
+
+2012-02-09 10:17  ananasik
+
+	* src/text.c:
+
+2012-02-09 10:07  ananasik
+
+	* src/text.c: improve search in text-info dialog
+
+2012-02-08 16:24  ananasik
+
+	* src/text.c: implement search in text-info dialog
+
+2012-02-07 16:25  ananasik
+
+	* src/text.c: working commit
+
+2012-02-01 15:58  ananasik
+
+	* src/browser.c, src/entry.c, src/list.c, src/text.c: some cleanups
+
+2011-12-11 09:16  ananasik
+
+	* data/yad.1: update man page
+
+2011-12-11 07:35  ananasik
+
+	* src/option.c, src/util.c, src/yad.h: add new settings
+	  "ignore_unknown_options"
+
+2011-12-05 16:18  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.16.3
+
 2011-12-05 16:10  ananasik
 
 	* src/form.c: recognize special characters like \n in form labels
