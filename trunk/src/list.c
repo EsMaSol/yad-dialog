@@ -484,6 +484,7 @@ fill_data (gint n_columns)
   GtkTreeIter iter;
   GtkListStore *model =
     GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (list_view)));
+  GIOChannel *channel;
 
   if (options.extra_data && *options.extra_data)
     {
@@ -553,16 +554,11 @@ fill_data (gint n_columns)
 	  gtk_tree_selection_select_iter (sel, &it);
 	}
     }
-  else
-    {
-      GIOChannel *channel;
 
-      channel = g_io_channel_unix_new (0);
-      g_io_channel_set_encoding (channel, NULL, NULL);
-      g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
-      g_io_add_watch (channel, G_IO_IN | G_IO_HUP,
-                      handle_stdin, GINT_TO_POINTER (n_columns));
-    }
+  channel = g_io_channel_unix_new (0);
+  g_io_channel_set_encoding (channel, NULL, NULL);
+  g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
+  g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, GINT_TO_POINTER (n_columns));
 }
 
 static void
