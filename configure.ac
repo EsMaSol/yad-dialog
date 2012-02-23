@@ -1,4 +1,4 @@
-AC_INIT([YAD], [0.16.99], [http://code.google.com/p/yad/issues/entry], yad, [http://code.google.com/p/yad])
+AC_INIT([YAD], [0.17.0], [http://code.google.com/p/yad/issues/entry], yad, [http://code.google.com/p/yad])
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
 AM_SILENT_RULES([yes])
 
