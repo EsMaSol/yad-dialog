@@ -398,7 +398,6 @@ handle_stdin (GIOChannel * channel,
                 gtk_main_iteration ();
             }
           while (status == G_IO_STATUS_AGAIN);
-          strip_new_line (string->str);
 
           if (status != G_IO_STATUS_NORMAL)
             {
@@ -408,6 +407,15 @@ handle_stdin (GIOChannel * channel,
                   g_error_free (err);
                   err = NULL;
                 }
+              continue;
+            }
+
+          strip_new_line (string->str);
+          if (string->str[0] == '\014')
+            {
+              /* clear list if ^L received */
+              gtk_list_store_clear (GTK_LIST_STORE (model));
+              row_count = column_count = 0;
               continue;
             }
 
