@@ -716,11 +716,12 @@ form_create_widget (GtkWidget *dlg)
 		
 		sw = gtk_scrolled_window_new (NULL, NULL);
 		gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 		gtk_box_pack_start (GTK_BOX (b), sw, TRUE, TRUE, 0);
 
 		e = gtk_text_view_new ();
 		gtk_widget_set_name (e, "yad-form-text");
+		gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (e), GTK_WRAP_WORD_CHAR);
 		gtk_container_add (GTK_CONTAINER (sw), e);
 
 		gtk_table_attach (GTK_TABLE (w), b, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 5, 5);
