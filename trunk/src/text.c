@@ -79,6 +79,8 @@ do_search (GtkWidget *e, GtkWidget *w)
 
       offset += epos;
     }
+  else
+    new_search = TRUE;
   g_match_info_free (match);
 }
 
