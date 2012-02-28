@@ -144,7 +144,15 @@ show_search ()
   fev->focus_change.window = gtk_widget_get_window (e);
   if (fev->focus_change.window != NULL)
     g_object_ref (fev->focus_change.window);
+#if GTK_CHECK_VERSION(2,22,0)
   gtk_widget_send_focus_change (e, fev);
+#else
+  g_object_ref (e);
+  GTK_OBJECT_FLAGS (e) |= GTK_HAS_FOCUS;
+  gtk_widget_event (e, fev);
+  g_object_notify (G_OBJECT (e), "has-focus");
+  g_object_unref (e);
+#endif
   gdk_event_free (fev);
 }
 
