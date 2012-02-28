@@ -324,3 +324,43 @@ unescape_markup (char *str)
 
   return res;
 }
+
+char *
+escape_str (char *str)
+{
+  char *res, *buf = str;
+  unsigned i = 0, len;
+
+  if (!str)
+    return NULL;
+
+  len = strlen (str);
+  res = (char *) calloc (len + 1, sizeof (char));
+
+  while (*buf)
+    {
+      switch (*buf)
+        {
+        case '\n':
+          len += 1;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "\\n");
+          i += 2;
+          break;
+        case '\t':
+          len += 1;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "\\t");
+          i += 2;
+          break;
+        default:
+          *(res + i) = *buf;
+          i++;
+          break;
+        }
+      buf++;
+    }
+  res[i] = '\0';
+
+  return res;
+}
