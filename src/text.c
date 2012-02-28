@@ -506,8 +506,7 @@ text_create_widget (GtkWidget * dlg)
     }
 
   /* Add submit on ctrl+enter */
-  g_signal_connect (text_view, "key-press-event",
-		    G_CALLBACK (key_press_cb), dlg);
+  g_signal_connect (text_view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
 
   /* Initialize linkifying */
   if (options.text_data.uri)
@@ -530,8 +529,7 @@ text_create_widget (GtkWidget * dlg)
       /* Create cursors */
       hand = gdk_cursor_new (GDK_HAND2);
       normal= gdk_cursor_new (GDK_XTERM);
-      g_signal_connect (G_OBJECT (text_view), "motion-notify-event",
-                        G_CALLBACK (motion_cb), NULL);
+      g_signal_connect (G_OBJECT (text_view), "motion-notify-event", G_CALLBACK (motion_cb), NULL);
 
       g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);
     }
