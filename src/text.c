@@ -38,7 +38,7 @@ do_search (GtkWidget *e, GtkWidget *w)
   static gchar *text = NULL;
   static guint offset;
   static GRegex *regex = NULL;
-  GMatchInfo *match;
+  GMatchInfo *match = NULL;
   GtkTextIter begin, end;
 
   g_free (pattern);
@@ -81,7 +81,8 @@ do_search (GtkWidget *e, GtkWidget *w)
     }
   else
     new_search = TRUE;
-  g_match_info_free (match);
+  if (match)
+    g_match_info_free (match);
 }
 
 static gboolean 
