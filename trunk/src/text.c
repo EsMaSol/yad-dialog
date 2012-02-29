@@ -78,11 +78,11 @@ do_search (GtkWidget *e, GtkWidget *w)
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &begin, 0, FALSE, 0, 0);
 
       offset += epos;
+      
+      g_match_info_free (match);
     }
   else
     new_search = TRUE;
-  if (match)
-    g_match_info_free (match);
 }
 
 static gboolean 
