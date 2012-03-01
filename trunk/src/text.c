@@ -80,6 +80,7 @@ do_search (GtkWidget *e, GtkWidget *w)
       offset += epos;
       
       g_match_info_free (match);
+      match = NULL;
     }
   else
     new_search = TRUE;
