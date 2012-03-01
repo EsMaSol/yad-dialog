@@ -55,7 +55,7 @@ do_search (GtkWidget *e, GtkWidget *w)
       offset = 0;
       /* compile new regex */
       if (regex)
-	g_object_unref (regex);
+	g_regex_unref (regex);
       regex = g_regex_new (pattern, G_REGEX_EXTENDED | G_REGEX_OPTIMIZE, G_REGEX_MATCH_NOTEMPTY, NULL);
       new_search = FALSE;
     }
