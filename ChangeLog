@@ -1,3 +1,16 @@
+2012-03-05 14:37  ananasik
+
+	* configure.ac, src/notification.c: fix --listen mode of
+	  notification
+
+2012-03-05 08:26  ananasik
+
+	* src/notification.c:
+
+2012-03-05 08:14  ananasik
+
+	* ChangeLog, NEWS: release 0.17.1
+
 2012-03-05 08:02  ananasik
 
 	* src/notification.c: fix handling empty strings in --listen mode
