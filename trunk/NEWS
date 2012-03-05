@@ -1,3 +1,10 @@
+Version 0.17.1
+    - fix build with gtk+ < 2.22
+    - add wrapping to multiline text field in form dialog
+    - fix search in text-info dialog
+    - fix handling empty strings in --listen mode of notification
+    - add traditional chinese translation
+
 Version 0.17.0
     - add search in --text-info dialog (activate by pressing Ctrl+S)
     - add multiline text field to form dialog
