@@ -230,7 +230,7 @@ handle_stdin (GIOChannel * channel,
             }
 
 	  strip_new_line (string->str);
-	  if (G_UNLIKELY (string->str) || G_UNLIKELY (string->str[0])
+	  if (G_UNLIKELY (string->str) || G_UNLIKELY (string->str[0]))
 	    continue;
 
 	  args = g_strsplit (string->str, ":", 2);
