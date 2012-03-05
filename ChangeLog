@@ -1,3 +1,57 @@
+2012-03-05 08:02  ananasik
+
+	* src/notification.c: fix handling empty strings in --listen mode
+	  of notification
+
+2012-03-03 08:21  ananasik
+
+	* src/main.c: cleanup
+
+2012-03-01 15:07  ananasik
+
+	* src/text.c: fix releasing search regexp in text-info dialog
+
+2012-03-01 10:55  ananasik
+
+	* po/LINGUAS, po/zh_TW.po: add traditional chinese translation
+
+2012-03-01 10:52  ananasik
+
+	* src/text.c: fix releasing search result in test-info dialog
+
+2012-02-29 11:56  ananasik
+
+	* src/text.c:
+
+2012-02-29 11:16  ananasik
+
+	* src/text.c:
+
+2012-02-28 12:55  ananasik
+
+	* src/text.c: improve search in text-info
+
+2012-02-28 10:37  ananasik
+
+	* configure.ac: bump version to 0.17.1
+
+2012-02-28 10:20  ananasik
+
+	* src/form.c, src/util.c, src/yad.h: fix output of multiline text
+	  field in form dialog
+
+2012-02-28 09:04  ananasik
+
+	* src/form.c, src/text.c: add wrap to text field in form
+
+2012-02-28 08:08  ananasik
+
+	* src/text.c: fix build for gtk < 2.22.0
+
+2012-02-23 16:58  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.17.0
+
 2012-02-23 14:52  ananasik
 
 	* data/yad.1: update man page
