@@ -217,7 +217,6 @@ handle_stdin (GIOChannel * channel,
                 gtk_main_iteration ();
             }
           while (status == G_IO_STATUS_AGAIN);
-	  strip_new_line (string->str);
 
           if (status != G_IO_STATUS_NORMAL)
             {
@@ -229,6 +228,10 @@ handle_stdin (GIOChannel * channel,
                 }
               continue;
             }
+
+	  strip_new_line (string->str);
+	  if (G_UNLIKELY (string->str) || G_UNLIKELY (string->str[0])
+	    continue;
 
 	  args = g_strsplit (string->str, ":", 2);
           command = g_strdup (args[0]);
