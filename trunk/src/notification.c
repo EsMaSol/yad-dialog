@@ -230,12 +230,13 @@ handle_stdin (GIOChannel * channel,
             }
 
 	  strip_new_line (string->str);
-	  if (G_UNLIKELY (string->str) || G_UNLIKELY (string->str[0]))
+	  if (!string->str[0])
 	    continue;
 
 	  args = g_strsplit (string->str, ":", 2);
           command = g_strdup (args[0]);
           value = g_strdup (args[1]);
+          g_printerr ("%s - %s\n", command, value);
 	  g_strfreev (args);
 	  if (value)
 	    g_strstrip (value);
@@ -280,13 +281,13 @@ handle_stdin (GIOChannel * channel,
                     gtk_status_icon_set_blinking (status_icon, FALSE);
 #endif
                   }
-              else
-                {
-                  gtk_status_icon_set_visible (status_icon, TRUE);
+                else
+                  {
+                    gtk_status_icon_set_visible (status_icon, TRUE);
 #if !GTK_CHECK_VERSION(2,22,0)
-                  gtk_status_icon_set_blinking (status_icon, FALSE);
+                    gtk_status_icon_set_blinking (status_icon, FALSE);
 #endif
-                }
+                  }
             }
           else if (!g_ascii_strcasecmp (command, "action"))
             {
