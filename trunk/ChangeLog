@@ -1,3 +1,32 @@
+2012-03-09 18:25  ananasik
+
+	* configure.ac, data/yad.1: update man page. bump version to
+	  0.17.90
+
+2012-03-09 18:21  ananasik
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po, po/zh_TW.po,
+	  src/main.c, src/option.c, src/yad.h: add --buttons-layout option
+
+2012-03-09 17:53  ananasik
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po, po/zh_TW.po,
+	  src/form.c, src/multi-progress.c, src/option.c, src/yad.h: make
+	  --align works for multi-progress too
+
+2012-03-09 17:42  ananasik
+
+	* src/multi-progress.c: use markup for bar labels in multiprogress
+	  dialog
+
+2012-03-09 10:09  ananasik
+
+	* data/yad.1: fix man page
+
+2012-03-05 14:38  ananasik
+
+	* ChangeLog, NEWS: release 0.17.1.1
+
 2012-03-05 14:37  ananasik
 
 	* configure.ac, src/notification.c: fix --listen mode of
