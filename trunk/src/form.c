@@ -525,7 +525,7 @@ form_create_widget (GtkWidget *dlg)
               else
                 gtk_label_set_text (GTK_LABEL (l), buf);
 	      gtk_widget_set_name (l, "yad-form-flabel");
-              gtk_misc_set_alignment (GTK_MISC (l), options.form_data.align, 0.5);
+              gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
               gtk_table_attach (GTK_TABLE (w), l, 0 + col * 2, 1 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
               g_free (buf);
             }
@@ -680,7 +680,7 @@ form_create_widget (GtkWidget *dlg)
                     gtk_label_set_markup (GTK_LABEL (e), buf);
 		  gtk_label_set_line_wrap (GTK_LABEL (e), TRUE);
                   gtk_label_set_selectable (GTK_LABEL (e), options.data.selectable_labels);
-                  gtk_misc_set_alignment (GTK_MISC (e), options.form_data.align, 0.5);
+                  gtk_misc_set_alignment (GTK_MISC (e), options.common_data.align, 0.5);
 		  g_signal_connect_after (G_OBJECT (e), "size-allocate",
 					  G_CALLBACK (text_size_allocate_cb), NULL);
                   g_free (buf);

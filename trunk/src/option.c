@@ -503,10 +503,10 @@ static GOptionEntry form_options[] = {
     N_("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, MDIR, FN, DT, CLR, BTN, LBL or TXT)"),
     N_("LABEL[:TYPE]") },
   { "align", 0,
-    0,
+    G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_CALLBACK,
     set_align,
-    N_("Set alignment of fileds labels (left, center or right)"),
+    N_("Set alignment of filed labels (left, center or right)"),
     N_("TYPE") },
   { "columns", 0,
     0,
@@ -720,6 +720,12 @@ static GOptionEntry multi_progress_options[] = {
     &options.common_data.vertical,
     N_("Show vertical bars"),
     NULL },
+  { "align", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_CALLBACK,
+    set_align,
+    N_("Set alignment of bar labels (left, center or right)"),
+    N_("TYPE") },
   { NULL }
 };
 
@@ -1237,11 +1243,11 @@ set_align (const gchar *option_name, const gchar *value,
 	   gpointer data, GError **err)
 {
   if (g_ascii_strcasecmp (value, "left") == 0)
-    options.form_data.align = 0.0;
+    options.common_data.align = 0.0;
   else if (g_ascii_strcasecmp (value, "right") == 0)
-    options.form_data.align = 1.0;
+    options.common_data.align = 1.0;
   else if (g_ascii_strcasecmp (value, "center") == 0)
-    options.form_data.align = 0.5;
+    options.common_data.align = 0.5;
   else
     g_printerr (_("Unknown align type: %s\n"), value);
 
@@ -1415,6 +1421,7 @@ yad_options_init (void)
   options.common_data.command = NULL;
   options.common_data.date_format = "%x";
   options.common_data.vertical = FALSE;
+  options.common_data.align = 0.0;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
@@ -1454,7 +1461,6 @@ yad_options_init (void)
 
   /* Initialize form data */
   options.form_data.fields = NULL;
-  options.form_data.align = 0.0;
   options.form_data.columns = 1;
 
   /* Initialize icons data */
