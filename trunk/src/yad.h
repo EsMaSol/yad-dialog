@@ -155,6 +155,7 @@ typedef struct {
   gboolean no_markup;
   gboolean always_print;
   gboolean selectable_labels;
+  GtkButtonBoxStyle buttons_layout;
   /* window settings */
   gboolean sticky;
   gboolean fixed;

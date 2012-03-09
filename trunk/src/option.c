@@ -29,6 +29,7 @@ static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_buttons_layout (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
@@ -145,6 +146,12 @@ static GOptionEntry general_options[] = {
     &options.data.no_buttons,
     N_("Don't show buttons"),
     NULL },
+  { "buttons-layout", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    set_buttons_layout,
+    N_("Set buttons layout type (spread, edge, start, end or center)"),
+    N_("TYPE") },
   { "no-markup", 0,
     0,
     G_OPTION_ARG_NONE,
@@ -1239,6 +1246,26 @@ add_confirm_overwrite (const gchar *option_name, const gchar *value,
 }
 
 static gboolean
+set_buttons_layout (const gchar *option_name, const gchar *value,
+		    gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "spread") == 0)
+    options.data.buttons_layout = GTK_BUTTONBOX_SPREAD;
+  else if (g_ascii_strcasecmp (value, "edge") == 0)
+    options.data.buttons_layout = GTK_BUTTONBOX_EDGE;
+  else if (g_ascii_strcasecmp (value, "start") == 0)
+    options.data.buttons_layout = GTK_BUTTONBOX_START;
+  else if (g_ascii_strcasecmp (value, "end") == 0)
+    options.data.buttons_layout = GTK_BUTTONBOX_END;
+  else if (g_ascii_strcasecmp (value, "center") == 0)
+    options.data.buttons_layout = GTK_BUTTONBOX_CENTER;
+  else
+    g_printerr (_("Unknown buttons layout type: %s\n"), value);
+
+  return TRUE;
+}
+
+static gboolean
 set_align (const gchar *option_name, const gchar *value,
 	   gpointer data, GError **err)
 {
@@ -1394,6 +1421,7 @@ yad_options_init (void)
   options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
+  options.data.buttons_layout = GTK_BUTTONBOX_DEFAULT_STYLE;
 #if !GTK_CHECK_VERSION(2,22,0)
   options.data.dialog_sep = settings.dlg_sep;
 #endif
