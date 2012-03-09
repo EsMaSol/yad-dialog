@@ -352,11 +352,11 @@ create_dialog ()
           do
             {
               YadButton *b = (YadButton *) tmp->data;
-	      if (b->cmd)
-		{
-		  GtkWidget *btn = gtk_button_new_from_stock (b->name);
-		  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
-		  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+              if (b->cmd)
+        	{
+                  GtkWidget *btn = gtk_button_new_from_stock (b->name);
+                  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
+                  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
 		}
 	      else
 		gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
@@ -386,6 +386,8 @@ create_dialog ()
 	    }
           gtk_dialog_set_default_response (GTK_DIALOG (dlg), YAD_RESPONSE_OK);
         }
+      gtk_button_box_set_layout (GTK_BUTTON_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dlg))),
+				 options.data.buttons_layout);
     }
 
   /* show widgets */
