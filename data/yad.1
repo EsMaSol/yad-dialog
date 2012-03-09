@@ -120,6 +120,9 @@ If command have a `%d' template, \fIYAD\fP replace it with value of his pid.
 .B \-\-no-buttons
 Don't show buttons.
 .TP
+.B \-\-buttons-layout=TYPE
+Set buttons layout type. Possible types are: \fIspread\fP, \fIedge\fP, \fIstart\fP, \fIend\fP or \fIcenter\fP.
+.TP
 .B \-\-no-markup
 Don't use pango markup in dialog's text.
 .TP
@@ -350,7 +353,7 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBTXT\fP - multiline text entry. This field is always occupy all of form width.
 .TP
 .B \-\-align=TYPE
-Set alignment of fields labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
+Set alignment of field labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
 .TP
 .B \-\-columns=NUMBER
 Set number of columns in form. Fields will be placed from top to bottom.
@@ -430,6 +433,9 @@ Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a 
 .TP
 .B \-\-vertical
 Set vertical orientation of progress bars.
+.TP
+.B \-\-align=TYPE
+Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
 .PP
 Initial values for bars set as extra arguments. Each lines with progress data passed to stdin must be started from \fIN:\fP where \fIN\fP is a number of progress bar. Rest is
 the same as in \fIprogress\fP dialog.
