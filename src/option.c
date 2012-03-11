@@ -1421,7 +1421,7 @@ yad_options_init (void)
   options.data.to_indicator = settings.to_indicator;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
-  options.data.buttons_layout = GTK_BUTTONBOX_DEFAULT_STYLE;
+  options.data.buttons_layout = GTK_BUTTONBOX_END;
 #if !GTK_CHECK_VERSION(2,22,0)
   options.data.dialog_sep = settings.dlg_sep;
 #endif
