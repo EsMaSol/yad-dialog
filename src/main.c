@@ -145,13 +145,6 @@ create_dialog ()
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
       else if (options.data.mouse)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
-      gtk_widget_realize (dlg);
-    }
-  else
-    {
-      /* parse geometry, if given. must be after showing widget */
-      gtk_widget_realize (dlg);
-      gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
     }
 
   /* set window behavior */
@@ -391,9 +384,17 @@ create_dialog ()
     }
 
   /* show widgets */
-  gtk_widget_show_all (dlg);
+  gtk_widget_show_all (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
   if (options.data.no_buttons)
     gtk_widget_hide (bbox);
+
+  /* parse geometry, if given. must be after showing widget */
+  if (options.data.geometry)
+    {
+      gtk_widget_realize (dlg);
+      gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
+    }
+  gtk_widget_show (dlg);
 
   /* set timeout */
   if (options.data.timeout)
