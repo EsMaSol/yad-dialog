@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:15+0200\n"
+"POT-Creation-Date: 2012-04-02 16:16+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -126,12 +126,12 @@ msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
-#: ../src/main.c:89 ../src/main.c:225
+#: ../src/main.c:89 ../src/main.c:218
 #, c-format
 msgid "%d sec"
 msgstr ""
 
-#: ../src/main.c:499
+#: ../src/main.c:500
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
@@ -141,29 +141,29 @@ msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Kann Benachrichtigungs-Symbol '%s' nicht laden: %s"
 
-#: ../src/notification.c:264
+#: ../src/notification.c:265
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Ungültiger UTF-8 Eintrag im Tool-Tip!\n"
 
-#: ../src/notification.c:326
+#: ../src/notification.c:327
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/notification.c:362
+#: ../src/notification.c:363
 msgid "Yad notification"
 msgstr "Yad Benachrichtigung"
 
-#: ../src/list.c:707
+#: ../src/list.c:704
 msgid "Add row"
 msgstr "Reihe hinzufügen"
 
-#: ../src/list.c:716
+#: ../src/list.c:713
 msgid "Delete row"
 msgstr "Reihe löschen"
 
-#: ../src/list.c:745
+#: ../src/list.c:742
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Keine Spaltentitel für Listendialog angegeben\n"
@@ -642,7 +642,7 @@ msgid "Don't show column headers"
 msgstr "Spalten-Bezeichnung angeben"
 
 #: ../src/option.c:621
-msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, IMG or TIP)"
+msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, IMG, HD or TIP)"
 msgstr ""
 
 #: ../src/option.c:622
@@ -918,206 +918,206 @@ msgstr "Version"
 msgid "Load extra arguments from file"
 msgstr ""
 
-#: ../src/option.c:1068 ../src/option.c:1279
+#: ../src/option.c:1068 ../src/option.c:1281
 #, fuzzy, c-format
 msgid "Unknown align type: %s\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/option.c:1217
+#: ../src/option.c:1219
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr ""
 
-#: ../src/option.c:1263
+#: ../src/option.c:1265
 #, fuzzy, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/option.c:1297
+#: ../src/option.c:1299
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr ""
 
-#: ../src/option.c:1336
+#: ../src/option.c:1338
 #, fuzzy, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/option.c:1352
+#: ../src/option.c:1354
 #, fuzzy, c-format
 msgid "Unknown source type: %s\n"
 msgstr "Befehl '%s' unbekannt\n"
 
-#: ../src/option.c:1484
+#: ../src/option.c:1486
 msgid "File exist. Overwrite?"
 msgstr ""
 
-#: ../src/option.c:1565
+#: ../src/option.c:1567
 msgid "Yet another dialoging program"
 msgstr "Nur ein anderes Dialog-Programm"
 
 #. Adds general option entries
-#: ../src/option.c:1569
+#: ../src/option.c:1571
 msgid "General options"
 msgstr "Allgemeine Einstellungen"
 
-#: ../src/option.c:1570
+#: ../src/option.c:1572
 msgid "Show general options"
 msgstr "Allgemeine Einstellungen anzeigen"
 
 #. Adds calendar option entries
-#: ../src/option.c:1576
+#: ../src/option.c:1578
 msgid "Calendar options"
 msgstr "Kalender-Einstellungen"
 
-#: ../src/option.c:1577
+#: ../src/option.c:1579
 msgid "Show calendar options"
 msgstr "Kalender-Einstellungen anzeigen"
 
 #. Adds color option entries
-#: ../src/option.c:1583
+#: ../src/option.c:1585
 #, fuzzy
 msgid "Color selection options"
 msgstr "Dateiauswahl-Einstellungen"
 
-#: ../src/option.c:1584
+#: ../src/option.c:1586
 #, fuzzy
 msgid "Show color selection options"
 msgstr "Dateiauswahl-Einstellungen anzeigen"
 
 #. Adds dnd option entries
-#: ../src/option.c:1590
+#: ../src/option.c:1592
 #, fuzzy
 msgid "DND options"
 msgstr "Formular-Einstellungen"
 
-#: ../src/option.c:1591
+#: ../src/option.c:1593
 #, fuzzy
 msgid "Show drag-n-drop options"
 msgstr "Kalender-Einstellungen anzeigen"
 
 #. Adds entry option entries
-#: ../src/option.c:1597
+#: ../src/option.c:1599
 msgid "Text entry options"
 msgstr "Textfeld-Einstellungen"
 
-#: ../src/option.c:1598
+#: ../src/option.c:1600
 msgid "Show text entry options"
 msgstr "Textfeld-Einstellungen anzeigen"
 
 #. Adds file selection option entries
-#: ../src/option.c:1604
+#: ../src/option.c:1606
 msgid "File selection options"
 msgstr "Dateiauswahl-Einstellungen"
 
-#: ../src/option.c:1605
+#: ../src/option.c:1607
 msgid "Show file selection options"
 msgstr "Dateiauswahl-Einstellungen anzeigen"
 
 #. Add font selection option entries
-#: ../src/option.c:1611
+#: ../src/option.c:1613
 #, fuzzy
 msgid "Font selection options"
 msgstr "Dateiauswahl-Einstellungen"
 
-#: ../src/option.c:1612
+#: ../src/option.c:1614
 #, fuzzy
 msgid "Show font selection options"
 msgstr "Dateiauswahl-Einstellungen anzeigen"
 
 #. Add form option entries
-#: ../src/option.c:1618
+#: ../src/option.c:1620
 msgid "Form options"
 msgstr "Formular-Einstellungen"
 
-#: ../src/option.c:1619
+#: ../src/option.c:1621
 msgid "Show form options"
 msgstr "Formular-Einstellungen anzeigen"
 
 #. Add icons option entries
-#: ../src/option.c:1625
+#: ../src/option.c:1627
 #, fuzzy
 msgid "Icons box options"
 msgstr "Farb-Einstellungen"
 
-#: ../src/option.c:1626
+#: ../src/option.c:1628
 #, fuzzy
 msgid "Show icons box options"
 msgstr "Farb-Einstellungen anzeigen"
 
 #. Adds list option entries
-#: ../src/option.c:1632
+#: ../src/option.c:1634
 msgid "List options"
 msgstr "Listen-Einstellungen"
 
-#: ../src/option.c:1633
+#: ../src/option.c:1635
 msgid "Show list options"
 msgstr "Listen-Einstellungen anzeigen"
 
 #. Adds multi progress option entries
-#: ../src/option.c:1639
+#: ../src/option.c:1641
 #, fuzzy
 msgid "Multi progress bars options"
 msgstr "Fortschrittsbalken-Einstellungen anzeigen"
 
-#: ../src/option.c:1640
+#: ../src/option.c:1642
 #, fuzzy
 msgid "Show Multi progress bars options"
 msgstr "Fortschrittsbalken-Einstellungen anzeigen"
 
 #. Adds notification option entries
-#: ../src/option.c:1646
+#: ../src/option.c:1648
 msgid "Notification icon options"
 msgstr "Benachrichtigungssymbol-Einstellungen"
 
-#: ../src/option.c:1647
+#: ../src/option.c:1649
 msgid "Show notification icon options"
 msgstr "Benachrichtigungssymbol-Einstellungen"
 
 #. Adds print option entries
-#: ../src/option.c:1653
+#: ../src/option.c:1655
 #, fuzzy
 msgid "Print dialog options"
 msgstr "Fortschrittsbalken-Einstellungen"
 
-#: ../src/option.c:1654
+#: ../src/option.c:1656
 #, fuzzy
 msgid "Show print dialog options"
 msgstr "Fortschrittsbalken-Einstellungen anzeigen"
 
 #. Adds progress option entries
-#: ../src/option.c:1660
+#: ../src/option.c:1662
 msgid "Progress options"
 msgstr "Fortschrittsbalken-Einstellungen"
 
-#: ../src/option.c:1661
+#: ../src/option.c:1663
 msgid "Show progress options"
 msgstr "Fortschrittsbalken-Einstellungen anzeigen"
 
 #. Adds scale option entries
-#: ../src/option.c:1667
+#: ../src/option.c:1669
 msgid "Scale options"
 msgstr "Schieberegler-Einstellungen"
 
-#: ../src/option.c:1668
+#: ../src/option.c:1670
 msgid "Show scale options"
 msgstr "Schieberegler-Einstellungen anzeigen"
 
 #. Adds text option entries
-#: ../src/option.c:1674
+#: ../src/option.c:1676
 msgid "Text information options"
 msgstr "Informationstext-Einstellungen"
 
-#: ../src/option.c:1675
+#: ../src/option.c:1677
 msgid "Show text information options"
 msgstr "Informationstext-Einstellungen anzeigen"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:1681
+#: ../src/option.c:1683
 msgid "Miscellaneous options"
 msgstr "Verschiedene Einstellungen"
 
-#: ../src/option.c:1682
+#: ../src/option.c:1684
 msgid "Show miscellaneous options"
 msgstr "Verschiedene Einstellungen anzeigen"
 
