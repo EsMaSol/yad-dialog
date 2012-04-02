@@ -108,9 +108,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
   GtkTreeModel *model = NULL;
   GtkTreePath *path = NULL;
   GtkTreeIter iter;
-  gint cnum = -1;
 
-  /* FIXME: check this code with hidden columns */
   if (gtk_tree_view_get_tooltip_context (GTK_TREE_VIEW (list_view), &x, &y, kmode,
 					 &model, &path, &iter))
     {
@@ -122,9 +120,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
       cols = gtk_tree_view_get_columns (GTK_TREE_VIEW (list_view));
       for (node = cols;  node != NULL && col == NULL;  node = node->next)
 	{
-	  GtkTreeViewColumn *checkcol = (GtkTreeViewColumn*) node->data;
-
-	  cnum++;
+	  GtkTreeViewColumn *checkcol = GTK_TREE_VIEW_COLUMN (node->data);
 	  if (x >= colx  &&  x < (colx + gtk_tree_view_column_get_width (checkcol)))
 	    col = checkcol;
 	  else
@@ -136,8 +132,15 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
       /* set tolltip */
       if (col)
 	{
+	  GList *rndr;
 	  YadColumn *yc;
+	  gint cnum;
 	  gchar *text = NULL;
+
+	  /* get real column number */
+  	  rndr = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (col));
+          cnum = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (rndr->data), "column"));
+          g_list_free (rndr);
 
 	  yc = (YadColumn *) g_slist_nth_data (options.list_data.columns, cnum);
 	  switch (yc->type)
@@ -285,7 +288,6 @@ add_columns (gint n_columns)
         {
         case YAD_COLUMN_CHECK:
           renderer = gtk_cell_renderer_toggle_new ();
-          g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
           g_signal_connect (renderer, "toggled", G_CALLBACK (toggled_cb), NULL);
           column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "active", i, NULL);
 	  if (back_col != -1)
@@ -303,7 +305,6 @@ add_columns (gint n_columns)
           if (options.common_data.editable)
             {
               g_object_set (G_OBJECT (renderer), "editable", TRUE, NULL);
-              g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
               g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
             }
           column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "text", i, NULL);
@@ -321,7 +322,6 @@ add_columns (gint n_columns)
           if (options.common_data.editable)
             {
               g_object_set (G_OBJECT (renderer), "editable", TRUE, NULL);
-              g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
               g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
             }
           column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "markup", i, NULL);
@@ -336,6 +336,7 @@ add_columns (gint n_columns)
           gtk_tree_view_column_set_resizable (column, TRUE);
           break;
         }
+      g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
       gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
 
       if (col->type != YAD_COLUMN_CHECK || col->type != YAD_COLUMN_IMAGE)
