@@ -110,6 +110,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
   GtkTreeIter iter;
   gint cnum = -1;
 
+  /* FIXME: check this code with hidden columns */
   if (gtk_tree_view_get_tooltip_context (GTK_TREE_VIEW (list_view), &x, &y, kmode,
 					 &model, &path, &iter))
     {
@@ -253,8 +254,6 @@ create_model (gint n_columns)
 	  ctypes[i] = G_TYPE_STRING;
 	  font_col = i;
 	  break;
-        case YAD_COLUMN_TOOLTIP:
-        case YAD_COLUMN_TEXT:
         default:
           ctypes[i] = G_TYPE_STRING;
           break;
@@ -278,7 +277,7 @@ add_columns (gint n_columns)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
 
-      if (i == options.list_data.hide_column - 1 ||
+      if (i == options.list_data.hide_column - 1 || col->type == YAD_COLUMN_HIDDEN ||
 	  i == fore_col || i == back_col || i == font_col)
         continue;
 
@@ -317,8 +316,6 @@ add_columns (gint n_columns)
           gtk_tree_view_column_set_sort_column_id (column, i);
           gtk_tree_view_column_set_resizable  (column, TRUE);
           break;
-        case YAD_COLUMN_TEXT:
-        case YAD_COLUMN_TOOLTIP:
         default:
           renderer = gtk_cell_renderer_text_new ();
           if (options.common_data.editable)

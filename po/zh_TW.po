@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad 0.17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:15+0200\n"
+"POT-Creation-Date: 2012-04-02 16:16+0300\n"
 "PO-Revision-Date: 2012-02-28 16:08+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -115,12 +115,12 @@ msgstr "無法剖析檔案 %s：%s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "無法開啟目錄 %s：%s\n"
 
-#: ../src/main.c:89 ../src/main.c:225
+#: ../src/main.c:89 ../src/main.c:218
 #, c-format
 msgid "%d sec"
 msgstr "%d 秒"
 
-#: ../src/main.c:499
+#: ../src/main.c:500
 #, c-format
 msgid "Unable parse command line: %s\n"
 msgstr "無法剖析命令列：%s\n"
@@ -130,29 +130,29 @@ msgstr "無法剖析命令列：%s\n"
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "無法載入通知圖示『%s』：%s\n"
 
-#: ../src/notification.c:264
+#: ../src/notification.c:265
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "在提示框中無效的 UTF-8！\n"
 
-#: ../src/notification.c:326
+#: ../src/notification.c:327
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "不明命令『%s』\n"
 
-#: ../src/notification.c:362
+#: ../src/notification.c:363
 msgid "Yad notification"
 msgstr "Yad 通知"
 
-#: ../src/list.c:707
+#: ../src/list.c:704
 msgid "Add row"
 msgstr "加入列"
 
-#: ../src/list.c:716
+#: ../src/list.c:713
 msgid "Delete row"
 msgstr "刪除列"
 
-#: ../src/list.c:745
+#: ../src/list.c:742
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "沒有指定的欄標題用於清單對話框。\n"
@@ -614,7 +614,8 @@ msgid "Don't show column headers"
 msgstr "不顯示欄標題"
 
 #: ../src/option.c:621
-msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, IMG or TIP)"
+#, fuzzy
+msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, IMG, HD or TIP)"
 msgstr "設定欄標題 (型態 - TEXT, NUM, FLT, CHK, IMG 或 TIP)"
 
 #: ../src/option.c:622
@@ -876,194 +877,194 @@ msgstr "印出版本"
 msgid "Load extra arguments from file"
 msgstr "從檔案載入額外引數"
 
-#: ../src/option.c:1068 ../src/option.c:1279
+#: ../src/option.c:1068 ../src/option.c:1281
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: ../src/option.c:1217
+#: ../src/option.c:1219
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "標記 %s 沒有值\n"
 
-#: ../src/option.c:1263
+#: ../src/option.c:1265
 #, fuzzy, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: ../src/option.c:1297
+#: ../src/option.c:1299
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "不明的調整型態：%s\n"
 
-#: ../src/option.c:1336
+#: ../src/option.c:1338
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "不明的省略型態：%s\n"
 
-#: ../src/option.c:1352
+#: ../src/option.c:1354
 #, c-format
 msgid "Unknown source type: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: ../src/option.c:1484
+#: ../src/option.c:1486
 msgid "File exist. Overwrite?"
 msgstr "檔案已存在。覆寫？"
 
-#: ../src/option.c:1565
+#: ../src/option.c:1567
 msgid "Yet another dialoging program"
 msgstr "又一個對話框程式"
 
 #. Adds general option entries
-#: ../src/option.c:1569
+#: ../src/option.c:1571
 msgid "General options"
 msgstr "一般選項"
 
-#: ../src/option.c:1570
+#: ../src/option.c:1572
 msgid "Show general options"
 msgstr "顯示一般選項"
 
 #. Adds calendar option entries
-#: ../src/option.c:1576
+#: ../src/option.c:1578
 msgid "Calendar options"
 msgstr "行事曆選項"
 
-#: ../src/option.c:1577
+#: ../src/option.c:1579
 msgid "Show calendar options"
 msgstr "顯示行事曆選項"
 
 #. Adds color option entries
-#: ../src/option.c:1583
+#: ../src/option.c:1585
 msgid "Color selection options"
 msgstr "顏色選擇選項"
 
-#: ../src/option.c:1584
+#: ../src/option.c:1586
 msgid "Show color selection options"
 msgstr "顯示顏色選擇選項"
 
 #. Adds dnd option entries
-#: ../src/option.c:1590
+#: ../src/option.c:1592
 msgid "DND options"
 msgstr "拖放選項"
 
-#: ../src/option.c:1591
+#: ../src/option.c:1593
 msgid "Show drag-n-drop options"
 msgstr "顯示拖放選項"
 
 #. Adds entry option entries
-#: ../src/option.c:1597
+#: ../src/option.c:1599
 msgid "Text entry options"
 msgstr "文字輸入框選項"
 
-#: ../src/option.c:1598
+#: ../src/option.c:1600
 msgid "Show text entry options"
 msgstr "顯示文字輸入框選項"
 
 #. Adds file selection option entries
-#: ../src/option.c:1604
+#: ../src/option.c:1606
 msgid "File selection options"
 msgstr "檔案選取選項"
 
-#: ../src/option.c:1605
+#: ../src/option.c:1607
 msgid "Show file selection options"
 msgstr "顯示檔案選取選項"
 
 #. Add font selection option entries
-#: ../src/option.c:1611
+#: ../src/option.c:1613
 msgid "Font selection options"
 msgstr "字型選擇選項"
 
-#: ../src/option.c:1612
+#: ../src/option.c:1614
 msgid "Show font selection options"
 msgstr "顯示字型選擇選項"
 
 #. Add form option entries
-#: ../src/option.c:1618
+#: ../src/option.c:1620
 msgid "Form options"
 msgstr "表單選項"
 
-#: ../src/option.c:1619
+#: ../src/option.c:1621
 msgid "Show form options"
 msgstr "顯示表單選項"
 
 #. Add icons option entries
-#: ../src/option.c:1625
+#: ../src/option.c:1627
 msgid "Icons box options"
 msgstr "圖示框選項"
 
-#: ../src/option.c:1626
+#: ../src/option.c:1628
 msgid "Show icons box options"
 msgstr "顯示圖示框選項"
 
 #. Adds list option entries
-#: ../src/option.c:1632
+#: ../src/option.c:1634
 msgid "List options"
 msgstr "清單選項"
 
-#: ../src/option.c:1633
+#: ../src/option.c:1635
 msgid "Show list options"
 msgstr "顯示清單選項"
 
 #. Adds multi progress option entries
-#: ../src/option.c:1639
+#: ../src/option.c:1641
 msgid "Multi progress bars options"
 msgstr "多重進度條選項"
 
-#: ../src/option.c:1640
+#: ../src/option.c:1642
 msgid "Show Multi progress bars options"
 msgstr "顯示多重進度條選項"
 
 #. Adds notification option entries
-#: ../src/option.c:1646
+#: ../src/option.c:1648
 msgid "Notification icon options"
 msgstr "通知圖示選項"
 
-#: ../src/option.c:1647
+#: ../src/option.c:1649
 msgid "Show notification icon options"
 msgstr "顯示通知圖示選項"
 
 #. Adds print option entries
-#: ../src/option.c:1653
+#: ../src/option.c:1655
 msgid "Print dialog options"
 msgstr "列印對話框選項"
 
-#: ../src/option.c:1654
+#: ../src/option.c:1656
 msgid "Show print dialog options"
 msgstr "顯示列印對話框選項"
 
 #. Adds progress option entries
-#: ../src/option.c:1660
+#: ../src/option.c:1662
 msgid "Progress options"
 msgstr "進度選項"
 
-#: ../src/option.c:1661
+#: ../src/option.c:1663
 msgid "Show progress options"
 msgstr "顯示進度選項"
 
 #. Adds scale option entries
-#: ../src/option.c:1667
+#: ../src/option.c:1669
 msgid "Scale options"
 msgstr "尺度選項"
 
-#: ../src/option.c:1668
+#: ../src/option.c:1670
 msgid "Show scale options"
 msgstr "顯示尺度選項"
 
 #. Adds text option entries
-#: ../src/option.c:1674
+#: ../src/option.c:1676
 msgid "Text information options"
 msgstr "文字資訊選項"
 
-#: ../src/option.c:1675
+#: ../src/option.c:1677
 msgid "Show text information options"
 msgstr "顯示文字資訊選項"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:1681
+#: ../src/option.c:1683
 msgid "Miscellaneous options"
 msgstr "雜項選項"
 
-#: ../src/option.c:1682
+#: ../src/option.c:1684
 msgid "Show miscellaneous options"
 msgstr "顯示雜項選項"
 
