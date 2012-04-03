@@ -971,7 +971,7 @@ list_print_result (void)
       return;
     }
 
-  if (options.list_data.checkbox)
+  if (options.list_data.checkbox || options.list_data.radiobox)
     {
       // don't check in cycle
       if (col)
