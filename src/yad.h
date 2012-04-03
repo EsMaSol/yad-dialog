@@ -230,6 +230,7 @@ typedef struct {
   GSList *columns;
   gboolean no_headers;
   gboolean checkbox;
+  gboolean radiobox;
   gboolean print_all;
   gint print_column;
   gint hide_column;

@@ -254,6 +254,11 @@ create_model (gint n_columns)
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, 0);
       col->type = YAD_COLUMN_CHECK;
     }
+  else if (options.list_data.radiobox)
+    {
+      YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, 0);
+      col->type = YAD_COLUMN_RADIO;
+    }
 
   for (i = 0; i < n_columns; i++)
     {
@@ -702,6 +707,14 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, chk, -1);
 	    }
 	}
+      else if (options.list_data.radiobox)
+	{
+	  if (gtk_tree_model_get_iter (model, &iter, path))
+	    {
+	      gtk_tree_model_foreach (model, runtoggle, GINT_TO_POINTER (0));
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, TRUE, -1);
+	    }
+	}
       else
 	gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
     }
@@ -801,14 +814,14 @@ list_create_widget (GtkWidget *dlg)
 
   add_columns (n_columns);
 
-  if (options.common_data.multi && !options.list_data.checkbox)
+  if (options.common_data.multi && !options.list_data.checkbox && !options.list_data.radiobox)
     {
       GtkTreeSelection *sel =
         gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
       gtk_tree_selection_set_mode (sel, GTK_SELECTION_MULTIPLE);
     }
 
-  if (options.list_data.checkbox || !options.common_data.multi)
+  if (options.list_data.checkbox || options.list_data.radiobox || !options.common_data.multi)
     {
       g_signal_connect (G_OBJECT (list_view), "row-activated",
                         G_CALLBACK (double_click_cb), dlg);
