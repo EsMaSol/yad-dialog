@@ -618,7 +618,7 @@ static GOptionEntry list_options[] = {
     0,
     G_OPTION_ARG_CALLBACK,
     add_column,
-    N_("Set the column header (TYPE - TEXT, NUM, FLT, CHK, IMG, HD or TIP)"),
+    N_("Set the column header (TYPE - TEXT, NUM, FLT, CHK, RD, IMG, HD or TIP)"),
     N_("COLUMN[:TYPE]") },
   { "checklist", 0,
     0,
@@ -1093,6 +1093,8 @@ add_column (const gchar *option_name, const gchar *value,
 	    col->type = YAD_COLUMN_NUM ;
 	  else if (g_ascii_strcasecmp (cstr[1], "CHK") == 0)
 	    col->type = YAD_COLUMN_CHECK;
+	  else if (g_ascii_strcasecmp (cstr[1], "RD") == 0)
+	    col->type = YAD_COLUMN_RADIO;
 	  else if (g_ascii_strcasecmp (cstr[1], "FLT") == 0)
 	    col->type = YAD_COLUMN_FLOAT;
 	  else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
