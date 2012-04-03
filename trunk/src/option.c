@@ -624,13 +624,13 @@ static GOptionEntry list_options[] = {
     0,
     G_OPTION_ARG_NONE,
     &options.list_data.checkbox,
-    N_("Use check boxes for first column"),
+    N_("Use checkboxes for first column"),
     NULL },
   { "radiolist", 0,
     0,
     G_OPTION_ARG_NONE,
-    &options.list_data.checkbox,
-    N_("Alias to checklist (deprecated)"),
+    &options.list_data.radiobox,
+    N_("Use radioboxes for first column"),
     NULL },
   { "separator",
     0,
@@ -1509,6 +1509,7 @@ yad_options_init (void)
   options.list_data.columns = NULL;
   options.list_data.no_headers = FALSE;
   options.list_data.checkbox = FALSE;
+  options.list_data.radiobox = FALSE;
   options.list_data.print_all = FALSE;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
