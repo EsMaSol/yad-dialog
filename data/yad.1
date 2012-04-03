@@ -373,8 +373,9 @@ Additional data in command line interprets as a default values for form fields.
 .SS List options
 .TP
 .B \-\-column=STRING[:TYPE]
-Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fIFLT\fP, \fICHK\fP, \fIIMG\fP, \fIHD\fP or \fITIP\fP. 
+Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fIFLT\fP, \fICHK\fP, \fIRD\fP, \fIIMG\fP, \fIHD\fP or \fITIP\fP. 
 \fITEXT\fP type is default. Use \fINUM\fP for integers and \fIFTL\fP for double values. \fITIP\fP is used for define tooltip column.
+\fICHK\fP (checkboxes) and \fIRD\fP (radio toggle) are a boolean columns. 
 \fIHD\fP type means a hidden column. Such columns are not displayes in the list, only in output.
 \fIIMG\fP may be path to image or icon name from currnet GTK+ icon theme.
 Size of icons may be set in config file. Image field prints as empty value.
@@ -384,6 +385,9 @@ Values of those columns don't show in results.
 .TP
 .B \-\-checklist
 Use check boxes for first column.
+.TP
+.B \-\-radiolist
+Use radio toggle for first column.
 .TP
 .B \-\-separator=STRING
 Set output separator characters.
