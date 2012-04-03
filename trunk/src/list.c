@@ -75,28 +75,30 @@ toggled_cb (GtkCellRendererToggle *cell,
   gtk_tree_path_free (path);
 }
 
+static gboolean
+runtoggle (GtkTreeModel *model, GtkTreePath *path, 
+	  GtkTreeIter *iter, gpointer data)
+{
+  gint col = GPOINTER_TO_INT (data);
+  gtk_list_store_set (GTK_LIST_STORE (model), iter, col, FALSE, -1);
+  return FALSE;
+}
+
 static void
 rtoggled_cb (GtkCellRendererToggle *cell,
             gchar *path_str, gpointer data)
 {
   gint column;
   GtkTreeIter iter;
-  static GtkTreeIter *siter = NULL;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
   
   column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
 
-  if (siter)
-    {
-      /* cleanup previous value */
-      gtk_list_store_set (GTK_LIST_STORE (model), siter, column, FALSE, -1);
-      gtk_tree_iter_free (siter);
-    }
+  gtk_tree_model_foreach (model, runtoggle, GINT_TO_POINTER (column));
 
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_list_store_set (GTK_LIST_STORE (model), &iter, column, TRUE, -1);
-  siter = gtk_tree_iter_copy (&iter);
 
   gtk_tree_path_free (path);
 }
