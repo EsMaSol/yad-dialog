@@ -142,9 +142,19 @@ expand_action (gchar *cmd)
 static void
 set_field_value (guint num, gchar *value)
 {
+  GtkWidget *w;
   gchar **s;
   guint j = 0;
   YadField *fld = g_slist_nth_data (options.form_data.fields, num);
+
+  w = GTK_WIDGET (g_slist_nth_data (fields, num));
+  if (g_ascii_strcasecmp (value, "@disabled@") == 0)
+    {
+      gtk_widget_set_sensitive (w, FALSE);
+      return;
+    }
+  else
+    gtk_widget_set_sensitive (w, TRUE);
 
   switch (fld->type)
     {
@@ -156,14 +166,13 @@ set_field_value (guint num, gchar *value)
     case YAD_FIELD_FILE_SAVE:
     case YAD_FIELD_DIR_CREATE:
     case YAD_FIELD_DATE:
-      gtk_entry_set_text (GTK_ENTRY (g_slist_nth_data (fields, num)), value);
+      gtk_entry_set_text (GTK_ENTRY (w), value);
       break;
 
     case YAD_FIELD_NUM:
       s = g_strsplit (value, options.common_data.item_separator, -1);
       if (s[0])
 	{
-	  GtkWidget *w;
 	  gdouble val = g_strtod (s[0], NULL);
 	  w = g_slist_nth_data (fields, num);
 	  if (s[1])
@@ -188,9 +197,9 @@ set_field_value (guint num, gchar *value)
 
     case YAD_FIELD_CHECK:
       if (g_ascii_strcasecmp (value, "TRUE") == 0)
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, num)), TRUE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), TRUE);
       else
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, num)), FALSE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
       break;
 
     case YAD_FIELD_COMBO:
@@ -199,27 +208,24 @@ set_field_value (guint num, gchar *value)
       while (s[j])
 	{
 #if GTK_CHECK_VERSION(2,24,0)
-	  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, num)), s[j]);
+	  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (w), s[j]);
 #else
-	  gtk_combo_box_append_text (GTK_COMBO_BOX (g_slist_nth_data (fields, num)), s[j]);
+	  gtk_combo_box_append_text (GTK_COMBO_BOX (w), s[j]);
 #endif
 	  j++;
 	}
-      gtk_combo_box_set_active (GTK_COMBO_BOX (g_slist_nth_data (fields, num)), 0);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (w), 0);
       g_strfreev (s);
       break;
 
     case YAD_FIELD_DIR:
-      gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num)),
-					   value);
+      gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (w), value);
     case YAD_FIELD_FILE:
-      gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num)),
-				     value);
+      gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (w), value);
       break;
 
     case YAD_FIELD_FONT:
-      gtk_font_button_set_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num)),
-				     value);
+      gtk_font_button_set_font_name (GTK_FONT_BUTTON (w), value);
       break;
 
     case YAD_FIELD_COLOR:
@@ -227,18 +233,17 @@ set_field_value (guint num, gchar *value)
 	GdkColor c;
 
 	gdk_color_parse (value, &c);
-	gtk_color_button_set_color (GTK_COLOR_BUTTON (g_slist_nth_data (fields, num)), &c);
+	gtk_color_button_set_color (GTK_COLOR_BUTTON (w), &c);
 	break;
       }
 
     case YAD_FIELD_BUTTON:
-      g_signal_connect (G_OBJECT (g_slist_nth_data (fields, num)), "clicked",
-			G_CALLBACK (button_clicked_cb), value);
+      g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (button_clicked_cb), value);
       break;
 
     case YAD_FIELD_TEXT:
       {
-	GtkTextBuffer *tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, num)));
+	GtkTextBuffer *tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
 	gchar *txt = g_strcompress (value);
 	gtk_text_buffer_set_text (tb, txt, -1);
 	g_free (txt);
