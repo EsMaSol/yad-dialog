@@ -26,6 +26,7 @@ static gboolean set_text_align (const gchar *, const gchar *, gpointer, GError *
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_tab (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
@@ -49,6 +50,7 @@ static gboolean form_mode = FALSE;
 static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
 static gboolean multi_progress_mode = FALSE;
+static gboolean notebook_mode = FALSE;
 static gboolean notification_mode = FALSE;
 static gboolean print_mode = FALSE;
 static gboolean progress_mode = FALSE;
@@ -736,6 +738,34 @@ static GOptionEntry multi_progress_options[] = {
   { NULL }
 };
 
+static GOptionEntry notebook_options[] = {
+  { "notebook", 0,
+    G_OPTION_FLAG_IN_MAIN,
+    G_OPTION_ARG_NONE,
+    &notebook_mode,
+    N_("Display notebook dialog"),
+    NULL },
+  { "tab", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    add_tab,
+    N_("Add a tab to notebook"),
+    N_("LABEL") },
+  { "align", 0,
+    G_OPTION_FLAG_NOALIAS,
+    G_OPTION_ARG_CALLBACK,
+    set_align,
+    N_("Set alignment of tab labels (left, center or right)"),
+    N_("TYPE") },
+  { "tab-borders", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.notebook_data.borders,
+    N_("Set tab borders"),
+    N_("NUMBER") },
+  { NULL }
+};
+
 static GOptionEntry notification_options[] = {
   { "notification", 0,
     G_OPTION_FLAG_IN_MAIN,
@@ -1203,6 +1233,14 @@ add_bar (const gchar *option_name, const gchar *value,
 }
 
 static gboolean
+add_tab (const gchar *option_name, const gchar *value,
+	 gpointer data, GError **err)
+{
+  options.notebook_data.tabs = g_slist_append (options.notebook_data.tabs, g_strdup (value));
+  return TRUE;
+}
+
+static gboolean
 add_scale_mark (const gchar *option_name, const gchar *value,
 		gpointer data, GError **err)
 {
@@ -1381,6 +1419,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_LIST;
   else if (multi_progress_mode)
     options.mode = YAD_MODE_MULTI_PROGRESS;
+  else if (notebook_mode)
+    options.mode = YAD_MODE_NOTEBOOK;
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
   else if (print_mode)
@@ -1523,6 +1563,10 @@ yad_options_init (void)
   /* Initialize multiprogress data */
   options.multi_progress_data.bars = NULL;
 
+  /* Initialize notebook data */
+  options.notebook_data.tabs = NULL;
+  options.notebook_data.borders = 0;
+
   /* Initialize notification data */
   options.notification_data.listen = FALSE;
 
@@ -1642,8 +1686,15 @@ yad_create_context (void)
 
   /* Adds multi progress option entries */
   a_group = g_option_group_new ("multi-progress", _("Multi progress bars options"),
-				_("Show Multi progress bars options"), NULL, NULL);
+				_("Show multi progress bars options"), NULL, NULL);
   g_option_group_add_entries (a_group, multi_progress_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds notebook option entries */
+  a_group = g_option_group_new ("notebook", _("Notebook options"),
+				_("Show notebook dialog options"), NULL, NULL);
+  g_option_group_add_entries (a_group, notebook_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

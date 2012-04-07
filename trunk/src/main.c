@@ -311,6 +311,9 @@ create_dialog ()
     case YAD_MODE_MULTI_PROGRESS:
       main_widget = multi_progress_create_widget (dlg);
       break;
+    case YAD_MODE_NOTEBOOK:
+      main_widget = notebook_create_widget (dlg);
+      break;
     case YAD_MODE_PROGRESS:
       main_widget = progress_create_widget (dlg);
       break;
@@ -440,6 +443,9 @@ print_result (void)
       break;
     case YAD_MODE_LIST:
       list_print_result ();
+      break;
+    case YAD_MODE_NOTEBOOK:
+      notebook_print_result ();
       break;
     case YAD_MODE_SCALE:
       scale_print_result ();
@@ -573,6 +579,11 @@ main (gint argc, gchar ** argv)
           g_signal_connect (G_OBJECT (dialog), "response",
                             G_CALLBACK (confirm_overwrite_cb), NULL);
         }
+      else if (options.mode == YAD_MODE_NOTEBOOK)
+	{
+	  /* add childs to notebook */
+	  notebook_swallow_childs ();
+	}
       ret = gtk_dialog_run (GTK_DIALOG (dialog));
       if (options.data.always_print)
         print_result ();
