@@ -46,6 +46,7 @@ typedef enum {
   YAD_MODE_ICONS,
   YAD_MODE_LIST,
   YAD_MODE_MULTI_PROGRESS,
+  YAD_MODE_NOTEBOOK,
   YAD_MODE_NOTIFICATION,
   YAD_MODE_PRINT,
   YAD_MODE_PROGRESS,
@@ -247,6 +248,11 @@ typedef struct {
 } YadMultiProgressData;
 
 typedef struct {
+  GSList *tabs;
+  guint borders;
+} YadNotebookData;
+
+typedef struct {
   gboolean listen;
 } YadNotificationData;
 
@@ -319,6 +325,7 @@ typedef struct {
   YadIconsData icons_data;
   YadListData list_data;
   YadMultiProgressData multi_progress_data;
+  YadNotebookData notebook_data;
   YadNotificationData notification_data;
   YadPrintData print_data;
   YadProgressData progress_data;
@@ -372,11 +379,13 @@ GtkWidget * form_create_widget (GtkWidget *dlg);
 GtkWidget * icons_create_widget (GtkWidget *dlg);
 GtkWidget * list_create_widget (GtkWidget *dlg);
 GtkWidget * multi_progress_create_widget (GtkWidget *dlg);
+GtkWidget * notebook_create_widget (GtkWidget *dlg);
 GtkWidget * progress_create_widget (GtkWidget *dlg);
 GtkWidget * scale_create_widget (GtkWidget *dlg);
 GtkWidget * text_create_widget (GtkWidget *dlg);
 
 void confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data);
+void notebook_swallow_childs (void);
 
 void calendar_print_result (void);
 void color_print_result (void);
@@ -385,6 +394,7 @@ void file_print_result (void);
 void font_print_result (void);
 void form_print_result (void);
 void list_print_result (void);
+void notebook_print_result (void);
 void scale_print_result (void);
 void text_print_result (void);
 
