@@ -422,10 +422,9 @@ GtkWidget *
 create_plug (void)
 {
   GtkWidget *win, *vbox, *text;
-  GtkWidget *main_widget;
+  GtkWidget *main_widget = NULL;
 
-  win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_widget_set_name (win, "yad-dialog-window");
+  win = gtk_plug_new (0);
   /* set window borders */
   if (options.data.borders == -1)
     options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (win));
@@ -503,6 +502,7 @@ create_plug (void)
   if (main_widget)
     gtk_box_pack_start (GTK_BOX (vbox), main_widget, TRUE, TRUE, 2);
 
+  gtk_widget_show_all (win);
   return win;
 }
 
@@ -639,6 +639,9 @@ main (gint argc, gchar ** argv)
   /* plug mode */
   if (options.plug)
     {
+      dialog = create_plug ();
+      g_print ("export %s=%d", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
+      gtk_main ();
       return ret;
     }
 
