@@ -640,7 +640,10 @@ main (gint argc, gchar ** argv)
   if (options.plug)
     {
       dialog = create_plug ();
-      g_print ("export %s=%d\n", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
+      if (options.var_style == YAD_SH_VAR)
+        g_print ("export %s=%d\n", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
+      else
+        g_print ("setenv %s=%d\n", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
       gtk_main ();
       return ret;
     }
