@@ -640,7 +640,7 @@ main (gint argc, gchar ** argv)
   if (options.plug)
     {
       dialog = create_plug ();
-      g_print ("export %s=%d", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
+      g_print ("export %s=%d\n", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
       gtk_main ();
       return ret;
     }
