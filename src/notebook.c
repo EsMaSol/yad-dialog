@@ -93,7 +93,10 @@ notebook_swallow_childs (void)
 		      gint fd = open (pn, O_RDWR);
 		  
 		      if (fd != -1)
-			plugs[i] = g_io_channel_unix_new (fd);
+		        {
+			  plugs[i] = g_io_channel_unix_new (fd);
+			  g_io_channel_write_chars (plugs[i], "show\n", -1, NULL, NULL);
+                        }
 		    }
 		  g_free (pn);
 		}
