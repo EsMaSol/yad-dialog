@@ -636,6 +636,12 @@ main (gint argc, gchar ** argv)
       g_io_channel_shutdown (ioc, FALSE, NULL);
     }
 
+  /* plug mode */
+  if (options.plug)
+    {
+      return ret;
+    }
+
 #ifndef G_OS_WIN32
   /* set signal handlers */
   bzero (&sa, sizeof (struct sigaction));

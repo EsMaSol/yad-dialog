@@ -229,6 +229,12 @@ static GOptionEntry general_options[] = {
     &options.data.skip_taskbar,
     N_("Don't show window in taskbar"),
     NULL },
+  { "plug", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.plug,
+    N_("Special mode for XEMBED"),
+    NULL },
 #ifndef G_OS_WIN32
   { "kill-parent", 0,
     0,
@@ -1444,6 +1450,7 @@ yad_options_init (void)
   options.mode = YAD_MODE_MESSAGE;
   options.rest_file = NULL;
   options.extra_data = NULL;
+  options.plug = FALSE;
 #ifndef G_OS_WIN32
   options.kill_parent = FALSE;
   options.print_xid = FALSE;
