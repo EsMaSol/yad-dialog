@@ -37,6 +37,7 @@ static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError 
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_var_style (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -235,6 +236,12 @@ static GOptionEntry general_options[] = {
     &options.plug,
     N_("Special mode for XEMBED"),
     N_("NAME") },
+  { "var-style", 0,
+    0,
+    G_OPTION_ARG_CALLBACK,
+    set_var_style,
+    N_("Set style of XID variable for pluggable dialog (sh or csh)"),
+    N_("STYLE") },
 #ifndef G_OS_WIN32
   { "kill-parent", 0,
     0,
@@ -1402,6 +1409,17 @@ set_print_type (const gchar *option_name, const gchar *value,
   return TRUE;
 }
 
+static gboolean
+set_var_style (const gchar *option_name, const gchar *value,
+		gpointer data, GError **err)
+{
+  if (g_ascii_strcasecmp (value, "csh") == 0)
+    options.var_style = YAD_CSH_VAR;
+  else
+    options.var_style = YAD_SH_VAR;
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -1451,6 +1469,7 @@ yad_options_init (void)
   options.rest_file = NULL;
   options.extra_data = NULL;
   options.plug = NULL;
+  options.var_style = YAD_SH_VAR;
 #ifndef G_OS_WIN32
   options.kill_parent = FALSE;
   options.print_xid = FALSE;
