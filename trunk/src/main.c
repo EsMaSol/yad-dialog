@@ -17,10 +17,14 @@
  * Copyright (C) 2008-2012, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <locale.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #ifndef G_OS_WIN32
 # include <gdk/gdkx.h>
@@ -99,6 +103,18 @@ static void
 text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
+}
+
+static gboolean
+handle_pipe (GIOChannel *ch, GIOCondition cond, gpointer data)
+{
+  if ((cond != G_IO_IN) && (cond != G_IO_IN + G_IO_HUP))
+    {
+      g_io_channel_shutdown (ch, TRUE, NULL);
+      return FALSE;
+    }
+                      
+  return TRUE;
 }
 
 GtkWidget *
@@ -639,12 +655,41 @@ main (gint argc, gchar ** argv)
   /* plug mode */
   if (options.plug)
     {
+      guint id, fd;
+      gchar *pn;
+      GIOChannel *ch = NULL;
+      
+      /* create dialog */
       dialog = create_plug ();
+      id = (guint) gtk_plug_get_id (GTK_PLUG (dialog));
       if (options.var_style == YAD_SH_VAR)
-        g_print ("export %s=%d\n", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
+        g_print ("export %s=%ul\n", options.plug, id);
       else
-        g_print ("setenv %s=%d\n", options.plug, gtk_plug_get_id (GTK_PLUG (dialog)));
+        g_print ("setenv %s=%ul\n", options.plug, id);
+        
+      /* create control fifo */
+      pn = g_strdup_printf ("/tmp/yad-%ul", id);
+      mkfifo (pn, 0644);
+      fd = open (pn, O_RDWR);
+      if (fd != -1)
+        {
+          ch = g_io_channel_unix_new (fd);
+          g_io_channel_set_encoding (ch, NULL, NULL);
+          g_io_channel_set_flags (ch, G_IO_FLAG_NONBLOCK, NULL);
+          g_io_add_watch (ch, G_IO_IN | G_IO_HUP, handle_pipe, dialog);          
+        }
+      
+      /* run main loop */
       gtk_main ();
+      
+      if (ch)
+        {
+          g_io_channel_shutdown (ch, TRUE, NULL);
+          g_io_channel_unref (ch);
+        }
+      unlink (pn);
+      g_free (pn);
+                 
       return ret;
     }
 
