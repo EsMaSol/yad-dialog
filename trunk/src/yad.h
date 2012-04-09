@@ -335,7 +335,7 @@ typedef struct {
   gchar *rest_file;
   gchar **extra_data;
 
-  gboolean plug;
+  gchar *plug;
 
 #ifndef G_OS_WIN32
   gboolean kill_parent;
