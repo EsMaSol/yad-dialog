@@ -109,11 +109,6 @@ typedef enum {
   YAD_SMALL_ICON,
 } YadIconSize;
 
-typedef enum {
-  YAD_SH_VAR,
-  YAD_CSH_VAR,
-} YadVarStyle;
-
 typedef struct {
   gchar *name;
   gchar *cmd;
@@ -341,7 +336,6 @@ typedef struct {
   gchar **extra_data;
 
   gchar *plug;
-  YadVarStyle var_style;
 
 #ifndef G_OS_WIN32
   gboolean kill_parent;

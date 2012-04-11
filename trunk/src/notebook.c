@@ -64,38 +64,50 @@ notebook_create_widget (GtkWidget *dlg)
 void
 notebook_swallow_childs (void)
 {
-  plugs = g_new0 (GIOChannel *, g_slist_length (options.notebook_data.tabs));
+  plugs = g_new0 (GIOChannel*, g_slist_length (options.notebook_data.tabs));
 
   if (options.extra_data)
     {
       gint i = 0;
       while (options.extra_data[i])
 	{
-	  guint id;
+	  guint id = 0;
 
-	  id = strtoul (options.extra_data[i], NULL, 0);
+	  /* get client id */
+	  if (g_file_test (options.extra_data[i], G_FILE_TEST_EXISTS))
+	    {
+	      gint fd = open (options.extra_data[i], O_RDWR);
+	  
+	      if (fd != -1)
+	        {
+	          plugs[i] = g_io_channel_unix_new (fd);
+	          g_io_channel_set_encoding (plugs[i], NULL, NULL);
+	          g_io_channel_set_flags (plugs[i], G_IO_FLAG_NONBLOCK, NULL);
+	        }
+              if (g_io_channel_write_chars (plugs[i], "id\n", -1, NULL, NULL) == G_IO_STATUS_NORMAL)
+                {
+                  gchar *buf;
+                  if (g_io_channel_read_line (plugs[i], &buf, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
+                    {
+                      id = strtoul (buf, NULL, 0);
+                      g_free (buf);
+                    }
+                }
+	    }
+          else
+	    id = strtoul (options.extra_data[i], NULL, 0);
+	  
+	  /* add id to socket */
 	  if (id)
 	    {
 	      GtkWidget *e = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
 	      if (e)
 		{
 		  GList *cl;
-		  gchar *pn;
 
 		  /* add plug to socket */
 		  cl = gtk_container_get_children (GTK_CONTAINER (e));
 		  gtk_socket_add_id (GTK_SOCKET (cl->data), (GdkNativeWindow) id);
-
-		  /* add control pipe */
-		  pn = g_strdup_printf ("/tmp/yad-%ul", id);
-		  if (g_file_test (pn, G_FILE_TEST_EXISTS))
-		    {
-		      gint fd = open (pn, O_RDWR);
-		  
-		      if (fd != -1)
-		        plugs[i] = g_io_channel_unix_new (fd);
-		    }
-		  g_free (pn);
 		}
 	    }
 	  i++;
