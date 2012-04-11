@@ -655,22 +655,15 @@ main (gint argc, gchar ** argv)
   /* plug mode */
   if (options.plug)
     {
-      guint id, fd;
-      gchar *pn;
+      gint fd;
       GIOChannel *ch = NULL;
       
       /* create dialog */
       dialog = create_plug ();
-      id = (guint) gtk_plug_get_id (GTK_PLUG (dialog));
-      if (options.var_style == YAD_SH_VAR)
-        g_print ("export %s=%ul\n", options.plug, id);
-      else
-        g_print ("setenv %s=%ul\n", options.plug, id);
         
       /* create control fifo */
-      pn = g_strdup_printf ("/tmp/yad-%ul", id);
-      mkfifo (pn, 0644);
-      fd = open (pn, O_RDWR);
+      mkfifo (options.plug, 0644);
+      fd = open (options.plug, O_RDWR);
       if (fd != -1)
         {
           ch = g_io_channel_unix_new (fd);
@@ -687,8 +680,7 @@ main (gint argc, gchar ** argv)
           g_io_channel_shutdown (ch, TRUE, NULL);
           g_io_channel_unref (ch);
         }
-      unlink (pn);
-      g_free (pn);
+      unlink (options.plug);
                  
       return ret;
     }
