@@ -236,7 +236,6 @@ handle_stdin (GIOChannel * channel,
 	  args = g_strsplit (string->str, ":", 2);
           command = g_strdup (args[0]);
           value = g_strdup (args[1]);
-          g_printerr ("%s - %s\n", command, value);
 	  g_strfreev (args);
 	  if (value)
 	    g_strstrip (value);
