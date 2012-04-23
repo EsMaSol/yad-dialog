@@ -821,11 +821,8 @@ list_create_widget (GtkWidget *dlg)
       gtk_tree_selection_set_mode (sel, GTK_SELECTION_MULTIPLE);
     }
 
-  if (options.list_data.checkbox || options.list_data.radiobox || !options.common_data.multi)
-    {
-      g_signal_connect (G_OBJECT (list_view), "row-activated",
-                        G_CALLBACK (double_click_cb), dlg);
-    }
+  g_signal_connect (G_OBJECT (list_view), "row-activated", G_CALLBACK (double_click_cb), dlg);
+  g_signal_connect (G_OBJECT (list_view), "key-press-event", G_CALLBACK (list_activate_cb), dlg);
 
   if (options.common_data.editable)
     {
@@ -833,10 +830,6 @@ list_create_widget (GtkWidget *dlg)
       g_signal_connect_swapped (G_OBJECT (list_view), "button_press_event",
                                 G_CALLBACK (popup_menu_cb), NULL);
     }
-
-  /* Return submits data */
-  g_signal_connect (G_OBJECT (list_view), "key-press-event",
-                    G_CALLBACK (list_activate_cb), dlg);
 
   fill_data (n_columns);
 
