@@ -713,6 +713,12 @@ static GOptionEntry list_options[] = {
     &options.list_data.regex_search,
     N_("Use regex in search"),
     NULL },
+  { "listen", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.common_data.listen,
+    N_("Listen for data on stdin in addition to command-line"),
+    NULL },
   { NULL }
 };
 
@@ -788,7 +794,7 @@ static GOptionEntry notification_options[] = {
   { "listen", 0,
     0,
     G_OPTION_ARG_NONE,
-    &options.notification_data.listen,
+    &options.common_data.listen,
     N_("Listen for commands on stdin"),
     NULL },
   { "separator", 0,
@@ -1031,6 +1037,12 @@ static GOptionEntry text_options[] = {
     G_OPTION_ARG_NONE,
     &options.text_data.uri,
     N_("Make URI clickable"),
+    NULL },
+  { "listen", 0,
+    0,
+    G_OPTION_ARG_NONE,
+    &options.common_data.listen,
+    N_("Listen for data on stdin in addition to file"),
     NULL },
   { NULL }
 };
@@ -1501,6 +1513,7 @@ yad_options_init (void)
   options.common_data.date_format = "%x";
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
+  options.common_data.listen = FALSE;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
@@ -1573,9 +1586,6 @@ yad_options_init (void)
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 0;
-
-  /* Initialize notification data */
-  options.notification_data.listen = FALSE;
 
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;

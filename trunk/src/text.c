@@ -542,7 +542,8 @@ text_create_widget (GtkWidget * dlg)
 
   if (options.common_data.uri)
     fill_buffer_from_file ();
-  else
+
+  if (options.common_data.listen || options.common_data.uri == NULL)
     fill_buffer_from_stdin ();
 
   return w;

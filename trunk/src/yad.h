@@ -253,10 +253,6 @@ typedef struct {
 } YadNotebookData;
 
 typedef struct {
-  gboolean listen;
-} YadNotificationData;
-
-typedef struct {
   YadPrintType type;
   gboolean headers;
   gboolean preview;
@@ -307,6 +303,7 @@ typedef struct {
   gchar *command;
   gchar *date_format;
   gdouble align;
+  gboolean listen;
 } YadCommonData;
 
 typedef struct {
@@ -326,7 +323,6 @@ typedef struct {
   YadListData list_data;
   YadMultiProgressData multi_progress_data;
   YadNotebookData notebook_data;
-  YadNotificationData notification_data;
   YadPrintData print_data;
   YadProgressData progress_data;
   YadScaleData scale_data;
