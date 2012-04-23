@@ -1128,12 +1128,12 @@ msgstr "Сбій друку: %s\n"
 #: ../src/print.c:230
 #, c-format
 msgid "File %s not found.\n"
-msgstr "Файл %s не знайден.\n"
+msgstr "Файл %s не знайдено.\n"
 
 #: ../src/print.c:236
 #, c-format
 msgid "Filename is not specified.\n"
-msgstr "Файл не вказан.\n"
+msgstr "Файл не вказано.\n"
 
 #: ../src/print.c:379
 #, c-format
@@ -1163,7 +1163,7 @@ msgstr "Не можу відкрити файл %s: %s\n"
 #. create expander
 #: ../src/color.c:149
 msgid "Palette"
-msgstr "Палитра"
+msgstr "Палітра"
 
 #: ../src/color.c:171
 msgid "Color"
