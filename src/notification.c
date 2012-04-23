@@ -106,7 +106,7 @@ icon_size_changed_cb (GtkStatusIcon * icon, gint size, gpointer data)
 static gboolean
 activate_cb (GtkWidget * widget, YadData * data)
 {
-  if ((action == NULL && !options.notification_data.listen) || 
+  if ((action == NULL && !options.common_data.listen) || 
       (action && g_ascii_strcasecmp (action, "quit") == 0))
     {
       exit_code = YAD_RESPONSE_OK;
@@ -376,7 +376,7 @@ yad_notification_run ()
   g_signal_connect (status_icon, "button-press-event",
 		    G_CALLBACK (middle_quit_cb), NULL);
 
-  if (options.notification_data.listen)
+  if (options.common_data.listen)
     {
       channel = g_io_channel_unix_new (0);
       if (channel)
