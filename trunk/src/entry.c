@@ -135,22 +135,27 @@ entry_create_widget (GtkWidget *dlg)
 
   if (options.entry_data.numeric)
     {
-      gdouble min, max, step, val;
+      gdouble min, max, step,val; 
+      guint prec;
 
-      min = 0.0; max = 65535.0; step = 1.0;
+      min = 0.0; max = 65535.0; step = 1.0; prec = 0;
 
-      if (options.extra_data && *options.extra_data)
+      if (options.extra_data && options.extra_data[0])
         {
           min = g_ascii_strtod (options.extra_data[0], NULL);
           if (options.extra_data[1])
+            max = g_ascii_strtod (options.extra_data[1], NULL);
+          if (options.extra_data[2])
+            step = g_ascii_strtod (options.extra_data[2], NULL);
+          if (options.extra_data[3])
             {
-              max = g_ascii_strtod (options.extra_data[1], NULL);
-              if (options.extra_data[2])
-                step = g_ascii_strtod (options.extra_data[2], NULL);
+              prec = (guint) g_ascii_strtoull (options.extra_data[3], NULL, 0);
+              if (prec > 20) prec = 20;              
             }
         }
 
       c = entry = gtk_spin_button_new_with_range (min, max, step);
+      gtk_spin_button_set_digits (GTK_SPIN_BUTTON (c), prec);
       gtk_widget_set_name (entry, "yad-entry-spin");
 
       if (options.entry_data.entry_text)

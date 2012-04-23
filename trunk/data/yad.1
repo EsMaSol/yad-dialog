@@ -232,7 +232,8 @@ Use completion instead of combo-box.
 Allow changes to text in combo-box.
 .TP
 .B \-\-numeric
-Use spin button instead of text entry. Additional parameters in command line treats as minimum and maximum values and step value (in that order). All this values are optional. Default range is from 0 to 65535 with step 1.
+Use spin button instead of text entry. Additional parameters in command line treats as minimum and maximum
+values, step value and precisions (in that order). All this values are optional. Default range is from 0 to 65535 with step 1.
 .TP
 .B \-\-licon
 Set an icon on a left side of entry.
@@ -321,7 +322,7 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 .br
 \fBRO\fP - field is in read-only mode.
 .br
-\fBNUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP]]\fP, where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separator.
+\fBNUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP![PREC]]]\fP, where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separator. \fIPREC\fP is a precision for decimals.
 .br
 \fBCHK\fP - checkbox field. Initial value is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
 .br

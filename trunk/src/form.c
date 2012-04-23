@@ -173,20 +173,26 @@ set_field_value (guint num, gchar *value)
       s = g_strsplit (value, options.common_data.item_separator, -1);
       if (s[0])
 	{
-	  gdouble val = g_strtod (s[0], NULL);
+	  gdouble val = g_ascii_strtod (s[0], NULL);
 	  w = g_slist_nth_data (fields, num);
 	  if (s[1])
 	    {
 	      gdouble min, max;
 	      gchar **s1 = g_strsplit (s[1], "..", 2);
-	      min = g_strtod (s1[0], NULL);
-	      max = g_strtod (s1[1], NULL);
+	      min = g_ascii_strtod (s1[0], NULL);
+	      max = g_ascii_strtod (s1[1], NULL);
 	      g_strfreev (s1);
 	      gtk_spin_button_set_range (GTK_SPIN_BUTTON (w), min, max);
 	      if (s[2])
 		{
-		  gdouble step = g_strtod (s[2], NULL);
+		  gdouble step = g_ascii_strtod (s[2], NULL);
 		  gtk_spin_button_set_increments (GTK_SPIN_BUTTON (w), step, step * 10);
+		  if (s[3])
+		    {
+		      guint prec = (guint) g_ascii_strtoull (s[3], NULL, 0);
+		      if (prec > 20) prec = 20;
+		      gtk_spin_button_set_digits (GTK_SPIN_BUTTON (w), prec);
+		    }
 		}
 	    }
 	  /* set initial value must be after setting range and step */

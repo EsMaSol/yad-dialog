@@ -552,7 +552,7 @@ fill_data (gint n_columns)
 
               if (args[i] == NULL)
                 break;
-
+                
               switch (col->type)
                 {
                 case YAD_COLUMN_CHECK:
