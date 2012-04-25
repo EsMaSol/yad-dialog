@@ -402,6 +402,8 @@ gint yad_notification_run (void);
 gint yad_print_run (void);
 gint yad_about (void);
 
+void notebook_close_childs (void);
+
 void read_settings (void);
 void write_settings (void);
 
