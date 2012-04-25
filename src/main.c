@@ -40,12 +40,16 @@ static void
 sa_usr1 (gint sig)
 {
   gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_OK);
+  if (options.plug)
+    gtk_main_quit ();
 }
 
 static void
 sa_usr2 (gint sig)
 {
   gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_CANCEL);
+  if (options.plug)
+    gtk_main_quit ();
 }
 #endif
 
@@ -103,18 +107,6 @@ static void
 text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
-}
-
-static gboolean
-handle_pipe (GIOChannel *ch, GIOCondition cond, gpointer data)
-{
-  if ((cond != G_IO_IN) && (cond != G_IO_IN + G_IO_HUP))
-    {
-      g_io_channel_shutdown (ch, TRUE, NULL);
-      return FALSE;
-    }
-                      
-  return TRUE;
 }
 
 GtkWidget *
@@ -441,6 +433,7 @@ create_plug (void)
   GtkWidget *main_widget = NULL;
 
   win = gtk_plug_new (0);
+  gtk_window_set_role (GTK_WINDOW (win), options.plug);
   /* set window borders */
   if (options.data.borders == -1)
     options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (win));
@@ -655,33 +648,8 @@ main (gint argc, gchar ** argv)
   /* plug mode */
   if (options.plug)
     {
-      gint fd;
-      GIOChannel *ch = NULL;
-      
-      /* create dialog */
       dialog = create_plug ();
-        
-      /* create control fifo */
-      mkfifo (options.plug, 0644);
-      fd = open (options.plug, O_RDWR);
-      if (fd != -1)
-        {
-          ch = g_io_channel_unix_new (fd);
-          g_io_channel_set_encoding (ch, NULL, NULL);
-          g_io_channel_set_flags (ch, G_IO_FLAG_NONBLOCK, NULL);
-          g_io_add_watch (ch, G_IO_IN | G_IO_HUP, handle_pipe, dialog);          
-        }
-      
-      /* run main loop */
-      gtk_main ();
-      
-      if (ch)
-        {
-          g_io_channel_shutdown (ch, TRUE, NULL);
-          g_io_channel_unref (ch);
-        }
-      unlink (options.plug);
-                 
+      gtk_main ();                 
       return ret;
     }
 

@@ -26,7 +26,7 @@
 
 static GtkWidget *notebook;
 
-GIOChannel **plugs;
+static guint *plugs;
 
 GtkWidget *
 notebook_create_widget (GtkWidget *dlg)
@@ -64,7 +64,7 @@ notebook_create_widget (GtkWidget *dlg)
 void
 notebook_swallow_childs (void)
 {
-  plugs = g_new0 (GIOChannel*, g_slist_length (options.notebook_data.tabs));
+  plugs = g_new0 (guint, g_slist_length (options.notebook_data.tabs));
 
   if (options.extra_data)
     {
@@ -74,32 +74,11 @@ notebook_swallow_childs (void)
 	  guint id = 0;
 
 	  /* get client id */
-	  if (g_file_test (options.extra_data[i], G_FILE_TEST_EXISTS))
-	    {
-	      gint fd = open (options.extra_data[i], O_RDWR);
+	  id = strtoul (options.extra_data[i], NULL, 0);
 	  
-	      if (fd != -1)
-	        {
-	          plugs[i] = g_io_channel_unix_new (fd);
-	          g_io_channel_set_encoding (plugs[i], NULL, NULL);
-	          g_io_channel_set_flags (plugs[i], G_IO_FLAG_NONBLOCK, NULL);
-	        }
-              if (g_io_channel_write_chars (plugs[i], "id\n", -1, NULL, NULL) == G_IO_STATUS_NORMAL)
-                {
-                  gchar *buf;
-                  if (g_io_channel_read_line (plugs[i], &buf, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
-                    {
-                      id = strtoul (buf, NULL, 0);
-                      g_free (buf);
-                    }
-                }
-	    }
-          else
-	    id = strtoul (options.extra_data[i], NULL, 0);
-	  
-	  /* add id to socket */
 	  if (id)
 	    {
+	      /* data is XID */
 	      GtkWidget *e = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
 	      if (e)
 		{
@@ -110,6 +89,11 @@ notebook_swallow_childs (void)
 		  gtk_socket_add_id (GTK_SOCKET (cl->data), (GdkNativeWindow) id);
 		}
 	    }
+	  else
+	    {
+	      /* data is YAD's plug */
+	    }
+
 	  i++;
 	}
     }
@@ -125,16 +109,11 @@ notebook_print_result (void)
     {
       if (plugs[i])
 	{
-	  if (g_io_channel_write_chars (plugs[i], "print\n", -1, NULL, NULL) == G_IO_STATUS_NORMAL)
-	    {
-	      gchar *buf;
-	      while (g_io_channel_read_line (plugs[i], &buf, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
-		{
-		  g_print ("%s", buf);
-		  g_free (buf);
-		}
-	    }
-	  g_io_channel_write_chars (plugs[i], "quit\n", -1, NULL, NULL);
 	}
     }
+}
+
+void
+notebook_close_childs (void)
+{
 }
