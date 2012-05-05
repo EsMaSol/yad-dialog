@@ -22,11 +22,53 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#include <X11/Xutil.h>
+#include <gdk/gdk.h>
+#include <gdk/gdkx.h>
+
 #include "yad.h"
 
 static GtkWidget *notebook;
 
 static guint *plugs;
+
+static GHashTable *wins = NULL;
+
+static void
+create_wins_hash (void)
+{
+  Atom type;
+  gint format;
+  gulong i, nitems, bytes_after;
+  GList *data, *tmp;
+  gint res;
+
+  wins = g_hash_table_new (g_str_hash, g_str_equal);
+
+  /* get window list */
+  data = gdk_window_get_children (gdk_get_default_root_window ());
+  printf ("%d\n", g_list_length (data));
+
+  for (tmp = data; tmp; tmp = tmp->next)
+    {
+      XClassHint ch;
+      GdkWindow *w = (GdkWindow *) tmp->data;
+
+      printf ("0x%X\n", gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)));
+      res = XGetClassHint (gdk_x11_get_default_xdisplay (), 
+			   gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)), &ch);
+
+      printf ("%s - %s\n", ch.res_class, ch.res_name);
+      if (res != Success)
+	continue;
+      if (strcmp (ch.res_class, "YAD-PLUG") != 0)
+	continue;
+      
+      printf ("get %s\n", ch.res_name);
+    }
+}
 
 GtkWidget *
 notebook_create_widget (GtkWidget *dlg)
@@ -69,6 +111,9 @@ notebook_swallow_childs (void)
   if (options.extra_data)
     {
       gint i = 0;
+      
+      create_wins_hash ();
+
       while (options.extra_data[i])
 	{
 	  guint id = 0;
@@ -96,6 +141,8 @@ notebook_swallow_childs (void)
 
 	  i++;
 	}
+
+      g_hash_table_destroy (wins);
     }
 }
 
