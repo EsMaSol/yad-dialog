@@ -148,7 +148,7 @@ set_field_value (guint num, gchar *value)
   YadField *fld = g_slist_nth_data (options.form_data.fields, num);
 
   w = GTK_WIDGET (g_slist_nth_data (fields, num));
-  if (g_ascii_strcasecmp (value, "@disabled@") == 0)
+  if (fld->type == YAD_FIELD_READ_ONLY || g_ascii_strcasecmp (value, "@disabled@") == 0)
     {
       gtk_widget_set_sensitive (w, FALSE);
       return;
