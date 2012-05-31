@@ -404,15 +404,8 @@ handle_stdin (GIOChannel * channel,
   static GtkTreeIter iter;
   static gint column_count = 0;
   static gint row_count = 0;
-  static gboolean first_time = TRUE;
   gint n_columns = GPOINTER_TO_INT (data);
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
-
-  if (first_time)
-    {
-      first_time = FALSE;
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-    }
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
     {
@@ -457,8 +450,10 @@ handle_stdin (GIOChannel * channel,
               row_count = column_count = 0;
               continue;
             }
-
-          if (column_count == n_columns)
+          
+          if (row_count == 0 && column_count == 0)
+            gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+          else if (column_count == n_columns)
             {
 	      /* add eliipsize */
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count,
