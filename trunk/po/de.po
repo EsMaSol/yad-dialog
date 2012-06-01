@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-23 15:10+0300\n"
+"POT-Creation-Date: 2012-06-01 16:01+0300\n"
 "PO-Revision-Date: 2009-11-30 16:53+0100\n"
 "Last-Translator: Manfred Mueller aka Quax<mmueller@live-modules.org>\n"
 "Language-Team: German translations at Lin2Go <mmueller@live-modules.org>\n"
@@ -83,36 +83,36 @@ msgstr ""
 msgid "Initial value greater than maximum.\n"
 msgstr "Der Maximalwert muß kleiner als der Minimalwert sein.\n"
 
-#: ../src/form.c:344
+#: ../src/form.c:345
 #, fuzzy
 msgid "Select files"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:353
+#: ../src/form.c:354
 #, fuzzy
 msgid "Select folders"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:418
+#: ../src/form.c:419
 #, fuzzy
 msgid "Select or create file"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:427
+#: ../src/form.c:428
 msgid "Select or create folder"
 msgstr ""
 
-#: ../src/form.c:460
+#: ../src/form.c:461
 #, fuzzy
 msgid "Select date"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:602
+#: ../src/form.c:603
 #, fuzzy
 msgid "Select file"
 msgstr "Datei öffnen"
 
-#: ../src/form.c:609
+#: ../src/form.c:610
 msgid "Select folder"
 msgstr ""
 
@@ -126,14 +126,14 @@ msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
-#: ../src/main.c:93 ../src/main.c:234
+#: ../src/main.c:97 ../src/main.c:226
 #, c-format
 msgid "%d sec"
 msgstr ""
 
-#: ../src/main.c:610
+#: ../src/main.c:604
 #, c-format
-msgid "Unable parse command line: %s\n"
+msgid "Unable to parse command line: %s\n"
 msgstr "Kann Befehlszeile nicht einlesen: %s\n"
 
 #: ../src/notification.c:82
@@ -155,15 +155,15 @@ msgstr "Befehl '%s' unbekannt\n"
 msgid "Yad notification"
 msgstr "Yad Benachrichtigung"
 
-#: ../src/list.c:760
+#: ../src/list.c:755
 msgid "Add row"
 msgstr "Reihe hinzufügen"
 
-#: ../src/list.c:769
+#: ../src/list.c:764
 msgid "Delete row"
 msgstr "Reihe löschen"
 
-#: ../src/list.c:798
+#: ../src/list.c:793
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Keine Spaltentitel für Listendialog angegeben\n"

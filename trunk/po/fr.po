@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-23 15:10+0300\n"
+"POT-Creation-Date: 2012-06-01 16:01+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Yannou90 <windaube.non.merci@gmail.com>\n"
 "Language-Team: Français\n"
@@ -91,32 +91,32 @@ msgstr "Valeur initial inférieur à la minimal.\n"
 msgid "Initial value greater than maximum.\n"
 msgstr "Valeur initial supérieur à la maximal.\n"
 
-#: ../src/form.c:344
+#: ../src/form.c:345
 msgid "Select files"
 msgstr "Sélectionner _tous les fichiers"
 
-#: ../src/form.c:353
+#: ../src/form.c:354
 #, fuzzy
 msgid "Select folders"
 msgstr "Choisir un répertoire"
 
-#: ../src/form.c:418
+#: ../src/form.c:419
 msgid "Select or create file"
 msgstr "Sélectionner ou créer le fichier"
 
-#: ../src/form.c:427
+#: ../src/form.c:428
 msgid "Select or create folder"
 msgstr "Sélectionner ou créer le dossier"
 
-#: ../src/form.c:460
+#: ../src/form.c:461
 msgid "Select date"
 msgstr "Sélectionner une date"
 
-#: ../src/form.c:602
+#: ../src/form.c:603
 msgid "Select file"
 msgstr "Sélectionner le fichier"
 
-#: ../src/form.c:609
+#: ../src/form.c:610
 msgid "Select folder"
 msgstr "Choisir un répertoire"
 
@@ -130,14 +130,14 @@ msgstr "Impossible d'analyser le fichier %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "impossible d'ouvrir le répertoire  %s: %s\n"
 
-#: ../src/main.c:93 ../src/main.c:234
+#: ../src/main.c:97 ../src/main.c:226
 #, c-format
 msgid "%d sec"
 msgstr "%d sec"
 
-#: ../src/main.c:610
+#: ../src/main.c:604
 #, c-format
-msgid "Unable parse command line: %s\n"
+msgid "Unable to parse command line: %s\n"
 msgstr "Impossible d'analyser la ligne de commande: %s\n"
 
 #: ../src/notification.c:82
@@ -159,15 +159,15 @@ msgstr "Commande inconnue: '%s'\n"
 msgid "Yad notification"
 msgstr "Yad notification"
 
-#: ../src/list.c:760
+#: ../src/list.c:755
 msgid "Add row"
 msgstr "Ajouter une ligne"
 
-#: ../src/list.c:769
+#: ../src/list.c:764
 msgid "Delete row"
 msgstr "Supprimer la ligne"
 
-#: ../src/list.c:798
+#: ../src/list.c:793
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Pas de titre de colonne spécifié pour liste.\n"

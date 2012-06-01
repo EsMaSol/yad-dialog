@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad 0.17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-23 15:10+0300\n"
+"POT-Creation-Date: 2012-06-01 16:01+0300\n"
 "PO-Revision-Date: 2012-02-28 16:08+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -77,31 +77,31 @@ msgstr "初始值少於最小值。\n"
 msgid "Initial value greater than maximum.\n"
 msgstr "初始值大於最大值。\n"
 
-#: ../src/form.c:344
+#: ../src/form.c:345
 msgid "Select files"
 msgstr "選取檔案"
 
-#: ../src/form.c:353
+#: ../src/form.c:354
 msgid "Select folders"
 msgstr "選取資料夾"
 
-#: ../src/form.c:418
+#: ../src/form.c:419
 msgid "Select or create file"
 msgstr "選取或建立檔案"
 
-#: ../src/form.c:427
+#: ../src/form.c:428
 msgid "Select or create folder"
 msgstr "選取或建立資料夾"
 
-#: ../src/form.c:460
+#: ../src/form.c:461
 msgid "Select date"
 msgstr "選取日期"
 
-#: ../src/form.c:602
+#: ../src/form.c:603
 msgid "Select file"
 msgstr "選取檔案"
 
-#: ../src/form.c:609
+#: ../src/form.c:610
 msgid "Select folder"
 msgstr "選取資料夾"
 
@@ -115,14 +115,14 @@ msgstr "無法剖析檔案 %s：%s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "無法開啟目錄 %s：%s\n"
 
-#: ../src/main.c:93 ../src/main.c:234
+#: ../src/main.c:97 ../src/main.c:226
 #, c-format
 msgid "%d sec"
 msgstr "%d 秒"
 
-#: ../src/main.c:610
+#: ../src/main.c:604
 #, c-format
-msgid "Unable parse command line: %s\n"
+msgid "Unable to parse command line: %s\n"
 msgstr "無法剖析命令列：%s\n"
 
 #: ../src/notification.c:82
@@ -144,15 +144,15 @@ msgstr "不明命令『%s』\n"
 msgid "Yad notification"
 msgstr "Yad 通知"
 
-#: ../src/list.c:760
+#: ../src/list.c:755
 msgid "Add row"
 msgstr "加入列"
 
-#: ../src/list.c:769
+#: ../src/list.c:764
 msgid "Delete row"
 msgstr "刪除列"
 
-#: ../src/list.c:798
+#: ../src/list.c:793
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "沒有指定的欄標題用於清單對話框。\n"

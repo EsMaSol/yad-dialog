@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-23 15:10+0300\n"
+"POT-Creation-Date: 2012-06-01 16:01+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -83,31 +83,31 @@ msgstr "Начальное значение меньше минимальног�
 msgid "Initial value greater than maximum.\n"
 msgstr "Начальное значение больше маскимального.\n"
 
-#: ../src/form.c:344
+#: ../src/form.c:345
 msgid "Select files"
 msgstr "Выбор файлов"
 
-#: ../src/form.c:353
+#: ../src/form.c:354
 msgid "Select folders"
 msgstr "Выбор каталогов"
 
-#: ../src/form.c:418
+#: ../src/form.c:419
 msgid "Select or create file"
 msgstr "Выбор или создание файла"
 
-#: ../src/form.c:427
+#: ../src/form.c:428
 msgid "Select or create folder"
 msgstr "Выбор или создание каталога"
 
-#: ../src/form.c:460
+#: ../src/form.c:461
 msgid "Select date"
 msgstr "Выбор даты"
 
-#: ../src/form.c:602
+#: ../src/form.c:603
 msgid "Select file"
 msgstr "Выбор файла"
 
-#: ../src/form.c:609
+#: ../src/form.c:610
 msgid "Select folder"
 msgstr "Выбор каталога"
 
@@ -121,14 +121,14 @@ msgstr "Не могу разобрать файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не могу открыть каталог %s: %s\n"
 
-#: ../src/main.c:93 ../src/main.c:234
+#: ../src/main.c:97 ../src/main.c:226
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:610
+#: ../src/main.c:604
 #, c-format
-msgid "Unable parse command line: %s\n"
+msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
 
 #: ../src/notification.c:82
@@ -150,15 +150,15 @@ msgstr "Неизвестная команда '%s'\n"
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:760
+#: ../src/list.c:755
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:769
+#: ../src/list.c:764
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:798
+#: ../src/list.c:793
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
