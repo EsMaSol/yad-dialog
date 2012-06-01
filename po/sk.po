@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-23 15:10+0300\n"
+"POT-Creation-Date: 2012-06-01 16:01+0300\n"
 "PO-Revision-Date: 2011-09-05 07:57+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <debian-l10n-slovak@lists.debian.org>\n"
@@ -81,34 +81,34 @@ msgstr "Počiatočná hodnota je menšia ako minimálna.\n"
 msgid "Initial value greater than maximum.\n"
 msgstr "Maximálna hodnota je väčšia ako minimálna.\n"
 
-#: ../src/form.c:344
+#: ../src/form.c:345
 msgid "Select files"
 msgstr "Vyberte súbory"
 
-#: ../src/form.c:353
+#: ../src/form.c:354
 #, fuzzy
 msgid "Select folders"
 msgstr "Vyberte pole"
 
-#: ../src/form.c:418
+#: ../src/form.c:419
 #, fuzzy
 msgid "Select or create file"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:427
+#: ../src/form.c:428
 #, fuzzy
 msgid "Select or create folder"
 msgstr "Vyberte pole"
 
-#: ../src/form.c:460
+#: ../src/form.c:461
 msgid "Select date"
 msgstr "Vyberte dátum"
 
-#: ../src/form.c:602
+#: ../src/form.c:603
 msgid "Select file"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:609
+#: ../src/form.c:610
 msgid "Select folder"
 msgstr "Vyberte pole"
 
@@ -122,14 +122,14 @@ msgstr "Nemožno spracovať súbor %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Nemožno otvoriť adresár %s: %s\n"
 
-#: ../src/main.c:93 ../src/main.c:234
+#: ../src/main.c:97 ../src/main.c:226
 #, c-format
 msgid "%d sec"
 msgstr "%d s"
 
-#: ../src/main.c:610
+#: ../src/main.c:604
 #, c-format
-msgid "Unable parse command line: %s\n"
+msgid "Unable to parse command line: %s\n"
 msgstr "Nemožno spracovať príkazový riadok: %s\n"
 
 #: ../src/notification.c:82
@@ -151,15 +151,15 @@ msgstr "Neznámy príkaz '%s'\n"
 msgid "Yad notification"
 msgstr "Informačná ikona Yad"
 
-#: ../src/list.c:760
+#: ../src/list.c:755
 msgid "Add row"
 msgstr "Pridá riadok"
 
-#: ../src/list.c:769
+#: ../src/list.c:764
 msgid "Delete row"
 msgstr "Odstráni riadok"
 
-#: ../src/list.c:798
+#: ../src/list.c:793
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Neboli zadané mená stĺpcov pre dialóg Zoznam.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-23 15:10+0300\n"
+"POT-Creation-Date: 2012-06-01 16:01+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -40,14 +40,14 @@ msgid ""
 msgstr ""
 "YAD - це вільна програма; ви можете розповсюджувати її та/чи змінювати на "
 "умовах Загальної громадської ліцензії GNU, опублікованої Фондом вільного "
-"програмного забезпечення; або версії 3 цієї ліцензії, або (на ваш вибір) будь-якої "
-"пізнішої версії.\n"
+"програмного забезпечення; або версії 3 цієї ліцензії, або (на ваш вибір) "
+"будь-якої пізнішої версії.\n"
 "Ця програма розповсюджується в сподіванні на те, що вона буде корисною, але "
 "БЕЗ БУДЬ-ЯКИХ ГАРАНТІЙ, в тому числі без неявної гарантії КОМЕРЦІЙНОЇ "
 "ЦІННОСТІ чи ПРИДАТНОСТІ ДЛЯ БУДЬ-ЯКИХ ЦІЛЕЙ. Докладніше про це дивіться "
 "Загальну громадську ліцензію GNU.\n"
-"Ви мали отримати копію Загальної громадської ліцензії GNU разом з цією програмою; "
-"якщо це не так, дивіться <http://www.gnu.org/licenses/>."
+"Ви мали отримати копію Загальної громадської ліцензії GNU разом з цією "
+"програмою; якщо це не так, дивіться <http://www.gnu.org/licenses/>."
 
 #: ../src/about.c:50
 msgid ""
@@ -71,43 +71,43 @@ msgstr "Не можу відкрити файлу %s: %s\n"
 msgid "Maximum value must be greater than minimum value.\n"
 msgstr "Максимальне значення повинне бути більше за мінімальне.\n"
 
+# # FIXME: "Initial value IS less than minimal.\n" 
 #: ../src/entry.c:173 ../src/scale.c:48
-## FIXME: "Initial value IS less than minimal.\n" 
 #, c-format
-msgid "Initial value less than minimal.\n" 
+msgid "Initial value less than minimal.\n"
 msgstr "Початкове значення - менше за мінімальне.\n"
 
+# # FIXME: "Initial value IS greater than maximum.\n"
 #: ../src/entry.c:178 ../src/scale.c:53
 #, c-format
-## FIXME: "Initial value IS greater than maximum.\n"
 msgid "Initial value greater than maximum.\n"
 msgstr "Початкове значення - більше за максимальне.\n"
 
-#: ../src/form.c:344
+#: ../src/form.c:345
 msgid "Select files"
 msgstr "Вибір файлу"
 
-#: ../src/form.c:353
+#: ../src/form.c:354
 msgid "Select folders"
 msgstr "Вибір каталогів"
 
-#: ../src/form.c:418
+#: ../src/form.c:419
 msgid "Select or create file"
 msgstr "Вибір або створення файлу"
 
-#: ../src/form.c:427
+#: ../src/form.c:428
 msgid "Select or create folder"
 msgstr "Вибір або створення каталогу"
 
-#: ../src/form.c:460
+#: ../src/form.c:461
 msgid "Select date"
 msgstr "Вибір дати"
 
-#: ../src/form.c:602
+#: ../src/form.c:603
 msgid "Select file"
 msgstr "Вибір файлу"
 
-#: ../src/form.c:609
+#: ../src/form.c:610
 msgid "Select folder"
 msgstr "Вибір каталогу"
 
@@ -121,14 +121,14 @@ msgstr "Не можу розібрати файлу %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталогу %s: %s\n"
 
-#: ../src/main.c:93 ../src/main.c:234
+#: ../src/main.c:97 ../src/main.c:226
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:610
+#: ../src/main.c:604
 #, c-format
-msgid "Unable parse command line: %s\n"
+msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
 
 #: ../src/notification.c:82
@@ -150,15 +150,15 @@ msgstr "Невідома команда '%s'\n"
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
-#: ../src/list.c:760
+#: ../src/list.c:755
 msgid "Add row"
 msgstr "Додати рядок"
 
-#: ../src/list.c:769
+#: ../src/list.c:764
 msgid "Delete row"
 msgstr "Прибрати рядок"
 
-#: ../src/list.c:798
+#: ../src/list.c:793
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовки стовпчиків для діалогу зі списком\n"
@@ -278,8 +278,8 @@ msgstr "Не показувати кнопки"
 #: ../src/option.c:155
 msgid "Set buttons layout type (spread, edge, start, end or center)"
 msgstr "Задати тип розміщення кнопок (spread, edge, start, end або center)"
-## (розкидано, по краю, на початку, по центру)
 
+# # (розкидано, по краю, на початку, по центру)
 #: ../src/option.c:161
 msgid "Don't use pango markup language in dialog's text"
 msgstr "Не використовувати розмітку pango в тексті"
@@ -682,8 +682,8 @@ msgid ""
 "Set the quick search column. Default is first column. Set it to 0 for "
 "disable searching"
 msgstr ""
-"Задати стовпчик швидкого пошуку. Без вказівки використовується перший стовпчик. "
-"0 забороняє пошук"
+"Задати стовпчик швидкого пошуку. Без вказівки використовується перший "
+"стовпчик. 0 забороняє пошук"
 
 #: ../src/option.c:702
 msgid "Set the limit of rows in list"
@@ -1224,4 +1224,3 @@ msgstr "Переглядач іконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Перегляд теми іконок GTK"
-

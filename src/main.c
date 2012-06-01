@@ -601,7 +601,7 @@ main (gint argc, gchar ** argv)
   g_option_context_parse (ctx, &argc, &argv, &err);
   if (err)
     {
-      g_printerr (_("Unable parse command line: %s\n"), err->message);
+      g_printerr (_("Unable to parse command line: %s\n"), err->message);
       return -1;
     }
   yad_set_mode ();
