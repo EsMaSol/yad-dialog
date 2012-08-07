@@ -72,6 +72,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               continue;
             }
 
+      /* remove eol */
+
 	  value = g_strsplit(string->str, ":", 2);
 	  num = atoi (value[0]) - 1;
 	  if (num < 0 || num > nbars)
@@ -86,10 +88,13 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 	    {
 	      if (value[1] && value[1][0] == '#')
 		{
-		  gchar *match;
+		  gchar *match, *p;
 
 		  /* We have a comment, so let's try to change the label */
-		  match = g_strcompress (g_strstrip (string->str + 1));
+		  match = g_strcompress (value[1] + 1);
+		  p = g_strrstr (match, "\n");
+		  if (p)
+		    *p = '\0';
 		  gtk_progress_bar_set_text (pb, match);
 		  g_free (match);
 		}
