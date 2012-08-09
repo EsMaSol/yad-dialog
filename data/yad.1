@@ -316,7 +316,7 @@ Set the preview text.
 .SS Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fICLR\fP,\fIBTN\fP, \fILBL\fP or \fITXT\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fICLR\fP, \fIBTN\fP, \fILBL\fP or \fITXT\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -353,6 +353,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBLBL\fP - text label. If field name is empty, horisontal separator line will be shown.
 .br
 \fBTXT\fP - multiline text entry. This field is always occupy all of form width.
+
+Without type field will be a simple text entry.
 .TP
 .B \-\-align=TYPE
 Set alignment of field labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
