@@ -113,7 +113,7 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "height", "Default dialog height", NULL);
   g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
   g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
-  g_key_file_set_integer (kf, "General", "timeout_indicator", settings.timeout);
+  g_key_file_set_string (kf, "General", "timeout_indicator", settings.to_indicator);
   g_key_file_set_comment (kf, "General", "timeout_indicator", 
 			  "Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
