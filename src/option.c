@@ -800,7 +800,7 @@ static GOptionEntry notification_options[] = {
   { "separator", 0,
     G_OPTION_FLAG_NOALIAS,
     G_OPTION_ARG_STRING,
-    &options.common_data.item_separator,
+    &options.common_data.separator,
     N_("Set separator character for menu values"),
     N_("SEPARATOR") },
   { "item-separator", 0,
