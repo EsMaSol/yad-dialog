@@ -136,25 +136,30 @@ progress_create_widget (GtkWidget * dlg)
   GtkWidget *w;
   GIOChannel *channel;
 
-  w = progress_bar = gtk_progress_bar_new ();
+  // fix it when vertical specified
+  w = gtk_alignment_new (0.5, 0.5, 1, 0);
+
+  progress_bar = gtk_progress_bar_new ();
+  gtk_container_add (GTK_CONTAINER (w), progress_bar);
+
   gtk_widget_set_name (w, "yad-progress-widget");
 #if GTK_CHECK_VERSION(3,0,0)
-  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
+  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress_bar), TRUE);
 #endif
 
   if (options.progress_data.percentage > 100)
     options.progress_data.percentage = 100;
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w),
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
                                  options.progress_data.percentage / 100.0);
   if (options.progress_data.progress_text)
-    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w),
+    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar),
                                options.progress_data.progress_text);
 #if GTK_CHECK_VERSION(3,0,0)
-  gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w),
+  gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (progress_bar),
                                  options.progress_data.rtl);
 #else
   if (options.progress_data.rtl)
-    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w),
+    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (progress_bar),
                                       GTK_PROGRESS_RIGHT_TO_LEFT);
 #endif
 
