@@ -28,13 +28,13 @@ yad_SOURCES = 			\
 	yad.h			\
 	calendar.xpm
 
-yad_CFLAGS = $(YAD_CFLAGS)
-yad_LDADD = $(YAD_LIBS)
+yad_CFLAGS = $(GTK_CFLAGS)
+yad_LDADD = $(GTK_LIBS)
 
 if BUILD_IB
 bin_PROGRAMS += yad-icon-browser
 
 yad_icon_browser_SOURCES = browser.c
-yad_icon_browser_CFLAGS = $(YAD_CFLAGS)
-yad_icon_browser_LDADD = $(YAD_LIBS)
+yad_icon_browser_CFLAGS = $(GTK_CFLAGS)
+yad_icon_browser_LDADD = $(GTK_LIBS)
 endif
