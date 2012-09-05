@@ -136,13 +136,16 @@ popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
 {
   gchar *cmd = (gchar *) data;
 
-  if (g_ascii_strcasecmp (cmd, "quit") == 0)
+  if (cmd)
     {
-      exit_code = YAD_RESPONSE_OK;
-      gtk_main_quit ();
+      if (g_ascii_strcasecmp (cmd, "quit") == 0)
+        {
+          exit_code = YAD_RESPONSE_OK;
+          gtk_main_quit ();
+        }
+      else
+        g_spawn_command_line_async (cmd, NULL);
     }
-  else
-    g_spawn_command_line_async (cmd, NULL);
 }
 
 static void
@@ -206,7 +209,7 @@ handle_stdin (GIOChannel * channel,
       do
         {
           gint status;
-          gchar *command, *value, **args;
+          gchar *command = NULL, *value = NULL, **args;
 
           do
             {
@@ -235,12 +238,13 @@ handle_stdin (GIOChannel * channel,
 
 	  args = g_strsplit (string->str, ":", 2);
           command = g_strdup (args[0]);
-          value = g_strdup (args[1]);
+          if (args[1])  
+            value = g_strdup (args[1]);
 	  g_strfreev (args);
 	  if (value)
 	    g_strstrip (value);
 
-          if (!g_ascii_strcasecmp (command, "icon"))
+          if (!g_ascii_strcasecmp (command, "icon") && value)
             {
               g_free (icon);
               icon = g_strdup (value);
@@ -291,7 +295,8 @@ handle_stdin (GIOChannel * channel,
           else if (!g_ascii_strcasecmp (command, "action"))
             {
               g_free (action);
-              action = g_strdup (value);
+              if (value)
+                action = g_strdup (value);
             }
           else if (!g_ascii_strcasecmp (command, "quit"))
             {
@@ -312,9 +317,16 @@ handle_stdin (GIOChannel * channel,
                 {
                   gchar **s = g_strsplit (menu_vals[i], options.common_data.item_separator, 3);
                   mdata = g_new0 (MenuData, 1);
-                  mdata->name = g_strdup (s[0]);
-                  mdata->action = g_strdup (s[1]);
-                  mdata->icon = g_strdup (s[2]);
+                  if (s[0])
+                    {
+                      mdata->name = g_strdup (s[0]);
+                      if (s[1])
+                        {
+                          mdata->action = g_strdup (s[1]);
+                          if (s[2])
+                            mdata->icon = g_strdup (s[2]);
+                        }
+                    }
                   menu_data = g_slist_append (menu_data, mdata);
                   g_strfreev (s);
                   i++;
