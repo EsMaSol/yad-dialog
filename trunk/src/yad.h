@@ -409,7 +409,12 @@ void write_settings (void);
 
 GdkPixbuf * get_pixbuf (gchar *name, YadIconSize size);
 
+#ifdef __clang__
+extern inline void strip_new_line (gchar *str);
+#else
 inline void strip_new_line (gchar *str);
+#endif
+
 gchar **split_arg (const gchar *str);
 
 char *escape_markup (char *str);
