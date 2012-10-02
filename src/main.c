@@ -331,6 +331,7 @@ create_dialog (void)
     case YAD_MODE_TEXTINFO:
       main_widget = text_create_widget (dlg);
       break;
+    default: ;
     }
   if (main_widget)
     {
@@ -418,7 +419,7 @@ create_dialog (void)
   /* print xid */
   if (options.print_xid)
     {
-      fprintf (stderr, "0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+      fprintf (stderr, "0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
       fflush (stderr);
     }
 #endif
@@ -507,6 +508,7 @@ create_plug (void)
     case YAD_MODE_TEXTINFO:
       main_widget = text_create_widget (win);
       break;
+    default: ;
     }
   if (main_widget)
     gtk_box_pack_start (GTK_BOX (vbox), main_widget, TRUE, TRUE, 2);
@@ -551,6 +553,7 @@ print_result (void)
     case YAD_MODE_TEXTINFO:
       text_print_result ();
       break;
+    default: ;
     }
 }
 

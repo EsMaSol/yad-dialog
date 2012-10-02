@@ -119,6 +119,7 @@ expand_action (gchar *cmd)
 		    g_free (txt); 
 		    g_free (buf);
 		  }
+		default: ;
 		}
 	      i = j;
 	    }
@@ -256,6 +257,8 @@ set_field_value (guint num, gchar *value)
 	g_free (txt);
 	break;
       }
+
+    default: ;
     }
 }
 
@@ -414,7 +417,7 @@ create_files_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 	    path = g_path_get_dirname (val);
 	}
 
-      if (type = YAD_FIELD_FILE_SAVE)
+      if (type == YAD_FIELD_FILE_SAVE)
 	{
 	  dlg = gtk_file_chooser_dialog_new (_("Select or create file"),
 					     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),

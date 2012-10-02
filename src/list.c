@@ -177,7 +177,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 	      {
 		gint64 nval;
 		gtk_tree_model_get (model, &iter, cnum, &nval, -1);
-		text = g_strdup_printf ("%ld", nval);
+		text = g_strdup_printf ("%ld", (long) nval);
 		break;
 	      }
 	    case YAD_COLUMN_FLOAT:
@@ -195,6 +195,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y,
 		text = g_strdup_printf ("%s", cval);
 		break;
 	      }
+	    default: ;
 	    }
 
 	  if (text)
@@ -645,7 +646,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 		  {
 		    gint64 nval;
 		    gtk_tree_model_get (model, &iter, i, &nval, -1);
-		    g_string_append_printf (args, " %ld", nval);
+		    g_string_append_printf (args, " %ld", (long) nval);
 		    break;
 		  }
 		case YAD_COLUMN_FLOAT:
@@ -889,7 +890,7 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
       {
         gint64 nval;
         gtk_tree_model_get (model, iter, num, &nval, -1);
-        g_printf ("%ld", nval);
+        g_printf ("%ld", (long) nval);
         break;
       }
     case YAD_COLUMN_FLOAT:
