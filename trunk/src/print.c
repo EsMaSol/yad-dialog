@@ -356,6 +356,7 @@ yad_print_run (void)
 	      gtk_print_operation_set_n_pages (op, 1);
 	      g_signal_connect (G_OBJECT (op), "draw-page", G_CALLBACK (draw_page_image), NULL);
 	      break;
+	    default: ;
 	    }
 
 	  if (gtk_print_operation_run (op, act, NULL, &err) == GTK_PRINT_OPERATION_RESULT_ERROR)

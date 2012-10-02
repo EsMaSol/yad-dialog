@@ -49,24 +49,24 @@ create_wins_hash (void)
 
   /* get window list */
   data = gdk_window_get_children (gdk_get_default_root_window ());
-  printf ("%d\n", g_list_length (data));
+  //printf ("%d\n", g_list_length (data));
 
   for (tmp = data; tmp; tmp = tmp->next)
     {
       XClassHint ch;
       GdkWindow *w = (GdkWindow *) tmp->data;
 
-      printf ("0x%X\n", gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)));
+      //printf ("0x%X\n", gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)));
       res = XGetClassHint (gdk_x11_get_default_xdisplay (), 
 			   gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)), &ch);
 
-      printf ("%s - %s\n", ch.res_class, ch.res_name);
+      //printf ("%s - %s\n", ch.res_class, ch.res_name);
       if (res != Success)
 	continue;
       if (strcmp (ch.res_class, "YAD-PLUG") != 0)
 	continue;
       
-      printf ("get %s\n", ch.res_name);
+      //printf ("get %s\n", ch.res_name);
     }
 }
 
