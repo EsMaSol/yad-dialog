@@ -69,7 +69,7 @@ notebook_create_widget (GtkWidget *dlg)
 }
 
 void
-notebook_swallow_child (void)
+notebook_swallow_childs (void)
 {
   guint i, n_tabs;
 
