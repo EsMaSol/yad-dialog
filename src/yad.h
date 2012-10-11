@@ -22,6 +22,9 @@
 
 #include <config.h>
 
+#include <sys/types.h>
+#include <sys/ipc.h>
+
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
@@ -331,7 +334,8 @@ typedef struct {
   gchar *rest_file;
   gchar **extra_data;
 
-  gboolean plug;
+  key_t plug;
+  guint tabnum;
 
 #ifndef G_OS_WIN32
   gboolean kill_parent;

@@ -231,10 +231,16 @@ static GOptionEntry general_options[] = {
     NULL },
   { "plug", 0,
     0,
-    G_OPTION_ARG_NONE,
+    G_OPTION_ARG_INT,
     &options.plug,
     N_("Special type of dialog for XEMBED"),
-    NULL },
+    N_("KEY") },
+  { "tabnum", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.tabnum,
+    N_("Tab nubmer of this dialog"),
+    N_("NUMBER") },
 #ifndef G_OS_WIN32
   { "kill-parent", 0,
     0,
@@ -1462,11 +1468,14 @@ yad_options_init (void)
   options.mode = YAD_MODE_MESSAGE;
   options.rest_file = NULL;
   options.extra_data = NULL;
-  options.plug = FALSE;
 #ifndef G_OS_WIN32
   options.kill_parent = FALSE;
   options.print_xid = FALSE;
 #endif
+  
+  /* plug settings */
+  options.plug = -1;
+  options.tabnum = 0;
 
   /* Initialize general data */
   options.data.dialog_title = NULL;
