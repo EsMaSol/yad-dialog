@@ -78,7 +78,6 @@ notebook_swallow_childs (void)
     {
       GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
 
-      printf ("nb: xid is %u\n", tabs[i].xid);
       if (tabs[i].pid != -1)
 	gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
     }  
