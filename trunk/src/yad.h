@@ -427,11 +427,13 @@ extern inline void strip_new_line (gchar *str);
 inline void strip_new_line (gchar *str);
 #endif
 
-gchar **split_arg (const gchar *str);
+gchar ** split_arg (const gchar *str);
 
-char *escape_markup (char *str);
-char *unescape_markup (char *str);
-char *escape_str (char *str);
+char * escape_markup (char *str);
+char * unescape_markup (char *str);
+char * escape_str (char *str);
+
+YadNTabs * get_tabs (void);
 
 G_END_DECLS
 
