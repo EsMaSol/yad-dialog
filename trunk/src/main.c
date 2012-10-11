@@ -35,6 +35,8 @@
 YadOptions options;
 GtkWidget *dialog = NULL;
 
+YadNTabs *tabs;
+
 #ifndef G_OS_WIN32
 static void
 sa_usr1 (gint sig)

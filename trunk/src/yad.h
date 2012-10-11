@@ -369,6 +369,13 @@ typedef struct {
 
 extern YadSettings settings;
 
+typedef struct {
+    guint pid;
+    guint xid;
+} YadNTabs;
+
+extern YadNTabs *tabs;
+
 void yad_options_init (void);
 GOptionContext * yad_create_context (void);
 void yad_set_mode (void);
