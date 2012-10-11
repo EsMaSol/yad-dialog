@@ -373,3 +373,11 @@ escape_str (char *str)
 
   return res;
 }
+
+YadNTabs *
+get_tabs (void)
+{
+  YadNTabs *t;
+  
+  return t;
+}
