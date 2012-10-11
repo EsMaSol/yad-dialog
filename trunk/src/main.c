@@ -333,6 +333,7 @@ create_dialog (void)
       break;
     default: ;
     }
+
   if (main_widget)
     {
       if (options.data.expander)

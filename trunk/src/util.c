@@ -48,6 +48,7 @@ read_settings (void)
   settings.expand_palette = FALSE;
   settings.term = "xterm -e %s";
   settings.ignore_unknown = TRUE;
+  settings.max_tab = 100;
 
   filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
 
@@ -85,6 +86,8 @@ read_settings (void)
 	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
 	  if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
 	    settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
+	  if (g_key_file_has_key (kf, "General", "max_tab", NULL))
+	    settings.max_tab = g_key_file_get_integer (kf, "General", "max_tab", NULL);
 	}
 
       g_key_file_free (kf);
@@ -132,6 +135,8 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
   g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
   g_key_file_set_comment (kf, "General", "ignore_unknown_options", "Ingnore unknown command-line options", NULL);
+  g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);
+  g_key_file_set_comment (kf, "General", "max_tab", "Maximum number of tabs in notebook", NULL);
 
   context = g_key_file_to_data (kf, NULL, NULL);
 
