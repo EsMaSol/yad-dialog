@@ -435,7 +435,6 @@ create_plug (void)
   GtkWidget *main_widget = NULL;
 
   win = gtk_plug_new (0);
-  gtk_window_set_wmclass (GTK_WINDOW (win), options.plug, "YAD-PLUG");
   /* set window borders */
   if (options.data.borders == -1)
     options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (win));

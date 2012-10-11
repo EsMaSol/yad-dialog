@@ -231,10 +231,10 @@ static GOptionEntry general_options[] = {
     NULL },
   { "plug", 0,
     0,
-    G_OPTION_ARG_STRING,
+    G_OPTION_ARG_NONE,
     &options.plug,
-    N_("Special mode for XEMBED"),
-    N_("FILENAME") },
+    N_("Special type of dialog for XEMBED"),
+    NULL },
 #ifndef G_OS_WIN32
   { "kill-parent", 0,
     0,
@@ -1462,7 +1462,7 @@ yad_options_init (void)
   options.mode = YAD_MODE_MESSAGE;
   options.rest_file = NULL;
   options.extra_data = NULL;
-  options.plug = NULL;
+  options.plug = FALSE;
 #ifndef G_OS_WIN32
   options.kill_parent = FALSE;
   options.print_xid = FALSE;
