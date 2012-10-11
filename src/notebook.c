@@ -32,57 +32,25 @@
 
 static GtkWidget *notebook;
 
-static guint *plugs;
-
-static GHashTable *wins = NULL;
-
-static void
-create_wins_hash (void)
-{
-  Atom type;
-  gint format;
-  gulong i, nitems, bytes_after;
-  GList *data, *tmp;
-  gint res;
-
-  wins = g_hash_table_new (g_str_hash, g_str_equal);
-
-  /* get window list */
-  data = gdk_window_get_children (gdk_get_default_root_window ());
-  //printf ("%d\n", g_list_length (data));
-
-  for (tmp = data; tmp; tmp = tmp->next)
-    {
-      XClassHint ch;
-      GdkWindow *w = (GdkWindow *) tmp->data;
-
-      //printf ("0x%X\n", gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)));
-      res = XGetClassHint (gdk_x11_get_default_xdisplay (), 
-			   gdk_x11_drawable_get_xid (GDK_DRAWABLE (w)), &ch);
-
-      //printf ("%s - %s\n", ch.res_class, ch.res_name);
-      if (res != Success)
-	continue;
-      if (strcmp (ch.res_class, "YAD-PLUG") != 0)
-	continue;
-      
-      //printf ("get %s\n", ch.res_name);
-    }
-}
-
 GtkWidget *
 notebook_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;
   GSList *tab;
+  guint i = 0;
 
   w = notebook = gtk_notebook_new ();
   gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
+  /* get shared memory */
+  tabs = get_tabs (options.notebook_data.key);
+  if (!tabs)
+    exit (-1);
+
   /* add tabs */
   for (tab = options.notebook_data.tabs; tab; tab = tab->next)
     {
-      GtkWidget *l, *s, *e;
+      GtkWidget *l, *s;
 
       l = gtk_label_new (NULL);
       if (!options.data.no_markup)
@@ -91,59 +59,29 @@ notebook_create_widget (GtkWidget *dlg)
 	gtk_label_set_text (GTK_LABEL (l), (gchar *) tab->data);
       gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
 
-      e = gtk_event_box_new ();
-      gtk_container_set_border_width (GTK_CONTAINER (e), options.notebook_data.borders);
-
       s = gtk_socket_new ();
-      gtk_container_add (GTK_CONTAINER (e), s);
+      gtk_container_set_border_width (GTK_CONTAINER (s), options.notebook_data.borders);
 
-      gtk_notebook_append_page (GTK_NOTEBOOK (w), e, l);
+      gtk_notebook_append_page (GTK_NOTEBOOK (w), s, l);
     }
 
   return w;
 }
 
 void
-notebook_swallow_childs (void)
+notebook_swallow_child (void)
 {
-  plugs = g_new0 (guint, g_slist_length (options.notebook_data.tabs));
+  guint i, n_tabs;
 
-  if (options.extra_data)
+  n_tabs = g_slist_length (options.notebook_data.tabs);
+  for (i = 0; i < n_tabs; i++)
     {
-      gint i = 0;
-      
-      create_wins_hash ();
+      GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
 
-      while (options.extra_data[i])
-	{
-	  guint id = 0;
-
-	  /* get client id */
-	  id = strtoul (options.extra_data[i], NULL, 0);
-	  
-	  if (id)
-	    {
-	      /* data is XID */
-	      GtkWidget *e = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
-	      if (e)
-		{
-		  GList *cl;
-
-		  /* add plug to socket */
-		  cl = gtk_container_get_children (GTK_CONTAINER (e));
-		  gtk_socket_add_id (GTK_SOCKET (cl->data), (GdkNativeWindow) id);
-		}
-	    }
-	  else
-	    {
-	      /* data is YAD's plug */
-	    }
-
-	  i++;
-	}
-
-      g_hash_table_destroy (wins);
-    }
+      printf ("nb: xid is %u\n", tabs[i].xid);
+      if (tabs[i].pid != -1)
+	gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
+    }  
 }
 
 void
@@ -154,9 +92,6 @@ notebook_print_result (void)
   n_tabs = g_slist_length (options.notebook_data.tabs);
   for (i = 0; i < n_tabs; i++)
     {
-      if (plugs[i])
-	{
-	}
     }
 }
 

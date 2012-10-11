@@ -430,11 +430,15 @@ create_dialog (void)
   return dlg;
 }
 
-GtkWidget *
+void
 create_plug (void)
 {
   GtkWidget *win, *vbox, *text;
   GtkWidget *main_widget = NULL;
+
+  tabs = get_tabs (options.plug);
+  if (!tabs)
+    exit (-1);
 
   win = gtk_plug_new (0);
   /* set window borders */
@@ -517,7 +521,12 @@ create_plug (void)
 
   gtk_widget_show_all (win);
 
-  return win;
+  /* add plug data */
+  tabs[options.tabnum-1].pid = getpid ();
+  /* get XID of toplevel */
+  tabs[options.tabnum-1].xid = gtk_plug_get_id (GTK_PLUG (win));
+
+  printf ("%d: xid is %u\n", options.tabnum-1, tabs[options.tabnum-1].xid);
 }
 
 void
@@ -654,7 +663,7 @@ main (gint argc, gchar ** argv)
   /* plug mode */
   if (options.plug != -1)
     {
-      dialog = create_plug ();
+      create_plug ();
       gtk_main ();                 
       return ret;
     }
@@ -690,11 +699,9 @@ main (gint argc, gchar ** argv)
           g_signal_connect (G_OBJECT (dialog), "response",
                             G_CALLBACK (confirm_overwrite_cb), NULL);
         }
-      else if (options.mode == YAD_MODE_NOTEBOOK)
-	{
-	  /* add childs to notebook */
-	  notebook_swallow_childs ();
-	}
+      else if (options.mode = YAD_MODE_NOTEBOOK)
+	notebook_swallow_child ();
+
       ret = gtk_dialog_run (GTK_DIALOG (dialog));
       if (options.data.always_print)
         print_result ();

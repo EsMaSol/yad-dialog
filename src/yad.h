@@ -25,6 +25,8 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 
+#include <gdk/gdkx.h>
+
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
@@ -371,8 +373,8 @@ typedef struct {
 extern YadSettings settings;
 
 typedef struct {
-    guint pid;
-    guint xid;
+    pid_t pid;
+    GdkNativeWindow xid;
 } YadNTabs;
 
 extern YadNTabs *tabs;
@@ -434,7 +436,7 @@ char * escape_markup (char *str);
 char * unescape_markup (char *str);
 char * escape_str (char *str);
 
-YadNTabs * get_tabs (void);
+YadNTabs * get_tabs (key_t key);
 
 G_END_DECLS
 

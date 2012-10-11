@@ -21,6 +21,9 @@
 #include <string.h>
 #include <errno.h>
 
+#include <sys/ipc.h>
+#include <sys/shm.h>
+
 #include "yad.h"
 
 #define SETTINGS_FILE "yad.conf"
@@ -375,9 +378,40 @@ escape_str (char *str)
 }
 
 YadNTabs *
-get_tabs (void)
+get_tabs (key_t key)
 {
-  YadNTabs *t;
-  
+  YadNTabs *t = NULL;
+  int shmid, i, new = 0;
+
+  /* get shared memory */
+  if ((shmid = shmget (key, settings.max_tab * sizeof (YadNTabs), 0)) == -1)
+    {
+      if (errno != ENOENT )
+	{
+	  g_printerr ("yad: cannot get shared memory for key %d: %s", key, strerror (errno));
+	  exit (1);
+	}
+      /* try to create it */
+      if ((shmid = shmget (key, settings.max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
+	{
+	  g_printerr ("yad: cannot create shared memory for key %d: %s", key, strerror (errno));
+	  exit (1);
+	}
+      new = 1;
+    }
+
+  /* attach shared memory */
+  if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) -1)
+    {
+      g_printerr ("yad: cannot attach shared memory for key %d: %s", key, strerror (errno));
+      exit (1);
+    }
+
+  if (new)
+    {
+      for (i = 0; i < settings.max_tab; i++)
+	t[i].pid = -1;
+    }
+
   return t;
 }
