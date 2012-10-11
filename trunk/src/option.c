@@ -763,6 +763,12 @@ static GOptionEntry notebook_options[] = {
     &notebook_mode,
     N_("Display notebook dialog"),
     NULL },
+  { "key", 0,
+    0,
+    G_OPTION_ARG_INT,
+    &options.notebook_data.key,
+    N_("Identifier of embedded dialogs"),
+    N_("KEY") },
   { "tab", 0,
     0,
     G_OPTION_ARG_CALLBACK,
@@ -1595,6 +1601,7 @@ yad_options_init (void)
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 0;
+  options.notebook_data.key = -1;
 
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;
