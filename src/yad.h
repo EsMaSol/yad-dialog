@@ -360,6 +360,7 @@ typedef struct {
   GdkPixbuf *big_fallback_image;
   GdkPixbuf *small_fallback_image;
   gchar *term;
+  guint max_tab;
 } YadSettings;
 
 extern YadSettings settings;

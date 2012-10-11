@@ -1,4 +1,4 @@
-INCLUDES = 					\
+AM_CPPFLAGS = 					\
 	-DLOCALEDIR=\""$(datadir)/locale"\"	\
 	@DISABLE_DEPRECATED@
 
