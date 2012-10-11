@@ -40,7 +40,7 @@ static void
 sa_usr1 (gint sig)
 {
   gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_OK);
-  if (options.plug)
+  if (options.plug != -1)
     gtk_main_quit ();
 }
 
@@ -48,7 +48,7 @@ static void
 sa_usr2 (gint sig)
 {
   gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_CANCEL);
-  if (options.plug)
+  if (options.plug != -1)
     gtk_main_quit ();
 }
 #endif
@@ -650,7 +650,7 @@ main (gint argc, gchar ** argv)
     }
 
   /* plug mode */
-  if (options.plug)
+  if (options.plug != -1)
     {
       dialog = create_plug ();
       gtk_main ();                 
