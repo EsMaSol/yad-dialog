@@ -523,10 +523,7 @@ create_plug (void)
 
   /* add plug data */
   tabs[options.tabnum-1].pid = getpid ();
-  /* get XID of toplevel */
   tabs[options.tabnum-1].xid = gtk_plug_get_id (GTK_PLUG (win));
-
-  printf ("%d: xid is %u\n", options.tabnum-1, tabs[options.tabnum-1].xid);
 }
 
 void
