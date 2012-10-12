@@ -714,7 +714,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path,
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, TRUE, -1);
 	    }
 	}
-      else
+      else if (options.plug == -1)
 	gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
     }
 }
