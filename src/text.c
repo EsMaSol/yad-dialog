@@ -171,7 +171,8 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
       (key->state & GDK_CONTROL_MASK))
 #endif
     {
-      gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      if (options.plug == -1)
+        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
       return TRUE;
     }
 
