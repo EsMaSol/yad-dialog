@@ -41,17 +41,19 @@ YadNTabs *tabs;
 static void
 sa_usr1 (gint sig)
 {
-  gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_OK);
   if (options.plug != -1)
     gtk_main_quit ();
+  else
+    gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_OK);
 }
 
 static void
 sa_usr2 (gint sig)
 {
-  gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_CANCEL);
   if (options.plug != -1)
     gtk_main_quit ();
+  else
+    gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_CANCEL);
 }
 #endif
 
@@ -661,7 +663,8 @@ main (gint argc, gchar ** argv)
   if (options.plug != -1)
     {
       create_plug ();
-      gtk_main ();                 
+      gtk_main ();
+      shmdt (tabs); 
       return ret;
     }
 
