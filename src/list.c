@@ -48,7 +48,7 @@ list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 	}
       else
 	gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
-
+      
       return TRUE;
     }
   return FALSE;
@@ -77,7 +77,7 @@ toggled_cb (GtkCellRendererToggle *cell,
 
 static gboolean
 runtoggle (GtkTreeModel *model, GtkTreePath *path, 
-	  GtkTreeIter *iter, gpointer data)
+	   GtkTreeIter *iter, gpointer data)
 {
   gint col = GPOINTER_TO_INT (data);
   gtk_list_store_set (GTK_LIST_STORE (model), iter, col, FALSE, -1);
@@ -86,7 +86,7 @@ runtoggle (GtkTreeModel *model, GtkTreePath *path,
 
 static void
 rtoggled_cb (GtkCellRendererToggle *cell,
-            gchar *path_str, gpointer data)
+	     gchar *path_str, gpointer data)
 {
   gint column;
   GtkTreeIter iter;
@@ -535,6 +535,8 @@ fill_data (gint n_columns)
       gchar **args = options.extra_data;
       gint i = 0;
 
+      gtk_widget_freeze_child_notify (list_view);
+
       while (args[i] != NULL)
         {
           gint j;
@@ -572,11 +574,11 @@ fill_data (gint n_columns)
                   if (pb)
                     g_object_unref (pb);
                   break;
-		case YAD_COLUMN_ATTR_FORE:
-		case YAD_COLUMN_ATTR_BACK:
-		case YAD_COLUMN_ATTR_FONT:
+                case YAD_COLUMN_ATTR_FORE:
+                case YAD_COLUMN_ATTR_BACK:
+                case YAD_COLUMN_ATTR_FONT:
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
-		  break;
+                  break;
                 default:
                   val = escape_markup (args[i]);
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, val, -1);
@@ -585,9 +587,11 @@ fill_data (gint n_columns)
                 }
               i++;
             }
-	  /* set ellipsize */
-	  gtk_list_store_set (GTK_LIST_STORE (model), &iter, n_columns, options.list_data.ellipsize, -1);
+          /* set ellipsize */
+          gtk_list_store_set (GTK_LIST_STORE (model), &iter, n_columns, options.list_data.ellipsize, -1);
         }
+
+      gtk_widget_thaw_child_notify (list_view);
 
       if (settings.always_selected)
 	{
