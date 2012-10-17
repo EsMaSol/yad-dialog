@@ -30,6 +30,10 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
+#if GTK_CHECK_VERSION(3,0,0)
+#include <gtk/gtkx.h>
+#endif
+
 G_BEGIN_DECLS
 
 #define YAD_RESPONSE_OK         0
