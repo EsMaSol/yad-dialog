@@ -374,7 +374,7 @@ extern YadSettings settings;
 
 typedef struct {
     pid_t pid;
-    GdkNativeWindow xid;
+    Window xid;
 } YadNTabs;
 
 extern YadNTabs *tabs;
