@@ -419,12 +419,6 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             }
           while (status == G_IO_STATUS_AGAIN);
 
-          if (status == G_IO_STATUS_EOF)
-            {
-              g_io_channel_shutdown (channel, TRUE, NULL);
-              return FALSE;
-            }
-
           if (status != G_IO_STATUS_NORMAL)
             {
               if (err)
@@ -433,7 +427,9 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                   g_error_free (err);
                   err = NULL;
                 }
-              continue;
+              /* stop handling */
+              g_io_channel_shutdown (channel, TRUE, NULL);
+              return FALSE;
             }
 
           strip_new_line (string->str);

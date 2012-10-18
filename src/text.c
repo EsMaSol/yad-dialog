@@ -333,6 +333,8 @@ handle_stdin (GIOChannel * channel,
               g_error_free (err);
               err = NULL;
             }
+          /* stop handling */
+          g_io_channel_shutdown (channel, TRUE, NULL);
           return FALSE;
         }
 
