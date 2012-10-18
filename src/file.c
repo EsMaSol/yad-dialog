@@ -22,44 +22,41 @@
 static GtkWidget *filechooser;
 
 static void
-file_activated_cb (GtkFileChooser *chooser, gpointer *data)
+file_activated_cb (GtkFileChooser * chooser, gpointer * data)
 {
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 void
-confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data)
+confirm_overwrite_cb (GtkDialog * dlg, gint id, gpointer data)
 {
   if (id != YAD_RESPONSE_OK)
     return;
 
-  if (options.file_data.save &&
-      options.file_data.confirm_overwrite &&
-      !options.common_data.multi)
+  if (options.file_data.save && options.file_data.confirm_overwrite && !options.common_data.multi)
     {
       gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
 
       if (g_file_test (filename, G_FILE_TEST_EXISTS))
-	{
-	  GtkWidget *d;
-	  gint r;
-	  gchar *buf;
+        {
+          GtkWidget *d;
+          gint r;
+          gchar *buf;
 
-	  buf = g_strcompress (options.file_data.confirm_text);
-	  d = gtk_message_dialog_new (GTK_WINDOW (dlg), GTK_DIALOG_DESTROY_WITH_PARENT,
-				      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
-				      "%s", buf);
-	  g_free (buf);
-	  r = gtk_dialog_run (GTK_DIALOG (d));
-	  gtk_widget_destroy (d);
-	  if (r != GTK_RESPONSE_YES)
-	    g_signal_stop_emission_by_name (dlg, "response");
-	}
+          buf = g_strcompress (options.file_data.confirm_text);
+          d = gtk_message_dialog_new (GTK_WINDOW (dlg), GTK_DIALOG_DESTROY_WITH_PARENT,
+                                      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", buf);
+          g_free (buf);
+          r = gtk_dialog_run (GTK_DIALOG (d));
+          gtk_widget_destroy (d);
+          if (r != GTK_RESPONSE_YES)
+            g_signal_stop_emission_by_name (dlg, "response");
+        }
     }
 }
 
 GtkWidget *
-file_create_widget (GtkWidget *dlg)
+file_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
   gchar *dir, *basename;
@@ -92,11 +89,9 @@ file_create_widget (GtkWidget *dlg)
         {
           basename = g_path_get_basename (options.common_data.uri);
           if (options.file_data.save)
-            gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (w),
-                                               basename);
+            gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (w), basename);
           else
-            gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (w),
-					   options.common_data.uri);
+            gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (w), options.common_data.uri);
           g_free (basename);
         }
       g_free (dir);
@@ -120,13 +115,13 @@ file_create_widget (GtkWidget *dlg)
 
           /* Set name */
           for (i = 0; filter_str[i] != '\0'; i++)
-	    {
-	      if (filter_str[i] == '|')
-		break;
-	    }
+            {
+              if (filter_str[i] == '|')
+                break;
+            }
 
           if (filter_str[i] == '|')
-	    name = g_strstrip (g_strndup (filter_str, i));
+            name = g_strstrip (g_strndup (filter_str, i));
 
           if (name)
             {
@@ -147,15 +142,14 @@ file_create_widget (GtkWidget *dlg)
           for (pattern = patterns; *pattern; pattern++)
             gtk_file_filter_add_pattern (filter, *pattern);
 
-	  g_free (name);
+          g_free (name);
           g_strfreev (patterns);
 
           gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (w), filter);
         }
     }
 
-  g_signal_connect (w, "file-activated",
-  		    G_CALLBACK (file_activated_cb), dlg);
+  g_signal_connect (w, "file-activated", G_CALLBACK (file_activated_cb), dlg);
 
   return w;
 }
@@ -168,12 +162,10 @@ file_print_result (void)
   selections = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (filechooser));
   for (iter = selections; iter != NULL; iter = iter->next)
     {
-      g_print ("%s",
-	       g_filename_to_utf8 ((gchar *) iter->data, -1, NULL, NULL,
-				   NULL));
+      g_print ("%s", g_filename_to_utf8 ((gchar *) iter->data, -1, NULL, NULL, NULL));
       g_free (iter->data);
       if (iter->next != NULL)
-	g_print ("%s", options.common_data.separator);
+        g_print ("%s", options.common_data.separator);
     }
   g_print ("\n");
   g_slist_free (selections);

@@ -22,13 +22,13 @@
 static GtkWidget *scale;
 
 static void
-value_changed_cb (GtkWidget *w, gpointer data)
+value_changed_cb (GtkWidget * w, gpointer data)
 {
   g_print ("%.0f\n", gtk_range_get_value (GTK_RANGE (w)));
 }
 
 GtkWidget *
-scale_create_widget (GtkWidget *dlg)
+scale_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
   GtkAdjustment *adj;
@@ -44,15 +44,15 @@ scale_create_widget (GtkWidget *dlg)
   if (options.scale_data.have_value)
     {
       if (options.scale_data.value < options.scale_data.min_value)
-	{
-	  g_printerr (_("Initial value less than minimal.\n"));
-	  options.scale_data.value = options.scale_data.min_value;
-	}
+        {
+          g_printerr (_("Initial value less than minimal.\n"));
+          options.scale_data.value = options.scale_data.min_value;
+        }
       else if (options.scale_data.value > options.scale_data.max_value)
-	{
-	  g_printerr (_("Initial value greater than maximum.\n"));
-	  options.scale_data.value = options.scale_data.max_value;
-	}
+        {
+          g_printerr (_("Initial value greater than maximum.\n"));
+          options.scale_data.value = options.scale_data.max_value;
+        }
     }
   else
     options.scale_data.value = options.scale_data.min_value;
@@ -61,10 +61,9 @@ scale_create_widget (GtkWidget *dlg)
   page = options.scale_data.page == -1 ? options.scale_data.step * 10 : options.scale_data.page;
   /* this type conversion needs only for gtk-2.0 */
   adj = (GtkAdjustment *) gtk_adjustment_new ((double) options.scale_data.value,
-					      (double) options.scale_data.min_value,
-					      (double) options.scale_data.max_value,
-					      (double) options.scale_data.step,
-					      (double) page, 0.0);
+                                              (double) options.scale_data.min_value,
+                                              (double) options.scale_data.max_value,
+                                              (double) options.scale_data.step, (double) page, 0.0);
   if (options.common_data.vertical)
     {
       w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
@@ -80,8 +79,7 @@ scale_create_widget (GtkWidget *dlg)
   gtk_scale_set_digits (GTK_SCALE (w), 0);
 
   if (options.scale_data.print_partial)
-    g_signal_connect (G_OBJECT (w), "value-changed",
-		      G_CALLBACK (value_changed_cb), NULL);
+    g_signal_connect (G_OBJECT (w), "value-changed", G_CALLBACK (value_changed_cb), NULL);
 
   if (options.scale_data.hide_value)
     gtk_scale_set_draw_value (GTK_SCALE (w), FALSE);
@@ -94,10 +92,10 @@ scale_create_widget (GtkWidget *dlg)
 
       pos = options.common_data.vertical ? GTK_POS_LEFT : GTK_POS_BOTTOM;
       for (; m; m = m->next)
-	{
-	  YadScaleMark *mark = (YadScaleMark *) m->data;
-	  gtk_scale_add_mark (GTK_SCALE (w), mark->value, pos, mark->name);
-	}
+        {
+          YadScaleMark *mark = (YadScaleMark *) m->data;
+          gtk_scale_add_mark (GTK_SCALE (w), mark->value, pos, mark->name);
+        }
     }
 
   return w;

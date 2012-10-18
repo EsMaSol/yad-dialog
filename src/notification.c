@@ -46,7 +46,7 @@ static void
 free_menu_data (gpointer data, gpointer udata)
 {
   MenuData *m = (MenuData *) data;
-  
+
   g_free (m->name);
   g_free (m->action);
   g_free (m->icon);
@@ -74,22 +74,19 @@ set_icon (void)
 
   if (g_file_test (icon, G_FILE_TEST_EXISTS))
     {
-      pixbuf =
-        gdk_pixbuf_new_from_file_at_scale (icon, icon_size, icon_size,
-                                           TRUE, &err);
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, icon_size, icon_size, TRUE, &err);
       if (err)
         {
-          g_printerr (_("Could not load notification icon '%s': %s\n"),
-                     icon, err->message);
+          g_printerr (_("Could not load notification icon '%s': %s\n"), icon, err->message);
           g_clear_error (&err);
         }
       if (pixbuf)
-	{
-	  gtk_status_icon_set_from_pixbuf (status_icon, pixbuf);
-	  g_object_unref (pixbuf);
-	}
+        {
+          gtk_status_icon_set_from_pixbuf (status_icon, pixbuf);
+          g_object_unref (pixbuf);
+        }
       else
-	gtk_status_icon_set_from_icon_name (status_icon, "yad");
+        gtk_status_icon_set_from_icon_name (status_icon, "yad");
     }
   else
     gtk_status_icon_set_from_icon_name (status_icon, icon);
@@ -106,8 +103,7 @@ icon_size_changed_cb (GtkStatusIcon * icon, gint size, gpointer data)
 static gboolean
 activate_cb (GtkWidget * widget, YadData * data)
 {
-  if ((action == NULL && !options.common_data.listen) || 
-      (action && g_ascii_strcasecmp (action, "quit") == 0))
+  if ((action == NULL && !options.common_data.listen) || (action && g_ascii_strcasecmp (action, "quit") == 0))
     {
       exit_code = YAD_RESPONSE_OK;
       gtk_main_quit ();
@@ -119,8 +115,7 @@ activate_cb (GtkWidget * widget, YadData * data)
 }
 
 static gboolean
-middle_quit_cb (GtkStatusIcon * icon, GdkEventButton * ev,
-		gpointer data)
+middle_quit_cb (GtkStatusIcon * icon, GdkEventButton * ev, gpointer data)
 {
   if (ev->button == 2)
     {
@@ -149,8 +144,7 @@ popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
 }
 
 static void
-popup_menu_cb (GtkStatusIcon * icon, guint button,
-	       guint activate_time, gpointer data)
+popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer data)
 {
   GtkWidget *menu;
   GtkWidget *item;
@@ -172,31 +166,26 @@ popup_menu_cb (GtkStatusIcon * icon, guint button,
               item = gtk_image_menu_item_new_with_mnemonic (d->name);
               if (pb)
                 {
-                  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-                                                 gtk_image_new_from_pixbuf (pb));
+                  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), gtk_image_new_from_pixbuf (pb));
                   g_object_unref (pb);
                 }
             }
           else
             item = gtk_menu_item_new_with_mnemonic (d->name);
           g_signal_connect (GTK_MENU_ITEM (item), "activate",
-                            G_CALLBACK (popup_menu_item_activate_cb),
-                            (gpointer) d->action);
+                            G_CALLBACK (popup_menu_item_activate_cb), (gpointer) d->action);
         }
       else
-	item = gtk_separator_menu_item_new ();
+        item = gtk_separator_menu_item_new ();
 
       gtk_widget_show (item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
     }
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  gtk_status_icon_position_menu,
-		  icon, button, activate_time);
+  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, gtk_status_icon_position_menu, icon, button, activate_time);
 }
 
 static gboolean
-handle_stdin (GIOChannel * channel,
-	      GIOCondition condition, gpointer data)
+handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
   if ((condition & G_IO_IN) != 0)
     {
@@ -204,7 +193,7 @@ handle_stdin (GIOChannel * channel,
       GError *err = NULL;
 
       string = g_string_new (NULL);
-      while (channel->is_readable == FALSE) ;
+      while (channel->is_readable == FALSE);
 
       do
         {
@@ -213,8 +202,7 @@ handle_stdin (GIOChannel * channel,
 
           do
             {
-              status =
-                g_io_channel_read_line_string (channel, string, NULL, &err);
+              status = g_io_channel_read_line_string (channel, string, NULL, &err);
 
               while (gdk_events_pending ())
                 gtk_main_iteration ();
@@ -234,25 +222,24 @@ handle_stdin (GIOChannel * channel,
               return FALSE;
             }
 
-	  strip_new_line (string->str);
-	  if (!string->str[0])
-	    continue;
+          strip_new_line (string->str);
+          if (!string->str[0])
+            continue;
 
-	  args = g_strsplit (string->str, ":", 2);
+          args = g_strsplit (string->str, ":", 2);
           command = g_strdup (args[0]);
-          if (args[1])  
+          if (args[1])
             value = g_strdup (args[1]);
-	  g_strfreev (args);
-	  if (value)
-	    g_strstrip (value);
+          g_strfreev (args);
+          if (value)
+            g_strstrip (value);
 
           if (!g_ascii_strcasecmp (command, "icon") && value)
             {
               g_free (icon);
               icon = g_strdup (value);
 
-              if (gtk_status_icon_get_visible (status_icon) &&
-                  gtk_status_icon_is_embedded (status_icon))
+              if (gtk_status_icon_get_visible (status_icon) && gtk_status_icon_is_embedded (status_icon))
                 set_icon ();
             }
           else if (!g_ascii_strcasecmp (command, "tooltip"))
@@ -279,20 +266,20 @@ handle_stdin (GIOChannel * channel,
                 }
               else
 #endif
-                if (!g_ascii_strcasecmp (value, "false"))
-                  {
-                    gtk_status_icon_set_visible (status_icon, FALSE);
+              if (!g_ascii_strcasecmp (value, "false"))
+                {
+                  gtk_status_icon_set_visible (status_icon, FALSE);
 #if !GTK_CHECK_VERSION(2,22,0)
-                    gtk_status_icon_set_blinking (status_icon, FALSE);
+                  gtk_status_icon_set_blinking (status_icon, FALSE);
 #endif
-                  }
-                else
-                  {
-                    gtk_status_icon_set_visible (status_icon, TRUE);
+                }
+              else
+                {
+                  gtk_status_icon_set_visible (status_icon, TRUE);
 #if !GTK_CHECK_VERSION(2,22,0)
-                    gtk_status_icon_set_blinking (status_icon, FALSE);
+                  gtk_status_icon_set_blinking (status_icon, FALSE);
 #endif
-                  }
+                }
             }
           else if (!g_ascii_strcasecmp (command, "action"))
             {
@@ -337,10 +324,10 @@ handle_stdin (GIOChannel * channel,
               g_strfreev (menu_vals);
             }
           else
-	    g_printerr (_("Unknown command '%s'\n"), command);
+            g_printerr (_("Unknown command '%s'\n"), command);
 
           g_free (command);
-	  g_free (value);
+          g_free (value);
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
@@ -362,8 +349,7 @@ yad_notification_run ()
   GIOChannel *channel = NULL;
 
   status_icon = gtk_status_icon_new ();
-  g_signal_connect (status_icon, "size-changed",
-                    G_CALLBACK (icon_size_changed_cb), NULL);
+  g_signal_connect (status_icon, "size-changed", G_CALLBACK (icon_size_changed_cb), NULL);
 
   if (options.data.dialog_text)
     {
@@ -383,33 +369,29 @@ yad_notification_run ()
 
   set_icon ();
 
-  g_signal_connect (status_icon, "activate",
-		    G_CALLBACK (activate_cb), NULL);
+  g_signal_connect (status_icon, "activate", G_CALLBACK (activate_cb), NULL);
 
   /* quit on middle click (like press Esc) */
-  g_signal_connect (status_icon, "button-press-event",
-		    G_CALLBACK (middle_quit_cb), NULL);
+  g_signal_connect (status_icon, "button-press-event", G_CALLBACK (middle_quit_cb), NULL);
 
   if (options.common_data.listen)
     {
       channel = g_io_channel_unix_new (0);
       if (channel)
-	{
-	  g_io_channel_set_encoding (channel, NULL, NULL);
-	  g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
-	  g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
+        {
+          g_io_channel_set_encoding (channel, NULL, NULL);
+          g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
+          g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
 
-	  g_signal_connect (status_icon, "popup_menu",
-			    G_CALLBACK (popup_menu_cb), NULL);
-	}
+          g_signal_connect (status_icon, "popup_menu", G_CALLBACK (popup_menu_cb), NULL);
+        }
     }
 
   /* Show icon and wait */
   gtk_status_icon_set_visible (status_icon, TRUE);
 
   if (options.data.timeout > 0)
-    g_timeout_add_seconds (options.data.timeout,
-			   (GSourceFunc) timeout_cb, NULL);
+    g_timeout_add_seconds (options.data.timeout, (GSourceFunc) timeout_cb, NULL);
 
   gtk_main ();
 

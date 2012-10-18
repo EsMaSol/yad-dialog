@@ -40,7 +40,7 @@ typedef struct {
 } DEntry;
 
 static void
-activate_cb (GtkWidget *view, GtkTreePath *path, gpointer data)
+activate_cb (GtkWidget * view, GtkTreePath * path, gpointer data)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -53,10 +53,7 @@ activate_cb (GtkWidget *view, GtkTreePath *path, gpointer data)
     model = gtk_tree_view_get_model (GTK_TREE_VIEW (view));
 
   gtk_tree_model_get_iter (model, &iter, path);
-  gtk_tree_model_get (model, &iter,
-		      COL_COMMAND, &cmd,
-		      COL_TERM, &in_term,
-		      -1);
+  gtk_tree_model_get (model, &iter, COL_COMMAND, &cmd, COL_TERM, &in_term, -1);
 
   if (in_term)
     {
@@ -71,8 +68,7 @@ activate_cb (GtkWidget *view, GtkTreePath *path, gpointer data)
 }
 
 static gboolean
-handle_stdin (GIOChannel * channel,
-              GIOCondition condition, gpointer data)
+handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
   static GtkTreeIter iter;
   static gint column_count = 1;
@@ -92,7 +88,7 @@ handle_stdin (GIOChannel * channel,
       GError *err = NULL;
       GString *string = g_string_new (NULL);
 
-      while (channel->is_readable != TRUE) ;
+      while (channel->is_readable != TRUE);
 
       do
         {
@@ -101,8 +97,7 @@ handle_stdin (GIOChannel * channel,
 
           do
             {
-              status =
-                g_io_channel_read_line_string (channel, string, NULL, &err);
+              status = g_io_channel_read_line_string (channel, string, NULL, &err);
 
               while (gtk_events_pending ())
                 gtk_main_iteration ();
@@ -129,45 +124,45 @@ handle_stdin (GIOChannel * channel,
               column_count = 1;
               row_count++;
               gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, COL_FILENAME, "", -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, COL_FILENAME, "", -1);
             }
 
-	  switch (column_count)
-	    {
-	    case COL_NAME:
-	    case COL_COMMAND:
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
-	      break;
-	    case COL_TOOLTIP:
-	      {
-		gchar *val;
+          switch (column_count)
+            {
+              case COL_NAME:
+              case COL_COMMAND:
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
+                break;
+              case COL_TOOLTIP:
+                {
+                  gchar *val;
 
-		val = escape_markup (string->str);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
-		g_free (val);
-		break;
-	      }
-	    case COL_PIXBUF:
-	      if (options.icons_data.compact)
-		if (*string->str)
-		  pb = get_pixbuf (string->str, YAD_SMALL_ICON);
-		else
-		  pb = NULL;
-	      else
-		pb = get_pixbuf (string->str, YAD_BIG_ICON);
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
-	      if (pb)
-		g_object_unref (pb);
-	      break;
-	    case COL_TERM:
-	      if (g_ascii_strcasecmp (string->str, "true") == 0)
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
-	      else
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
-	      break;
-	    }
+                  val = escape_markup (string->str);
+                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
+                  g_free (val);
+                  break;
+                }
+              case COL_PIXBUF:
+                if (options.icons_data.compact)
+                  if (*string->str)
+                    pb = get_pixbuf (string->str, YAD_SMALL_ICON);
+                  else
+                    pb = NULL;
+                else
+                  pb = get_pixbuf (string->str, YAD_BIG_ICON);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
+                if (pb)
+                  g_object_unref (pb);
+                break;
+              case COL_TERM:
+                if (g_ascii_strcasecmp (string->str, "true") == 0)
+                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
+                else
+                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
+                break;
+            }
 
-	  column_count++;
+          column_count++;
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
@@ -183,7 +178,7 @@ handle_stdin (GIOChannel * channel,
 }
 
 static DEntry *
-parse_desktop_file (gchar *filename)
+parse_desktop_file (gchar * filename)
 {
   DEntry *ent;
   GKeyFile *kf;
@@ -197,53 +192,53 @@ parse_desktop_file (gchar *filename)
       gchar *icon;
 
       if (g_key_file_has_group (kf, "Desktop Entry"))
-	{
-	  gint i;
-	  gchar *val;
+        {
+          gint i;
+          gchar *val;
 
-	  if (options.icons_data.generic)
-	    {
-	      ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "GenericName", NULL, NULL);
-	      if (!ent->name)
-		ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
-	    }
-	  else
-	    ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
-	  /* use filename as a fallback */
-	  if (!ent->name)
-	    {
-	      gchar *ext_pos, *nm = g_path_get_basename (filename);
+          if (options.icons_data.generic)
+            {
+              ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "GenericName", NULL, NULL);
+              if (!ent->name)
+                ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+            }
+          else
+            ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+          /* use filename as a fallback */
+          if (!ent->name)
+            {
+              gchar *ext_pos, *nm = g_path_get_basename (filename);
 
-	      ext_pos = g_strrstr (nm, ".desktop");
-	      if (ext_pos)
-		*ext_pos = '\000';
-	      ent->name = g_strdup (nm);
-	      g_free (nm);
-	    }
-	  val = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
-	  ent->comment = escape_markup (val);
-	  g_free (val);
-	  ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
-	  /* remove possible arguments patterns */
-	  for (i = strlen (ent->command); i > 0; i--)
-	    {
-	      if (ent->command[i] == '%')
-		{
-		  ent->command[i] = '\0';
-		  break;
-		}
-	    }
-	  ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
-	  icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
-	  if (icon)
-	    {
-	      if (options.icons_data.compact)
-		ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
-	      else
-		ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
-	      g_free (icon);
-	    }
-	}
+              ext_pos = g_strrstr (nm, ".desktop");
+              if (ext_pos)
+                *ext_pos = '\000';
+              ent->name = g_strdup (nm);
+              g_free (nm);
+            }
+          val = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+          ent->comment = escape_markup (val);
+          g_free (val);
+          ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
+          /* remove possible arguments patterns */
+          for (i = strlen (ent->command); i > 0; i--)
+            {
+              if (ent->command[i] == '%')
+                {
+                  ent->command[i] = '\0';
+                  break;
+                }
+            }
+          ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
+          icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
+          if (icon)
+            {
+              if (options.icons_data.compact)
+                ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
+              else
+                ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
+              g_free (icon);
+            }
+        }
     }
   else
     g_printerr (_("Unable to parse file %s: %s\n"), filename, err->message);
@@ -254,7 +249,7 @@ parse_desktop_file (gchar *filename)
 }
 
 static void
-read_dir (GtkListStore *store)
+read_dir (GtkListStore * store)
 {
   GDir *dir;
   const gchar *filename;
@@ -263,8 +258,7 @@ read_dir (GtkListStore *store)
   dir = g_dir_open (options.icons_data.directory, 0, &err);
   if (!dir)
     {
-      g_printerr (_("Unable to open directory %s: %s\n"),
-		  options.icons_data.directory, err->message);
+      g_printerr (_("Unable to open directory %s: %s\n"), options.icons_data.directory, err->message);
       return;
     }
 
@@ -275,31 +269,29 @@ read_dir (GtkListStore *store)
       gchar *fullname;
 
       if (!g_str_has_suffix (filename, ".desktop"))
-	continue;
+        continue;
 
       fullname = g_build_filename (options.icons_data.directory, filename, NULL);
       ent = parse_desktop_file (fullname);
       g_free (fullname);
 
       if (ent->name)
-	{
-	  gtk_list_store_append (store, &iter);
-	  gtk_list_store_set (store, &iter,
-			      COL_FILENAME, filename,
-			      COL_NAME, ent->name,
-			      COL_TOOLTIP, ent->comment ? ent->comment : "",
-			      COL_PIXBUF, ent->pixbuf,
-			      COL_COMMAND, ent->command ? ent->command : "",
-			      COL_TERM, ent->in_term,
-			      -1);
-	}
+        {
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter,
+                              COL_FILENAME, filename,
+                              COL_NAME, ent->name,
+                              COL_TOOLTIP, ent->comment ? ent->comment : "",
+                              COL_PIXBUF, ent->pixbuf,
+                              COL_COMMAND, ent->command ? ent->command : "", COL_TERM, ent->in_term, -1);
+        }
 
       /* free desktop entry */
       g_free (ent->name);
       g_free (ent->comment);
       g_free (ent->command);
       if (ent->pixbuf)
-	g_object_unref (ent->pixbuf);
+        g_object_unref (ent->pixbuf);
       g_free (ent);
     }
 
@@ -307,26 +299,21 @@ read_dir (GtkListStore *store)
 }
 
 GtkWidget *
-icons_create_widget (GtkWidget *dlg)
+icons_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
   GtkListStore *store;
 
   w = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   store = gtk_list_store_new (NUM_COLS,
-			      G_TYPE_STRING,
-			      G_TYPE_STRING,
-			      G_TYPE_STRING,
-			      GDK_TYPE_PIXBUF,
-			      G_TYPE_STRING,
-			      G_TYPE_BOOLEAN);
+                              G_TYPE_STRING,
+                              G_TYPE_STRING, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
-					options.icons_data.sort_by_name ? COL_NAME : COL_FILENAME,
-					options.icons_data.descend ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
+                                        options.icons_data.sort_by_name ? COL_NAME : COL_FILENAME,
+                                        options.icons_data.descend ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
 
   if (!options.icons_data.compact)
     {

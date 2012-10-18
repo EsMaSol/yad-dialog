@@ -36,7 +36,7 @@ typedef struct {
 } IconBrowserData;
 
 static gboolean
-key_press_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
+key_press_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
 {
 #if GTK_CHECK_VERSION(2,24,0)
   if (ev->keyval == GDK_KEY_Escape)
@@ -51,7 +51,7 @@ key_press_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
 }
 
 static GtkListStore *
-load_icon_cat (IconBrowserData *data, gchar *cat)
+load_icon_cat (IconBrowserData * data, gchar * cat)
 {
   GtkListStore *store;
   GList *i, *icons;
@@ -68,26 +68,25 @@ load_icon_cat (IconBrowserData *data, gchar *cat)
       GtkTreeIter iter;
       GdkPixbuf *pb, *spb;
 
-      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size,
-					   GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
       if (pb)
-	{
-	  /* scale pixbuf if needed */
-	  w = gdk_pixbuf_get_width (pb);
-	  h = gdk_pixbuf_get_height (pb);
-	  if (w > size || h > size)
-	    {
-	      pb = gdk_pixbuf_scale_simple (spb, size, size, GDK_INTERP_BILINEAR);
-	      g_object_unref (spb);
-	    }
-	}
+        {
+          /* scale pixbuf if needed */
+          w = gdk_pixbuf_get_width (pb);
+          h = gdk_pixbuf_get_height (pb);
+          if (w > size || h > size)
+            {
+              pb = gdk_pixbuf_scale_simple (spb, size, size, GDK_INTERP_BILINEAR);
+              g_object_unref (spb);
+            }
+        }
 
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter, 0, pb, 1, i->data, -1);
 
       if (pb)
-	g_object_unref (pb);
+        g_object_unref (pb);
       g_free (i->data);
     }
   g_list_free (icons);
@@ -98,7 +97,7 @@ load_icon_cat (IconBrowserData *data, gchar *cat)
 }
 
 static void
-select_icon (GtkTreeSelection *sel, IconBrowserData *data)
+select_icon (GtkTreeSelection * sel, IconBrowserData * data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -128,16 +127,16 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
   while (sz[i])
     {
       if (sz[i] == -1)
-	g_string_append (sizes, _("scalable "));
+        g_string_append (sizes, _("scalable "));
       else
-	g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
+        g_string_append_printf (sizes, "%dx%d ", sz[i], sz[i]);
       i++;
     }
   /* free memory */
   g_free (sz);
 
   lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
-			 icon, sizes->str, file ? file : _("built-in"));
+                         icon, sizes->str, file ? file : _("built-in"));
   gtk_label_set_markup (GTK_LABEL (data->label), lbl);
   g_string_free (sizes, TRUE);
   g_free (lbl);
@@ -147,7 +146,7 @@ select_icon (GtkTreeSelection *sel, IconBrowserData *data)
 }
 
 static void
-select_cat (GtkTreeSelection *sel, IconBrowserData *data)
+select_cat (GtkTreeSelection * sel, IconBrowserData * data)
 {
   GtkTreeModel *model;
   GtkListStore *store;
@@ -169,7 +168,7 @@ select_cat (GtkTreeSelection *sel, IconBrowserData *data)
 }
 
 gint
-main (gint argc, gchar *argv[])
+main (gint argc, gchar * argv[])
 {
   IconBrowserData *data;
   gchar **themes = NULL;
@@ -181,8 +180,9 @@ main (gint argc, gchar *argv[])
   GtkWidget *w, *p, *box;
 
   GOptionEntry entrs[] = {
-    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL },
-    { NULL }
+    {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL}
+    ,
+    {NULL}
   };
 
   data = g_new0 (IconBrowserData, 1);
@@ -244,9 +244,7 @@ main (gint argc, gchar *argv[])
 
   /* create category list */
   w = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w),
-				  GTK_POLICY_AUTOMATIC,
-				  GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
   gtk_paned_add1 (GTK_PANED (p), w);
 
@@ -279,9 +277,7 @@ main (gint argc, gchar *argv[])
 
   /* create icons list */
   w = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w),
-				  GTK_POLICY_AUTOMATIC,
-				  GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
   gtk_paned_add2 (GTK_PANED (p), w);
 

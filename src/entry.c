@@ -25,19 +25,19 @@ static GtkWidget *entry;
 static gboolean is_combo = FALSE;
 
 static void
-entry_activate_cb (GtkEntry *entry, gpointer data)
+entry_activate_cb (GtkEntry * entry, gpointer data)
 {
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 static gboolean
-combo_activate_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
+combo_activate_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
 {
 #if GTK_CHECK_VERSION(2,24,0)
   if (ev->keyval == GDK_KEY_Return || ev->keyval == GDK_KEY_KP_Enter)
 #else
   if (ev->keyval == GDK_Return || ev->keyval == GDK_KP_Enter)
-#endif  
+#endif
     {
       gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
       return TRUE;
@@ -46,8 +46,7 @@ combo_activate_cb (GtkWidget *w, GdkEventKey *ev, gpointer data)
 }
 
 static void
-icon_cb (GtkEntry *entry, GtkEntryIconPosition pos,
-         GdkEventButton *event, gpointer data)
+icon_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * event, gpointer data)
 {
   if (event->button == 1)
     {
@@ -55,12 +54,12 @@ icon_cb (GtkEntry *entry, GtkEntryIconPosition pos,
 
       switch (pos)
         {
-        case GTK_ENTRY_ICON_PRIMARY:
-          cmd = options.entry_data.licon_action;
-          break;
-        case GTK_ENTRY_ICON_SECONDARY:
-          cmd = options.entry_data.ricon_action;
-          break;
+          case GTK_ENTRY_ICON_PRIMARY:
+            cmd = options.entry_data.licon_action;
+            break;
+          case GTK_ENTRY_ICON_SECONDARY:
+            cmd = options.entry_data.ricon_action;
+            break;
         }
 
       if (cmd)
@@ -112,7 +111,7 @@ create_completion_model (void)
 }
 
 GtkWidget *
-entry_create_widget (GtkWidget *dlg)
+entry_create_widget (GtkWidget * dlg)
 {
   GtkWidget *c, *w = NULL;
 
@@ -135,10 +134,13 @@ entry_create_widget (GtkWidget *dlg)
 
   if (options.entry_data.numeric)
     {
-      gdouble min, max, step,val; 
+      gdouble min, max, step, val;
       guint prec;
 
-      min = 0.0; max = 65535.0; step = 1.0; prec = 0;
+      min = 0.0;
+      max = 65535.0;
+      step = 1.0;
+      prec = 0;
 
       if (options.extra_data && options.extra_data[0])
         {
@@ -150,7 +152,8 @@ entry_create_widget (GtkWidget *dlg)
           if (options.extra_data[3])
             {
               prec = (guint) g_ascii_strtoull (options.extra_data[3], NULL, 0);
-              if (prec > 20) prec = 20;              
+              if (prec > 20)
+                prec = 20;
             }
         }
 
@@ -165,7 +168,8 @@ entry_create_widget (GtkWidget *dlg)
           if (min >= max)
             {
               g_printerr (_("Maximum value must be greater than minimum value.\n"));
-              min = 0.0; max = 65535.0;
+              min = 0.0;
+              max = 65535.0;
             }
 
           if (val < min)
@@ -182,8 +186,7 @@ entry_create_widget (GtkWidget *dlg)
           gtk_spin_button_set_value (GTK_SPIN_BUTTON (c), val);
         }
     }
-  else if (!options.entry_data.completion &&
-      options.extra_data && *options.extra_data)
+  else if (!options.entry_data.completion && options.extra_data && *options.extra_data)
     {
       gint i = 0;
 
@@ -194,22 +197,22 @@ entry_create_widget (GtkWidget *dlg)
 #else
           c = gtk_combo_box_entry_new_text ();
 #endif
-	  gtk_widget_set_name (c, "yad-entry-edit-combo");
+          gtk_widget_set_name (c, "yad-entry-edit-combo");
           entry = gtk_bin_get_child (GTK_BIN (c));
-	  if (options.entry_data.licon)
-	    {
-	      GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
+          if (options.entry_data.licon)
+            {
+              GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
 
-	      if (pb)
-		gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
-	    }
-	  if (options.entry_data.ricon)
-	    {
-	      GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
+              if (pb)
+                gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
+            }
+          if (options.entry_data.ricon)
+            {
+              GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
 
-	      if (pb)
-		gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
-	    }
+              if (pb)
+                gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
+            }
         }
       else
         {
@@ -218,7 +221,7 @@ entry_create_widget (GtkWidget *dlg)
 #else
           c = entry = gtk_combo_box_new_text ();
 #endif
-	  gtk_widget_set_name (c, "yad-entry-combo");
+          gtk_widget_set_name (c, "yad-entry-combo");
           is_combo = TRUE;
         }
 
@@ -235,15 +238,13 @@ entry_create_widget (GtkWidget *dlg)
       if (options.entry_data.entry_text)
         {
 #if GTK_CHECK_VERSION(2,24,0)
-          gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (c),
-                                      options.entry_data.entry_text);
+          gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (c), options.entry_data.entry_text);
 #else
-          gtk_combo_box_prepend_text (GTK_COMBO_BOX (c),
-                                      options.entry_data.entry_text);
+          gtk_combo_box_prepend_text (GTK_COMBO_BOX (c), options.entry_data.entry_text);
 #endif
         }
 
-      /* set first iter active */        
+      /* set first iter active */
       if (!options.common_data.editable)
         gtk_combo_box_set_active (GTK_COMBO_BOX (c), 0);
     }
@@ -281,14 +282,14 @@ entry_create_widget (GtkWidget *dlg)
           GdkPixbuf *pb = get_pixbuf (options.entry_data.licon, YAD_SMALL_ICON);
 
           if (pb)
-	    gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
+            gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, pb);
         }
       if (options.entry_data.ricon)
         {
           GdkPixbuf *pb = get_pixbuf (options.entry_data.ricon, YAD_SMALL_ICON);
 
           if (pb)
-	    gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
+            gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
         }
     }
 
@@ -296,7 +297,7 @@ entry_create_widget (GtkWidget *dlg)
     g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (entry_activate_cb), dlg);
   else
     g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (combo_activate_cb), dlg);
-    
+
   if (options.entry_data.licon || options.entry_data.ricon)
     g_signal_connect (G_OBJECT (entry), "icon-press", G_CALLBACK (icon_cb), NULL);
 

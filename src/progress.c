@@ -54,7 +54,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
         }
 
-      while (channel->is_readable != TRUE) ;
+      while (channel->is_readable != TRUE);
 
       do
         {
@@ -104,8 +104,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                     gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
                 }
               else
-                gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
-                                               percentage / 100.0);
+                gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), percentage / 100.0);
             }
 
         }
@@ -151,18 +150,14 @@ progress_create_widget (GtkWidget * dlg)
 
   if (options.progress_data.percentage > 100)
     options.progress_data.percentage = 100;
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
-                                 options.progress_data.percentage / 100.0);
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), options.progress_data.percentage / 100.0);
   if (options.progress_data.progress_text)
-    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar),
-                               options.progress_data.progress_text);
+    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), options.progress_data.progress_text);
 #if GTK_CHECK_VERSION(3,0,0)
-  gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (progress_bar),
-                                 options.progress_data.rtl);
+  gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (progress_bar), options.progress_data.rtl);
 #else
   if (options.progress_data.rtl)
-    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (progress_bar),
-                                      GTK_PROGRESS_RIGHT_TO_LEFT);
+    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (progress_bar), GTK_PROGRESS_RIGHT_TO_LEFT);
 #endif
 
   channel = g_io_channel_unix_new (0);

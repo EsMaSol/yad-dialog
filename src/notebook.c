@@ -33,7 +33,7 @@
 static GtkWidget *notebook;
 
 GtkWidget *
-notebook_create_widget (GtkWidget *dlg)
+notebook_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
   GSList *tab;
@@ -54,9 +54,9 @@ notebook_create_widget (GtkWidget *dlg)
 
       l = gtk_label_new (NULL);
       if (!options.data.no_markup)
-	gtk_label_set_markup (GTK_LABEL (l), (gchar *) tab->data);
+        gtk_label_set_markup (GTK_LABEL (l), (gchar *) tab->data);
       else
-	gtk_label_set_text (GTK_LABEL (l), (gchar *) tab->data);
+        gtk_label_set_text (GTK_LABEL (l), (gchar *) tab->data);
       gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
 
       s = gtk_socket_new ();
@@ -79,8 +79,8 @@ notebook_swallow_childs (void)
       GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
 
       if (tabs[i].pid != -1)
-	gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
-    }  
+        gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
+    }
 }
 
 void

@@ -36,8 +36,7 @@ parse_details ()
   f = fopen (options.calendar_data.details, "r");
   if (f == NULL)
     {
-      g_printerr (_("Cannot open file '%s': %s\n"),
-		  options.common_data.uri, g_strerror (errno));
+      g_printerr (_("Cannot open file '%s': %s\n"), options.common_data.uri, g_strerror (errno));
       return;
     }
 
@@ -50,19 +49,17 @@ parse_details ()
       memset (buf, 0, 4096);
       fgets (buf, 4096, f);
       if (strlen (buf) > 0)
-	{
-	  dtl = g_strsplit (buf, " ", 2);
-	  g_hash_table_insert (details, dtl[0], dtl[1]);
-	}
+        {
+          dtl = g_strsplit (buf, " ", 2);
+          g_hash_table_insert (details, dtl[0], dtl[1]);
+        }
     }
 
   fclose (f);
 }
 
 static gchar *
-get_details (GtkCalendar *cal,
-	     guint year, guint month, guint day,
-	     gpointer data)
+get_details (GtkCalendar * cal, guint year, guint month, guint day, gpointer data)
 {
   GDate *d;
   gchar time_string[128];
@@ -82,13 +79,13 @@ get_details (GtkCalendar *cal,
 }
 
 static void
-double_click_cb (GtkWidget *w, gpointer data)
+double_click_cb (GtkWidget * w, gpointer data)
 {
   gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 GtkWidget *
-calendar_create_widget (GtkWidget *dlg)
+calendar_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
 
@@ -96,12 +93,9 @@ calendar_create_widget (GtkWidget *dlg)
   gtk_widget_set_name (w, "yad-calendar-widget");
 
   if (options.calendar_data.month > 0 || options.calendar_data.year > 0)
-    gtk_calendar_select_month (GTK_CALENDAR (w),
-			       options.calendar_data.month - 1,
-			       options.calendar_data.year);
+    gtk_calendar_select_month (GTK_CALENDAR (w), options.calendar_data.month - 1, options.calendar_data.year);
   if (options.calendar_data.day > 0)
-    gtk_calendar_select_day (GTK_CALENDAR (w),
-			     options.calendar_data.day);
+    gtk_calendar_select_day (GTK_CALENDAR (w), options.calendar_data.day);
 
   if (options.calendar_data.details)
     {
@@ -110,12 +104,10 @@ calendar_create_widget (GtkWidget *dlg)
     }
 
   gtk_calendar_set_display_options (GTK_CALENDAR (w),
-				    GTK_CALENDAR_SHOW_HEADING |
-				    GTK_CALENDAR_SHOW_DAY_NAMES |
-				    GTK_CALENDAR_SHOW_WEEK_NUMBERS);
+                                    GTK_CALENDAR_SHOW_HEADING |
+                                    GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
 
-  g_signal_connect (w, "day-selected-double-click",
-  		    G_CALLBACK (double_click_cb), dlg);
+  g_signal_connect (w, "day-selected-double-click", G_CALLBACK (double_click_cb), dlg);
 
   return w;
 }
