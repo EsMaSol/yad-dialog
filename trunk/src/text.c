@@ -32,8 +32,8 @@ static gchar *pattern = NULL;
 static gboolean new_search = TRUE;
 
 /* searching */
-static void 
-do_search (GtkWidget *e, GtkWidget *w)
+static void
+do_search (GtkWidget * e, GtkWidget * w)
 {
   static gchar *text = NULL;
   static guint offset;
@@ -55,7 +55,7 @@ do_search (GtkWidget *e, GtkWidget *w)
       offset = 0;
       /* compile new regex */
       if (regex)
-	g_regex_unref (regex);
+        g_regex_unref (regex);
       regex = g_regex_new (pattern, G_REGEX_EXTENDED | G_REGEX_OPTIMIZE, G_REGEX_MATCH_NOTEMPTY, NULL);
       new_search = FALSE;
     }
@@ -67,7 +67,7 @@ do_search (GtkWidget *e, GtkWidget *w)
 
       g_match_info_fetch_pos (match, 0, &sp, &ep);
 
-      /* positions are in bytes, not character, so here we must normalize it*/
+      /* positions are in bytes, not character, so here we must normalize it */
       spos = g_utf8_pointer_to_offset (text, text + sp + offset);
       epos = g_utf8_pointer_to_offset (text, text + ep + offset);
 
@@ -78,7 +78,7 @@ do_search (GtkWidget *e, GtkWidget *w)
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &begin, 0, FALSE, 0, 0);
 
       offset += epos;
-      
+
       g_match_info_free (match);
       match = NULL;
     }
@@ -86,8 +86,8 @@ do_search (GtkWidget *e, GtkWidget *w)
     new_search = TRUE;
 }
 
-static gboolean 
-search_key_cb (GtkWidget *w, GdkEventKey *key, GtkWidget *win)
+static gboolean
+search_key_cb (GtkWidget * w, GdkEventKey * key, GtkWidget * win)
 {
 #if GTK_CHECK_VERSION(2,24,0)
   if (key->keyval == GDK_KEY_Escape)
@@ -102,7 +102,7 @@ search_key_cb (GtkWidget *w, GdkEventKey *key, GtkWidget *win)
 }
 
 static void
-search_changed (GtkWidget *w, gpointer d)
+search_changed (GtkWidget * w, gpointer d)
 {
   new_search = TRUE;
 }
@@ -112,7 +112,7 @@ show_search ()
 {
   GtkWidget *w, *f, *a, *e;
   GdkEvent *fev;
-  
+
   w = gtk_window_new (GTK_WINDOW_POPUP);
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (gtk_widget_get_toplevel (text_view)));
   gtk_window_set_position (GTK_WINDOW (w), GTK_WIN_POS_CENTER_ON_PARENT);
@@ -125,7 +125,7 @@ show_search ()
   f = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (f), GTK_SHADOW_ETCHED_IN);
   gtk_container_add (GTK_CONTAINER (w), f);
-  
+
   a = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
   gtk_alignment_set_padding (GTK_ALIGNMENT (a), 2, 2, 2, 2);
   gtk_container_add (GTK_CONTAINER (f), a);
@@ -134,7 +134,7 @@ show_search ()
   if (pattern)
     gtk_entry_set_text (GTK_ENTRY (e), pattern);
   gtk_container_add (GTK_CONTAINER (a), e);
-    
+
   g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (do_search), w);
   g_signal_connect (G_OBJECT (e), "changed", G_CALLBACK (search_changed), NULL);
   g_signal_connect (G_OBJECT (e), "key-press-event", G_CALLBACK (search_key_cb), w);
@@ -161,14 +161,12 @@ show_search ()
 }
 
 static gboolean
-key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
+key_press_cb (GtkWidget * w, GdkEventKey * key, gpointer data)
 {
 #if GTK_CHECK_VERSION(2,24,0)
-  if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) &&
-      (key->state & GDK_CONTROL_MASK))
+  if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) && (key->state & GDK_CONTROL_MASK))
 #else
-  if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) &&
-      (key->state & GDK_CONTROL_MASK))
+  if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) && (key->state & GDK_CONTROL_MASK))
 #endif
     {
       if (options.plug == -1)
@@ -177,11 +175,9 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
     }
 
 #if GTK_CHECK_VERSION(2,24,0)
-  if ((key->state & GDK_CONTROL_MASK) && 
-      (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
+  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
 #else
-  if ((key->state & GDK_CONTROL_MASK) && 
-      (key->keyval == GDK_S || key->keyval == GDK_s))
+  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_S || key->keyval == GDK_s))
 #endif
     {
       show_search ();
@@ -192,8 +188,7 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer data)
 }
 
 static gboolean
-tag_event_cb (GtkTextTag *tag, GObject *obj, GdkEvent *ev,
-	      GtkTextIter *iter, gpointer d)
+tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter, gpointer d)
 {
   GtkTextIter start = *iter;
   GtkTextIter end = *iter;
@@ -215,7 +210,7 @@ tag_event_cb (GtkTextTag *tag, GObject *obj, GdkEvent *ev,
           g_spawn_command_line_async (cmdline, NULL);
 
           g_free (cmdline);
-	  return TRUE;
+          return TRUE;
         }
     }
 
@@ -225,20 +220,19 @@ tag_event_cb (GtkTextTag *tag, GObject *obj, GdkEvent *ev,
 static gboolean hovering_over_link = FALSE;
 
 static gboolean
-motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
+motion_cb (GtkWidget * w, GdkEventMotion * ev, gpointer d)
 {
   gint x, y;
   GSList *tags = NULL, *tagp = NULL;
   GtkTextIter iter;
   gboolean hovering = FALSE;
 
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (w), GTK_TEXT_WINDOW_WIDGET,
-                                         ev->x, ev->y, &x, &y);
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (w), GTK_TEXT_WINDOW_WIDGET, ev->x, ev->y, &x, &y);
 
   gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (w), &iter, x, y);
 
   tags = gtk_text_iter_get_tags (&iter);
-  for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
+  for (tagp = tags; tagp != NULL; tagp = tagp->next)
     {
       GtkTextTag *tag = tagp->data;
       gint link = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "is_link"));
@@ -269,7 +263,7 @@ motion_cb (GtkWidget *w, GdkEventMotion *ev, gpointer d)
 }
 
 static void
-linkify_cb (GtkTextBuffer *buf, GRegex *regex)
+linkify_cb (GtkTextBuffer * buf, GRegex * regex)
 {
   gchar *text;
   GtkTextIter start, end;
@@ -283,30 +277,29 @@ linkify_cb (GtkTextBuffer *buf, GRegex *regex)
   if (g_regex_match (regex, text, G_REGEX_MATCH_NOTEMPTY, &match))
     {
       do
-	{
-	  gint sp, ep, spos, epos;
+        {
+          gint sp, ep, spos, epos;
 
-	  g_match_info_fetch_pos (match, 0, &sp, &ep);
+          g_match_info_fetch_pos (match, 0, &sp, &ep);
 
-	  /* positions are in bytes, not character, so here we must normalize it*/
-	  spos = g_utf8_pointer_to_offset (text, text + sp);
-	  epos = g_utf8_pointer_to_offset (text, text + ep);
+          /* positions are in bytes, not character, so here we must normalize it */
+          spos = g_utf8_pointer_to_offset (text, text + sp);
+          epos = g_utf8_pointer_to_offset (text, text + ep);
 
-	  gtk_text_buffer_get_iter_at_offset (buf, &start, spos);
-	  gtk_text_buffer_get_iter_at_offset (buf, &end, epos);
+          gtk_text_buffer_get_iter_at_offset (buf, &start, spos);
+          gtk_text_buffer_get_iter_at_offset (buf, &end, epos);
 
-	  gtk_text_buffer_apply_tag (buf, tag, &start, &end);
-	}
+          gtk_text_buffer_apply_tag (buf, tag, &start, &end);
+        }
       while (g_match_info_next (match, NULL));
     }
   g_match_info_free (match);
 
-  g_free(text);
+  g_free (text);
 }
 
 static gboolean
-handle_stdin (GIOChannel * channel,
-	      GIOCondition condition, gpointer data)
+handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
   if ((condition & G_IO_IN) || (condition & (G_IO_IN | G_IO_HUP)))
     {
@@ -315,7 +308,7 @@ handle_stdin (GIOChannel * channel,
       gint status;
 
       string = g_string_new (NULL);
-      while (channel->is_readable != TRUE) ;
+      while (channel->is_readable != TRUE);
 
       do
         {
@@ -349,21 +342,20 @@ handle_stdin (GIOChannel * channel,
           if (!g_utf8_validate (string->str, string->len, NULL))
             {
               utftext =
-                g_convert_with_fallback (string->str, string->len, "UTF-8", "ISO-8859-1",
-                                         NULL, NULL, &utflen, NULL);
+                g_convert_with_fallback (string->str, string->len, "UTF-8", "ISO-8859-1", NULL, NULL, &utflen, NULL);
               gtk_text_buffer_insert (text_buffer, &end, utftext, utflen);
               g_free (utftext);
             }
           else
-	    gtk_text_buffer_insert (text_buffer, &end, string->str, string->len);
+            gtk_text_buffer_insert (text_buffer, &end, string->str, string->len);
 
-	  if (options.text_data.tail)
-	    {
-	      while (gtk_events_pending ())
-		gtk_main_iteration ();
-	      gtk_text_buffer_get_end_iter (text_buffer, &end);
-	      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
-	    }
+          if (options.text_data.tail)
+            {
+              while (gtk_events_pending ())
+                gtk_main_iteration ();
+              gtk_text_buffer_get_end_iter (text_buffer, &end);
+              gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
+            }
         }
 
       g_string_free (string, TRUE);
@@ -387,8 +379,7 @@ fill_buffer_from_file ()
 
   if (f == NULL)
     {
-      g_printerr (_("Cannot open file '%s': %s\n"),
-		  options.common_data.uri, g_strerror (errno));
+      g_printerr (_("Cannot open file '%s': %s\n"), options.common_data.uri, g_strerror (errno));
       return;
     }
 
@@ -417,8 +408,7 @@ fill_buffer_from_file ()
 
   if (remaining)
     {
-      g_printerr (_("Invalid UTF-8 data encountered reading file %s\n"),
-		  options.common_data.uri);
+      g_printerr (_("Invalid UTF-8 data encountered reading file %s\n"), options.common_data.uri);
       return;
     }
 
@@ -433,7 +423,7 @@ fill_buffer_from_file ()
   if (options.text_data.tail)
     {
       while (gtk_events_pending ())
-	gtk_main_iteration ();
+        gtk_main_iteration ();
       gtk_text_buffer_get_end_iter (text_buffer, &end);
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &end, 0, FALSE, 0, 0);
     }
@@ -457,8 +447,7 @@ text_create_widget (GtkWidget * dlg)
 
   w = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   text_view = gtk_text_view_new ();
   gtk_widget_set_name (text_view, "yad-text-widget");
@@ -479,11 +468,11 @@ text_create_widget (GtkWidget * dlg)
 #if GTK_CHECK_VERSION(3,0,0)
       GdkRGBA clr;
       if (gdk_rgba_parse (&clr, options.text_data.fore))
-	gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
+        gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
 #else
       GdkColor clr;
       if (gdk_color_parse (options.text_data.fore, &clr))
-	gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
+        gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
 #endif
     }
 
@@ -492,18 +481,17 @@ text_create_widget (GtkWidget * dlg)
 #if GTK_CHECK_VERSION(3,0,0)
       GdkRGBA clr;
       if (gdk_rgba_parse (&clr, options.text_data.fore))
-	gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
+        gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
 #else
       GdkColor clr;
       if (gdk_color_parse (options.text_data.back, &clr))
-	gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
+        gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
 #endif
     }
 
   if (options.common_data.font)
     {
-      PangoFontDescription *fd =
-	pango_font_description_from_string (options.common_data.font);
+      PangoFontDescription *fd = pango_font_description_from_string (options.common_data.font);
 #if GTK_CHECK_VERSION(3,0,0)
       gtk_widget_override_font (text_view, fd);
 #else
@@ -521,21 +509,17 @@ text_create_widget (GtkWidget * dlg)
       GRegex *regex;
 
       regex = g_regex_new (YAD_URL_REGEX,
-			   G_REGEX_CASELESS | G_REGEX_OPTIMIZE | G_REGEX_EXTENDED,
-			   G_REGEX_MATCH_NOTEMPTY,
-			   NULL);
+                           G_REGEX_CASELESS | G_REGEX_OPTIMIZE | G_REGEX_EXTENDED, G_REGEX_MATCH_NOTEMPTY, NULL);
 
       /* Create text tag for URI */
       tag = gtk_text_buffer_create_tag (text_buffer, NULL,
-                                        "foreground", "blue",
-                                        "underline", PANGO_UNDERLINE_SINGLE,
-                                        NULL);
+                                        "foreground", "blue", "underline", PANGO_UNDERLINE_SINGLE, NULL);
       g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (1));
       g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
 
       /* Create cursors */
       hand = gdk_cursor_new (GDK_HAND2);
-      normal= gdk_cursor_new (GDK_XTERM);
+      normal = gdk_cursor_new (GDK_XTERM);
       g_signal_connect (G_OBJECT (text_view), "motion-notify-event", G_CALLBACK (motion_cb), NULL);
 
       g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);

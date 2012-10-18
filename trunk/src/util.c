@@ -60,38 +60,38 @@ read_settings (void)
       kf = g_key_file_new ();
 
       if (g_key_file_load_from_file (kf, filename, G_KEY_FILE_NONE, NULL))
-	{
+        {
 #if !GTK_CHECK_VERSION(2,22,0)
-	  if (g_key_file_has_key (kf, "General", "dialog_separator", NULL))
-	    settings.dlg_sep = g_key_file_get_boolean (kf, "General", "dialog_separator", NULL);
+          if (g_key_file_has_key (kf, "General", "dialog_separator", NULL))
+            settings.dlg_sep = g_key_file_get_boolean (kf, "General", "dialog_separator", NULL);
 #endif
-	  if (g_key_file_has_key (kf, "General", "width", NULL))
-	    settings.width = g_key_file_get_integer (kf, "General", "width", NULL);
-	  if (g_key_file_has_key (kf, "General", "height", NULL))
-	    settings.height = g_key_file_get_integer (kf, "General", "height", NULL);
-	  if (g_key_file_has_key (kf, "General", "timeout", NULL))
-	    settings.timeout = g_key_file_get_integer (kf, "General", "timeout", NULL);
-	  if (g_key_file_has_key (kf, "General", "timeout_indicator", NULL))
-	    settings.to_indicator = g_key_file_get_string (kf, "General", "timeout_indicator", NULL);
-	  if (g_key_file_has_key (kf, "General", "show_remain", NULL))
-	    settings.show_remain = g_key_file_get_boolean (kf, "General", "show_remain", NULL);
-	  if (g_key_file_has_key (kf, "General", "rules_hint", NULL))
-	    settings.rules_hint = g_key_file_get_boolean (kf, "General", "rules_hint", NULL);
-	  if (g_key_file_has_key (kf, "General", "always_selected", NULL))
-	    settings.always_selected = g_key_file_get_boolean (kf, "General", "always_selected", NULL);
-	  if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
-	    settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
-	  if (g_key_file_has_key (kf, "General", "show_gtk_palette", NULL))
-	    settings.show_gtk_palette = g_key_file_get_boolean (kf, "General", "show_gtk_palette", NULL);
-	  if (g_key_file_has_key (kf, "General", "expand_palette", NULL))
-	    settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
-	  if (g_key_file_has_key (kf, "General", "terminal", NULL))
-	    settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
-	  if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
-	    settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
-	  if (g_key_file_has_key (kf, "General", "max_tab", NULL))
-	    settings.max_tab = g_key_file_get_integer (kf, "General", "max_tab", NULL);
-	}
+          if (g_key_file_has_key (kf, "General", "width", NULL))
+            settings.width = g_key_file_get_integer (kf, "General", "width", NULL);
+          if (g_key_file_has_key (kf, "General", "height", NULL))
+            settings.height = g_key_file_get_integer (kf, "General", "height", NULL);
+          if (g_key_file_has_key (kf, "General", "timeout", NULL))
+            settings.timeout = g_key_file_get_integer (kf, "General", "timeout", NULL);
+          if (g_key_file_has_key (kf, "General", "timeout_indicator", NULL))
+            settings.to_indicator = g_key_file_get_string (kf, "General", "timeout_indicator", NULL);
+          if (g_key_file_has_key (kf, "General", "show_remain", NULL))
+            settings.show_remain = g_key_file_get_boolean (kf, "General", "show_remain", NULL);
+          if (g_key_file_has_key (kf, "General", "rules_hint", NULL))
+            settings.rules_hint = g_key_file_get_boolean (kf, "General", "rules_hint", NULL);
+          if (g_key_file_has_key (kf, "General", "always_selected", NULL))
+            settings.always_selected = g_key_file_get_boolean (kf, "General", "always_selected", NULL);
+          if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
+            settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
+          if (g_key_file_has_key (kf, "General", "show_gtk_palette", NULL))
+            settings.show_gtk_palette = g_key_file_get_boolean (kf, "General", "show_gtk_palette", NULL);
+          if (g_key_file_has_key (kf, "General", "expand_palette", NULL))
+            settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
+          if (g_key_file_has_key (kf, "General", "terminal", NULL))
+            settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
+          if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
+            settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
+          if (g_key_file_has_key (kf, "General", "max_tab", NULL))
+            settings.max_tab = g_key_file_get_integer (kf, "General", "max_tab", NULL);
+        }
 
       g_key_file_free (kf);
     }
@@ -120,8 +120,8 @@ write_settings (void)
   g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
   g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
   g_key_file_set_string (kf, "General", "timeout_indicator", settings.to_indicator);
-  g_key_file_set_comment (kf, "General", "timeout_indicator", 
-			  "Position of timeout indicator (top, bottom, left, right, none)", NULL);
+  g_key_file_set_comment (kf, "General", "timeout_indicator",
+                          "Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
   g_key_file_set_comment (kf, "General", "show_remain", "Show remain seconds in timeout indicator", NULL);
   g_key_file_set_boolean (kf, "General", "rules_hint", settings.rules_hint);
@@ -158,7 +158,7 @@ write_settings (void)
 }
 
 GdkPixbuf *
-get_pixbuf (gchar *name, YadIconSize size)
+get_pixbuf (gchar * name, YadIconSize size)
 {
   gint w, h;
   GdkPixbuf *pb = NULL;
@@ -168,28 +168,27 @@ get_pixbuf (gchar *name, YadIconSize size)
     {
       pb = gdk_pixbuf_new_from_file (name, &err);
       if (!pb)
-	{
-	  g_printerr ("yad_get_pixbuf(): %s\n", err->message);
-	  g_error_free (err);
-	}
+        {
+          g_printerr ("yad_get_pixbuf(): %s\n", err->message);
+          g_error_free (err);
+        }
     }
   else
     {
       if (size == YAD_BIG_ICON)
-	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
+        gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
       else
-	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+        gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
 
-      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h),
-				     GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
     }
 
   if (!pb)
     {
       if (size == YAD_BIG_ICON)
-	pb = settings.big_fallback_image;
+        pb = settings.big_fallback_image;
       else
-	pb = settings.small_fallback_image;
+        pb = settings.small_fallback_image;
     }
 
   return pb;
@@ -200,7 +199,7 @@ extern inline void
 #else
 inline void
 #endif
-strip_new_line (gchar *str)
+strip_new_line (gchar * str)
 {
   gint nl = strlen (str) - 1;
 
@@ -209,14 +208,14 @@ strip_new_line (gchar *str)
 }
 
 gchar **
-split_arg (const gchar *str)
+split_arg (const gchar * str)
 {
   gchar **res;
   gchar *p_col;
 
-  res = g_new0 (gchar*, 3);
+  res = g_new0 (gchar *, 3);
 
-  p_col =  g_strrstr (str, ":");
+  p_col = g_strrstr (str, ":");
   if (p_col && p_col[1])
     {
       res[0] = g_strndup (str, p_col - str);
@@ -244,40 +243,40 @@ escape_markup (char *str)
     {
       switch (*buf)
         {
-        case '&':
-          len += 4;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "&amp;");
-          i += 5;
-          break;
-        case '<':
-          len += 3;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "&lt;");
-          i += 4;
-          break;
-        case '>':
-          len += 3;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "&gt;");
-          i += 4;
-          break;
-        case '"':
-          len += 5;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "&quot;");
-          i += 6;
-          break;
-        case '\'':
-          len += 5;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "&apos;");
-          i += 6;
-          break;
-        default:
-          *(res + i) = *buf;
-          i++;
-          break;
+          case '&':
+            len += 4;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "&amp;");
+            i += 5;
+            break;
+          case '<':
+            len += 3;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "&lt;");
+            i += 4;
+            break;
+          case '>':
+            len += 3;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "&gt;");
+            i += 4;
+            break;
+          case '"':
+            len += 5;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "&quot;");
+            i += 6;
+            break;
+          case '\'':
+            len += 5;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "&apos;");
+            i += 6;
+            break;
+          default:
+            *(res + i) = *buf;
+            i++;
+            break;
         }
       buf++;
     }
@@ -353,22 +352,22 @@ escape_str (char *str)
     {
       switch (*buf)
         {
-        case '\n':
-          len += 1;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "\\n");
-          i += 2;
-          break;
-        case '\t':
-          len += 1;
-          res = (char *) realloc (res, len + 1);
-          strcpy (res + i, "\\t");
-          i += 2;
-          break;
-        default:
-          *(res + i) = *buf;
-          i++;
-          break;
+          case '\n':
+            len += 1;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "\\n");
+            i += 2;
+            break;
+          case '\t':
+            len += 1;
+            res = (char *) realloc (res, len + 1);
+            strcpy (res + i, "\\t");
+            i += 2;
+            break;
+          default:
+            *(res + i) = *buf;
+            i++;
+            break;
         }
       buf++;
     }
@@ -386,22 +385,22 @@ get_tabs (key_t key)
   /* get shared memory */
   if ((shmid = shmget (key, settings.max_tab * sizeof (YadNTabs), 0)) == -1)
     {
-      if (errno != ENOENT )
-	{
-	  g_printerr ("yad: cannot get shared memory for key %d: %s", key, strerror (errno));
-	  exit (1);
-	}
+      if (errno != ENOENT)
+        {
+          g_printerr ("yad: cannot get shared memory for key %d: %s", key, strerror (errno));
+          exit (1);
+        }
       /* try to create it */
       if ((shmid = shmget (key, settings.max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
-	{
-	  g_printerr ("yad: cannot create shared memory for key %d: %s", key, strerror (errno));
-	  exit (1);
-	}
+        {
+          g_printerr ("yad: cannot create shared memory for key %d: %s", key, strerror (errno));
+          exit (1);
+        }
       new = 1;
     }
 
   /* attach shared memory */
-  if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) -1)
+  if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) - 1)
     {
       g_printerr ("yad: cannot attach shared memory for key %d: %s", key, strerror (errno));
       exit (1);
@@ -410,7 +409,7 @@ get_tabs (key_t key)
   if (new)
     {
       for (i = 0; i < settings.max_tab; i++)
-	t[i].pid = -1;
+        t[i].pid = -1;
     }
 
   return t;

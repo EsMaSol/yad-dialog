@@ -39,8 +39,7 @@ G_BEGIN_DECLS
 #define YAD_RESPONSE_OK         0
 #define YAD_RESPONSE_CANCEL     1
 #define YAD_RESPONSE_TIMEOUT   	70
-#define YAD_RESPONSE_ESC        -4  /* 252 */
-
+#define YAD_RESPONSE_ESC        -4      /* 252 */
 #define YAD_URL_REGEX "(http|https|ftp)://[a-zA-Z0-9./_%#&-]+"
 
 typedef enum {
@@ -377,31 +376,31 @@ typedef struct {
 extern YadSettings settings;
 
 typedef struct {
-    pid_t pid;
-    Window xid;
+  pid_t pid;
+  Window xid;
 } YadNTabs;
 
 extern YadNTabs *tabs;
 
 void yad_options_init (void);
-GOptionContext * yad_create_context (void);
+GOptionContext *yad_create_context (void);
 void yad_set_mode (void);
 
-GtkWidget * calendar_create_widget (GtkWidget *dlg);
-GtkWidget * color_create_widget (GtkWidget *dlg);
-GtkWidget * entry_create_widget (GtkWidget *dlg);
-GtkWidget * file_create_widget (GtkWidget *dlg);
-GtkWidget * font_create_widget (GtkWidget *dlg);
-GtkWidget * form_create_widget (GtkWidget *dlg);
-GtkWidget * icons_create_widget (GtkWidget *dlg);
-GtkWidget * list_create_widget (GtkWidget *dlg);
-GtkWidget * multi_progress_create_widget (GtkWidget *dlg);
-GtkWidget * notebook_create_widget (GtkWidget *dlg);
-GtkWidget * progress_create_widget (GtkWidget *dlg);
-GtkWidget * scale_create_widget (GtkWidget *dlg);
-GtkWidget * text_create_widget (GtkWidget *dlg);
+GtkWidget *calendar_create_widget (GtkWidget * dlg);
+GtkWidget *color_create_widget (GtkWidget * dlg);
+GtkWidget *entry_create_widget (GtkWidget * dlg);
+GtkWidget *file_create_widget (GtkWidget * dlg);
+GtkWidget *font_create_widget (GtkWidget * dlg);
+GtkWidget *form_create_widget (GtkWidget * dlg);
+GtkWidget *icons_create_widget (GtkWidget * dlg);
+GtkWidget *list_create_widget (GtkWidget * dlg);
+GtkWidget *multi_progress_create_widget (GtkWidget * dlg);
+GtkWidget *notebook_create_widget (GtkWidget * dlg);
+GtkWidget *progress_create_widget (GtkWidget * dlg);
+GtkWidget *scale_create_widget (GtkWidget * dlg);
+GtkWidget *text_create_widget (GtkWidget * dlg);
 
-void confirm_overwrite_cb (GtkDialog *dlg, gint id, gpointer data);
+void confirm_overwrite_cb (GtkDialog * dlg, gint id, gpointer data);
 void notebook_swallow_childs (void);
 
 void calendar_print_result (void);
@@ -415,7 +414,7 @@ void notebook_print_result (void);
 void scale_print_result (void);
 void text_print_result (void);
 
-void dnd_init (GtkWidget *w);
+void dnd_init (GtkWidget * w);
 
 gint yad_notification_run (void);
 gint yad_print_run (void);
@@ -426,21 +425,21 @@ void notebook_close_childs (void);
 void read_settings (void);
 void write_settings (void);
 
-GdkPixbuf * get_pixbuf (gchar *name, YadIconSize size);
+GdkPixbuf *get_pixbuf (gchar * name, YadIconSize size);
 
 #ifdef __clang__
-extern inline void strip_new_line (gchar *str);
+extern inline void strip_new_line (gchar * str);
 #else
-inline void strip_new_line (gchar *str);
+inline void strip_new_line (gchar * str);
 #endif
 
-gchar ** split_arg (const gchar *str);
+gchar **split_arg (const gchar * str);
 
-char * escape_markup (char *str);
-char * unescape_markup (char *str);
-char * escape_str (char *str);
+char *escape_markup (char *str);
+char *unescape_markup (char *str);
+char *escape_str (char *str);
 
-YadNTabs * get_tabs (key_t key);
+YadNTabs *get_tabs (key_t key);
 
 G_END_DECLS
 

@@ -42,18 +42,17 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
       string = g_string_new (NULL);
 
-      while (channel->is_readable != TRUE) ;
+      while (channel->is_readable != TRUE);
 
       do
         {
           gint status, num;
-	  GtkProgressBar *pb;
-	  YadProgressBar *b;
+          GtkProgressBar *pb;
+          YadProgressBar *b;
 
           do
             {
-              status =
-                g_io_channel_read_line_string (channel, string, NULL, &err);
+              status = g_io_channel_read_line_string (channel, string, NULL, &err);
 
               while (gtk_events_pending ())
                 gtk_main_iteration ();
@@ -74,43 +73,43 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               return FALSE;
             }
 
-	  value = g_strsplit(string->str, ":", 2);
-	  num = atoi (value[0]) - 1;
-	  if (num < 0 || num > nbars)
-	    continue;
+          value = g_strsplit (string->str, ":", 2);
+          num = atoi (value[0]) - 1;
+          if (num < 0 || num > nbars)
+            continue;
 
-	  pb = GTK_PROGRESS_BAR (g_slist_nth_data (progress_bars, num));
-	  b = (YadProgressBar *) g_slist_nth_data (options.multi_progress_data.bars, num);
-	  
-	  if (b->type == YAD_PROGRESS_PULSE)
-	    gtk_progress_bar_pulse (pb);
-	  else
-	    {
-	      if (value[1] && value[1][0] == '#')
-		{
-		  gchar *match, *p;
+          pb = GTK_PROGRESS_BAR (g_slist_nth_data (progress_bars, num));
+          b = (YadProgressBar *) g_slist_nth_data (options.multi_progress_data.bars, num);
 
-		  /* We have a comment, so let's try to change the label */
-		  match = g_strcompress (value[1] + 1);
-		  p = g_strrstr (match, "\n");
-		  if (p)
-		    *p = '\0';
-		  gtk_progress_bar_set_text (pb, match);
-		  g_free (match);
-		}
-	      else
-		{
-		  if (!value[1] || !g_ascii_isdigit (*value[1]))
-		    continue;
+          if (b->type == YAD_PROGRESS_PULSE)
+            gtk_progress_bar_pulse (pb);
+          else
+            {
+              if (value[1] && value[1][0] == '#')
+                {
+                  gchar *match, *p;
 
-		  /* Now try to convert the thing to a number */
-		  percentage = atoi (value[1]);
-		  if (percentage >= 100)
-		    gtk_progress_bar_set_fraction (pb, 1.0);
-		  else
-		    gtk_progress_bar_set_fraction (pb, percentage / 100.0);
-		}
-	    }
+                  /* We have a comment, so let's try to change the label */
+                  match = g_strcompress (value[1] + 1);
+                  p = g_strrstr (match, "\n");
+                  if (p)
+                    *p = '\0';
+                  gtk_progress_bar_set_text (pb, match);
+                  g_free (match);
+                }
+              else
+                {
+                  if (!value[1] || !g_ascii_isdigit (*value[1]))
+                    continue;
+
+                  /* Now try to convert the thing to a number */
+                  percentage = atoi (value[1]);
+                  if (percentage >= 100)
+                    gtk_progress_bar_set_fraction (pb, 1.0);
+                  else
+                    gtk_progress_bar_set_fraction (pb, percentage / 100.0);
+                }
+            }
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
@@ -148,14 +147,14 @@ multi_progress_create_widget (GtkWidget * dlg)
       /* add label */
       l = gtk_label_new (NULL);
       if (!options.data.no_markup)
-	gtk_label_set_markup (GTK_LABEL (l), p->name);
+        gtk_label_set_markup (GTK_LABEL (l), p->name);
       else
-	gtk_label_set_text (GTK_LABEL (l), p->name);
+        gtk_label_set_text (GTK_LABEL (l), p->name);
       gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
       if (options.common_data.vertical)
-	gtk_table_attach (GTK_TABLE (table), l, i, i + 1, 1, 2, GTK_FILL, 0, 2, 2);
+        gtk_table_attach (GTK_TABLE (table), l, i, i + 1, 1, 2, GTK_FILL, 0, 2, 2);
       else
-	gtk_table_attach (GTK_TABLE (table), l, 0, 1, i, i + 1, GTK_FILL, 0, 2, 2);
+        gtk_table_attach (GTK_TABLE (table), l, 0, 1, i, i + 1, GTK_FILL, 0, 2, 2);
 
       /* add progress bar */
       w = gtk_progress_bar_new ();
@@ -165,54 +164,47 @@ multi_progress_create_widget (GtkWidget * dlg)
 #endif
 
       if (p->type != YAD_PROGRESS_PULSE)
-	{
-	  if (options.extra_data && options.extra_data[i])
-	    {
-	      if (g_ascii_isdigit (*options.extra_data[i]))
-		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w),
-					       atoi (options.extra_data[i]) / 100.0);
-	    }
-	}
+        {
+          if (options.extra_data && options.extra_data[i])
+            {
+              if (g_ascii_isdigit (*options.extra_data[i]))
+                gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), atoi (options.extra_data[i]) / 100.0);
+            }
+        }
       else
-	{
-	  if (options.extra_data && options.extra_data[i])
-	    {
-	      if (g_ascii_isdigit (*options.extra_data[i]))
-		gtk_progress_bar_set_pulse_step (GTK_PROGRESS_BAR (w), 
-						 atoi (options.extra_data[i]) / 100.0);
-	    }
-	}
+        {
+          if (options.extra_data && options.extra_data[i])
+            {
+              if (g_ascii_isdigit (*options.extra_data[i]))
+                gtk_progress_bar_set_pulse_step (GTK_PROGRESS_BAR (w), atoi (options.extra_data[i]) / 100.0);
+            }
+        }
 
 #if GTK_CHECK_VERSION(3,0,0)
-      gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w),
-				     p->type == YAD_PROGRESS_RTL);
+      gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w), p->type == YAD_PROGRESS_RTL);
       if (options.common_data.vertical)
-	{
-	  gtk_orientable_set_orientation (GTK_ORIENTABLE (w),
-					  GTK_ORIENTATION_VERTICAL);
-	}
+        {
+          gtk_orientable_set_orientation (GTK_ORIENTABLE (w), GTK_ORIENTATION_VERTICAL);
+        }
 #else
       if (p->type == YAD_PROGRESS_RTL)
-	{
-	  if (options.common_data.vertical)
-	    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w),
-					      GTK_PROGRESS_TOP_TO_BOTTOM);
-	  else
-	    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w),
-					      GTK_PROGRESS_RIGHT_TO_LEFT);
-	}
+        {
+          if (options.common_data.vertical)
+            gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w), GTK_PROGRESS_TOP_TO_BOTTOM);
+          else
+            gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w), GTK_PROGRESS_RIGHT_TO_LEFT);
+        }
       else
-	{
-	  if (options.common_data.vertical)
-	    gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w),
-					      GTK_PROGRESS_BOTTOM_TO_TOP);
-	}
+        {
+          if (options.common_data.vertical)
+            gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w), GTK_PROGRESS_BOTTOM_TO_TOP);
+        }
 #endif
       if (options.common_data.vertical)
-	gtk_table_attach (GTK_TABLE (table), w, i, i + 1, 0, 1, 0, GTK_FILL | GTK_EXPAND, 2, 2);
+        gtk_table_attach (GTK_TABLE (table), w, i, i + 1, 0, 1, 0, GTK_FILL | GTK_EXPAND, 2, 2);
       else
-	gtk_table_attach (GTK_TABLE (table), w, 1, 2, i, i + 1, GTK_FILL | GTK_EXPAND, 0, 2, 2);
-	
+        gtk_table_attach (GTK_TABLE (table), w, 1, 2, i, i + 1, GTK_FILL | GTK_EXPAND, 0, 2, 2);
+
       progress_bars = g_slist_append (progress_bars, w);
 
       i++;

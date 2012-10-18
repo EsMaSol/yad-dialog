@@ -44,16 +44,14 @@ yad_about (void)
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
 
   g_object_set (G_OBJECT (dialog),
-		"name", PACKAGE_NAME,
-		"version", PACKAGE_VERSION,
-		"copyright", "Copyright \xc2\xa9 2008-2012 Victor Ananjevsky <ananasik@gmail.com>",
-		"comments", _("Yet Another Dialog\n(show dialog boxes from shell scripts)\n\nBased on Zenity code\n"),
-		"authors", authors,
-		"website", PACKAGE_URL,
-		"translator-credits", translators,
-		"wrap-license", TRUE, "license", license,
-		"logo-icon-name", "yad",
-		NULL);
+                "name", PACKAGE_NAME,
+                "version", PACKAGE_VERSION,
+                "copyright", "Copyright \xc2\xa9 2008-2012 Victor Ananjevsky <ananasik@gmail.com>",
+                "comments", _("Yet Another Dialog\n(show dialog boxes from shell scripts)\n\nBased on Zenity code\n"),
+                "authors", authors,
+                "website", PACKAGE_URL,
+                "translator-credits", translators,
+                "wrap-license", TRUE, "license", license, "logo-icon-name", "yad", NULL);
 
   return gtk_dialog_run (GTK_DIALOG (dialog));
 }

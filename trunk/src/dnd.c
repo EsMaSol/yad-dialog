@@ -22,8 +22,8 @@
 #include "yad.h"
 
 static void
-drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
-	      GtkSelectionData *sel, guint info, guint t, gpointer data)
+drop_data_cb (GtkWidget * w, GdkDragContext * dc, gint x, gint y,
+              GtkSelectionData * sel, guint info, guint t, gpointer data)
 {
   GdkAtom stgt;
 
@@ -39,49 +39,49 @@ drop_data_cb (GtkWidget *w, GdkDragContext *dc, gint x, gint y,
         return;
 
       while (uris[i])
-	{
-	  gchar *dstr = g_uri_unescape_string (uris[i], NULL);
-	  if (options.common_data.command)
-	    {
-	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
-	      g_spawn_command_line_async (action, NULL);
-	      g_free (action);
-	    }
-	  else
-	    {
-	      g_printf ("%s\n", dstr);
-	      fflush (stdout);
-	    }
-	  g_free (dstr);
-	  i++;
-	}
+        {
+          gchar *dstr = g_uri_unescape_string (uris[i], NULL);
+          if (options.common_data.command)
+            {
+              gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
+              g_spawn_command_line_async (action, NULL);
+              g_free (action);
+            }
+          else
+            {
+              g_printf ("%s\n", dstr);
+              fflush (stdout);
+            }
+          g_free (dstr);
+          i++;
+        }
       g_strfreev (uris);
     }
   else if (gtk_targets_include_text (&stgt, 1))
     {
       guchar *str = gtk_selection_data_get_text (sel);
       if (str)
-	{
-	  gchar *dstr = g_uri_unescape_string ((const gchar *) str, NULL);
-	  if (options.common_data.command)
-	    {
-	      gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
-	      g_spawn_command_line_async (action, NULL);
-	      g_free (action);
-	    }
-	  else
-	    {
-	      g_printf ("%s\n", dstr);
-	      fflush (stdout);
-	    }
-	  g_free (dstr);
-	  g_free(str);
-	}
+        {
+          gchar *dstr = g_uri_unescape_string ((const gchar *) str, NULL);
+          if (options.common_data.command)
+            {
+              gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
+              g_spawn_command_line_async (action, NULL);
+              g_free (action);
+            }
+          else
+            {
+              g_printf ("%s\n", dstr);
+              fflush (stdout);
+            }
+          g_free (dstr);
+          g_free (str);
+        }
     }
 }
 
 void
-dnd_init (GtkWidget *w)
+dnd_init (GtkWidget * w)
 {
   GtkTargetList *tlist;
   GtkTargetEntry *tgts;
@@ -93,10 +93,8 @@ dnd_init (GtkWidget *w)
 
   tgts = gtk_target_table_new_from_list (tlist, &ntgts);
 
-  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL, tgts, ntgts,
-		     GDK_ACTION_COPY | GDK_ACTION_MOVE);
-  g_signal_connect (G_OBJECT (w), "drag_data_received",
-                    G_CALLBACK (drop_data_cb), NULL);
+  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL, tgts, ntgts, GDK_ACTION_COPY | GDK_ACTION_MOVE);
+  g_signal_connect (G_OBJECT (w), "drag_data_received", G_CALLBACK (drop_data_cb), NULL);
 
   gtk_target_table_free (tgts, ntgts);
   gtk_target_list_unref (tlist);
@@ -108,8 +106,8 @@ dnd_init (GtkWidget *w)
 
       box = gtk_dialog_get_content_area (GTK_DIALOG (w));
       if (!options.data.no_markup)
-	gtk_widget_set_tooltip_markup (box, options.data.dialog_text);
+        gtk_widget_set_tooltip_markup (box, options.data.dialog_text);
       else
-	gtk_widget_set_tooltip_text (box, options.data.dialog_text);
+        gtk_widget_set_tooltip_text (box, options.data.dialog_text);
     }
 }
