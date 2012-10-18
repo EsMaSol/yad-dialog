@@ -69,10 +69,10 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                   g_error_free (err);
                   err = NULL;
                 }
-              continue;
+              /* stop handling */
+              g_io_channel_shutdown (channel, TRUE, NULL);
+              return FALSE;
             }
-
-      /* remove eol */
 
 	  value = g_strsplit(string->str, ":", 2);
 	  num = atoi (value[0]) - 1;

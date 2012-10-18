@@ -699,8 +699,8 @@ main (gint argc, gchar ** argv)
           g_signal_connect (G_OBJECT (dialog), "response",
                             G_CALLBACK (confirm_overwrite_cb), NULL);
         }
-      else if (options.mode = YAD_MODE_NOTEBOOK)
-	notebook_swallow_childs ();
+      else if (options.mode == YAD_MODE_NOTEBOOK)
+        notebook_swallow_childs ();
 
       ret = gtk_dialog_run (GTK_DIALOG (dialog));
       if (options.data.always_print)

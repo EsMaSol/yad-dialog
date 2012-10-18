@@ -229,7 +229,9 @@ handle_stdin (GIOChannel * channel,
                   g_error_free (err);
                   err = NULL;
                 }
-              continue;
+              /* stop handling but not exit */
+              g_io_channel_shutdown (channel, TRUE, NULL);
+              return FALSE;
             }
 
 	  strip_new_line (string->str);

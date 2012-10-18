@@ -96,7 +96,7 @@ handle_stdin (GIOChannel * channel,
 
       do
         {
-	  GdkPixbuf *pb;
+          GdkPixbuf *pb;
           gint status;
 
           do
@@ -108,7 +108,7 @@ handle_stdin (GIOChannel * channel,
                 gtk_main_iteration ();
             }
           while (status == G_IO_STATUS_AGAIN);
-	  strip_new_line (string->str);
+          strip_new_line (string->str);
 
           if (status != G_IO_STATUS_NORMAL)
             {
@@ -118,7 +118,9 @@ handle_stdin (GIOChannel * channel,
                   g_error_free (err);
                   err = NULL;
                 }
-              continue;
+              /* stop handling */
+              g_io_channel_shutdown (channel, TRUE, NULL);
+              return FALSE;
             }
 
           if (column_count == NUM_COLS)
