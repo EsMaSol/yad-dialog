@@ -43,7 +43,7 @@ notebook_create_widget (GtkWidget * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
   /* get shared memory */
-  tabs = get_tabs (options.notebook_data.key);
+  tabs = get_tabs (options.notebook_data.key, TRUE);
   if (!tabs)
     exit (-1);
 
@@ -74,7 +74,15 @@ notebook_swallow_childs (void)
   guint i, n_tabs;
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
-  for (i = 0; i < n_tabs; i++)
+  
+  /* wait until all children are register */
+  while (tabs[0].pid != n_tabs - 1)
+    {
+    printf ("%d\n", tabs[0].pid);
+    usleep (1000);
+    }
+ 
+  for (i = 1; i <= n_tabs; i++)
     {
       GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
 

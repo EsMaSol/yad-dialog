@@ -329,7 +329,7 @@ create_dialog (void)
       case YAD_MODE_TEXTINFO:
         main_widget = text_create_widget (dlg);
         break;
-      default:;
+      default: ;
     }
 
   if (main_widget)
@@ -371,9 +371,7 @@ create_dialog (void)
       else
         {
           if (options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS)
-            {
-              gtk_dialog_add_buttons (GTK_DIALOG (dlg), GTK_STOCK_CLOSE, YAD_RESPONSE_OK, NULL);
-            }
+	    gtk_dialog_add_buttons (GTK_DIALOG (dlg), GTK_STOCK_CLOSE, YAD_RESPONSE_OK, NULL);
           else
             {
               if (gtk_alternative_dialog_button_order (NULL))
@@ -427,9 +425,12 @@ create_plug (void)
   GtkWidget *win, *vbox, *text;
   GtkWidget *main_widget = NULL;
 
-  tabs = get_tabs (options.plug);
-  if (!tabs)
-    exit (-1);
+  tabs = NULL;
+  while (!tabs)
+    {
+      usleep (1000);
+      tabs = get_tabs (options.plug, FALSE);
+    }
 
   win = gtk_plug_new (0);
   /* set window borders */
@@ -511,9 +512,10 @@ create_plug (void)
 
   gtk_widget_show_all (win);
 
-  /* add plug data */
-  tabs[options.tabnum - 1].pid = getpid ();
-  tabs[options.tabnum - 1].xid = gtk_plug_get_id (GTK_PLUG (win));
+  /* add plug data */  
+  tabs[options.tabnum].pid = getpid ();
+  tabs[options.tabnum].xid = gtk_plug_get_id (GTK_PLUG (win));
+  tabs[0].pid++;
 }
 
 void

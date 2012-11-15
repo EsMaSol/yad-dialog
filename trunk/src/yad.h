@@ -439,7 +439,7 @@ char *escape_markup (char *str);
 char *unescape_markup (char *str);
 char *escape_str (char *str);
 
-YadNTabs *get_tabs (key_t key);
+YadNTabs *get_tabs (key_t key, gboolean create);
 
 G_END_DECLS
 
