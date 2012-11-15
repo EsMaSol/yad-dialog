@@ -243,40 +243,40 @@ escape_markup (char *str)
     {
       switch (*buf)
         {
-          case '&':
-            len += 4;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "&amp;");
-            i += 5;
-            break;
-          case '<':
-            len += 3;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "&lt;");
-            i += 4;
-            break;
-          case '>':
-            len += 3;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "&gt;");
-            i += 4;
-            break;
-          case '"':
-            len += 5;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "&quot;");
-            i += 6;
-            break;
-          case '\'':
-            len += 5;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "&apos;");
-            i += 6;
-            break;
-          default:
-            *(res + i) = *buf;
-            i++;
-            break;
+        case '&':
+          len += 4;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "&amp;");
+          i += 5;
+          break;
+        case '<':
+          len += 3;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "&lt;");
+          i += 4;
+          break;
+        case '>':
+          len += 3;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "&gt;");
+          i += 4;
+          break;
+        case '"':
+          len += 5;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "&quot;");
+          i += 6;
+          break;
+        case '\'':
+          len += 5;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "&apos;");
+          i += 6;
+          break;
+        default:
+          *(res + i) = *buf;
+          i++;
+          break;
         }
       buf++;
     }
@@ -352,22 +352,22 @@ escape_str (char *str)
     {
       switch (*buf)
         {
-          case '\n':
-            len += 1;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "\\n");
-            i += 2;
-            break;
-          case '\t':
-            len += 1;
-            res = (char *) realloc (res, len + 1);
-            strcpy (res + i, "\\t");
-            i += 2;
-            break;
-          default:
-            *(res + i) = *buf;
-            i++;
-            break;
+        case '\n':
+          len += 1;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "\\n");
+          i += 2;
+          break;
+        case '\t':
+          len += 1;
+          res = (char *) realloc (res, len + 1);
+          strcpy (res + i, "\\t");
+          i += 2;
+          break;
+        default:
+          *(res + i) = *buf;
+          i++;
+          break;
         }
       buf++;
     }
@@ -377,36 +377,38 @@ escape_str (char *str)
 }
 
 YadNTabs *
-get_tabs (key_t key)
+get_tabs (key_t key, gboolean create)
 {
   YadNTabs *t = NULL;
   int shmid, i, new = 0;
 
   /* get shared memory */
-  if ((shmid = shmget (key, settings.max_tab * sizeof (YadNTabs), 0)) == -1)
+  if (create)
     {
-      if (errno != ENOENT)
-        {
-          g_printerr ("yad: cannot get shared memory for key %d: %s", key, strerror (errno));
-          exit (1);
-        }
-      /* try to create it */
-      if ((shmid = shmget (key, settings.max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
+      if ((shmid = shmget (key, (settings.max_tab + 1) * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
         {
           g_printerr ("yad: cannot create shared memory for key %d: %s", key, strerror (errno));
-          exit (1);
+          return NULL;
         }
-      new = 1;
+    }
+  else
+    {
+      if ((shmid = shmget (key, (settings.max_tab + 1) * sizeof (YadNTabs), 0)) == -1)
+        {
+          if (errno != ENOENT)
+            g_printerr ("yad: cannot get shared memory for key %d: %s", key, strerror (errno));
+          return NULL;
+        }
     }
 
   /* attach shared memory */
   if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) - 1)
     {
       g_printerr ("yad: cannot attach shared memory for key %d: %s", key, strerror (errno));
-      exit (1);
+      return NULL;
     }
 
-  if (new)
+  if (create)
     {
       for (i = 0; i < settings.max_tab; i++)
         t[i].pid = -1;
