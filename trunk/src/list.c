@@ -894,13 +894,16 @@ print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
 static void
 print_selected (GtkTreeModel * model, GtkTreePath * path, GtkTreeIter * iter, gpointer data)
 {
-  gint i, col = options.list_data.print_column;
+  gint i, n_cols, col;
 
-  if (col)
+  col = options.list_data.print_column;
+  n_cols = gtk_tree_model_get_n_columns (model) - 1;
+
+  if (col && col <= n_cols)
     print_col (model, iter, col - 1);
   else
     {
-      for (i = 0; i < gtk_tree_model_get_n_columns (model) - 1; i++)
+      for (i = 0; i < n_cols; i++)
         print_col (model, iter, i);
     }
   g_printf ("\n");
