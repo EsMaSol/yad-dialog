@@ -515,6 +515,7 @@ create_plug (void)
   /* add plug data */
   tabs[options.tabnum].pid = getpid ();
   tabs[options.tabnum].xid = gtk_plug_get_id (GTK_PLUG (win));
+  /* FIXME: may be a race here */
   tabs[0].xid++;
   shmdt (tabs[0].pid);
 }
