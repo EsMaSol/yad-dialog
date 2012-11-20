@@ -39,13 +39,14 @@ notebook_create_widget (GtkWidget * dlg)
   GSList *tab;
   guint i = 0;
 
-  w = notebook = gtk_notebook_new ();
-  gtk_container_set_border_width (GTK_CONTAINER (w), 5);
-
   /* get shared memory */
   tabs = get_tabs (options.notebook_data.key, TRUE);
   if (!tabs)
     exit (-1);
+
+  /* screate widget */
+  w = notebook = gtk_notebook_new ();
+  gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
   /* add tabs */
   for (tab = options.notebook_data.tabs; tab; tab = tab->next)
@@ -74,17 +75,14 @@ notebook_swallow_childs (void)
   guint i, n_tabs;
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
-  
+
   /* wait until all children are register */
-  while (tabs[0].pid != n_tabs - 1)
-    {
-    printf ("%d\n", tabs[0].pid);
+  while (tabs[0].xid != n_tabs)
     usleep (1000);
-    }
- 
+
   for (i = 1; i <= n_tabs; i++)
     {
-      GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
+      GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i - 1);
 
       if (tabs[i].pid != -1)
         gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
