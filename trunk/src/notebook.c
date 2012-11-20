@@ -32,6 +32,8 @@
 
 static GtkWidget *notebook;
 
+static gboolean printed = FALSE;
+
 GtkWidget *
 notebook_create_widget (GtkWidget * dlg)
 {
@@ -96,11 +98,20 @@ notebook_print_result (void)
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
   for (i = 0; i < n_tabs; i++)
-    {
-    }
+    kill (tabs[i].pid, SIGUSR1);
+
+  printed = TRUE;
 }
 
 void
 notebook_close_childs (void)
 {
+  guint i, n_tabs;
+
+  if (!printed)
+    {
+      n_tabs = g_slist_length (options.notebook_data.tabs);
+      for (i = 0; i < n_tabs; i++)
+        kill (tabs[i].pid, SIGUSR2);
+    }
 }
