@@ -425,7 +425,7 @@ create_plug (void)
   GtkWidget *win, *vbox, *text;
   GtkWidget *main_widget = NULL;
 
-  tabs = NULL;
+  tabs = get_tabs (options.plug, FALSE);
   while (!tabs)
     {
       usleep (1000);
@@ -512,10 +512,11 @@ create_plug (void)
 
   gtk_widget_show_all (win);
 
-  /* add plug data */  
+  /* add plug data */
   tabs[options.tabnum].pid = getpid ();
   tabs[options.tabnum].xid = gtk_plug_get_id (GTK_PLUG (win));
-  tabs[0].pid++;
+  tabs[0].xid++;
+  shmdt (tabs[0].pid);
 }
 
 void

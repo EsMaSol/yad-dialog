@@ -913,13 +913,13 @@ static void
 print_all (GtkTreeModel * model)
 {
   GtkTreeIter iter;
-  gint i, cols = gtk_tree_model_get_n_columns (model) - 1;
+  gint i, n_cols = gtk_tree_model_get_n_columns (model) - 1;
 
   if (gtk_tree_model_get_iter_first (model, &iter))
     {
       do
         {
-          for (i = 0; i < cols; i++)
+          for (i = 0; i < n_cols; i++)
             print_col (model, &iter, i);
           g_printf ("\n");
         }
