@@ -380,6 +380,10 @@ typedef struct {
   Window xid;
 } YadNTabs;
 
+/* pointer to shared memory for tabbed dialog */
+/* 0 item used for special info: */
+/*   pid - memory id */
+/*   xid - count of registered tabs (for sync) */
 extern YadNTabs *tabs;
 
 void yad_options_init (void);
