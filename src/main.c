@@ -703,6 +703,8 @@ main (gint argc, gchar ** argv)
               print_result ();
           }
 #ifndef G_OS_WIN32
+        if (options.mode == YAD_MODE_NOTEBOOK)
+          notebook_close_childs ();
         /* autokill option for progress dialog */
         if (!options.kill_parent)
           {
