@@ -37,12 +37,14 @@ GtkWidget *dialog = NULL;
 
 YadNTabs *tabs;
 
+void print_result (void);
+
 #ifndef G_OS_WIN32
 static void
 sa_usr1 (gint sig)
 {
   if (options.plug != -1)
-    gtk_main_quit ();
+    print_result ();
   else
     gtk_dialog_response (GTK_DIALOG (dialog), YAD_RESPONSE_OK);
 }
@@ -659,11 +661,13 @@ main (gint argc, gchar ** argv)
 
 #ifndef G_OS_WIN32
   /* set signal handlers */
-  bzero (&sa, sizeof (struct sigaction));
-  sa.sa_handler = sa_usr1;
-  sigaction (SIGUSR1, &sa, NULL);
-  sa.sa_handler = sa_usr2;
-  sigaction (SIGUSR2, &sa, NULL);
+  signal (SIGUSR1, sa_usr1);
+  signal (SIGUSR2, sa_usr2);
+  /* bzero (&sa, sizeof (struct sigaction)); */
+  /* sa.sa_handler = sa_usr1; */
+  /* sigaction (SIGUSR1, &sa, NULL); */
+  /* sa.sa_handler = sa_usr2; */
+  /* sigaction (SIGUSR2, &sa, NULL); */
 #endif
 
   switch (options.mode)
