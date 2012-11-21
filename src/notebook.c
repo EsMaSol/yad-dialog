@@ -35,8 +35,6 @@
 
 static GtkWidget *notebook;
 
-static gboolean printed = FALSE;
-
 GtkWidget *
 notebook_create_widget (GtkWidget * dlg)
 {
@@ -99,10 +97,11 @@ notebook_print_result (void)
   guint i, n_tabs;
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
-  for (i = 0; i < n_tabs; i++)
-    kill (tabs[i].pid, SIGUSR1);
-
-  printed = TRUE;
+  for (i = 1; i <= n_tabs; i++)
+    {
+      if (tabs[i].pid != -1)
+        kill (tabs[i].pid, SIGUSR1);
+    }
 }
 
 void
@@ -111,14 +110,16 @@ notebook_close_childs (void)
   guint i, n_tabs;
   struct shmid_ds buf;
 
-  if (!printed)
+  gtk_widget_destroy (notebook);
+
+  n_tabs = g_slist_length (options.notebook_data.tabs);
+  for (i = 1; i <= n_tabs; i++)
     {
-      n_tabs = g_slist_length (options.notebook_data.tabs);
-      for (i = 0; i < n_tabs; i++)
+      if (tabs[i].pid != -1)
         kill (tabs[i].pid, SIGUSR2);
     }
 
   /* cleanup shared memory */
-  shmdt (tabs);
   shmctl (tabs[0].pid, IPC_RMID, &buf);
+  shmdt (tabs);
 }
