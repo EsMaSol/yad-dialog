@@ -22,6 +22,9 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+#include <sys/ipc.h>
+#include <sys/shm.h>
+
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
@@ -39,7 +42,6 @@ notebook_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
   GSList *tab;
-  guint i = 0;
 
   /* get shared memory */
   tabs = get_tabs (options.notebook_data.key, TRUE);
@@ -107,6 +109,7 @@ void
 notebook_close_childs (void)
 {
   guint i, n_tabs;
+  struct shmid_ds buf;
 
   if (!printed)
     {
@@ -114,4 +117,8 @@ notebook_close_childs (void)
       for (i = 0; i < n_tabs; i++)
         kill (tabs[i].pid, SIGUSR2);
     }
+
+  /* cleanup shared memory */
+  shmdt (tabs);
+  shmctl (tabs[0].pid, IPC_RMID, &buf);
 }
