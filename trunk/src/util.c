@@ -380,7 +380,7 @@ YadNTabs *
 get_tabs (key_t key, gboolean create)
 {
   YadNTabs *t = NULL;
-  int shmid, i, new = 0;
+  int shmid, i;
 
   /* get shared memory */
   if (create)
