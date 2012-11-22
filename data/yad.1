@@ -50,6 +50,9 @@ Display list dialog
 .B \-\-multi-progress
 Display multi progress bars dialog.
 .TP
+.B \-\-notebook
+Display notebook dialog.
+.TP
 .B \-\-notification
 Display notification icon.
 .TP
@@ -84,13 +87,19 @@ Set the dialog timeout in seconds.
 .TP
 .B \-\-timeout-indicator=POSITION
 Show timeout indicator in given position. Positions are \fItop\fP, \fIbottom\fP, \fIleft\fP or \fIright\fP.
-Style of indicator may be set through the gtkrc file. 
+Style of indicator may be set through the gtkrc file.
 See \fIhttp://code.google.com/p/yad/wiki/TimeoutIndicator\fP for details.
 .TP
 .B \-\-kill-parent
 Send SIGTERM to parent process.
 .TP
-.B --print-xid
+.B \-\-plug=KEY
+Run dialog in plug mode for swallow as a notebook tab. See \fINOTEBOOK\fP section for more.
+.TP
+.B \-\-tabnum=NUM
+Set the tab number for plugged dialog. See \fINOTEBOOK\fP section for more.
+.TP
+.B \-\-print-xid
 Print X Window Id of a dialog window to the stderr.
 .TP
 .B \-\-text=STRING
@@ -111,8 +120,8 @@ Hide main widget with expander. \fITEXT\fP is an optional argument with expander
 .TP
 .B \-\-button=BUTTON:ID
 Add the dialog button. May be used multiply times. \fIID\fP is an exit code or a command.
-\fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or simple text label. 
-Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP. 
+\fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or simple text label.
+Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP.
 If no buttons specified \fIOK\fP and \fICancel\fP buttons used. See \fBEXIT STATUS\fP section for more.
 If \fIID\fP have a non-numeric value it treats like a command and click on such button doesn't close the dialog.
 If command have a `%d' template, \fIYAD\fP replace it with value of his pid.
@@ -128,7 +137,7 @@ Default is \fIend\fP.
 Don't use pango markup in dialog's text.
 .TP
 .B \-\-always-print-result
-Always print result. 
+Always print result.
 .TP
 .B \-\-dialog-sep
 Show separator between dialog and buttons. Works only with gtk+-2.0.
@@ -163,7 +172,7 @@ When this option is used, \fIwidth\fP, \fIheight\fP, \fImouse\fP and \fIcenter\f
 ignored.
 .TP
 .B \-\-selectable-labels
-If set, user can select dialog's text and copy it to clipboard. 
+If set, user can select dialog's text and copy it to clipboard.
 This option also affects on label fields in form dialog.
 .TP
 .B \-\-rest=FILENAME
@@ -184,7 +193,7 @@ Set the calendar year.
 Set the format for the returned date. By default is `%x'. See \fIstrftime(3)\fP for more details.
 .TP
 .B \-\-details=FILENAME
-Read days description from \fIFILENAME\fP. 
+Read days description from \fIFILENAME\fP.
 .PP
 File with days details must be in following format:
 .IP
@@ -211,7 +220,7 @@ By default used \fI/etc/X11/rgb.txt\fP.
 Use dialog text as a tooltip for Drag-and-Drop box.
 .TP
 .B \-\-command=CMD
-Run command when data received. Data strings pass to command as an agrument. 
+Run command when data received. Data strings pass to command as an agrument.
 By default data just prints to stdout.
 
 .SS Text entry options
@@ -249,7 +258,7 @@ Specify a command which will be run when the right icon clicked. Output of comma
 .PP
 Any extra data specified in command line adds as an items of combo-box entry, except of numeric mode.
 
-If icon specified and icon action is not given, click on icon just clear the entry. 
+If icon specified and icon action is not given, click on icon just clear the entry.
 Numeric fields will ignore the icons.
 
 .SS Iconbox options
@@ -296,7 +305,7 @@ Activate save mode.
 Specify separator character when returning multiple filenames.
 .TP
 .B \-\-confirm\-overwrite[=TEXT]
-Confirm file selection if filename already exists. 
+Confirm file selection if filename already exists.
 Optional argument is a text for confirmation dialog.
 .TP
 .B \-\-file-filter=NAME | PATTERN1 PATTERN2 ...
@@ -307,7 +316,7 @@ used multiply times.
 .SS Font selection options
 .TP
 .B \-\-fontname=FONTNAME
-Set the initial font. \fIFONTNAME\fP is a string with font representation in the 
+Set the initial font. \fIFONTNAME\fP is a string with font representation in the
 form \fI"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"\fP.
 .TP
 .B \-\-preview
@@ -376,9 +385,9 @@ Additional data in command line interprets as a default values for form fields. 
 .SS List options
 .TP
 .B \-\-column=STRING[:TYPE]
-Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fIFLT\fP, \fICHK\fP, \fIRD\fP, \fIIMG\fP, \fIHD\fP or \fITIP\fP. 
+Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fIFLT\fP, \fICHK\fP, \fIRD\fP, \fIIMG\fP, \fIHD\fP or \fITIP\fP.
 \fITEXT\fP type is default. Use \fINUM\fP for integers and \fIFTL\fP for double values. \fITIP\fP is used for define tooltip column.
-\fICHK\fP (checkboxes) and \fIRD\fP (radio toggle) are a boolean columns. 
+\fICHK\fP (checkboxes) and \fIRD\fP (radio toggle) are a boolean columns.
 \fIHD\fP type means a hidden column. Such columns are not displayes in the list, only in output.
 \fIIMG\fP may be path to image or icon name from currnet GTK+ icon theme.
 Size of icons may be set in config file. Image field prints as empty value.
@@ -405,7 +414,7 @@ Allow changes to text.
 Do not show column headers
 .TP
 .B \-\-print-all
-Print all data from the list. 
+Print all data from the list.
 .TP
 .B \-\-print-column=NUM
 Specify what column will be printed to standard output. \fI0\fP may be used to print all columns (this is default).
@@ -452,10 +461,26 @@ Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIr
 Initial values for bars set as extra arguments. Each lines with progress data passed to stdin must be started from \fIN:\fP where \fIN\fP is a number of progress bar. Rest is
 the same as in \fIprogress\fP dialog.
 
+.SS Notebook options
+.TP
+.B \-\-key=KEY
+Set the key of this notebook.
+.TP
+.B \-\-tab=LABEL
+Add tab with specified label to notebook.
+.TP
+.B \-\-align=TYPE
+Set the tab label align. Value may be \fIleft\fP, \fIcenter\fP or \fIright\fP.
+.TP
+.B \-\-tab-borders=NUMBER
+Set the borders width around widget in tabs.
+.PP
+See \fBNOTEBOOK\fP section for more about notebook dialog.
+
 .SS Notification options
 .TP
 .B \-\-command=CMD
-Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified. 
+Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified.
 .TP
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
@@ -466,7 +491,7 @@ Set separator character for menu values. Default is \fI|\fP.
 .B \-\-item-separator=STRING
 Set separator character for menu items. Default is \fI!\fP.
 .PP
-See \fBNOTIFICATION\fP section for more about separators. 
+See \fBNOTIFICATION\fP section for more about separators.
 
 .SS Print options
 .TP
@@ -593,6 +618,19 @@ Show version of program.
 .PP
 Also the standard GTK+ options are accepted.
 
+.SH NOTEBOOK
+Notebook is a complex dialog which swallow other dialogs in his tabs.
+Dialogs identifies by unique key (integer) and must be runs in a special plug mode (--plug option).
+Following example runs notebook dialog with two tabs, first has a simple text and second is an entry dialog.
+
+.nf
+#! /bin/sh
+.sp
+yad --plug=12345 --tabnum=1 --text="first tab with text" &> res1 &
+yad --plug=12345 --tabnum=2 --text="second tab" --entry &> res2 &
+yad --notebook --key=12345 --tab="Tab 1" --tab="Tab 2"
+.fi
+
 .SH NOTIFICATION
 Allows commands to be sent to yad in the form \fBcommand:args\fP.
 Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP, \fImenu\fP and \fIquit\fP.
@@ -607,7 +645,7 @@ Set notification tooltip.
 Set notification icon to visible, invisible or blinking states.
 .TP
 .B action:COMMAND
-Specify the command running when click on the icon. 
+Specify the command running when click on the icon.
 Special string \fI"quit"\fP exit the program.
 .TP
 .B menu:STRING
@@ -651,7 +689,7 @@ The look and feel of yad's dialogs can be customized through gtkrc file. Here is
 .TS
 tab (@);
 l l l.
-.B 
+.B
 Widget name@Widget type@Description
 _
 yad-dialog-window@GtkDialog@Dialog window
