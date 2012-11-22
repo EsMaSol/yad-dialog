@@ -650,6 +650,12 @@ main (gint argc, gchar ** argv)
       g_io_channel_shutdown (ioc, FALSE, NULL);
     }
 
+#ifndef G_OS_WIN32
+  /* set signal handlers */
+  signal (SIGUSR1, sa_usr1);
+  signal (SIGUSR2, sa_usr2);
+#endif
+
   /* plug mode */
   if (options.plug != -1)
     {
@@ -658,17 +664,6 @@ main (gint argc, gchar ** argv)
       shmdt (tabs);
       return ret;
     }
-
-#ifndef G_OS_WIN32
-  /* set signal handlers */
-  signal (SIGUSR1, sa_usr1);
-  signal (SIGUSR2, sa_usr2);
-  /* bzero (&sa, sizeof (struct sigaction)); */
-  /* sa.sa_handler = sa_usr1; */
-  /* sigaction (SIGUSR1, &sa, NULL); */
-  /* sa.sa_handler = sa_usr2; */
-  /* sigaction (SIGUSR2, &sa, NULL); */
-#endif
 
   switch (options.mode)
     {
