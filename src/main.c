@@ -569,7 +569,6 @@ main (gint argc, gchar ** argv)
   gint w, h;
   gint ret = 0;
   gchar *tmp_sep;
-  struct sigaction sa;
 
   setlocale (LC_ALL, "");
 
