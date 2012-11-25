@@ -445,7 +445,7 @@ Use regular expressions in search for text fields.
 .B \-\-listen
 Listen data from stdin even if command-line values was specified.
 
-Sending FormFeed character to list clears it. This symbol may be sent as \fIecho -e '\\f'\fP.
+Sending FormFeed character to list clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 
 .SS Multi progress bars dialog options
 .TP
@@ -620,15 +620,15 @@ Also the standard GTK+ options are accepted.
 
 .SH NOTEBOOK
 Notebook is a complex dialog which swallow other dialogs in his tabs.
-Dialogs identifies by unique key (integer) and must be runs in a special plug mode (--plug option).
+Dialogs identifies by unique key (integer) and must be runs in a special plug mode (\-\-plug option).
 Following example runs notebook dialog with two tabs, first has a simple text and second is an entry dialog.
 
 .nf
 #! /bin/sh
 .sp
-yad --plug=12345 --tabnum=1 --text="first tab with text" &> res1 &
-yad --plug=12345 --tabnum=2 --text="second tab" --entry &> res2 &
-yad --notebook --key=12345 --tab="Tab 1" --tab="Tab 2"
+yad \-\-plug=12345 \-\-tabnum=1 \-\-text="first tab with text" &> res1 &
+yad \-\-plug=12345 \-\-tabnum=2 \-\-text="second tab" \-\-entry &> res2 &
+yad \-\-notebook \-\-key=12345 \-\-tab="Tab 1" \-\-tab="Tab 2"
 .fi
 
 .SH NOTIFICATION
@@ -783,7 +783,9 @@ yad-icon-browser [theme]
 .PP
 When using autoconf you may use special m4 macro \fIAM_PATH_YAD\fP for looking for yad and check it version. Usage of this macro is
 .IP
-AM_PATH_YAD([MIN-VERSION],[ACT-FOUND],[ACT-NOT-FOUND])
+AM_PATH_YAD([MINIMUM-VERSION],\\
+[ACTION-IF-FOUND],\\
+[ACTION-IF-NOT-FOUND])
 .PP
 
 .SH AUTHORS
