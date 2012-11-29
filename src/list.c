@@ -655,11 +655,13 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
                     break;
                   default:
                     {
-                      gchar *cval, *uval;
+                      gchar *cval, *uval, *sval;
                       gtk_tree_model_get (model, &iter, i, &cval, -1);
                       uval = unescape_markup (cval);
-                      g_string_append_printf (args, " '%s'", uval);
+		      sval = g_shell_quote (uval);
                       g_free (uval);
+                      g_string_append_printf (args, " %s", sval);
+		      g_free (sval);
                       break;
                     }
                 }
