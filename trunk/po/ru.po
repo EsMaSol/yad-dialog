@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-22 12:41+0200\n"
+"POT-Creation-Date: 2012-12-11 12:46+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -126,7 +126,7 @@ msgstr "Не могу открыть каталог %s: %s\n"
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:608
+#: ../src/main.c:607
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
@@ -150,15 +150,15 @@ msgstr "Неизвестная команда '%s'\n"
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:744
+#: ../src/list.c:746
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:751
+#: ../src/list.c:753
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:777
+#: ../src/list.c:779
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
@@ -1191,39 +1191,40 @@ msgstr "Название"
 msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr "Неверная последователньость UTF-8 при чтении файла %s\n"
 
-#: ../src/browser.c:130
+#: ../src/browser.c:132
 msgid "scalable "
 msgstr "масштабируемый "
 
-#: ../src/browser.c:138
-#, c-format
-msgid ""
-"<b>Name:</b> %s\n"
-"<b>Sizes:</b> %s\n"
-"<b>Filename:</b> %s"
-msgstr ""
-"<b>Имя:</b> %s\n"
-"<b>Размеры:</b> %s\n"
-"<b>Имя файла:</b> %s"
-
-#: ../src/browser.c:139
+#: ../src/browser.c:142
 msgid "built-in"
 msgstr "встроенный"
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:199
+#: ../src/browser.c:200
 msgid "- Icon browser"
 msgstr "- Броузер иконок"
 
-#: ../src/browser.c:212
+#: ../src/browser.c:213
 msgid "Icon browser"
 msgstr "Броузер иконок"
 
-#: ../src/browser.c:261
+#: ../src/browser.c:237
+msgid "<b>Name:</b>"
+msgstr "<b>Имя:</b>"
+
+#: ../src/browser.c:246
+msgid "<b>Sizes:</b>"
+msgstr "<b>Размеры:</b>"
+
+#: ../src/browser.c:255
+msgid "<b>Filename:</b>"
+msgstr "<b>Имя файла:</b>"
+
+#: ../src/browser.c:284
 msgid "Category"
 msgstr "Категория"
 
-#: ../src/browser.c:292
+#: ../src/browser.c:315
 msgid "Icons"
 msgstr "Иконки"
 

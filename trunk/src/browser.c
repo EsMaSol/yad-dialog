@@ -26,7 +26,9 @@
 typedef struct {
   GtkWidget *win;
   GtkWidget *image;
-  GtkWidget *label;
+  GtkWidget *lname;
+  GtkWidget *lsize;
+  GtkWidget *lfile;
   GtkWidget *cat_list;
   GtkWidget *icon_list;
 
@@ -103,7 +105,7 @@ select_icon (GtkTreeSelection * sel, IconBrowserData * data)
   GtkTreeIter iter;
   GtkIconInfo *info;
   gint *sz, i;
-  gchar *icon, *file, *lbl;
+  gchar *icon, *file;
   GString *sizes;
 
   if (!gtk_tree_selection_get_selected (sel, &model, &iter))
@@ -135,11 +137,11 @@ select_icon (GtkTreeSelection * sel, IconBrowserData * data)
   /* free memory */
   g_free (sz);
 
-  lbl = g_strdup_printf (_("<b>Name:</b> %s\n<b>Sizes:</b> %s\n<b>Filename:</b> %s"),
-                         icon, sizes->str, file ? file : _("built-in"));
-  gtk_label_set_markup (GTK_LABEL (data->label), lbl);
+  gtk_label_set_text (GTK_LABEL (data->lname), icon);
+  gtk_label_set_text (GTK_LABEL (data->lsize), sizes->str);
+  gtk_label_set_text (GTK_LABEL (data->lfile), file ? file : _("built-in"));
+
   g_string_free (sizes, TRUE);
-  g_free (lbl);
 
   if (info)
     gtk_icon_info_free (info);
@@ -177,11 +179,10 @@ main (gint argc, gchar * argv[])
   GtkTreeSelection *sel;
   GtkTreeViewColumn *col;
   GtkCellRenderer *r;
-  GtkWidget *w, *p, *box;
+  GtkWidget *w, *p, *box, *t;
 
   GOptionEntry entrs[] = {
-    {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL}
-    ,
+    {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL},
     {NULL}
   };
 
@@ -224,18 +225,40 @@ main (gint argc, gchar * argv[])
   gtk_container_set_border_width (GTK_CONTAINER (data->win), 5);
 
   /* create icon info box */
-#if !GTK_CHECK_VERSION(3,0,0)
-  w = gtk_hbox_new (FALSE, 5);
-#else
-  w = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
-#endif
-  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 2);
-  data->image = gtk_image_new ();
-  gtk_box_pack_start (GTK_BOX (w), data->image, FALSE, FALSE, 2);
+  t = gtk_table_new (3, 3, FALSE);
+  gtk_table_set_col_spacings (GTK_TABLE (t), 5);
+  gtk_table_set_row_spacings (GTK_TABLE (t), 5);
+  gtk_box_pack_start (GTK_BOX (box), t, FALSE, FALSE, 2);
 
-  data->label = gtk_label_new ("");
-  gtk_misc_set_alignment (GTK_MISC (data->label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (w), data->label, TRUE, TRUE, 2);
+  data->image = gtk_image_new_from_stock ("gtk-missing-image", GTK_ICON_SIZE_DIALOG);
+  gtk_table_attach (GTK_TABLE (t), data->image, 0, 1, 0, 3, GTK_FILL, 0, 0, 0);
+
+  w = gtk_label_new (NULL);
+  gtk_label_set_markup (GTK_LABEL (w), _("<b>Name:</b>"));
+  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
+  gtk_table_attach (GTK_TABLE (t), w, 1, 2, 0, 1, GTK_FILL, 0, 0, 0);
+  data->lname = gtk_label_new (NULL);
+  gtk_label_set_selectable (GTK_LABEL (data->lname), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (data->lname), 0, 0.5);
+  gtk_table_attach (GTK_TABLE (t), data->lname, 2, 3, 0, 1, GTK_FILL | GTK_EXPAND, 0, 0, 0);
+
+  w = gtk_label_new (NULL);
+  gtk_label_set_markup (GTK_LABEL (w), _("<b>Sizes:</b>"));
+  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
+  gtk_table_attach (GTK_TABLE (t), w, 1, 2, 1, 2, GTK_FILL, 0, 0, 0);
+  data->lsize = gtk_label_new (NULL);
+  gtk_label_set_selectable (GTK_LABEL (data->lsize), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (data->lsize), 0, 0.5);
+  gtk_table_attach (GTK_TABLE (t), data->lsize, 2, 3, 1, 2, GTK_FILL | GTK_EXPAND, 0, 0, 0);
+
+  w = gtk_label_new (NULL);
+  gtk_label_set_markup (GTK_LABEL (w), _("<b>Filename:</b>"));
+  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
+  gtk_table_attach (GTK_TABLE (t), w, 1, 2, 2, 3, GTK_FILL, 0, 0, 0);
+  data->lfile = gtk_label_new (NULL);
+  gtk_label_set_selectable (GTK_LABEL (data->lfile), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (data->lfile), 0, 0.5);
+  gtk_table_attach (GTK_TABLE (t), data->lfile, 2, 3, 2, 3, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 
   /* create icon browser */
   p = gtk_hpaned_new ();

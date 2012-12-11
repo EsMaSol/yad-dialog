@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-22 12:41+0200\n"
+"POT-Creation-Date: 2012-12-11 12:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Yannou90 <windaube.non.merci@gmail.com>\n"
 "Language-Team: Français\n"
@@ -135,7 +135,7 @@ msgstr "impossible d'ouvrir le répertoire  %s: %s\n"
 msgid "%d sec"
 msgstr "%d sec"
 
-#: ../src/main.c:608
+#: ../src/main.c:607
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Impossible d'analyser la ligne de commande: %s\n"
@@ -159,15 +159,15 @@ msgstr "Commande inconnue: '%s'\n"
 msgid "Yad notification"
 msgstr "Yad notification"
 
-#: ../src/list.c:744
+#: ../src/list.c:746
 msgid "Add row"
 msgstr "Ajouter une ligne"
 
-#: ../src/list.c:751
+#: ../src/list.c:753
 msgid "Delete row"
 msgstr "Supprimer la ligne"
 
-#: ../src/list.c:777
+#: ../src/list.c:779
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Pas de titre de colonne spécifié pour liste.\n"
@@ -1226,39 +1226,40 @@ msgstr "Nom"
 msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr "Données UTF-8 invalides rencontrées en lecture du fichier %s\n"
 
-#: ../src/browser.c:130
+#: ../src/browser.c:132
 msgid "scalable "
 msgstr "scalable "
 
-#: ../src/browser.c:138
-#, c-format
-msgid ""
-"<b>Name:</b> %s\n"
-"<b>Sizes:</b> %s\n"
-"<b>Filename:</b> %s"
-msgstr ""
-"<b>Nom</b> %s\n"
-"<b>Poids:</b> %s\n"
-"<b>Nom de fichier:</b> %s"
-
-#: ../src/browser.c:139
+#: ../src/browser.c:142
 msgid "built-in"
 msgstr "Support intégré"
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:199
+#: ../src/browser.c:200
 msgid "- Icon browser"
 msgstr "Navigateur d'icône"
 
-#: ../src/browser.c:212
+#: ../src/browser.c:213
 msgid "Icon browser"
 msgstr "Navigateur d'icône"
 
-#: ../src/browser.c:261
+#: ../src/browser.c:237
+msgid "<b>Name:</b>"
+msgstr ""
+
+#: ../src/browser.c:246
+msgid "<b>Sizes:</b>"
+msgstr ""
+
+#: ../src/browser.c:255
+msgid "<b>Filename:</b>"
+msgstr ""
+
+#: ../src/browser.c:284
 msgid "Category"
 msgstr "Catégorie"
 
-#: ../src/browser.c:292
+#: ../src/browser.c:315
 msgid "Icons"
 msgstr "Icônes"
 
@@ -1269,6 +1270,15 @@ msgstr "Navigateur d'Icônes"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Parcourir les icônes du thème GTK"
+
+#~ msgid ""
+#~ "<b>Name:</b> %s\n"
+#~ "<b>Sizes:</b> %s\n"
+#~ "<b>Filename:</b> %s"
+#~ msgstr ""
+#~ "<b>Nom</b> %s\n"
+#~ "<b>Poids:</b> %s\n"
+#~ "<b>Nom de fichier:</b> %s"
 
 #, fuzzy
 #~ msgid "NUM"
