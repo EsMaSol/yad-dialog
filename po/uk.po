@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-22 12:41+0200\n"
+"POT-Creation-Date: 2012-12-11 12:46+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -126,7 +126,7 @@ msgstr "Не можу відкрити каталогу %s: %s\n"
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:608
+#: ../src/main.c:607
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
@@ -150,15 +150,15 @@ msgstr "Невідома команда '%s'\n"
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
-#: ../src/list.c:744
+#: ../src/list.c:746
 msgid "Add row"
 msgstr "Додати рядок"
 
-#: ../src/list.c:751
+#: ../src/list.c:753
 msgid "Delete row"
 msgstr "Прибрати рядок"
 
-#: ../src/list.c:777
+#: ../src/list.c:779
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовки стовпчиків для діалогу зі списком\n"
@@ -1192,39 +1192,40 @@ msgstr "Назва"
 msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr "Неправильна послідовність UTF-8 при читанні файлу %s\n"
 
-#: ../src/browser.c:130
+#: ../src/browser.c:132
 msgid "scalable "
 msgstr "масштабовний "
 
-#: ../src/browser.c:138
-#, c-format
-msgid ""
-"<b>Name:</b> %s\n"
-"<b>Sizes:</b> %s\n"
-"<b>Filename:</b> %s"
-msgstr ""
-"<b>Назва:</b> %s\n"
-"<b>Розміри:</b> %s\n"
-"<b>Назва файлу:</b> %s"
-
-#: ../src/browser.c:139
+#: ../src/browser.c:142
 msgid "built-in"
 msgstr "вбудований"
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:199
+#: ../src/browser.c:200
 msgid "- Icon browser"
 msgstr "- Переглядач іконок"
 
-#: ../src/browser.c:212
+#: ../src/browser.c:213
 msgid "Icon browser"
 msgstr "Переглядач іконок"
 
-#: ../src/browser.c:261
+#: ../src/browser.c:237
+msgid "<b>Name:</b>"
+msgstr "<b>Назва:</b>"
+
+#: ../src/browser.c:246
+msgid "<b>Sizes:</b>"
+msgstr "<b>Розміри:</b>"
+
+#: ../src/browser.c:255
+msgid "<b>Filename:</b>"
+msgstr "<b>Назва файлу:</b>"
+
+#: ../src/browser.c:284
 msgid "Category"
 msgstr "Категорія"
 
-#: ../src/browser.c:292
+#: ../src/browser.c:315
 msgid "Icons"
 msgstr "Іконки"
 
@@ -1235,7 +1236,3 @@ msgstr "Переглядач іконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Перегляд теми іконок GTK"
-
-#, fuzzy
-#~ msgid "NUM"
-#~ msgstr "ЧИСЛО"

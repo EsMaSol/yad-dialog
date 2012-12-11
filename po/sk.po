@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-22 12:41+0200\n"
+"POT-Creation-Date: 2012-12-11 12:46+0200\n"
 "PO-Revision-Date: 2011-09-05 07:57+0200\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: Slovak <debian-l10n-slovak@lists.debian.org>\n"
@@ -127,7 +127,7 @@ msgstr "Nemožno otvoriť adresár %s: %s\n"
 msgid "%d sec"
 msgstr "%d s"
 
-#: ../src/main.c:608
+#: ../src/main.c:607
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Nemožno spracovať príkazový riadok: %s\n"
@@ -151,15 +151,15 @@ msgstr "Neznámy príkaz '%s'\n"
 msgid "Yad notification"
 msgstr "Informačná ikona Yad"
 
-#: ../src/list.c:744
+#: ../src/list.c:746
 msgid "Add row"
 msgstr "Pridá riadok"
 
-#: ../src/list.c:751
+#: ../src/list.c:753
 msgid "Delete row"
 msgstr "Odstráni riadok"
 
-#: ../src/list.c:777
+#: ../src/list.c:779
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Neboli zadané mená stĺpcov pre dialóg Zoznam.\n"
@@ -1210,39 +1210,40 @@ msgstr "Meno"
 msgid "Invalid UTF-8 data encountered reading file %s\n"
 msgstr "Pri čítaní súboru %s zistené neplatné UTF-8 dáta\n"
 
-#: ../src/browser.c:130
+#: ../src/browser.c:132
 msgid "scalable "
 msgstr "scalable "
 
-#: ../src/browser.c:138
-#, c-format
-msgid ""
-"<b>Name:</b> %s\n"
-"<b>Sizes:</b> %s\n"
-"<b>Filename:</b> %s"
-msgstr ""
-"<b>Meno:</b> %s\n"
-"<b>Veľkosť:</b> %s\n"
-"<b>Meno súboru:</b> %s"
-
-#: ../src/browser.c:139
+#: ../src/browser.c:142
 msgid "built-in"
 msgstr "zabudované"
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:199
+#: ../src/browser.c:200
 msgid "- Icon browser"
 msgstr "– Prezerač ikon"
 
-#: ../src/browser.c:212
+#: ../src/browser.c:213
 msgid "Icon browser"
 msgstr "Prezerač ikon"
 
-#: ../src/browser.c:261
+#: ../src/browser.c:237
+msgid "<b>Name:</b>"
+msgstr ""
+
+#: ../src/browser.c:246
+msgid "<b>Sizes:</b>"
+msgstr ""
+
+#: ../src/browser.c:255
+msgid "<b>Filename:</b>"
+msgstr ""
+
+#: ../src/browser.c:284
 msgid "Category"
 msgstr "Kategória"
 
-#: ../src/browser.c:292
+#: ../src/browser.c:315
 msgid "Icons"
 msgstr "Ikony"
 
@@ -1253,6 +1254,15 @@ msgstr "Prezerač ikon"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Preskúmať tému ikon GTK"
+
+#~ msgid ""
+#~ "<b>Name:</b> %s\n"
+#~ "<b>Sizes:</b> %s\n"
+#~ "<b>Filename:</b> %s"
+#~ msgstr ""
+#~ "<b>Meno:</b> %s\n"
+#~ "<b>Veľkosť:</b> %s\n"
+#~ "<b>Meno súboru:</b> %s"
 
 #, fuzzy
 #~ msgid "NUM"
