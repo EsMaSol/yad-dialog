@@ -31,6 +31,11 @@ enum {
   NUM_COLS
 };
 
+enum {
+  TYPE_APP,
+  TYPE_LINK
+};
+
 typedef struct {
   gchar *name;
   gchar *comment;
@@ -55,16 +60,19 @@ activate_cb (GtkWidget * view, GtkTreePath * path, gpointer data)
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_model_get (model, &iter, COL_COMMAND, &cmd, COL_TERM, &in_term, -1);
 
-  if (in_term)
+  if (cmd && cmd[0])
     {
-      gchar *tcmd;
+      if (in_term)
+        {
+          gchar *tcmd;
 
-      tcmd = g_strdup_printf (options.icons_data.term, cmd);
-      g_spawn_command_line_async (tcmd, NULL);
-      g_free (tcmd);
+          tcmd = g_strdup_printf (options.icons_data.term, cmd);
+          g_spawn_command_line_async (tcmd, NULL);
+          g_free (tcmd);
+        }
+      else
+        g_spawn_command_line_async (cmd, NULL);
     }
-  else
-    g_spawn_command_line_async (cmd, NULL);
 }
 
 static gboolean
@@ -193,9 +201,17 @@ parse_desktop_file (gchar * filename)
 
       if (g_key_file_has_group (kf, "Desktop Entry"))
         {
-          gint i;
+          gint i, type;
           gchar *val;
 
+          /* get type */
+          val = g_key_file_get_string (kf, "Desktop Entry", "Type", NULL);
+          if (g_ascii_strcasecmp (val, "Link"))
+            type = TYPE_LINK;
+          else
+            type = TYPE_APP;
+          g_free (val);
+          /* get name */
           if (options.icons_data.generic)
             {
               ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "GenericName", NULL, NULL);
@@ -218,17 +234,31 @@ parse_desktop_file (gchar * filename)
           val = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
           ent->comment = escape_markup (val);
           g_free (val);
-          ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
-          /* remove possible arguments patterns */
-          for (i = strlen (ent->command); i > 0; i--)
+          /* parse command or url */
+          if (type == TYPE_APP)
             {
-              if (ent->command[i] == '%')
+              ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
+              /* remove possible arguments patterns */
+              for (i = strlen (ent->command); i > 0; i--)
                 {
-                  ent->command[i] = '\0';
-                  break;
+                  if (ent->command[i] == '%')
+                    {
+                      ent->command[i] = '\0';
+                      break;
+                    }
+                }
+              ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
+            }
+          else
+            {
+              gchar *url = g_key_file_get_string (kf, "Desktop Entry", "URL", NULL);
+              if (url)
+                {
+                  ent->command = g_strdup_printf ("xdg-open '%s'", url);
+                  g_free (url);
                 }
             }
-          ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
+          /* add icon */
           icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
           if (icon)
             {
