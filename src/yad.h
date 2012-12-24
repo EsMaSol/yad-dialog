@@ -264,7 +264,6 @@ typedef struct {
 typedef struct {
   YadPrintType type;
   gboolean headers;
-  gboolean preview;
 } YadPrintData;
 
 typedef struct {
@@ -313,6 +312,7 @@ typedef struct {
   gchar *date_format;
   gdouble align;
   gboolean listen;
+  gboolean preview;
 } YadCommonData;
 
 typedef struct {

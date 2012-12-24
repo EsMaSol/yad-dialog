@@ -243,7 +243,7 @@ yad_print_run (void)
   pcap = GTK_PRINT_CAPABILITY_PAGE_SET | GTK_PRINT_CAPABILITY_COPIES |
     GTK_PRINT_CAPABILITY_COLLATE | GTK_PRINT_CAPABILITY_REVERSE |
     GTK_PRINT_CAPABILITY_NUMBER_UP | GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT;
-  if (options.print_data.preview && options.print_data.type != YAD_PRINT_RAW)
+  if (options.common_data.preview && options.print_data.type != YAD_PRINT_RAW)
     pcap |= GTK_PRINT_CAPABILITY_PREVIEW;
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg), pcap);
 
