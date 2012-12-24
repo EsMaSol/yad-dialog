@@ -1,3 +1,9 @@
+Version 0.19.0
+    - add preview to file dialog
+    - recognize link type in .desktop files for icon dialog
+    - make icon description selectable in icon browser
+    - fix quoting special characters when pass data to the command in list and dnd dialogs
+
 Version 0.18.0
     - add notebook dialog
     - add --button-layout option
