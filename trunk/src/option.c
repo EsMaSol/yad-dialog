@@ -479,6 +479,12 @@ static GOptionEntry file_options[] = {
    &options.file_data.filter,
    N_("Sets a filename filter"),
    N_("NAME | PATTERN1 PATTERN2 ...")},
+  {"add-preview", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.common_data.preview,
+   N_("Enable preview"),
+   NULL},
   {NULL}
 };
 
@@ -853,7 +859,7 @@ static GOptionEntry print_options[] = {
   {"add-preview", 0,
    0,
    G_OPTION_ARG_NONE,
-   &options.print_data.preview,
+   &options.common_data.preview,
    N_("Enable preview in print dialog"),
    NULL},
   {"fontname", 0,
@@ -1511,6 +1517,7 @@ yad_options_init (void)
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
   options.common_data.listen = FALSE;
+  options.common_data.preview = FALSE;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
@@ -1588,7 +1595,6 @@ yad_options_init (void)
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;
   options.print_data.headers = FALSE;
-  options.print_data.preview = FALSE;
 
   /* Initialize progress data */
   options.progress_data.progress_text = NULL;
