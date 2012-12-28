@@ -158,6 +158,8 @@ file_create_widget (GtkWidget * dlg)
         }
       g_free (dir);
     }
+  else
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (w), ".");
 
   if (options.common_data.multi)
     gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (w), TRUE);

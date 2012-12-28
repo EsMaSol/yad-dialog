@@ -343,7 +343,7 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           if (g_file_test (val, G_FILE_TEST_IS_DIR))
             path = g_strdup (val);
           else
-            path = g_path_get_dirname (val);
+            path = val ? g_path_get_dirname (val) : ".";
         }
 
       if (type == YAD_FIELD_MFILE)
@@ -414,7 +414,7 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           if (g_file_test (val, G_FILE_TEST_IS_DIR))
             path = g_strdup (val);
           else
-            path = g_path_get_dirname (val);
+            path = val ? g_path_get_dirname (val) : ".";
         }
 
       if (type == YAD_FIELD_FILE_SAVE)
@@ -521,8 +521,8 @@ form_create_widget (GtkWidget * dlg)
           YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
           /* add field label */
-          if (fld->type != YAD_FIELD_CHECK &&
-              fld->type != YAD_FIELD_BUTTON && fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
+          if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON && 
+              fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
@@ -601,6 +601,7 @@ form_create_widget (GtkWidget * dlg)
               case YAD_FIELD_FILE:
                 e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
                 gtk_widget_set_name (e, "yad-form-file");
+                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), ".");
                 gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5,
                                   5);
                 fields = g_slist_append (fields, e);
@@ -609,6 +610,7 @@ form_create_widget (GtkWidget * dlg)
               case YAD_FIELD_DIR:
                 e = gtk_file_chooser_button_new (_("Select folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
                 gtk_widget_set_name (e, "yad-form-file");
+                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), ".");
                 gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5,
                                   5);
                 fields = g_slist_append (fields, e);
