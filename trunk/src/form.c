@@ -343,7 +343,7 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           if (g_file_test (val, G_FILE_TEST_IS_DIR))
             path = g_strdup (val);
           else
-            path = val ? g_path_get_dirname (val) : ".";
+            path = val ? g_path_get_dirname (val) : g_get_current_dir ();
         }
 
       if (type == YAD_FIELD_MFILE)
@@ -414,7 +414,7 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           if (g_file_test (val, G_FILE_TEST_IS_DIR))
             path = g_strdup (val);
           else
-            path = val ? g_path_get_dirname (val) : ".";
+            path = val ? g_path_get_dirname (val) : g_get_current_dir ();
         }
 
       if (type == YAD_FIELD_FILE_SAVE)
@@ -601,7 +601,7 @@ form_create_widget (GtkWidget * dlg)
               case YAD_FIELD_FILE:
                 e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
                 gtk_widget_set_name (e, "yad-form-file");
-                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), ".");
+                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), g_get_current_dir ());
                 gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5,
                                   5);
                 fields = g_slist_append (fields, e);
@@ -610,7 +610,7 @@ form_create_widget (GtkWidget * dlg)
               case YAD_FIELD_DIR:
                 e = gtk_file_chooser_button_new (_("Select folder"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
                 gtk_widget_set_name (e, "yad-form-file");
-                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), ".");
+                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), g_get_current_dir ());
                 gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5,
                                   5);
                 fields = g_slist_append (fields, e);
