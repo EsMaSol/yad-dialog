@@ -1,3 +1,8 @@
+2012-12-31 11:36  ananasik
+
+	* ChangeLog, configure.ac, data/yad.1: update man page. bump
+	  version to 0.19.1
+
 2012-12-31 08:22  ananasik
 
 	* src/icons.c: fix parsing .desktop files in icons dialog
