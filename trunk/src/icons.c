@@ -206,7 +206,7 @@ parse_desktop_file (gchar * filename)
 
           /* get type */
           val = g_key_file_get_string (kf, "Desktop Entry", "Type", NULL);
-          if (g_ascii_strcasecmp (val, "Link"))
+          if (g_ascii_strcasecmp (val, "Link") == 0)
             type = TYPE_LINK;
           else
             type = TYPE_APP;
