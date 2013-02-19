@@ -64,6 +64,7 @@ select_cb (GObject *obj, gpointer data)
 
       if (first_time)
         {
+          /* don't activate item when dialog is appear and clear the selection */
           first_time = FALSE;
           gtk_tree_selection_unselect_all (sel);
           return;
