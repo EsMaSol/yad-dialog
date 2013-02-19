@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2012, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2013, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include "yad.h"
@@ -45,12 +45,53 @@ typedef struct {
 } DEntry;
 
 static void
+select_cb (GObject *obj, gpointer data)
+{
+  static gboolean first_time = TRUE;
+
+  if (!options.icons_data.compact)
+    {
+      GList *sel = gtk_icon_view_get_selected_items (GTK_ICON_VIEW (icon_view));
+      if (sel)
+        gtk_icon_view_item_activated (GTK_ICON_VIEW (icon_view), (GtkTreePath *) sel->data);
+      g_list_foreach (sel, (GFunc) gtk_tree_path_free, NULL);
+      g_list_free (sel);
+    }
+  else
+    {
+      GtkTreeIter iter;
+      GtkTreeSelection *sel = (GtkTreeSelection *) obj;
+
+      if (first_time)
+        {
+          first_time = FALSE;
+          gtk_tree_selection_unselect_all (sel);
+          return;
+        }
+
+      if (gtk_tree_selection_get_selected (sel, NULL, &iter))
+        {
+          GtkTreeModel *model;
+          GtkTreePath *path;
+
+          model = gtk_tree_view_get_model (GTK_TREE_VIEW (icon_view));
+          path = gtk_tree_model_get_path (model, &iter);
+
+          gtk_tree_view_row_activated (GTK_TREE_VIEW (icon_view), path, (GtkTreeViewColumn *) data);
+        }
+    }
+}
+
+static void
 activate_cb (GtkWidget * view, GtkTreePath * path, gpointer data)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
   gchar *cmd;
   gboolean in_term;
+
+  if (!path)
+    return;
 
   if (!options.icons_data.compact)
     model = gtk_icon_view_get_model (GTK_ICON_VIEW (view));
@@ -338,9 +379,8 @@ icons_create_widget (GtkWidget * dlg)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-  store = gtk_list_store_new (NUM_COLS,
-                              G_TYPE_STRING,
-                              G_TYPE_STRING, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN);
+  store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
+                              GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
                                         options.icons_data.sort_by_name ? COL_NAME : COL_FILENAME,
                                         options.icons_data.descend ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
@@ -353,6 +393,9 @@ icons_create_widget (GtkWidget * dlg)
       gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
       gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW (icon_view), COL_TOOLTIP);
       gtk_icon_view_set_item_width (GTK_ICON_VIEW (icon_view), options.icons_data.width);
+
+      if (options.icons_data.single_click)
+        g_signal_connect (G_OBJECT (icon_view), "selection-changed", G_CALLBACK (select_cb), NULL);
     }
   else
     {
@@ -375,6 +418,13 @@ icons_create_widget (GtkWidget * dlg)
       gtk_tree_view_append_column (GTK_TREE_VIEW (icon_view), col);
 
       gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (icon_view), COL_TOOLTIP);
+
+      if (options.icons_data.single_click)
+        {
+          GtkTreeSelection *sel;
+          sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (icon_view));
+          g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_cb), col);
+        }
     }
 
   /* handle directory */

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2012, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2013, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <stdlib.h>
@@ -618,6 +618,12 @@ static GOptionEntry icons_options[] = {
    G_OPTION_ARG_NONE,
    &options.icons_data.descend,
    N_("Sort items in descending order"),
+   NULL},
+  {"single-click", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.icons_data.single_click,
+   N_("Activate items by single click"),
    NULL},
   {NULL}
 };
@@ -1568,6 +1574,7 @@ yad_options_init (void)
   options.icons_data.term = settings.term;
   options.icons_data.sort_by_name = FALSE;
   options.icons_data.descend = FALSE;
+  options.icons_data.single_click = FALSE;
 
   /* Initialize list data */
   options.list_data.columns = NULL;

@@ -231,6 +231,7 @@ typedef struct {
   gboolean descend;
   gboolean sort_by_name;
   gboolean stdinput;
+  gboolean single_click;
   guint width;
   gchar *term;
 } YadIconsData;
