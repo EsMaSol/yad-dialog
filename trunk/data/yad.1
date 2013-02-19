@@ -211,7 +211,7 @@ Set initial color value.
 Show extra information about color in returned string.
 .TP
 .B \-\-palette[=FILENAME]
-Show palette ans set predefined colors from given filename.
+Show palette and set predefined colors from given filename.
 By default used \fI/etc/X11/rgb.txt\fP.
 
 .SS Drag-and-Drop box options
@@ -229,7 +229,7 @@ By default data just prints to stdout.
 Set the entry label text.
 .TP
 .B \-\-entry-text=STRING
-Set the initial entry text.
+Set the initial entry text or default item in combo-box.
 .TP
 .B \-\-hide-text
 Hide the entry text.
@@ -238,22 +238,22 @@ Hide the entry text.
 Use completion instead of combo-box.
 .TP
 .B \-\-editable
-Allow changes to text in combo-box.
+Allow make changes to text in combo-box.
 .TP
 .B \-\-numeric
 Use spin button instead of text entry. Additional parameters in command line treats as minimum and maximum
 values, step value and precisions (in that order). All this values are optional. Default range is from 0 to 65535 with step 1.
 .TP
-.B \-\-licon
+.B \-\-licon=IMAGE
 Set an icon on a left side of entry.
 .TP
-.B \-\-licon-action
+.B \-\-licon-action=CMD
 Specify a command which will be run when the left icon clicked. Output of command will be set as entry text.
 .TP
-.B \-\-ricon
+.B \-\-ricon=IMAGE
 Set an icon on a right side of entry.
 .TP
-.B \-\-ricon-action
+.B \-\-ricon-action=CMD
 Specify a command which will be run when the right icon clicked. Output of command will be set as entry text.
 .PP
 Any extra data specified in command line adds as an items of combo-box entry, except of numeric mode.
@@ -281,6 +281,12 @@ separated by newline. \fIInTerm\fP is a case insensitive boolean constant (\fITR
 .TP
 .B \-\-item-width
 Set items width.
+.TP
+.B \-\-compact
+Use compact mode. Icon and name of each item is placed in a single row.
+.TP
+.B \-\-single-click
+Activate items by single mouse click. This option may not works properly in case of compact mode.
 .TP
 .B \-\-term
 Pattern for terminal. By default use `xterm \-e %s' where %s replaced by the command.
