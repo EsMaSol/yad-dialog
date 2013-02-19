@@ -188,8 +188,8 @@ entry_create_widget (GtkWidget * dlg)
     }
   else if (!options.entry_data.completion && options.extra_data && *options.extra_data)
     {
-      gint i = 0;
-
+      gint active, i;
+      
       if (options.common_data.editable || settings.combo_always_editable)
         {
 #if GTK_CHECK_VERSION(2,24,0)
@@ -225,8 +225,12 @@ entry_create_widget (GtkWidget * dlg)
           is_combo = TRUE;
         }
 
+      i = 0; active = -1;
       while (options.extra_data[i] != NULL)
         {
+          if (options.entry_data.entry_text &&
+              g_ascii_strcasecmp (options.extra_data[i], options.entry_data.entry_text) == 0)
+            active = i;
 #if GTK_CHECK_VERSION(2,24,0)
           gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (c), options.extra_data[i]);
 #else
@@ -235,7 +239,7 @@ entry_create_widget (GtkWidget * dlg)
           i++;
         }
 
-      if (options.entry_data.entry_text)
+      if (options.entry_data.entry_text && active == -1)
         {
 #if GTK_CHECK_VERSION(2,24,0)
           gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (c), options.entry_data.entry_text);
@@ -246,7 +250,7 @@ entry_create_widget (GtkWidget * dlg)
 
       /* set first iter active */
       if (!options.common_data.editable)
-        gtk_combo_box_set_active (GTK_COMBO_BOX (c), 0);
+        gtk_combo_box_set_active (GTK_COMBO_BOX (c), (active != -1 ? active : 0));
     }
   else
     {
