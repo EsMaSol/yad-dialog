@@ -1,3 +1,18 @@
+2013-02-19 11:12  ananasik@gmail.com
+
+	* data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po,
+	  po/zh_TW.po, src/icons.c, src/option.c, src/yad.h: add
+	  --single-click option to icons dialog
+
+2013-02-19 09:30  ananasik@gmail.com
+
+	* src/entry.c: --entry-text sets existing default item in combo-box
+	  or add it if not found
+
+2012-12-31 11:37  ananasik
+
+	* ChangeLog, NEWS: release 0.19.1
+
 2012-12-31 11:36  ananasik
 
 	* ChangeLog, configure.ac, data/yad.1: update man page. bump
