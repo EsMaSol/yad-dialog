@@ -37,6 +37,7 @@ static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError 
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
+static gboolean parse_signal (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -243,11 +244,11 @@ static GOptionEntry general_options[] = {
    N_("NUMBER")},
 #ifndef G_OS_WIN32
   {"kill-parent", 0,
-   0,
-   G_OPTION_ARG_NONE,
-   &options.kill_parent,
-   N_("Send TERM to parent"),
-   NULL},
+   G_OPTION_FLAG_OPTIONAL_ARG,
+   G_OPTION_ARG_CALLBACK,
+   parse_signal,
+   N_("Send SIGNAL to parent"),
+   N_("SIGNAL")},
   {"print-xid", 0,
    0,
    G_OPTION_ARG_NONE,
@@ -1420,6 +1421,99 @@ set_print_type (const gchar * option_name, const gchar * value, gpointer data, G
   return TRUE;
 }
 
+static gboolean
+parse_signal (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  guint sn = 0;
+
+  if (!value || !value[0])
+    return;
+
+  sn = (guint) strtol (value, NULL, 0);
+  if (!sn)
+    {
+      guint ofst = 0;
+
+      if (strncmp (value, "SIG", 3) == 0)
+        ofst = 3;
+
+      /* signals names from bits/sn.h */
+      if (strcmp (value + ofst, "HUP") == 0)
+        sn = SIGHUP;
+      else if (strcmp (value + ofst, "INT") == 0)
+        sn = SIGINT;
+      else if (strcmp (value + ofst, "QUIT") == 0)
+        sn = SIGQUIT;
+      else if (strcmp (value + ofst, "ILL") == 0)
+        sn = SIGILL;
+      else if (strcmp (value + ofst, "TRAP") == 0)
+        sn = SIGTRAP;
+      else if (strcmp (value + ofst, "ABRT") == 0)
+        sn = SIGABRT;
+      else if (strcmp (value + ofst, "IOT") == 0)
+        sn = SIGIOT;
+      else if (strcmp (value + ofst, "BUS") == 0)
+        sn = SIGBUS;
+      else if (strcmp (value + ofst, "FPE") == 0)
+        sn = SIGFPE;
+      else if (strcmp (value + ofst, "KILL") == 0)
+        sn = SIGKILL;
+      else if (strcmp (value + ofst, "USR1") == 0)
+        sn = SIGUSR1;
+      else if (strcmp (value + ofst, "SEGV") == 0)
+        sn = SIGSEGV;
+      else if (strcmp (value + ofst, "USR2") == 0)
+        sn = SIGUSR2;
+      else if (strcmp (value + ofst, "PIPE") == 0)
+        sn = SIGPIPE;
+      else if (strcmp (value + ofst, "ALRM") == 0)
+        sn = SIGPIPE;
+      else if (strcmp (value + ofst, "TERM") == 0)
+        sn = SIGTERM;
+      else if (strcmp (value + ofst, "STKFLT") == 0)
+        sn = SIGSTKFLT;
+      else if (strcmp (value + ofst, "CHLD") == 0 ||
+               strcmp (value + ofst, "CLD") == 0)
+        sn = SIGCHLD;
+      else if (strcmp (value + ofst, "CONT") == 0)
+        sn = SIGCONT;
+      else if (strcmp (value + ofst, "STOP") == 0)
+        sn = SIGSTOP;
+      else if (strcmp (value + ofst, "TSTP") == 0)
+        sn = SIGTSTP;
+      else if (strcmp (value + ofst, "TTIN") == 0)
+        sn = SIGTTIN;
+      else if (strcmp (value + ofst, "TTOU") == 0)
+        sn = SIGTTOU;
+      else if (strcmp (value + ofst, "URG") == 0)
+        sn = SIGURG;
+      else if (strcmp (value + ofst, "XCPU") == 0)
+        sn = SIGXCPU;
+      else if (strcmp (value + ofst, "XFSZ") == 0)
+        sn = SIGXFSZ;
+      else if (strcmp (value + ofst, "VTALRM") == 0)
+        sn = SIGVTALRM;
+      else if (strcmp (value + ofst, "PROF") == 0)
+        sn = SIGPROF;
+      else if (strcmp (value + ofst, "WINCH") == 0)
+        sn = SIGWINCH;
+      else if (strcmp (value + ofst, "IO") == 0 ||
+               strcmp (value + ofst, "POLL") == 0)
+        sn = SIGIO;
+      else if (strcmp (value + ofst, "PWR") == 0)
+        sn = SIGPWR;
+      else if (strcmp (value + ofst, "SYS") == 0)
+        sn = SIGSYS;
+    }
+
+  if (sn && sn < _NSIG)
+    options.kill_parent = sn;
+  else
+    g_printerr (_("Unknown signal: %s\n"), value);
+
+  return TRUE;
+}
+
 void
 yad_set_mode (void)
 {
@@ -1469,7 +1563,7 @@ yad_options_init (void)
   options.rest_file = NULL;
   options.extra_data = NULL;
 #ifndef G_OS_WIN32
-  options.kill_parent = FALSE;
+  options.kill_parent = SIGTERM;
   options.print_xid = FALSE;
 #endif
 

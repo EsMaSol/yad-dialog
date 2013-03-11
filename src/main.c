@@ -713,8 +713,9 @@ main (gint argc, gchar ** argv)
     }
 
 #ifndef G_OS_WIN32
-  if (options.kill_parent)
-    kill (getppid (), SIGTERM);
+  /* _NSIG defined in bits/signum.h */
+  if (options.kill_parent > 0 && options.kill_parent < _NSIG)
+    kill (getppid (), options.kill_parent);
 #endif
 
   return ret;

@@ -4,7 +4,7 @@ yad \- display GTK+ dialogs
 
 .SH SYNOPSIS
 .B yad
-.RI [ options ]
+.RI [ OPTIONS ]
 
 .SH DESCRIPTION
 \fBYAD\fP is a program that will display GTK+ dialogs, and return
@@ -90,8 +90,10 @@ Show timeout indicator in given position. Positions are \fItop\fP, \fIbottom\fP,
 Style of indicator may be set through the gtkrc file.
 See \fIhttp://code.google.com/p/yad/wiki/TimeoutIndicator\fP for details.
 .TP
-.B \-\-kill-parent
-Send SIGTERM to parent process.
+.B \-\-kill-parent[=SIGNAL]
+Send SIGNAL to parent process. Default value of SIGNAL is a SIGTERM.
+SIGNAL may be specified by it's number or symbolic name with or without SIG prefix.
+See signal(7) for details about signals.
 .TP
 .B \-\-plug=KEY
 Run dialog in plug mode for swallow as a notebook tab. See \fINOTEBOOK\fP section for more.
