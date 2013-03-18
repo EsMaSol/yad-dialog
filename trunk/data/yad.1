@@ -1,6 +1,6 @@
-.TH YAD 1 "Marth 24, 2011"
+.TH YAD 1 "Marth 18, 2013"
 .SH NAME
-yad \- display GTK+ dialogs
+yad \- display GTK+ dialogs in shell scripts
 
 .SH SYNOPSIS
 .B yad
@@ -547,6 +547,16 @@ Kill parent process if cancel button is pressed.
 .TP
 .B \-\-pulsate
 Pulsate progress bar.
+.TP
+.B \-\-enable-log[=TEXT]
+Show log window. This window gathers all of lines from stdin, started from \fI#\fP instead of setting appropriate progress labels.
+Optional argument \fITEXT\fP is a text label for window expander.
+.TP
+.B \-\--log-on-top
+Place log window above progress bar.
+.TP
+.B \-\-log-expanded
+Start with expanded log window.
 
 .SS Text options
 .TP

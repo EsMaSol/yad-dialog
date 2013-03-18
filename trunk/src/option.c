@@ -37,6 +37,7 @@ static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError 
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_progress_log (const gchar *, const gchar *, gpointer, GError **);
 static gboolean parse_signal (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
@@ -924,6 +925,24 @@ static GOptionEntry progress_options[] = {
    &options.progress_data.rtl,
    N_("Right-To-Left progress bar direction"),
    NULL},
+  {"enable-log", 0,
+   G_OPTION_FLAG_OPTIONAL_ARG,
+   G_OPTION_ARG_CALLBACK,
+   set_progress_log,
+   N_("Show log window"),
+   N_("TEXT")},
+  {"log-expanded", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.progress_data.log_expanded,
+   N_("Expand log window"),
+   NULL},
+  {"log-on-top", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.progress_data.log_on_top,
+   N_("Place log window above progress bar"),
+   NULL},
   {NULL}
 };
 
@@ -1422,6 +1441,15 @@ set_print_type (const gchar * option_name, const gchar * value, gpointer data, G
 }
 
 static gboolean
+set_progress_log (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (value)
+    options.progress_data.log = g_strdup (value);
+  else
+    options.progress_data.log = _("Progress log");
+}
+
+static gboolean
 parse_signal (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   guint sn = 0;
@@ -1706,6 +1734,9 @@ yad_options_init (void)
   options.progress_data.autokill = FALSE;
 #endif
   options.progress_data.rtl = FALSE;
+  options.progress_data.log = NULL;
+  options.progress_data.log_expanded = FALSE;
+  options.progress_data.log_on_top = FALSE;
 
   /* Initialize scale data */
   options.scale_data.value = 0;
