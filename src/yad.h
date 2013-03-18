@@ -276,6 +276,9 @@ typedef struct {
 #endif
   guint percentage;
   gboolean rtl;
+  gchar *log;
+  gboolean log_expanded;
+  gboolean log_on_top;
 } YadProgressData;
 
 typedef struct {

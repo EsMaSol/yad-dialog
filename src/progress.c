@@ -27,6 +27,8 @@
 #include "yad.h"
 
 static GtkWidget *progress_bar;
+static GtkWidget *progress_log;
+static GtkTextBuffer *log_buffer;
 
 static gboolean
 pulsate_progress_bar (gpointer user_data)
@@ -87,24 +89,38 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
               /* We have a comment, so let's try to change the label */
               match = g_strcompress (g_strstrip (string->str + 1));
-              gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
+              if (options.progress_data.log)
+                {
+                  GtkTextIter end;
+
+                  gtk_text_buffer_get_end_iter (log_buffer, &end);
+                  gtk_text_buffer_insert (log_buffer, &end, match, -1);
+
+                  /* scroll to end */
+                  while (gtk_events_pending ())
+                    gtk_main_iteration ();
+                  gtk_text_buffer_get_end_iter (log_buffer, &end);
+                  gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (progress_log), &end, 0, FALSE, 0, 0);
+                }
+              else
+                gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
               g_free (match);
             }
           else
             {
-              if (!g_ascii_isdigit (*(string->str)))
-                continue;
-
-              /* Now try to convert the thing to a number */
-              percentage = atoi (string->str);
-              if (percentage >= 100)
+              if (g_ascii_isdigit (*(string->str)))
                 {
-                  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
-                  if (options.progress_data.autoclose)
-                    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+                  /* Now try to convert the thing to a number */
+                  percentage = atoi (string->str);
+                  if (percentage >= 100)
+                    {
+                      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
+                      if (options.progress_data.autoclose)
+                        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+                    }
+                  else
+                    gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), percentage / 100.0);
                 }
-              else
-                gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), percentage / 100.0);
             }
 
         }
@@ -138,15 +154,14 @@ progress_create_widget (GtkWidget * dlg)
   GIOChannel *channel;
 
   // fix it when vertical specified
-  w = gtk_alignment_new (0.5, 0.5, 1, 0);
+  w = gtk_vbox_new (FALSE, 0);
 
   progress_bar = gtk_progress_bar_new ();
-  gtk_container_add (GTK_CONTAINER (w), progress_bar);
-
-  gtk_widget_set_name (w, "yad-progress-widget");
-#if GTK_CHECK_VERSION(3,0,0)
-  gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress_bar), TRUE);
-#endif
+  gtk_widget_set_name (progress_bar, "yad-progress-widget");
+  if (options.progress_data.log_on_top)
+    gtk_box_pack_end (GTK_BOX (w), progress_bar, FALSE, FALSE, 0);
+  else
+    gtk_box_pack_start (GTK_BOX (w), progress_bar, FALSE, FALSE, 0);
 
   if (options.progress_data.percentage > 100)
     options.progress_data.percentage = 100;
@@ -158,6 +173,36 @@ progress_create_widget (GtkWidget * dlg)
 #else
   if (options.progress_data.rtl)
     gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (progress_bar), GTK_PROGRESS_RIGHT_TO_LEFT);
+#endif
+
+  if (options.progress_data.log)
+    {
+      GtkWidget *ex, *sw;
+
+      ex = gtk_expander_new (options.progress_data.log);
+      gtk_expander_set_spacing (GTK_EXPANDER (ex), 2);
+      gtk_expander_set_expanded (GTK_EXPANDER (ex), options.progress_data.log_expanded);
+      gtk_box_pack_start (GTK_BOX (w), ex, TRUE, TRUE, 2);
+
+      sw = gtk_scrolled_window_new (NULL, NULL);
+      gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+      gtk_container_add (GTK_CONTAINER (ex), sw);
+
+      progress_log = gtk_text_view_new ();
+      gtk_widget_set_name (progress_log, "yad-text-widget");
+      gtk_container_add (GTK_CONTAINER (sw), progress_log);
+
+      log_buffer = gtk_text_buffer_new (NULL);
+      gtk_text_view_set_buffer (GTK_TEXT_VIEW (progress_log), log_buffer);
+      gtk_text_view_set_left_margin (GTK_TEXT_VIEW (progress_log), 5);
+      gtk_text_view_set_right_margin (GTK_TEXT_VIEW (progress_log), 5);
+      gtk_text_view_set_editable (GTK_TEXT_VIEW (progress_log), FALSE);
+      gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (progress_log), FALSE);
+    }
+#if GTK_CHECK_VERSION(3,0,0)
+  else
+    gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress_bar), TRUE);
 #endif
 
   channel = g_io_channel_unix_new (0);
