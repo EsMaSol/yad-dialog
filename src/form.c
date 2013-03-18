@@ -715,7 +715,7 @@ form_create_widget (GtkWidget * dlg)
 #endif
                     gtk_widget_set_name (e, "yad-form-separator");
                   }
-                gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
+                gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
                 fields = g_slist_append (fields, e);
                 break;
 
