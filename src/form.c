@@ -521,7 +521,7 @@ form_create_widget (GtkWidget * dlg)
           YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
           /* add field label */
-          if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON && 
+          if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
@@ -684,8 +684,7 @@ form_create_widget (GtkWidget * dlg)
                     }
                   gtk_widget_set_name (e, "yad-form-button");
                   gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
-                  gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0,
-                                    5, 5);
+                  gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
                   fields = g_slist_append (fields, e);
                   g_strfreev (buf);
                   break;
@@ -716,8 +715,7 @@ form_create_widget (GtkWidget * dlg)
 #endif
                     gtk_widget_set_name (e, "yad-form-separator");
                   }
-                gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5,
-                                  5);
+                gtk_table_attach (GTK_TABLE (w), e, 0 + col * 2, 2 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
                 fields = g_slist_append (fields, e);
                 break;
 

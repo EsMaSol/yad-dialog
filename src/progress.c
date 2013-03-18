@@ -154,7 +154,11 @@ progress_create_widget (GtkWidget * dlg)
   GIOChannel *channel;
 
   // fix it when vertical specified
+#if GTK_CHECK_VERSION(3,0,0)
+  w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
   w = gtk_vbox_new (FALSE, 0);
+#endif
 
   progress_bar = gtk_progress_bar_new ();
   gtk_widget_set_name (progress_bar, "yad-progress-widget");
