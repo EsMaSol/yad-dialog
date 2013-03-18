@@ -36,6 +36,7 @@ YadOptions options;
 GtkWidget *dialog = NULL;
 
 YadNTabs *tabs;
+gint t_sem;
 
 void print_result (void);
 

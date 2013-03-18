@@ -389,6 +389,7 @@ typedef struct {
 /*   pid - memory id */
 /*   xid - count of registered tabs (for sync) */
 extern YadNTabs *tabs;
+extern gint t_sem;
 
 void yad_options_init (void);
 GOptionContext *yad_create_context (void);
