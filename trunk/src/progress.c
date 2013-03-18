@@ -87,14 +87,17 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             {
               gchar *match;
 
-              /* We have a comment, so let's try to change the label */
+              /* We have a comment, so let's try to change the label or write it to the log */
               match = g_strcompress (g_strstrip (string->str + 1));
               if (options.progress_data.log)
                 {
+                  gchar *logline;
                   GtkTextIter end;
-
+                  
+                  logline = g_strdup_printf ("%s\n", match); /* add new line */
                   gtk_text_buffer_get_end_iter (log_buffer, &end);
-                  gtk_text_buffer_insert (log_buffer, &end, match, -1);
+                  gtk_text_buffer_insert (log_buffer, &end, logline, -1);
+                  g_free (logline);                  
 
                   /* scroll to end */
                   while (gtk_events_pending ())
