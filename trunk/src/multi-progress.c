@@ -142,8 +142,6 @@ multi_progress_create_widget (GtkWidget * dlg)
     table = gtk_table_new (nbars, 2, FALSE);
 #else
   table = gtk_grid_new ();
-  gtk_grid_set_row_homogeneous (GTK_GRID (table), FALSE);
-  gtk_grid_set_column_homogeneous (GTK_GRID (table), FALSE);
   gtk_grid_set_row_spacing (GTK_GRID (table), 2);
   gtk_grid_set_column_spacing (GTK_GRID (table), 2);
 #endif
