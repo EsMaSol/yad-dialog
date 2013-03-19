@@ -231,8 +231,6 @@ main (gint argc, gchar * argv[])
   gtk_table_set_row_spacings (GTK_TABLE (t), 5);
 #else
   t = gtk_grid_new ();
-  gtk_grid_set_column_homogeneous (GTK_GRID (t), FALSE);
-  gtk_grid_set_row_homogeneous (GTK_GRID (t), TRUE);
   gtk_grid_set_row_spacing (GTK_GRID (t), 5);
   gtk_grid_set_column_spacing (GTK_GRID (t), 5);
 #endif
