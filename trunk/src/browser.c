@@ -260,6 +260,7 @@ main (gint argc, gchar * argv[])
   gtk_table_attach (GTK_TABLE (t), data->lname, 2, 3, 0, 1, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 #else
   gtk_grid_attach (GTK_GRID (t), data->lname, 2, 0, 1, 1);
+  gtk_widget_set_hexpand (data->lname, TRUE);
 #endif
 
   w = gtk_label_new (NULL);
@@ -277,6 +278,7 @@ main (gint argc, gchar * argv[])
   gtk_table_attach (GTK_TABLE (t), data->lsize, 2, 3, 1, 2, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 #else
   gtk_grid_attach (GTK_GRID (t), data->lsize, 2, 1, 1, 1);
+  gtk_widget_set_hexpand (data->lsize, TRUE);
 #endif
 
   w = gtk_label_new (NULL);
@@ -294,6 +296,7 @@ main (gint argc, gchar * argv[])
   gtk_table_attach (GTK_TABLE (t), data->lfile, 2, 3, 2, 3, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 #else
   gtk_grid_attach (GTK_GRID (t), data->lfile, 2, 2, 1, 1);
+  gtk_widget_set_hexpand (data->lfile, TRUE);
 #endif
 
   /* create icon browser */
