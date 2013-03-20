@@ -1,3 +1,11 @@
+Version 0.20.0
+    - default value for combo-box can be specified by --entry-text from one of existings entries in list
+    - add --single-click option for icon dialog
+    - add log window to progress dialog
+    - fix geometry settings for unresizable windows
+    - fix layout on gtk3
+    - add custom signals for --kill-parent option
+
 Version 0.19.1
     - use current path as a default folder for file selection dialogs
     - fix parsing .desktop files in icons dialog
@@ -99,7 +107,7 @@ Version 0.13.0
     - fixes for icons in entry dialog
     - add icons for editable combo-boxes in entry dialog
     - add new field types for form dialog - labels and buttons
-    - fix blinking behavior in notification icon 
+    - fix blinking behavior in notification icon
     - some improvements in user-defined double-click action for list dialog
     - dialog text can be selected if --selectable-labels specified
     - fix image clipping in gtk+-3.0
@@ -130,7 +138,7 @@ Version 0.12.1
 Version 0.12.0
     - add icons to entry dialog
     - add --details option to calendar dialog
-    - add new field types to form dialog: CBE for editable combo-boxes, DT for date field 
+    - add new field types to form dialog: CBE for editable combo-boxes, DT for date field
       and MFL for choose multiple files
     - add user-specified doubleclick actions to list dialog
     - makes YAD buildable under MS Windows
@@ -140,7 +148,7 @@ Version 0.11.0
     - new --skip-taskbar option for hiding yad window from taskbar and pager
     - add --search-column option to list dialog for set quicksearch column number
     - add --elipsize option to list dialog for shortened long text in text columns
-    - add tooltips for list dialog. when tooltip column is not specified tooltips 
+    - add tooltips for list dialog. when tooltip column is not specified tooltips
       shows content of cell under mouse
     - add markup for entry labels in entry and form dialogs
 
@@ -161,7 +169,7 @@ Version 0.10.0
     - vertical and invert scale dialog
     - numeric entry
     - new font selection dialog
-    - tagging URIs in text dialog 
+    - tagging URIs in text dialog
     - new option --kill-parent for send SIGTERM to parent process
     - fix URI handling in dnd dialog
 
@@ -181,12 +189,12 @@ Version 0.8.1
     - fix setting initial value in DIR field of form dialog
 
 Version 0.8.0
-    - add --icon-theme option for use specific icon theme 
+    - add --icon-theme option for use specific icon theme
       instead of default
     - add --align option for label alignment in form dialog
     - fix handling ESC for return proper exit code
     - fix handling colons in options
-    - add yad-icon-browser, a separate tool for exploring GTK icon 
+    - add yad-icon-browser, a separate tool for exploring GTK icon
       themes
     - add autoconf macros AM_PATH_YAD for easily check for yad when
       use autotools
@@ -223,7 +231,7 @@ Version 0.5.0
     - notification icon always close on middle click
     - YAD now understand SIGUSR1 and SIGUSR2 signals
     - YAD can be build against new gtk+ 3.0
-    - fix output bug in list dialog 
+    - fix output bug in list dialog
 
 Version 0.4.0
     - add --no-headers option in list dialog
@@ -266,7 +274,7 @@ Version 0.1.0
 
 Version 0.0.10
     - add rtl direction to progress bar
-    - add --image-on-top option 
+    - add --image-on-top option
     - set cursor invisible when text is not editable in text dialog
     - add oprtion for setting colors of text-dialog
     - add --tail options to text dialog for autoscrolling
