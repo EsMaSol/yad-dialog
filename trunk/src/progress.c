@@ -93,11 +93,11 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 {
                   gchar *logline;
                   GtkTextIter end;
-                  
+
                   logline = g_strdup_printf ("%s\n", match); /* add new line */
                   gtk_text_buffer_get_end_iter (log_buffer, &end);
                   gtk_text_buffer_insert (log_buffer, &end, logline, -1);
-                  g_free (logline);                  
+                  g_free (logline);
 
                   /* scroll to end */
                   while (gtk_events_pending ())
@@ -198,6 +198,7 @@ progress_create_widget (GtkWidget * dlg)
 
       progress_log = gtk_text_view_new ();
       gtk_widget_set_name (progress_log, "yad-text-widget");
+      gtk_widget_set_size_request (progress_log, -1, options.progress_data.log_height);
       gtk_container_add (GTK_CONTAINER (sw), progress_log);
 
       log_buffer = gtk_text_buffer_new (NULL);

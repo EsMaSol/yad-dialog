@@ -943,6 +943,12 @@ static GOptionEntry progress_options[] = {
    &options.progress_data.log_on_top,
    N_("Place log window above progress bar"),
    NULL},
+  {"log-height", 0,
+   0,
+   G_OPTION_ARG_INT,
+   &options.progress_data.log_height,
+   N_("Height of log window"),
+   NULL},
   {NULL}
 };
 
@@ -1737,6 +1743,7 @@ yad_options_init (void)
   options.progress_data.log = NULL;
   options.progress_data.log_expanded = FALSE;
   options.progress_data.log_on_top = FALSE;
+  options.progress_data.log_height = -1;
 
   /* Initialize scale data */
   options.scale_data.value = 0;

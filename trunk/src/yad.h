@@ -279,6 +279,7 @@ typedef struct {
   gchar *log;
   gboolean log_expanded;
   gboolean log_on_top;
+  gint log_height;
 } YadProgressData;
 
 typedef struct {
