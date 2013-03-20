@@ -162,7 +162,6 @@ create_dialog (void)
   /* set window behavior */
   if (options.data.sticky)
     gtk_window_stick (GTK_WINDOW (dlg));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
   gtk_window_set_keep_above (GTK_WINDOW (dlg), options.data.ontop);
   gtk_window_set_decorated (GTK_WINDOW (dlg), !options.data.undecorated);
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
@@ -402,6 +401,8 @@ create_dialog (void)
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
     }
   gtk_widget_show (dlg);
+  /* set fixed size after showing widget */
+  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
 
   /* set timeout */
   if (options.data.timeout)
