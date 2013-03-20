@@ -1,3 +1,73 @@
+2013-03-20 05:51  ananasik
+
+	* configure.ac: bump version to 0.20.0
+
+2013-03-20 05:50  ananasik
+
+	* src/main.c: fix geometry for windows with --fixed argument
+
+2013-03-20 05:38  ananasik
+
+	* data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po,
+	  po/zh_TW.po, src/option.c, src/progress.c, src/yad.h: add
+	  log-height option for progress dialog
+
+2013-03-19 16:28  ananasik
+
+	* src/browser.c, src/form.c, src/multi-progress.c: switch to grid
+	  from table on gtk3
+
+2013-03-19 15:43  ananasik
+
+	* src/browser.c, src/multi-progress.c: improve gtk3 layout in
+	  multi-progress dialog
+
+2013-03-18 19:11  ananasik
+
+	* src/browser.c, src/main.c, src/yad.h: improve gtk3 for icon
+	  browser
+
+2013-03-18 15:24  ananasik@gmail.com
+
+	* src/progress.c: add newline to log strings
+
+2013-03-18 15:20  ananasik@gmail.com
+
+	* data/yad.1, src/form.c: update man page
+
+2013-03-18 14:11  ananasik@gmail.com
+
+	* src/form.c, src/progress.c: gtk3 improvement
+
+2013-03-18 11:56  ananasik@gmail.com
+
+	* configure.ac, data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po,
+	  po/uk.po, po/zh_TW.po, src/option.c, src/progress.c, src/yad.h:
+	  add log window to progress dialog
+
+2013-03-11 14:58  ananasik@gmail.com
+
+	* data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po,
+	  po/zh_TW.po, src/main.c, src/option.c, src/yad.h: add
+	  user-specified signals to --kill-parent
+
+2013-02-19 11:24  ananasik@gmail.com
+
+	* src/about.c, src/browser.c, src/calendar.c, src/color.c,
+	  src/dnd.c, src/entry.c, src/file.c, src/font.c, src/form.c,
+	  src/list.c, src/main.c, src/multi-progress.c, src/notebook.c,
+	  src/notification.c, src/print.c, src/progress.c, src/scale.c,
+	  src/text.c, src/util.c, src/yad.h: update copyright info
+
+2013-02-19 11:20  ananasik@gmail.com
+
+	* src/icons.c:
+
+2013-02-19 11:13  ananasik@gmail.com
+
+	* ChangeLog, configure.ac: bump version in configure.ac to 0.19.90.
+	  prepare to next release
+
 2013-02-19 11:12  ananasik@gmail.com
 
 	* data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po,
