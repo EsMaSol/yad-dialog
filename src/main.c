@@ -715,8 +715,8 @@ main (gint argc, gchar ** argv)
     }
 
 #ifndef G_OS_WIN32
-  /* _NSIG defined in bits/signum.h */
-  if (options.kill_parent > 0 && options.kill_parent < _NSIG)
+  /* NSIG defined in signal.h */
+  if (options.kill_parent > 0 && options.kill_parent < NSIG)
     kill (getppid (), options.kill_parent);
 #endif
 

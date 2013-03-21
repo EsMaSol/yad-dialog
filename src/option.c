@@ -1453,6 +1453,8 @@ set_progress_log (const gchar * option_name, const gchar * value, gpointer data,
     options.progress_data.log = g_strdup (value);
   else
     options.progress_data.log = _("Progress log");
+
+  return TRUE;
 }
 
 static gboolean
@@ -1461,7 +1463,10 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
   guint sn = 0;
 
   if (!value || !value[0])
-    return;
+    {
+      options.kill_parent = SIGTERM;
+      return TRUE;
+    }
 
   sn = (guint) strtol (value, NULL, 0);
   if (!sn)
@@ -1504,8 +1509,10 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
         sn = SIGPIPE;
       else if (strcmp (value + ofst, "TERM") == 0)
         sn = SIGTERM;
+#ifdef SIGSTKFLT
       else if (strcmp (value + ofst, "STKFLT") == 0)
         sn = SIGSTKFLT;
+#endif        
       else if (strcmp (value + ofst, "CHLD") == 0 ||
                strcmp (value + ofst, "CLD") == 0)
         sn = SIGCHLD;
@@ -1534,13 +1541,15 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
       else if (strcmp (value + ofst, "IO") == 0 ||
                strcmp (value + ofst, "POLL") == 0)
         sn = SIGIO;
+#ifdef SIGPWR        
       else if (strcmp (value + ofst, "PWR") == 0)
         sn = SIGPWR;
+#endif        
       else if (strcmp (value + ofst, "SYS") == 0)
         sn = SIGSYS;
     }
 
-  if (sn && sn < _NSIG)
+  if (sn > 0 && sn < NSIG)
     options.kill_parent = sn;
   else
     g_printerr (_("Unknown signal: %s\n"), value);
