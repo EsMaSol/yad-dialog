@@ -1597,7 +1597,7 @@ yad_options_init (void)
   options.rest_file = NULL;
   options.extra_data = NULL;
 #ifndef G_OS_WIN32
-  options.kill_parent = SIGTERM;
+  options.kill_parent = 0;
   options.print_xid = FALSE;
 #endif
 
