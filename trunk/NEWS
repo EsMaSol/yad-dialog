@@ -1,3 +1,6 @@
+Version 0.20.1
+    - fix --kill-parent option
+
 Version 0.20.0
     - default value for combo-box can be specified by --entry-text from one of existings entries in list
     - add --single-click option for icon dialog
