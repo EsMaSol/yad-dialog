@@ -123,7 +123,7 @@ cell_edited_cb (GtkCellRendererText * cell, const gchar * path_string, const gch
   gtk_tree_path_free (path);
 }
 
-static void
+static gboolean
 tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpointer data)
 {
   GtkTreeModel *model = NULL;
@@ -145,7 +145,6 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
             col = checkcol;
           else
             colx += gtk_tree_view_column_get_width (checkcol);
-
         }
       g_list_free (cols);
 
@@ -187,16 +186,16 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
                   text = g_strdup_printf ("%s", cval);
                   break;
                 }
-              default:;
+              default: 
+                return FALSE;
             }
 
-          if (text)
-            {
-              gtk_tooltip_set_text (tip, text);
-              g_free (text);
-            }
+          gtk_tooltip_set_text (tip, text);
+          g_free (text);
         }
     }
+    
+  return TRUE;
 }
 
 static gboolean

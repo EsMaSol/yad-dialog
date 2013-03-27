@@ -1,3 +1,16 @@
+2013-03-21 06:27  ananasik
+
+	* NEWS, configure.ac, src/main.c, src/option.c, src/util.c: improve
+	  parse arguments for --kill-parent
+
+2013-03-21 06:12  ananasik
+
+	* src/option.c: fix initial value of kill_parent option
+
+2013-03-20 06:03  ananasik
+
+	* ChangeLog, NEWS: release 0.20.0
+
 2013-03-20 05:51  ananasik
 
 	* configure.ac: bump version to 0.20.0
