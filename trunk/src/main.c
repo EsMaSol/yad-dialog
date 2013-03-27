@@ -580,7 +580,9 @@ main (gint argc, gchar ** argv)
   textdomain (GETTEXT_PACKAGE);
 #endif
 
+#if !GLIB_CHECK_VERSION(2,36,0)
   g_type_init ();
+#endif
   read_settings ();
 
   gtk_init (&argc, &argv);
