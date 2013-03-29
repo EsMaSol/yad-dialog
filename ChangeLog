@@ -1,3 +1,19 @@
+2013-03-29 14:33  ananasik
+
+	* NEWS, configure.ac: update NEWS, bump version to 0 20.2
+
+2013-03-29 14:29  ananasik
+
+	* src/scale.c: fix gtk3 deprecations in scale
+
+2013-03-27 16:07  ananasik@gmail.com
+
+	* src/main.c: fix warning
+
+2013-03-27 06:22  ananasik
+
+	* ChangeLog: update Changelog
+
 2013-03-27 06:21  ananasik
 
 	* ChangeLog, src/list.c: fix tooltips in list dialog
