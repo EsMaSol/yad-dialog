@@ -66,13 +66,21 @@ scale_create_widget (GtkWidget * dlg)
                                               (double) options.scale_data.step, (double) page, 0.0);
   if (options.common_data.vertical)
     {
+#if GTK_CHECK_VERSION(3,0,0)
+      w = scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, GTK_ADJUSTMENT (adj));
+#else    
       w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
+#endif
       gtk_widget_set_name (w, "yad-vscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), !options.scale_data.invert);
     }
   else
     {
+#if GTK_CHECK_VERSION(3,0,0)
+      w = scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT (adj));
+#else    
       w = scale = gtk_hscale_new (GTK_ADJUSTMENT (adj));
+#endif
       gtk_widget_set_name (w, "yad-hscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), options.scale_data.invert);
     }
