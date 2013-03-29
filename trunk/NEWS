@@ -1,3 +1,6 @@
+Version 0.20.2
+    - fix tooltips in list dialog
+
 Version 0.20.1
     - fix --kill-parent option
 
