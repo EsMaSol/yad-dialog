@@ -2,21 +2,31 @@
 # Slovenský preklad balíka YAD.
 # Copyright (C) 2010 THE YAD'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the YAD package.
-# Slavko <linux@slavino.sk>, 2010, 2011.
+# Slavko <linux@slavino.sk>, 2010, 2011, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-20 07:37+0200\n"
-"PO-Revision-Date: 2011-09-05 07:57+0200\n"
+"PO-Revision-Date: 2013-03-30 08:10+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
-"Language-Team: Slovak <debian-l10n-slovak@lists.debian.org>\n"
+"Language-Team: slovenčina <debian-l10n-slovak@lists.debian.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-POFile-SpellExtra: font Public Foundation ČASLIMIT Free RD RAW spread\n"
+"X-POFile-SpellExtra: save LBL xterm URI pango redistribuovať button SFL\n"
+"X-POFile-SpellExtra: stderr NORM CESTAIKON right FLT HD NONE bottom\n"
+"X-POFile-SpellExtra: rrrrggggbbbb RTL MFL END MIDDLE 100 CBE PULSE\n"
+"X-POFile-SpellExtra: MENOSÚBORU pdf BTN MENOFONTU color XEMBED Yad FL FN\n"
+"X-POFile-SpellExtra: ps start NUM MDIR IMG CB GTK YAD spin CLR Software RO\n"
+"X-POFile-SpellExtra: raw General GNU Window shell UTF-8 file DT CDIR DIR\n"
+"X-POFile-SpellExtra: fill VZOR1 VZOR2 Slavko IMAGE rrggbb TXT WxH CHK\n"
+"X-POFile-SpellExtra: License START end ID stdin edge left GenericName\n"
+"X-POFile-SpellExtra: expanderom\n"
 
 #: ../src/about.c:30
 msgid "translator-credits"
@@ -86,19 +96,16 @@ msgid "Select files"
 msgstr "Vyberte súbory"
 
 #: ../src/form.c:359
-#, fuzzy
 msgid "Select folders"
-msgstr "Vyberte pole"
+msgstr "Vyberte adresáre"
 
 #: ../src/form.c:422
-#, fuzzy
 msgid "Select or create file"
-msgstr "Vyberte súbor"
+msgstr "Vyberte alebo vytvorte  súbor"
 
 #: ../src/form.c:430
-#, fuzzy
 msgid "Select or create folder"
-msgstr "Vyberte pole"
+msgstr "Vyberte alebo vytvorte  adresár"
 
 #: ../src/form.c:461
 msgid "Select date"
@@ -110,7 +117,7 @@ msgstr "Vyberte súbor"
 
 #: ../src/form.c:651
 msgid "Select folder"
-msgstr "Vyberte pole"
+msgstr "Vyberte adresár"
 
 #: ../src/icons.c:316
 #, c-format
@@ -231,9 +238,8 @@ msgid "TEXT"
 msgstr "TEXT"
 
 #: ../src/option.c:115
-#, fuzzy
 msgid "Set the dialog text alignment (left, center, right)"
-msgstr "Nastaví zarovnanie menoviek polí (left, center alebo right)"
+msgstr "Nastaví zarovnanie textu dialógu (left, center, right)"
 
 #: ../src/option.c:116 ../src/option.c:158 ../src/option.c:540
 #: ../src/option.c:694 ../src/option.c:770 ../src/option.c:798
@@ -251,7 +257,7 @@ msgstr "OBRÁZOK"
 
 #: ../src/option.c:127
 msgid "Show image above main widget"
-msgstr "Zobrazí obrázok nad hlavným widgetom"
+msgstr "Zobrazí obrázok nad hlavným prvkom"
 
 #: ../src/option.c:133
 msgid "Use specified icon theme instead of default"
@@ -263,7 +269,7 @@ msgstr "TÉMA"
 
 #: ../src/option.c:139
 msgid "Hide main widget with expander"
-msgstr "Skryť hlavný widget s expanderom"
+msgstr "Skryť hlavný prvok s expanderom"
 
 #: ../src/option.c:145
 msgid "Add dialog button (may be used multiple times)"
@@ -279,7 +285,7 @@ msgstr "Nezobrazuje tlačidlá"
 
 #: ../src/option.c:157
 msgid "Set buttons layout type (spread, edge, start, end or center)"
-msgstr ""
+msgstr "Nastaví typ vzhľadu tlačidiel (spread, edge, start, end alebo center)"
 
 #: ../src/option.c:163
 msgid "Don't use pango markup language in dialog's text"
@@ -333,32 +339,31 @@ msgstr "Odoberie dekorácie okna"
 
 #: ../src/option.c:232
 msgid "Don't show window in taskbar"
-msgstr "Nezobrazuje okno v paneli úloh"
+msgstr "Skryje okno v paneli úloh"
 
 #: ../src/option.c:238
 msgid "Special type of dialog for XEMBED"
-msgstr ""
+msgstr "Špeciálny typ dialógu pre XEMBED"
 
 #: ../src/option.c:239 ../src/option.c:786
 msgid "KEY"
-msgstr ""
+msgstr "KĽÚČ"
 
 #: ../src/option.c:244
 msgid "Tab nubmer of this dialog"
-msgstr ""
+msgstr "Číslo záložky tohoto dialógu"
 
 #: ../src/option.c:251
-#, fuzzy
 msgid "Send SIGNAL to parent"
-msgstr "Pošle rodičovi TERM"
+msgstr "Pošle rodičovi SIGNÁL"
 
 #: ../src/option.c:252
 msgid "SIGNAL"
-msgstr ""
+msgstr "SIGNÁL"
 
 #: ../src/option.c:257
 msgid "Print X Window Id to the stderr"
-msgstr ""
+msgstr "Vypíše identifikátor X Window do stderr"
 
 #: ../src/option.c:268
 msgid "Display calendar dialog"
@@ -435,7 +440,7 @@ msgstr "Zobrazí dialóg Ťahaj a Pusť"
 
 #: ../src/option.c:348
 msgid "Use dialog text as tooltip"
-msgstr ""
+msgstr "Použiť text dialógu ako nástrojový tip"
 
 #: ../src/option.c:354
 msgid "Set command for process d-n-d data"
@@ -540,9 +545,8 @@ msgid "NAME | PATTERN1 PATTERN2 ..."
 msgstr "MENO | VZOR1 VZOR2 ..."
 
 #: ../src/option.c:488
-#, fuzzy
 msgid "Enable preview"
-msgstr "Nastaví vzorový text"
+msgstr "Zapne ukážku"
 
 #: ../src/option.c:498
 msgid "Display font selection dialog"
@@ -569,20 +573,18 @@ msgid "Display form dialog"
 msgstr "Zobrazí dialóg Formulár"
 
 #: ../src/option.c:533
-#, fuzzy
 msgid ""
 "Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, "
 "MDIR, FN, DT, CLR, BTN, LBL or TXT)"
 msgstr ""
-"Pridá pole do formulára (TYP – H RO, NUM, CHK, CB, CBE, FL, SFL, DIR, CDIR, "
-"FN, MFL, DT, CLR, BTN alebo LBL)"
+"Pridá do formulára pole (TYP – H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, "
+"CDIR, MDIR, FN, DT, CLR, BTN, LBL alebo TXT)"
 
 #: ../src/option.c:534 ../src/option.c:758
 msgid "LABEL[:TYPE]"
 msgstr "NÁVESTIE[:TYP]"
 
 #: ../src/option.c:539
-#, fuzzy
 msgid "Set alignment of filed labels (left, center or right)"
 msgstr "Nastaví zarovnanie menoviek polí (left, center alebo right)"
 
@@ -626,7 +628,8 @@ msgstr "Nastaví šírku položiek dialógu"
 #, no-c-format
 msgid ""
 "Use specified pattern for launch command in terminal (default: xterm -e %s)"
-msgstr "Vzor pre spustenie príkazu v termináli (predvolené: xterm -e %s)"
+msgstr ""
+"Špecifický vzor spustenia príkazu v terminále (predvolené: xterm -e %s)"
 
 #: ../src/option.c:616
 msgid "Sort items by name instead of filename"
@@ -638,7 +641,7 @@ msgstr "Zoradí položky zostupne"
 
 #: ../src/option.c:628
 msgid "Activate items by single click"
-msgstr ""
+msgstr "Aktivovať položku jedným kliknutím"
 
 #: ../src/option.c:638
 msgid "Display list dialog"
@@ -649,23 +652,21 @@ msgid "Don't show column headers"
 msgstr "Nezobrazuje hlavičky stĺpcov"
 
 #: ../src/option.c:650
-#, fuzzy
 msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, RD, IMG, HD or TIP)"
-msgstr "Nastaví hlavičku stĺpca (TYP – TEXT, NUM, FLT, CHK, IMG alebo TIP)"
+msgstr ""
+"Nastaví hlavičku stĺpca (TYP – TEXT, NUM, FLT, CHK, RD, IMG, HD alebo TIP)"
 
 #: ../src/option.c:651
 msgid "COLUMN[:TYPE]"
 msgstr "STĹPEC[:TYP]"
 
 #: ../src/option.c:656
-#, fuzzy
 msgid "Use checkboxes for first column"
-msgstr "Použije zaškrtávacie voľby v prvom stĺpci"
+msgstr "V prvom stĺpci použije zaškrtávacie voľby"
 
 #: ../src/option.c:662
-#, fuzzy
 msgid "Use radioboxes for first column"
-msgstr "Použije zaškrtávacie voľby v prvom stĺpci"
+msgstr "V prvom stĺpci použije výberové voľby"
 
 #: ../src/option.c:675
 msgid "Allow multiple rows to be selected"
@@ -682,7 +683,7 @@ msgstr "Vypíše všetky dáta zoznamu"
 #: ../src/option.c:693
 msgid "Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"
 msgstr ""
-"Nastaví režim výpustky textových polí (TYP - NONE, START, MIDDLE alebo END)"
+"Nastaví režim výpustky textových polí (TYP – NONE, START, MIDDLE alebo END)"
 
 #: ../src/option.c:699
 msgid ""
@@ -724,53 +725,47 @@ msgstr "Použije regulárny výraz v hľadaní"
 
 #: ../src/option.c:741
 msgid "Listen for data on stdin in addition to command-line"
-msgstr ""
+msgstr "Prijímať dáta na stdin ako doplnenie príkazového riadku"
 
 #: ../src/option.c:751
-#, fuzzy
 msgid "Display multi progress bars dialog"
-msgstr "Zobrazí dialóg Indikátor priebehu"
+msgstr "Zobrazí viacnásobný dialóg Indikátor priebehu"
 
 #: ../src/option.c:757
 msgid "Add the progress bar (TYPE - NORM, RTL or PULSE)"
-msgstr ""
+msgstr "Pridá ukazovateľ priebehu (TYP – NORM, RTL alebo PULSE)"
 
 #: ../src/option.c:763
-#, fuzzy
 msgid "Show vertical bars"
-msgstr "Zobrazí zvislý posuvník"
+msgstr "Zobraziť zvislé ukazovatele"
 
 #: ../src/option.c:769
-#, fuzzy
 msgid "Set alignment of bar labels (left, center or right)"
-msgstr "Nastaví zarovnanie menoviek polí (left, center alebo right)"
+msgstr "Nastaví zarovnanie menoviek ukazovateľov (left, center alebo right)"
 
 #: ../src/option.c:779
-#, fuzzy
 msgid "Display notebook dialog"
-msgstr "Zobrazí dialóg Ikony"
+msgstr "Zobrazí dialóg Zápisník"
 
 #: ../src/option.c:785
 msgid "Identifier of embedded dialogs"
-msgstr ""
+msgstr "Identifikátor vnorených dialógov"
 
 #: ../src/option.c:791
 msgid "Add a tab to notebook"
-msgstr ""
+msgstr "Pridá do zápisníka záložku"
 
 #: ../src/option.c:792
 msgid "LABEL"
-msgstr ""
+msgstr "MENOVKA"
 
 #: ../src/option.c:797
-#, fuzzy
 msgid "Set alignment of tab labels (left, center or right)"
-msgstr "Nastaví zarovnanie menoviek polí (left, center alebo right)"
+msgstr "Nastaví zarovnanie menoviek záložiek (left, center alebo right)"
 
 #: ../src/option.c:803
-#, fuzzy
 msgid "Set tab borders"
-msgstr "Nastaví okraje okna"
+msgstr "Nastaví okraje záložky"
 
 #: ../src/option.c:813
 msgid "Display notification"
@@ -793,26 +788,24 @@ msgid "Set separator character for menu items"
 msgstr "Nastaví znak oddeľovača položiek menu"
 
 #: ../src/option.c:847
-#, fuzzy
 msgid "Display printing dialog"
-msgstr "Zobrazí dialóg Zoznam"
+msgstr "Zobrazí dialóg Tlače"
 
 #: ../src/option.c:853
-#, fuzzy
 msgid "Source filename"
-msgstr "Nastaví meno súboru"
+msgstr "Meno zdrojového súboru"
 
 #: ../src/option.c:859
 msgid "Set source type (TYPE - TEXT, IMAGE or RAW)"
-msgstr ""
+msgstr "Nastaví typ zdroja (TYP – TEXT, IMAGE alebo RAW)"
 
 #: ../src/option.c:865
 msgid "Add headers to page"
-msgstr ""
+msgstr "Pridať hlavičky do stránky"
 
 #: ../src/option.c:871
 msgid "Enable preview in print dialog"
-msgstr ""
+msgstr "Zapne ukážku pred tlačou v dialógu Tlače"
 
 #: ../src/option.c:877 ../src/option.c:1048
 msgid "Use specified font"
@@ -852,23 +845,20 @@ msgid "Right-To-Left progress bar direction"
 msgstr "Indikátor priebehu sprava doľava"
 
 #: ../src/option.c:932
-#, fuzzy
 msgid "Show log window"
-msgstr "Zobraziť voľby farby"
+msgstr "Zobrazí okno záznamu"
 
 #: ../src/option.c:938
 msgid "Expand log window"
-msgstr ""
+msgstr "Rozšíriť okno záznamu"
 
 #: ../src/option.c:944
-#, fuzzy
 msgid "Place log window above progress bar"
-msgstr "Pulzujúci ukazovateľ priebehu"
+msgstr "Umiestni okno záznamu nad ukazovateľ"
 
 #: ../src/option.c:950
-#, fuzzy
 msgid "Height of log window"
-msgstr "Zobraziť voľby farby"
+msgstr "Výška okna záznamu"
 
 #: ../src/option.c:960
 msgid "Display scale dialog"
@@ -941,7 +931,7 @@ msgstr "Zapne zalamovanie textu"
 
 #: ../src/option.c:1060
 msgid "Set justification (TYPE - left, right, center or fill)"
-msgstr "Nastaví zarovnanie (TYP - left, right, center alebo fill)"
+msgstr "Nastaví zarovnanie (TYP – left, right, center alebo fill)"
 
 #: ../src/option.c:1066
 msgid "Set text margins"
@@ -953,7 +943,7 @@ msgstr "VEĽKOSŤ"
 
 #: ../src/option.c:1072
 msgid "Autoscroll to end of text"
-msgstr "Atoposun na koniec textu"
+msgstr "Automaticky posunúť na koniec textu"
 
 #: ../src/option.c:1078
 msgid "Open file"
@@ -961,11 +951,11 @@ msgstr "Otvorí súbor"
 
 #: ../src/option.c:1090
 msgid "Make URI clickable"
-msgstr "Urobí URI klikateľné"
+msgstr "Urobí URI kliknuteľné"
 
 #: ../src/option.c:1096
 msgid "Listen for data on stdin in addition to file"
-msgstr ""
+msgstr "Prijímať dáta na stdin, ako doplnenie k súboru"
 
 #: ../src/option.c:1106
 msgid "Show about dialog"
@@ -977,7 +967,7 @@ msgstr "Vypíše verziu"
 
 #: ../src/option.c:1122
 msgid "Load extra arguments from file"
-msgstr ""
+msgstr "Načíta ďalšie argumenty zo súboru"
 
 #: ../src/option.c:1165 ../src/option.c:1376
 #, c-format
@@ -990,9 +980,9 @@ msgid "Mark %s doesn't have a value\n"
 msgstr "Značka %s nemá hodnotu\n"
 
 #: ../src/option.c:1361
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown buttons layout type: %s\n"
-msgstr "Neznámy typ zarovnania: %s\n"
+msgstr "Neznámy typ vzhľadu tlačidiel: %s\n"
 
 #: ../src/option.c:1393
 #, c-format
@@ -1005,19 +995,18 @@ msgid "Unknown ellipsize type: %s\n"
 msgstr "Neznámy typ výpustky: %s\n"
 
 #: ../src/option.c:1444
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown source type: %s\n"
-msgstr "Neznámy typ výpustky: %s\n"
+msgstr "Neznámy typ zdroja: %s\n"
 
 #: ../src/option.c:1455
-#, fuzzy
 msgid "Progress log"
-msgstr "Voľby ukazovateľa priebehu"
+msgstr "Spracuje záznam"
 
 #: ../src/option.c:1546
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown signal: %s\n"
-msgstr "Neznámy typ zarovnania: %s\n"
+msgstr "Neznámy signál: %s\n"
 
 #: ../src/option.c:1686
 msgid "File exist. Overwrite?"
@@ -1025,7 +1014,7 @@ msgstr "Súbor existuje. Prepísať ho?"
 
 #: ../src/option.c:1774
 msgid "Yet another dialoging program"
-msgstr "Prosto ďalší dialógový program"
+msgstr "Prosto ďalší program na dialógy"
 
 #. Adds general option entries
 #: ../src/option.c:1778
@@ -1119,25 +1108,21 @@ msgstr "Zobrazí voľby zoznamu"
 
 #. Adds multi progress option entries
 #: ../src/option.c:1838
-#, fuzzy
 msgid "Multi progress bars options"
-msgstr "Zobrazí voľby ukazovateľa priebehu"
+msgstr "Voľby viacnásobného ukazovateľa priebehu"
 
 #: ../src/option.c:1839
-#, fuzzy
 msgid "Show multi progress bars options"
-msgstr "Zobrazí voľby ukazovateľa priebehu"
+msgstr "Zobrazí voľby viacnásobného ukazovateľa priebehu"
 
 #. Adds notebook option entries
 #: ../src/option.c:1845
-#, fuzzy
 msgid "Notebook options"
-msgstr "Voľby farby"
+msgstr "Voľby zápisníka"
 
 #: ../src/option.c:1845
-#, fuzzy
 msgid "Show notebook dialog options"
-msgstr "Zobrazí voľby ukazovateľa priebehu"
+msgstr "Zobrazí voľby zápisníka"
 
 #. Adds notification option entries
 #: ../src/option.c:1851
@@ -1150,14 +1135,12 @@ msgstr "Zobrazí voľby informačnej ikony"
 
 #. Adds print option entries
 #: ../src/option.c:1858
-#, fuzzy
 msgid "Print dialog options"
-msgstr "Voľby ukazovateľa priebehu"
+msgstr "Voľby dialógu Tlače"
 
 #: ../src/option.c:1858
-#, fuzzy
 msgid "Show print dialog options"
-msgstr "Zobrazí voľby ukazovateľa priebehu"
+msgstr "Zobrazí voľby dialógu Tlače"
 
 #. Adds progress option entries
 #: ../src/option.c:1864
@@ -1196,44 +1179,44 @@ msgid "Show miscellaneous options"
 msgstr "Zobrazí doplnkové voľby"
 
 #: ../src/print.c:202 ../src/print.c:361
-#, fuzzy, c-format
+#, c-format
 msgid "Printing failed: %s\n"
-msgstr "Nemožno otvoriť súbor %s: %s"
+msgstr "Tlačenie zlyhalo %s\n"
 
 #: ../src/print.c:230
 #, c-format
 msgid "File %s not found.\n"
-msgstr ""
+msgstr "Súbor %s nenájdený.\n"
 
 #: ../src/print.c:236
 #, c-format
 msgid "Filename is not specified.\n"
-msgstr ""
+msgstr "Nebolo zadané meno súboru.\n"
 
 #: ../src/print.c:377
 #, c-format
 msgid "Printer doesn't support ps format.\n"
-msgstr ""
+msgstr "Tlačiareň nepodporuje formát ps.\n"
 
 #: ../src/print.c:385
 #, c-format
 msgid "Printer doesn't support pdf format.\n"
-msgstr ""
+msgstr "Tlačiareň nepodporuje formát pdf.\n"
 
 #: ../src/print.c:391
 #, c-format
 msgid "This file type is not supported for raw printing.\n"
-msgstr ""
+msgstr "Tento typ súboru nie je podporovaný na surovú (raw) tlač.\n"
 
 #: ../src/print.c:405
 #, c-format
 msgid "Load source file failed: %s\n"
-msgstr ""
+msgstr "Načítanie zdrojového súboru zlyhalo: %s\n"
 
 #: ../src/color.c:65
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open file %s: %s\n"
-msgstr "Nemožno otvoriť súbor %s: %s"
+msgstr "Nemožno otvoriť súbor %s: %s\n"
 
 #. create expander
 #: ../src/color.c:150
@@ -1255,7 +1238,7 @@ msgstr "Pri čítaní súboru %s zistené neplatné UTF-8 dáta\n"
 
 #: ../src/browser.c:132
 msgid "scalable "
-msgstr "scalable "
+msgstr "škálovateľné"
 
 #: ../src/browser.c:142
 msgid "built-in"
@@ -1264,23 +1247,23 @@ msgstr "zabudované"
 #. initialize GTK+ and parse the command line arguments
 #: ../src/browser.c:200
 msgid "- Icon browser"
-msgstr "– Prezerač ikon"
+msgstr "– Prehliadač ikon"
 
 #: ../src/browser.c:213
 msgid "Icon browser"
-msgstr "Prezerač ikon"
+msgstr "Prehliadač ikon"
 
 #: ../src/browser.c:247
 msgid "<b>Name:</b>"
-msgstr ""
+msgstr "<b>Názov:</b>"
 
 #: ../src/browser.c:265
 msgid "<b>Sizes:</b>"
-msgstr ""
+msgstr "<b>Veľkosť:</b>"
 
 #: ../src/browser.c:283
 msgid "<b>Filename:</b>"
-msgstr ""
+msgstr "<b>Súbor:</b>"
 
 #: ../src/browser.c:325
 msgid "Category"
@@ -1292,7 +1275,7 @@ msgstr "Ikony"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
-msgstr "Prezerač ikon"
+msgstr "Prehliadač ikon"
 
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
