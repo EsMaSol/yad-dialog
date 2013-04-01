@@ -450,6 +450,12 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
 }
 
 static void
+date_selected_cb (GtkCalendar * c, gpointer data)
+{
+  gtk_dialog_response (GTK_DIALOG (data), GTK_RESPONSE_ACCEPT);
+}
+
+static void
 select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * event, gpointer data)
 {
   GtkWidget *dlg, *cal;
@@ -465,6 +471,7 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
                                          GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
       cal = gtk_calendar_new ();
       gtk_widget_show (cal);
+      g_signal_connect (G_OBJECT (cal), "day-selected-double-click", G_CALLBACK (date_selected_cb), dlg);
       gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), cal, TRUE, TRUE, 5);
 
       d = g_date_new ();
