@@ -598,7 +598,7 @@ form_create_widget (GtkWidget * dlg)
                   gtk_table_attach (GTK_TABLE (w), e, col * 2, 2 + col * 2, row, row + 1,
                                     GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                  gtk_grid_attach (GTK_GRID (w), e, col * 2, row, 1, 1);
+                  gtk_grid_attach (GTK_GRID (w), e, col * 2, row, 2, 1);
                   gtk_widget_set_hexpand (e, TRUE);
 #endif
                   fields = g_slist_append (fields, e);
