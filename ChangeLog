@@ -1,3 +1,28 @@
+2013-04-05 08:14  ananasik@gmail.com
+
+	* NEWS: release 0.20.3
+
+2013-04-05 08:11  ananasik@gmail.com
+
+	* configure.ac: bump version to 0.20.3
+
+2013-04-05 08:10  ananasik@gmail.com
+
+	* src/form.c: fix check field placement in form dialog for gtk3
+
+2013-04-01 08:25  ananasik@gmail.com
+
+	* src/form.c: use double-click for selecting date in date field of
+	  form dialog
+
+2013-04-01 08:17  ananasik@gmail.com
+
+	* po/sk.po: update slovak translation
+
+2013-03-29 14:34  ananasik
+
+	* ChangeLog: release 0.20.2
+
 2013-03-29 14:33  ananasik
 
 	* NEWS, configure.ac: update NEWS, bump version to 0 20.2
