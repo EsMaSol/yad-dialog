@@ -186,7 +186,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
                   text = g_strdup_printf ("%s", cval);
                   break;
                 }
-              default: 
+              default:
                 return FALSE;
             }
 
@@ -194,7 +194,7 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
           g_free (text);
         }
     }
-    
+
   return TRUE;
 }
 
@@ -657,10 +657,10 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
                       gchar *cval, *uval, *sval;
                       gtk_tree_model_get (model, &iter, i, &cval, -1);
                       uval = unescape_markup (cval);
-		      sval = g_shell_quote (uval);
+                      sval = g_shell_quote (uval);
                       g_free (uval);
                       g_string_append_printf (args, " %s", sval);
-		      g_free (sval);
+                      g_free (sval);
                       break;
                     }
                 }
@@ -708,7 +708,7 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
     }
 }
 
-void
+static void
 add_row_cb (GtkMenuItem * item, gpointer data)
 {
   GtkTreeModel *model;
@@ -719,7 +719,7 @@ add_row_cb (GtkMenuItem * item, gpointer data)
   gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 }
 
-void
+static void
 del_row_cb (GtkMenuItem * item, gpointer data)
 {
   GtkTreeIter iter;
@@ -728,6 +728,61 @@ del_row_cb (GtkMenuItem * item, gpointer data)
 
   if (gtk_tree_selection_get_selected (sel, NULL, &iter))
     gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+}
+
+static void
+copy_row_cb (GtkMenuItem * item, gpointer data)
+{
+  GtkTreeIter iter, new_iter;
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+  GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+
+  if (gtk_tree_selection_get_selected (sel, NULL, &iter))
+    {
+      gint i, n_columns;
+
+      /* decrease by 1 due to last ellipsize column */
+      n_columns = gtk_tree_model_get_n_columns (model) - 1;
+
+      gtk_list_store_insert_after (GTK_LIST_STORE (model), &new_iter, &iter);
+
+      for (i = 0; i < n_columns; i++)
+        {
+          GdkPixbuf *pb;
+          gchar *tv;
+          gint64 iv;
+          gfloat fv;
+          gboolean bv;
+          YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
+
+          switch (col->type)
+            {
+            case YAD_COLUMN_CHECK:
+            case YAD_COLUMN_RADIO:
+              gtk_tree_model_get (model, &iter, i, &bv, -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &new_iter, i, bv, -1);
+              break;
+            case YAD_COLUMN_NUM:
+              gtk_tree_model_get (model, &iter, i, &iv, -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &new_iter, i, iv, -1);
+              break;
+            case YAD_COLUMN_FLOAT:
+              gtk_tree_model_get (model, &iter, i, &fv, -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &new_iter, i, fv, -1);
+              break;
+            case YAD_COLUMN_IMAGE:
+              gtk_tree_model_get (model, &iter, i, &pb, -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &new_iter, i, pb, -1);
+              break;
+            default:
+              gtk_tree_model_get (model, &iter, i, &tv, -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &new_iter, i, tv, -1);
+              break;
+            }
+        }
+      /* set ellipsize */
+      gtk_list_store_set (GTK_LIST_STORE (model), &new_iter, n_columns, options.list_data.ellipsize, -1);
+    }
 }
 
 static gboolean
@@ -755,6 +810,14 @@ popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
           gtk_widget_show (item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (del_row_cb), NULL);
+
+          item = gtk_image_menu_item_new_with_label (_("Duplicate row"));
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
+                                         gtk_image_new_from_stock (GTK_STOCK_COPY, GTK_ICON_SIZE_MENU));
+          gtk_widget_show (item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (copy_row_cb), NULL);
+
           gtk_widget_show (menu);
         }
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, ev->button, ev->time);

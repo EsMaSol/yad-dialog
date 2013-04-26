@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-20 07:37+0200\n"
+"POT-Creation-Date: 2013-04-26 14:21+0300\n"
 "PO-Revision-Date: 2013-03-30 08:10+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: slovenčina <debian-l10n-slovak@lists.debian.org>\n"
@@ -107,15 +107,15 @@ msgstr "Vyberte alebo vytvorte  súbor"
 msgid "Select or create folder"
 msgstr "Vyberte alebo vytvorte  adresár"
 
-#: ../src/form.c:461
+#: ../src/form.c:467
 msgid "Select date"
 msgstr "Vyberte dátum"
 
-#: ../src/form.c:637
+#: ../src/form.c:644
 msgid "Select file"
 msgstr "Vyberte súbor"
 
-#: ../src/form.c:651
+#: ../src/form.c:658
 msgid "Select folder"
 msgstr "Vyberte adresár"
 
@@ -129,12 +129,12 @@ msgstr "Nemožno spracovať súbor %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Nemožno otvoriť adresár %s: %s\n"
 
-#: ../src/main.c:102 ../src/main.c:228
+#: ../src/main.c:102 ../src/main.c:227
 #, c-format
 msgid "%d sec"
 msgstr "%d s"
 
-#: ../src/main.c:608
+#: ../src/main.c:611
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Nemožno spracovať príkazový riadok: %s\n"
@@ -158,15 +158,20 @@ msgstr "Neznámy príkaz '%s'\n"
 msgid "Yad notification"
 msgstr "Informačná ikona Yad"
 
-#: ../src/list.c:746
+#: ../src/list.c:800
 msgid "Add row"
 msgstr "Pridá riadok"
 
-#: ../src/list.c:753
+#: ../src/list.c:807
 msgid "Delete row"
 msgstr "Odstráni riadok"
 
-#: ../src/list.c:779
+#: ../src/list.c:814
+#, fuzzy
+msgid "Duplicate row"
+msgstr "Odstráni riadok"
+
+#: ../src/list.c:841
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Neboli zadané mená stĺpcov pre dialóg Zoznam.\n"
@@ -1003,178 +1008,178 @@ msgstr "Neznámy typ zdroja: %s\n"
 msgid "Progress log"
 msgstr "Spracuje záznam"
 
-#: ../src/option.c:1546
+#: ../src/option.c:1555
 #, c-format
 msgid "Unknown signal: %s\n"
 msgstr "Neznámy signál: %s\n"
 
-#: ../src/option.c:1686
+#: ../src/option.c:1695
 msgid "File exist. Overwrite?"
 msgstr "Súbor existuje. Prepísať ho?"
 
-#: ../src/option.c:1774
+#: ../src/option.c:1783
 msgid "Yet another dialoging program"
 msgstr "Prosto ďalší program na dialógy"
 
 #. Adds general option entries
-#: ../src/option.c:1778
+#: ../src/option.c:1787
 msgid "General options"
 msgstr "Všeobecné voľby"
 
-#: ../src/option.c:1778
+#: ../src/option.c:1787
 msgid "Show general options"
 msgstr "Zobrazí všeobecné voľby"
 
 #. Adds calendar option entries
-#: ../src/option.c:1784
+#: ../src/option.c:1793
 msgid "Calendar options"
 msgstr "Voľby kalendára"
 
-#: ../src/option.c:1784
+#: ../src/option.c:1793
 msgid "Show calendar options"
 msgstr "Zobrazí voľby kalendára"
 
 #. Adds color option entries
-#: ../src/option.c:1790
+#: ../src/option.c:1799
 msgid "Color selection options"
 msgstr "Voľby výberu farby"
 
-#: ../src/option.c:1790
+#: ../src/option.c:1799
 msgid "Show color selection options"
 msgstr "Zobrazí voľby výberu farby"
 
 #. Adds dnd option entries
-#: ../src/option.c:1796
+#: ../src/option.c:1805
 msgid "DND options"
 msgstr "Voľby Ťahaj a Pusť"
 
-#: ../src/option.c:1796
+#: ../src/option.c:1805
 msgid "Show drag-n-drop options"
 msgstr "Zobrazí voľby pre Ťahaj a Pusť"
 
 #. Adds entry option entries
-#: ../src/option.c:1802
+#: ../src/option.c:1811
 msgid "Text entry options"
 msgstr "Voľby textovej položky"
 
-#: ../src/option.c:1802
+#: ../src/option.c:1811
 msgid "Show text entry options"
 msgstr "Zobrazí voľby textovej položky"
 
 #. Adds file selection option entries
-#: ../src/option.c:1808
+#: ../src/option.c:1817
 msgid "File selection options"
 msgstr "Voľby výberu súboru"
 
-#: ../src/option.c:1808
+#: ../src/option.c:1817
 msgid "Show file selection options"
 msgstr "Zobrazí voľby výberu súboru"
 
 #. Add font selection option entries
-#: ../src/option.c:1814
+#: ../src/option.c:1823
 msgid "Font selection options"
 msgstr "Voľby výberu písma"
 
-#: ../src/option.c:1814
+#: ../src/option.c:1823
 msgid "Show font selection options"
 msgstr "Zobrazí voľby výberu písma"
 
 #. Add form option entries
-#: ../src/option.c:1820
+#: ../src/option.c:1829
 msgid "Form options"
 msgstr "Voľby formulára"
 
-#: ../src/option.c:1820
+#: ../src/option.c:1829
 msgid "Show form options"
 msgstr "Zobrazí voľby formulára"
 
 #. Add icons option entries
-#: ../src/option.c:1826
+#: ../src/option.c:1835
 msgid "Icons box options"
 msgstr "Voľby dialógu ikon"
 
-#: ../src/option.c:1826
+#: ../src/option.c:1835
 msgid "Show icons box options"
 msgstr "Zobrazí voľby dialógu ikon"
 
 #. Adds list option entries
-#: ../src/option.c:1832
+#: ../src/option.c:1841
 msgid "List options"
 msgstr "Voľby zoznamu"
 
-#: ../src/option.c:1832
+#: ../src/option.c:1841
 msgid "Show list options"
 msgstr "Zobrazí voľby zoznamu"
 
 #. Adds multi progress option entries
-#: ../src/option.c:1838
+#: ../src/option.c:1847
 msgid "Multi progress bars options"
 msgstr "Voľby viacnásobného ukazovateľa priebehu"
 
-#: ../src/option.c:1839
+#: ../src/option.c:1848
 msgid "Show multi progress bars options"
 msgstr "Zobrazí voľby viacnásobného ukazovateľa priebehu"
 
 #. Adds notebook option entries
-#: ../src/option.c:1845
+#: ../src/option.c:1854
 msgid "Notebook options"
 msgstr "Voľby zápisníka"
 
-#: ../src/option.c:1845
+#: ../src/option.c:1854
 msgid "Show notebook dialog options"
 msgstr "Zobrazí voľby zápisníka"
 
 #. Adds notification option entries
-#: ../src/option.c:1851
+#: ../src/option.c:1860
 msgid "Notification icon options"
 msgstr "Voľby informačnej ikony"
 
-#: ../src/option.c:1852
+#: ../src/option.c:1861
 msgid "Show notification icon options"
 msgstr "Zobrazí voľby informačnej ikony"
 
 #. Adds print option entries
-#: ../src/option.c:1858
+#: ../src/option.c:1867
 msgid "Print dialog options"
 msgstr "Voľby dialógu Tlače"
 
-#: ../src/option.c:1858
+#: ../src/option.c:1867
 msgid "Show print dialog options"
 msgstr "Zobrazí voľby dialógu Tlače"
 
 #. Adds progress option entries
-#: ../src/option.c:1864
+#: ../src/option.c:1873
 msgid "Progress options"
 msgstr "Voľby ukazovateľa priebehu"
 
-#: ../src/option.c:1864
+#: ../src/option.c:1873
 msgid "Show progress options"
 msgstr "Zobrazí voľby ukazovateľa priebehu"
 
 #. Adds scale option entries
-#: ../src/option.c:1870
+#: ../src/option.c:1879
 msgid "Scale options"
 msgstr "Voľby posuvníka"
 
-#: ../src/option.c:1870
+#: ../src/option.c:1879
 msgid "Show scale options"
 msgstr "Zobrazí voľby posuvníka"
 
 #. Adds text option entries
-#: ../src/option.c:1876
+#: ../src/option.c:1885
 msgid "Text information options"
 msgstr "Voľby textovej informácie"
 
-#: ../src/option.c:1876
+#: ../src/option.c:1885
 msgid "Show text information options"
 msgstr "Zobrazí voľby textovej informácie"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:1882
+#: ../src/option.c:1891
 msgid "Miscellaneous options"
 msgstr "Doplnkové voľby"
 
-#: ../src/option.c:1882
+#: ../src/option.c:1891
 msgid "Show miscellaneous options"
 msgstr "Zobrazí doplnkové voľby"
 
