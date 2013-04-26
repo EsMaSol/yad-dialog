@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-20 07:37+0200\n"
+"POT-Creation-Date: 2013-04-26 14:21+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -99,15 +99,15 @@ msgstr "Выбор или создание файла"
 msgid "Select or create folder"
 msgstr "Выбор или создание каталога"
 
-#: ../src/form.c:461
+#: ../src/form.c:467
 msgid "Select date"
 msgstr "Выбор даты"
 
-#: ../src/form.c:637
+#: ../src/form.c:644
 msgid "Select file"
 msgstr "Выбор файла"
 
-#: ../src/form.c:651
+#: ../src/form.c:658
 msgid "Select folder"
 msgstr "Выбор каталога"
 
@@ -121,12 +121,12 @@ msgstr "Не могу разобрать файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не могу открыть каталог %s: %s\n"
 
-#: ../src/main.c:102 ../src/main.c:228
+#: ../src/main.c:102 ../src/main.c:227
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:608
+#: ../src/main.c:611
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
@@ -150,15 +150,19 @@ msgstr "Неизвестная команда '%s'\n"
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:746
+#: ../src/list.c:800
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:753
+#: ../src/list.c:807
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:779
+#: ../src/list.c:814
+msgid "Duplicate row"
+msgstr "Скопировать строку"
+
+#: ../src/list.c:841
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
@@ -995,178 +999,178 @@ msgstr "Неизвестный исходный тип: %s\n"
 msgid "Progress log"
 msgstr "Окно журнала"
 
-#: ../src/option.c:1546
+#: ../src/option.c:1555
 #, c-format
 msgid "Unknown signal: %s\n"
 msgstr "Неизвестный сигнал: %s\n"
 
-#: ../src/option.c:1686
+#: ../src/option.c:1695
 msgid "File exist. Overwrite?"
 msgstr "Файл существует. Перезаписать?"
 
-#: ../src/option.c:1774
+#: ../src/option.c:1783
 msgid "Yet another dialoging program"
 msgstr "Программа для отображения диалогов"
 
 #. Adds general option entries
-#: ../src/option.c:1778
+#: ../src/option.c:1787
 msgid "General options"
 msgstr "Основные параметры"
 
-#: ../src/option.c:1778
+#: ../src/option.c:1787
 msgid "Show general options"
 msgstr "Показывать основные параметры"
 
 #. Adds calendar option entries
-#: ../src/option.c:1784
+#: ../src/option.c:1793
 msgid "Calendar options"
 msgstr "Параметры календаря"
 
-#: ../src/option.c:1784
+#: ../src/option.c:1793
 msgid "Show calendar options"
 msgstr "Показывать параметры календаря"
 
 #. Adds color option entries
-#: ../src/option.c:1790
+#: ../src/option.c:1799
 msgid "Color selection options"
 msgstr "Параметры диалога выбора цвета"
 
-#: ../src/option.c:1790
+#: ../src/option.c:1799
 msgid "Show color selection options"
 msgstr "Показывать параметры диалога выбора цвета"
 
 #. Adds dnd option entries
-#: ../src/option.c:1796
+#: ../src/option.c:1805
 msgid "DND options"
 msgstr "Параметры DND"
 
-#: ../src/option.c:1796
+#: ../src/option.c:1805
 msgid "Show drag-n-drop options"
 msgstr "Показывать параметры dnd"
 
 #. Adds entry option entries
-#: ../src/option.c:1802
+#: ../src/option.c:1811
 msgid "Text entry options"
 msgstr "Параметры ввода текста"
 
-#: ../src/option.c:1802
+#: ../src/option.c:1811
 msgid "Show text entry options"
 msgstr "Показывать параметры ввода текста"
 
 #. Adds file selection option entries
-#: ../src/option.c:1808
+#: ../src/option.c:1817
 msgid "File selection options"
 msgstr "Параметры диалога выбора файла"
 
-#: ../src/option.c:1808
+#: ../src/option.c:1817
 msgid "Show file selection options"
 msgstr "Показывать параметры диалога выбора файлов"
 
 #. Add font selection option entries
-#: ../src/option.c:1814
+#: ../src/option.c:1823
 msgid "Font selection options"
 msgstr "Параметры диалога выбора шрифта"
 
-#: ../src/option.c:1814
+#: ../src/option.c:1823
 msgid "Show font selection options"
 msgstr "Показывать параметры диалога выбора шрифта"
 
 #. Add form option entries
-#: ../src/option.c:1820
+#: ../src/option.c:1829
 msgid "Form options"
 msgstr "Параметры диалога формы"
 
-#: ../src/option.c:1820
+#: ../src/option.c:1829
 msgid "Show form options"
 msgstr "Показывать параметры диалога формы"
 
 #. Add icons option entries
-#: ../src/option.c:1826
+#: ../src/option.c:1835
 msgid "Icons box options"
 msgstr "Параметры диалога значков"
 
-#: ../src/option.c:1826
+#: ../src/option.c:1835
 msgid "Show icons box options"
 msgstr "Показывать параметры диалога значков быстрого доступа"
 
 #. Adds list option entries
-#: ../src/option.c:1832
+#: ../src/option.c:1841
 msgid "List options"
 msgstr "Параметры списка"
 
-#: ../src/option.c:1832
+#: ../src/option.c:1841
 msgid "Show list options"
 msgstr "Показывать параметры списка"
 
 #. Adds multi progress option entries
-#: ../src/option.c:1838
+#: ../src/option.c:1847
 msgid "Multi progress bars options"
 msgstr "Параметры диалога с несколькими индикаторами"
 
-#: ../src/option.c:1839
+#: ../src/option.c:1848
 msgid "Show multi progress bars options"
 msgstr "Показывать параметры диалога с несколькими индикаторами"
 
 #. Adds notebook option entries
-#: ../src/option.c:1845
+#: ../src/option.c:1854
 msgid "Notebook options"
 msgstr "Параметры диалога с вкладками"
 
-#: ../src/option.c:1845
+#: ../src/option.c:1854
 msgid "Show notebook dialog options"
 msgstr "Показывать параметры диалога с вкладками"
 
 #. Adds notification option entries
-#: ../src/option.c:1851
+#: ../src/option.c:1860
 msgid "Notification icon options"
 msgstr "Параметры значка уведомления"
 
-#: ../src/option.c:1852
+#: ../src/option.c:1861
 msgid "Show notification icon options"
 msgstr "Показывать параметры значка уведомления"
 
 #. Adds print option entries
-#: ../src/option.c:1858
+#: ../src/option.c:1867
 msgid "Print dialog options"
 msgstr "Параметры диалога печати"
 
-#: ../src/option.c:1858
+#: ../src/option.c:1867
 msgid "Show print dialog options"
 msgstr "Показывать параметры диалога печати"
 
 #. Adds progress option entries
-#: ../src/option.c:1864
+#: ../src/option.c:1873
 msgid "Progress options"
 msgstr "Параметры хода процесса"
 
-#: ../src/option.c:1864
+#: ../src/option.c:1873
 msgid "Show progress options"
 msgstr "Показывать параметры хода процесса"
 
 #. Adds scale option entries
-#: ../src/option.c:1870
+#: ../src/option.c:1879
 msgid "Scale options"
 msgstr "Параметры масштаба"
 
-#: ../src/option.c:1870
+#: ../src/option.c:1879
 msgid "Show scale options"
 msgstr "Показывать параметры масштаба"
 
 #. Adds text option entries
-#: ../src/option.c:1876
+#: ../src/option.c:1885
 msgid "Text information options"
 msgstr "Параметры текстовой информации"
 
-#: ../src/option.c:1876
+#: ../src/option.c:1885
 msgid "Show text information options"
 msgstr "Показывать параметры текстовой информации"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:1882
+#: ../src/option.c:1891
 msgid "Miscellaneous options"
 msgstr "Дополнительные параметры"
 
-#: ../src/option.c:1882
+#: ../src/option.c:1891
 msgid "Show miscellaneous options"
 msgstr "Показывать дополнительные параметры"
 
