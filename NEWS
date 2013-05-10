@@ -1,3 +1,8 @@
+Version 0.21.0
+    - add optional scrollbars for form dialog
+    - add "duplicate row" menu entry for editable lists
+    - some fixes in man page
+
 Version 0.20.3
     - update slovak translation
     - use double-ckick for selecting date in form dialog
