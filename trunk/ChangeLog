@@ -1,3 +1,27 @@
+2013-05-10 06:11  ananasik
+
+	* NEWS, configure.ac: release 0.21.0
+
+2013-05-10 06:06  ananasik
+
+	* data/yad.1, po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po,
+	  po/zh_TW.po, src/form.c, src/option.c, src/yad.h: add scrolling
+	  for form dialog
+
+2013-05-10 04:58  ananasik
+
+	* data/yad.1: fix man page
+
+2013-04-26 11:23  ananasik@gmail.com
+
+	* po/de.po, po/fr.po, po/ru.po, po/sk.po, po/uk.po, po/zh_TW.po,
+	  src/list.c: add "Duplicate row" menu entry in editable list
+	  dialog
+
+2013-04-05 08:14  ananasik@gmail.com
+
+	* ChangeLog:
+
 2013-04-05 08:14  ananasik@gmail.com
 
 	* NEWS: release 0.20.3
