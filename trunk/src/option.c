@@ -562,6 +562,12 @@ static GOptionEntry form_options[] = {
    &options.common_data.date_format,
    N_("Set the format for the returned date"),
    N_("PATTERN")},
+  {"scroll", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.form_data.scroll,
+   N_("Make form scrollable"),
+   NULL},
   {NULL}
 };
 
@@ -1512,7 +1518,7 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
 #ifdef SIGSTKFLT
       else if (strcmp (value + ofst, "STKFLT") == 0)
         sn = SIGSTKFLT;
-#endif        
+#endif
       else if (strcmp (value + ofst, "CHLD") == 0 ||
                strcmp (value + ofst, "CLD") == 0)
         sn = SIGCHLD;
@@ -1541,10 +1547,10 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
       else if (strcmp (value + ofst, "IO") == 0 ||
                strcmp (value + ofst, "POLL") == 0)
         sn = SIGIO;
-#ifdef SIGPWR        
+#ifdef SIGPWR
       else if (strcmp (value + ofst, "PWR") == 0)
         sn = SIGPWR;
-#endif        
+#endif
       else if (strcmp (value + ofst, "SYS") == 0)
         sn = SIGSYS;
     }

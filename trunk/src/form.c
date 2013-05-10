@@ -505,6 +505,7 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
 GtkWidget *
 form_create_widget (GtkWidget * dlg)
 {
+  GtkWidget *sw, *vp, *tbl;
   GtkWidget *w = NULL;
 
   if (options.form_data.fields)
@@ -521,12 +522,34 @@ form_create_widget (GtkWidget * dlg)
         rows++;
 
 #if !GTK_CHECK_VERSION(3,0,0)
-      w = gtk_table_new (n_fields, 2 * options.form_data.columns, FALSE);
+      tbl = gtk_table_new (n_fields, 2 * options.form_data.columns, FALSE);
 #else
-      w = gtk_grid_new ();
-      gtk_grid_set_row_spacing (GTK_GRID (w), 5);
-      gtk_grid_set_column_spacing (GTK_GRID (w), 5);
+      tbl = gtk_grid_new ();
+      gtk_grid_set_row_spacing (GTK_GRID (tbl), 5);
+      gtk_grid_set_column_spacing (GTK_GRID (tbl), 5);
 #endif
+
+      if (options.form_data.scroll)
+	{
+	  /* create scrolled container */
+	  GtkAdjustment *hadj, *vadj;
+
+	  sw = gtk_scrolled_window_new (NULL, NULL);
+	  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_NONE);
+	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+	  hadj = gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (sw));
+	  vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));
+
+	  vp = gtk_viewport_new (hadj, vadj);
+	  gtk_viewport_set_shadow_type (GTK_VIEWPORT (vp), GTK_SHADOW_NONE);
+	  gtk_container_add (GTK_CONTAINER (sw), vp);
+
+	  gtk_container_add (GTK_CONTAINER (vp), tbl);
+	  w = sw;
+	}
+      else
+	w = tbl;
 
       /* create form */
       for (i = 0; i < n_fields; i++)
@@ -546,9 +569,9 @@ form_create_widget (GtkWidget * dlg)
               gtk_widget_set_name (l, "yad-form-flabel");
               gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
-              gtk_table_attach (GTK_TABLE (w), l, col * 2, 1 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
+              gtk_table_attach (GTK_TABLE (tbl), l, col * 2, 1 + col * 2, row, row + 1, GTK_FILL, 0, 5, 5);
 #else
-              gtk_grid_attach (GTK_GRID (w), l, col * 2, row, 1, 1);
+              gtk_grid_attach (GTK_GRID (tbl), l, col * 2, row, 1, 1);
 #endif
               g_free (buf);
             }
@@ -567,10 +590,10 @@ form_create_widget (GtkWidget * dlg)
                 else if (fld->type == YAD_FIELD_READ_ONLY)
                   gtk_widget_set_sensitive (e, FALSE);
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -580,10 +603,10 @@ form_create_widget (GtkWidget * dlg)
                 e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
                 gtk_widget_set_name (e, "yad-form-spin");
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -595,10 +618,10 @@ form_create_widget (GtkWidget * dlg)
                   e = gtk_check_button_new_with_label (buf);
                   gtk_widget_set_name (e, "yad-form-check");
 #if !GTK_CHECK_VERSION(3,0,0)
-                  gtk_table_attach (GTK_TABLE (w), e, col * 2, 2 + col * 2, row, row + 1,
+                  gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
                                     GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                  gtk_grid_attach (GTK_GRID (w), e, col * 2, row, 2, 1);
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
                   gtk_widget_set_hexpand (e, TRUE);
 #endif
                   fields = g_slist_append (fields, e);
@@ -614,10 +637,10 @@ form_create_widget (GtkWidget * dlg)
 #endif
                 gtk_widget_set_name (e, "yad-form-combo");
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -631,10 +654,10 @@ form_create_widget (GtkWidget * dlg)
 #endif
                 gtk_widget_set_name (e, "yad-form-edit-combo");
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -645,10 +668,10 @@ form_create_widget (GtkWidget * dlg)
                 gtk_widget_set_name (e, "yad-form-file");
                 gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), g_get_current_dir ());
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -659,10 +682,10 @@ form_create_widget (GtkWidget * dlg)
                 gtk_widget_set_name (e, "yad-form-file");
                 gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), g_get_current_dir ());
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -672,10 +695,10 @@ form_create_widget (GtkWidget * dlg)
                 e = gtk_font_button_new ();
                 gtk_widget_set_name (e, "yad-form-font");
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -685,10 +708,10 @@ form_create_widget (GtkWidget * dlg)
                 e = gtk_color_button_new ();
                 gtk_widget_set_name (e, "yad-form-color");
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -703,10 +726,10 @@ form_create_widget (GtkWidget * dlg)
                                   GINT_TO_POINTER (fld->type));
                 g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -721,10 +744,10 @@ form_create_widget (GtkWidget * dlg)
                                   GINT_TO_POINTER (fld->type));
                 g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -739,10 +762,10 @@ form_create_widget (GtkWidget * dlg)
                 g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_date_cb), e);
                 g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, 1 + col * 2, row, 1, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -762,10 +785,10 @@ form_create_widget (GtkWidget * dlg)
                   gtk_widget_set_name (e, "yad-form-button");
                   gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)
-                  gtk_table_attach (GTK_TABLE (w), e, col * 2, 2 + col * 2, row, row + 1,
+                  gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
                                     GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                  gtk_grid_attach (GTK_GRID (w), e, col * 2, row, 1, 1);
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 1, 1);
                   gtk_widget_set_hexpand (e, TRUE);
 #endif
                   fields = g_slist_append (fields, e);
@@ -799,10 +822,10 @@ form_create_widget (GtkWidget * dlg)
                     gtk_widget_set_name (e, "yad-form-separator");
                   }
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (w), e, col * 2, 2 + col * 2, row, row + 1,
+                gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (w), e, col * 2, row, 2, 1);
+                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
@@ -840,10 +863,10 @@ form_create_widget (GtkWidget * dlg)
                   gtk_container_add (GTK_CONTAINER (sw), e);
 
 #if !GTK_CHECK_VERSION(3,0,0)
-                  gtk_table_attach (GTK_TABLE (w), b, col * 2, 2 + col * 2, row, row + 1,
+                  gtk_table_attach (GTK_TABLE (tbl), b, col * 2, 2 + col * 2, row, row + 1,
                                     GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 5, 5);
 #else
-                  gtk_grid_attach (GTK_GRID (w), b, col * 2, row, 2, 1);
+                  gtk_grid_attach (GTK_GRID (tbl), b, col * 2, row, 2, 1);
                   gtk_widget_set_hexpand (b, TRUE);
                   gtk_widget_set_vexpand (b, TRUE);
 #endif
