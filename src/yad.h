@@ -222,6 +222,7 @@ typedef struct {
 typedef struct {
   GSList *fields;
   guint columns;
+  gboolean scroll;
 } YadFormData;
 
 typedef struct {
