@@ -1739,7 +1739,7 @@ yad_options_init (void)
 
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
-  options.notebook_data.borders = 0;
+  options.notebook_data.borders = 5;
   options.notebook_data.key = -1;
 
   /* Initialize print data */
