@@ -92,12 +92,10 @@ expand_action (gchar * cmd)
                     break;
                   case YAD_FIELD_FILE:
                   case YAD_FIELD_DIR:
-                    g_string_append (xcmd,
-                                     gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
+                    g_string_append (xcmd, gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
                     break;
                   case YAD_FIELD_FONT:
-                    g_string_append (xcmd,
-                                     gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
+                    g_string_append (xcmd, gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
                     break;
                   case YAD_FIELD_COLOR:
                     {
@@ -530,26 +528,26 @@ form_create_widget (GtkWidget * dlg)
 #endif
 
       if (options.form_data.scroll)
-	{
-	  /* create scrolled container */
-	  GtkAdjustment *hadj, *vadj;
+        {
+          /* create scrolled container */
+          GtkAdjustment *hadj, *vadj;
 
-	  sw = gtk_scrolled_window_new (NULL, NULL);
-	  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_NONE);
-	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+          sw = gtk_scrolled_window_new (NULL, NULL);
+          gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_NONE);
+          gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-	  hadj = gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (sw));
-	  vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));
+          hadj = gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (sw));
+          vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));
 
-	  vp = gtk_viewport_new (hadj, vadj);
-	  gtk_viewport_set_shadow_type (GTK_VIEWPORT (vp), GTK_SHADOW_NONE);
-	  gtk_container_add (GTK_CONTAINER (sw), vp);
+          vp = gtk_viewport_new (hadj, vadj);
+          gtk_viewport_set_shadow_type (GTK_VIEWPORT (vp), GTK_SHADOW_NONE);
+          gtk_container_add (GTK_CONTAINER (sw), vp);
 
-	  gtk_container_add (GTK_CONTAINER (vp), tbl);
-	  w = sw;
-	}
+          gtk_container_add (GTK_CONTAINER (vp), tbl);
+          w = sw;
+        }
       else
-	w = tbl;
+        w = tbl;
 
       /* create form */
       for (i = 0; i < n_fields; i++)
@@ -788,7 +786,7 @@ form_create_widget (GtkWidget * dlg)
                   gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
                                     GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 1, 1);
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
                   gtk_widget_set_hexpand (e, TRUE);
 #endif
                   fields = g_slist_append (fields, e);
