@@ -842,6 +842,12 @@ static GOptionEntry notification_options[] = {
    &options.common_data.item_separator,
    N_("Set separator character for menu items"),
    N_("SEPARATOR")},
+  {"no-middle", 0,
+   G_OPTION_FLAG_REVERSE,
+   G_OPTION_ARG_NONE,
+   &options.notification_data.middle,
+   N_("Disable exit on middle click"),
+   NULL},
   {NULL}
 };
 
@@ -1741,6 +1747,9 @@ yad_options_init (void)
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 5;
   options.notebook_data.key = -1;
+
+  /* Initialize notification data */
+  options.notification_data.middle = TRUE;
 
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;
