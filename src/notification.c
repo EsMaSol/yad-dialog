@@ -372,7 +372,8 @@ yad_notification_run ()
   g_signal_connect (status_icon, "activate", G_CALLBACK (activate_cb), NULL);
 
   /* quit on middle click (like press Esc) */
-  g_signal_connect (status_icon, "button-press-event", G_CALLBACK (middle_quit_cb), NULL);
+  if (options.notification_data.middle)
+    g_signal_connect (status_icon, "button-press-event", G_CALLBACK (middle_quit_cb), NULL);
 
   if (options.common_data.listen)
     {
