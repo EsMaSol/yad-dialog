@@ -124,7 +124,12 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
   static gint column_count = 1;
   static gint row_count = 0;
   static gboolean first_time = TRUE;
-  GtkTreeModel *model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
+  GtkTreeModel *model;
+   
+  if (!options.icons_data.compact)
+    model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
+  else
+    model = gtk_tree_view_get_model (GTK_TREE_VIEW (icon_view));
 
   if (first_time)
     {
