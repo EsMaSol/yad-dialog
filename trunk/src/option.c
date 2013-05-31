@@ -112,7 +112,7 @@ static GOptionEntry general_options[] = {
    G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_CALLBACK,
    set_text_align,
-   N_("Set the dialog text alignment (left, center, right)"),
+   N_("Set the dialog text alignment (left, center, right, fill)"),
    N_("TYPE")},
   {"image", 0,
    G_OPTION_FLAG_NOALIAS,
@@ -1168,11 +1168,13 @@ static gboolean
 set_text_align (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   if (g_ascii_strcasecmp (value, "left") == 0)
-    options.data.text_align = 0.0;
+    options.data.text_align = GTK_JUSTIFY_LEFT;
   else if (g_ascii_strcasecmp (value, "right") == 0)
-    options.data.text_align = 1.0;
+    options.data.text_align = GTK_JUSTIFY_RIGHT;
   else if (g_ascii_strcasecmp (value, "center") == 0)
-    options.data.text_align = 0.5;
+    options.data.text_align = GTK_JUSTIFY_CENTER;
+  else if (g_ascii_strcasecmp (value, "fill") == 0)
+    options.data.text_align = GTK_JUSTIFY_FILL;
   else
     g_printerr (_("Unknown align type: %s\n"), value);
 
@@ -1633,7 +1635,7 @@ yad_options_init (void)
   options.data.height = settings.height;
   options.data.geometry = NULL;
   options.data.dialog_text = NULL;
-  options.data.text_align = 0.0;
+  options.data.text_align = GTK_JUSTIFY_LEFT;
   options.data.dialog_image = NULL;
   options.data.image_on_top = FALSE;
   options.data.icon_theme = NULL;

@@ -152,7 +152,7 @@ typedef struct {
   guint timeout;
   gchar *to_indicator;
   gchar *dialog_text;
-  gdouble text_align;
+  GtkJustification text_align;
   gchar *dialog_image;
   gboolean image_on_top;
   gchar *icon_theme;
