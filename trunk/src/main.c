@@ -272,18 +272,29 @@ create_dialog (void)
             gtk_label_set_markup (GTK_LABEL (text), buf);
           else
             gtk_label_set_text (GTK_LABEL (text), buf);
+          g_free (buf);
+
           gtk_widget_set_name (text, "yad-dialog-label");
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
-          if (options.data.geometry || options.data.width != -1)
-            gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
+          switch (options.data.text_align)
+            {
+            case GTK_JUSTIFY_LEFT:
+            case GTK_JUSTIFY_FILL:
+              gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
+              break;
+            case GTK_JUSTIFY_CENTER:
+              gtk_misc_set_alignment (GTK_MISC (text), 0.5, 0.5);
+              break;
+            case GTK_JUSTIFY_RIGHT:
+              gtk_misc_set_alignment (GTK_MISC (text), 1.0, 0.5);
+              break;
+            }
           if (options.data.image_on_top)
             gtk_box_pack_start (GTK_BOX (hbox2), text, TRUE, TRUE, 2);
           else
             gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
           g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
-
-          g_free (buf);
         }
     }
 
@@ -374,7 +385,7 @@ create_dialog (void)
       else
         {
           if (options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS)
-	    gtk_dialog_add_buttons (GTK_DIALOG (dlg), GTK_STOCK_CLOSE, YAD_RESPONSE_OK, NULL);
+            gtk_dialog_add_buttons (GTK_DIALOG (dlg), GTK_STOCK_CLOSE, YAD_RESPONSE_OK, NULL);
           else
             {
               if (gtk_alternative_dialog_button_order (NULL))
@@ -462,7 +473,20 @@ create_plug (void)
         gtk_label_set_text (GTK_LABEL (text), buf);
       gtk_widget_set_name (text, "yad-dialog-label");
       gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
-      gtk_misc_set_alignment (GTK_MISC (text), options.data.text_align, 0.5);
+      gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
+      switch (options.data.text_align)
+        {
+        case GTK_JUSTIFY_LEFT:
+        case GTK_JUSTIFY_FILL:
+          gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
+          break;
+        case GTK_JUSTIFY_CENTER:
+          gtk_misc_set_alignment (GTK_MISC (text), 0.5, 0.5);
+          break;
+        case GTK_JUSTIFY_RIGHT:
+          gtk_misc_set_alignment (GTK_MISC (text), 1.0, 0.5);
+          break;
+        }
       if (options.data.geometry || options.data.width != -1)
         gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
       gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
