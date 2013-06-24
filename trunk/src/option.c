@@ -530,7 +530,7 @@ static GOptionEntry form_options[] = {
    G_OPTION_ARG_CALLBACK,
    add_field,
    N_
-   ("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, MDIR, FN, DT, CLR, BTN, LBL or TXT)"),
+   ("Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, MDIR, FN, DT, SCL, CLR, BTN, LBL or TXT)"),
    N_("LABEL[:TYPE]")},
   {"align", 0,
    G_OPTION_FLAG_NOALIAS,
@@ -1265,6 +1265,8 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
         fld->type = YAD_FIELD_MDIR;
       else if (g_ascii_strcasecmp (fstr[1], "DT") == 0)
         fld->type = YAD_FIELD_DATE;
+      else if (g_ascii_strcasecmp (fstr[1], "SCL") == 0)
+        fld->type = YAD_FIELD_SCALE;
       else if (g_ascii_strcasecmp (fstr[1], "BTN") == 0)
         fld->type = YAD_FIELD_BUTTON;
       else if (g_ascii_strcasecmp (fstr[1], "LBL") == 0)

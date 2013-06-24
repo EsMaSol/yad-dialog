@@ -71,7 +71,6 @@ scale_create_widget (GtkWidget * dlg)
 #else    
       w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
 #endif
-      gtk_widget_set_name (w, "yad-vscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), !options.scale_data.invert);
     }
   else
@@ -81,9 +80,9 @@ scale_create_widget (GtkWidget * dlg)
 #else    
       w = scale = gtk_hscale_new (GTK_ADJUSTMENT (adj));
 #endif
-      gtk_widget_set_name (w, "yad-hscale-widget");
       gtk_range_set_inverted (GTK_RANGE (w), options.scale_data.invert);
     }
+  gtk_widget_set_name (w, "yad-scale-widget");
   gtk_scale_set_digits (GTK_SCALE (w), 0);
 
   if (options.scale_data.print_partial)

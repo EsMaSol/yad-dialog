@@ -2,4 +2,3 @@
 - DBus support (?)
 - Common search dialog for list and text dialogs
 - Use item-separator in filters of file dialog (?)
-- Add scale field for form dialog
