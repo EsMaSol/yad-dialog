@@ -1,3 +1,55 @@
+2013-06-02 05:52  ananasik
+
+	* data/yad.1: update man page
+
+2013-06-01 16:49  ananasik
+
+	* src/main.c: some fixes in dialog text alignment
+
+2013-05-31 11:41  ananasik@gmail.com
+
+	* data/yad.1, po/de.po, po/fr.po, po/it.po, po/ru.po, po/sk.po,
+	  po/uk.po, po/zh_TW.po, src/main.c, src/option.c, src/yad.h: fix
+	  dialog text alignment
+
+2013-05-29 15:08  ananasik@gmail.com
+
+	* configure.ac: bump version to 0.21.90
+
+2013-05-29 15:07  ananasik@gmail.com
+
+	* data/yad.1, po/de.po, po/fr.po, po/it.po, po/ru.po, po/sk.po,
+	  po/uk.po, po/zh_TW.po, src/notification.c, src/option.c,
+	  src/yad.h: add --no-middle option to notification icon
+
+2013-05-29 14:19  ananasik@gmail.com
+
+	* src/icons.c: fix handle stdin for icons dialog in compact mode
+
+2013-05-29 14:19  ananasik@gmail.com
+
+	* po/LINGUAS, po/it.po: add italian translation
+
+2013-05-12 11:52  ananasik
+
+	* configure.ac: bump version to 0.21.1
+
+2013-05-12 11:51  ananasik
+
+	* src/notebook.c: fix borders around child dialogs in notebook
+
+2013-05-12 11:09  ananasik
+
+	* data/yad.1, src/option.c: update man page
+
+2013-05-12 10:31  ananasik
+
+	* src/form.c: fix form layout on gtk+-3.0
+
+2013-05-10 06:12  ananasik
+
+	* ChangeLog:
+
 2013-05-10 06:11  ananasik
 
 	* NEWS, configure.ac: release 0.21.0
