@@ -1,3 +1,12 @@
+Version 0.22.0
+    - add scale field to form dialog
+    - fix form layout on gtk+-3.0
+    - fix borders around child dialogs in notebook
+    - fix handle stdin for icons dialog in compact mode
+    - fix dialog text alignment
+    - add italian translation
+    - update man page
+
 Version 0.21.0
     - add optional scrollbars for form dialog
     - add "duplicate row" menu entry for editable lists
