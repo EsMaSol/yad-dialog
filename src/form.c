@@ -90,6 +90,10 @@ expand_action (gchar * cmd)
 #endif
                       );
                     break;
+                  case YAD_FIELD_SCALE:
+                    g_string_append_printf (xcmd, "%d", (gint) gtk_range_get_value
+					    (GTK_RANGE (g_slist_nth_data (fields, num))));
+                    break;
                   case YAD_FIELD_FILE:
                   case YAD_FIELD_DIR:
                     g_string_append (xcmd, gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
@@ -238,6 +242,10 @@ set_field_value (guint num, gchar * value)
         gtk_font_button_set_font_name (GTK_FONT_BUTTON (w), value);
         break;
 
+      case YAD_FIELD_SCALE:
+	gtk_range_set_value (GTK_RANGE (w), atoi (value));
+	break;
+
       case YAD_FIELD_COLOR:
         {
           GdkColor c;
@@ -260,7 +268,7 @@ set_field_value (guint num, gchar * value)
           break;
         }
 
-      default:;
+      default: ;
     }
 }
 
@@ -769,7 +777,20 @@ form_create_widget (GtkWidget * dlg)
                 fields = g_slist_append (fields, e);
                 break;
 
-              case YAD_FIELD_BUTTON:
+	    case YAD_FIELD_SCALE:
+	      e = gtk_hscale_new_with_range (0.0, 100.0, 1.0);
+	      gtk_widget_set_name (e, "yad-form-scale");
+#if !GTK_CHECK_VERSION(3,0,0)
+	      gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
+				GTK_EXPAND | GTK_FILL, 0, 5, 5);
+#else
+	      gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
+	      gtk_widget_set_hexpand (e, TRUE);
+#endif
+	      fields = g_slist_append (fields, e);
+	      break;
+
+             case YAD_FIELD_BUTTON:
                 {
                   gchar **buf = g_strsplit (fld->name, options.common_data.item_separator, 2);
                   e = gtk_button_new_from_stock (buf[0]);
@@ -959,6 +980,11 @@ form_print_result (void)
               g_printf ("%s%s", gdk_color_to_string (&c), options.common_data.separator);
               break;
             }
+          case YAD_FIELD_SCALE:
+            g_printf ("%d%s",
+                      (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, i))),
+                      options.common_data.separator);
+            break;
           case YAD_FIELD_BUTTON:
           case YAD_FIELD_LABEL:
             g_printf ("%s", options.common_data.separator);
