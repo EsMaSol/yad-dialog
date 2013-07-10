@@ -275,6 +275,7 @@ create_dialog (void)
           g_free (buf);
 
           gtk_widget_set_name (text, "yad-dialog-label");
+          gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
           switch (options.data.text_align)
@@ -472,6 +473,7 @@ create_plug (void)
       else
         gtk_label_set_text (GTK_LABEL (text), buf);
       gtk_widget_set_name (text, "yad-dialog-label");
+      gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
       gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
       gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
       switch (options.data.text_align)
