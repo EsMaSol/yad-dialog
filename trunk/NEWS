@@ -1,3 +1,7 @@
+Version 0.22.1
+    - fix resize of dialog text
+    - fix usage of stock items in popup menu of notification icon
+
 Version 0.22.0
     - add scale field to form dialog
     - fix form layout on gtk+-3.0
