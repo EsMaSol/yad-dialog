@@ -1,3 +1,27 @@
+2013-07-10 07:09  ananasik@gmail.com
+
+	* src/main.c, src/notification.c: fix dialog text wrapping and use
+	  of stock items in notification menu
+
+2013-06-24 09:22  ananasik
+
+	* data/yad.1, src/form.c: a bit of fixes before upload release
+
+2013-06-24 09:17  ananasik
+
+	* ChangeLog, NEWS: release 0.22.0
+
+2013-06-24 08:59  ananasik
+
+	* configure.ac: bump version to 0.22.0
+
+2013-06-24 07:59  ananasik
+
+	* TODO, configure.ac, data/yad.1, po/de.po, po/fr.po, po/it.po,
+	  po/ru.po, po/sk.po, po/uk.po, po/zh_TW.po, src/form.c,
+	  src/option.c, src/scale.c, src/yad.h: add scale field to form
+	  dialog
+
 2013-06-02 05:52  ananasik
 
 	* data/yad.1: update man page
