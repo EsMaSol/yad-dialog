@@ -108,12 +108,14 @@ timeout_indicator_cb (gpointer data)
   return TRUE;
 }
 
+#if !GTK_CHECK_VERSION(3,0,0)                                                            
 static void
 text_size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
   gtk_widget_queue_draw (w);
 }
+#endif
 
 GtkWidget *
 create_dialog (void)
@@ -295,7 +297,9 @@ create_dialog (void)
             gtk_box_pack_start (GTK_BOX (hbox2), text, TRUE, TRUE, 2);
           else
             gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
+#if !GTK_CHECK_VERSION(3,0,0)
           g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
+#endif
         }
     }
 
@@ -492,7 +496,9 @@ create_plug (void)
       if (options.data.geometry || options.data.width != -1)
         gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
       gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
+#if !GTK_CHECK_VERSION(3,0,0)                                                            
       g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
+#endif
 
       g_free (buf);
     }
