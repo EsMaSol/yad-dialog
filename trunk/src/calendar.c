@@ -81,7 +81,8 @@ get_details (GtkCalendar * cal, guint year, guint month, guint day, gpointer dat
 static void
 double_click_cb (GtkWidget * w, gpointer data)
 {
-  gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+  if (options.plug == -1)
+    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 GtkWidget *

@@ -118,7 +118,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                   if (percentage >= 100)
                     {
                       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
-                      if (options.progress_data.autoclose)
+                      if (options.progress_data.autoclose && options.plug == -1)
                         gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
                     }
                   else
@@ -141,7 +141,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
           pulsate_timeout = 0;
         }
 
-      if (options.progress_data.autoclose)
+      if (options.progress_data.autoclose && options.plug == -1)
         gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 
       g_io_channel_shutdown (channel, TRUE, NULL);

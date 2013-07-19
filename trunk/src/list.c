@@ -42,12 +42,18 @@ list_activate_cb (GtkWidget * widget, GdkEventKey * event, gpointer data)
         {
           /* FIXME: check this under gtk-3.0 */
           if (event->state & GDK_CONTROL_MASK)
-            gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+            {
+              if (options.plug == -1)
+                gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+            }
           else
             return FALSE;
         }
       else
-        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+        {
+          if (options.plug == -1)
+            gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+        }
 
       return TRUE;
     }
