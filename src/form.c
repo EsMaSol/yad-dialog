@@ -323,7 +323,8 @@ button_clicked_cb (GtkButton * b, gchar * action)
 static void
 form_activate_cb (GtkEntry * entry, gpointer data)
 {
-  gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+  if (options.plug == -1)
+    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 static void

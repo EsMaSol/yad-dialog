@@ -27,7 +27,8 @@ static gchar *large_path;
 static void
 file_activated_cb (GtkFileChooser * chooser, gpointer data)
 {
-  gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+  if (options.plug == -1)
+    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 static void

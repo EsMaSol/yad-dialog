@@ -27,7 +27,8 @@ static gboolean is_combo = FALSE;
 static void
 entry_activate_cb (GtkEntry * entry, gpointer data)
 {
-  gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+  if (options.plug == -1)
+    gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
 }
 
 static gboolean
@@ -39,7 +40,8 @@ combo_activate_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
   if (ev->keyval == GDK_Return || ev->keyval == GDK_KP_Enter)
 #endif
     {
-      gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+      if (options.plug == -1)
+        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
       return TRUE;
     }
   return FALSE;
