@@ -112,7 +112,10 @@ timeout_indicator_cb (gpointer data)
 static void
 text_size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
 {
-  gtk_widget_set_size_request (w, al->width, -1);
+  PangoLayout *pl = gtk_label_get_layout (GTK_LABEL (w));
+  
+  if (pango_layout_is_wrapped (pl))
+    gtk_widget_set_size_request (w, al->width, -1);
 }
 #endif
 
