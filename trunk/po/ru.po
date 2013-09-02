@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-24 11:03+0300\n"
+"POT-Creation-Date: 2013-09-02 17:25+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -68,46 +68,46 @@ msgstr ""
 msgid "Cannot open file '%s': %s\n"
 msgstr "Не могу открыть файл %s: %s\n"
 
-#: ../src/entry.c:170 ../src/scale.c:39
+#: ../src/entry.c:172 ../src/scale.c:39
 #, c-format
 msgid "Maximum value must be greater than minimum value.\n"
 msgstr "Максимальное значение должно быть больше, чем минимальное.\n"
 
-#: ../src/entry.c:177 ../src/scale.c:48
+#: ../src/entry.c:179 ../src/scale.c:48
 #, c-format
 msgid "Initial value less than minimal.\n"
 msgstr "Начальное значение меньше минимального.\n"
 
-#: ../src/entry.c:182 ../src/scale.c:53
+#: ../src/entry.c:184 ../src/scale.c:53
 #, c-format
 msgid "Initial value greater than maximum.\n"
 msgstr "Начальное значение больше маскимального.\n"
 
-#: ../src/form.c:357
+#: ../src/form.c:371
 msgid "Select files"
 msgstr "Выбор файлов"
 
-#: ../src/form.c:365
+#: ../src/form.c:379
 msgid "Select folders"
 msgstr "Выбор каталогов"
 
-#: ../src/form.c:428
+#: ../src/form.c:442
 msgid "Select or create file"
 msgstr "Выбор или создание файла"
 
-#: ../src/form.c:436
+#: ../src/form.c:450
 msgid "Select or create folder"
 msgstr "Выбор или создание каталога"
 
-#: ../src/form.c:473
+#: ../src/form.c:487
 msgid "Select date"
 msgstr "Выбор даты"
 
-#: ../src/form.c:673
+#: ../src/form.c:687
 msgid "Select file"
 msgstr "Выбор файла"
 
-#: ../src/form.c:687
+#: ../src/form.c:701
 msgid "Select folder"
 msgstr "Выбор каталога"
 
@@ -121,12 +121,12 @@ msgstr "Не могу разобрать файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не могу открыть каталог %s: %s\n"
 
-#: ../src/main.c:102 ../src/main.c:228
+#: ../src/main.c:102 ../src/main.c:232
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:636
+#: ../src/main.c:644
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
@@ -136,33 +136,33 @@ msgstr "Не удается разобрать командную строку: 
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Не удается загрузить иконку '%s': %s\n"
 
-#: ../src/notification.c:257
+#: ../src/notification.c:260
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Неверная последовательность UTF-8 в подсказке!\n"
 
-#: ../src/notification.c:327
+#: ../src/notification.c:330
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Неизвестная команда '%s'\n"
 
-#: ../src/notification.c:362
+#: ../src/notification.c:365
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:800
+#: ../src/list.c:806
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:807
+#: ../src/list.c:813
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:814
+#: ../src/list.c:820
 msgid "Duplicate row"
 msgstr "Скопировать строку"
 
-#: ../src/list.c:841
+#: ../src/list.c:847
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
@@ -228,8 +228,8 @@ msgid "Set the dialog text"
 msgstr "Задать текст диалога"
 
 #: ../src/option.c:110 ../src/option.c:140 ../src/option.c:371
-#: ../src/option.c:377 ../src/option.c:383 ../src/option.c:517
-#: ../src/option.c:906 ../src/option.c:945
+#: ../src/option.c:377 ../src/option.c:383 ../src/option.c:523
+#: ../src/option.c:924 ../src/option.c:963
 msgid "TEXT"
 msgstr "ТЕКСТ"
 
@@ -237,9 +237,9 @@ msgstr "ТЕКСТ"
 msgid "Set the dialog text alignment (left, center, right, fill)"
 msgstr "Задать выравнивание текста диалога (left, center, right, fill)"
 
-#: ../src/option.c:116 ../src/option.c:158 ../src/option.c:540
-#: ../src/option.c:700 ../src/option.c:776 ../src/option.c:804
-#: ../src/option.c:872 ../src/option.c:1073
+#: ../src/option.c:116 ../src/option.c:158 ../src/option.c:546
+#: ../src/option.c:712 ../src/option.c:794 ../src/option.c:822
+#: ../src/option.c:890 ../src/option.c:1091
 msgid "TYPE"
 msgstr "ТИП"
 
@@ -295,9 +295,9 @@ msgstr "Добавить разделитель между диалогом и �
 msgid "Set window borders"
 msgstr "Установить границы окна"
 
-#: ../src/option.c:178 ../src/option.c:245 ../src/option.c:546
-#: ../src/option.c:706 ../src/option.c:712 ../src/option.c:718
-#: ../src/option.c:724 ../src/option.c:730 ../src/option.c:810
+#: ../src/option.c:178 ../src/option.c:245 ../src/option.c:552
+#: ../src/option.c:718 ../src/option.c:724 ../src/option.c:730
+#: ../src/option.c:736 ../src/option.c:742 ../src/option.c:828
 msgid "NUMBER"
 msgstr "ЧИСЛО"
 
@@ -341,7 +341,7 @@ msgstr "Не показывать окно в панели задач"
 msgid "Special type of dialog for XEMBED"
 msgstr "Специальный режим диалога для встраивания"
 
-#: ../src/option.c:239 ../src/option.c:792
+#: ../src/option.c:239 ../src/option.c:810
 msgid "KEY"
 msgstr "КЛЮЧ"
 
@@ -389,11 +389,11 @@ msgstr "Задать год календаря"
 msgid "YEAR"
 msgstr "ГОД"
 
-#: ../src/option.c:292 ../src/option.c:563
+#: ../src/option.c:292 ../src/option.c:569
 msgid "Set the format for the returned date"
 msgstr "Задать формат возвращаемой даты"
 
-#: ../src/option.c:293 ../src/option.c:564 ../src/option.c:617
+#: ../src/option.c:293 ../src/option.c:570 ../src/option.c:629
 msgid "PATTERN"
 msgstr "ШАБЛОН"
 
@@ -402,7 +402,7 @@ msgid "Set the filename with dates details"
 msgstr "Задать имя файла с описанием дат"
 
 #: ../src/option.c:299 ../src/option.c:327 ../src/option.c:447
-#: ../src/option.c:866 ../src/option.c:1091 ../src/option.c:1135
+#: ../src/option.c:884 ../src/option.c:1109 ../src/option.c:1153
 msgid "FILENAME"
 msgstr "ИМЯ_ФАЙЛА"
 
@@ -418,7 +418,7 @@ msgstr "Синоним для --color"
 msgid "Set initial color value"
 msgstr "Задать начальное значение цвета"
 
-#: ../src/option.c:321 ../src/option.c:1049 ../src/option.c:1055
+#: ../src/option.c:321 ../src/option.c:1067 ../src/option.c:1073
 msgid "COLOR"
 msgstr "ЦВЕТ"
 
@@ -443,7 +443,7 @@ msgid "Set command for process d-n-d data"
 msgstr "Команда для обработки полученных данных"
 
 #: ../src/option.c:355 ../src/option.c:413 ../src/option.c:425
-#: ../src/option.c:736 ../src/option.c:826
+#: ../src/option.c:748 ../src/option.c:844
 msgid "CMD"
 msgstr "КОМАНДА"
 
@@ -515,12 +515,12 @@ msgstr "Активировать выделение только по катал
 msgid "Activate save mode"
 msgstr "Активировать режим сохранения"
 
-#: ../src/option.c:470 ../src/option.c:551 ../src/option.c:675
+#: ../src/option.c:470 ../src/option.c:557 ../src/option.c:687
 msgid "Set output separator character"
 msgstr "Установить выходной разделяющий символ"
 
-#: ../src/option.c:471 ../src/option.c:552 ../src/option.c:558
-#: ../src/option.c:676 ../src/option.c:838 ../src/option.c:844
+#: ../src/option.c:471 ../src/option.c:558 ../src/option.c:564
+#: ../src/option.c:688 ../src/option.c:856 ../src/option.c:862
 msgid "SEPARATOR"
 msgstr "РАЗДЕЛИТЕЛЬ"
 
@@ -544,31 +544,35 @@ msgstr "ИМЯ | ШАБЛОН1 ШАБЛОН2 ..."
 msgid "Enable preview"
 msgstr "Добавить предпросмотр"
 
-#: ../src/option.c:498
+#: ../src/option.c:494 ../src/option.c:581 ../src/option.c:765
+msgid "Quote dialogs output"
+msgstr "Вывод значений в кавычках"
+
+#: ../src/option.c:504
 msgid "Display font selection dialog"
 msgstr "Отобразить диалог для выбора шрифта"
 
-#: ../src/option.c:504
+#: ../src/option.c:510
 msgid "Alias for --font"
 msgstr "Синоним для --font"
 
-#: ../src/option.c:510
+#: ../src/option.c:516
 msgid "Set initial font"
 msgstr "Задать начальный шрифт"
 
-#: ../src/option.c:511 ../src/option.c:890 ../src/option.c:1061
+#: ../src/option.c:517 ../src/option.c:908 ../src/option.c:1079
 msgid "FONTNAME"
 msgstr "ИМЯ_ШРИФТА"
 
-#: ../src/option.c:516
+#: ../src/option.c:522
 msgid "Set preview text"
 msgstr "Задать текст образца"
 
-#: ../src/option.c:526
+#: ../src/option.c:532
 msgid "Display form dialog"
 msgstr "Отобразить диалог формы ввода"
 
-#: ../src/option.c:533
+#: ../src/option.c:539
 msgid ""
 "Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, "
 "MDIR, FN, DT, SCL, CLR, BTN, LBL or TXT)"
@@ -576,55 +580,55 @@ msgstr ""
 "Добавить поле к форме (Тип поля: Н, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, "
 "DIR, CDIR, MDIR, FN, MFL, DT, SCL, CLR, BTN, LBL или TXT)"
 
-#: ../src/option.c:534 ../src/option.c:764
+#: ../src/option.c:540 ../src/option.c:782
 msgid "LABEL[:TYPE]"
 msgstr "МЕТКА[:ТИП]"
 
-#: ../src/option.c:539
+#: ../src/option.c:545
 msgid "Set alignment of filed labels (left, center or right)"
 msgstr "Задать выравнивание меток полей (left, center или right)"
 
-#: ../src/option.c:545
+#: ../src/option.c:551
 msgid "Set number of columns in form"
 msgstr "Задать количество колонок в форме"
 
-#: ../src/option.c:557
+#: ../src/option.c:563
 msgid "Set separator character for combobox or scale data"
 msgstr "Установить разделяющий символ для данных списка или числового поля"
 
-#: ../src/option.c:569
+#: ../src/option.c:575
 msgid "Make form scrollable"
 msgstr "Сделать форму прокручиваемой"
 
-#: ../src/option.c:579
+#: ../src/option.c:591
 msgid "Display icons box dialog"
 msgstr "Отобразить диалог со значками быстрого доступа"
 
-#: ../src/option.c:585
+#: ../src/option.c:597
 msgid "Read data from .desktop files in specified directory"
 msgstr "Читать данные из .desktop файлов в определенном каталоге"
 
-#: ../src/option.c:586
+#: ../src/option.c:598
 msgid "DIRECTORY"
 msgstr "КАТАЛОГ"
 
-#: ../src/option.c:591
+#: ../src/option.c:603
 msgid "Use compact (list) view"
 msgstr "Использовать компактный вид (список)"
 
-#: ../src/option.c:597
+#: ../src/option.c:609
 msgid "Use GenericName field instead of Name for icon label"
 msgstr "Использовать поле GenericName вместо Name для метки"
 
-#: ../src/option.c:603
+#: ../src/option.c:615
 msgid "Read data from stdin"
 msgstr "Читать данные со стандартного ввода"
 
-#: ../src/option.c:609
+#: ../src/option.c:621
 msgid "Set the width of dialog items"
 msgstr "Задать ширину элемента диалога"
 
-#: ../src/option.c:616
+#: ../src/option.c:628
 #, no-c-format
 msgid ""
 "Use specified pattern for launch command in terminal (default: xterm -e %s)"
@@ -632,62 +636,62 @@ msgstr ""
 "Использовать указанный шаблон для запуска в терминале (по умолчанию: xterm -"
 "e %s)"
 
-#: ../src/option.c:622
+#: ../src/option.c:634
 msgid "Sort items by name instead of filename"
 msgstr "Сортировать по полю Имя вместо имени файла"
 
-#: ../src/option.c:628
+#: ../src/option.c:640
 msgid "Sort items in descending order"
 msgstr "Сортировать в убывающем порядке"
 
-#: ../src/option.c:634
+#: ../src/option.c:646
 msgid "Activate items by single click"
 msgstr "Активировать элемент одинарным щелчком"
 
-#: ../src/option.c:644
+#: ../src/option.c:656
 msgid "Display list dialog"
 msgstr "Отобразить диалог со списком"
 
-#: ../src/option.c:650
+#: ../src/option.c:662
 msgid "Don't show column headers"
 msgstr "Не показывать заголовки колонок"
 
-#: ../src/option.c:656
+#: ../src/option.c:668
 msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, RD, IMG, HD or TIP)"
 msgstr ""
 "Задать заголовок столбца (ТИП - TEXT, NUM, FLT, CHK, RD, IMG, HD или TIP)"
 
-#: ../src/option.c:657
+#: ../src/option.c:669
 msgid "COLUMN[:TYPE]"
 msgstr "СТОЛБЕЦ[:ТИП]"
 
-#: ../src/option.c:662
+#: ../src/option.c:674
 msgid "Use checkboxes for first column"
 msgstr "Использовать флажки для первой колонки"
 
-#: ../src/option.c:668
+#: ../src/option.c:680
 msgid "Use radioboxes for first column"
 msgstr "Использовать переключатель для первой колонки"
 
-#: ../src/option.c:681
+#: ../src/option.c:693
 msgid "Allow multiple rows to be selected"
 msgstr "Разрешить выбор нескольких строк"
 
-#: ../src/option.c:687 ../src/option.c:1096
+#: ../src/option.c:699 ../src/option.c:1114
 msgid "Allow changes to text"
 msgstr "Разрешить изменять текст"
 
-#: ../src/option.c:693
+#: ../src/option.c:705
 msgid "Print all data from list"
 msgstr "Печатать таблицу полностью"
 
-#: ../src/option.c:699
+#: ../src/option.c:711
 msgid "Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"
 msgstr ""
 "Задать тип усечсения для текстовых столбцов (ТИП - NONE, START, MIDDLE или "
 "END)"
 
-#: ../src/option.c:705
+#: ../src/option.c:717
 msgid ""
 "Print a specific column. By default or if 0 is specified will be printed all "
 "columns"
@@ -695,490 +699,490 @@ msgstr ""
 "Распечатать только определённый столбец. По-умолчанию или если столбец равен "
 "0, будут распечатаны все столбцы"
 
-#: ../src/option.c:711
+#: ../src/option.c:723
 msgid "Hide a specific column"
 msgstr "Скрыть указанный столбец"
 
-#: ../src/option.c:717
+#: ../src/option.c:729
 msgid "Set the column expandable by default. 0 sets all columns expandable"
 msgstr ""
 "Задать колонку, расширяемую по-умолчанию. 0 устанавливает расширяемыми все "
 "колонки"
 
-#: ../src/option.c:723
+#: ../src/option.c:735
 msgid ""
 "Set the quick search column. Default is first column. Set it to 0 for "
 "disable searching"
 msgstr "Задать колонку поиска. По-умолчанию первая. 0 запрещает поиск"
 
-#: ../src/option.c:729
+#: ../src/option.c:741
 msgid "Set the limit of rows in list"
 msgstr "Задать количество строк в списке"
 
-#: ../src/option.c:735
+#: ../src/option.c:747
 msgid "Set double-click action"
 msgstr "Действие по двойному щелчку мыши"
 
-#: ../src/option.c:741
+#: ../src/option.c:753
 msgid "Use regex in search"
 msgstr "Использовать регулярные выражения при поиске"
 
-#: ../src/option.c:747
+#: ../src/option.c:759
 msgid "Listen for data on stdin in addition to command-line"
 msgstr "Получать даннные из stdin в дополнение к указанным в командной строке"
 
-#: ../src/option.c:757
+#: ../src/option.c:775
 msgid "Display multi progress bars dialog"
 msgstr "Отобразить диалог c несколькими индикаторами"
 
-#: ../src/option.c:763
+#: ../src/option.c:781
 msgid "Add the progress bar (TYPE - NORM, RTL or PULSE)"
 msgstr "Добавить индикатор (ТИП - NORM, RTL или PULSE))"
 
-#: ../src/option.c:769
+#: ../src/option.c:787
 msgid "Show vertical bars"
 msgstr "Показывать вертикальные индикаторы"
 
-#: ../src/option.c:775
+#: ../src/option.c:793
 msgid "Set alignment of bar labels (left, center or right)"
 msgstr "Задать выравнивание меток индикаторов (left, center или right)"
 
-#: ../src/option.c:785
+#: ../src/option.c:803
 msgid "Display notebook dialog"
 msgstr "Отобразить диалог с вкладками"
 
-#: ../src/option.c:791
+#: ../src/option.c:809
 msgid "Identifier of embedded dialogs"
 msgstr "Идентификатор встраиваемых диалогов"
 
-#: ../src/option.c:797
+#: ../src/option.c:815
 msgid "Add a tab to notebook"
 msgstr "Добавить вкладку"
 
-#: ../src/option.c:798
+#: ../src/option.c:816
 msgid "LABEL"
 msgstr "МЕТКА"
 
-#: ../src/option.c:803
+#: ../src/option.c:821
 msgid "Set alignment of tab labels (left, center or right)"
 msgstr "Задать выравнивание меток вкладок (left, center или right)"
 
-#: ../src/option.c:809
+#: ../src/option.c:827
 msgid "Set tab borders"
 msgstr "Установить границы вкладки"
 
-#: ../src/option.c:819
+#: ../src/option.c:837
 msgid "Display notification"
 msgstr "Отобразить диалог уведомления"
 
-#: ../src/option.c:825
+#: ../src/option.c:843
 msgid "Set left-click action"
 msgstr "Действие по левому щелчку мыши"
 
-#: ../src/option.c:831
+#: ../src/option.c:849
 msgid "Listen for commands on stdin"
 msgstr "Воспринимать команды со стандартного ввода"
 
-#: ../src/option.c:837
+#: ../src/option.c:855
 msgid "Set separator character for menu values"
 msgstr "Установить разделяющий символ для значений меню"
 
-#: ../src/option.c:843
+#: ../src/option.c:861
 msgid "Set separator character for menu items"
 msgstr "Установить разделяющий символ для элементов меню"
 
-#: ../src/option.c:849
+#: ../src/option.c:867
 msgid "Disable exit on middle click"
 msgstr "Запретить выход по щелчку средней кнопкой"
 
-#: ../src/option.c:859
+#: ../src/option.c:877
 msgid "Display printing dialog"
 msgstr "Отобразить диалог печати"
 
-#: ../src/option.c:865
+#: ../src/option.c:883
 msgid "Source filename"
 msgstr "Имя исходного файла"
 
-#: ../src/option.c:871
+#: ../src/option.c:889
 msgid "Set source type (TYPE - TEXT, IMAGE or RAW)"
 msgstr "Тип исходных данных (ТИП - TEXT, IMAGE или RAW)"
 
-#: ../src/option.c:877
+#: ../src/option.c:895
 msgid "Add headers to page"
 msgstr "Добавлять колонтитулы на страницу"
 
-#: ../src/option.c:883
+#: ../src/option.c:901
 msgid "Enable preview in print dialog"
 msgstr "Разрешить предпросмотр в диалоге печати"
 
-#: ../src/option.c:889 ../src/option.c:1060
+#: ../src/option.c:907 ../src/option.c:1078
 msgid "Use specified font"
 msgstr "Использовать указанный шрифт"
 
-#: ../src/option.c:899
+#: ../src/option.c:917
 msgid "Display progress indication dialog"
 msgstr "Отобразить диалог хода процесса"
 
-#: ../src/option.c:905
+#: ../src/option.c:923
 msgid "Set progress text"
 msgstr "Показывать текст на индикаторе"
 
-#: ../src/option.c:911
+#: ../src/option.c:929
 msgid "Set initial percentage"
 msgstr "Задать начальный процент"
 
-#: ../src/option.c:912
+#: ../src/option.c:930
 msgid "PERCENTAGE"
 msgstr "ПРОЦЕНТЫ"
 
-#: ../src/option.c:917
+#: ../src/option.c:935
 msgid "Pulsate progress bar"
 msgstr "Пульсирующий индикатор прогресса"
 
-#: ../src/option.c:924
+#: ../src/option.c:942
 #, no-c-format
 msgid "Dismiss the dialog when 100% has been reached"
 msgstr "Закрыть диалог когда дойдет до 100%"
 
-#: ../src/option.c:931
+#: ../src/option.c:949
 msgid "Kill parent process if cancel button is pressed"
 msgstr "Завершить родительский процесс, если нажата кнопка отмены"
 
-#: ../src/option.c:938
+#: ../src/option.c:956
 msgid "Right-To-Left progress bar direction"
 msgstr "Направление индикатора Справа-Налево"
 
-#: ../src/option.c:944
+#: ../src/option.c:962
 msgid "Show log window"
 msgstr "Показать окно журнала"
 
-#: ../src/option.c:950
+#: ../src/option.c:968
 msgid "Expand log window"
 msgstr "Развернуть окно журнала"
 
-#: ../src/option.c:956
+#: ../src/option.c:974
 msgid "Place log window above progress bar"
 msgstr "Разместить окно журнала над индикатором прогресса"
 
-#: ../src/option.c:962
+#: ../src/option.c:980
 msgid "Height of log window"
 msgstr "Высота окна журнала"
 
-#: ../src/option.c:972
+#: ../src/option.c:990
 msgid "Display scale dialog"
 msgstr "Отобразить диалог масштаба"
 
-#: ../src/option.c:978
+#: ../src/option.c:996
 msgid "Set initial value"
 msgstr "Задать начальное значение"
 
-#: ../src/option.c:979 ../src/option.c:985 ../src/option.c:991
-#: ../src/option.c:997 ../src/option.c:1003
+#: ../src/option.c:997 ../src/option.c:1003 ../src/option.c:1009
+#: ../src/option.c:1015 ../src/option.c:1021
 msgid "VALUE"
 msgstr "ЗНАЧЕНИЕ"
 
-#: ../src/option.c:984
+#: ../src/option.c:1002
 msgid "Set minimum value"
 msgstr "Задать минимальное значение"
 
-#: ../src/option.c:990
+#: ../src/option.c:1008
 msgid "Set maximum value"
 msgstr "Задать максимальное значение"
 
-#: ../src/option.c:996
+#: ../src/option.c:1014
 msgid "Set step size"
 msgstr "Задать шаг"
 
-#: ../src/option.c:1002
+#: ../src/option.c:1020
 msgid "Set paging size"
 msgstr "Задать шаг страницы"
 
-#: ../src/option.c:1008
+#: ../src/option.c:1026
 msgid "Print partial values"
 msgstr "Печатать частичные значения"
 
-#: ../src/option.c:1014
+#: ../src/option.c:1032
 msgid "Hide value"
 msgstr "Скрыть величину"
 
-#: ../src/option.c:1020
+#: ../src/option.c:1038
 msgid "Show vertical scale"
 msgstr "Показывать вертикальную шкалу"
 
-#: ../src/option.c:1026
+#: ../src/option.c:1044
 msgid "Invert direction"
 msgstr "Инвертировать направление"
 
-#: ../src/option.c:1032
+#: ../src/option.c:1050
 msgid "Add mark to scale (may be used multiple times)"
 msgstr "Добавить метку (может использоваться несколько раз)"
 
-#: ../src/option.c:1033
+#: ../src/option.c:1051
 msgid "NAME:VALUE"
 msgstr "ИМЯ:ЗНАЧЕНИЕ"
 
-#: ../src/option.c:1042
+#: ../src/option.c:1060
 msgid "Display text information dialog"
 msgstr "Отобразить диалог с текстовой информацией"
 
-#: ../src/option.c:1048
+#: ../src/option.c:1066
 msgid "Use specified color for text"
 msgstr "Использовать указанный цвет текста"
 
-#: ../src/option.c:1054
+#: ../src/option.c:1072
 msgid "Use specified color for background"
 msgstr "Использовать указанный цвет фона"
 
-#: ../src/option.c:1066
+#: ../src/option.c:1084
 msgid "Enable text wrapping"
 msgstr "Разрешить перенос текста"
 
-#: ../src/option.c:1072
+#: ../src/option.c:1090
 msgid "Set justification (TYPE - left, right, center or fill)"
 msgstr "Установить выравнивание (ТИП - left, right, center или fill)"
 
-#: ../src/option.c:1078
+#: ../src/option.c:1096
 msgid "Set text margins"
 msgstr "Установить отступы"
 
-#: ../src/option.c:1079
+#: ../src/option.c:1097
 msgid "SIZE"
 msgstr "РАЗМЕР"
 
-#: ../src/option.c:1084
+#: ../src/option.c:1102
 msgid "Autoscroll to end of text"
 msgstr "Автопрокрутка в конец текста"
 
-#: ../src/option.c:1090
+#: ../src/option.c:1108
 msgid "Open file"
 msgstr "Открыть файл"
 
-#: ../src/option.c:1102
+#: ../src/option.c:1120
 msgid "Make URI clickable"
 msgstr "Сделать ссылки активными"
 
-#: ../src/option.c:1108
+#: ../src/option.c:1126
 msgid "Listen for data on stdin in addition to file"
 msgstr "Получать данные из стандартного потока ввода в дополнение к файлу"
 
-#: ../src/option.c:1118
+#: ../src/option.c:1136
 msgid "Show about dialog"
 msgstr "Показать диалог 'О программе'"
 
-#: ../src/option.c:1124
+#: ../src/option.c:1142
 msgid "Print version"
 msgstr "Вывести версию"
 
-#: ../src/option.c:1134
+#: ../src/option.c:1152
 msgid "Load extra arguments from file"
 msgstr "Загрузить дополнительные аргументы из файла"
 
-#: ../src/option.c:1179 ../src/option.c:1392
+#: ../src/option.c:1197 ../src/option.c:1410
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "Неизвестный тип выравнивания: %s\n"
 
-#: ../src/option.c:1334
+#: ../src/option.c:1352
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "Метке %s не задано значение\n"
 
-#: ../src/option.c:1377
+#: ../src/option.c:1395
 #, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "Неизвестный тип расположения кнопок: %s\n"
 
-#: ../src/option.c:1409
+#: ../src/option.c:1427
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "Неизвестный тип выравнивания: %s\n"
 
-#: ../src/option.c:1445
+#: ../src/option.c:1463
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "Неизвестный тип усечения: %s\n"
 
-#: ../src/option.c:1460
+#: ../src/option.c:1478
 #, c-format
 msgid "Unknown source type: %s\n"
 msgstr "Неизвестный исходный тип: %s\n"
 
-#: ../src/option.c:1471
+#: ../src/option.c:1489
 msgid "Progress log"
 msgstr "Окно журнала"
 
-#: ../src/option.c:1571
+#: ../src/option.c:1589
 #, c-format
 msgid "Unknown signal: %s\n"
 msgstr "Неизвестный сигнал: %s\n"
 
-#: ../src/option.c:1711
+#: ../src/option.c:1730
 msgid "File exist. Overwrite?"
 msgstr "Файл существует. Перезаписать?"
 
-#: ../src/option.c:1802
+#: ../src/option.c:1821
 msgid "Yet another dialoging program"
 msgstr "Программа для отображения диалогов"
 
 #. Adds general option entries
-#: ../src/option.c:1806
+#: ../src/option.c:1825
 msgid "General options"
 msgstr "Основные параметры"
 
-#: ../src/option.c:1806
+#: ../src/option.c:1825
 msgid "Show general options"
 msgstr "Показывать основные параметры"
 
 #. Adds calendar option entries
-#: ../src/option.c:1812
+#: ../src/option.c:1831
 msgid "Calendar options"
 msgstr "Параметры календаря"
 
-#: ../src/option.c:1812
+#: ../src/option.c:1831
 msgid "Show calendar options"
 msgstr "Показывать параметры календаря"
 
 #. Adds color option entries
-#: ../src/option.c:1818
+#: ../src/option.c:1837
 msgid "Color selection options"
 msgstr "Параметры диалога выбора цвета"
 
-#: ../src/option.c:1818
+#: ../src/option.c:1837
 msgid "Show color selection options"
 msgstr "Показывать параметры диалога выбора цвета"
 
 #. Adds dnd option entries
-#: ../src/option.c:1824
+#: ../src/option.c:1843
 msgid "DND options"
 msgstr "Параметры DND"
 
-#: ../src/option.c:1824
+#: ../src/option.c:1843
 msgid "Show drag-n-drop options"
 msgstr "Показывать параметры dnd"
 
 #. Adds entry option entries
-#: ../src/option.c:1830
+#: ../src/option.c:1849
 msgid "Text entry options"
 msgstr "Параметры ввода текста"
 
-#: ../src/option.c:1830
+#: ../src/option.c:1849
 msgid "Show text entry options"
 msgstr "Показывать параметры ввода текста"
 
 #. Adds file selection option entries
-#: ../src/option.c:1836
+#: ../src/option.c:1855
 msgid "File selection options"
 msgstr "Параметры диалога выбора файла"
 
-#: ../src/option.c:1836
+#: ../src/option.c:1855
 msgid "Show file selection options"
 msgstr "Показывать параметры диалога выбора файлов"
 
 #. Add font selection option entries
-#: ../src/option.c:1842
+#: ../src/option.c:1861
 msgid "Font selection options"
 msgstr "Параметры диалога выбора шрифта"
 
-#: ../src/option.c:1842
+#: ../src/option.c:1861
 msgid "Show font selection options"
 msgstr "Показывать параметры диалога выбора шрифта"
 
 #. Add form option entries
-#: ../src/option.c:1848
+#: ../src/option.c:1867
 msgid "Form options"
 msgstr "Параметры диалога формы"
 
-#: ../src/option.c:1848
+#: ../src/option.c:1867
 msgid "Show form options"
 msgstr "Показывать параметры диалога формы"
 
 #. Add icons option entries
-#: ../src/option.c:1854
+#: ../src/option.c:1873
 msgid "Icons box options"
 msgstr "Параметры диалога значков"
 
-#: ../src/option.c:1854
+#: ../src/option.c:1873
 msgid "Show icons box options"
 msgstr "Показывать параметры диалога значков быстрого доступа"
 
 #. Adds list option entries
-#: ../src/option.c:1860
+#: ../src/option.c:1879
 msgid "List options"
 msgstr "Параметры списка"
 
-#: ../src/option.c:1860
+#: ../src/option.c:1879
 msgid "Show list options"
 msgstr "Показывать параметры списка"
 
 #. Adds multi progress option entries
-#: ../src/option.c:1866
+#: ../src/option.c:1885
 msgid "Multi progress bars options"
 msgstr "Параметры диалога с несколькими индикаторами"
 
-#: ../src/option.c:1867
+#: ../src/option.c:1886
 msgid "Show multi progress bars options"
 msgstr "Показывать параметры диалога с несколькими индикаторами"
 
 #. Adds notebook option entries
-#: ../src/option.c:1873
+#: ../src/option.c:1892
 msgid "Notebook options"
 msgstr "Параметры диалога с вкладками"
 
-#: ../src/option.c:1873
+#: ../src/option.c:1892
 msgid "Show notebook dialog options"
 msgstr "Показывать параметры диалога с вкладками"
 
 #. Adds notification option entries
-#: ../src/option.c:1879
+#: ../src/option.c:1898
 msgid "Notification icon options"
 msgstr "Параметры значка уведомления"
 
-#: ../src/option.c:1880
+#: ../src/option.c:1899
 msgid "Show notification icon options"
 msgstr "Показывать параметры значка уведомления"
 
 #. Adds print option entries
-#: ../src/option.c:1886
+#: ../src/option.c:1905
 msgid "Print dialog options"
 msgstr "Параметры диалога печати"
 
-#: ../src/option.c:1886
+#: ../src/option.c:1905
 msgid "Show print dialog options"
 msgstr "Показывать параметры диалога печати"
 
 #. Adds progress option entries
-#: ../src/option.c:1892
+#: ../src/option.c:1911
 msgid "Progress options"
 msgstr "Параметры хода процесса"
 
-#: ../src/option.c:1892
+#: ../src/option.c:1911
 msgid "Show progress options"
 msgstr "Показывать параметры хода процесса"
 
 #. Adds scale option entries
-#: ../src/option.c:1898
+#: ../src/option.c:1917
 msgid "Scale options"
 msgstr "Параметры масштаба"
 
-#: ../src/option.c:1898
+#: ../src/option.c:1917
 msgid "Show scale options"
 msgstr "Показывать параметры масштаба"
 
 #. Adds text option entries
-#: ../src/option.c:1904
+#: ../src/option.c:1923
 msgid "Text information options"
 msgstr "Параметры текстовой информации"
 
-#: ../src/option.c:1904
+#: ../src/option.c:1923
 msgid "Show text information options"
 msgstr "Показывать параметры текстовой информации"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:1910
+#: ../src/option.c:1929
 msgid "Miscellaneous options"
 msgstr "Дополнительные параметры"
 
-#: ../src/option.c:1910
+#: ../src/option.c:1929
 msgid "Show miscellaneous options"
 msgstr "Показывать дополнительные параметры"
 
