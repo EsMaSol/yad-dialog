@@ -150,7 +150,6 @@ set_field_value (guint num, gchar * value)
 {
   GtkWidget *w;
   gchar **s;
-  guint j = 0;
   YadField *fld = g_slist_nth_data (options.form_data.fields, num);
 
   w = GTK_WIDGET (g_slist_nth_data (fields, num));
@@ -218,19 +217,33 @@ set_field_value (guint num, gchar * value)
 
       case YAD_FIELD_COMBO:
       case YAD_FIELD_COMBO_ENTRY:
-        s = g_strsplit (value, options.common_data.item_separator, -1);
-        while (s[j])
-          {
+        {
+          gint i = 0, def = 0;
+
+          s = g_strsplit (value, options.common_data.item_separator, -1);
+          while (s[i])
+            {
+              gchar *buf;
+
+              if (s[i][0] == '^')
+                {
+                  buf = g_strcompress (s[i] + 1);
+                  def = i;
+                }
+              else
+                buf = g_strcompress (s[i]);
 #if GTK_CHECK_VERSION(2,24,0)
-            gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (w), s[j]);
+              gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (w), buf);
 #else
-            gtk_combo_box_append_text (GTK_COMBO_BOX (w), s[j]);
+              gtk_combo_box_append_text (GTK_COMBO_BOX (w), buf);
 #endif
-            j++;
-          }
-        gtk_combo_box_set_active (GTK_COMBO_BOX (w), 0);
-        g_strfreev (s);
-        break;
+              g_free (buf);
+              i++;
+            }
+          gtk_combo_box_set_active (GTK_COMBO_BOX (w), def);
+          g_strfreev (s);
+          break;
+        }
 
       case YAD_FIELD_DIR:
         gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (w), value);
