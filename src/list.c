@@ -929,31 +929,49 @@ print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
         {
           gboolean bval;
           gtk_tree_model_get (model, iter, num, &bval, -1);
-          g_printf ("%s", bval ? "TRUE" : "FALSE");
+          if (options.common_data.quoted_output)
+            g_printf ("'%s'", bval ? "TRUE" : "FALSE");
+          else
+            g_printf ("%s", bval ? "TRUE" : "FALSE");
           break;
         }
       case YAD_COLUMN_NUM:
         {
           gint64 nval;
           gtk_tree_model_get (model, iter, num, &nval, -1);
-          g_printf ("%ld", (long) nval);
+          if (options.common_data.quoted_output)
+            g_printf ("'%ld'", (long) nval);
+          else
+            g_printf ("%ld", (long) nval);
           break;
         }
       case YAD_COLUMN_FLOAT:
         {
           gdouble nval;
           gtk_tree_model_get (model, iter, num, &nval, -1);
-          g_printf ("%lf", nval);
+          if (options.common_data.quoted_output)
+            g_printf ("'%lf'", nval);
+          else
+            g_printf ("%lf", nval);
           break;
         }
       case YAD_COLUMN_IMAGE:
+        if (options.common_data.quoted_output)
+          g_printf ("''");
         break;
       default:
         {
           gchar *cval, *uval;
           gtk_tree_model_get (model, iter, num, &cval, -1);
           uval = unescape_markup (cval);
-          g_printf ("%s", uval);
+          if (options.common_data.quoted_output)
+            {
+              gchar *buf = g_shell_quote (uval);
+              g_printf ("%s", buf);
+              g_free (buf);
+            }
+          else
+            g_printf ("%s", uval);
           g_free (uval);
           break;
         }

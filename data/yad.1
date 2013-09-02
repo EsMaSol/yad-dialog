@@ -328,6 +328,9 @@ used multiply times.
 Add preview widget to file dialog. Preview images loads from large or normal thumbnails according to XDG Thumbnails
 specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
 as large thumbnails.
+.TP
+.B \-\-quoted-output
+Output values will be shell-style quoted.
 
 .SS Font selection options
 .TP
@@ -400,6 +403,9 @@ Set the format for the date fields (same as in calendar dialog).
 .TP
 .B \-\-scroll
 Make form scrollable.
+.TP
+.B \-\-quoted-output
+Output values will be shell-style quoted.
 .PP
 Additional data in command line interprets as a default values for form fields. A special value \fI@disabled\fP makes proper field inactive.
 
@@ -466,6 +472,9 @@ Use regular expressions in search for text fields.
 .TP
 .B \-\-listen
 Listen data from stdin even if command-line values was specified.
+.TP
+.B \-\-quoted-output
+Output values will be shell-style quoted.
 
 Sending FormFeed character to list clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 
