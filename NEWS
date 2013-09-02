@@ -1,3 +1,8 @@
+Version 0.23.0
+    - add --quoted-output option for file, form and list dialogs
+    - add default values for combo-box field in form dialog
+    - fix dialogs responses when working in notebook mode
+
 Version 0.22.1
     - fix resize of dialog text
     - fix usage of stock items in popup menu of notification icon
