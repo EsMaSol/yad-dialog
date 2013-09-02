@@ -487,6 +487,12 @@ static GOptionEntry file_options[] = {
    &options.common_data.preview,
    N_("Enable preview"),
    NULL},
+  {"quoted-output", 0,
+   G_OPTION_FLAG_NOALIAS,
+   G_OPTION_ARG_NONE,
+   &options.common_data.quoted_output,
+   N_("Quote dialogs output"),
+   NULL},
   {NULL}
 };
 
@@ -567,6 +573,12 @@ static GOptionEntry form_options[] = {
    G_OPTION_ARG_NONE,
    &options.form_data.scroll,
    N_("Make form scrollable"),
+   NULL},
+  {"quoted-output", 0,
+   G_OPTION_FLAG_NOALIAS,
+   G_OPTION_ARG_NONE,
+   &options.common_data.quoted_output,
+   N_("Quote dialogs output"),
    NULL},
   {NULL}
 };
@@ -745,6 +757,12 @@ static GOptionEntry list_options[] = {
    G_OPTION_ARG_NONE,
    &options.common_data.listen,
    N_("Listen for data on stdin in addition to command-line"),
+   NULL},
+  {"quoted-output", 0,
+   G_OPTION_FLAG_NOALIAS,
+   G_OPTION_ARG_NONE,
+   &options.common_data.quoted_output,
+   N_("Quote dialogs output"),
    NULL},
   {NULL}
 };
@@ -1677,6 +1695,7 @@ yad_options_init (void)
   options.common_data.align = 0.0;
   options.common_data.listen = FALSE;
   options.common_data.preview = FALSE;
+  options.common_data.quoted_output = FALSE;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
