@@ -238,11 +238,18 @@ file_print_result (void)
   selections = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (filechooser));
   for (iter = selections; iter != NULL; iter = iter->next)
     {
-      g_print ("%s", g_filename_to_utf8 ((gchar *) iter->data, -1, NULL, NULL, NULL));
+      if (options.common_data.quoted_output)
+        {
+          gchar *buf = g_shell_quote (g_filename_to_utf8 ((gchar *) iter->data, -1, NULL, NULL, NULL));
+          g_printf ("%s", buf);
+          g_free (buf);
+        }
+      else
+        g_printf ("%s", g_filename_to_utf8 ((gchar *) iter->data, -1, NULL, NULL, NULL));
       g_free (iter->data);
       if (iter->next != NULL)
-        g_print ("%s", options.common_data.separator);
+        g_printf ("%s", options.common_data.separator);
     }
-  g_print ("\n");
+  g_printf ("\n");
   g_slist_free (selections);
 }
