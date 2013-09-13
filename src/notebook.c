@@ -131,10 +131,10 @@ notebook_close_childs (void)
   /* wait for stop subprocesses */
   while (is_running)
     {
-      is_tunning = FALSE;
+      is_running = FALSE;
       for (i = 1; i <= n_tabs; i++)
         {
-          if (tabs[i].pid != -1) && kill (tabs[i].pid, O) == 0)
+          if (tabs[i].pid != -1 && kill (tabs[i].pid, 0) == 0)
             {
               is_running = TRUE;
               gtk_main_iteration ();
