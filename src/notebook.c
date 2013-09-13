@@ -117,6 +117,7 @@ notebook_close_childs (void)
 {
   guint i, n_tabs;
   struct shmid_ds buf;
+  gboolean is_running = TRUE;
 
   gtk_widget_destroy (notebook);
 
@@ -125,6 +126,21 @@ notebook_close_childs (void)
     {
       if (tabs[i].pid != -1)
         kill (tabs[i].pid, SIGUSR2);
+    }
+
+  /* wait for stop subprocesses */
+  while (is_running)
+    {
+      is_tunning = FALSE;
+      for (i = 1; i <= n_tabs; i++)
+        {
+          if (tabs[i].pid != -1) && kill (tabs[i].pid, O) == 0)
+            {
+              is_running = TRUE;
+              gtk_main_iteration ();
+              break;
+            }
+        }
     }
 
   /* cleanup shared memory */
