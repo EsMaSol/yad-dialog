@@ -300,7 +300,8 @@ create_dialog (void)
           else
             gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
 #if !GTK_CHECK_VERSION(3,0,0)
-          g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
+          if (!options.data.fixed)
+            g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
 #endif
         }
     }
@@ -418,10 +419,13 @@ create_dialog (void)
     {
       gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
+      
     }
   gtk_widget_show (dlg);
   /* set fixed size after showing widget */
   gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+  if (options.data.fixed)
+    gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
 
   /* set timeout */
   if (options.data.timeout)
