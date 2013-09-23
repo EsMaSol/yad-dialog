@@ -1,3 +1,19 @@
+2013-09-14 08:04  ananasik
+
+	* src/main.c: fix setting size of unresizable dialogs
+
+2013-09-13 09:46  ananasik
+
+	* configure.ac, src/notebook.c: fix previous commit
+
+2013-09-13 09:11  ananasik
+
+	* src/notebook.c: wait for child termination in notebook
+
+2013-09-02 14:34  ananasik@gmail.com
+
+	* ChangeLog, NEWS: release 0.23.0
+
 2013-09-02 14:28  ananasik@gmail.com
 
 	* po/de.po, po/fr.po, po/it.po, po/ru.po, po/sk.po, po/uk.po,

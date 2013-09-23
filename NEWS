@@ -1,3 +1,7 @@
+Versaion 0.23.1
+    - wait for child termination in notebook dialog
+    - honour custom width and height settings in unresizable dialogs
+
 Version 0.23.0
     - add --quoted-output option for file, form and list dialogs
     - add default values for combo-box field in form dialog
