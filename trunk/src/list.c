@@ -148,13 +148,16 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
         {
           GtkTreeViewColumn *checkcol = GTK_TREE_VIEW_COLUMN (node->data);
           if (x >= colx && x < (colx + gtk_tree_view_column_get_width (checkcol)))
-            col = checkcol;
+            {
+              col = checkcol;
+              break;
+            }
           else
             colx += gtk_tree_view_column_get_width (checkcol);
         }
       g_list_free (cols);
 
-      /* set tolltip */
+      /* set tooltip */
       if (col)
         {
           GList *rndr;
@@ -199,7 +202,11 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
           gtk_tooltip_set_text (tip, text);
           g_free (text);
         }
+      else
+        return FALSE;
     }
+  else
+    return FALSE;
 
   return TRUE;
 }
