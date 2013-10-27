@@ -75,7 +75,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
           value = g_strsplit (string->str, ":", 2);
           num = atoi (value[0]) - 1;
-          if (num < 0 || num > nbars)
+          if (num < 0 || num > nbars - 1)
             continue;
 
           pb = GTK_PROGRESS_BAR (g_slist_nth_data (progress_bars, num));
