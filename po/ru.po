@@ -842,7 +842,7 @@ msgstr "Пульсирующий индикатор прогресса"
 #: ../src/option.c:942
 #, no-c-format
 msgid "Dismiss the dialog when 100% has been reached"
-msgstr "Закрыть диалог когда дойдет до 100%"
+msgstr "Закрыть диалог по достижении 100%"
 
 #: ../src/option.c:949
 msgid "Kill parent process if cancel button is pressed"
