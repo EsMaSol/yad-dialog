@@ -108,12 +108,12 @@ timeout_indicator_cb (gpointer data)
   return TRUE;
 }
 
-#if !GTK_CHECK_VERSION(3,0,0)                                                            
+#if !GTK_CHECK_VERSION(3,0,0)
 static void
 text_size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
 {
   PangoLayout *pl = gtk_label_get_layout (GTK_LABEL (w));
-  
+
   if (pango_layout_is_wrapped (pl))
     gtk_widget_set_size_request (w, al->width, -1);
 }
@@ -419,7 +419,7 @@ create_dialog (void)
     {
       gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
-      
+
     }
   gtk_widget_show (dlg);
   /* set fixed size after showing widget */
@@ -500,7 +500,7 @@ create_plug (void)
           break;
         }
       gtk_box_pack_start (GTK_BOX (vbox), text, FALSE, FALSE, 2);
-#if !GTK_CHECK_VERSION(3,0,0)                                                            
+#if !GTK_CHECK_VERSION(3,0,0)
       g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
 #endif
 
@@ -747,9 +747,9 @@ main (gint argc, gchar ** argv)
         /* autokill option for progress dialog */
         if (!options.kill_parent)
           {
-            if ((options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS) && 
+            if ((options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS) &&
                 options.progress_data.autokill && ret != YAD_RESPONSE_OK)
-              kill (getppid (), 1);
+              kill (getppid (), SIGHUP);
           }
 #endif
     }
