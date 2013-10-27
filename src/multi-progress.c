@@ -52,7 +52,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
           do
             {
-              status = g_io_channel_read_line_string (channel, string, NULL, &err);
+              status =
+                g_io_channel_read_line_string (channel, string, NULL, &err);
 
               while (gtk_events_pending ())
                 gtk_main_iteration ();
@@ -108,6 +109,25 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                     gtk_progress_bar_set_fraction (pb, 1.0);
                   else
                     gtk_progress_bar_set_fraction (pb, percentage / 100.0);
+
+                  /* Check if all of progres bars reach 100% */
+                  if (options.progress_data.autoclose && options.plug == -1)
+                    {
+                      GSList *p;
+                      gboolean close = TRUE;
+
+                      for (p = progress_bars; p; p = p->next)
+                        {
+                          if (gtk_progress_bar_get_fraction (GTK_PROGRESS_BAR (p->data)) != 1.0)
+                            {
+                              close = FALSE;
+                              break;
+                            }
+                        }
+
+                      if (close)
+                        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+                    }
                 }
             }
         }
