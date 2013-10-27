@@ -325,6 +325,7 @@ typedef struct {
   gboolean listen;
   gboolean preview;
   gboolean quoted_output;
+
 } YadCommonData;
 
 typedef struct {

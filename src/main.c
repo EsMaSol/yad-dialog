@@ -747,7 +747,8 @@ main (gint argc, gchar ** argv)
         /* autokill option for progress dialog */
         if (!options.kill_parent)
           {
-            if (options.mode == YAD_MODE_PROGRESS && options.progress_data.autokill && ret != YAD_RESPONSE_OK)
+            if ((options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS) && 
+                options.progress_data.autokill && ret != YAD_RESPONSE_OK)
               kill (getppid (), 1);
           }
 #endif

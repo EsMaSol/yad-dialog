@@ -792,6 +792,21 @@ static GOptionEntry multi_progress_options[] = {
    set_align,
    N_("Set alignment of bar labels (left, center or right)"),
    N_("TYPE")},
+  {"auto-close", 0,
+   G_OPTION_FLAG_NOALIAS,
+   G_OPTION_ARG_NONE,
+   &options.progress_data.autoclose,
+   /* xgettext: no-c-format */
+   N_("Dismiss the dialog when 100% of all bars has been reached"),
+   NULL},
+#ifndef G_OS_WIN32
+  {"auto-kill", 0,
+   G_OPTION_FLAG_NOALIAS,
+   G_OPTION_ARG_NONE,
+   &options.progress_data.autokill,
+   N_("Kill parent process if cancel button is pressed"),
+   NULL},
+#endif
   {NULL}
 };
 
@@ -935,7 +950,7 @@ static GOptionEntry progress_options[] = {
    N_("Pulsate progress bar"),
    NULL},
   {"auto-close", 0,
-   0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
    &options.progress_data.autoclose,
    /* xgettext: no-c-format */
@@ -943,7 +958,7 @@ static GOptionEntry progress_options[] = {
    NULL},
 #ifndef G_OS_WIN32
   {"auto-kill", 0,
-   0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
    &options.progress_data.autokill,
    N_("Kill parent process if cancel button is pressed"),
