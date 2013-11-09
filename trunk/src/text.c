@@ -331,19 +331,26 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
           return FALSE;
         }
 
-      if (string->len > 0)
+      if (string->str[0] == '\014')
+	{
+          GtkTextIter start, end;
+
+	  /* clear text if ^L received */
+          gtk_text_buffer_get_start_iter (text_buffer, &start);
+          gtk_text_buffer_get_end_iter (text_buffer, &end);
+          gtk_text_buffer_delete (text_buffer, &start, &end);
+	}
+      else if (string->len > 0)
         {
           GtkTextIter end;
-          gchar *utftext;
-          gsize utflen;
 
           gtk_text_buffer_get_end_iter (text_buffer, &end);
 
           if (!g_utf8_validate (string->str, string->len, NULL))
             {
-              utftext =
-                g_convert_with_fallback (string->str, string->len, "UTF-8", "ISO-8859-1", NULL, NULL, &utflen, NULL);
-              gtk_text_buffer_insert (text_buffer, &end, utftext, utflen);
+              gchar *utftext =
+                g_convert_with_fallback (string->str, string->len, "UTF-8", "ISO-8859-1", NULL, NULL, NULL, NULL);
+              gtk_text_buffer_insert (text_buffer, &end, utftext, -1);
               g_free (utftext);
             }
           else
