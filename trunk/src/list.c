@@ -383,6 +383,8 @@ add_columns (gint n_columns)
       g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
       gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
 
+      gtk_tree_view_column_set_clickable (column, options.list_data.clickable);
+
       if (col->type != YAD_COLUMN_CHECK || col->type != YAD_COLUMN_IMAGE)
         {
           if (i == options.list_data.expand_column - 1 || options.list_data.expand_column == 0)

@@ -679,6 +679,12 @@ static GOptionEntry list_options[] = {
    &options.list_data.radiobox,
    N_("Use radioboxes for first column"),
    NULL},
+  {"no-click", 0,
+   G_OPTION_FLAG_REVERSE,
+   G_OPTION_ARG_NONE,
+   &options.list_data.clickable,
+   N_("Disable clickable column headers"),
+   NULL},
   {"separator",
    0,
    G_OPTION_FLAG_NOALIAS,
@@ -1777,6 +1783,7 @@ yad_options_init (void)
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
   options.list_data.dclick_action = NULL;
   options.list_data.regex_search = FALSE;
+  options.list_data.clickable = TRUE;
 
   /* Initialize multiprogress data */
   options.multi_progress_data.bars = NULL;
