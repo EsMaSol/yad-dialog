@@ -252,6 +252,7 @@ typedef struct {
   PangoEllipsizeMode ellipsize;
   gchar *dclick_action;
   gboolean regex_search;
+  gboolean clickable;
 } YadListData;
 
 typedef struct {
