@@ -39,6 +39,7 @@ static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **)
 static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_progress_log (const gchar *, const gchar *, gpointer, GError **);
 static gboolean parse_signal (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_image_path (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -257,6 +258,12 @@ static GOptionEntry general_options[] = {
    N_("Print X Window Id to the stderr"),
    NULL},
 #endif
+  {"image-path", 0,
+   0,
+   G_OPTION_ARG_CALLBACK,
+   add_image_path,
+   N_("Add path for search icons by name"),
+   N_("PATH")},
   {NULL}
 };
 
@@ -1508,6 +1515,15 @@ set_progress_log (const gchar * option_name, const gchar * value, gpointer data,
     options.progress_data.log = g_strdup (value);
   else
     options.progress_data.log = _("Progress log");
+
+  return TRUE;
+}
+
+static gboolean
+add_image_path (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (value)
+    gtk_icon_theme_append_search_path (settings.icon_theme, value);
 
   return TRUE;
 }

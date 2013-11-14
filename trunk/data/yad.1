@@ -180,6 +180,9 @@ ignored.
 If set, user can select dialog's text and copy it to clipboard.
 This option also affects on label fields in form dialog.
 .TP
+.B \-\-image-path=PATH
+Add specified path to the standard list of directories for looking for icons. This option can be used multiply times.
+.TP
 .B \-\-rest=FILENAME
 Read extra arguments from given file instead of command line. Each line of a file treats as a single argument.
 
@@ -438,7 +441,10 @@ Allow multiple rows to be selected.
 Allow changes to text.
 .TP
 .B \-\-no-headers
-Do not show column headers
+Do not show column headers.
+.TP
+.B \-\-no-click
+Disable sorting of column content by clicking on its header.
 .TP
 .B \-\-print-all
 Print all data from the list.
@@ -590,10 +596,10 @@ Open specified file.
 Allow changes to text.
 .TP
 .B \-\-fore=COLOR
-Set foreground color of text
+Set foreground color of text.
 .TP
 .B \-\-back=COLOR
-Set background color of text
+Set background color of text.
 .TP
 .B \-\-fontname=FONT
 Set text font. \fIFONT\fP must be in a Pango font description format.
@@ -617,6 +623,7 @@ Make URI in text clickable. Links opens with \fIxdg-open\fP command.
 .B \-\-listen
 Listen data from stdin even if filename was specified.
 
+Sending FormFeed character to text dialog clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 Pressing \fICtrl+S\fP popups the search entry in text dialog.
 
 .SS Scale options
