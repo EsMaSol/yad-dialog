@@ -1,3 +1,64 @@
+2013-11-14 11:21  ananasik@gmail.com
+
+	* configure.ac, data/yad.1, po/de.po, po/fr.po, po/it.po,
+	  po/pt_BR.po, po/ru.po, po/sk.po, po/uk.po, po/zh_TW.po,
+	  src/option.c: add --image-path option/ update man page and
+	  translations
+
+2013-11-09 05:56  ananasik
+
+	* configure.ac: prepare to next release
+
+2013-11-09 05:53  ananasik
+
+	* src/list.c, src/option.c, src/yad.h: add --no-click option to
+	  list dialog
+
+2013-11-09 05:39  ananasik
+
+	* src/text.c: allow clear text in text-info dialog with ^L
+
+2013-10-27 09:22  ananasik
+
+	* configure.ac: bump version to 0.23.2
+
+2013-10-27 09:18  ananasik
+
+	* src/main.c: use signal name instead of number
+
+2013-10-27 09:16  ananasik
+
+	* po/de.po, po/fr.po, po/it.po, po/pt_BR.po, po/ru.po, po/sk.po,
+	  po/uk.po, po/zh_TW.po, src/main.c, src/option.c, src/yad.h:
+	  correct --auto-kill and --auto-close options for multi-progress
+	  dialog
+
+2013-10-27 09:01  ananasik
+
+	* po/ru.po: fix russian translation
+
+2013-10-27 08:57  ananasik
+
+	* src/multi-progress.c: add auto-close feature to multi-progress
+	  dialog
+
+2013-10-27 08:31  ananasik
+
+	* src/multi-progress.c: fix segfault on wrong bar number in
+	  multiprogress dialog
+
+2013-10-27 07:43  ananasik
+
+	* po/LINGUAS, po/pt_BR.po: add Brazilian Portuguese translation
+
+2013-10-24 10:57  ananasik@gmail.com
+
+	* src/list.c: fix tooltips in list dialog
+
+2013-09-23 05:02  ananasik
+
+	* ChangeLog, NEWS: release 0.23.1
+
 2013-09-14 08:04  ananasik
 
 	* src/main.c: fix setting size of unresizable dialogs
