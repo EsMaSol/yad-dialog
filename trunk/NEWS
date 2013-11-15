@@ -1,4 +1,12 @@
-Versaion 0.23.1
+Version 0.24.0
+    - add --auto-close option for multi-progress dialog
+    - add --image-path option
+    - add --no-clict option to list dialog
+    - allow clear text in text-info dialog with ^L
+    - new translations
+    - bug fixes
+
+Version 0.23.1
     - wait for child termination in notebook dialog
     - honour custom width and height settings in unresizable dialogs
 
