@@ -1,3 +1,6 @@
+Vesrion 0.24.1
+    - fix parsing menu in notification dialog
+
 Version 0.24.0
     - add --auto-close option for multi-progress dialog
     - add --image-path option
