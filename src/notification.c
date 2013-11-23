@@ -172,8 +172,11 @@ popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer
             }
           else
             {
-              item = gtk_menu_item_new_with_mnemonic (d->name);
-              gtk_image_menu_item_set_use_stock (GTK_IMAGE_MENU_ITEM (item), TRUE);
+              GtkStockItem it;
+              if (gtk_stock_lookup (d->name, &it))
+                item = gtk_image_menu_item_new_from_stock (d->name, NULL);
+              else
+                item = gtk_menu_item_new_with_mnemonic (d->name);
             }
           g_signal_connect (GTK_MENU_ITEM (item), "activate",
                             G_CALLBACK (popup_menu_item_activate_cb), (gpointer) d->action);
