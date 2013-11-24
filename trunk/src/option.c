@@ -615,10 +615,10 @@ static GOptionEntry icons_options[] = {
    &options.icons_data.generic,
    N_("Use GenericName field instead of Name for icon label"),
    NULL},
-  {"stdin", 0,
-   0,
+  {"listen", 0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
-   &options.icons_data.stdinput,
+   &options.common_data.listen,
    N_("Read data from stdin"),
    NULL},
   {"item-width", 0,
@@ -766,7 +766,7 @@ static GOptionEntry list_options[] = {
    N_("Use regex in search"),
    NULL},
   {"listen", 0,
-   0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
    &options.common_data.listen,
    N_("Listen for data on stdin in addition to command-line"),
@@ -871,7 +871,7 @@ static GOptionEntry notification_options[] = {
    N_("Set left-click action"),
    N_("CMD")},
   {"listen", 0,
-   0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
    &options.common_data.listen,
    N_("Listen for commands on stdin"),
@@ -1148,7 +1148,7 @@ static GOptionEntry text_options[] = {
    N_("Make URI clickable"),
    NULL},
   {"listen", 0,
-   0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
    &options.common_data.listen,
    N_("Listen for data on stdin in addition to file"),
@@ -1778,7 +1778,6 @@ yad_options_init (void)
   options.icons_data.directory = NULL;
   options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
-  options.icons_data.stdinput = FALSE;
   options.icons_data.width = -1;
   options.icons_data.term = settings.term;
   options.icons_data.sort_by_name = FALSE;

@@ -125,7 +125,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
   static gint row_count = 0;
   static gboolean first_time = TRUE;
   GtkTreeModel *model;
-   
+
   if (!options.icons_data.compact)
     model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
   else
@@ -436,7 +436,7 @@ icons_create_widget (GtkWidget * dlg)
   /* handle directory */
   if (options.icons_data.directory)
     read_dir (store);
-  else if (options.icons_data.stdinput)
+  else if (options.common_data.listen)
     {
       /* read from stdin */
       GIOChannel *channel;
