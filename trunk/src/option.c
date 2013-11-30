@@ -888,6 +888,12 @@ static GOptionEntry notification_options[] = {
    &options.common_data.item_separator,
    N_("Set separator character for menu items"),
    N_("SEPARATOR")},
+  {"menu", 0,
+   0,
+   G_OPTION_ARG_STRING,
+   &options.notification_data.menu,
+   N_("Set initial popup menu"),
+   N_("STRING")},
   {"no-middle", 0,
    G_OPTION_FLAG_REVERSE,
    G_OPTION_ARG_NONE,
@@ -1810,6 +1816,7 @@ yad_options_init (void)
 
   /* Initialize notification data */
   options.notification_data.middle = TRUE;
+  options.notification_data.menu = NULL;
 
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;

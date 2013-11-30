@@ -266,6 +266,7 @@ typedef struct {
 
 typedef struct {
   gboolean middle;
+  gchar *menu;
 } YadNotificationData;
 
 typedef struct {

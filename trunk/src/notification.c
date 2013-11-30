@@ -37,7 +37,7 @@ static GtkStatusIcon *status_icon;
 static gchar *icon = NULL;
 static gchar *action = NULL;
 
-static GSList *menu_data;
+static GSList *menu_data = NULL;
 
 static gint exit_code;
 static gint icon_size = 16;
@@ -51,6 +51,44 @@ free_menu_data (gpointer data, gpointer udata)
   g_free (m->action);
   g_free (m->icon);
   g_free (m);
+}
+
+static void
+parse_menu_str (gchar *str)
+{
+  gchar **menu_vals;
+  gint i = 0;
+
+  if (!menu_data)
+    {
+      g_slist_foreach (menu_data, free_menu_data, NULL);
+      g_slist_free (menu_data);
+      menu_data = NULL;
+    }
+
+  menu_vals = g_strsplit (str, options.common_data.separator, -1);
+
+  while (menu_vals[i] != NULL)
+    {
+      MenuData *mdata = g_new0 (MenuData, 1);
+      gchar **s = g_strsplit (menu_vals[i], options.common_data.item_separator, 3);
+
+      if (s[0])
+        {
+          mdata->name = g_strdup (s[0]);
+          if (s[1])
+            {
+              mdata->action = g_strdup (s[1]);
+              if (s[2])
+                mdata->icon = g_strdup (s[2]);
+            }
+        }
+      menu_data = g_slist_append (menu_data, mdata);
+      g_strfreev (s);
+      i++;
+    }
+
+  g_strfreev (menu_vals);
 }
 
 static void
@@ -300,34 +338,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             }
           else if (!g_ascii_strcasecmp (command, "menu"))
             {
-              MenuData *mdata;
-              int i = 0;
-              gchar **menu_vals = g_strsplit (value, options.common_data.separator, -1);
-
-              g_slist_foreach (menu_data, free_menu_data, NULL);
-              g_slist_free (menu_data);
-              menu_data = NULL;
-
-              while (menu_vals[i] != NULL)
-                {
-                  gchar **s = g_strsplit (menu_vals[i], options.common_data.item_separator, 3);
-                  mdata = g_new0 (MenuData, 1);
-                  if (s[0])
-                    {
-                      mdata->name = g_strdup (s[0]);
-                      if (s[1])
-                        {
-                          mdata->action = g_strdup (s[1]);
-                          if (s[2])
-                            mdata->icon = g_strdup (s[2]);
-                        }
-                    }
-                  menu_data = g_slist_append (menu_data, mdata);
-                  g_strfreev (s);
-                  i++;
-                }
-
-              g_strfreev (menu_vals);
+              if (value)
+                parse_menu_str (value);
             }
           else
             g_printerr (_("Unknown command '%s'\n"), command);
@@ -371,11 +383,14 @@ yad_notification_run ()
     icon = g_strdup (options.data.dialog_image);
   if (options.common_data.command)
     action = g_strdup (options.common_data.command);
-  menu_data = NULL;
 
   set_icon ();
 
   g_signal_connect (status_icon, "activate", G_CALLBACK (activate_cb), NULL);
+  g_signal_connect (status_icon, "popup_menu", G_CALLBACK (popup_menu_cb), NULL);
+
+  if (options.notification_data.menu)
+    parse_menu_str (options.notification_data.menu);
 
   /* quit on middle click (like press Esc) */
   if (options.notification_data.middle)
@@ -389,8 +404,6 @@ yad_notification_run ()
           g_io_channel_set_encoding (channel, NULL, NULL);
           g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
           g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
-
-          g_signal_connect (status_icon, "popup_menu", G_CALLBACK (popup_menu_cb), NULL);
         }
     }
 
