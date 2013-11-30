@@ -155,7 +155,7 @@ create_dialog (void)
   gtk_container_set_border_width (GTK_CONTAINER (dlg), (guint) options.data.borders);
 
   /* set window size and position */
-  if (!options.data.geometry)
+  if (!options.data.geometry && !options.data.maximized && !options.data.fullscreen)
     {
       gtk_window_set_default_size (GTK_WINDOW (dlg), options.data.width, options.data.height);
       if (options.data.center)
@@ -415,18 +415,25 @@ create_dialog (void)
     gtk_widget_hide (bbox);
 
   /* parse geometry, if given. must be after showing widget */
-  if (options.data.geometry)
+  if (options.data.geometry && !options.data.maximized && !options.data.fullscreen)
     {
       gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
 
     }
   gtk_widget_show (dlg);
-  /* set fixed size after showing widget */
-  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
-  if (options.data.fixed)
-    gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
 
+  /* set maximized or fixed size after showing widget */
+  if (options.data.maximized)
+    gtk_window_maximize (GTK_WINDOW (dlg));
+  else if (options.data.fullscreen)
+    gtk_window_fullscreen (GTK_WINDOW (dlg));
+  else
+    {
+      gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+      if (options.data.fixed)
+        gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
+    }
   /* set timeout */
   if (options.data.timeout)
     {
