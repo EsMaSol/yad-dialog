@@ -1,3 +1,9 @@
+Version 0.25.0
+    - add --menu option for notification icon
+    - add --maximized and --fullscreen options
+    - unify --listen option for differend kind of dialogs
+    - replace --stdin option by --listen in icon dialog 
+
 Vesrion 0.24.1
     - fix parsing menu in notification dialog
 
