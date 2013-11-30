@@ -232,7 +232,19 @@ static GOptionEntry general_options[] = {
    &options.data.skip_taskbar,
    N_("Don't show window in taskbar"),
    NULL},
-  {"plug", 0,
+  {"maximized", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.data.maximized,
+   N_("Set window maximized"),
+   NULL},
+   {"fullscreen", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.data.fullscreen,
+   N_("Set window fulscreen"),
+   NULL},
+ {"plug", 0,
    0,
    G_OPTION_ARG_INT,
    &options.plug,
@@ -1724,6 +1736,8 @@ yad_options_init (void)
   options.data.mouse = FALSE;
   options.data.undecorated = FALSE;
   options.data.skip_taskbar = FALSE;
+  options.data.maximized = FALSE;
+  options.data.fullscreen = FALSE;
 
   /* Initialize common data */
   options.common_data.uri = NULL;
