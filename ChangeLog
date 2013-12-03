@@ -1,3 +1,46 @@
+2013-11-30 15:08  ananasik
+
+	* NEWS, configure.ac: prepare to the next release
+
+2013-11-30 14:23  ananasik
+
+	* data/yad.1, po/de.po, po/fr.po, po/it.po, po/pt_BR.po, po/ru.po,
+	  po/sk.po, po/uk.po, po/zh_TW.po, src/main.c, src/option.c,
+	  src/yad.h: add --maximized and --fullscreen options
+
+2013-11-30 13:59  ananasik
+
+	* data/yad.1, po/de.po, po/fr.po, po/it.po, po/pt_BR.po, po/ru.po,
+	  po/sk.po, po/uk.po, po/zh_TW.po, src/notification.c,
+	  src/option.c, src/yad.h: add --menu option for notification icon
+
+2013-11-24 07:07  ananasik
+
+	* data/yad.1, po/ru.po: update man page
+
+2013-11-24 07:01  ananasik
+
+	* configure.ac, src/icons.c, src/option.c, src/yad.h: remove
+	  aliases for --listen option. replace --stdin on --listen in icons
+	  dialog(!!!)
+
+2013-11-23 16:39  ananasik
+
+	* NEWS: release 0.24.1
+
+2013-11-23 16:38  ananasik
+
+	* configure.ac, src/notification.c: fix parsing menu in
+	  notification dialog
+
+2013-11-15 05:52  ananasik
+
+	* NEWS: fix typo
+
+2013-11-15 05:47  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.24.0
+
 2013-11-14 11:21  ananasik@gmail.com
 
 	* configure.ac, data/yad.1, po/de.po, po/fr.po, po/it.po,
