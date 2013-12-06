@@ -1,3 +1,19 @@
+2013-12-03 10:53  ananasik
+
+	* src/option.c: fix indentation
+
+2013-12-03 10:43  ananasik
+
+	* src/main.c: set normal windows hints for yad windows
+
+2013-12-03 09:14  ananasik
+
+	* NEWS: fix typo
+
+2013-12-03 09:05  ananasik
+
+	* ChangeLog: release 0.25.0
+
 2013-11-30 15:08  ananasik
 
 	* NEWS, configure.ac: prepare to the next release
