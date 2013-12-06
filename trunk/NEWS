@@ -1,3 +1,7 @@
+Version 0.25.1
+    - use normal window hints for dialog windows
+    - fix menu in notification icon (issue #196)
+
 Version 0.25.0
     - add --menu option for notification icon
     - add --maximized and --fullscreen options
