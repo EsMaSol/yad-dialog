@@ -59,7 +59,7 @@ parse_menu_str (gchar *str)
   gchar **menu_vals;
   gint i = 0;
 
-  if (!menu_data)
+  if (menu_data)
     {
       g_slist_foreach (menu_data, free_menu_data, NULL);
       g_slist_free (menu_data);
