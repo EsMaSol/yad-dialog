@@ -503,7 +503,10 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
                 break;
               default:
-                val = escape_markup (string->str);
+                if (options.data.no_markup)
+                  val = escape_markup (string->str);
+                else
+                  val = g_strdup (string->str);
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
                 g_free (val);
                 break;
@@ -579,7 +582,10 @@ fill_data (gint n_columns)
                     gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
                     break;
                   default:
-                    val = escape_markup (args[i]);
+                    if (options.data.no_markup)
+                      val = escape_markup (args[i]);
+                    else
+                      val = g_strdup (args[i]);
                     gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, val, -1);
                     g_free (val);
                     break;
