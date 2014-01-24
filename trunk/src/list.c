@@ -204,7 +204,10 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
                 return FALSE;
             }
 
-          gtk_tooltip_set_text (tip, text);
+	  if (options.data.no_markup)
+	    gtk_tooltip_set_text (tip, text);
+	  else
+	    gtk_tooltip_set_markup (tip, text);
           g_free (text);
         }
       else
@@ -373,7 +376,10 @@ add_columns (gint n_columns)
                 g_object_set (G_OBJECT (renderer), "editable", TRUE, NULL);
                 g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
               }
-            column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "markup", i, NULL);
+	    if (options.data.no_markup)
+	      column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "text", i, NULL);
+	    else
+	      column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "markup", i, NULL);
             gtk_tree_view_column_add_attribute (column, renderer, "ellipsize", n_columns);
             if (fore_col != -1)
               gtk_tree_view_column_add_attribute (column, renderer, "foreground", fore_col);
