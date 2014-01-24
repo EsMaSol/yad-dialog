@@ -136,6 +136,11 @@ tooltip_cb (GtkWidget * w, gint x, gint y, gboolean kmode, GtkTooltip * tip, gpo
   GtkTreePath *path = NULL;
   GtkTreeIter iter;
 
+  /* hide current tooltip */
+  gtk_tooltip_set_text (tip, NULL);
+  while (gtk_events_pending ())
+    gtk_main_iteration ();
+
   if (gtk_tree_view_get_tooltip_context (GTK_TREE_VIEW (list_view), &x, &y, kmode, &model, &path, &iter))
     {
       GtkTreeViewColumn *col = NULL;
