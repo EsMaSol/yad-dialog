@@ -433,7 +433,6 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
           YadColumn *col;
           GdkPixbuf *pb;
           gint status;
-          gchar *val;
 
           do
             {
@@ -508,18 +507,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 if (pb)
                   g_object_unref (pb);
                 break;
-              case YAD_COLUMN_ATTR_FORE:
-              case YAD_COLUMN_ATTR_BACK:
-              case YAD_COLUMN_ATTR_FONT:
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
-                break;
               default:
-                if (options.data.no_markup)
-                  val = escape_markup (string->str);
-                else
-                  val = g_strdup (string->str);
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
-                g_free (val);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
                 break;
             }
 
@@ -561,7 +550,6 @@ fill_data (gint n_columns)
             {
               YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, j);
               GdkPixbuf *pb;
-              gchar *val;
 
               if (args[i] == NULL)
                 break;
@@ -587,18 +575,8 @@ fill_data (gint n_columns)
                     if (pb)
                       g_object_unref (pb);
                     break;
-                  case YAD_COLUMN_ATTR_FORE:
-                  case YAD_COLUMN_ATTR_BACK:
-                  case YAD_COLUMN_ATTR_FONT:
-                    gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
-                    break;
                   default:
-                    if (options.data.no_markup)
-                      val = escape_markup (args[i]);
-                    else
-                      val = g_strdup (args[i]);
-                    gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, val, -1);
-                    g_free (val);
+                    gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
                     break;
                 }
               i++;
