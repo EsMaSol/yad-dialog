@@ -488,7 +488,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             {
               case YAD_COLUMN_CHECK:
               case YAD_COLUMN_RADIO:
-                if (g_ascii_strcasecmp (string->str, "true") == 0)
+                if (strcasecmp (string->str, "true") == 0)
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
                 else
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
@@ -546,7 +546,7 @@ fill_data (gint n_columns)
           gint j;
 
           gtk_list_store_append (model, &iter);
-          for (j = 0; j < n_columns; j++)
+          for (j = 0; j < n_columns; j++, i++)
             {
               YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, j);
               GdkPixbuf *pb;
@@ -558,10 +558,10 @@ fill_data (gint n_columns)
                 {
                   case YAD_COLUMN_CHECK:
                   case YAD_COLUMN_RADIO:
-                    if (g_ascii_strcasecmp ((gchar *) args[i], "true") == 0)
-                      gtk_list_store_set (model, &iter, j, TRUE, -1);
+                    if (strcasecmp ((gchar *) args[i], "true") == 0)
+                      gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, TRUE, -1);
                     else
-                      gtk_list_store_set (model, &iter, j, FALSE, -1);
+                      gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, FALSE, -1);
                     break;
                   case YAD_COLUMN_NUM:
                     gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, g_ascii_strtoll (args[i], NULL, 10), -1);
@@ -579,7 +579,6 @@ fill_data (gint n_columns)
                     gtk_list_store_set (GTK_LIST_STORE (model), &iter, j, args[i], -1);
                     break;
                 }
-              i++;
             }
           /* set ellipsize */
           gtk_list_store_set (GTK_LIST_STORE (model), &iter, n_columns, options.list_data.ellipsize, -1);
@@ -619,14 +618,17 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
     {
       gchar *cmd;
       GString *args;
+      guint n_cols;
 
       args = g_string_new ("");
+
+      n_cols = gtk_tree_model_get_n_columns (model) - 1;
 
       if (gtk_tree_model_get_iter (model, &iter, path))
         {
           gint i;
 
-          for (i = 0; i < gtk_tree_model_get_n_columns (model) - 1; i++)
+          for (i = 0; i < n_cols; i++)
             {
               YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
               switch (col->type)
@@ -658,17 +660,11 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
                       g_string_append_printf (args, " ''");
                       break;
                     }
-                  case YAD_COLUMN_ATTR_FORE:
-                  case YAD_COLUMN_ATTR_BACK:
-                  case YAD_COLUMN_ATTR_FONT:
-                    break;
                   default:
                     {
-                      gchar *cval, *uval, *sval;
+                      gchar *cval, *sval;
                       gtk_tree_model_get (model, &iter, i, &cval, -1);
-                      uval = unescape_markup (cval);
-                      sval = g_shell_quote (uval);
-                      g_free (uval);
+                      sval = g_shell_quote (cval);
                       g_string_append_printf (args, " %s", sval);
                       g_free (sval);
                       break;
@@ -689,7 +685,60 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
         cmd = g_strdup_printf ("%s %s", options.list_data.dclick_action, args->str);
       g_string_free (args, TRUE);
 
-      g_spawn_command_line_async (cmd, NULL);
+      if (cmd[0] == '@')
+        {
+          gchar *data = NULL;
+          gint exit;
+
+          g_spawn_command_line_sync (cmd + 1, &data, NULL, &exit, NULL);
+          if (exit == 0)
+            {
+	      gint i;
+              gchar **lines = g_strsplit (data, "\n", 0);
+
+	      for (i = 0; i < n_cols; i++)
+		{
+		  YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
+		  GdkPixbuf *pb;
+
+		  if (lines[i] == NULL)
+		    break;
+
+		  switch (col->type)
+		    {
+		    case YAD_COLUMN_CHECK:
+		    case YAD_COLUMN_RADIO:
+		      if (strcasecmp ((gchar *) lines[i], "true") == 0)
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter, i, TRUE, -1);
+		      else
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter, i, FALSE, -1);
+		      break;
+		    case YAD_COLUMN_NUM:
+		      gtk_list_store_set (GTK_LIST_STORE (model), &iter, i, g_ascii_strtoll (lines[i], NULL, 10), -1);
+		      break;
+		    case YAD_COLUMN_FLOAT:
+		      gtk_list_store_set (GTK_LIST_STORE (model), &iter, i, g_ascii_strtod (lines[i], NULL), -1);
+		      break;
+		    case YAD_COLUMN_IMAGE:
+		      pb = get_pixbuf (lines[i], YAD_SMALL_ICON);
+		      if (pb)
+			{
+			  gtk_list_store_set (GTK_LIST_STORE (model), &iter, i, pb, -1);
+			  g_object_unref (pb);
+			}
+		      break;
+		    default:
+		      gtk_list_store_set (GTK_LIST_STORE (model), &iter, i, lines[i], -1);
+		      break;
+		    }
+		}
+	      g_strfreev (lines);
+            }
+          g_free (data);
+        }
+      else
+	g_spawn_command_line_async (cmd, NULL);
+
       g_free (cmd);
     }
   else

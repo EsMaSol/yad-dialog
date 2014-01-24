@@ -477,6 +477,7 @@ Set ellipsize mode for text columns. \fITYPE\fP may be \fINONE\fP, \fISTART\fP, 
 Set the \fICMD\fP as a double-click command. When user double-clicked on row, \fICMD\fP will be launched with values of all columns as an arguments. By default double-click selects row and act as \fIOK\fP button for simple lists, set the checkbox if \fI\-\-checklist\fP specified and do nothing when list run with \fI\-\-multiple\fP option.
 When double-click specified \fIEnter\fP acts as a double-click and \fICtrl+Enter\fP acts as an \fIOK\fP button.
 \fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
+If \fICMD\fP starts with \fI@\fP, its output will replace values of current row.
 This option doesn't work with \fI--editable\fP.
 .TP
 .B \-\-regex-search
