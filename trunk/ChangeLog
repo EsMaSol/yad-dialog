@@ -1,3 +1,40 @@
+2014-01-24 06:38  ananasik
+
+	* src/list.c: improve ellipsizing in list dialog
+
+2014-01-24 03:34  ananasik
+
+	* configure.ac: bump version in configure
+
+2014-01-24 03:34  ananasik
+
+	* data/yad.1, src/list.c: add \@ handler for double-click action in
+	  list dialog
+
+2014-01-24 02:53  ananasik
+
+	* src/list.c: improve handling no-markup option in list dialog
+
+2014-01-24 02:47  ananasik
+
+	* src/list.c: fix handling no-markup option in list dialog
+
+2014-01-24 02:44  ananasik
+
+	* src/list.c:
+
+2013-12-18 12:58  ananasik@gmail.com
+
+	* src/list.c: fix markup in list dialog
+
+2013-12-06 05:51  ananasik
+
+	* ChangeLog, NEWS, configure.ac: release 0.25.1
+
+2013-12-06 05:25  ananasik
+
+	* src/notification.c: fix notification menu
+
 2013-12-03 10:53  ananasik
 
 	* src/option.c: fix indentation
