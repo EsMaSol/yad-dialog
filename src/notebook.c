@@ -54,14 +54,7 @@ notebook_create_widget (GtkWidget * dlg)
   /* add tabs */
   for (tab = options.notebook_data.tabs; tab; tab = tab->next)
     {
-      GtkWidget *a, *l, *s;
-
-      l = gtk_label_new (NULL);
-      if (!options.data.no_markup)
-        gtk_label_set_markup (GTK_LABEL (l), (gchar *) tab->data);
-      else
-        gtk_label_set_text (GTK_LABEL (l), (gchar *) tab->data);
-      gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
+      GtkWidget *a, *s;
 
       a = gtk_alignment_new (0.5, 0.5, 1, 1);
       gtk_alignment_set_padding (GTK_ALIGNMENT (a),
@@ -72,7 +65,7 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_container_add (GTK_CONTAINER (a), s);
       g_object_set_data (G_OBJECT (a), "socket", s);
 
-      gtk_notebook_append_page (GTK_NOTEBOOK (w), a, l);
+      gtk_notebook_append_page (GTK_NOTEBOOK (w), a, get_label ((gchar *) tab->data));
     }
 
   return w;
