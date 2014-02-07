@@ -579,7 +579,7 @@ form_create_widget (GtkWidget * dlg)
 
           /* add field label */
           if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
-	      fld->type != YAD_FIELD_FULL_BUTTON &&
+              fld->type != YAD_FIELD_FULL_BUTTON &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
@@ -812,30 +812,20 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_BUTTON:
             case YAD_FIELD_FULL_BUTTON:
-              {
-                gchar **buf = g_strsplit (fld->name, options.common_data.item_separator, 2);
-                e = gtk_button_new_from_stock (buf[0]);
-                if (buf[1])
-                  {
-                    if (options.data.no_markup)
-                      gtk_widget_set_tooltip_text (e, buf[1]);
-                    else
-                      gtk_widget_set_tooltip_markup (e, buf[1]);
-                  }
-                gtk_widget_set_name (e, "yad-form-button");
-		if (fld->type == YAD_FIELD_BUTTON)
-		  gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
+              e = gtk_button_new ();
+              gtk_container_add (GTK_CONTAINER (e), get_label (fld->name));
+              gtk_widget_set_name (e, "yad-form-button");
+              if (fld->type == YAD_FIELD_BUTTON)
+                gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)
-                gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
-                                  GTK_EXPAND | GTK_FILL, 0, 5, 5);
+              gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
+                                GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
-                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
-                gtk_widget_set_hexpand (e, TRUE);
+              gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+              gtk_widget_set_hexpand (e, TRUE);
 #endif
-                fields = g_slist_append (fields, e);
-                g_strfreev (buf);
-                break;
-              }
+              fields = g_slist_append (fields, e);
+              break;
 
             case YAD_FIELD_LABEL:
               if (fld->name[0])
