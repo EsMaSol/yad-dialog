@@ -71,18 +71,18 @@ timeout_cb (gpointer data)
 }
 
 static void
-btn_cb (GtkButton * b, gchar * c)
+btn_cb (GtkWidget *b, gchar *cmd)
 {
-  gchar *cmd;
-  gint pid;
+  if (cmd)
+    g_spawn_command_line_async (cmd, NULL);
+  else
+    {
+      gint resp;
+      GtkWidget *dlg = gtk_widget_get_toplevel (b);
 
-#if !defined(_WIN32)
-  pid = getpid ();
-#endif
-
-  cmd = g_strdup_printf (c, pid);
-  g_spawn_command_line_async (cmd, NULL);
-  g_free (cmd);
+      resp = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (b), "resp"));
+      gtk_dialog_response (GTK_DIALOG (dlg), resp);
+    }
 }
 
 static gboolean
@@ -378,15 +378,15 @@ create_dialog (void)
           GSList *tmp = options.data.buttons;
           do
             {
+              GtkWidget *btn;
               YadButton *b = (YadButton *) tmp->data;
-              if (b->cmd)
-                {
-                  GtkWidget *btn = gtk_button_new_from_stock (b->name);
-                  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
-                  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
-                }
-              else
-                gtk_dialog_add_button (GTK_DIALOG (dlg), b->name, b->response);
+
+              btn = gtk_button_new ();
+              gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2));
+              g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (b->response));
+              g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+
               tmp = tmp->next;
             }
           while (tmp != NULL);

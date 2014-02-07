@@ -65,7 +65,7 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_container_add (GTK_CONTAINER (a), s);
       g_object_set_data (G_OBJECT (a), "socket", s);
 
-      gtk_notebook_append_page (GTK_NOTEBOOK (w), a, get_label ((gchar *) tab->data));
+      gtk_notebook_append_page (GTK_NOTEBOOK (w), a, get_label ((gchar *) tab->data, 0));
     }
 
   return w;
