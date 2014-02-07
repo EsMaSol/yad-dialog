@@ -436,11 +436,19 @@ get_label (gchar *str)
   if (gtk_stock_lookup (vals[0], &it))
     {
       l = gtk_label_new (it.label);
+      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+
       i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON));
     }
   else
     {
-      l = gtk_label_new (vals[0]);
+      l = gtk_label_new (NULL);
+      if (!options.data.no_markup)
+        gtk_label_set_markup (GTK_LABEL (l), vals[0]);
+      else
+        gtk_label_set_text (GTK_LABEL (l), vals[0]);
+      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+
       i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
     }
   g_strfreev (vals);
