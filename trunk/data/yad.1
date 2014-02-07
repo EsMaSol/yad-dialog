@@ -353,7 +353,7 @@ Set the preview text.
 .SS Form options
 .TP
 .B \-\-field=LABEL[:TYPE]
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fICLR\fP, \fIBTN\fP, \fILBL\fP or \fITXT\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILBL\fP or \fITXT\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -388,6 +388,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBCLR\fP - color selection button.
 .br
 \fBBTN\fP - button field. Label may be in form \fITEXT[!TOOLTIP]\fP. \fITEXT\fP is a text of button label or gtk stock id. \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with numbers will be treats as a new field values.
+.br
+\fBFBTN\fP - same as button field, but with full relief of a button.
 .br
 \fBLBL\fP - text label. If field name is empty, horizontal separator line will be shown.
 .br
@@ -513,8 +515,8 @@ Set the key of this notebook.
 .B \-\-tab=LABEL
 Add tab with specified label to notebook.
 .TP
-.B \-\-align=TYPE
-Set the tab label align. Value may be \fIleft\fP, \fIcenter\fP or \fIright\fP.
+.B \-\-tab-pos=TYPE
+Set the tabs position. Value may be \fItop\fP, \fIbottom\fP, \fIleft\fP, or \fIright\fP. Default is  \fItop\fP.
 .TP
 .B \-\-tab-borders=NUMBER
 Set the borders width around widget in tabs.
@@ -723,6 +725,12 @@ Separator character for menu items (e.g. `!') sets with \-\-item-separator argum
 .TP
 .B quit
 Exit the program. Middle click on icon also send \fIquit\fP command.
+
+.SH ENVIRONMENT VARIABLES
+.TP
+.B YAD_PID
+This variable sets to the value of current dialog's pid ad accessible in all
+dialog childs.
 
 .SH USER DEFINED SIGNALS
 .TP
