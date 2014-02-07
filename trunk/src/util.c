@@ -421,3 +421,33 @@ get_tabs (key_t key, gboolean create)
 
   return t;
 }
+
+GtkWidget *
+get_label (gchar *str)
+{
+  GtkWidget *t, *i, *l;
+  GtkStockItem it;
+  gchar **vals;
+
+  if (!str)
+    return gtk_label_new ("");
+
+  vals = g_strsplit_set (str, options.common_data.item_separator, 2);
+  if (gtk_stock_lookup (vals[0], &it))
+    {
+      l = gtk_label_new (it.label);
+      i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON));
+    }
+  else
+    {
+      l = gtk_label_new (vals[0]);
+      i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
+    }
+  g_strfreev (vals);
+
+  t = gtk_hbox_new (FALSE, 1);
+  gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 0);
+
+  return t;
+}
