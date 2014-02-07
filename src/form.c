@@ -269,6 +269,7 @@ set_field_value (guint num, gchar * value)
       }
 
     case YAD_FIELD_BUTTON:
+    case YAD_FIELD_FULL_BUTTON:
       g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (button_clicked_cb), value);
       break;
 
@@ -578,6 +579,7 @@ form_create_widget (GtkWidget * dlg)
 
           /* add field label */
           if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
+	      fld->type != YAD_FIELD_FULL_BUTTON &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
@@ -809,6 +811,7 @@ form_create_widget (GtkWidget * dlg)
               break;
 
             case YAD_FIELD_BUTTON:
+            case YAD_FIELD_FULL_BUTTON:
               {
                 gchar **buf = g_strsplit (fld->name, options.common_data.item_separator, 2);
                 e = gtk_button_new_from_stock (buf[0]);
@@ -820,7 +823,8 @@ form_create_widget (GtkWidget * dlg)
                       gtk_widget_set_tooltip_markup (e, buf[1]);
                   }
                 gtk_widget_set_name (e, "yad-form-button");
-                gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
+		if (fld->type == YAD_FIELD_BUTTON)
+		  gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)
                 gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
                                   GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -1047,6 +1051,7 @@ form_print_result (void)
                       options.common_data.separator);
           break;
         case YAD_FIELD_BUTTON:
+        case YAD_FIELD_FULL_BUTTON:
         case YAD_FIELD_LABEL:
           if (options.common_data.quoted_output)
             g_printf ("''%s", options.common_data.separator);
