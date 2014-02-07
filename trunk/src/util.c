@@ -464,7 +464,7 @@ get_label (gchar *str, guint border)
           gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
         }
 
-      if (vals[1])
+      if (vals[1] && *vals[1])
         i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
     }
 
@@ -474,7 +474,7 @@ get_label (gchar *str, guint border)
     gtk_box_pack_start (GTK_BOX (t), l, FALSE, FALSE, 1);
 
   /* !!! must check both 1 and 2 values for !NULL */
-  if (vals[1] && vals[2])
+  if (vals[1] && vals[2] && *vals[2])
     {
       if (!options.data.no_markup)
         gtk_widget_set_tooltip_markup (t, vals[2]);
