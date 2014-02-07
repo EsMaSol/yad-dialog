@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2013, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <stdlib.h>
@@ -423,7 +423,7 @@ get_tabs (key_t key, gboolean create)
 }
 
 GtkWidget *
-get_label (gchar *str)
+get_label (gchar *str, guint border)
 {
   GtkWidget *t, *i, *l;
   GtkStockItem it;
@@ -432,8 +432,14 @@ get_label (gchar *str)
   if (!str)
     return gtk_label_new ("");
 
-  vals = g_strsplit_set (str, options.common_data.item_separator, 3);
+#if !GTK_CHECK_VERSION(3,0,0)
+  t = gtk_hbox_new (FALSE, 0);
+#else
+  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#endif
+  gtk_container_set_border_width (GTK_CONTAINER (t), border);
 
+  vals = g_strsplit_set (str, options.common_data.item_separator, 3);
   if (gtk_stock_lookup (vals[0], &it))
     {
       l = gtk_label_new_with_mnemonic (it.label);
@@ -451,18 +457,15 @@ get_label (gchar *str)
       gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
 
       i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
+
+
     }
 
-#if !GTK_CHECK_VERSION(3,0,0)
-  t = gtk_hbox_new (FALSE, 2);
-#else
-  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-#endif
-  gtk_container_set_border_width (GTK_CONTAINER (t), 2);
-  gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
+  gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 1);
 
-  if (vals[2])
+  /* !!! must check both 1 and 2 values for !NULL */
+  if (vals[1] && vals[2])
     {
       if (!options.data.no_markup)
         gtk_widget_set_tooltip_markup (t, vals[2]);
@@ -471,6 +474,8 @@ get_label (gchar *str)
     }
 
   g_strfreev (vals);
+
+  gtk_widget_show_all (t);
 
   return t;
 }

@@ -464,7 +464,7 @@ char *escape_str (char *str);
 
 YadNTabs *get_tabs (key_t key, gboolean create);
 
-GtkWidget *get_label (gchar *str);
+GtkWidget *get_label (gchar *str, guint border);
 
 G_END_DECLS
 
