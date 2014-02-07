@@ -425,7 +425,7 @@ get_tabs (key_t key, gboolean create)
 GtkWidget *
 get_label (gchar *str, guint border)
 {
-  GtkWidget *t, *i, *l;
+  GtkWidget *a, *t, *i, *l;
   GtkStockItem it;
   gchar **vals;
 
@@ -434,12 +434,15 @@ get_label (gchar *str, guint border)
 
   l = i = NULL;
 
+  a = gtk_alignment_new (0.0, 0.5, 0, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (a), border);
+
 #if !GTK_CHECK_VERSION(3,0,0)
   t = gtk_hbox_new (FALSE, 0);
 #else
   t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 #endif
-  gtk_container_set_border_width (GTK_CONTAINER (t), border);
+  gtk_container_add (GTK_CONTAINER (a), t);
 
   vals = g_strsplit_set (str, options.common_data.item_separator, 3);
   if (gtk_stock_lookup (vals[0], &it))
@@ -468,7 +471,7 @@ get_label (gchar *str, guint border)
   if (i)
     gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
   if (l)
-    gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 1);
+    gtk_box_pack_start (GTK_BOX (t), l, FALSE, FALSE, 1);
 
   /* !!! must check both 1 and 2 values for !NULL */
   if (vals[1] && vals[2])
@@ -481,7 +484,7 @@ get_label (gchar *str, guint border)
 
   g_strfreev (vals);
 
-  gtk_widget_show_all (t);
+  gtk_widget_show_all (a);
 
-  return t;
+  return a;
 }
