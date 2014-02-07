@@ -1,3 +1,47 @@
+2014-02-07 07:44  ananasik
+
+	* ChangeLog, src/notebook.c, src/yad.h: use image labels in
+	  notebook tabs
+
+2014-02-07 07:26  ananasik
+
+	* configure.ac, po/de.po, po/fr.po, po/it.po, po/pt_BR.po,
+	  po/ru.po, po/sk.po, po/uk.po, po/zh_TW.po: update translations
+
+2014-02-07 07:21  ananasik
+
+	* src/option.c: fix typo
+
+2014-02-07 07:19  ananasik
+
+	* data/yad.1: update man page
+
+2014-02-07 07:10  ananasik
+
+	* src/util.c: some gtk3 fixes for image labels
+
+2014-02-07 07:07  ananasik
+
+	* src/form.c, src/option.c, src/yad.h: add fbtn field type for form
+	  dialog
+
+2014-02-07 06:58  ananasik
+
+	* src/notebook.c, src/option.c, src/yad.h: remove align option and
+	  add tab-pos option for notebook dialog
+
+2014-02-07 06:50  ananasik
+
+	* src/util.c: use markup for image labels
+
+2014-02-07 06:41  ananasik
+
+	* src/util.c: add parser for labels with images
+
+2014-02-07 06:06  ananasik
+
+	* src/main.c: set YAD_PID variable for child processes
+
 2014-01-24 08:24  ananasik
 
 	* ChangeLog:

@@ -432,6 +432,8 @@ get_label (gchar *str, guint border)
   if (!str)
     return gtk_label_new ("");
 
+  l = i = NULL;
+
 #if !GTK_CHECK_VERSION(3,0,0)
   t = gtk_hbox_new (FALSE, 0);
 #else
@@ -449,20 +451,24 @@ get_label (gchar *str, guint border)
     }
   else
     {
-      l = gtk_label_new (NULL);
-      if (!options.data.no_markup)
-        gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), vals[0]);
-      else
-        gtk_label_set_text_with_mnemonic (GTK_LABEL (l), vals[0]);
-      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+      if (vals[0] && *vals[0])
+        {
+          l = gtk_label_new (NULL);
+          if (!options.data.no_markup)
+            gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), vals[0]);
+          else
+            gtk_label_set_text_with_mnemonic (GTK_LABEL (l), vals[0]);
+          gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+        }
 
-      i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
-
-
+      if (vals[1])
+        i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
     }
 
-  gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
-  gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 1);
+  if (i)
+    gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
+  if (l)
+    gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 1);
 
   /* !!! must check both 1 and 2 values for !NULL */
   if (vals[1] && vals[2])
