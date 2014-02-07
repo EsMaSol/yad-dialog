@@ -387,7 +387,7 @@ get_tabs (key_t key, gboolean create)
     {
       if ((shmid = shmget (key, (settings.max_tab + 1) * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
         {
-          g_printerr ("yad: cannot create shared memory for key %ld: %s", key, strerror (errno));
+          g_printerr ("yad: cannot create shared memory for key %ld: %s\n", key, strerror (errno));
           return NULL;
         }
     }
@@ -396,7 +396,7 @@ get_tabs (key_t key, gboolean create)
       if ((shmid = shmget (key, (settings.max_tab + 1) * sizeof (YadNTabs), 0)) == -1)
         {
           if (errno != ENOENT)
-            g_printerr ("yad: cannot get shared memory for key %ld: %s", key, strerror (errno));
+            g_printerr ("yad: cannot get shared memory for key %ld: %s\n", key, strerror (errno));
           return NULL;
         }
     }
@@ -404,7 +404,7 @@ get_tabs (key_t key, gboolean create)
   /* attach shared memory */
   if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) -1)
     {
-      g_printerr ("yad: cannot attach shared memory for key %ld: %s", key, strerror (errno));
+      g_printerr ("yad: cannot attach shared memory for key %ld: %s\n", key, strerror (errno));
       return NULL;
     }
 
@@ -432,10 +432,11 @@ get_label (gchar *str)
   if (!str)
     return gtk_label_new ("");
 
-  vals = g_strsplit_set (str, options.common_data.item_separator, 2);
+  vals = g_strsplit_set (str, options.common_data.item_separator, 3);
+
   if (gtk_stock_lookup (vals[0], &it))
     {
-      l = gtk_label_new (it.label);
+      l = gtk_label_new_with_mnemonic (it.label);
       gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
 
       i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON));
@@ -444,22 +445,32 @@ get_label (gchar *str)
     {
       l = gtk_label_new (NULL);
       if (!options.data.no_markup)
-        gtk_label_set_markup (GTK_LABEL (l), vals[0]);
+        gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), vals[0]);
       else
-        gtk_label_set_text (GTK_LABEL (l), vals[0]);
+        gtk_label_set_text_with_mnemonic (GTK_LABEL (l), vals[0]);
       gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
 
       i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
     }
-  g_strfreev (vals);
 
 #if !GTK_CHECK_VERSION(3,0,0)
-  t = gtk_hbox_new (FALSE, 1);
+  t = gtk_hbox_new (FALSE, 2);
 #else
-  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);
+  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
 #endif
+  gtk_container_set_border_width (GTK_CONTAINER (t), 2);
   gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 0);
+
+  if (vals[2])
+    {
+      if (!options.data.no_markup)
+        gtk_widget_set_tooltip_markup (t, vals[2]);
+      else
+        gtk_widget_set_tooltip_text (t, vals[2]);
+    }
+
+  g_strfreev (vals);
 
   return t;
 }
