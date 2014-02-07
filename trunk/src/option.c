@@ -859,7 +859,7 @@ static GOptionEntry notebook_options[] = {
    G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_CALLBACK,
    set_tab_pos,
-   N_("Set postion of a notebook tabs (top, bottom, left or right)"),
+   N_("Set position of a notebook tabs (top, bottom, left or right)"),
    N_("TYPE")},
   {"tab-borders", 0,
    0,
