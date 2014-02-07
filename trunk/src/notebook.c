@@ -46,8 +46,9 @@ notebook_create_widget (GtkWidget * dlg)
   if (!tabs)
     exit (-1);
 
-  /* screate widget */
+  /* create widget */
   w = notebook = gtk_notebook_new ();
+  gtk_notebook_set_tab_pos (GTK_NOTEBOOK (w), options.notebook_data.pos);
   gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
   /* add tabs */

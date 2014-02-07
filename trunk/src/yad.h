@@ -263,6 +263,7 @@ typedef struct {
 typedef struct {
   GSList *tabs;
   guint borders;
+  GtkPositionType pos;
   key_t key;
 } YadNotebookData;
 
