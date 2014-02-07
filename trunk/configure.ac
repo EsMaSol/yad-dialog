@@ -1,4 +1,4 @@
-AC_INIT([YAD], [0.25.90], [http://code.google.com/p/yad/issues/entry], yad, [http://code.google.com/p/yad])
+AC_INIT([YAD], [0.26.0], [http://code.google.com/p/yad/issues/entry], yad, [http://code.google.com/p/yad])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
