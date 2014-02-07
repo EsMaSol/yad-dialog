@@ -453,7 +453,11 @@ get_label (gchar *str)
     }
   g_strfreev (vals);
 
+#if !GTK_CHECK_VERSION(3,0,0)
   t = gtk_hbox_new (FALSE, 1);
+#else
+  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);
+#endif
   gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (t), l, TRUE, TRUE, 0);
 
