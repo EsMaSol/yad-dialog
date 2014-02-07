@@ -614,8 +614,8 @@ main (gint argc, gchar ** argv)
   GOptionContext *ctx;
   GError *err = NULL;
   gint w, h;
+  gchar *str;
   gint ret = 0;
-  gchar *tmp_sep;
 
   setlocale (LC_ALL, "");
 
@@ -659,10 +659,10 @@ main (gint argc, gchar ** argv)
   yad_set_mode ();
 
   /* correct separators */
-  tmp_sep = g_strcompress (options.common_data.separator);
-  options.common_data.separator = tmp_sep;
-  tmp_sep = g_strcompress (options.common_data.item_separator);
-  options.common_data.item_separator = tmp_sep;
+  str = g_strcompress (options.common_data.separator);
+  options.common_data.separator = str;
+  str = g_strcompress (options.common_data.item_separator);
+  options.common_data.item_separator = str;
 
   /* loads an extra arguments, if specified */
   if (options.rest_file)
@@ -699,6 +699,9 @@ main (gint argc, gchar ** argv)
     }
 
 #ifndef G_OS_WIN32
+  /* add YAD_PID variable */
+  str = g_strdup_printf ("%d", getpid ());
+  setenv ("YAD_PID", str, TRUE);
   /* set signal handlers */
   signal (SIGUSR1, sa_usr1);
   signal (SIGUSR2, sa_usr2);
