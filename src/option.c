@@ -33,6 +33,7 @@ static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, G
 static gboolean set_buttons_layout (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_tab_pos (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
@@ -854,11 +855,11 @@ static GOptionEntry notebook_options[] = {
    add_tab,
    N_("Add a tab to notebook"),
    N_("LABEL")},
-  {"align", 0,
+  {"tab-pos", 0,
    G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_CALLBACK,
-   set_align,
-   N_("Set alignment of tab labels (left, center or right)"),
+   set_tab_pos,
+   N_("Set postion of a notebook tabs (top, bottom, left or right)"),
    N_("TYPE")},
   {"tab-borders", 0,
    0,
@@ -1476,6 +1477,23 @@ set_justify (const gchar * option_name, const gchar * value, gpointer data, GErr
 }
 
 static gboolean
+set_tab_pos (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (g_ascii_strcasecmp (value, "top") == 0)
+    options.notebook_data.pos = GTK_POS_TOP;
+  else if (g_ascii_strcasecmp (value, "bottom") == 0)
+    options.notebook_data.pos = GTK_POS_BOTTOM;
+  else if (g_ascii_strcasecmp (value, "left") == 0)
+    options.notebook_data.pos = GTK_POS_LEFT;
+  else if (g_ascii_strcasecmp (value, "right") == 0)
+    options.notebook_data.pos = GTK_POS_RIGHT;
+  else
+    g_printerr (_("Unknown tab position type: %s\n"), value);
+
+  return TRUE;
+}
+
+static gboolean
 set_expander (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   if (value)
@@ -1826,6 +1844,7 @@ yad_options_init (void)
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 5;
+  options.notebook_data.pos = GTK_POS_TOP;
   options.notebook_data.key = -1;
 
   /* Initialize notification data */
