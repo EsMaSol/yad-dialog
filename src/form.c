@@ -623,6 +623,7 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_NUM:
               e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
+              gtk_entry_set_alignment (GTK_ENTRY (e), 1.0);
               gtk_widget_set_name (e, "yad-form-spin");
 #if !GTK_CHECK_VERSION(3,0,0)
               gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,

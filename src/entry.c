@@ -160,6 +160,7 @@ entry_create_widget (GtkWidget * dlg)
         }
 
       c = entry = gtk_spin_button_new_with_range (min, max, step);
+      gtk_entry_set_alignment (GTK_ENTRY (c), 1.0);
       gtk_spin_button_set_digits (GTK_SPIN_BUTTON (c), prec);
       gtk_widget_set_name (entry, "yad-entry-spin");
 
