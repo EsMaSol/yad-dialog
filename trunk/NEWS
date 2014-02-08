@@ -1,3 +1,12 @@
+Version 0.26.0
+    - double-click actions in list dialog can change values in current row
+    - impove handling of markup text in list dialog
+    - add FBTN field type (relief buttons) to form dialog
+    - add buttons with custom icons
+    - add labels with icons for tab labels in notebook dialog
+    - remove --align option for notebook dialog 
+    - numeric entries aligned to the right side
+
 Version 0.25.1
     - use normal window hints for dialog windows
     - fix menu in notification icon (issue #196)
