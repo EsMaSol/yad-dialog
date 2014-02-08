@@ -1,3 +1,50 @@
+2014-02-08 07:52  ananasik
+
+	* src/entry.c, src/form.c: make numeric entries aligned to the
+	  right
+
+2014-02-07 15:29  ananasik
+
+	* src/util.c: improve image labels behavior
+
+2014-02-07 12:27  ananasik@gmail.com
+
+	* src/main.c, src/util.c: fix alignment of image labels
+
+2014-02-07 12:06  ananasik@gmail.com
+
+	* ChangeLog, src/util.c: update image labels creation
+
+2014-02-07 10:52  ananasik@gmail.com
+
+	* configure.ac: bump version to 0.26.0. prepare for release
+
+2014-02-07 10:51  ananasik@gmail.com
+
+	* data/yad.1: fix typo
+
+2014-02-07 10:50  ananasik@gmail.com
+
+	* data/yad.1: update man page
+
+2014-02-07 10:40  ananasik@gmail.com
+
+	* configure.ac, src/about.c, src/browser.c, src/calendar.c,
+	  src/color.c, src/dnd.c, src/entry.c, src/file.c, src/font.c,
+	  src/form.c, src/icons.c, src/list.c, src/main.c,
+	  src/multi-progress.c, src/notebook.c, src/notification.c,
+	  src/option.c, src/print.c, src/progress.c, src/scale.c,
+	  src/text.c, src/yad.h:
+
+2014-02-07 10:36  ananasik@gmail.com
+
+	* src/form.c, src/main.c, src/notebook.c, src/util.c, src/yad.h:
+	  use image labels for all such elements
+
+2014-02-07 09:56  ananasik@gmail.com
+
+	* src/form.c, src/util.c: update image labels
+
 2014-02-07 07:44  ananasik
 
 	* ChangeLog, src/notebook.c, src/yad.h: use image labels in
