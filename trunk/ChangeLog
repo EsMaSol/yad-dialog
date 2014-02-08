@@ -1,3 +1,7 @@
+2014-02-08 08:02  ananasik
+
+	* ChangeLog, NEWS: release 0.26.0
+
 2014-02-08 07:52  ananasik
 
 	* src/entry.c, src/form.c: make numeric entries aligned to the
