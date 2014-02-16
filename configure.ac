@@ -1,4 +1,4 @@
-AC_INIT([YAD], [0.26.0], [https://sourceforge.net/p/yad-dialog/tickets/], YAD, [https://sourceforge.net/projects/yad-dialog/])
+AC_INIT([YAD], [0.26.1], [https://sourceforge.net/p/yad-dialog/tickets/], YAD, [https://sourceforge.net/projects/yad-dialog/])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
