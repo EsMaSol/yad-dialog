@@ -816,6 +816,7 @@ form_create_widget (GtkWidget * dlg)
               e = gtk_button_new ();
               gtk_container_add (GTK_CONTAINER (e), get_label (fld->name, 2));
               gtk_widget_set_name (e, "yad-form-button");
+              gtk_button_set_alignment (GTK_BUTTON (e), 0.5, 0.5);
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)
