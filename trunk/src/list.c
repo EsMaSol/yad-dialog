@@ -1114,7 +1114,7 @@ list_print_result (void)
                   if (chk)
                     {
                       gint i;
-                      for (i = 0; i < gtk_tree_model_get_n_columns (model) - 1; i++)
+                      for (i = 0; i < gtk_tree_model_get_n_columns (model); i++)
                         print_col (model, &iter, i);
                       g_printf ("\n");
                     }
