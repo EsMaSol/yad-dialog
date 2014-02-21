@@ -406,6 +406,7 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
               ptr = ptr->next;
             }
 
+          str->str[str->len-1] = '\0'; // remove last item separator
           gtk_entry_set_text (entry, str->str);
 
           g_slist_free (files);
