@@ -20,8 +20,8 @@ AC_ARG_WITH([gtk],
 AC_ARG_WITH([gtk],
 	[AS_HELP_STRING([--with-gtk=gtk2|gtk3],[set the GTK+ version to use (default - gtk2)])],
 	[case "$with_gtk" in
-	    gtk2|gtk3) ;;
-	        *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+        gtk2|gtk3) ;;
+        *) AC_MSG_ERROR([invalid gtk version specified]) ;;
      esac],
     [with_gtk=gtk2])
 AC_MSG_RESULT([$with_gtk])
