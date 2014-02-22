@@ -1,3 +1,8 @@
+Version 0.26.1
+    - fix output in list dialog for check and radiolists
+    - fix button alignment in form dialog
+    - don't add last item separator in multifile field of form dialog
+
 Version 0.26.0
     - double-click actions in list dialog can change values in current row
     - impove handling of markup text in list dialog
