@@ -1,3 +1,36 @@
+2014-02-21 07:10  v1c0nt
+
+	* configure.ac: fix name of dist package
+
+2014-02-21 07:08  v1c0nt
+
+	* configure.ac, src/form.c: fix setting values in multifile field
+	  of form dialog
+
+2014-02-20 09:28  v1c0nt
+
+	* configure.ac: fix package name
+
+2014-02-16 19:43  v1c0nt
+
+	* configure.ac: bump version to 0.26.1
+
+2014-02-16 19:43  v1c0nt
+
+	* src/form.c: fix button alignment in form dialog
+
+2014-02-16 18:42  v1c0nt
+
+	* src/list.c: fix output in list dialog from check and radiolists
+
+2014-02-13 12:25  v1c0nt
+
+	* configure.ac: update configure.ac with new hosting description
+
+2014-02-08 08:03  ananasik
+
+	* ChangeLog:
+
 2014-02-08 08:02  ananasik
 
 	* ChangeLog, NEWS: release 0.26.0
