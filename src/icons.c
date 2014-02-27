@@ -186,9 +186,15 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             {
               case COL_NAME:
               case COL_COMMAND:
-              case COL_TOOLTIP:
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
                 break;
+              case COL_TOOLTIP:
+                {
+                  gchar *buf = g_markup_escape_text (string->str, -1);
+                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, buf, -1);
+                  g_free (buf);
+                  break;
+                }
               case COL_PIXBUF:
                 if (options.icons_data.compact)
                   if (*string->str)
@@ -274,7 +280,9 @@ parse_desktop_file (gchar * filename)
             }
 
           /* get tooltip */
-          ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+          val = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+          ent->comment = g_markup_escape_text (val, -1);
+          g_free (val);
 
           /* parse command or url */
           if (type == TYPE_APP)
