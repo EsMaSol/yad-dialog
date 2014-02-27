@@ -462,6 +462,8 @@ YadNTabs *get_tabs (key_t key, gboolean create);
 
 GtkWidget *get_label (gchar *str, guint border);
 
+char *escape_str (char *str);
+
 G_END_DECLS
 
 #endif /* _YAD_H_ */
