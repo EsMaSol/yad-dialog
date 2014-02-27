@@ -119,7 +119,7 @@ expand_action (gchar * cmd)
                     tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, num)));
                     gtk_text_buffer_get_bounds (tb, &b, &e);
                     buf = gtk_text_buffer_get_text (tb, &b, &e, FALSE);
-                    txt = g_strescape (buf, NULL);
+                    txt = escape_str (buf);
                     g_string_append (xcmd, txt);
                     g_free (txt);
                     g_free (buf);
@@ -1059,7 +1059,7 @@ form_print_result (void)
 
             tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, i)));
             gtk_text_buffer_get_bounds (tb, &b, &e);
-            txt = g_strescape (gtk_text_buffer_get_text (tb, &b, &e, FALSE), NULL);
+            txt = escape_str (gtk_text_buffer_get_text (tb, &b, &e, FALSE));
             g_printf ("%s%s", txt, options.common_data.separator);
             g_free (txt);
           }
