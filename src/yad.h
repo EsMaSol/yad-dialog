@@ -95,7 +95,6 @@ typedef enum {
   YAD_COLUMN_CHECK,
   YAD_COLUMN_RADIO,
   YAD_COLUMN_IMAGE,
-  YAD_COLUMN_TOOLTIP,
   YAD_COLUMN_HIDDEN,
   YAD_COLUMN_ATTR_FORE,
   YAD_COLUMN_ATTR_BACK,
@@ -250,6 +249,7 @@ typedef struct {
   gint hide_column;
   gint expand_column;
   gint search_column;
+  gint tooltip_column;
   guint limit;
   PangoEllipsizeMode ellipsize;
   gchar *dclick_action;
@@ -457,10 +457,6 @@ inline void strip_new_line (gchar * str);
 #endif
 
 gchar **split_arg (const gchar * str);
-
-char *escape_markup (char *str);
-char *unescape_markup (char *str);
-char *escape_str (char *str);
 
 YadNTabs *get_tabs (key_t key, gboolean create);
 
