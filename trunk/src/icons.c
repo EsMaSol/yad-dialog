@@ -186,17 +186,9 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             {
               case COL_NAME:
               case COL_COMMAND:
+              case COL_TOOLTIP:
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
                 break;
-              case COL_TOOLTIP:
-                {
-                  gchar *val;
-
-                  val = escape_markup (string->str);
-                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, val, -1);
-                  g_free (val);
-                  break;
-                }
               case COL_PIXBUF:
                 if (options.icons_data.compact)
                   if (*string->str)
@@ -210,7 +202,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                   g_object_unref (pb);
                 break;
               case COL_TERM:
-                if (g_ascii_strcasecmp (string->str, "true") == 0)
+                if (strcasecmp (string->str, "true") == 0)
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
                 else
                   gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
@@ -258,6 +250,7 @@ parse_desktop_file (gchar * filename)
           else
             type = TYPE_APP;
           g_free (val);
+
           /* get name */
           if (options.icons_data.generic)
             {
@@ -267,6 +260,7 @@ parse_desktop_file (gchar * filename)
             }
           else
             ent->name = g_key_file_get_locale_string (kf, "Desktop Entry", "Name", NULL, NULL);
+
           /* use filename as a fallback */
           if (!ent->name)
             {
@@ -278,9 +272,10 @@ parse_desktop_file (gchar * filename)
               ent->name = g_strdup (nm);
               g_free (nm);
             }
-          val = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
-          ent->comment = escape_markup (val);
-          g_free (val);
+
+          /* get tooltip */
+          ent->comment = g_key_file_get_locale_string (kf, "Desktop Entry", "Comment", NULL, NULL);
+
           /* parse command or url */
           if (type == TYPE_APP)
             {
@@ -305,6 +300,7 @@ parse_desktop_file (gchar * filename)
                   g_free (url);
                 }
             }
+
           /* add icon */
           icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
           if (icon)

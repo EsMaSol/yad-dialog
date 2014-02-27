@@ -760,6 +760,12 @@ static GOptionEntry list_options[] = {
    &options.list_data.search_column,
    N_("Set the quick search column. Default is first column. Set it to 0 for disable searching"),
    N_("NUMBER")},
+  {"tooltip-column", 0,
+   0,
+   G_OPTION_ARG_INT,
+   &options.list_data.tooltip_column,
+   N_("Set the tooltip column. Set it to 0 for disable searching (default)"),
+   N_("NUMBER")},
   {"limit", 0,
    0,
    G_OPTION_ARG_INT,
@@ -1232,13 +1238,13 @@ add_button (const gchar * option_name, const gchar * value, gpointer data, GErro
 static gboolean
 set_text_align (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "left") == 0)
+  if (strcasecmp (value, "left") == 0)
     options.data.text_align = GTK_JUSTIFY_LEFT;
-  else if (g_ascii_strcasecmp (value, "right") == 0)
+  else if (strcasecmp (value, "right") == 0)
     options.data.text_align = GTK_JUSTIFY_RIGHT;
-  else if (g_ascii_strcasecmp (value, "center") == 0)
+  else if (strcasecmp (value, "center") == 0)
     options.data.text_align = GTK_JUSTIFY_CENTER;
-  else if (g_ascii_strcasecmp (value, "fill") == 0)
+  else if (strcasecmp (value, "fill") == 0)
     options.data.text_align = GTK_JUSTIFY_FILL;
   else
     g_printerr (_("Unknown align type: %s\n"), value);
@@ -1254,29 +1260,27 @@ add_column (const gchar * option_name, const gchar * value, gpointer data, GErro
 
   col = g_new0 (YadColumn, 1);
   col->name = g_strdup (cstr[0]);
-  if (g_ascii_strcasecmp (cstr[0], "@fore@") == 0)
+  if (strcasecmp (cstr[0], "@fore@") == 0)
     col->type = YAD_COLUMN_ATTR_FORE;
-  else if (g_ascii_strcasecmp (cstr[0], "@back@") == 0)
+  else if (strcasecmp (cstr[0], "@back@") == 0)
     col->type = YAD_COLUMN_ATTR_BACK;
-  else if (g_ascii_strcasecmp (cstr[0], "@font@") == 0)
+  else if (strcasecmp (cstr[0], "@font@") == 0)
     col->type = YAD_COLUMN_ATTR_FONT;
   else
     {
       if (cstr[1])
         {
-          if (g_ascii_strcasecmp (cstr[1], "NUM") == 0)
+          if (strcasecmp (cstr[1], "NUM") == 0)
             col->type = YAD_COLUMN_NUM;
-          else if (g_ascii_strcasecmp (cstr[1], "CHK") == 0)
+          else if (strcasecmp (cstr[1], "CHK") == 0)
             col->type = YAD_COLUMN_CHECK;
-          else if (g_ascii_strcasecmp (cstr[1], "RD") == 0)
+          else if (strcasecmp (cstr[1], "RD") == 0)
             col->type = YAD_COLUMN_RADIO;
-          else if (g_ascii_strcasecmp (cstr[1], "FLT") == 0)
+          else if (strcasecmp (cstr[1], "FLT") == 0)
             col->type = YAD_COLUMN_FLOAT;
-          else if (g_ascii_strcasecmp (cstr[1], "IMG") == 0)
+          else if (strcasecmp (cstr[1], "IMG") == 0)
             col->type = YAD_COLUMN_IMAGE;
-          else if (g_ascii_strcasecmp (cstr[1], "TIP") == 0)
-            col->type = YAD_COLUMN_TOOLTIP;
-          else if (g_ascii_strcasecmp (cstr[1], "HD") == 0)
+          else if (strcasecmp (cstr[1], "HD") == 0)
             col->type = YAD_COLUMN_HIDDEN;
           else
             col->type = YAD_COLUMN_TEXT;
@@ -1300,45 +1304,45 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
   fld->name = g_strdup (fstr[0]);
   if (fstr[1])
     {
-      if (g_ascii_strcasecmp (fstr[1], "H") == 0)
+      if (strcasecmp (fstr[1], "H") == 0)
         fld->type = YAD_FIELD_HIDDEN;
-      else if (g_ascii_strcasecmp (fstr[1], "RO") == 0)
+      else if (strcasecmp (fstr[1], "RO") == 0)
         fld->type = YAD_FIELD_READ_ONLY;
-      else if (g_ascii_strcasecmp (fstr[1], "NUM") == 0)
+      else if (strcasecmp (fstr[1], "NUM") == 0)
         fld->type = YAD_FIELD_NUM;
-      else if (g_ascii_strcasecmp (fstr[1], "CHK") == 0)
+      else if (strcasecmp (fstr[1], "CHK") == 0)
         fld->type = YAD_FIELD_CHECK;
-      else if (g_ascii_strcasecmp (fstr[1], "CB") == 0)
+      else if (strcasecmp (fstr[1], "CB") == 0)
         fld->type = YAD_FIELD_COMBO;
-      else if (g_ascii_strcasecmp (fstr[1], "CBE") == 0)
+      else if (strcasecmp (fstr[1], "CBE") == 0)
         fld->type = YAD_FIELD_COMBO_ENTRY;
-      else if (g_ascii_strcasecmp (fstr[1], "FL") == 0)
+      else if (strcasecmp (fstr[1], "FL") == 0)
         fld->type = YAD_FIELD_FILE;
-      else if (g_ascii_strcasecmp (fstr[1], "SFL") == 0)
+      else if (strcasecmp (fstr[1], "SFL") == 0)
         fld->type = YAD_FIELD_FILE_SAVE;
-      else if (g_ascii_strcasecmp (fstr[1], "DIR") == 0)
+      else if (strcasecmp (fstr[1], "DIR") == 0)
         fld->type = YAD_FIELD_DIR;
-      else if (g_ascii_strcasecmp (fstr[1], "CDIR") == 0)
+      else if (strcasecmp (fstr[1], "CDIR") == 0)
         fld->type = YAD_FIELD_DIR_CREATE;
-      else if (g_ascii_strcasecmp (fstr[1], "FN") == 0)
+      else if (strcasecmp (fstr[1], "FN") == 0)
         fld->type = YAD_FIELD_FONT;
-      else if (g_ascii_strcasecmp (fstr[1], "CLR") == 0)
+      else if (strcasecmp (fstr[1], "CLR") == 0)
         fld->type = YAD_FIELD_COLOR;
-      else if (g_ascii_strcasecmp (fstr[1], "MFL") == 0)
+      else if (strcasecmp (fstr[1], "MFL") == 0)
         fld->type = YAD_FIELD_MFILE;
-      else if (g_ascii_strcasecmp (fstr[1], "MDIR") == 0)
+      else if (strcasecmp (fstr[1], "MDIR") == 0)
         fld->type = YAD_FIELD_MDIR;
-      else if (g_ascii_strcasecmp (fstr[1], "DT") == 0)
+      else if (strcasecmp (fstr[1], "DT") == 0)
         fld->type = YAD_FIELD_DATE;
-      else if (g_ascii_strcasecmp (fstr[1], "SCL") == 0)
+      else if (strcasecmp (fstr[1], "SCL") == 0)
         fld->type = YAD_FIELD_SCALE;
-      else if (g_ascii_strcasecmp (fstr[1], "BTN") == 0)
+      else if (strcasecmp (fstr[1], "BTN") == 0)
         fld->type = YAD_FIELD_BUTTON;
-      else if (g_ascii_strcasecmp (fstr[1], "FBTN") == 0)
+      else if (strcasecmp (fstr[1], "FBTN") == 0)
         fld->type = YAD_FIELD_FULL_BUTTON;
-      else if (g_ascii_strcasecmp (fstr[1], "LBL") == 0)
+      else if (strcasecmp (fstr[1], "LBL") == 0)
         fld->type = YAD_FIELD_LABEL;
-      else if (g_ascii_strcasecmp (fstr[1], "TXT") == 0)
+      else if (strcasecmp (fstr[1], "TXT") == 0)
         fld->type = YAD_FIELD_TEXT;
       else
         fld->type = YAD_FIELD_SIMPLE;
@@ -1361,9 +1365,9 @@ add_bar (const gchar * option_name, const gchar * value, gpointer data, GError *
   bar->name = g_strdup (bstr[0]);
   if (bstr[1])
     {
-      if (g_ascii_strcasecmp (bstr[1], "RTL") == 0)
+      if (strcasecmp (bstr[1], "RTL") == 0)
         bar->type = YAD_PROGRESS_RTL;
-      else if (g_ascii_strcasecmp (bstr[1], "PULSE") == 0)
+      else if (strcasecmp (bstr[1], "PULSE") == 0)
         bar->type = YAD_PROGRESS_PULSE;
       else
         bar->type = YAD_PROGRESS_NORMAL;
@@ -1430,15 +1434,15 @@ add_confirm_overwrite (const gchar * option_name, const gchar * value, gpointer 
 static gboolean
 set_buttons_layout (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "spread") == 0)
+  if (strcasecmp (value, "spread") == 0)
     options.data.buttons_layout = GTK_BUTTONBOX_SPREAD;
-  else if (g_ascii_strcasecmp (value, "edge") == 0)
+  else if (strcasecmp (value, "edge") == 0)
     options.data.buttons_layout = GTK_BUTTONBOX_EDGE;
-  else if (g_ascii_strcasecmp (value, "start") == 0)
+  else if (strcasecmp (value, "start") == 0)
     options.data.buttons_layout = GTK_BUTTONBOX_START;
-  else if (g_ascii_strcasecmp (value, "end") == 0)
+  else if (strcasecmp (value, "end") == 0)
     options.data.buttons_layout = GTK_BUTTONBOX_END;
-  else if (g_ascii_strcasecmp (value, "center") == 0)
+  else if (strcasecmp (value, "center") == 0)
     options.data.buttons_layout = GTK_BUTTONBOX_CENTER;
   else
     g_printerr (_("Unknown buttons layout type: %s\n"), value);
@@ -1449,11 +1453,11 @@ set_buttons_layout (const gchar * option_name, const gchar * value, gpointer dat
 static gboolean
 set_align (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "left") == 0)
+  if (strcasecmp (value, "left") == 0)
     options.common_data.align = 0.0;
-  else if (g_ascii_strcasecmp (value, "right") == 0)
+  else if (strcasecmp (value, "right") == 0)
     options.common_data.align = 1.0;
-  else if (g_ascii_strcasecmp (value, "center") == 0)
+  else if (strcasecmp (value, "center") == 0)
     options.common_data.align = 0.5;
   else
     g_printerr (_("Unknown align type: %s\n"), value);
@@ -1464,13 +1468,13 @@ set_align (const gchar * option_name, const gchar * value, gpointer data, GError
 static gboolean
 set_justify (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "left") == 0)
+  if (strcasecmp (value, "left") == 0)
     options.text_data.justify = GTK_JUSTIFY_LEFT;
-  else if (g_ascii_strcasecmp (value, "right") == 0)
+  else if (strcasecmp (value, "right") == 0)
     options.text_data.justify = GTK_JUSTIFY_RIGHT;
-  else if (g_ascii_strcasecmp (value, "center") == 0)
+  else if (strcasecmp (value, "center") == 0)
     options.text_data.justify = GTK_JUSTIFY_CENTER;
-  else if (g_ascii_strcasecmp (value, "fill") == 0)
+  else if (strcasecmp (value, "fill") == 0)
     options.text_data.justify = GTK_JUSTIFY_FILL;
   else
     g_printerr (_("Unknown justification type: %s\n"), value);
@@ -1481,13 +1485,13 @@ set_justify (const gchar * option_name, const gchar * value, gpointer data, GErr
 static gboolean
 set_tab_pos (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "top") == 0)
+  if (strcasecmp (value, "top") == 0)
     options.notebook_data.pos = GTK_POS_TOP;
-  else if (g_ascii_strcasecmp (value, "bottom") == 0)
+  else if (strcasecmp (value, "bottom") == 0)
     options.notebook_data.pos = GTK_POS_BOTTOM;
-  else if (g_ascii_strcasecmp (value, "left") == 0)
+  else if (strcasecmp (value, "left") == 0)
     options.notebook_data.pos = GTK_POS_LEFT;
-  else if (g_ascii_strcasecmp (value, "right") == 0)
+  else if (strcasecmp (value, "right") == 0)
     options.notebook_data.pos = GTK_POS_RIGHT;
   else
     g_printerr (_("Unknown tab position type: %s\n"), value);
@@ -1517,13 +1521,13 @@ set_scale_value (const gchar * option_name, const gchar * value, gpointer data, 
 static gboolean
 set_ellipsize (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "none") == 0)
+  if (strcasecmp (value, "none") == 0)
     options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
-  else if (g_ascii_strcasecmp (value, "start") == 0)
+  else if (strcasecmp (value, "start") == 0)
     options.list_data.ellipsize = PANGO_ELLIPSIZE_START;
-  else if (g_ascii_strcasecmp (value, "middle") == 0)
+  else if (strcasecmp (value, "middle") == 0)
     options.list_data.ellipsize = PANGO_ELLIPSIZE_MIDDLE;
-  else if (g_ascii_strcasecmp (value, "end") == 0)
+  else if (strcasecmp (value, "end") == 0)
     options.list_data.ellipsize = PANGO_ELLIPSIZE_END;
   else
     g_printerr (_("Unknown ellipsize type: %s\n"), value);
@@ -1534,11 +1538,11 @@ set_ellipsize (const gchar * option_name, const gchar * value, gpointer data, GE
 static gboolean
 set_print_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (g_ascii_strcasecmp (value, "text") == 0)
+  if (strcasecmp (value, "text") == 0)
     options.print_data.type = YAD_PRINT_TEXT;
-  else if (g_ascii_strcasecmp (value, "image") == 0)
+  else if (strcasecmp (value, "image") == 0)
     options.print_data.type = YAD_PRINT_IMAGE;
-  else if (g_ascii_strcasecmp (value, "raw") == 0)
+  else if (strcasecmp (value, "raw") == 0)
     options.print_data.type = YAD_PRINT_RAW;
   else
     g_printerr (_("Unknown source type: %s\n"), value);
@@ -1834,6 +1838,7 @@ yad_options_init (void)
   options.list_data.hide_column = 0;
   options.list_data.expand_column = -1; // must be -1 for disable expand by default (keep the original behavior)
   options.list_data.search_column = 0;
+  options.list_data.tooltip_column = 0;
   options.list_data.limit = 0;
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
   options.list_data.dclick_action = NULL;
