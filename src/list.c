@@ -1019,7 +1019,6 @@ list_print_result (void)
   else
     {
       GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
-
       gtk_tree_selection_selected_foreach (sel, print_selected, NULL);
     }
 }
