@@ -53,6 +53,9 @@ read_settings (void)
   settings.ignore_unknown = TRUE;
   settings.max_tab = 100;
 
+  settings.print_settings = NULL;
+  settings.page_setup = NULL;
+
   filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
 
   if (g_file_test (filename, G_FILE_TEST_EXISTS))
@@ -91,6 +94,9 @@ read_settings (void)
             settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
           if (g_key_file_has_key (kf, "General", "max_tab", NULL))
             settings.max_tab = g_key_file_get_integer (kf, "General", "max_tab", NULL);
+
+          settings.print_settings = gtk_print_settings_new_from_key_file (kf, NULL, NULL);
+          settings.page_setup = gtk_page_setup_new_from_key_file (kf, NULL, NULL);
         }
 
       g_key_file_free (kf);
@@ -141,11 +147,16 @@ write_settings (void)
   g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);
   g_key_file_set_comment (kf, "General", "max_tab", "Maximum number of tabs in notebook", NULL);
 
+  if (settings.print_settings)
+    gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
+  if (settings.page_setup)
+    gtk_page_setup_to_key_file (settings.page_setup, kf, NULL);
+
   context = g_key_file_to_data (kf, NULL, NULL);
 
   g_key_file_free (kf);
 
-  if (g_mkdir_with_parents (g_get_user_config_dir (), 0644) != -1)
+  if (g_mkdir_with_parents (g_get_user_config_dir (), 0755) != -1)
     {
       gchar *filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
       g_file_set_contents (filename, context, -1, NULL);
