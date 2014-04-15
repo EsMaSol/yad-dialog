@@ -702,7 +702,7 @@ main (gint argc, gchar ** argv)
 #ifndef G_OS_WIN32
   /* add YAD_PID variable */
   str = g_strdup_printf ("%d", getpid ());
-  setenv ("YAD_PID", str, TRUE);
+  g_setenv ("YAD_PID", str, TRUE);
   /* set signal handlers */
   signal (SIGUSR1, sa_usr1);
   signal (SIGUSR2, sa_usr2);
@@ -733,6 +733,13 @@ main (gint argc, gchar ** argv)
         break;
       default:
         dialog = create_dialog ();
+
+#ifndef G_OS_WIN32
+        /* add YAD_XID variable */
+        str = g_strdup_printf ("0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
+        g_setenv ("YAD_XID", str, TRUE);
+#endif
+        
         if (options.mode == YAD_MODE_FILE)
           {
             /* show custom confirmation dialog */
