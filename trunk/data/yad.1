@@ -732,6 +732,11 @@ Exit the program. Middle click on icon also send \fIquit\fP command.
 .B YAD_PID
 This variable sets to the value of current dialog's pid and accessible in all
 dialog children.
+.TP
+.B YAD_XID
+This variable sets to the value of current dialog's X Window ID and accessible in all
+dialog children. This variable is not set in print and notification dialogs,
+and in a dialogs which acts as a notebook children.
 
 .SH USER DEFINED SIGNALS
 .TP
