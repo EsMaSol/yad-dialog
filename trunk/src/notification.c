@@ -408,7 +408,7 @@ yad_notification_run ()
     }
 
   /* Show icon and wait */
-  gtk_status_icon_set_visible (status_icon, TRUE);
+  gtk_status_icon_set_visible (status_icon, !options.notification_data.hidden);
 
   if (options.data.timeout > 0)
     g_timeout_add_seconds (options.data.timeout, (GSourceFunc) timeout_cb, NULL);

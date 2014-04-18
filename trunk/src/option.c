@@ -766,7 +766,7 @@ static GOptionEntry list_options[] = {
    0,
    G_OPTION_ARG_INT,
    &options.list_data.tooltip_column,
-   N_("Set the tooltip column. Set it to 0 for disable searching (default)"),
+   N_("Set the tooltip column"),
    N_("NUMBER")},
   {"limit", 0,
    0,
@@ -920,6 +920,12 @@ static GOptionEntry notification_options[] = {
    G_OPTION_ARG_NONE,
    &options.notification_data.middle,
    N_("Disable exit on middle click"),
+   NULL},
+  {"hidden", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.notification_data.hidden,
+   N_("Doesn't show icon at startup"),
    NULL},
   {NULL}
 };
@@ -1860,6 +1866,7 @@ yad_options_init (void)
 
   /* Initialize notification data */
   options.notification_data.middle = TRUE;
+  options.notification_data.hidden = FALSE;
   options.notification_data.menu = NULL;
 
   /* Initialize print data */

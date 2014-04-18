@@ -272,6 +272,7 @@ typedef struct {
 
 typedef struct {
   gboolean middle;
+  gboolean hidden;
   gchar *menu;
 } YadNotificationData;
 
