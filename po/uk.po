@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-18 10:03+0300\n"
+"POT-Creation-Date: 2014-04-18 10:45+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -738,11 +738,8 @@ msgstr ""
 "стовпчик. 0 забороняє пошук"
 
 #: ../src/option.c:769
-#, fuzzy
-msgid "Set the tooltip column. Set it to 0 for disable searching (default)"
-msgstr ""
-"Задати стовпчик швидкого пошуку. Без вказівки використовується перший "
-"стовпчик. 0 забороняє пошук"
+msgid "Set the tooltip column"
+msgstr "Задати стовпчик підказок"
 
 #: ../src/option.c:775
 msgid "Set the limit of rows in list"
@@ -787,7 +784,7 @@ msgstr "Завершити батьківський процес, якщо на�
 
 #: ../src/option.c:852
 msgid "Display notebook dialog"
-msgstr "Відобразити діалог з вкладками"
+msgstr "Відобразити діалог із вкладинками"
 
 #: ../src/option.c:858
 msgid "Identifier of embedded dialogs"
@@ -842,9 +839,8 @@ msgid "Disable exit on middle click"
 msgstr "Заборонити вихід середньою кнопкою мишки"
 
 #: ../src/option.c:928
-#, fuzzy
 msgid "Doesn't show icon at startup"
-msgstr "Не показувати вікна в панелі завдань"
+msgstr "Не показувати іконку при старті"
 
 #: ../src/option.c:938
 msgid "Display printing dialog"
@@ -1340,6 +1336,12 @@ msgstr "Переглядач іконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Перегляд теми іконок GTK"
+
+#, fuzzy
+#~ msgid "Set the tooltip column. Set it to 0 for disable searching (default)"
+#~ msgstr ""
+#~ "Задати стовпчик швидкого пошуку. Без вказівки використовується перший "
+#~ "стовпчик. 0 забороняє пошук"
 
 #~ msgid "Set alignment of tab labels (left, center or right)"
 #~ msgstr "Задати вирівнювання міток вкладок (left, center або right)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-18 10:03+0300\n"
+"POT-Creation-Date: 2014-04-18 10:45+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -737,9 +737,8 @@ msgid ""
 msgstr "Задать колонку поиска. По-умолчанию первая. 0 запрещает поиск"
 
 #: ../src/option.c:769
-#, fuzzy
-msgid "Set the tooltip column. Set it to 0 for disable searching (default)"
-msgstr "Задать колонку поиска. По-умолчанию первая. 0 запрещает поиск"
+msgid "Set the tooltip column"
+msgstr "Задать колонку всплывающих подсказок"
 
 #: ../src/option.c:775
 msgid "Set the limit of rows in list"
@@ -839,9 +838,8 @@ msgid "Disable exit on middle click"
 msgstr "Запретить выход по щелчку средней кнопкой"
 
 #: ../src/option.c:928
-#, fuzzy
 msgid "Doesn't show icon at startup"
-msgstr "Не показывать окно в панели задач"
+msgstr "Не показывать иконку при запуске"
 
 #: ../src/option.c:938
 msgid "Display printing dialog"
@@ -1337,3 +1335,7 @@ msgstr "Броузер иконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Исследование темы иконок GTK"
+
+#, fuzzy
+#~ msgid "Set the tooltip column. Set it to 0 for disable searching (default)"
+#~ msgstr "Задать колонку поиска. По-умолчанию первая. 0 запрещает поиск"
