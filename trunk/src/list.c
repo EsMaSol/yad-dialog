@@ -306,7 +306,7 @@ add_columns (gint n_columns)
 
       gtk_tree_view_column_set_clickable (column, options.list_data.clickable);
 
-      if (col->type != YAD_COLUMN_CHECK || col->type != YAD_COLUMN_IMAGE)
+      if (col->type != YAD_COLUMN_CHECK && col->type != YAD_COLUMN_IMAGE)
         {
           if (i == options.list_data.expand_column - 1 || options.list_data.expand_column == 0)
             gtk_tree_view_column_set_expand (column, TRUE);
