@@ -27,6 +27,7 @@
 #include <unistd.h>
 
 #ifndef G_OS_WIN32
+# include <sys/shm.h>
 # include <gdk/gdkx.h>
 #endif
 
