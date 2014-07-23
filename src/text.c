@@ -407,7 +407,7 @@ fill_buffer_from_file ()
       gtk_text_buffer_insert (text_buffer, &iter, buf, leftover - buf);
 
       remaining = (buf + remaining + count) - leftover;
-      g_memmove (buf, leftover, remaining);
+      memmove (buf, leftover, remaining);
 
       if (remaining > 6 || count < to_read)
         break;
