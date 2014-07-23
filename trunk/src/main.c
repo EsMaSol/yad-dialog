@@ -422,7 +422,6 @@ create_dialog (void)
     {
       gtk_widget_realize (dlg);
       gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
-
     }
   gtk_widget_show (dlg);
 
