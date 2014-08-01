@@ -1,3 +1,12 @@
+Version 0.27.0
+    - add --hidden option to notification icon
+    - add --tooltip-column option to list dialog
+    - add --gtkrc option
+    - fix detection of expandind columns in list dialog
+    - fix markup handling
+    - add YAD_XID variable for dialogs children
+    - code cleanup for remove deprecated api
+
 Version 0.26.1
     - fix output in list dialog for check and radiolists
     - fix button alignment in form dialog
