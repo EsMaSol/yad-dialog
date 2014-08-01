@@ -1,3 +1,54 @@
+2014-04-18 07:50  v1c0nt
+
+	* data/yad.1: update man page
+
+2014-04-18 07:48  v1c0nt
+
+	* po/ru.po, po/uk.po: add --hidden option for notification icon
+
+2014-04-18 07:45  v1c0nt
+
+	* po/ru.po, po/uk.po, src/notification.c, src/option.c, src/yad.h:
+	  fix tooltip-colimn description
+
+2014-04-15 10:30  v1c0nt
+
+	* data/yad.1, src/main.c: add YAD_XID variable
+
+2014-04-15 04:59  v1c0nt
+
+	* data/yad.1: fix typo in man page
+
+2014-04-15 03:49  v1c0nt
+
+	* src/option.c: fix build for windows
+
+2014-03-17 16:02  v1c0nt
+
+	* src/print.c, src/util.c, src/yad.h:
+
+2014-02-28 11:48  v1c0nt
+
+	* src/list.c:
+
+2014-02-27 12:06  v1c0nt
+
+	* src/icons.c: fix markup tooltip in icon dialog
+
+2014-02-27 11:29  v1c0nt
+
+	* src/form.c, src/util.c, src/yad.h: undelete escape_str function
+
+2014-02-27 11:14  v1c0nt
+
+	* configure.ac, src/form.c, src/icons.c, src/list.c, src/option.c,
+	  src/util.c, src/yad.h: add --tooltip-column option. cleanup
+	  parsing markup code
+
+2014-02-22 07:00  v1c0nt
+
+	* ChangeLog, NEWS: release 0.26.1
+
 2014-02-21 07:10  v1c0nt
 
 	* configure.ac: fix name of dist package
