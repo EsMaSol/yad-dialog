@@ -659,6 +659,10 @@ main (gint argc, gchar ** argv)
     }
   yad_set_mode ();
 
+  /* parse custom gtkrc */
+  if (options.gtkrc_file)
+    gtk_rc_parse (options.gtkrc_file);
+
   /* correct separators */
   str = g_strcompress (options.common_data.separator);
   options.common_data.separator = str;
@@ -739,7 +743,7 @@ main (gint argc, gchar ** argv)
         str = g_strdup_printf ("0x%X", GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
         g_setenv ("YAD_XID", str, TRUE);
 #endif
-        
+
         if (options.mode == YAD_MODE_FILE)
           {
             /* show custom confirmation dialog */

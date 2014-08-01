@@ -358,6 +358,8 @@ typedef struct {
   YadScaleData scale_data;
   YadTextData text_data;
 
+  gchar *gtkrc_file;
+
   gchar *rest_file;
   gchar **extra_data;
 

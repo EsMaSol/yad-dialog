@@ -1202,6 +1202,12 @@ static GOptionEntry misc_options[] = {
    &version_mode,
    N_("Print version"),
    NULL},
+  {"gtkrc", 0,
+   0,
+   G_OPTION_ARG_FILENAME,
+   &options.gtkrc_file,
+   N_("Load additional GTK settings from file"),
+   N_("FILENAME")},
   {NULL}
 };
 
@@ -1728,6 +1734,7 @@ yad_options_init (void)
   options.mode = YAD_MODE_MESSAGE;
   options.rest_file = NULL;
   options.extra_data = NULL;
+  options.gtkrc_file = NULL;
 #ifndef G_OS_WIN32
   options.kill_parent = 0;
   options.print_xid = FALSE;
