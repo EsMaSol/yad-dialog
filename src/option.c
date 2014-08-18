@@ -30,6 +30,7 @@ static gboolean add_tab (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_color_mode (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_buttons_layout (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_justify (const gchar *, const gchar *, gpointer, GError **);
@@ -347,11 +348,23 @@ static GOptionEntry color_options[] = {
    add_palette,
    N_("Set path to palette file. Default - " RGB_FILE),
    N_("FILENAME")},
+  {"mode", 0,
+   0,
+   G_OPTION_ARG_CALLBACK,
+   set_color_mode,
+   N_("Set output mode to MODE. Values are 'hex' or 'rgb'"),
+   N_("MODE")},
   {"extra", 0,
    0,
    G_OPTION_ARG_NONE,
    &options.color_data.extra,
    N_("Use #rrrrggggbbbb format instead of #rrggbb"),
+   NULL},
+  {"alpha", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.color_data.alpha,
+   N_("Add opacity to output color value"),
    NULL},
   {NULL}
 };
@@ -1446,6 +1459,19 @@ add_confirm_overwrite (const gchar * option_name, const gchar * value, gpointer 
 }
 
 static gboolean
+set_color_mode (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (strcasecmp (value, "hex") == 0)
+    options.color_data.mode = YAD_COLOR_HEX;
+  else if(strcasecmp (value, "rgb") == 0)
+    options.color_data.mode = YAD_COLOR_RGB;
+  else
+    g_printerr (_("Unknown color mode: %s\n"), value);
+
+  return TRUE;
+}
+
+static gboolean
 set_buttons_layout (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   if (strcasecmp (value, "spread") == 0)
@@ -1806,6 +1832,8 @@ yad_options_init (void)
   options.color_data.use_palette = FALSE;
   options.color_data.palette = NULL;
   options.color_data.extra = FALSE;
+  options.color_data.alpha = FALSE;
+  options.color_data.mode = YAD_COLOR_HEX;
 
   /* Initialize DND data */
   options.dnd_data.tooltip = FALSE;

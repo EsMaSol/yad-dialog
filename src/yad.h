@@ -63,8 +63,13 @@ typedef enum {
   YAD_MODE_SCALE,
   YAD_MODE_TEXTINFO,
   YAD_MODE_ABOUT,
-  YAD_MODE_VERSION,
+  YAD_MODE_VERSION
 } YadDialogMode;
+
+typedef enum {
+  YAD_COLOR_HEX,
+  YAD_COLOR_RGB
+} YadColorMode;
 
 typedef enum {
   YAD_FIELD_SIMPLE = 0,
@@ -87,7 +92,7 @@ typedef enum {
   YAD_FIELD_BUTTON,
   YAD_FIELD_FULL_BUTTON,
   YAD_FIELD_LABEL,
-  YAD_FIELD_TEXT,
+  YAD_FIELD_TEXT
 } YadFieldType;
 
 typedef enum {
@@ -100,24 +105,24 @@ typedef enum {
   YAD_COLUMN_HIDDEN,
   YAD_COLUMN_ATTR_FORE,
   YAD_COLUMN_ATTR_BACK,
-  YAD_COLUMN_ATTR_FONT,
+  YAD_COLUMN_ATTR_FONT
 } YadColumnType;
 
 typedef enum {
   YAD_PRINT_TEXT = 0,
   YAD_PRINT_IMAGE,
-  YAD_PRINT_RAW,
+  YAD_PRINT_RAW
 } YadPrintType;
 
 typedef enum {
   YAD_PROGRESS_NORMAL = 0,
   YAD_PROGRESS_RTL,
-  YAD_PROGRESS_PULSE,
+  YAD_PROGRESS_PULSE
 } YadProgressType;
 
 typedef enum {
   YAD_BIG_ICON = 0,
-  YAD_SMALL_ICON,
+  YAD_SMALL_ICON
 } YadIconSize;
 
 typedef struct {
@@ -194,6 +199,8 @@ typedef struct {
   gboolean use_palette;
   gchar *palette;
   gboolean extra;
+  gboolean alpha;
+  YadColorMode mode;
 } YadColorData;
 
 typedef struct {
