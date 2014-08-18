@@ -234,11 +234,11 @@ color_print_result (void)
       break;
     case YAD_COLOR_RGB:
       if (options.color_data.alpha)
-        g_print ("rgba(%.1f, %.1f, %.1f, %hu)\n", (double) c.red / 256.0, (double) c.green / 256.0, 
-                 (double) c.blue / 256.0, alpha / 256);
+        g_print ("rgba(%.1f, %.1f, %.1f, %.1f)\n", (double) c.red / 255.0, (double) c.green / 255.0, 
+                 (double) c.blue / 255.0, (double) alpha / 255 / 255);
       else
-        g_print ("rgb(%.1f, %.1f, %.1f)\n", (double) c.red / 256.0,
-                 (double) c.green / 256.0, (double) c.blue / 256.0);
+        g_print ("rgb(%.1f, %.1f, %.1f)\n", (double) c.red / 255.0,
+                 (double) c.green / 255.0, (double) c.blue / 255.0);
       break;
     }
 }
