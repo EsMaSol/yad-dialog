@@ -227,9 +227,15 @@ Set initial color value.
 .B \-\-extra
 Show extra information about color in returned string.
 .TP
+.B \-\-alpha
+Add opacity to output color string.
+.TP
 .B \-\-palette[=FILENAME]
 Show palette and set predefined colors from given filename.
 By default used \fI/etc/X11/rgb.txt\fP.
+.TP
+.B \-\-mode=MODE
+Set output color mode. Possible values are \fIhex\fP or \fIrgb\fP. Default is \fIhex\fP. HEX mode looks like \fI#rrggbb\fP, RGB mode - \fIrgb(r, g, b)\fP.
 
 .SS Drag-and-Drop box options
 .TP

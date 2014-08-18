@@ -352,7 +352,7 @@ static GOptionEntry color_options[] = {
    0,
    G_OPTION_ARG_CALLBACK,
    set_color_mode,
-   N_("Set output mode to MODE. Values are 'hex' or 'rgb'"),
+   N_("Set output mode to MODE. Values are hex (default) or rgb"),
    N_("MODE")},
   {"extra", 0,
    0,
