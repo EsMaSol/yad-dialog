@@ -219,9 +219,9 @@ color_print_result (void)
       if (options.color_data.alpha)
         {
           if (options.color_data.extra)
-            g_print ("#%hx%s\n", alpha, cs + 1);
+            g_print ("#%s%hx\n", cs + 1, alpha);
           else
-            g_printf ("#%hx%c%c%c%c%c%c\n", alpha / 256, cs[1], cs[2], cs[5], cs[6], cs[9], cs[10]);
+            g_printf ("#%c%c%c%c%c%c%hx\n", cs[1], cs[2], cs[5], cs[6], cs[9], cs[10], alpha / 256);
         }
       else
         {
@@ -230,16 +230,15 @@ color_print_result (void)
           else
             g_printf ("#%c%c%c%c%c%c\n", cs[1], cs[2], cs[5], cs[6], cs[9], cs[10]);
         }
+      g_free (cs);
       break;
     case YAD_COLOR_RGB:
       if (options.color_data.alpha)
-        g_print ("rgba(%hu, %.1f, %.1f, %.1f)\n", alpha / 256, (double) c.red / 256.0,
-                 (double) c.green / 256.0, (double) c.blue / 256.0);
+        g_print ("rgba(%.1f, %.1f, %.1f, %hu)\n", (double) c.red / 256.0, (double) c.green / 256.0, 
+                 (double) c.blue / 256.0, alpha / 256);
       else
         g_print ("rgb(%.1f, %.1f, %.1f)\n", (double) c.red / 256.0,
                  (double) c.green / 256.0, (double) c.blue / 256.0);
       break;
     }
-
-  g_free (cs);
 }
