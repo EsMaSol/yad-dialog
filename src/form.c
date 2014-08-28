@@ -218,7 +218,12 @@ set_field_value (guint num, gchar * value)
     case YAD_FIELD_COMBO:
     case YAD_FIELD_COMBO_ENTRY:
       {
+        GtkTreeModel *m;
         gint i = 0, def = 0;
+
+        /* cleanup previous values */
+        m = gtk_combo_box_get_model (GTK_COMBO_BOX (w));
+        gtk_list_store_clear (GTK_LIST_STORE (m));
 
         s = g_strsplit (value, options.common_data.item_separator, -1);
         while (s[i])
