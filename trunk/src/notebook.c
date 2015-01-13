@@ -131,10 +131,10 @@ notebook_close_childs (void)
           if (tabs[i].pid != -1 && kill (tabs[i].pid, 0) == 0)
             {
               is_running = TRUE;
-              gtk_main_iteration ();
               break;
             }
         }
+      gtk_main_iteration ();
     }
 
   /* cleanup shared memory */
