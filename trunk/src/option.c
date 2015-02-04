@@ -1948,7 +1948,7 @@ yad_create_context (void)
   GOptionContext *tmp_ctx;
   GOptionGroup *a_group;
 
-  tmp_ctx = g_option_context_new (_("Yet another dialoging program"));
+  tmp_ctx = g_option_context_new (_("- Yet another dialoging program"));
   g_option_context_add_main_entries (tmp_ctx, rest_options, GETTEXT_PACKAGE);
 
   /* Adds general option entries */
