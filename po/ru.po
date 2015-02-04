@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 13:14+0300\n"
+"POT-Creation-Date: 2015-02-04 08:13+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -83,31 +83,31 @@ msgstr "Начальное значение меньше минимальног�
 msgid "Initial value greater than maximum.\n"
 msgstr "Начальное значение больше маскимального.\n"
 
-#: ../src/form.c:366
+#: ../src/form.c:371
 msgid "Select files"
 msgstr "Выбор файлов"
 
-#: ../src/form.c:374
+#: ../src/form.c:379
 msgid "Select folders"
 msgstr "Выбор каталогов"
 
-#: ../src/form.c:438
+#: ../src/form.c:443
 msgid "Select or create file"
 msgstr "Выбор или создание файла"
 
-#: ../src/form.c:446
+#: ../src/form.c:451
 msgid "Select or create folder"
 msgstr "Выбор или создание каталога"
 
-#: ../src/form.c:483
+#: ../src/form.c:488
 msgid "Select date"
 msgstr "Выбор даты"
 
-#: ../src/form.c:685
+#: ../src/form.c:690
 msgid "Select file"
 msgstr "Выбор файла"
 
-#: ../src/form.c:699
+#: ../src/form.c:704
 msgid "Select folder"
 msgstr "Выбор каталога"
 
@@ -1090,8 +1090,8 @@ msgid "File exist. Overwrite?"
 msgstr "Файл существует. Перезаписать?"
 
 #: ../src/option.c:1951
-msgid "Yet another dialoging program"
-msgstr "Программа для отображения диалогов"
+msgid "- Yet another dialoging program"
+msgstr "- Программа для отображения диалогов"
 
 #. Adds general option entries
 #: ../src/option.c:1955
@@ -1357,7 +1357,4 @@ msgstr "Броузер иконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Исследование темы иконок GTK"
-
-#, fuzzy
-#~ msgid "Set the tooltip column. Set it to 0 for disable searching (default)"
-#~ msgstr "Задать колонку поиска. По-умолчанию первая. 0 запрещает поиск"
+ 
