@@ -47,8 +47,9 @@ load_uri (const gchar *uri)
 }
 
 static void
-load_stdin ()
+load_stdin_done (GObject *obj, GAsyncResult *res, gpointer d)
 {
+  webkit_web_view_load_string (view, (gchar *) g_async_result_get_user_data (res), NULL, NULL, NULL);
 }
 
 static gboolean
@@ -184,7 +185,7 @@ html_create_widget (GtkWidget *dlg)
   if (options.html_data.browser)
     g_signal_connect (view, "context-menu", G_CALLBACK (menu_cb), NULL);
   else
-    g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);    
+    g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
 
   soup_session_add_feature_by_type (webkit_get_default_session (), SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
 
@@ -193,7 +194,12 @@ html_create_widget (GtkWidget *dlg)
   if (options.html_data.uri)
     load_uri (options.html_data.uri);
   else
-    load_stdin ();
+    {
+      GInputStream *stream = (GInputStream *) g_unix_input_stream_new (0, FALSE);
+      g_input_stream_read_async (stream, g_new0 (gchar, G_MAXSSIZE), G_MAXSSIZE, G_PRIORITY_DEFAULT,
+                                 NULL, load_stdin_done, NULL);
+      g_object_unref (stream);
+    }
 
   return sw;
 }
