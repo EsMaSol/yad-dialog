@@ -641,6 +641,12 @@ static GOptionEntry html_options[] = {
    &options.html_data.browser,
    N_("Turn on browser mode"),
    NULL},
+  {"print-uri", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.html_data.print_uri,
+   N_("Print clicked uri to stdout"),
+   NULL},
   {NULL}
 };
 #endif
@@ -1898,6 +1904,7 @@ yad_options_init (void)
   /* Initialize html data */
   options.html_data.uri = NULL;
   options.html_data.browser = FALSE;
+  options.html_data.print_uri = FALSE;
 #endif
 
   /* Initialize icons data */
