@@ -244,6 +244,7 @@ typedef struct {
 typedef struct {
   gchar *uri;
   gboolean browser;
+  gboolean print_uri;
 } YadHtmlData;
 #endif
 
