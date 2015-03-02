@@ -1,35 +1,39 @@
-AM_CPPFLAGS = 					\
+AM_CPPFLAGS =                           \
 	-DLOCALEDIR=\""$(datadir)/locale"\"	\
 	@DISABLE_DEPRECATED@
 
 bin_PROGRAMS = yad
 
 yad_SOURCES = 			\
-	about.c			\
-	calendar.c		\
-	color.c			\
+	about.c			    \
+	calendar.c		    \
+	color.c			    \
 	dnd.c           	\
-	entry.c			\
-	file.c			\
-	font.c			\
-	form.c			\
-	icons.c			\
-	list.c			\
+	entry.c			    \
+	file.c			    \
+	font.c			    \
+	form.c			    \
+	icons.c			    \
+	list.c			    \
 	multi-progress.c	\
-	notebook.c		\
+	notebook.c		    \
 	notification.c		\
-	option.c		\
-	print.c			\
-	progress.c		\
-	scale.c			\
-	text.c			\
-	util.c			\
-	main.c			\
-	yad.h			\
+	option.c		    \
+	print.c			    \
+	progress.c		    \
+	scale.c			    \
+	text.c			    \
+	util.c			    \
+	main.c			    \
+	yad.h			    \
 	calendar.xpm
 
-yad_CFLAGS = $(GTK_CFLAGS)
-yad_LDADD = $(GTK_LIBS)
+if HTML
+yad_SOURCES += html.c
+endif
+
+yad_CFLAGS = $(GTK_CFLAGS) $(HTML_CFLAGS)
+yad_LDADD = $(GTK_LIBS) $(HTML_LIBS)
 
 if BUILD_IB
 bin_PROGRAMS += yad-icon-browser

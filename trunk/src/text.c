@@ -92,12 +92,12 @@ search_key_cb (GtkWidget * w, GdkEventKey * key, GtkWidget * win)
 #if GTK_CHECK_VERSION(2,24,0)
   if (key->keyval == GDK_KEY_Escape)
 #else
-  if (key->keyval == GDK_Escape)
+    if (key->keyval == GDK_Escape)
 #endif
-    {
-      gtk_widget_destroy (win);
-      return TRUE;
-    }
+      {
+        gtk_widget_destroy (win);
+        return TRUE;
+      }
   return FALSE;
 }
 
@@ -166,23 +166,23 @@ key_press_cb (GtkWidget * w, GdkEventKey * key, gpointer data)
 #if GTK_CHECK_VERSION(2,24,0)
   if ((key->keyval == GDK_KEY_Return || key->keyval == GDK_KEY_KP_Enter) && (key->state & GDK_CONTROL_MASK))
 #else
-  if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) && (key->state & GDK_CONTROL_MASK))
+    if ((key->keyval == GDK_Return || key->keyval == GDK_KP_Enter) && (key->state & GDK_CONTROL_MASK))
 #endif
-    {
-      if (options.plug == -1)
-        gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
-      return TRUE;
-    }
+      {
+        if (options.plug == -1)
+          gtk_dialog_response (GTK_DIALOG (data), YAD_RESPONSE_OK);
+        return TRUE;
+      }
 
 #if GTK_CHECK_VERSION(2,24,0)
   if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
 #else
-  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_S || key->keyval == GDK_s))
+    if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_S || key->keyval == GDK_s))
 #endif
-    {
-      show_search ();
-      return TRUE;
-    }
+      {
+        show_search ();
+        return TRUE;
+      }
 
   return FALSE;
 }
@@ -332,14 +332,14 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
         }
 
       if (string->str[0] == '\014')
-	{
+        {
           GtkTextIter start, end;
 
-	  /* clear text if ^L received */
+          /* clear text if ^L received */
           gtk_text_buffer_get_start_iter (text_buffer, &start);
           gtk_text_buffer_get_end_iter (text_buffer, &end);
           gtk_text_buffer_delete (text_buffer, &start, &end);
-	}
+        }
       else if (string->len > 0)
         {
           GtkTextIter end;

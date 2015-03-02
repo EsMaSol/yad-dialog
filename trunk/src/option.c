@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <stdlib.h>
@@ -54,6 +54,9 @@ static gboolean entry_mode = FALSE;
 static gboolean file_mode = FALSE;
 static gboolean font_mode = FALSE;
 static gboolean form_mode = FALSE;
+#ifdef HAVE_HTML
+static gboolean html_mode = FALSE;
+#endif
 static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
 static gboolean multi_progress_mode = FALSE;
@@ -617,6 +620,30 @@ static GOptionEntry form_options[] = {
    NULL},
   {NULL}
 };
+
+#ifdef HAVE_HTML
+static GOptionEntry html_options[] = {
+  {"html", 0,
+   G_OPTION_FLAG_IN_MAIN,
+   G_OPTION_ARG_NONE,
+   &html_mode,
+   N_("Display HTML dialog"),
+   NULL},
+  {"uri", 0,
+   0,
+   G_OPTION_ARG_STRING,
+   &options.html_data.uri,
+   N_("Open specified location"),
+   N_("URI")},
+  {"browser", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.html_data.browser,
+   N_("Turn on browser mode"),
+   NULL},
+  {NULL}
+};
+#endif
 
 static GOptionEntry icons_options[] = {
   {"icons", 0,
@@ -1729,6 +1756,10 @@ yad_set_mode (void)
     options.mode = YAD_MODE_FONT;
   else if (form_mode)
     options.mode = YAD_MODE_FORM;
+#ifdef HAVE_HTML
+  else if (html_mode)
+    options.mode = YAD_MODE_HTML;
+#endif
   else if (icons_mode)
     options.mode = YAD_MODE_ICONS;
   else if (list_mode)
@@ -1862,6 +1893,12 @@ yad_options_init (void)
   /* Initialize form data */
   options.form_data.fields = NULL;
   options.form_data.columns = 1;
+
+#ifdef HAVE_HTML
+  /* Initialize html data */
+  options.html_data.uri = NULL;
+  options.html_data.browser = FALSE;
+#endif
 
   /* Initialize icons data */
   options.icons_data.directory = NULL;
@@ -1998,6 +2035,14 @@ yad_create_context (void)
   g_option_group_add_entries (a_group, form_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
+
+#ifdef HAVE_HTML
+  /* Add html options entries */
+  a_group = g_option_group_new ("html", _("HTML options"), _("Show HTML options"), NULL, NULL);
+  g_option_group_add_entries (a_group, html_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+#endif
 
   /* Add icons option entries */
   a_group = g_option_group_new ("icons", _("Icons box options"), _("Show icons box options"), NULL, NULL);
