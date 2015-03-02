@@ -56,7 +56,8 @@ AC_ARG_ENABLE([html],
 	[build_html=$enableval], [build_html=yes])
 have_html=no
 if test x$build_html = xyes; then
-    PKG_CHECK_MODULES([HTML], [webkit-1.0], [have_html=yes], [have_html=no])
+    dnl Add gio here because i use g_input_* directly in code
+    PKG_CHECK_MODULES([HTML], [webkit-1.0 gio-2.0], [have_html=yes], [have_html=no])
 fi
 AC_SUBST([HTML_CFLAGS])
 AC_SUBST([HTML_LIBS])
