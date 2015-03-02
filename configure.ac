@@ -1,4 +1,4 @@
-AC_INIT([YAD], [0.27.52], [https://sourceforge.net/p/yad-dialog/tickets/], yad, [https://sourceforge.net/projects/yad-dialog/])
+AC_INIT([YAD], [0.27.90], [https://sourceforge.net/p/yad-dialog/tickets/], yad, [https://sourceforge.net/projects/yad-dialog/])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -16,15 +16,12 @@ IT_PROG_INTLTOOL([0.40.0])
 AC_PROG_CC
 
 AC_ARG_WITH([gtk],
-	[gtkver="$withval"], [gtkver="gtk2"])
-AC_ARG_WITH([gtk],
 	[AS_HELP_STRING([--with-gtk=gtk2|gtk3],[set the GTK+ version to use (default - gtk2)])],
 	[case "$with_gtk" in
         gtk2|gtk3) ;;
         *) AC_MSG_ERROR([invalid gtk version specified]) ;;
      esac],
     [with_gtk=gtk2])
-AC_MSG_RESULT([$with_gtk])
 
 case "$with_gtk" in
     gtk3) 
@@ -44,19 +41,37 @@ AC_SUBST([GTK_LIBS])
 
 GTK_DISABLE_DEPRECATED
 
+dnl rgb.txt
+with_rgb="/etc/X11/rgb.txt"
+AC_ARG_WITH([rgb],
+	[AS_HELP_STRING([--with-rgb=PATH],
+			[set path to rgb.txt file (default - /etc/X11/rgb.txt)])],
+	[AC_DEFINE_UNQUOTED([RGB_FILE], ["$withval"], [Path to rgb.txt file])],
+	[AC_DEFINE([RGB_FILE], ["/etc/X11/rgb.txt"], [Path to rgb.txt file])])
+
+dnl html widget
+AC_ARG_ENABLE([html],
+	[AS_HELP_STRING([--enable-html],
+			[Build YAD with HTML widget])],
+	[build_html=$enableval], [build_html=yes])
+have_html=no
+if test x$build_html = xyes; then
+    PKG_CHECK_MODULES([HTML], [webkit-1.0], [have_html=yes], [have_html=no])
+fi
+AC_SUBST([HTML_CFLAGS])
+AC_SUBST([HTML_LIBS])
+AM_CONDITIONAL([HTML], [test x$have_html = xyes])
+
+if test x$have_html = xyes; then
+    AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit installed])
+fi
+
 dnl icon browser
 AC_ARG_ENABLE([icon-browser],
 	[AS_HELP_STRING([--enable-icon-browser],
 			[Build YAD icon browser])],
 	[build_ib=$enableval], [build_ib=no])
 AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
-
-dnl rgb.txt
-AC_ARG_WITH([rgb],
-	[AS_HELP_STRING([--with-rgb=PATH],
-			[set path to rgb.txt file (default - /etc/X11/rgb.txt)])],
-	[AC_DEFINE_UNQUOTED([RGB_FILE], ["$withval"], [Path to rgb.txt file])],
-	[AC_DEFINE([RGB_FILE], ["/etc/X11/rgb.txt"], [Path to rgb.txt file])])
 
 # *******************************
 # Internationalization
@@ -95,5 +110,9 @@ data/yad.spec
 AC_OUTPUT
 
 echo
-echo "Build icon browser - $build_ib"
+echo "Build configuratioh:"
+echo "  GTK+ version         - $with_gtk"
+echo "  Path to rgb.txt      - $with_rgb"
+echo "  HTML widget          - $have_html"
+echo "  Icon browser         - $build_ib"
 echo

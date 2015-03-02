@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <sys/types.h>
@@ -332,6 +332,11 @@ create_dialog (void)
       case YAD_MODE_FORM:
         main_widget = form_create_widget (dlg);
         break;
+#ifdef HAVE_HTML
+      case YAD_MODE_HTML:
+        main_widget = html_create_widget (dlg);
+        break;
+#endif
       case YAD_MODE_ICONS:
         main_widget = icons_create_widget (dlg);
         break;
@@ -537,6 +542,11 @@ create_plug (void)
       case YAD_MODE_FORM:
         main_widget = form_create_widget (win);
         break;
+#ifdef HAVE_HTML
+      case YAD_MODE_HTML:
+        main_widget = html_create_widget (win);
+        break;
+#endif
       case YAD_MODE_ICONS:
         main_widget = icons_create_widget (win);
         break;

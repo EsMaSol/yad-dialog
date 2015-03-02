@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #ifndef _YAD_H_
@@ -53,6 +53,9 @@ typedef enum {
   YAD_MODE_FILE,
   YAD_MODE_FONT,
   YAD_MODE_FORM,
+#ifdef HAVE_HTML
+  YAD_MODE_HTML,
+#endif
   YAD_MODE_ICONS,
   YAD_MODE_LIST,
   YAD_MODE_MULTI_PROGRESS,
@@ -237,6 +240,13 @@ typedef struct {
   gboolean scroll;
 } YadFormData;
 
+#ifdef HAVE_HTML
+typedef struct {
+  gchar *uri;
+  gboolean browser;
+} YadHtmlData;
+#endif
+
 typedef struct {
   gchar *directory;
   gboolean compact;
@@ -355,6 +365,9 @@ typedef struct {
   YadFileData file_data;
   YadFontData font_data;
   YadFormData form_data;
+#ifdef HAVE_HTML
+  YadHtmlData html_data;
+#endif
   YadIconsData icons_data;
   YadListData list_data;
   YadMultiProgressData multi_progress_data;
@@ -431,6 +444,9 @@ GtkWidget *entry_create_widget (GtkWidget * dlg);
 GtkWidget *file_create_widget (GtkWidget * dlg);
 GtkWidget *font_create_widget (GtkWidget * dlg);
 GtkWidget *form_create_widget (GtkWidget * dlg);
+#ifdef HAVE_HTML
+GtkWidget *html_create_widget (GtkWidget * dlg);
+#endif
 GtkWidget *icons_create_widget (GtkWidget * dlg);
 GtkWidget *list_create_widget (GtkWidget * dlg);
 GtkWidget *multi_progress_create_widget (GtkWidget * dlg);
