@@ -647,6 +647,18 @@ static GOptionEntry html_options[] = {
    &options.html_data.print_uri,
    N_("Print clicked uri to stdout"),
    NULL},
+  {"mime", 0,
+   0,
+   G_OPTION_ARG_STRING,
+   &options.html_data.mime,
+   N_("Set mime type of input stream data"),
+   N_("MIME")},
+  {"encoding", 0,
+   0,
+   G_OPTION_ARG_STRING,
+   &options.html_data.encoding,
+   N_("Set encoding of input stream data"),
+   N_("ENCODING")},
   {NULL}
 };
 #endif
@@ -1905,6 +1917,8 @@ yad_options_init (void)
   options.html_data.uri = NULL;
   options.html_data.browser = FALSE;
   options.html_data.print_uri = FALSE;
+  options.html_data.mime = NULL;
+  options.html_data.encoding = NULL;
 #endif
 
   /* Initialize icons data */

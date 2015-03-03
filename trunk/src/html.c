@@ -22,7 +22,15 @@
 #include <webkit/webkit.h>
 
 static WebKitWebView *view;
-static gboolean is_link;
+
+static GString *inbuf;
+
+static gboolean is_link = FALSE;
+static gboolean is_loaded = FALSE;
+
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
 
 static void
 load_uri (const gchar *uri)
@@ -33,7 +41,17 @@ load_uri (const gchar *uri)
     return;
 
   if (g_file_test (uri, G_FILE_TEST_EXISTS))
-    addr = g_filename_to_uri (uri, NULL, NULL);
+    {
+      if (g_path_is_absolute (uri))
+        addr = g_filename_to_uri (uri, NULL, NULL);
+      else
+        {
+          gchar *afn = g_new0 (gchar, PATH_MAX);
+          realpath (uri, afn);
+          addr = g_filename_to_uri (afn, NULL, NULL);
+          g_free (afn);
+        }
+    }
   else
     {
       if (g_uri_parse_scheme (uri) == NULL)
@@ -42,25 +60,45 @@ load_uri (const gchar *uri)
         addr = g_strdup (uri);
     }
 
-  webkit_web_view_load_uri (view, addr);
-  g_free (addr);
+  if (addr)
+    {
+      webkit_web_view_load_uri (view, addr);
+      g_free (addr);
+    }
+  else
+    g_printerr ("yad_html_load_uri: cannot load uri '%s'\n", uri);
 }
 
 static void
-load_stdin_done (GObject *obj, GAsyncResult *res, gpointer d)
+loaded_cb (WebKitWebView *v, WebKitWebFrame *f, gpointer d)
 {
-  webkit_web_view_load_string (view, (gchar *) g_async_result_get_user_data (res), NULL, NULL, NULL);
+  is_loaded = TRUE;
 }
 
 static gboolean
 link_cb (WebKitWebView *v, WebKitWebFrame *f, WebKitNetworkRequest *r,
          WebKitWebNavigationAction *act, WebKitWebPolicyDecision *pd, gpointer d)
 {
+  gchar *uri;
+
+  if (!is_loaded)
+    return FALSE;
+
+  uri = (gchar *) webkit_network_request_get_uri (r);
+  if (options.html_data.print_uri)
+    g_printf ("%s\n", uri);
+  else
+    {
+      gchar *cmd = g_strdup_printf ("xdg-open '%s'", uri);
+      g_spawn_command_line_async (cmd, NULL);
+      g_free (cmd);
+    }
+
   return TRUE;
 }
 
 static void
-link_hover_cb (WebKitWebView *view, const gchar *title, const gchar *link, GtkStatusbar *sb)
+link_hover_cb (WebKitWebView *v, const gchar *t, const gchar *link, gpointer *d)
 {
   if (link)
     is_link = TRUE;
@@ -168,6 +206,35 @@ ready_cb (WebKitWebView *v, gpointer d)
   return FALSE;
 }
 
+static gboolean
+handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
+{
+  gchar *buf;
+  GError *err = NULL;
+
+  switch (g_io_channel_read_line (ch, &buf, NULL, NULL, &err))
+    {
+    case G_IO_STATUS_NORMAL:
+      g_string_append (inbuf, buf);
+      return TRUE;
+
+    case G_IO_STATUS_ERROR:
+      g_printerr ("yad_html_handle_stdin(): %s\n", err->message);
+      g_error_free (err);
+      return FALSE;
+
+    case G_IO_STATUS_EOF:
+      webkit_web_view_load_string (view, inbuf->str, options.html_data.mime,
+                                   options.html_data.encoding, NULL);
+      return FALSE;
+
+    case G_IO_STATUS_AGAIN:
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 GtkWidget *
 html_create_widget (GtkWidget *dlg)
 {
@@ -185,7 +252,10 @@ html_create_widget (GtkWidget *dlg)
   if (options.html_data.browser)
     g_signal_connect (view, "context-menu", G_CALLBACK (menu_cb), NULL);
   else
-    g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
+    {
+      g_signal_connect (view, "document-load-finished", G_CALLBACK (loaded_cb), NULL);
+      g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
+    }
 
   soup_session_add_feature_by_type (webkit_get_default_session (), SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
 
@@ -193,12 +263,15 @@ html_create_widget (GtkWidget *dlg)
 
   if (options.html_data.uri)
     load_uri (options.html_data.uri);
-  else
+  else if (!options.html_data.browser)
     {
-      GInputStream *stream = (GInputStream *) g_unix_input_stream_new (0, FALSE);
-      g_input_stream_read_async (stream, g_new0 (gchar, G_MAXSSIZE), G_MAXSSIZE, G_PRIORITY_DEFAULT,
-                                 NULL, load_stdin_done, NULL);
-      g_object_unref (stream);
+      GIOChannel *ch;
+
+      inbuf = g_string_new (NULL);
+      ch = g_io_channel_unix_new (0);
+      g_io_channel_set_encoding (ch, NULL, NULL);
+      g_io_channel_set_flags (ch, G_IO_FLAG_NONBLOCK, NULL);
+      g_io_add_watch (ch, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
     }
 
   return sw;
