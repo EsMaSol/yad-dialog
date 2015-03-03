@@ -1,13 +1,13 @@
 # Ukrainian translation for YAD
 # This file is distributed under the same license as the YAD package.
 #
-# Victor Ananjevsky <ananasik@gmail.com>, 2011-2013.
+# Victor Ananjevsky <ananasik@gmail.com>, 2011-2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-04 08:13+0200\n"
+"POT-Creation-Date: 2015-03-03 13:05+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -126,7 +126,7 @@ msgstr "Не можу відкрити каталогу %s: %s\n"
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:657
+#: ../src/main.c:667
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
@@ -167,444 +167,444 @@ msgstr "Скопіювати рядок"
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовки стовпчиків для діалогу зі списком\n"
 
-#: ../src/option.c:72
+#: ../src/option.c:75
 msgid "Set the dialog title"
 msgstr "Задати заголовок діалогу"
 
-#: ../src/option.c:73
+#: ../src/option.c:76
 msgid "TITLE"
 msgstr "ЗАГОЛОВОК"
 
-#: ../src/option.c:78
+#: ../src/option.c:81
 msgid "Set the window icon"
 msgstr "Задати іконку діалогу"
 
-#: ../src/option.c:79
+#: ../src/option.c:82
 msgid "ICONPATH"
 msgstr "ІКОНКА"
 
-#: ../src/option.c:84
+#: ../src/option.c:87
 msgid "Set the width"
 msgstr "Задати ширину вікна"
 
-#: ../src/option.c:85
+#: ../src/option.c:88
 msgid "WIDTH"
 msgstr "ШИРИНА"
 
-#: ../src/option.c:90
+#: ../src/option.c:93
 msgid "Set the height"
 msgstr "Задати висоту вікна"
 
-#: ../src/option.c:91
+#: ../src/option.c:94
 msgid "HEIGHT"
 msgstr "ВИСОТА"
 
-#: ../src/option.c:96
+#: ../src/option.c:99
 msgid "Set the window geometry"
 msgstr "Задати геометрію вікна"
 
-#: ../src/option.c:97
+#: ../src/option.c:100
 msgid "WxH+X+Y"
 msgstr "ВxШ+X+Y"
 
-#: ../src/option.c:102
+#: ../src/option.c:105
 msgid "Set dialog timeout in seconds"
 msgstr "Задати час роботи діалогу в секундах"
 
-#: ../src/option.c:103
+#: ../src/option.c:106
 msgid "TIMEOUT"
 msgstr "ЗАТРИМКА"
 
-#: ../src/option.c:108
+#: ../src/option.c:111
 msgid "Show remaining time indicator (top, bottom, left, right)"
 msgstr "Показник часу, який залишився (top, bottom, left, right)"
 
-#: ../src/option.c:109
+#: ../src/option.c:112
 msgid "POS"
 msgstr "ПОЗИЦІЯ"
 
-#: ../src/option.c:114
+#: ../src/option.c:117
 msgid "Set the dialog text"
 msgstr "Задати текст діалогу"
 
-#: ../src/option.c:115 ../src/option.c:145 ../src/option.c:406
-#: ../src/option.c:412 ../src/option.c:418 ../src/option.c:558
-#: ../src/option.c:998 ../src/option.c:1037
+#: ../src/option.c:118 ../src/option.c:148 ../src/option.c:409
+#: ../src/option.c:415 ../src/option.c:421 ../src/option.c:561
+#: ../src/option.c:1043 ../src/option.c:1082
 msgid "TEXT"
 msgstr "ТЕКСТ"
 
-#: ../src/option.c:120
+#: ../src/option.c:123
 msgid "Set the dialog text alignment (left, center, right, fill)"
 msgstr "Задати вирівнювання тексту діалогу (left, center, right, fill)"
 
-#: ../src/option.c:121 ../src/option.c:163 ../src/option.c:581
-#: ../src/option.c:753 ../src/option.c:841 ../src/option.c:884
-#: ../src/option.c:964 ../src/option.c:1165
+#: ../src/option.c:124 ../src/option.c:166 ../src/option.c:584
+#: ../src/option.c:798 ../src/option.c:886 ../src/option.c:929
+#: ../src/option.c:1009 ../src/option.c:1210
 msgid "TYPE"
 msgstr "ТИП"
 
-#: ../src/option.c:126
+#: ../src/option.c:129
 msgid "Set the dialog image"
 msgstr "Задати картинку діалогу"
 
-#: ../src/option.c:127 ../src/option.c:442 ../src/option.c:454
+#: ../src/option.c:130 ../src/option.c:445 ../src/option.c:457
 msgid "IMAGE"
 msgstr "КАРТИНКА"
 
-#: ../src/option.c:132
+#: ../src/option.c:135
 msgid "Show image above main widget"
 msgstr "Показувати картинку над основним віджетом"
 
-#: ../src/option.c:138
+#: ../src/option.c:141
 msgid "Use specified icon theme instead of default"
 msgstr "Використовувати вказану тему іконок"
 
-#: ../src/option.c:139
+#: ../src/option.c:142
 msgid "THEME"
 msgstr "ТЕМА"
 
-#: ../src/option.c:144
+#: ../src/option.c:147
 msgid "Hide main widget with expander"
 msgstr "Приховати головний віджет"
 
-#: ../src/option.c:150
+#: ../src/option.c:153
 msgid "Add dialog button (may be used multiple times)"
 msgstr "Додати кнопку (може використовуватись декілька разів)"
 
-#: ../src/option.c:151
+#: ../src/option.c:154
 msgid "NAME:ID"
 msgstr "ІМ'Я:ID"
 
-#: ../src/option.c:156
+#: ../src/option.c:159
 msgid "Don't show buttons"
 msgstr "Не показувати кнопки"
 
-#: ../src/option.c:162
+#: ../src/option.c:165
 msgid "Set buttons layout type (spread, edge, start, end or center)"
 msgstr "Задати тип розміщення кнопок (spread, edge, start, end або center)"
 
 # # (розкидано, по краю, на початку, по центру)
-#: ../src/option.c:168
+#: ../src/option.c:171
 msgid "Don't use pango markup language in dialog's text"
 msgstr "Не використовувати розмітку pango в тексті"
 
-#: ../src/option.c:175
+#: ../src/option.c:178
 msgid "Add separator between dialog and buttons"
 msgstr "Додати розділювач між діалогом та кнопками"
 
-#: ../src/option.c:182
+#: ../src/option.c:185
 msgid "Set window borders"
 msgstr "Задати краї вікна"
 
-#: ../src/option.c:183 ../src/option.c:262 ../src/option.c:587
-#: ../src/option.c:759 ../src/option.c:765 ../src/option.c:771
-#: ../src/option.c:777 ../src/option.c:783 ../src/option.c:789
-#: ../src/option.c:890
+#: ../src/option.c:186 ../src/option.c:265 ../src/option.c:590
+#: ../src/option.c:804 ../src/option.c:810 ../src/option.c:816
+#: ../src/option.c:822 ../src/option.c:828 ../src/option.c:834
+#: ../src/option.c:935
 msgid "NUMBER"
 msgstr "ЧИСЛО"
 
-#: ../src/option.c:188
+#: ../src/option.c:191
 msgid "Always print result"
 msgstr "Завжди виводити результат"
 
-#: ../src/option.c:194
+#: ../src/option.c:197
 msgid "Dialog text can be selected"
 msgstr "Текст діалогу може буди виділеним"
 
-#: ../src/option.c:201
+#: ../src/option.c:204
 msgid "Set window sticky"
 msgstr "Вікно - на всіх стільницях"
 
-#: ../src/option.c:207
+#: ../src/option.c:210
 msgid "Set window unresizable"
 msgstr "Незмінний розмір вікна"
 
-#: ../src/option.c:213
+#: ../src/option.c:216
 msgid "Place window on top"
 msgstr "Розташувати вікно над іншими"
 
-#: ../src/option.c:219
+#: ../src/option.c:222
 msgid "Place window on center of screen"
 msgstr "Розташувати вікно по центру екрана"
 
-#: ../src/option.c:225
+#: ../src/option.c:228
 msgid "Place window at the mouse position"
 msgstr "Розташувати вікно в положенні мишки"
 
-#: ../src/option.c:231
+#: ../src/option.c:234
 msgid "Set window undecorated"
 msgstr "Прибрати декорації вікна"
 
-#: ../src/option.c:237
+#: ../src/option.c:240
 msgid "Don't show window in taskbar"
 msgstr "Не показувати вікна в панелі завдань"
 
-#: ../src/option.c:243
+#: ../src/option.c:246
 msgid "Set window maximized"
 msgstr "Задати вікну максимальний розмір вікна"
 
-#: ../src/option.c:249
+#: ../src/option.c:252
 msgid "Set window fulscreen"
 msgstr "Розгорнути вікно на весь екран"
 
-#: ../src/option.c:255
+#: ../src/option.c:258
 msgid "Special type of dialog for XEMBED"
 msgstr "Спеціальний режим діалога для вбудовування"
 
-#: ../src/option.c:256 ../src/option.c:872
+#: ../src/option.c:259 ../src/option.c:917
 msgid "KEY"
 msgstr "КЛЮЧ"
 
-#: ../src/option.c:261
+#: ../src/option.c:264
 msgid "Tab nubmer of this dialog"
 msgstr "Номер вкладки для цього діалога"
 
-#: ../src/option.c:268
+#: ../src/option.c:271
 msgid "Send SIGNAL to parent"
 msgstr "Послати СИГНАЛ батьківському процесу"
 
-#: ../src/option.c:269
+#: ../src/option.c:272
 msgid "SIGNAL"
 msgstr "СИГНАЛ"
 
-#: ../src/option.c:274
+#: ../src/option.c:277
 msgid "Print X Window Id to the stderr"
 msgstr "Вивести ідентифікатор вікна на stderr"
 
-#: ../src/option.c:281
+#: ../src/option.c:284
 msgid "Add path for search icons by name"
 msgstr "Додати каталог для пошуку зображень"
 
-#: ../src/option.c:282
+#: ../src/option.c:285
 msgid "PATH"
 msgstr "КАТАЛОГ"
 
-#: ../src/option.c:291
+#: ../src/option.c:294
 msgid "Display calendar dialog"
 msgstr "Зобразити діалог для вибору дати"
 
-#: ../src/option.c:297
+#: ../src/option.c:300
 msgid "Set the calendar day"
 msgstr "Задати календарний день"
 
-#: ../src/option.c:298
+#: ../src/option.c:301
 msgid "DAY"
 msgstr "ДЕНЬ"
 
-#: ../src/option.c:303
+#: ../src/option.c:306
 msgid "Set the calendar month"
 msgstr "Задати календарний місяць"
 
-#: ../src/option.c:304
+#: ../src/option.c:307
 msgid "MONTH"
 msgstr "МІСЯЦЬ"
 
-#: ../src/option.c:309
+#: ../src/option.c:312
 msgid "Set the calendar year"
 msgstr "Задати календарний рік"
 
-#: ../src/option.c:310
+#: ../src/option.c:313
 msgid "YEAR"
 msgstr "РІК"
 
-#: ../src/option.c:315 ../src/option.c:604
+#: ../src/option.c:318 ../src/option.c:607
 msgid "Set the format for the returned date"
 msgstr "Задати формат відображення дати"
 
-#: ../src/option.c:316 ../src/option.c:605 ../src/option.c:664
+#: ../src/option.c:319 ../src/option.c:608 ../src/option.c:709
 msgid "PATTERN"
 msgstr "ШАБЛОН"
 
-#: ../src/option.c:321
+#: ../src/option.c:324
 msgid "Set the filename with dates details"
 msgstr "Задати назву файлу з описом дат"
 
-#: ../src/option.c:322 ../src/option.c:350 ../src/option.c:482
-#: ../src/option.c:958 ../src/option.c:1183 ../src/option.c:1223
-#: ../src/option.c:1233
+#: ../src/option.c:325 ../src/option.c:353 ../src/option.c:485
+#: ../src/option.c:1003 ../src/option.c:1228 ../src/option.c:1268
+#: ../src/option.c:1278
 msgid "FILENAME"
 msgstr "НАЗВА ФАЙЛУ"
 
-#: ../src/option.c:331
+#: ../src/option.c:334
 msgid "Display color selection dialog"
 msgstr "Відобразити діалог для вибору кольору"
 
-#: ../src/option.c:337
+#: ../src/option.c:340
 msgid "Alias for --color"
 msgstr "Синонім для --color"
 
-#: ../src/option.c:343
+#: ../src/option.c:346
 msgid "Set initial color value"
 msgstr "Задати початковий колір"
 
-#: ../src/option.c:344 ../src/option.c:1141 ../src/option.c:1147
+#: ../src/option.c:347 ../src/option.c:1186 ../src/option.c:1192
 msgid "COLOR"
 msgstr "КОЛІР"
 
-#: ../src/option.c:349
+#: ../src/option.c:352
 msgid "Set path to palette file. Default - "
 msgstr "Задати шлях до файлу кольорів. Без назви - "
 
-#: ../src/option.c:355
+#: ../src/option.c:358
 msgid "Set output mode to MODE. Values are hex (default) or rgb"
 msgstr ""
 "Встановити режим вивода в РЕЖИМ. Значення - hex (за умовчанням) або rgb"
 
-#: ../src/option.c:356
+#: ../src/option.c:359
 msgid "MODE"
 msgstr "РЕЖИМ"
 
-#: ../src/option.c:361
+#: ../src/option.c:364
 msgid "Use #rrrrggggbbbb format instead of #rrggbb"
 msgstr "Використовувати формат #rrrrggggbbbb замість #rrggbb"
 
-#: ../src/option.c:367
+#: ../src/option.c:370
 msgid "Add opacity to output color value"
 msgstr "Додати прозорість до значення кольору"
 
-#: ../src/option.c:377
+#: ../src/option.c:380
 msgid "Display drag-n-drop box"
 msgstr "Відобразити діалог для перехоплення dnd"
 
-#: ../src/option.c:383
+#: ../src/option.c:386
 msgid "Use dialog text as tooltip"
 msgstr "Використовувати текст діалогу в якості підказки"
 
-#: ../src/option.c:389
+#: ../src/option.c:392
 msgid "Set command for process d-n-d data"
 msgstr "Команда для обробки отриманих даних"
 
-#: ../src/option.c:390 ../src/option.c:448 ../src/option.c:460
-#: ../src/option.c:795 ../src/option.c:906
+#: ../src/option.c:393 ../src/option.c:451 ../src/option.c:463
+#: ../src/option.c:840 ../src/option.c:951
 msgid "CMD"
 msgstr "КОМАНДА"
 
-#: ../src/option.c:399
+#: ../src/option.c:402
 msgid "Display text entry or combo-box dialog"
 msgstr "Відобразити діалог для вводу тексту або вибору варіанта"
 
-#: ../src/option.c:405
+#: ../src/option.c:408
 msgid "Set the entry label"
 msgstr "Задати мітку поля вводу"
 
-#: ../src/option.c:411
+#: ../src/option.c:414
 msgid "Set the entry text"
 msgstr "Задати текст для поля вводу"
 
-#: ../src/option.c:417
+#: ../src/option.c:420
 msgid "Hide the entry text"
 msgstr "Сховати введений текст (Пароль)"
 
-#: ../src/option.c:423
+#: ../src/option.c:426
 msgid "Use completion instead of combo-box"
 msgstr "Використовувати автозаповнення замість списку значень"
 
-#: ../src/option.c:429
+#: ../src/option.c:432
 msgid "Use spin button for text entry"
 msgstr "Використовувати числове поле замість тексту"
 
-#: ../src/option.c:435
+#: ../src/option.c:438
 msgid "Allow changes to text in combo-box"
 msgstr "Дозволити змінювати текст у режимі вибору варіанта"
 
-#: ../src/option.c:441
+#: ../src/option.c:444
 msgid "Set the left entry icon"
 msgstr "Задати ліву іконку"
 
-#: ../src/option.c:447
+#: ../src/option.c:450
 msgid "Set the left entry icon action"
 msgstr "Дія для лівої іконки"
 
-#: ../src/option.c:453
+#: ../src/option.c:456
 msgid "Set the right entry icon"
 msgstr "Задати праву іконку"
 
-#: ../src/option.c:459
+#: ../src/option.c:462
 msgid "Set the right entry icon action"
 msgstr "Дія для правої іконки"
 
-#: ../src/option.c:469
+#: ../src/option.c:472
 msgid "Display file selection dialog"
 msgstr "Відобразити діалог для вибору файлу"
 
-#: ../src/option.c:475
+#: ../src/option.c:478
 msgid "Alias for --file"
 msgstr "Синонім для --file"
 
-#: ../src/option.c:481
+#: ../src/option.c:484
 msgid "Set the filename"
 msgstr "Задати назву файлу"
 
-#: ../src/option.c:487
+#: ../src/option.c:490
 msgid "Allow multiple files to be selected"
 msgstr "Дозволити вибір декількох файлів"
 
-#: ../src/option.c:493
+#: ../src/option.c:496
 msgid "Activate directory-only selection"
 msgstr "Активувати виділення тільки по каталогам"
 
-#: ../src/option.c:499
+#: ../src/option.c:502
 msgid "Activate save mode"
 msgstr "Активувати режим зберігання"
 
-#: ../src/option.c:505 ../src/option.c:592 ../src/option.c:728
+#: ../src/option.c:508 ../src/option.c:595 ../src/option.c:773
 msgid "Set output separator character"
 msgstr "Установити вихідний розділювач"
 
-#: ../src/option.c:506 ../src/option.c:593 ../src/option.c:599
-#: ../src/option.c:729 ../src/option.c:918 ../src/option.c:924
+#: ../src/option.c:509 ../src/option.c:596 ../src/option.c:602
+#: ../src/option.c:774 ../src/option.c:963 ../src/option.c:969
 msgid "SEPARATOR"
 msgstr "РОЗДІЛЮВАЧ"
 
-#: ../src/option.c:511
+#: ../src/option.c:514
 msgid "Confirm file selection if filename already exists"
 msgstr "Підтвердити вибір файлу, якщо файл вже існує"
 
-#: ../src/option.c:512
+#: ../src/option.c:515
 msgid "[TEXT]"
 msgstr "[ТЕКСТ]"
 
-#: ../src/option.c:517
+#: ../src/option.c:520
 msgid "Sets a filename filter"
 msgstr "Задати фільтр файлів"
 
-#: ../src/option.c:518
+#: ../src/option.c:521
 msgid "NAME | PATTERN1 PATTERN2 ..."
 msgstr "НАЗВА | ШАБЛОН1 ШАБЛОН2 ..."
 
-#: ../src/option.c:523
+#: ../src/option.c:526
 msgid "Enable preview"
 msgstr "Додати попередній перегляд"
 
-#: ../src/option.c:529 ../src/option.c:616 ../src/option.c:812
+#: ../src/option.c:532 ../src/option.c:619 ../src/option.c:857
 msgid "Quote dialogs output"
 msgstr "Виводити значення у лапках"
 
-#: ../src/option.c:539
+#: ../src/option.c:542
 msgid "Display font selection dialog"
 msgstr "Відобразити діалог для вибору шрифту"
 
-#: ../src/option.c:545
+#: ../src/option.c:548
 msgid "Alias for --font"
 msgstr "Синонім для --font"
 
-#: ../src/option.c:551
+#: ../src/option.c:554
 msgid "Set initial font"
 msgstr "Задати початковий шрифт"
 
-#: ../src/option.c:552 ../src/option.c:982 ../src/option.c:1153
+#: ../src/option.c:555 ../src/option.c:1027 ../src/option.c:1198
 msgid "FONTNAME"
 msgstr "НАЗВА_ШРИФТУ"
 
-#: ../src/option.c:557
+#: ../src/option.c:560
 msgid "Set preview text"
 msgstr "Задати текст зразка"
 
-#: ../src/option.c:567
+#: ../src/option.c:570
 msgid "Display form dialog"
 msgstr "Відобразити діалог форми вводу"
 
-#: ../src/option.c:574
+#: ../src/option.c:577
 msgid ""
 "Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, "
 "MDIR, FN, DT, SCL, CLR, BTN, FBTN, LBL or TXT)"
@@ -612,55 +612,91 @@ msgstr ""
 "Додати поле до форми (Тип поля: Н, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, "
 "CDIR, MDIR, FN, MFL, DT, SCL, CLR, BTN, FBTN, LBL або TXT)"
 
-#: ../src/option.c:575 ../src/option.c:829
+#: ../src/option.c:578 ../src/option.c:874
 msgid "LABEL[:TYPE]"
 msgstr "МІТКА[:ТИП]"
 
-#: ../src/option.c:580
+#: ../src/option.c:583
 msgid "Set alignment of filed labels (left, center or right)"
 msgstr "Задати вирівнювання міток полів (left, center або right)"
 
-#: ../src/option.c:586
+#: ../src/option.c:589
 msgid "Set number of columns in form"
 msgstr "Задати кількість стовпчиків у формі"
 
-#: ../src/option.c:598
+#: ../src/option.c:601
 msgid "Set separator character for combobox or scale data"
 msgstr "Задати розділювач для даних списку або числового поля"
 
-#: ../src/option.c:610
+#: ../src/option.c:613
 msgid "Make form scrollable"
 msgstr "Додати прокрутку до форми"
 
-#: ../src/option.c:626
+#: ../src/option.c:630
+msgid "Display HTML dialog"
+msgstr "Відобразити HTML діалог"
+
+#: ../src/option.c:636
+msgid "Open specified location"
+msgstr "Відкрити вказану адресу"
+
+#: ../src/option.c:637
+msgid "URI"
+msgstr "URI"
+
+#: ../src/option.c:642
+msgid "Turn on browser mode"
+msgstr "Ввімкнути режим браузеру"
+
+#: ../src/option.c:648
+msgid "Print clicked uri to stdout"
+msgstr "Друкувати натиснуті зсилки"
+
+#: ../src/option.c:654
+msgid "Set mime type of input stream data"
+msgstr "Задати тип mime для вхідних даних"
+
+#: ../src/option.c:655
+msgid "MIME"
+msgstr "MIME"
+
+#: ../src/option.c:660
+msgid "Set encoding of input stream data"
+msgstr "Задати кодування для вхідних даних"
+
+#: ../src/option.c:661
+msgid "ENCODING"
+msgstr "КОДУВАННЯ"
+
+#: ../src/option.c:671
 msgid "Display icons box dialog"
 msgstr "Відобразити діалог з іконками швидкого доступу"
 
-#: ../src/option.c:632
+#: ../src/option.c:677
 msgid "Read data from .desktop files in specified directory"
 msgstr "Читати дані з файлів .desktop у вказаному каталозі"
 
-#: ../src/option.c:633
+#: ../src/option.c:678
 msgid "DIRECTORY"
 msgstr "КАТАЛОГ"
 
-#: ../src/option.c:638
+#: ../src/option.c:683
 msgid "Use compact (list) view"
 msgstr "Використовувати компактний вигляд (список)"
 
-#: ../src/option.c:644
+#: ../src/option.c:689
 msgid "Use GenericName field instead of Name for icon label"
 msgstr "Використовувати поле GenericName замість Name для мітки"
 
-#: ../src/option.c:650
+#: ../src/option.c:695
 msgid "Read data from stdin"
 msgstr "Читати дані зі стандартного вводу"
 
-#: ../src/option.c:656
+#: ../src/option.c:701
 msgid "Set the width of dialog items"
 msgstr "Задати ширину елемента діалогу"
 
-#: ../src/option.c:663
+#: ../src/option.c:708
 #, no-c-format
 msgid ""
 "Use specified pattern for launch command in terminal (default: xterm -e %s)"
@@ -668,66 +704,66 @@ msgstr ""
 "Використовувати вказаний шаблон для запуску в терміналі (без шаблону: xterm -"
 "e %s)"
 
-#: ../src/option.c:669
+#: ../src/option.c:714
 msgid "Sort items by name instead of filename"
 msgstr "Сортувати по полю Назва замість назви файлу"
 
-#: ../src/option.c:675
+#: ../src/option.c:720
 msgid "Sort items in descending order"
 msgstr "Сортувати в порядку спадання"
 
-#: ../src/option.c:681
+#: ../src/option.c:726
 msgid "Activate items by single click"
 msgstr "Активувати елемент одним натисненням"
 
-#: ../src/option.c:691
+#: ../src/option.c:736
 msgid "Display list dialog"
 msgstr "Відобразити діалог зі списком"
 
-#: ../src/option.c:697
+#: ../src/option.c:742
 msgid "Don't show column headers"
 msgstr "Не показувати заголовки стовпчиків"
 
-#: ../src/option.c:703
+#: ../src/option.c:748
 msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, RD, IMG, HD or TIP)"
 msgstr ""
 "Задати заголовок стовпчика (ТИП - TEXT, NUM, FLT, CHK, RD, IMG, HD або TIP)"
 
-#: ../src/option.c:704
+#: ../src/option.c:749
 msgid "COLUMN[:TYPE]"
 msgstr "СТОВПЧИК[:ТИП]"
 
-#: ../src/option.c:709
+#: ../src/option.c:754
 msgid "Use checkboxes for first column"
 msgstr "Використовувати відмітки для першого стовпчика"
 
-#: ../src/option.c:715
+#: ../src/option.c:760
 msgid "Use radioboxes for first column"
 msgstr "Використовувати перемикач для першого стовпчика"
 
-#: ../src/option.c:721
+#: ../src/option.c:766
 msgid "Disable clickable column headers"
 msgstr "Заборонити натискати на заголовок"
 
-#: ../src/option.c:734
+#: ../src/option.c:779
 msgid "Allow multiple rows to be selected"
 msgstr "Дозволити вибір декількох рядків"
 
-#: ../src/option.c:740 ../src/option.c:1188
+#: ../src/option.c:785 ../src/option.c:1233
 msgid "Allow changes to text"
 msgstr "Дозволити змінювати текст"
 
-#: ../src/option.c:746
+#: ../src/option.c:791
 msgid "Print all data from list"
 msgstr "Виводити таблицю повністю"
 
-#: ../src/option.c:752
+#: ../src/option.c:797
 msgid "Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"
 msgstr ""
 "Задати тип урізання для текстових стовпчиків (ТИП - NONE, START, MIDDLE або "
 "END)"
 
-#: ../src/option.c:758
+#: ../src/option.c:803
 msgid ""
 "Print a specific column. By default or if 0 is specified will be printed all "
 "columns"
@@ -735,15 +771,15 @@ msgstr ""
 "Виводити тільки вказаний стовпчик. Без вказівки або якщо стовпчик дорівнює "
 "0, будуть виведені усі стовпчики"
 
-#: ../src/option.c:764
+#: ../src/option.c:809
 msgid "Hide a specific column"
 msgstr "Сховати вказаний стовпчик"
 
-#: ../src/option.c:770
+#: ../src/option.c:815
 msgid "Set the column expandable by default. 0 sets all columns expandable"
 msgstr "Задати стовпчик, який розширюється. 0 розширює всі стовпчики"
 
-#: ../src/option.c:776
+#: ../src/option.c:821
 msgid ""
 "Set the quick search column. Default is first column. Set it to 0 for "
 "disable searching"
@@ -751,509 +787,518 @@ msgstr ""
 "Задати стовпчик швидкого пошуку. Без вказівки використовується перший "
 "стовпчик. 0 забороняє пошук"
 
-#: ../src/option.c:782
+#: ../src/option.c:827
 msgid "Set the tooltip column"
 msgstr "Задати стовпчик підказок"
 
-#: ../src/option.c:788
+#: ../src/option.c:833
 msgid "Set the limit of rows in list"
 msgstr "Задати кількість рядків у списку"
 
-#: ../src/option.c:794
+#: ../src/option.c:839
 msgid "Set double-click action"
 msgstr "Дія для подвійного клацання мишки"
 
-#: ../src/option.c:800
+#: ../src/option.c:845
 msgid "Use regex in search"
 msgstr "Використовувати регулярні вирази в пошуку"
 
-#: ../src/option.c:806
+#: ../src/option.c:851
 msgid "Listen for data on stdin in addition to command-line"
 msgstr "Отримувати дані з потоку вводу додатково до командного рядка"
 
-#: ../src/option.c:822
+#: ../src/option.c:867
 msgid "Display multi progress bars dialog"
 msgstr "Відобразити діалог з декількома індикаторами виконання"
 
-#: ../src/option.c:828
+#: ../src/option.c:873
 msgid "Add the progress bar (TYPE - NORM, RTL or PULSE)"
 msgstr "Додати індикатор виконання (ТИП - NORM, RTL або PULSE)"
 
-#: ../src/option.c:834
+#: ../src/option.c:879
 msgid "Show vertical bars"
 msgstr "Відобразити вертикальні індикатори"
 
-#: ../src/option.c:840
+#: ../src/option.c:885
 msgid "Set alignment of bar labels (left, center or right)"
 msgstr "Задати вирівнювання міток індикаторів (left, center або right)"
 
-#: ../src/option.c:847
+#: ../src/option.c:892
 #, no-c-format
 msgid "Dismiss the dialog when 100% of all bars has been reached"
 msgstr "Закрити діалог по досягненні 100% усіма індикаторами"
 
-#: ../src/option.c:854 ../src/option.c:1023
+#: ../src/option.c:899 ../src/option.c:1068
 msgid "Kill parent process if cancel button is pressed"
 msgstr "Завершити батьківський процес, якщо натиснута кнопка відміни"
 
-#: ../src/option.c:865
+#: ../src/option.c:910
 msgid "Display notebook dialog"
 msgstr "Відобразити діалог із вкладинками"
 
-#: ../src/option.c:871
+#: ../src/option.c:916
 msgid "Identifier of embedded dialogs"
 msgstr "Ідентифікатор діалогів що вбудовуваються"
 
-#: ../src/option.c:877
+#: ../src/option.c:922
 msgid "Add a tab to notebook"
 msgstr "Додати вкладку"
 
-#: ../src/option.c:878
+#: ../src/option.c:923
 msgid "LABEL"
 msgstr "МІТКА"
 
-#: ../src/option.c:883
+#: ../src/option.c:928
 msgid "Set position of a notebook tabs (top, bottom, left or right)"
 msgstr "Задати позицію ярлика вкладки (top, bottom, left, або right)"
 
-#: ../src/option.c:889
+#: ../src/option.c:934
 msgid "Set tab borders"
 msgstr "Задати краї вкладок"
 
-#: ../src/option.c:899
+#: ../src/option.c:944
 msgid "Display notification"
 msgstr "Відобразити діалог повідомлень"
 
-#: ../src/option.c:905
+#: ../src/option.c:950
 msgid "Set left-click action"
 msgstr "Дія для лівого клацання мишки"
 
-#: ../src/option.c:911
+#: ../src/option.c:956
 msgid "Listen for commands on stdin"
 msgstr "Читати команди зі стандартного вводу"
 
-#: ../src/option.c:917
+#: ../src/option.c:962
 msgid "Set separator character for menu values"
 msgstr "Встановити розділювач для значень меню"
 
-#: ../src/option.c:923
+#: ../src/option.c:968
 msgid "Set separator character for menu items"
 msgstr "Встановити розділювач для елементів меню"
 
-#: ../src/option.c:929
+#: ../src/option.c:974
 msgid "Set initial popup menu"
 msgstr "Задати початкове меню"
 
-#: ../src/option.c:930
+#: ../src/option.c:975
 msgid "STRING"
 msgstr "РЯДОК"
 
-#: ../src/option.c:935
+#: ../src/option.c:980
 msgid "Disable exit on middle click"
 msgstr "Заборонити вихід середньою кнопкою мишки"
 
-#: ../src/option.c:941
+#: ../src/option.c:986
 msgid "Doesn't show icon at startup"
 msgstr "Не показувати іконку при старті"
 
-#: ../src/option.c:951
+#: ../src/option.c:996
 msgid "Display printing dialog"
 msgstr "Відобразити діалог друку"
 
-#: ../src/option.c:957
+#: ../src/option.c:1002
 msgid "Source filename"
 msgstr "Назва файлу"
 
-#: ../src/option.c:963
+#: ../src/option.c:1008
 msgid "Set source type (TYPE - TEXT, IMAGE or RAW)"
 msgstr "Задати тип даних (ТИП - TEXT, IMAGE або RAW)"
 
-#: ../src/option.c:969
+#: ../src/option.c:1014
 msgid "Add headers to page"
 msgstr "Додати колонтитули до сторінки"
 
-#: ../src/option.c:975
+#: ../src/option.c:1020
 msgid "Enable preview in print dialog"
 msgstr "Додати попередній перегляд до діалогу друку"
 
-#: ../src/option.c:981 ../src/option.c:1152
+#: ../src/option.c:1026 ../src/option.c:1197
 msgid "Use specified font"
 msgstr "Використовувати вказаний шрифт"
 
-#: ../src/option.c:991
+#: ../src/option.c:1036
 msgid "Display progress indication dialog"
 msgstr "Відобразити діалог прогресу"
 
-#: ../src/option.c:997
+#: ../src/option.c:1042
 msgid "Set progress text"
 msgstr "Показувати текст на індикаторі"
 
-#: ../src/option.c:1003
+#: ../src/option.c:1048
 msgid "Set initial percentage"
 msgstr "Задати початковий процент"
 
-#: ../src/option.c:1004
+#: ../src/option.c:1049
 msgid "PERCENTAGE"
 msgstr "ВІДСОТКИ"
 
-#: ../src/option.c:1009
+#: ../src/option.c:1054
 msgid "Pulsate progress bar"
 msgstr "Пульсовий індикатор виконання"
 
-#: ../src/option.c:1016
+#: ../src/option.c:1061
 #, no-c-format
 msgid "Dismiss the dialog when 100% has been reached"
 msgstr "Закрити діалог по досягненні 100%"
 
-#: ../src/option.c:1030
+#: ../src/option.c:1075
 msgid "Right-To-Left progress bar direction"
 msgstr "Напрямок індикатору Справа Наліво"
 
-#: ../src/option.c:1036
+#: ../src/option.c:1081
 msgid "Show log window"
 msgstr "Відобразити вікно журналу"
 
-#: ../src/option.c:1042
+#: ../src/option.c:1087
 msgid "Expand log window"
 msgstr "Розгорнути вікно журналу"
 
-#: ../src/option.c:1048
+#: ../src/option.c:1093
 msgid "Place log window above progress bar"
 msgstr "Розмістити вікно жуналу поверх індикатора виконання"
 
-#: ../src/option.c:1054
+#: ../src/option.c:1099
 msgid "Height of log window"
 msgstr "Висота вікна журналу"
 
-#: ../src/option.c:1064
+#: ../src/option.c:1109
 msgid "Display scale dialog"
 msgstr "Відобразити діалог масштабу"
 
-#: ../src/option.c:1070
+#: ../src/option.c:1115
 msgid "Set initial value"
 msgstr "Задати початкове значення"
 
-#: ../src/option.c:1071 ../src/option.c:1077 ../src/option.c:1083
-#: ../src/option.c:1089 ../src/option.c:1095
+#: ../src/option.c:1116 ../src/option.c:1122 ../src/option.c:1128
+#: ../src/option.c:1134 ../src/option.c:1140
 msgid "VALUE"
 msgstr "ЗНАЧЕННЯ"
 
-#: ../src/option.c:1076
+#: ../src/option.c:1121
 msgid "Set minimum value"
 msgstr "Задати мінімальне значення"
 
-#: ../src/option.c:1082
+#: ../src/option.c:1127
 msgid "Set maximum value"
 msgstr "Задати максимальне значення"
 
-#: ../src/option.c:1088
+#: ../src/option.c:1133
 msgid "Set step size"
 msgstr "Задати крок"
 
-#: ../src/option.c:1094
+#: ../src/option.c:1139
 msgid "Set paging size"
 msgstr "Задати крок сторінки"
 
-#: ../src/option.c:1100
+#: ../src/option.c:1145
 msgid "Print partial values"
 msgstr "Виводити часткові значення"
 
-#: ../src/option.c:1106
+#: ../src/option.c:1151
 msgid "Hide value"
 msgstr "Сховати значення"
 
-#: ../src/option.c:1112
+#: ../src/option.c:1157
 msgid "Show vertical scale"
 msgstr "Відобразити вертикальну шкалу"
 
-#: ../src/option.c:1118
+#: ../src/option.c:1163
 msgid "Invert direction"
 msgstr "Інвертувати напрямок"
 
-#: ../src/option.c:1124
+#: ../src/option.c:1169
 msgid "Add mark to scale (may be used multiple times)"
 msgstr "Додати мітку шкали (може використовуватись декілька разів)"
 
-#: ../src/option.c:1125
+#: ../src/option.c:1170
 msgid "NAME:VALUE"
 msgstr "НАЗВА:ЗНАЧЕННЯ"
 
-#: ../src/option.c:1134
+#: ../src/option.c:1179
 msgid "Display text information dialog"
 msgstr "Відобразити діалог з текстовою інформацією"
 
-#: ../src/option.c:1140
+#: ../src/option.c:1185
 msgid "Use specified color for text"
 msgstr "Використовувати вказаний колір тексту"
 
-#: ../src/option.c:1146
+#: ../src/option.c:1191
 msgid "Use specified color for background"
 msgstr "Використовувати вказаний колір фону"
 
-#: ../src/option.c:1158
+#: ../src/option.c:1203
 msgid "Enable text wrapping"
 msgstr "Дозволити перенос тексту"
 
-#: ../src/option.c:1164
+#: ../src/option.c:1209
 msgid "Set justification (TYPE - left, right, center or fill)"
 msgstr "Встановити вирівнювання (ТИП - left, right, center або fill)"
 
-#: ../src/option.c:1170
+#: ../src/option.c:1215
 msgid "Set text margins"
 msgstr "Встановити відступи"
 
-#: ../src/option.c:1171
+#: ../src/option.c:1216
 msgid "SIZE"
 msgstr "РОЗМІР"
 
-#: ../src/option.c:1176
+#: ../src/option.c:1221
 msgid "Autoscroll to end of text"
 msgstr "Автопрокрутка в кінець тексту"
 
-#: ../src/option.c:1182
+#: ../src/option.c:1227
 msgid "Open file"
 msgstr "Відкрити файл"
 
-#: ../src/option.c:1194
+#: ../src/option.c:1239
 msgid "Make URI clickable"
 msgstr "Зробити посилання активними"
 
-#: ../src/option.c:1200
+#: ../src/option.c:1245
 msgid "Listen for data on stdin in addition to file"
 msgstr "Отримувати дані з потоку вводу додатково до файлу"
 
-#: ../src/option.c:1210
+#: ../src/option.c:1255
 msgid "Show about dialog"
 msgstr "Показати діалог 'Про програму'"
 
-#: ../src/option.c:1216
+#: ../src/option.c:1261
 msgid "Print version"
 msgstr "Вивести версію"
 
-#: ../src/option.c:1222
+#: ../src/option.c:1267
 msgid "Load additional GTK settings from file"
 msgstr "Завантажити додаткові налаштування GTK з файлу"
 
-#: ../src/option.c:1232
+#: ../src/option.c:1277
 msgid "Load extra arguments from file"
 msgstr "Завантажити додаткові аргументи з файлу"
 
-#: ../src/option.c:1277 ../src/option.c:1503
+#: ../src/option.c:1322 ../src/option.c:1548
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "Невідомий тип вирівнювання: %s\n"
 
-#: ../src/option.c:1432
+#: ../src/option.c:1477
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "Помітці %s не надано значення\n"
 
-#: ../src/option.c:1469
+#: ../src/option.c:1514
 #, c-format
 msgid "Unknown color mode: %s\n"
 msgstr "Невідомий режим коліру: '%s'\n"
 
-#: ../src/option.c:1488
+#: ../src/option.c:1533
 #, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "Невідомий тип розміщення кнопок: %s\n"
 
-#: ../src/option.c:1520
+#: ../src/option.c:1565
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "Невідомий тип вирівнювання: %s\n"
 
-#: ../src/option.c:1537
+#: ../src/option.c:1582
 #, c-format
 msgid "Unknown tab position type: %s\n"
 msgstr "Невідомий тип позиції вкладки: %s\n"
 
-#: ../src/option.c:1573
+#: ../src/option.c:1618
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "Невідомий тип урізання: %s\n"
 
-#: ../src/option.c:1588
+#: ../src/option.c:1633
 #, c-format
 msgid "Unknown source type: %s\n"
 msgstr "Невідомий тип даних: %s\n"
 
-#: ../src/option.c:1599
+#: ../src/option.c:1644
 msgid "Progress log"
 msgstr "Вікно журналу"
 
-#: ../src/option.c:1709
+#: ../src/option.c:1754
 #, c-format
 msgid "Unknown signal: %s\n"
 msgstr "Невідомий сигнал: %s\n"
 
-#: ../src/option.c:1856
+#: ../src/option.c:1905
 msgid "File exist. Overwrite?"
 msgstr "Файл існує. Перезаписати?"
 
-#: ../src/option.c:1951
+#: ../src/option.c:2009
 msgid "- Yet another dialoging program"
 msgstr "- Програма для відображення діалогів"
 
 #. Adds general option entries
-#: ../src/option.c:1955
+#: ../src/option.c:2013
 msgid "General options"
 msgstr "Основні параметри"
 
-#: ../src/option.c:1955
+#: ../src/option.c:2013
 msgid "Show general options"
 msgstr "Показувати основні параметри"
 
 #. Adds calendar option entries
-#: ../src/option.c:1961
+#: ../src/option.c:2019
 msgid "Calendar options"
 msgstr "Параметри календаря"
 
-#: ../src/option.c:1961
+#: ../src/option.c:2019
 msgid "Show calendar options"
 msgstr "Показувати параметри календаря"
 
 #. Adds color option entries
-#: ../src/option.c:1967
+#: ../src/option.c:2025
 msgid "Color selection options"
 msgstr "Параметри діалогу вибору кольору"
 
-#: ../src/option.c:1967
+#: ../src/option.c:2025
 msgid "Show color selection options"
 msgstr "Показувати параметри діалогу вибору кольору"
 
 #. Adds dnd option entries
-#: ../src/option.c:1973
+#: ../src/option.c:2031
 msgid "DND options"
 msgstr "Параметри DND"
 
-#: ../src/option.c:1973
+#: ../src/option.c:2031
 msgid "Show drag-n-drop options"
 msgstr "Показувати параметри dnd"
 
 #. Adds entry option entries
-#: ../src/option.c:1979
+#: ../src/option.c:2037
 msgid "Text entry options"
 msgstr "Параметри вводу тексту"
 
-#: ../src/option.c:1979
+#: ../src/option.c:2037
 msgid "Show text entry options"
 msgstr "Показувати параметри вводу тексту"
 
 #. Adds file selection option entries
-#: ../src/option.c:1985
+#: ../src/option.c:2043
 msgid "File selection options"
 msgstr "Параметри діалогу вибору файлів"
 
-#: ../src/option.c:1985
+#: ../src/option.c:2043
 msgid "Show file selection options"
 msgstr "Показувати параметри діалогу вибору файлів"
 
 #. Add font selection option entries
-#: ../src/option.c:1991
+#: ../src/option.c:2049
 msgid "Font selection options"
 msgstr "Параметри діалогу вибору шрифту"
 
-#: ../src/option.c:1991
+#: ../src/option.c:2049
 msgid "Show font selection options"
 msgstr "Показувати параметри діалоги вибору шрифту"
 
 #. Add form option entries
-#: ../src/option.c:1997
+#: ../src/option.c:2055
 msgid "Form options"
 msgstr "Параметри діалогу форми"
 
-#: ../src/option.c:1997
+#: ../src/option.c:2055
 msgid "Show form options"
 msgstr "Показувати параметри діалогу форми"
 
+#. Add html options entries
+#: ../src/option.c:2062
+msgid "HTML options"
+msgstr "Параметри HTML діалогу"
+
+#: ../src/option.c:2062
+msgid "Show HTML options"
+msgstr "Показувати параметри HTML діалогу"
+
 #. Add icons option entries
-#: ../src/option.c:2003
+#: ../src/option.c:2069
 msgid "Icons box options"
 msgstr "Параметри діалогу іконок"
 
-#: ../src/option.c:2003
+#: ../src/option.c:2069
 msgid "Show icons box options"
 msgstr "Показувати параметри діалогу іконок швидкого доступу"
 
 #. Adds list option entries
-#: ../src/option.c:2009
+#: ../src/option.c:2075
 msgid "List options"
 msgstr "Параметри списку"
 
-#: ../src/option.c:2009
+#: ../src/option.c:2075
 msgid "Show list options"
 msgstr "Показувати параметри списку"
 
 #. Adds multi progress option entries
-#: ../src/option.c:2015
+#: ../src/option.c:2081
 msgid "Multi progress bars options"
 msgstr "Параметри діалогу з декількома індикаторами"
 
-#: ../src/option.c:2016
+#: ../src/option.c:2082
 msgid "Show multi progress bars options"
 msgstr "Показувати параметри діалогу з декількома індикаторами"
 
 #. Adds notebook option entries
-#: ../src/option.c:2022
+#: ../src/option.c:2088
 msgid "Notebook options"
 msgstr "Параметри діалогу з вкладками"
 
-#: ../src/option.c:2022
+#: ../src/option.c:2088
 msgid "Show notebook dialog options"
 msgstr "Показувати параметри діалогу з вкладками"
 
 #. Adds notification option entries
-#: ../src/option.c:2028
+#: ../src/option.c:2094
 msgid "Notification icon options"
 msgstr "Параметри іконки повідомлень"
 
-#: ../src/option.c:2029
+#: ../src/option.c:2095
 msgid "Show notification icon options"
 msgstr "Показувати параметри іконки повідомлень"
 
 #. Adds print option entries
-#: ../src/option.c:2035
+#: ../src/option.c:2101
 msgid "Print dialog options"
 msgstr "Параметри діалогу друку"
 
-#: ../src/option.c:2035
+#: ../src/option.c:2101
 msgid "Show print dialog options"
 msgstr "Показувати параметри діалогу друку"
 
 #. Adds progress option entries
-#: ../src/option.c:2041
+#: ../src/option.c:2107
 msgid "Progress options"
 msgstr "Параметри прогресу"
 
-#: ../src/option.c:2041
+#: ../src/option.c:2107
 msgid "Show progress options"
 msgstr "Показувати параметри прогресу"
 
 #. Adds scale option entries
-#: ../src/option.c:2047
+#: ../src/option.c:2113
 msgid "Scale options"
 msgstr "Параметри масштабу"
 
-#: ../src/option.c:2047
+#: ../src/option.c:2113
 msgid "Show scale options"
 msgstr "Показувати параметри масштабу"
 
 #. Adds text option entries
-#: ../src/option.c:2053
+#: ../src/option.c:2119
 msgid "Text information options"
 msgstr "Параметри текстової інформації"
 
-#: ../src/option.c:2053
+#: ../src/option.c:2119
 msgid "Show text information options"
 msgstr "Показувати параметри текстової інформації"
 
 #. Adds miscellaneous option entries
-#: ../src/option.c:2059
+#: ../src/option.c:2125
 msgid "Miscellaneous options"
 msgstr "Додаткові параметри"
 
-#: ../src/option.c:2059
+#: ../src/option.c:2125
 msgid "Show miscellaneous options"
 msgstr "Показувати додаткові параметри"
 
