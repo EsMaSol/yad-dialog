@@ -213,7 +213,7 @@ yad_print_run (void)
 {
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
-  gchar *job_name = NULL;
+  gchar *uri, *job_name = NULL;
   GtkPrintCapabilities pcap;
   GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
   gint ret = 0;
@@ -247,11 +247,15 @@ yad_print_run (void)
 
   if (!settings.print_settings)
     settings.print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
-  gtk_print_settings_set (settings.print_settings, "output-uri", "yad.pdf");
+    
+  uri = g_build_filename (g_get_current_dir (), "yad.pdf", NULL);
+  gtk_print_settings_set (settings.print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
+  g_free (uri);
+  
   gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), settings.print_settings);
+  
   if (settings.page_setup)
     gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), settings.page_setup);
-
 
   /* set window behavior */
   gtk_widget_set_name (dlg, "yad-dialog-window");
