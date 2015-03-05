@@ -115,7 +115,7 @@ create_completion_model (void)
 GtkWidget *
 entry_create_widget (GtkWidget * dlg)
 {
-  GtkWidget *c, *w = NULL;
+  GtkWidget *c, *l = NULL, *w = NULL;
 
 #if !GTK_CHECK_VERSION(3,0,0)
   w = gtk_hbox_new (FALSE, 5);
@@ -125,11 +125,11 @@ entry_create_widget (GtkWidget * dlg)
 
   if (options.entry_data.entry_label)
     {
-      GtkWidget *l = gtk_label_new (NULL);
-      if (!options.data.no_markup)
-        gtk_label_set_markup (GTK_LABEL (l), options.entry_data.entry_label);
+      l = gtk_label_new (NULL);
+      if (options.data.no_markup)
+        gtk_label_set_text_with_mnemonic (GTK_LABEL (l), options.entry_data.entry_label);
       else
-        gtk_label_set_text (GTK_LABEL (l), options.entry_data.entry_label);
+        gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), options.entry_data.entry_label);
       gtk_widget_set_name (l, "yad-entry-label");
       gtk_box_pack_start (GTK_BOX (w), l, FALSE, FALSE, 1);
     }
@@ -192,7 +192,7 @@ entry_create_widget (GtkWidget * dlg)
   else if (!options.entry_data.completion && options.extra_data && *options.extra_data)
     {
       gint active, i;
-      
+
       if (options.common_data.editable || settings.combo_always_editable)
         {
 #if GTK_CHECK_VERSION(2,24,0)
@@ -299,6 +299,9 @@ entry_create_widget (GtkWidget * dlg)
             gtk_entry_set_icon_from_pixbuf (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, pb);
         }
     }
+
+  if (l)
+    gtk_label_set_mnemonic_widget (GTK_LABEL (l), entry);
 
   if (!is_combo)
     g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (entry_activate_cb), dlg);

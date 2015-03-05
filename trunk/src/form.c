@@ -578,6 +578,7 @@ form_create_widget (GtkWidget * dlg)
           YadField *fld = g_slist_nth_data (options.form_data.fields, i);
 
           /* add field label */
+          l = NULL;
           if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
               fld->type != YAD_FIELD_FULL_BUTTON &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
@@ -585,9 +586,9 @@ form_create_widget (GtkWidget * dlg)
               gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
               if (!options.data.no_markup)
-                gtk_label_set_markup (GTK_LABEL (l), buf);
+                gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), buf);
               else
-                gtk_label_set_text (GTK_LABEL (l), buf);
+                gtk_label_set_text_with_mnemonic (GTK_LABEL (l), buf);
               gtk_widget_set_name (l, "yad-form-flabel");
               gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
@@ -618,6 +619,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -632,6 +634,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -666,6 +669,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -683,6 +687,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -697,6 +702,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -711,6 +717,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -724,6 +731,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -737,6 +745,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -755,6 +764,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -773,6 +783,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -791,6 +802,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -808,6 +820,7 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
 
@@ -903,6 +916,7 @@ form_create_widget (GtkWidget * dlg)
                 gtk_widget_set_hexpand (b, TRUE);
                 gtk_widget_set_vexpand (b, TRUE);
 #endif
+                gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
                 fields = g_slist_append (fields, e);
 
                 break;
