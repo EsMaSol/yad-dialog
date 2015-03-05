@@ -1,3 +1,116 @@
+2015-03-05 14:41  v1c0nt
+
+	* src/multi-progress.c: previous doesn't need in multiprogress
+
+2015-03-05 14:31  v1c0nt
+
+	* src/entry.c, src/form.c, src/multi-progress.c, src/util.c: add
+	  mnemonic possibility for labels in some dialog
+
+2015-03-04 09:16  v1c0nt
+
+	* src/print.c: fix printing to a file
+
+2015-03-03 16:15  v1c0nt
+
+	* data/yad.1: update man page
+
+2015-03-03 11:51  v1c0nt
+
+	* data/yad.1: update man page
+
+2015-03-03 11:18  v1c0nt
+
+	* configure.ac, po/ru.po, po/uk.po, src/html.c, src/option.c,
+	  src/yad.h: completely add html dialog
+
+2015-03-02 16:59  v1c0nt
+
+	* src/html.c: some changes in html
+
+2015-03-02 16:44  v1c0nt
+
+	* src/option.c, src/yad.h: some changes in html
+
+2015-03-02 16:41  v1c0nt
+
+	* src/html.c: some changes in html
+
+2015-03-02 16:40  v1c0nt
+
+	* configure.ac: some changes in html
+
+2015-03-02 15:21  v1c0nt
+
+	* configure.ac, src/Makefile.am, src/main.c, src/option.c,
+	  src/text.c, src/yad.h: add initial html dialog
+
+2015-02-18 07:44  v1c0nt
+
+	* po/ru.po, po/uk.po:
+
+2015-02-04 06:10  v1c0nt
+
+	* po/ru.po, po/uk.po, src/option.c: update translation
+
+2015-01-13 13:00  v1c0nt
+
+	* configure.ac, src/multi-progress.c, src/notebook.c: set labels in
+	  pulsate progress bar in multi-progress dialog
+
+2014-08-28 07:18  v1c0nt
+
+	* configure.ac: fix setting combo field values in form dialog
+
+2014-08-28 07:17  v1c0nt
+
+	* src/form.c:
+
+2014-08-18 12:36  v1c0nt
+
+	* data/yad.1, src/color.c: fix rgba output in color dialog
+
+2014-08-18 11:16  v1c0nt
+
+	* data/yad.1, src/color.c: fix output order of opacity in color
+	  dialog
+
+2014-08-18 10:56  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/option.c: update translation
+	  and man page
+
+2014-08-18 10:08  v1c0nt
+
+	* configure.ac, src/color.c, src/option.c, src/yad.h: add --alpha
+	  and --mode options for color dialog
+
+2014-08-01 09:24  v1c0nt
+
+	* ChangeLog: release 0.27.0
+
+2014-08-01 08:33  v1c0nt
+
+	* NEWS, configure.ac: bump version to 0.27.0. prepare to release
+
+2014-08-01 07:38  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/main.c, src/option.c,
+	  src/yad.h: add --gtkrc option
+
+2014-07-23 18:37  v1c0nt
+
+	* configure.ac, src/text.c: replace g_memmove with memmove
+
+2014-07-23 07:42  v1c0nt
+
+	* src/form.c, src/main.c:
+
+2014-07-22 08:25  v1c0nt
+
+	* src/list.c, src/main.c: add shared memory header. fix condition
+	  for detect expanding columns in list dialog
+
 2014-04-18 07:50  v1c0nt
 
 	* data/yad.1: update man page

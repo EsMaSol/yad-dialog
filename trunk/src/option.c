@@ -618,6 +618,12 @@ static GOptionEntry form_options[] = {
    &options.common_data.quoted_output,
    N_("Quote dialogs output"),
    NULL},
+  {"output-by-row", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.form_data.output_by_row,
+   N_("Order output fields by rows"),
+   NULL},
   {NULL}
 };
 
@@ -1911,6 +1917,8 @@ yad_options_init (void)
   /* Initialize form data */
   options.form_data.fields = NULL;
   options.form_data.columns = 1;
+  options.form_data.scroll = FALSE;
+  options.form_data.output_by_row = FALSE;
 
 #ifdef HAVE_HTML
   /* Initialize html data */
