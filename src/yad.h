@@ -238,6 +238,7 @@ typedef struct {
   GSList *fields;
   guint columns;
   gboolean scroll;
+  gboolean output_by_row;
 } YadFormData;
 
 #ifdef HAVE_HTML
