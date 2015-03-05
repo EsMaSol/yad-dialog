@@ -173,10 +173,10 @@ multi_progress_create_widget (GtkWidget * dlg)
 
       /* add label */
       l = gtk_label_new (NULL);
-      if (!options.data.no_markup)
-        gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), p->name);
+      if (options.data.no_markup)
+        gtk_label_set_text (GTK_LABEL (l), p->name);
       else
-        gtk_label_set_text_with_mnemonic (GTK_LABEL (l), p->name);
+        gtk_label_set_markup (GTK_LABEL (l), p->name);
       gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
       if (options.common_data.vertical)
 #if !GTK_CHECK_VERSION(3,0,0)
@@ -251,8 +251,6 @@ multi_progress_create_widget (GtkWidget * dlg)
           gtk_widget_set_hexpand (w, TRUE);
 #endif
         }
-
-      gtk_label_set_mnemonic_widget (GTK_LABEL (l), w);
 
       progress_bars = g_slist_append (progress_bars, w);
 
