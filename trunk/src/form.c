@@ -64,6 +64,7 @@ expand_action (gchar * cmd)
                 case YAD_FIELD_SIMPLE:
                 case YAD_FIELD_HIDDEN:
                 case YAD_FIELD_READ_ONLY:
+                case YAD_FIELD_COMPLETE:
                 case YAD_FIELD_FILE_SAVE:
                 case YAD_FIELD_DIR_CREATE:
                 case YAD_FIELD_MFILE:
@@ -214,6 +215,37 @@ set_field_value (guint num, gchar * value)
       else
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
       break;
+
+    case YAD_FIELD_COMPLETE:
+      {
+        GtkEntryCompletion *c;
+        GtkTreeModel *m;
+        GtkTreeIter it;
+        gint i = 0, def = -1;
+
+        c = gtk_entry_get_completion (GTK_ENTRY (w));
+        m = gtk_entry_completion_get_model (GTK_ENTRY_COMPLETION (c));
+        gtk_list_store_clear (GTK_LIST_STORE (m));
+
+        s = g_strsplit (value, options.common_data.item_separator, -1);
+        while (s[i])
+          {
+            gtk_list_store_append (GTK_LIST_STORE (m), &it);
+            if (s[i][0] == '^')
+              {
+                gtk_list_store_set (GTK_LIST_STORE (m), &it, 0, g_strcompress (s[i] + 1), -1);
+                def = i;
+              }
+            else
+              gtk_list_store_set (GTK_LIST_STORE (m), &it, 0, g_strcompress (s[i]), -1);
+
+            i++;
+          }
+        if (def >= 0)
+          gtk_entry_set_text (GTK_ENTRY (w), s[def]);
+        g_strfreev (s);
+        break;
+     }
 
     case YAD_FIELD_COMBO:
     case YAD_FIELD_COMBO_ENTRY:
@@ -605,6 +637,7 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_SIMPLE:
             case YAD_FIELD_HIDDEN:
             case YAD_FIELD_READ_ONLY:
+            case YAD_FIELD_COMPLETE:
               e = gtk_entry_new ();
               gtk_widget_set_name (e, "yad-form-entry");
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
@@ -619,6 +652,19 @@ form_create_widget (GtkWidget * dlg)
               gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
               gtk_widget_set_hexpand (e, TRUE);
 #endif
+              if (fld->type == YAD_FIELD_COMPLETE)
+                {
+                  GtkEntryCompletion *c = gtk_entry_completion_new ();
+                  GtkListStore *m = gtk_list_store_new (1, G_TYPE_STRING);
+
+                  gtk_entry_set_completion (GTK_ENTRY (e), c);
+                  gtk_entry_completion_set_model (c, GTK_TREE_MODEL (m));
+                  gtk_entry_completion_set_text_column (c, 0);
+
+                  g_object_unref (m);
+                  g_object_unref (c);
+                }
+
               gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
               break;
@@ -957,6 +1003,7 @@ form_print_field (guint fn)
     case YAD_FIELD_SIMPLE:
     case YAD_FIELD_HIDDEN:
     case YAD_FIELD_READ_ONLY:
+    case YAD_FIELD_COMPLETE:
     case YAD_FIELD_MFILE:
     case YAD_FIELD_MDIR:
     case YAD_FIELD_FILE_SAVE:
