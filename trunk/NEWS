@@ -1,3 +1,14 @@
+Version 0.28.0
+    - add HTML dialog
+    - add different output formats for color dialog
+    - add mnemonic feature for field labels in form and entry dialogs
+    - add completion entry as field type in form dialog
+    - add output by rows in form dialog when layout with several columns is used
+    - fix labels in multiprogress dialog
+    - fix print to file in print dialog
+    - fix setup arguments for double-click action in list dialog
+    - update man page
+
 Version 0.27.0
     - add --hidden option to notification icon
     - add --tooltip-column option to list dialog
