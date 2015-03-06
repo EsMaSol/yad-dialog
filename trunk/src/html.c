@@ -239,6 +239,7 @@ GtkWidget *
 html_create_widget (GtkWidget *dlg)
 {
   GtkWidget *sw;
+  SoupSession *sess;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
@@ -257,7 +258,9 @@ html_create_widget (GtkWidget *dlg)
       g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
     }
 
-  soup_session_add_feature_by_type (webkit_get_default_session (), SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
+  sess = webkit_get_default_session ();
+  soup_session_add_feature_by_type (sess, SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
+  g_object_set (G_OBJECT (sess), SOUP_SESSION_ACCEPT_LANGUAGE_AUTO, TRUE, NULL);
 
   gtk_widget_show_all (sw);
 
