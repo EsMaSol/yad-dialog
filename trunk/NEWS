@@ -1,3 +1,6 @@
+Version 0.28.1
+    - fix output by row in form dialog
+
 Version 0.28.0
     - add HTML dialog
     - add different output formats for color dialog

@@ -1,3 +1,15 @@
+2015-03-10 11:36  v1c0nt
+
+	* configure.ac: bump version to 0.28.1
+
+2015-03-10 10:44  v1c0nt
+
+	* src/form.c: fix output by row in form dialog
+
+2015-03-06 13:53  v1c0nt
+
+	* ChangeLog, NEWS: release 0.28.0
+
 2015-03-06 11:15  v1c0nt
 
 	* ChangeLog, src/html.c:
