@@ -1131,10 +1131,11 @@ form_print_result (void)
     {
       guint j, rows;
 
-      rows = n_fields / options.form_data.columns + 1;
+      rows = n_fields / options.form_data.columns;
+      rows += (n_fields % options.form_data.columns ? 1 : 0);
       for (i = 0; i < rows; i++)
         {
-          for (j = 0; j <= options.form_data.columns; j++)
+          for (j = 0; j < options.form_data.columns; j++)
             {
               guint fld = i + rows * j;
               if (fld < n_fields)
