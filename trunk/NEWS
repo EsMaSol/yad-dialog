@@ -1,5 +1,5 @@
 Version 0.28.1
-    - fix output by row in form dialog
+    - fix incorrect rows output order in form dialog
 
 Version 0.28.0
     - add HTML dialog
