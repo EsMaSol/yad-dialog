@@ -1,3 +1,11 @@
+2015-03-12 10:25  v1c0nt
+
+	* NEWS: release 0.28.1
+
+2015-03-10 11:50  v1c0nt
+
+	* ChangeLog, NEWS:
+
 2015-03-10 11:36  v1c0nt
 
 	* configure.ac: bump version to 0.28.1
