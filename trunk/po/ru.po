@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-06 12:24+0200\n"
+"POT-Creation-Date: 2015-03-31 11:58+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -51,17 +51,21 @@ msgstr ""
 "Вы должны получить копию лицензии GNU c программой. Если лицензия не была "
 "получена, смотрите <http://www.gnu.org/licenses/>."
 
-#: ../src/about.c:50
+#: ../src/about.c:42
 msgid ""
 "Yet Another Dialog\n"
 "(show dialog boxes from shell scripts)\n"
 "\n"
 "Based on Zenity code\n"
+"\n"
+"Built with Webkit\n"
 msgstr ""
 "Yet Another Dialog\n"
 "(Программа для отображения диалоговых окон из скриптов оболочки)\n"
 "\n"
 "Основан на коде Zenity\n"
+"\n"
+"Собран с поддержкой Webkit\n"
 
 #: ../src/calendar.c:39 ../src/text.c:389
 #, c-format
