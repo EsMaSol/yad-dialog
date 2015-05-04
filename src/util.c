@@ -205,19 +205,6 @@ get_pixbuf (gchar * name, YadIconSize size)
   return pb;
 }
 
-#ifdef __clang__
-extern inline void
-#else
-inline void
-#endif
-strip_new_line (gchar * str)
-{
-  gint nl = strlen (str) - 1;
-
-  if (str[nl] == '\n')
-    str[nl] = '\0';
-}
-
 gchar **
 split_arg (const gchar * str)
 {

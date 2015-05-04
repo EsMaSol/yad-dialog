@@ -17,6 +17,7 @@
  * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
  */
 
+#include <stdlib.h>
 #include <glib/gprintf.h>
 
 #include "yad.h"
