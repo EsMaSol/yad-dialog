@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-31 11:58+0300\n"
+"POT-Creation-Date: 2015-05-04 14:10+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -51,7 +51,8 @@ msgstr ""
 "Вы должны получить копию лицензии GNU c программой. Если лицензия не была "
 "получена, смотрите <http://www.gnu.org/licenses/>."
 
-#: ../src/about.c:42
+#: ../src/about.c:43
+#, c-format
 msgid ""
 "Yet Another Dialog\n"
 "(show dialog boxes from shell scripts)\n"
@@ -59,6 +60,8 @@ msgid ""
 "Based on Zenity code\n"
 "\n"
 "Built with Webkit\n"
+"\n"
+"Using GTK+ %d.%d.%d\n"
 msgstr ""
 "Yet Another Dialog\n"
 "(Программа для отображения диалоговых окон из скриптов оболочки)\n"
@@ -66,6 +69,8 @@ msgstr ""
 "Основан на коде Zenity\n"
 "\n"
 "Собран с поддержкой Webkit\n"
+"\n"
+"Используется GTK+ %d.%d.%d\n"
 
 #: ../src/calendar.c:39 ../src/text.c:389
 #, c-format
@@ -87,31 +92,31 @@ msgstr "Начальное значение меньше минимальног�
 msgid "Initial value greater than maximum.\n"
 msgstr "Начальное значение больше маскимального.\n"
 
-#: ../src/form.c:403
+#: ../src/form.c:404
 msgid "Select files"
 msgstr "Выбор файлов"
 
-#: ../src/form.c:411
+#: ../src/form.c:412
 msgid "Select folders"
 msgstr "Выбор каталогов"
 
-#: ../src/form.c:475
+#: ../src/form.c:476
 msgid "Select or create file"
 msgstr "Выбор или создание файла"
 
-#: ../src/form.c:483
+#: ../src/form.c:484
 msgid "Select or create folder"
 msgstr "Выбор или создание каталога"
 
-#: ../src/form.c:520
+#: ../src/form.c:521
 msgid "Select date"
 msgstr "Выбор даты"
 
-#: ../src/form.c:741
+#: ../src/form.c:742
 msgid "Select file"
 msgstr "Выбор файла"
 
-#: ../src/form.c:756
+#: ../src/form.c:757
 msgid "Select folder"
 msgstr "Выбор каталога"
 

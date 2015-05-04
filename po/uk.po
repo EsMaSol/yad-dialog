@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-31 11:58+0300\n"
+"POT-Creation-Date: 2015-05-04 14:10+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -49,7 +49,8 @@ msgstr ""
 "Ви мали отримати копію Загальної громадської ліцензії GNU разом з цією "
 "програмою; якщо це не так, дивіться <http://www.gnu.org/licenses/>."
 
-#: ../src/about.c:42
+#: ../src/about.c:43
+#, c-format
 msgid ""
 "Yet Another Dialog\n"
 "(show dialog boxes from shell scripts)\n"
@@ -57,6 +58,8 @@ msgid ""
 "Based on Zenity code\n"
 "\n"
 "Built with Webkit\n"
+"\n"
+"Using GTK+ %d.%d.%d\n"
 msgstr ""
 "Yet Another Dialog\n"
 "(Програма для відображення діалогових вікон зі сценаріїв оболонки)\n"
@@ -64,6 +67,8 @@ msgstr ""
 "Основана на коді Zenity\n"
 "\n"
 "Вбудована підтримка Webkit\n"
+"\n"
+"Використовується GTK+ %d.%d.%d\n"
 
 #: ../src/calendar.c:39 ../src/text.c:389
 #, c-format
@@ -87,31 +92,31 @@ msgstr "Початкове значення - менше за мінімальн
 msgid "Initial value greater than maximum.\n"
 msgstr "Початкове значення - більше за максимальне.\n"
 
-#: ../src/form.c:403
+#: ../src/form.c:404
 msgid "Select files"
 msgstr "Вибір файлу"
 
-#: ../src/form.c:411
+#: ../src/form.c:412
 msgid "Select folders"
 msgstr "Вибір каталогів"
 
-#: ../src/form.c:475
+#: ../src/form.c:476
 msgid "Select or create file"
 msgstr "Вибір або створення файлу"
 
-#: ../src/form.c:483
+#: ../src/form.c:484
 msgid "Select or create folder"
 msgstr "Вибір або створення каталогу"
 
-#: ../src/form.c:520
+#: ../src/form.c:521
 msgid "Select date"
 msgstr "Вибір дати"
 
-#: ../src/form.c:741
+#: ../src/form.c:742
 msgid "Select file"
 msgstr "Вибір файлу"
 
-#: ../src/form.c:756
+#: ../src/form.c:757
 msgid "Select folder"
 msgstr "Вибір каталогу"
 
