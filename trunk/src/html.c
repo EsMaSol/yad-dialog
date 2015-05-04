@@ -17,9 +17,13 @@
  * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
-#include "yad.h"
+#include <limits.h>
+#include <stdlib.h>
 
+#include <glib/gprintf.h>
 #include <webkit/webkit.h>
+
+#include "yad.h"
 
 static WebKitWebView *view;
 
