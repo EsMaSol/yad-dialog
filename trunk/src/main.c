@@ -737,7 +737,7 @@ main (gint argc, gchar ** argv)
         ret = yad_about ();
         break;
       case YAD_MODE_VERSION:
-        g_print ("%s\n", VERSION);
+        g_print ("%s (GTK+ %d.%d.%d)\n", VERSION, gtk_major_version, gtk_minor_version, gtk_micro_version);
         break;
       case YAD_MODE_NOTIFICATION:
         ret = yad_notification_run ();
