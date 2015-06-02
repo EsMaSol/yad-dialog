@@ -176,6 +176,7 @@ typedef struct {
   GSList *buttons;
   gboolean no_buttons;
   gboolean no_markup;
+  gboolean no_escape;
   gboolean always_print;
   gboolean selectable_labels;
   GtkButtonBoxStyle buttons_layout;
