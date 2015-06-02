@@ -170,6 +170,12 @@ static GOptionEntry general_options[] = {
    &options.data.no_markup,
    N_("Don't use pango markup language in dialog's text"),
    NULL},
+  {"no-escape", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.data.no_escape,
+   N_("Don't close dialog if Escape was pressed"),
+   NULL},
 #if !GTK_CHECK_VERSION(2,22,0)
   {"dialog-sep", 0,
    0,
@@ -1849,6 +1855,7 @@ yad_options_init (void)
 #endif
   options.data.borders = -1;
   options.data.no_markup = FALSE;
+  options.data.no_escape = FALSE;
   options.data.always_print = FALSE;
   options.data.selectable_labels = FALSE;
 

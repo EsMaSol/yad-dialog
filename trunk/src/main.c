@@ -120,6 +120,12 @@ text_size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
 }
 #endif
 
+static void
+ignore_close_cb (GtkWidget *w, gpointer data)
+{
+  g_signal_stop_emission_by_name (G_OBJECT (w), "close");
+}
+
 GtkWidget *
 create_dialog (void)
 {
@@ -138,6 +144,9 @@ create_dialog (void)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), options.data.dialog_sep);
 #endif
   gtk_widget_set_name (dlg, "yad-dialog-window");
+
+  if (options.data.no_escape)
+    g_signal_connect (G_OBJECT (dlg), "close", G_CALLBACK (ignore_close_cb) , NULL);
 
   /* get buttons container */
   bbox = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
