@@ -257,6 +257,15 @@ file_chooser_cb (WebKitWebView *view, WebKitFileChooserRequest *req, gpointer d)
   return TRUE;
 }
 
+/*
+static gboolean
+auth_cb (WebKitWebView *view, WebKitAuthenticationRequest *req, gpointer d)
+{
+  printf ("get it\n");
+  return TRUE;
+}
+*/
+
 static gboolean
 handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
 {
@@ -290,6 +299,7 @@ GtkWidget *
 html_create_widget (GtkWidget *dlg)
 {
   GtkWidget *sw;
+  WebKitWebSettings *settings;
   SoupSession *sess;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
@@ -297,6 +307,9 @@ html_create_widget (GtkWidget *dlg)
 
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
+  
+  settings = webkit_web_view_get_settings (view);
+  g_object_set (G_OBJECT (settings), "default-encoding", "utf-8");
 
   g_signal_connect (view, "hovering-over-link", G_CALLBACK (link_hover_cb), NULL);
   g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
@@ -313,7 +326,7 @@ html_create_widget (GtkWidget *dlg)
 
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));
-
+  
   if (options.html_data.uri)
     load_uri (options.html_data.uri);
   else if (!options.html_data.browser)
