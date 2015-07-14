@@ -997,6 +997,7 @@ form_create_widget (GtkWidget * dlg)
 static void
 form_print_field (guint fn)
 {
+  gchar *buf;
   YadField *fld = g_slist_nth_data (options.form_data.fields, fn);
 
   switch (fld->type)
@@ -1012,7 +1013,7 @@ form_print_field (guint fn)
     case YAD_FIELD_DATE:
       if (options.common_data.quoted_output)
         {
-          gchar *buf = g_shell_quote (gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, fn))));
+          buf = g_shell_quote (gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, fn))));
           g_printf ("%s%s", buf, options.common_data.separator);
           g_free (buf);
         }
@@ -1041,11 +1042,9 @@ form_print_field (guint fn)
       if (options.common_data.quoted_output)
         {
 #if GTK_CHECK_VERSION(2,24,0)
-          gchar *buf = g_shell_quote (gtk_combo_box_text_get_active_text
-                                      (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))));
+          buf = g_shell_quote (gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))));
 #else
-          gchar *buf = g_shell_quote (gtk_combo_box_get_active_text
-                                      (GTK_COMBO_BOX (g_slist_nth_data (fields, fn))));
+          buf = g_shell_quote (gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, fn))));
 #endif
           g_printf ("%s%s", buf, options.common_data.separator);
           g_free (buf);
@@ -1065,13 +1064,18 @@ form_print_field (guint fn)
     case YAD_FIELD_DIR:
       if (options.common_data.quoted_output)
         {
-          gchar *buf = g_shell_quote (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, fn))));
-          g_printf ("%s%s", buf, options.common_data.separator);
+          gchar *fname = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, fn)));
+          buf = g_shell_quote (fname ? fname : "");
+          g_free (fname);
+          g_printf ("%s%s", buf ? buf : "", options.common_data.separator);
           g_free (buf);
         }
       else
-        g_printf ("%s%s", gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, fn))),
-                  options.common_data.separator);
+        {
+          buf = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, fn)));
+          g_printf ("%s%s", buf ? buf : "", options.common_data.separator);
+          g_free (buf);
+        }
       break;
     case YAD_FIELD_FONT:
       if (options.common_data.quoted_output)
@@ -1117,7 +1121,14 @@ form_print_field (guint fn)
         tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (g_slist_nth_data (fields, fn)));
         gtk_text_buffer_get_bounds (tb, &b, &e);
         txt = escape_str (gtk_text_buffer_get_text (tb, &b, &e, FALSE));
-        g_printf ("%s%s", txt, options.common_data.separator);
+        if (options.common_data.quoted_output)
+          {
+            buf = g_shell_quote (txt);
+            g_printf ("%s%s", buf, options.common_data.separator);
+            g_free (buf);
+          }
+        else
+          g_printf ("%s%s", txt, options.common_data.separator);
         g_free (txt);
       }
     }
