@@ -1,3 +1,7 @@
+2015-07-15 12:58  v1c0nt
+
+	* ChangeLog, NEWS, configure.ac: release 0.29.0
+
 2015-07-15 12:51  v1c0nt
 
 	* ChangeLog, po/ru.po, po/uk.po, src/html.c: set default html
