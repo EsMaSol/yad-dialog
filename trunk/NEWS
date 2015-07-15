@@ -1,3 +1,11 @@
+Version 0.29.0
+    - fix focus problems in html dialog
+    - set default encoding from locale for html widget
+    - fix quoted output in form dialog
+    - add --no-escape option to prevent close dialog when Esc is pressed
+    - show gtk version within --version and about dialog
+    - fix build with gcc 5.x
+
 Version 0.28.1
     - fix incorrect rows output order in form dialog
 

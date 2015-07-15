@@ -1,3 +1,8 @@
+2015-07-15 12:51  v1c0nt
+
+	* ChangeLog, po/ru.po, po/uk.po, src/html.c: set default html
+	  encoding from locale
+
 2015-07-15 12:23  v1c0nt
 
 	* src/html.c, src/main.c: fix focus problems in html dialog
