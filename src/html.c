@@ -207,66 +207,6 @@ menu_cb (WebKitWebView *view, GtkWidget *menu, WebKitHitTestResult *hit,
 }
 
 static gboolean
-file_chooser_cb (WebKitWebView *view, WebKitFileChooserRequest *req, gpointer d)
-{
-  GtkWidget *dlg;
-  GtkFileFilter *filt;
-  gchar **files;
-  static gchar *dir = NULL;
-
-  dlg = gtk_file_chooser_dialog_new (_("IxHTML - Select File(s)"),
-                                     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
-                                     GTK_FILE_CHOOSER_ACTION_OPEN,
-                                     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-                                     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                     NULL);
-
-  filt = webkit_file_chooser_request_get_mime_types_filter (req);
-  if (filt)
-    gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dlg), filt);
-
-  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg),
-                                        webkit_file_chooser_request_get_select_multiple (req));
-
-  if (dir)
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
-
-  if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
-    {
-      GSList *fl, *f;
-
-      fl = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (dlg));
-
-      if (fl)
-        {
-          guint i = 0;
-
-          files = g_new0 (gchar*, g_slist_length (fl) + 1);
-          for (f = fl; f; f = f->next, i++)
-            files[i] = f->data;
-          webkit_file_chooser_request_select_files (req, (const gchar * const *) files);
-          g_slist_free_full (fl, g_free);
-        }
-      /* keep current dir */
-      g_free (dir);
-      dir = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
-    }
-
-  gtk_widget_destroy (dlg);
-
-  return TRUE;
-}
-
-/*
-static gboolean
-auth_cb (WebKitWebView *view, WebKitAuthenticationRequest *req, gpointer d)
-{
-  printf ("get it\n");
-  return TRUE;
-}
-*/
-
-static gboolean
 handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
 {
   gchar *buf;
@@ -313,7 +253,6 @@ html_create_widget (GtkWidget *dlg)
 
   g_signal_connect (view, "hovering-over-link", G_CALLBACK (link_hover_cb), NULL);
   g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
-  g_signal_connect (view, "run-file-chooser", G_CALLBACK (file_chooser_cb), NULL);
 
   if (options.html_data.browser)
     g_signal_connect (view, "context-menu", G_CALLBACK (menu_cb), NULL);
