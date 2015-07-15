@@ -1,3 +1,38 @@
+2015-07-15 12:23  v1c0nt
+
+	* src/html.c, src/main.c: fix focus problems in html dialog
+
+2015-07-14 11:22  v1c0nt
+
+	* src/form.c: fix output of empty or unset fields in form dialog
+
+2015-07-14 11:05  v1c0nt
+
+	* src/html.c: set default encoding to utf-8 in html dialog
+
+2015-07-07 12:04  v1c0nt
+
+	* src/html.c: add custom file chooser handler for html dialog
+
+2015-06-02 16:58  v1c0nt
+
+	* configure.ac, data/yad.1, po/ru.po, po/uk.po, src/html.c,
+	  src/main.c, src/option.c, src/yad.h: add --no-escape option
+
+2015-05-04 11:13  v1c0nt
+
+	* po/ru.po, po/uk.po, src/about.c, src/main.c: show current gtk
+	  version in --version and --about dialog
+
+2015-05-04 11:02  v1c0nt
+
+	* src/file.c, src/form.c, src/html.c, src/util.c, src/yad.h: fix
+	  build with gcc 5.x
+
+2015-03-31 09:00  v1c0nt
+
+	* ChangeLog, po/ru.po, po/uk.po, src/about.c: extend about info
+
 2015-03-12 10:25  v1c0nt
 
 	* NEWS: release 0.28.1

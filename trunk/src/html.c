@@ -241,6 +241,7 @@ html_create_widget (GtkWidget *dlg)
   GtkWidget *sw;
   WebKitWebSettings *settings;
   SoupSession *sess;
+  const gchar *enc;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
@@ -249,7 +250,8 @@ html_create_widget (GtkWidget *dlg)
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
   
   settings = webkit_web_view_get_settings (view);
-  g_object_set (G_OBJECT (settings), "default-encoding", "utf-8");
+  g_get_charset (&enc);
+  g_object_set (G_OBJECT (settings), "default-encoding", enc);
 
   g_signal_connect (view, "hovering-over-link", G_CALLBACK (link_hover_cb), NULL);
   g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
