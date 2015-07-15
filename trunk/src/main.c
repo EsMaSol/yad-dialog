@@ -126,6 +126,13 @@ ignore_close_cb (GtkWidget *w, gpointer data)
   g_signal_stop_emission_by_name (G_OBJECT (w), "close");
 }
 
+static void
+html_response_cb (GtkDialog *dlg, gint id, gint *data)
+{
+  *data = id;
+  gtk_main_quit ();
+}
+
 GtkWidget *
 create_dialog (void)
 {
@@ -745,15 +752,30 @@ main (gint argc, gchar ** argv)
       case YAD_MODE_ABOUT:
         ret = yad_about ();
         break;
+
       case YAD_MODE_VERSION:
         g_print ("%s (GTK+ %d.%d.%d)\n", VERSION, gtk_major_version, gtk_minor_version, gtk_micro_version);
         break;
+
       case YAD_MODE_NOTIFICATION:
         ret = yad_notification_run ();
         break;
+
       case YAD_MODE_PRINT:
         ret = yad_print_run ();
         break;
+
+      case YAD_MODE_HTML:
+        /* Webkit doesn't handle focus for child dialogs when gtk_dialog_run() is used */
+        /* FIXME: maybe this solution must be expanded to all dialogs */
+        dialog = create_dialog ();
+        g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (html_response_cb), &ret);
+
+        gtk_widget_show_all (dialog);
+
+        gtk_main ();
+        break;
+
       default:
         dialog = create_dialog ();
 
