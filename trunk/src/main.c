@@ -126,12 +126,14 @@ ignore_close_cb (GtkWidget *w, gpointer data)
   g_signal_stop_emission_by_name (G_OBJECT (w), "close");
 }
 
+#ifdef HAVE_HTML
 static void
 html_response_cb (GtkDialog *dlg, gint id, gint *data)
 {
   *data = id;
   gtk_main_quit ();
 }
+#endif
 
 GtkWidget *
 create_dialog (void)
@@ -765,6 +767,7 @@ main (gint argc, gchar ** argv)
         ret = yad_print_run ();
         break;
 
+#ifdef HAVE_HTML
       case YAD_MODE_HTML:
         /* Webkit doesn't handle focus for child dialogs when gtk_dialog_run() is used */
         /* FIXME: maybe this solution must be expanded to all dialogs */
@@ -775,6 +778,7 @@ main (gint argc, gchar ** argv)
 
         gtk_main ();
         break;
+#endif
 
       default:
         dialog = create_dialog ();
