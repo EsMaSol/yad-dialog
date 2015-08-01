@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <glib/gprintf.h>
@@ -66,7 +66,7 @@ drop_data_cb (GtkWidget * w, GdkDragContext * dc, gint x, gint y,
           if (options.common_data.command)
             {
               gchar *action, *arg;
-              
+
               arg = g_shell_quote (dstr);
               action = g_strdup_printf ("%s %s", options.common_data.command, arg);
               g_free (arg);

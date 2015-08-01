@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <stdlib.h>
@@ -90,7 +90,7 @@ expand_action (gchar * cmd)
 #else
                                    gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, num)))
 #endif
-                                   );
+                    );
                   break;
                 case YAD_FIELD_SCALE:
                   g_string_append_printf (xcmd, "%d", (gint) gtk_range_get_value
@@ -98,10 +98,12 @@ expand_action (gchar * cmd)
                   break;
                 case YAD_FIELD_FILE:
                 case YAD_FIELD_DIR:
-                  g_string_append (xcmd, gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
+                  g_string_append (xcmd,
+                                   gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
                   break;
                 case YAD_FIELD_FONT:
-                  g_string_append (xcmd, gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
+                  g_string_append (xcmd,
+                                   gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
                   break;
                 case YAD_FIELD_COLOR:
                   {
@@ -246,7 +248,7 @@ set_field_value (guint num, gchar * value)
           gtk_entry_set_text (GTK_ENTRY (w), s[def]);
         g_strfreev (s);
         break;
-     }
+      }
 
     case YAD_FIELD_COMBO:
     case YAD_FIELD_COMBO_ENTRY:
@@ -320,7 +322,7 @@ set_field_value (guint num, gchar * value)
         break;
       }
 
-    default: ;
+    default:;
     }
 }
 
@@ -438,7 +440,7 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
               ptr = ptr->next;
             }
 
-          str->str[str->len-1] = '\0'; // remove last item separator
+          str->str[str->len - 1] = '\0';        // remove last item separator
           gtk_entry_set_text (entry, str->str);
 
           g_slist_free (files);
@@ -613,8 +615,7 @@ form_create_widget (GtkWidget * dlg)
           /* add field label */
           l = NULL;
           if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
-              fld->type != YAD_FIELD_FULL_BUTTON &&
-              fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
+              fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
@@ -801,8 +802,7 @@ form_create_widget (GtkWidget * dlg)
               e = gtk_entry_new ();
               gtk_widget_set_name (e, "yad-form-entry");
               gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
-              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb),
-                                GINT_TO_POINTER (fld->type));
+              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), GINT_TO_POINTER (fld->type));
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)
               gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
@@ -820,8 +820,7 @@ form_create_widget (GtkWidget * dlg)
               e = gtk_entry_new ();
               gtk_widget_set_name (e, "yad-form-entry");
               gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
-              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (create_files_cb),
-                                GINT_TO_POINTER (fld->type));
+              g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (create_files_cb), GINT_TO_POINTER (fld->type));
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)
               gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
@@ -880,8 +879,7 @@ form_create_widget (GtkWidget * dlg)
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)
-              gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
-                                GTK_EXPAND | GTK_FILL, 0, 5, 5);
+              gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
               gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
               gtk_widget_set_hexpand (e, TRUE);
@@ -915,8 +913,7 @@ form_create_widget (GtkWidget * dlg)
                   gtk_widget_set_name (e, "yad-form-separator");
                 }
 #if !GTK_CHECK_VERSION(3,0,0)
-              gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1,
-                                GTK_EXPAND | GTK_FILL, 0, 5, 5);
+              gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
 #else
               gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
               gtk_widget_set_hexpand (e, TRUE);

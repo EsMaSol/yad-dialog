@@ -35,16 +35,13 @@
 #endif
 
 G_BEGIN_DECLS
-
 #define YAD_SETTINGS_FILE "yad.conf"
-
 #define YAD_RESPONSE_OK         0
 #define YAD_RESPONSE_CANCEL     1
 #define YAD_RESPONSE_TIMEOUT   	70
 #define YAD_RESPONSE_ESC        -4      /* 252 */
 #define YAD_URL_REGEX "(http|https|ftp)://[a-zA-Z0-9./_%#&-]+"
-
-typedef enum {
+  typedef enum {
   YAD_MODE_MESSAGE,
   YAD_MODE_CALENDAR,
   YAD_MODE_COLOR,
@@ -492,12 +489,13 @@ gchar **split_arg (const gchar * str);
 
 YadNTabs *get_tabs (key_t key, gboolean create);
 
-GtkWidget *get_label (gchar *str, guint border);
+GtkWidget *get_label (gchar * str, guint border);
 
 char *escape_str (char *str);
 
 static inline void
-strip_new_line (gchar * str) {
+strip_new_line (gchar * str)
+{
   gint nl = strlen (str) - 1;
 
   if (str[nl] == '\n')
@@ -505,5 +503,4 @@ strip_new_line (gchar * str) {
 }
 
 G_END_DECLS
-
 #endif /* _YAD_H_ */

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <string.h>
@@ -406,8 +406,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                                   g_ascii_strtoll (string->str, NULL, 10), -1);
               break;
             case YAD_COLUMN_FLOAT:
-              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count,
-                                  g_ascii_strtod (string->str, NULL), -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, g_ascii_strtod (string->str, NULL), -1);
               break;
             case YAD_COLUMN_IMAGE:
               pb = get_pixbuf (string->str, YAD_SMALL_ICON);
@@ -575,7 +574,7 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
                     gchar *cval;
                     gtk_tree_model_get (model, &iter, i, &cval, -1);
                     if (cval)
-                      { 
+                      {
                         gchar *sval = g_shell_quote (cval);
                         g_string_append_printf (args, " %s", sval);
                         g_free (sval);

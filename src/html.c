@@ -37,7 +37,7 @@ static gboolean is_loaded = FALSE;
 #endif
 
 static void
-load_uri (const gchar *uri)
+load_uri (const gchar * uri)
 {
   gchar *addr = NULL;
 
@@ -74,14 +74,14 @@ load_uri (const gchar *uri)
 }
 
 static void
-loaded_cb (WebKitWebView *v, WebKitWebFrame *f, gpointer d)
+loaded_cb (WebKitWebView * v, WebKitWebFrame * f, gpointer d)
 {
   is_loaded = TRUE;
 }
 
 static gboolean
-link_cb (WebKitWebView *v, WebKitWebFrame *f, WebKitNetworkRequest *r,
-         WebKitWebNavigationAction *act, WebKitWebPolicyDecision *pd, gpointer d)
+link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
+         WebKitWebNavigationAction * act, WebKitWebPolicyDecision * pd, gpointer d)
 {
   gchar *uri = (gchar *) webkit_network_request_get_uri (r);
 
@@ -104,7 +104,7 @@ link_cb (WebKitWebView *v, WebKitWebFrame *f, WebKitNetworkRequest *r,
 }
 
 static void
-link_hover_cb (WebKitWebView *v, const gchar *t, const gchar *link, gpointer *d)
+link_hover_cb (WebKitWebView * v, const gchar * t, const gchar * link, gpointer * d)
 {
   if (link)
     is_link = TRUE;
@@ -113,7 +113,7 @@ link_hover_cb (WebKitWebView *v, const gchar *t, const gchar *link, gpointer *d)
 }
 
 static void
-select_file_cb (GtkEntry *entry, GtkEntryIconPosition pos, GdkEventButton *ev, gpointer d)
+select_file_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev, gpointer d)
 {
   GtkWidget *dlg;
   static gchar *dir = NULL;
@@ -124,9 +124,7 @@ select_file_cb (GtkEntry *entry, GtkEntryIconPosition pos, GdkEventButton *ev, g
   dlg = gtk_file_chooser_dialog_new (_("IxHTML - Select File"),
                                      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                      GTK_FILE_CHOOSER_ACTION_OPEN,
-                                     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-                                     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                     NULL);
+                                     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
   if (dir)
     gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
 
@@ -141,26 +139,24 @@ select_file_cb (GtkEntry *entry, GtkEntryIconPosition pos, GdkEventButton *ev, g
       dir = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
     }
 
- gtk_widget_destroy (dlg);
+  gtk_widget_destroy (dlg);
 }
 
 static void
-do_open_cb (GtkWidget *w, GtkDialog *dlg)
+do_open_cb (GtkWidget * w, GtkDialog * dlg)
 {
   gtk_dialog_response (dlg, GTK_RESPONSE_ACCEPT);
 }
 
 static void
-open_cb (GtkWidget *w, gpointer d)
+open_cb (GtkWidget * w, gpointer d)
 {
   GtkWidget *dlg, *cnt, *lbl, *entry;
 
   dlg = gtk_dialog_new_with_buttons (_("Open URI"),
                                      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
                                      GTK_DIALOG_DESTROY_WITH_PARENT,
-                                     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
-                                     GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                     NULL);
+                                     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
   gtk_window_set_default_size (GTK_WINDOW (dlg), 350, -1);
 
   cnt = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
@@ -185,8 +181,7 @@ open_cb (GtkWidget *w, gpointer d)
 }
 
 static gboolean
-menu_cb (WebKitWebView *view, GtkWidget *menu, WebKitHitTestResult *hit,
-         gboolean kb, gpointer d)
+menu_cb (WebKitWebView * view, GtkWidget * menu, WebKitHitTestResult * hit, gboolean kb, gpointer d)
 {
   GtkWidget *mi;
 
@@ -207,7 +202,7 @@ menu_cb (WebKitWebView *view, GtkWidget *menu, WebKitHitTestResult *hit,
 }
 
 static gboolean
-handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
+handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
 {
   gchar *buf;
   GError *err = NULL;
@@ -224,8 +219,7 @@ handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
       return FALSE;
 
     case G_IO_STATUS_EOF:
-      webkit_web_view_load_string (view, inbuf->str, options.html_data.mime,
-                                   options.html_data.encoding, NULL);
+      webkit_web_view_load_string (view, inbuf->str, options.html_data.mime, options.html_data.encoding, NULL);
       return FALSE;
 
     case G_IO_STATUS_AGAIN:
@@ -236,7 +230,7 @@ handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
 }
 
 GtkWidget *
-html_create_widget (GtkWidget *dlg)
+html_create_widget (GtkWidget * dlg)
 {
   GtkWidget *sw;
   WebKitWebSettings *settings;
@@ -248,7 +242,7 @@ html_create_widget (GtkWidget *dlg)
 
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
-  
+
   settings = webkit_web_view_get_settings (view);
   g_get_charset (&enc);
   g_object_set (G_OBJECT (settings), "default-encoding", enc);
@@ -267,7 +261,7 @@ html_create_widget (GtkWidget *dlg)
 
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));
-  
+
   if (options.html_data.uri)
     load_uri (options.html_data.uri);
   else if (!options.html_data.browser)

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include "yad.h"
@@ -45,7 +45,7 @@ typedef struct {
 } DEntry;
 
 static void
-select_cb (GObject *obj, gpointer data)
+select_cb (GObject * obj, gpointer data)
 {
   static gboolean first_time = TRUE;
 
@@ -184,35 +184,35 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
           switch (column_count)
             {
-              case COL_NAME:
-              case COL_COMMAND:
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
+            case COL_NAME:
+            case COL_COMMAND:
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, string->str, -1);
+              break;
+            case COL_TOOLTIP:
+              {
+                gchar *buf = g_markup_escape_text (string->str, -1);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, buf, -1);
+                g_free (buf);
                 break;
-              case COL_TOOLTIP:
-                {
-                  gchar *buf = g_markup_escape_text (string->str, -1);
-                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, buf, -1);
-                  g_free (buf);
-                  break;
-                }
-              case COL_PIXBUF:
-                if (options.icons_data.compact)
-                  if (*string->str)
-                    pb = get_pixbuf (string->str, YAD_SMALL_ICON);
-                  else
-                    pb = NULL;
+              }
+            case COL_PIXBUF:
+              if (options.icons_data.compact)
+                if (*string->str)
+                  pb = get_pixbuf (string->str, YAD_SMALL_ICON);
                 else
-                  pb = get_pixbuf (string->str, YAD_BIG_ICON);
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
-                if (pb)
-                  g_object_unref (pb);
-                break;
-              case COL_TERM:
-                if (strcasecmp (string->str, "true") == 0)
-                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
-                else
-                  gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
-                break;
+                  pb = NULL;
+              else
+                pb = get_pixbuf (string->str, YAD_BIG_ICON);
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
+              if (pb)
+                g_object_unref (pb);
+              break;
+            case COL_TERM:
+              if (strcasecmp (string->str, "true") == 0)
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
+              else
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
+              break;
             }
 
           column_count++;

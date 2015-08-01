@@ -1522,7 +1522,7 @@ set_color_mode (const gchar * option_name, const gchar * value, gpointer data, G
 {
   if (strcasecmp (value, "hex") == 0)
     options.color_data.mode = YAD_COLOR_HEX;
-  else if(strcasecmp (value, "rgb") == 0)
+  else if (strcasecmp (value, "rgb") == 0)
     options.color_data.mode = YAD_COLOR_RGB;
   else
     g_printerr (_("Unknown color mode: %s\n"), value);
@@ -1726,8 +1726,7 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
       else if (strcmp (value + ofst, "STKFLT") == 0)
         sn = SIGSTKFLT;
 #endif
-      else if (strcmp (value + ofst, "CHLD") == 0 ||
-               strcmp (value + ofst, "CLD") == 0)
+      else if (strcmp (value + ofst, "CHLD") == 0 || strcmp (value + ofst, "CLD") == 0)
         sn = SIGCHLD;
       else if (strcmp (value + ofst, "CONT") == 0)
         sn = SIGCONT;
@@ -1751,8 +1750,7 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
         sn = SIGPROF;
       else if (strcmp (value + ofst, "WINCH") == 0)
         sn = SIGWINCH;
-      else if (strcmp (value + ofst, "IO") == 0 ||
-               strcmp (value + ofst, "POLL") == 0)
+      else if (strcmp (value + ofst, "IO") == 0 || strcmp (value + ofst, "POLL") == 0)
         sn = SIGIO;
 #ifdef SIGPWR
       else if (strcmp (value + ofst, "PWR") == 0)

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include "yad.h"
@@ -41,8 +41,7 @@ yad_about (void)
        "along with YAD. If not, see <http://www.gnu.org/licenses/>.");
 
   gchar *comments = g_strdup_printf (_("Yet Another Dialog\n"
-                                       "(show dialog boxes from shell scripts)\n"
-                                       "\nBased on Zenity code\n"
+                                       "(show dialog boxes from shell scripts)\n" "\nBased on Zenity code\n"
 #ifdef HAVE_HTML
                                        "\nBuilt with Webkit\n"
 #endif
@@ -54,14 +53,13 @@ yad_about (void)
   g_object_set (G_OBJECT (dialog),
                 "name", PACKAGE_NAME,
                 "version", PACKAGE_VERSION,
-                "copyright",
-                "Copyright \xc2\xa9 2008-2014 Victor Ananjevsky <ananasik@gmail.com>",
+                "copyright", "Copyright \xc2\xa9 2008-2015 Victor Ananjevsky <ananasik@gmail.com>",
                 "comments", comments,
                 "authors", authors,
                 "website", PACKAGE_URL,
                 "translator-credits", translators,
-                "wrap-license", TRUE,
-                "license", license,
+                "wrap-license", TRUE, 
+                "license", license, 
                 "logo-icon-name", "yad",
                 NULL);
 

@@ -1,3 +1,6 @@
+Version 0.29.1
+    - fix build without HTML dialog
+
 Version 0.29.0
     - fix focus problems in html dialog
     - set default encoding from locale for html widget
