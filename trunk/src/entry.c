@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <gdk/gdkkeysyms.h>
@@ -56,12 +56,12 @@ icon_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * event, gpo
 
       switch (pos)
         {
-          case GTK_ENTRY_ICON_PRIMARY:
-            cmd = options.entry_data.licon_action;
-            break;
-          case GTK_ENTRY_ICON_SECONDARY:
-            cmd = options.entry_data.ricon_action;
-            break;
+        case GTK_ENTRY_ICON_PRIMARY:
+          cmd = options.entry_data.licon_action;
+          break;
+        case GTK_ENTRY_ICON_SECONDARY:
+          cmd = options.entry_data.ricon_action;
+          break;
         }
 
       if (cmd)
@@ -228,7 +228,8 @@ entry_create_widget (GtkWidget * dlg)
           is_combo = TRUE;
         }
 
-      i = 0; active = -1;
+      i = 0;
+      active = -1;
       while (options.extra_data[i] != NULL)
         {
           if (options.entry_data.entry_text &&

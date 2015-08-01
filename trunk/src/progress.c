@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <stdio.h>
@@ -94,7 +94,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                   gchar *logline;
                   GtkTextIter end;
 
-                  logline = g_strdup_printf ("%s\n", match); /* add new line */
+                  logline = g_strdup_printf ("%s\n", match);    /* add new line */
                   gtk_text_buffer_get_end_iter (log_buffer, &end);
                   gtk_text_buffer_insert (log_buffer, &end, logline, -1);
                   g_free (logline);

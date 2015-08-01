@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <sys/stat.h>
@@ -54,7 +54,7 @@ free_menu_data (gpointer data, gpointer udata)
 }
 
 static void
-parse_menu_str (gchar *str)
+parse_menu_str (gchar * str)
 {
   gchar **menu_vals;
   gint i = 0;

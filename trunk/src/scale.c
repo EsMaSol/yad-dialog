@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2014, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2015, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include "yad.h"
@@ -68,7 +68,7 @@ scale_create_widget (GtkWidget * dlg)
     {
 #if GTK_CHECK_VERSION(3,0,0)
       w = scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, GTK_ADJUSTMENT (adj));
-#else    
+#else
       w = scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
 #endif
       gtk_range_set_inverted (GTK_RANGE (w), !options.scale_data.invert);
@@ -77,7 +77,7 @@ scale_create_widget (GtkWidget * dlg)
     {
 #if GTK_CHECK_VERSION(3,0,0)
       w = scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT (adj));
-#else    
+#else
       w = scale = gtk_hscale_new (GTK_ADJUSTMENT (adj));
 #endif
       gtk_range_set_inverted (GTK_RANGE (w), options.scale_data.invert);
