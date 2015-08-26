@@ -154,6 +154,15 @@ create_dialog (void)
 #endif
   gtk_widget_set_name (dlg, "yad-dialog-window");
 
+#ifndef  G_OS_WIN32
+  if (options.parent)
+    {
+      gdk_window_set_transient_for (gtk_widget_get_window (dlg),
+                                    gdk_x11_window_foreign_new_for_display (gdk_display_get_default (),
+                                                                            options.parent));
+    }
+#endif
+
   if (options.data.no_escape)
     g_signal_connect (G_OBJECT (dlg), "close", G_CALLBACK (ignore_close_cb) , NULL);
 
