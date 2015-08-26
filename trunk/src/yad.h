@@ -337,6 +337,7 @@ typedef struct {
   gint margins;
   gboolean tail;
   gboolean uri;
+  gchar *uri_color;
 } YadTextData;
 
 typedef struct {
