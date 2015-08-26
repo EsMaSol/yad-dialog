@@ -520,7 +520,9 @@ text_create_widget (GtkWidget * dlg)
 
       /* Create text tag for URI */
       tag = gtk_text_buffer_create_tag (text_buffer, NULL,
-                                        "foreground", "blue", "underline", PANGO_UNDERLINE_SINGLE, NULL);
+                                        "foreground", options.text_data.uri_color,
+                                        "underline", PANGO_UNDERLINE_SINGLE,
+                                        NULL);
       g_object_set_data (G_OBJECT (tag), "is_link", GINT_TO_POINTER (1));
       g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
 

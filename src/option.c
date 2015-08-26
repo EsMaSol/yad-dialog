@@ -1250,6 +1250,12 @@ static GOptionEntry text_options[] = {
    &options.text_data.uri,
    N_("Make URI clickable"),
    NULL},
+  {"uri-color", 0,
+   0,
+   G_OPTION_ARG_STRING,
+   &options.text_data.uri_color,
+   N_("Use specified color for links"),
+   N_("COLOR")},
   {"listen", 0,
    G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_NONE,
@@ -2012,7 +2018,10 @@ yad_options_init (void)
   options.text_data.back = NULL;
   options.text_data.wrap = FALSE;
   options.text_data.justify = GTK_JUSTIFY_LEFT;
+  options.text_data.margins = 0;
   options.text_data.tail = FALSE;
+  options.text_data.uri = FALSE;
+  options.text_data.uri_color = "blue";
 }
 
 GOptionContext *
