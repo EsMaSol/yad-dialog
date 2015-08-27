@@ -270,7 +270,7 @@ static GOptionEntry general_options[] = {
    N_("Tab nubmer of this dialog"),
    N_("NUMBER")},
 #ifndef G_OS_WIN32
-  {"parent", 0,
+  {"parent-win", 0,
    0,
    G_OPTION_ARG_INT,
    &options.parent,
