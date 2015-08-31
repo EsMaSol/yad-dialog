@@ -373,7 +373,7 @@ msgstr "Номер вкладки для этого диалога"
 
 #: ../src/option.c:277
 msgid "XID of parent window"
-msgstr "XID родительсткого окна"
+msgstr "Идентификатор родительсткого окна"
 
 #: ../src/option.c:283
 msgid "Send SIGNAL to parent"
