@@ -38,6 +38,7 @@ static gboolean set_tab_pos (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scale_value (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_ellipsize (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_expander (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_orient (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_print_type (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_progress_log (const gchar *, const gchar *, gpointer, GError **);
 #ifndef G_OS_WIN32
@@ -62,6 +63,7 @@ static gboolean list_mode = FALSE;
 static gboolean multi_progress_mode = FALSE;
 static gboolean notebook_mode = FALSE;
 static gboolean notification_mode = FALSE;
+static gboolean paned_mode = FALSE;
 static gboolean print_mode = FALSE;
 static gboolean progress_mode = FALSE;
 static gboolean scale_mode = FALSE;
@@ -1006,6 +1008,28 @@ static GOptionEntry notification_options[] = {
   {NULL}
 };
 
+static GOptionEntry paned_options[] = {
+  {"paned", 0,
+   G_OPTION_FLAG_IN_MAIN,
+   G_OPTION_ARG_NONE,
+   &paned_mode,
+   N_("Display paned dialog"),
+   NULL},
+  {"orient", 0,
+   0,
+   G_OPTION_ARG_CALLBACK,
+   set_orient,
+   N_("Set orientation (TYPE - hor[izontal] or vert[ical])"),
+   N_("TYPE")},
+  {"splitter", 0,
+   0,
+   G_OPTION_ARG_INT,
+   &options.paned_data.splitter,
+   N_("Set initial splitter position"),
+   N_("POS")},
+  {NULL}
+};
+
 static GOptionEntry print_options[] = {
   {"print", 0,
    G_OPTION_FLAG_IN_MAIN,
@@ -1647,6 +1671,19 @@ set_ellipsize (const gchar * option_name, const gchar * value, gpointer data, GE
 }
 
 static gboolean
+set_orient (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (strncasecmp (value, "hor", 3) == 3)
+    options.paned_data.orient = GTK_ORIENTATION_HORIZONTAL;
+  else if (strncasecmp (value, "vert", 4) == 0)
+    options.print_data.type = GTK_ORIENTATION_VERTICAL;
+  else
+    g_printerr (_("Unknown orientation: %s\n"), value);
+
+  return TRUE;
+}
+
+static gboolean
 set_print_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   if (strcasecmp (value, "text") == 0)
@@ -1812,6 +1849,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_NOTEBOOK;
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
+  else if (paned_mode)
+    options.mode = YAD_MODE_PANED;
   else if (print_mode)
     options.mode = YAD_MODE_PRINT;
   else if (progress_mode)
@@ -1990,6 +2029,10 @@ yad_options_init (void)
   options.notification_data.hidden = FALSE;
   options.notification_data.menu = NULL;
 
+  /* Initialize paned data */
+  options.paned_data.orient = GTK_ORIENTATION_HORIZONTAL;
+  options.paned_data.splitter = -1;
+
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;
   options.print_data.headers = FALSE;
@@ -2125,6 +2168,12 @@ yad_create_context (void)
   a_group = g_option_group_new ("notification", _("Notification icon options"),
                                 _("Show notification icon options"), NULL, NULL);
   g_option_group_add_entries (a_group, notification_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds paned option entries */
+  a_group = g_option_group_new ("paned", _("Paned dialog options"), _("Show paned dialog options"), NULL, NULL);
+  g_option_group_add_entries (a_group, paned_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

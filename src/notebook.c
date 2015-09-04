@@ -29,7 +29,6 @@
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
 
 #include "yad.h"
 

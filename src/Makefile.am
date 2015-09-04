@@ -5,27 +5,28 @@ AM_CPPFLAGS =                           \
 bin_PROGRAMS = yad
 
 yad_SOURCES = 			\
-	about.c			    \
-	calendar.c		    \
-	color.c			    \
+	about.c			\
+	calendar.c		\
+	color.c			\
 	dnd.c           	\
-	entry.c			    \
-	file.c			    \
-	font.c			    \
-	form.c			    \
-	icons.c			    \
-	list.c			    \
+	entry.c			\
+	file.c			\
+	font.c			\
+	form.c			\
+	icons.c			\
+	list.c			\
 	multi-progress.c	\
-	notebook.c		    \
+	notebook.c		\
 	notification.c		\
-	option.c		    \
-	print.c			    \
-	progress.c		    \
-	scale.c			    \
-	text.c			    \
-	util.c			    \
-	main.c			    \
-	yad.h			    \
+	option.c		\
+	paned.c			\
+	print.c			\
+	progress.c		\
+	scale.c			\
+	text.c			\
+	util.c			\
+	main.c			\
+	yad.h			\
 	calendar.xpm
 
 if HTML
