@@ -41,7 +41,8 @@ yad_about (void)
        "along with YAD. If not, see <http://www.gnu.org/licenses/>.");
 
   gchar *comments = g_strdup_printf (_("Yet Another Dialog\n"
-                                       "(show dialog boxes from shell scripts)\n" "\nBased on Zenity code\n"
+                                       "(show dialog boxes from shell scripts)\n"
+                                       "\nBased on Zenity code\n"
 #ifdef HAVE_HTML
                                        "\nBuilt with Webkit\n"
 #endif

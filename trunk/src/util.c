@@ -338,17 +338,17 @@ get_label (gchar * str, guint border)
   return a;
 }
 
-char *
-escape_str (char *str)
+gchar *
+escape_str (gchar *str)
 {
-  char *res, *buf = str;
-  unsigned i = 0, len;
+  gchar *res, *buf = str;
+  guint i = 0, len;
 
   if (!str)
     return NULL;
 
   len = strlen (str);
-  res = (char *) calloc (len + 1, sizeof (char));
+  res = (gchar *) calloc (len + 1, sizeof (gchar));
 
   while (*buf)
     {
@@ -356,13 +356,13 @@ escape_str (char *str)
         {
         case '\n':
           len += 1;
-          res = (char *) realloc (res, len + 1);
+          res = (gchar *) realloc (res, len + 1);
           strcpy (res + i, "\\n");
           i += 2;
           break;
         case '\t':
           len += 1;
-          res = (char *) realloc (res, len + 1);
+          res = (gchar *) realloc (res, len + 1);
           strcpy (res + i, "\\t");
           i += 2;
           break;

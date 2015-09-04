@@ -35,13 +35,17 @@
 #endif
 
 G_BEGIN_DECLS
+
 #define YAD_SETTINGS_FILE "yad.conf"
+
 #define YAD_RESPONSE_OK         0
 #define YAD_RESPONSE_CANCEL     1
 #define YAD_RESPONSE_TIMEOUT   	70
 #define YAD_RESPONSE_ESC        -4      /* 252 */
+
 #define YAD_URL_REGEX "(http|https|ftp)://[a-zA-Z0-9./_%#&-]+"
-  typedef enum {
+
+typedef enum {
   YAD_MODE_MESSAGE,
   YAD_MODE_CALENDAR,
   YAD_MODE_COLOR,
@@ -58,6 +62,7 @@ G_BEGIN_DECLS
   YAD_MODE_MULTI_PROGRESS,
   YAD_MODE_NOTEBOOK,
   YAD_MODE_NOTIFICATION,
+  YAD_MODE_PANED,
   YAD_MODE_PRINT,
   YAD_MODE_PROGRESS,
   YAD_MODE_SCALE,
@@ -297,6 +302,11 @@ typedef struct {
 } YadNotificationData;
 
 typedef struct {
+  GtkOrientation orient;
+  gint splitter;
+} YadPanedData;
+
+typedef struct {
   YadPrintType type;
   gboolean headers;
 } YadPrintData;
@@ -377,6 +387,7 @@ typedef struct {
   YadMultiProgressData multi_progress_data;
   YadNotebookData notebook_data;
   YadNotificationData notification_data;
+  YadPanedData paned_data;
   YadPrintData print_data;
   YadProgressData progress_data;
   YadScaleData scale_data;
@@ -456,12 +467,14 @@ GtkWidget *icons_create_widget (GtkWidget * dlg);
 GtkWidget *list_create_widget (GtkWidget * dlg);
 GtkWidget *multi_progress_create_widget (GtkWidget * dlg);
 GtkWidget *notebook_create_widget (GtkWidget * dlg);
+GtkWidget *paned_create_widget (GtkWidget * dlg);
 GtkWidget *progress_create_widget (GtkWidget * dlg);
 GtkWidget *scale_create_widget (GtkWidget * dlg);
 GtkWidget *text_create_widget (GtkWidget * dlg);
 
 void confirm_overwrite_cb (GtkDialog * dlg, gint id, gpointer data);
 void notebook_swallow_childs (void);
+void paned_swallow_childs (void);
 
 void calendar_print_result (void);
 void color_print_result (void);
@@ -471,6 +484,7 @@ void font_print_result (void);
 void form_print_result (void);
 void list_print_result (void);
 void notebook_print_result (void);
+void paned_print_result (void);
 void scale_print_result (void);
 void text_print_result (void);
 
@@ -481,6 +495,7 @@ gint yad_print_run (void);
 gint yad_about (void);
 
 void notebook_close_childs (void);
+void paned_close_childs (void);
 
 void read_settings (void);
 void write_settings (void);
@@ -493,7 +508,7 @@ YadNTabs *get_tabs (key_t key, gboolean create);
 
 GtkWidget *get_label (gchar * str, guint border);
 
-char *escape_str (char *str);
+gchar *escape_str (gchar *str);
 
 static inline void
 strip_new_line (gchar * str)
