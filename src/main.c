@@ -376,7 +376,10 @@ create_dialog (void)
       case YAD_MODE_NOTEBOOK:
         main_widget = notebook_create_widget (dlg);
         break;
-      case YAD_MODE_PROGRESS:
+    case YAD_MODE_PANED:
+        main_widget = paned_create_widget (dlg);
+        break;
+     case YAD_MODE_PROGRESS:
         main_widget = progress_create_widget (dlg);
         break;
       case YAD_MODE_SCALE:
@@ -636,6 +639,9 @@ print_result (void)
       case YAD_MODE_NOTEBOOK:
         notebook_print_result ();
         break;
+      case YAD_MODE_PANED:
+        paned_print_result ();
+        break;
       case YAD_MODE_SCALE:
         scale_print_result ();
         break;
@@ -805,6 +811,8 @@ main (gint argc, gchar ** argv)
           }
         else if (options.mode == YAD_MODE_NOTEBOOK)
           notebook_swallow_childs ();
+        else if (options.mode == YAD_MODE_PANED)
+          paned_swallow_childs ();
 
         ret = gtk_dialog_run (GTK_DIALOG (dialog));
         if (options.data.always_print)
@@ -821,6 +829,8 @@ main (gint argc, gchar ** argv)
 #ifndef G_OS_WIN32
         if (options.mode == YAD_MODE_NOTEBOOK)
           notebook_close_childs ();
+        else if (options.mode == YAD_MODE_PANED)
+          paned_close_childs ();
         /* autokill option for progress dialog */
         if (!options.kill_parent)
           {
