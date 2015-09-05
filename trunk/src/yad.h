@@ -292,7 +292,6 @@ typedef struct {
   GSList *tabs;
   guint borders;
   GtkPositionType pos;
-  key_t key;
 } YadNotebookData;
 
 typedef struct {
@@ -364,6 +363,7 @@ typedef struct {
   gboolean listen;
   gboolean preview;
   gboolean quoted_output;
+  key_t key;
 } YadCommonData;
 
 typedef struct {

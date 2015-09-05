@@ -41,7 +41,7 @@ notebook_create_widget (GtkWidget * dlg)
   GSList *tab;
 
   /* get shared memory */
-  tabs = get_tabs (options.notebook_data.key, TRUE);
+  tabs = get_tabs (options.common_data.key, TRUE);
   if (!tabs)
     exit (-1);
 
