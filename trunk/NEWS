@@ -1,3 +1,8 @@
+Version 0.30.0
+    - add paned dialog
+    - add --parent-win option to make dialog transient for special window
+    - add --uri-color option for setting text color of URIs in text-info dialog
+
 Version 0.29.1
     - fix build without HTML dialog
 

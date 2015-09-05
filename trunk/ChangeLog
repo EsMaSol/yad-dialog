@@ -1,3 +1,65 @@
+2015-09-05 05:31  v1c0nt
+
+	* configure.ac, data/yad.1: update man page. bump version to
+	  0.30.0. prepare to next release
+
+2015-09-05 05:21  v1c0nt
+
+	* po/POTFILES.in, po/ru.po, po/uk.po, src/notebook.c, src/option.c,
+	  src/paned.c, src/yad.h: add paned dialog
+
+2015-09-04 14:54  v1c0nt
+
+	* src/paned.c:
+
+2015-09-04 14:53  v1c0nt
+
+	* src/main.c:
+
+2015-09-04 11:57  v1c0nt
+
+	* src/Makefile.am, src/about.c, src/notebook.c, src/option.c,
+	  src/util.c, src/yad.h: add placeholder for paned dialog
+
+2015-08-31 08:15  v1c0nt
+
+	* po/ru.po, po/uk.po: fix translation
+
+2015-08-27 06:04  v1c0nt
+
+	* data/yad.1, src/option.c: rename --parent to --parent-win
+
+2015-08-26 16:16  v1c0nt
+
+	* configure.ac: bump version
+
+2015-08-26 16:15  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/main.c, src/option.c,
+	  src/yad.h: add --parent option
+
+2015-08-26 15:39  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/option.c, src/text.c,
+	  src/yad.h: add --uri-color option for text dialog
+
+2015-08-01 16:34  v1c0nt
+
+	* NEWS, src/about.c, src/browser.c, src/calendar.c, src/color.c,
+	  src/dnd.c, src/entry.c, src/file.c, src/font.c, src/form.c,
+	  src/html.c, src/icons.c, src/list.c, src/multi-progress.c,
+	  src/notebook.c, src/notification.c, src/option.c, src/print.c,
+	  src/progress.c, src/scale.c, src/text.c, src/util.c, src/yad.h:
+	  update copyright years
+
+2015-07-29 09:50  v1c0nt
+
+	* configure.ac, src/main.c: fix build with --disable-html
+
+2015-07-15 12:58  v1c0nt
+
+	* ChangeLog:
+
 2015-07-15 12:58  v1c0nt
 
 	* ChangeLog, NEWS, configure.ac: release 0.29.0
