@@ -29,7 +29,6 @@
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
 
 #include "yad.h"
 
@@ -40,10 +39,16 @@ paned_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w, *s;
 
-  if (options.paned_data.orient == GTK_ORIENTATION_VERTICAL)
-    paned = w = gtk_vpaned_new ();
-  else
+  /* get shared memory */
+  tabs = get_tabs (options.common_data.key, TRUE);
+  if (!tabs)
+    exit (-1);
+
+  /* create widget */
+  if (options.paned_data.orient == GTK_ORIENTATION_HORIZONTAL)
     paned = w = gtk_hpaned_new ();
+  else
+    paned = w = gtk_vpaned_new ();
 
   gtk_paned_set_position (GTK_PANED (w), options.paned_data.splitter);
 

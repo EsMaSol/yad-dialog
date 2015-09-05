@@ -930,9 +930,9 @@ static GOptionEntry notebook_options[] = {
    N_("Display notebook dialog"),
    NULL},
   {"key", 0,
-   0,
+   G_OPTION_FLAG_NOALIAS,
    G_OPTION_ARG_INT,
-   &options.notebook_data.key,
+   &options.common_data.key,
    N_("Identifier of embedded dialogs"),
    N_("KEY")},
   {"tab", 0,
@@ -1027,6 +1027,12 @@ static GOptionEntry paned_options[] = {
    &options.paned_data.splitter,
    N_("Set initial splitter position"),
    N_("POS")},
+  {"key", 0,
+   G_OPTION_FLAG_NOALIAS,
+   G_OPTION_ARG_INT,
+   &options.common_data.key,
+   N_("Identifier of embedded dialogs"),
+   N_("KEY")},
   {NULL}
 };
 
@@ -1934,6 +1940,7 @@ yad_options_init (void)
   options.common_data.listen = FALSE;
   options.common_data.preview = FALSE;
   options.common_data.quoted_output = FALSE;
+  options.common_data.key = -1;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
@@ -2022,7 +2029,6 @@ yad_options_init (void)
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 5;
   options.notebook_data.pos = GTK_POS_TOP;
-  options.notebook_data.key = -1;
 
   /* Initialize notification data */
   options.notification_data.middle = TRUE;
@@ -2030,7 +2036,7 @@ yad_options_init (void)
   options.notification_data.menu = NULL;
 
   /* Initialize paned data */
-  options.paned_data.orient = GTK_ORIENTATION_HORIZONTAL;
+  options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
   options.paned_data.splitter = -1;
 
   /* Initialize print data */
