@@ -8,7 +8,7 @@ yad \- display GTK+ dialogs in shell scripts
 
 .SH DESCRIPTION
 \fBYAD\fP is a program that will display GTK+ dialogs, and return
-(either in the return code, or on standard output) the users
+(either in the return code or on standard output) the users
 input. This allows you to present information, and ask for information
 from the user, from all manner of shell scripts.
 .PP
@@ -548,7 +548,7 @@ the same as in \fIprogress\fP dialog.
 .SS Notebook options
 .TP
 .B \-\-key=\fIKEY\fP
-Set the key of this notebook.
+Set the key of the children.
 .TP
 .B \-\-tab=\fITEXT\fP
 Add tab with specified label to notebook. \fITEXT\fP may be in a form \fILABEL[!ICON[!TOOLTIP]]\fP
@@ -560,7 +560,7 @@ Set the tabs position. Value may be \fItop\fP, \fIbottom\fP, \fIleft\fP, or \fIr
 .B \-\-tab-borders=\fINUMBER\fP
 Set the borders width around widget in tabs.
 .PP
-See \fBNOTEBOOK\fP section for more about notebook dialog.
+See \fBNOTEBOOK and PANED\fP section for more about notebook dialog.
 
 .SS Notification options
 .TP
@@ -586,6 +586,19 @@ Disable exit on middle click.
 Doesn't show icon at startup.
 .PP
 See \fBNOTIFICATION\fP section for more about separators.
+
+.SS Paned options
+.TP
+.B \-\-key=\fIKEY\fP
+Set the key of the children.
+.TP
+.B \-\-orient=\fITYPE\fP
+Set orientation of panes inside dialog. \fITYPE\fP may be in \fIhor[izontal]\fP or \fIvert[ical]\fP.
+.TP
+.B \-\-splitter=\fIPOS\fP
+Set the initial splitter position.
+.PP
+See \fBNOTEBOOK and PANED\fP section for more about paned dialog.
 
 .SS Print options
 .TP
@@ -729,7 +742,7 @@ Show version of program.
 .PP
 Also the standard GTK+ options are accepted.
 
-.SH NOTEBOOK
+.SH NOTEBOOK and PANED
 Notebook is a complex dialog which swallow other dialogs in his tabs.
 Dialogs identifies by unique key (integer) and must be runs in a special plug mode (\-\-plug option).
 Following example runs notebook dialog with two tabs, first has a simple text and second is an entry dialog.
@@ -743,6 +756,9 @@ yad \-\-notebook \-\-key=12345 \-\-tab="Tab 1" \-\-tab="Tab 2"
 .fi
 
 NOTE: The order of output results for tabs is undefined!
+
+Paned works in a same manner as a notebook with one restriction - only first and secong plug dialogs
+will be swallowed to panes.
 
 .SH NOTIFICATION
 Allows commands to be sent to yad in the form \fBcommand:args\fP.
