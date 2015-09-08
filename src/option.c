@@ -846,6 +846,18 @@ static GOptionEntry list_options[] = {
    &options.list_data.tooltip_column,
    N_("Set the tooltip column"),
    N_("NUMBER")},
+  {"sep-column", 0,
+   0,
+   G_OPTION_ARG_INT,
+   &options.list_data.sep_column,
+   N_("Set the row separator column"),
+   N_("NUMBER")},
+  {"sep-value", 0,
+   0,
+   G_OPTION_ARG_STRING,
+   &options.list_data.sep_value,
+   N_("Set the row separator value"),
+   N_("TEXT")},
   {"limit", 0,
    0,
    G_OPTION_ARG_INT,
@@ -2016,6 +2028,8 @@ yad_options_init (void)
   options.list_data.expand_column = -1; // must be -1 for disable expand by default (keep the original behavior)
   options.list_data.search_column = 0;
   options.list_data.tooltip_column = 0;
+  options.list_data.sep_column = 0;
+  options.list_data.sep_value = NULL;
   options.list_data.limit = 0;
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
   options.list_data.dclick_action = NULL;
