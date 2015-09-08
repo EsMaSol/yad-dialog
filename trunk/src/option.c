@@ -1679,7 +1679,7 @@ set_ellipsize (const gchar * option_name, const gchar * value, gpointer data, GE
 static gboolean
 set_orient (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
-  if (strncasecmp (value, "hor", 3) == 3)
+  if (strncasecmp (value, "hor", 3) == 0)
     options.paned_data.orient = GTK_ORIENTATION_HORIZONTAL;
   else if (strncasecmp (value, "vert", 4) == 0)
     options.print_data.type = GTK_ORIENTATION_VERTICAL;
