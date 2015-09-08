@@ -277,6 +277,8 @@ typedef struct {
   gint expand_column;
   gint search_column;
   gint tooltip_column;
+  gint sep_column;
+  gchar *sep_value;
   guint limit;
   PangoEllipsizeMode ellipsize;
   gchar *dclick_action;
