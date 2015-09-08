@@ -678,6 +678,19 @@ main (gint argc, gchar ** argv)
   g_set_application_name ("YAD");
   yad_options_init ();
 
+  ctx = yad_create_context ();
+  g_option_context_parse (ctx, &argc, &argv, &err);
+  if (err)
+    {
+      g_printerr (_("Unable to parse command line: %s\n"), err->message);
+      return -1;
+    }
+  yad_set_mode ();
+
+  /* parse custom gtkrc */
+  if (options.gtkrc_file)
+    gtk_rc_parse (options.gtkrc_file);
+
   /* set default icons and icon theme */
   if (options.data.icon_theme)
     {
@@ -692,19 +705,6 @@ main (gint argc, gchar ** argv)
   gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
   settings.small_fallback_image =
     gtk_icon_theme_load_icon (settings.icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
-
-  ctx = yad_create_context ();
-  g_option_context_parse (ctx, &argc, &argv, &err);
-  if (err)
-    {
-      g_printerr (_("Unable to parse command line: %s\n"), err->message);
-      return -1;
-    }
-  yad_set_mode ();
-
-  /* parse custom gtkrc */
-  if (options.gtkrc_file)
-    gtk_rc_parse (options.gtkrc_file);
 
   /* correct separators */
   str = g_strcompress (options.common_data.separator);
