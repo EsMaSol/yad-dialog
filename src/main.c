@@ -679,6 +679,34 @@ main (gint argc, gchar ** argv)
   yad_options_init ();
 
   ctx = yad_create_context ();
+  /* parse YAD_OPTIONS */
+  if (g_getenv ("YAD_OPTIONS"))
+    {
+      gchar *cmd, **args = NULL;
+      gint cnt;
+      
+      cmd = g_strdup_printf ("yad %s", g_getenv ("YAD_OPTIONS"));
+      
+      if (g_shell_parse_argv (cmd, &cnt, &args, &err))
+        {
+          g_option_context_parse (ctx, &cnt, &args, &err);
+          if (err)
+            {
+              g_printerr (_("Unable to parse YAD_OPTIONS: %s\n"), err->message);
+              g_error_free (err);
+              err = NULL;          
+            }
+        }
+      else
+        {
+          g_printerr (_("Unable to parse YAD_OPTIONS: %s\n"), err->message);
+          g_error_free (err);
+          err = NULL;          
+        }
+        
+      g_free (cmd);
+    }
+  /* parse command line */
   g_option_context_parse (ctx, &argc, &argv, &err);
   if (err)
     {
