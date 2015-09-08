@@ -272,6 +272,7 @@ typedef struct {
   gboolean checkbox;
   gboolean radiobox;
   gboolean print_all;
+  gboolean rules_hint;
   gint print_column;
   gint hide_column;
   gint expand_column;
@@ -435,7 +436,6 @@ typedef struct {
 
   GtkPrintSettings *print_settings;
   GtkPageSetup *page_setup;
-
 } YadSettings;
 
 extern YadSettings settings;

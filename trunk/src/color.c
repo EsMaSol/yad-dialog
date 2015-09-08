@@ -160,7 +160,6 @@ color_create_widget (GtkWidget * dlg)
 
           list = gtk_tree_view_new_with_model (model);
           gtk_widget_set_name (list, "yad-color-palette");
-          gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), settings.rules_hint);
           g_object_unref (model);
           gtk_container_add (GTK_CONTAINER (sw), list);
 
