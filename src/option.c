@@ -810,6 +810,12 @@ static GOptionEntry list_options[] = {
    &options.list_data.print_all,
    N_("Print all data from list"),
    NULL},
+  {"no-rules-hint", 0,
+   G_OPTION_FLAG_REVERSE,
+   G_OPTION_ARG_NONE,
+   &options.list_data.rules_hint,
+   N_("Disable rules hints"),
+   NULL},
   {"ellipsize", 0,
    0,
    G_OPTION_ARG_CALLBACK,
@@ -2023,6 +2029,7 @@ yad_options_init (void)
   options.list_data.checkbox = FALSE;
   options.list_data.radiobox = FALSE;
   options.list_data.print_all = FALSE;
+  options.list_data.rules_hint = settings.rules_hint;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
   options.list_data.expand_column = -1; // must be -1 for disable expand by default (keep the original behavior)

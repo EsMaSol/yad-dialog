@@ -41,7 +41,6 @@ read_settings (void)
   settings.timeout = 0;
   settings.to_indicator = "none";
   settings.show_remain = FALSE;
-  settings.rules_hint = TRUE;
   settings.always_selected = FALSE;
 #if !GTK_CHECK_VERSION(2,22,0)
   settings.dlg_sep = FALSE;
@@ -78,8 +77,6 @@ read_settings (void)
             settings.to_indicator = g_key_file_get_string (kf, "General", "timeout_indicator", NULL);
           if (g_key_file_has_key (kf, "General", "show_remain", NULL))
             settings.show_remain = g_key_file_get_boolean (kf, "General", "show_remain", NULL);
-          if (g_key_file_has_key (kf, "General", "rules_hint", NULL))
-            settings.rules_hint = g_key_file_get_boolean (kf, "General", "rules_hint", NULL);
           if (g_key_file_has_key (kf, "General", "always_selected", NULL))
             settings.always_selected = g_key_file_get_boolean (kf, "General", "always_selected", NULL);
           if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
@@ -130,8 +127,6 @@ write_settings (void)
                           "Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
   g_key_file_set_comment (kf, "General", "show_remain", "Show remain seconds in timeout indicator", NULL);
-  g_key_file_set_boolean (kf, "General", "rules_hint", settings.rules_hint);
-  g_key_file_set_comment (kf, "General", "rules_hint", "Enable rules hints in list widget", NULL);
   g_key_file_set_boolean (kf, "General", "always_selected", settings.always_selected);
   g_key_file_set_comment (kf, "General", "always_selected", "List widget always have a selection", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
