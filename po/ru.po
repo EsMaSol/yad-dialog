@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 17:11+0300\n"
+"POT-Creation-Date: 2015-09-08 17:22+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -568,12 +568,12 @@ msgstr "Активировать выделение только по катал
 msgid "Activate save mode"
 msgstr "Активировать режим сохранения"
 
-#: ../src/option.c:522 ../src/option.c:609 ../src/option.c:793
+#: ../src/option.c:522 ../src/option.c:609 ../src/option.c:799
 msgid "Set output separator character"
 msgstr "Установить выходной разделяющий символ"
 
 #: ../src/option.c:523 ../src/option.c:610 ../src/option.c:616
-#: ../src/option.c:794 ../src/option.c:1001 ../src/option.c:1007
+#: ../src/option.c:800 ../src/option.c:1001 ../src/option.c:1007
 msgid "SEPARATOR"
 msgstr "РАЗДЕЛИТЕЛЬ"
 
@@ -746,45 +746,45 @@ msgid "Display list dialog"
 msgstr "Отобразить диалог со списком"
 
 #: ../src/option.c:762
-msgid "Don't show column headers"
-msgstr "Не показывать заголовки колонок"
-
-#: ../src/option.c:768
 msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, RD, IMG, HD or TIP)"
 msgstr ""
 "Задать заголовок столбца (ТИП - TEXT, NUM, FLT, CHK, RD, IMG, HD или TIP)"
 
-#: ../src/option.c:769
+#: ../src/option.c:763
 msgid "COLUMN[:TYPE]"
 msgstr "СТОЛБЕЦ[:ТИП]"
 
-#: ../src/option.c:774
+#: ../src/option.c:768
 msgid "Use checkboxes for first column"
 msgstr "Использовать флажки для первой колонки"
 
-#: ../src/option.c:780
+#: ../src/option.c:774
 msgid "Use radioboxes for first column"
 msgstr "Использовать переключатель для первой колонки"
+
+#: ../src/option.c:780
+msgid "Don't show column headers"
+msgstr "Не показывать заголовки колонок"
 
 #: ../src/option.c:786
 msgid "Disable clickable column headers"
 msgstr "Запретить нажимаемые заголовки"
 
-#: ../src/option.c:799
+#: ../src/option.c:792
+msgid "Disable rules hints"
+msgstr "Запретить раскраску строк"
+
+#: ../src/option.c:805
 msgid "Allow multiple rows to be selected"
 msgstr "Разрешить выбор нескольких строк"
 
-#: ../src/option.c:805 ../src/option.c:1299
+#: ../src/option.c:811 ../src/option.c:1299
 msgid "Allow changes to text"
 msgstr "Разрешить изменять текст"
 
-#: ../src/option.c:811
+#: ../src/option.c:817
 msgid "Print all data from list"
 msgstr "Печатать таблицу полностью"
-
-#: ../src/option.c:817
-msgid "Disable rules hints"
-msgstr "Запретить раскраску строк"
 
 #: ../src/option.c:823
 msgid "Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"
