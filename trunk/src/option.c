@@ -178,14 +178,6 @@ static GOptionEntry general_options[] = {
    &options.data.no_escape,
    N_("Don't close dialog if Escape was pressed"),
    NULL},
-#if !GTK_CHECK_VERSION(2,22,0)
-  {"dialog-sep", 0,
-   0,
-   G_OPTION_ARG_NONE,
-   &options.data.dialog_sep,
-   N_("Add separator between dialog and buttons"),
-   NULL},
-#endif
   {"borders", 0,
    0,
    G_OPTION_ARG_INT,
@@ -1924,9 +1916,6 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.buttons_layout = GTK_BUTTONBOX_END;
-#if !GTK_CHECK_VERSION(2,22,0)
-  options.data.dialog_sep = settings.dlg_sep;
-#endif
   options.data.borders = -1;
   options.data.no_markup = FALSE;
   options.data.no_escape = FALSE;
