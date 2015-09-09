@@ -26,8 +26,6 @@
 
 #include "yad.h"
 
-#define SETTINGS_FILE "yad.conf"
-
 YadSettings settings;
 
 void
@@ -42,9 +40,6 @@ read_settings (void)
   settings.to_indicator = "none";
   settings.show_remain = FALSE;
   settings.always_selected = FALSE;
-#if !GTK_CHECK_VERSION(2,22,0)
-  settings.dlg_sep = FALSE;
-#endif
   settings.combo_always_editable = FALSE;
   settings.show_gtk_palette = FALSE;
   settings.expand_palette = FALSE;
@@ -55,7 +50,7 @@ read_settings (void)
   settings.print_settings = NULL;
   settings.page_setup = NULL;
 
-  filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
+  filename = g_build_filename (g_get_user_config_dir (), YAD_SETTINGS_FILE, NULL);
 
   if (g_file_test (filename, G_FILE_TEST_EXISTS))
     {
@@ -63,10 +58,6 @@ read_settings (void)
 
       if (g_key_file_load_from_file (kf, filename, G_KEY_FILE_NONE, NULL))
         {
-#if !GTK_CHECK_VERSION(2,22,0)
-          if (g_key_file_has_key (kf, "General", "dialog_separator", NULL))
-            settings.dlg_sep = g_key_file_get_boolean (kf, "General", "dialog_separator", NULL);
-#endif
           if (g_key_file_has_key (kf, "General", "width", NULL))
             settings.width = g_key_file_get_integer (kf, "General", "width", NULL);
           if (g_key_file_has_key (kf, "General", "height", NULL))
@@ -112,10 +103,6 @@ write_settings (void)
 
   kf = g_key_file_new ();
 
-#if !GTK_CHECK_VERSION(2,22,0)
-  g_key_file_set_boolean (kf, "General", "dialog_separator", settings.dlg_sep);
-  g_key_file_set_comment (kf, "General", "dialog_separator", "Enable separator between dialog and buttons", NULL);
-#endif
   g_key_file_set_integer (kf, "General", "width", settings.width);
   g_key_file_set_comment (kf, "General", "width", "Default dialog width", NULL);
   g_key_file_set_integer (kf, "General", "height", settings.height);
@@ -153,7 +140,7 @@ write_settings (void)
 
   if (g_mkdir_with_parents (g_get_user_config_dir (), 0755) != -1)
     {
-      gchar *filename = g_build_filename (g_get_user_config_dir (), SETTINGS_FILE, NULL);
+      gchar *filename = g_build_filename (g_get_user_config_dir (), YAD_SETTINGS_FILE, NULL);
       g_file_set_contents (filename, context, -1, NULL);
       g_free (filename);
     }

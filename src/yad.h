@@ -170,9 +170,6 @@ typedef struct {
   gchar *dialog_image;
   gboolean image_on_top;
   gchar *icon_theme;
-#if !GTK_CHECK_VERSION(3,0,0)
-  gboolean dialog_sep;
-#endif
   gchar *expander;
   gint borders;
   GSList *buttons;
@@ -421,9 +418,6 @@ typedef struct {
   gboolean show_remain;
   gboolean rules_hint;
   gboolean always_selected;
-#if !GTK_CHECK_VERSION(3,0,0)
-  gboolean dlg_sep;
-#endif
   gboolean combo_always_editable;
   gboolean show_gtk_palette;
   gboolean expand_palette;
@@ -522,4 +516,5 @@ strip_new_line (gchar * str)
 }
 
 G_END_DECLS
+
 #endif /* _YAD_H_ */
