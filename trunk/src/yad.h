@@ -418,7 +418,6 @@ typedef struct {
   guint timeout;
   gchar *to_indicator;
   gboolean show_remain;
-  gboolean rules_hint;
   gboolean always_selected;
   gboolean combo_always_editable;
   gboolean ignore_unknown;
