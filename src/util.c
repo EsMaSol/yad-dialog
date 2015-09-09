@@ -41,8 +41,6 @@ read_settings (void)
   settings.show_remain = FALSE;
   settings.always_selected = FALSE;
   settings.combo_always_editable = FALSE;
-  settings.show_gtk_palette = FALSE;
-  settings.expand_palette = FALSE;
   settings.term = "xterm -e '%s'";
   settings.open_cmd = "xdg-open '%s'";
   settings.ignore_unknown = TRUE;
@@ -73,10 +71,6 @@ read_settings (void)
             settings.always_selected = g_key_file_get_boolean (kf, "General", "always_selected", NULL);
           if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
             settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
-          if (g_key_file_has_key (kf, "General", "show_gtk_palette", NULL))
-            settings.show_gtk_palette = g_key_file_get_boolean (kf, "General", "show_gtk_palette", NULL);
-          if (g_key_file_has_key (kf, "General", "expand_palette", NULL))
-            settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
           if (g_key_file_has_key (kf, "General", "terminal", NULL))
             settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
           if (g_key_file_has_key (kf, "General", "open_command", NULL))
@@ -121,10 +115,6 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "always_selected", " List widget always have a selection", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
   g_key_file_set_comment (kf, "General", "combo_always_editable", " Combo-box in entry dialog is always editable", NULL);
-  g_key_file_set_boolean (kf, "General", "show_gtk_palette", settings.show_gtk_palette);
-  g_key_file_set_comment (kf, "General", "show_gtk_palette", " Show GtkColorSelection palette", NULL);
-  g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
-  g_key_file_set_comment (kf, "General", "expand_palette", " Expand list of predefined colors in color dialog", NULL);
   g_key_file_set_string (kf, "General", "terminal", settings.term);
   g_key_file_set_comment (kf, "General", "terminal", " Default terminal command (use %s for arguments placeholder)", NULL);
   g_key_file_set_string (kf, "General", "open_command", settings.open_cmd);

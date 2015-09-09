@@ -200,7 +200,9 @@ typedef struct {
 
 typedef struct {
   gchar *init_color;
+  gboolean gtk_palette;
   gboolean use_palette;
+  gboolean expand_palette;
   gchar *palette;
   gboolean extra;
   gboolean alpha;
@@ -419,8 +421,6 @@ typedef struct {
   gboolean rules_hint;
   gboolean always_selected;
   gboolean combo_always_editable;
-  gboolean show_gtk_palette;
-  gboolean expand_palette;
   gboolean ignore_unknown;
   GtkIconTheme *icon_theme;
   GdkPixbuf *big_fallback_image;
