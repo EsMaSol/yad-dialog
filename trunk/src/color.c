@@ -125,7 +125,7 @@ color_create_widget (GtkWidget * dlg)
 
   color = gtk_color_selection_new ();
   gtk_widget_set_name (color, "yad-color-widget");
-  gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (color), settings.show_gtk_palette);
+  gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (color), options.color_data.gtk_palette);
   if (options.color_data.init_color)
     {
       GdkColor c;
@@ -148,7 +148,7 @@ color_create_widget (GtkWidget * dlg)
 
           /* create expander */
           exp = gtk_expander_new (_("Palette"));
-          gtk_expander_set_expanded (GTK_EXPANDER (exp), settings.expand_palette);
+          gtk_expander_set_expanded (GTK_EXPANDER (exp), options.color_data.expand_palette);
           gtk_container_set_border_width (GTK_CONTAINER (exp), 5);
           gtk_box_pack_start (GTK_BOX (w), exp, TRUE, TRUE, 2);
 
@@ -156,6 +156,7 @@ color_create_widget (GtkWidget * dlg)
           sw = gtk_scrolled_window_new (NULL, NULL);
           gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
           gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+          gtk_widget_set_size_request (sw, -1, 75);
           gtk_container_add (GTK_CONTAINER (exp), sw);
 
           list = gtk_tree_view_new_with_model (model);

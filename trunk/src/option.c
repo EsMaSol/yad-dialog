@@ -351,12 +351,24 @@ static GOptionEntry color_options[] = {
    &options.color_data.init_color,
    N_("Set initial color value"),
    N_("COLOR")},
+  {"gtk-palette", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.color_data.gtk_palette,
+   N_("Show system palette in color dialog"),
+   NULL},
   {"palette", 0,
    G_OPTION_FLAG_OPTIONAL_ARG,
    G_OPTION_ARG_CALLBACK,
    add_palette,
    N_("Set path to palette file. Default - " RGB_FILE),
    N_("FILENAME")},
+  {"expand-palette", 0,
+   0,
+   G_OPTION_ARG_NONE,
+   &options.color_data.expand_palette,
+   N_("Expand user palette"),
+   NULL},
   {"mode", 0,
    0,
    G_OPTION_ARG_CALLBACK,
@@ -1957,7 +1969,9 @@ yad_options_init (void)
 
   /* Initialize color data */
   options.color_data.init_color = NULL;
+  options.color_data.gtk_palette = FALSE;
   options.color_data.use_palette = FALSE;
+  options.color_data.expand_palette = FALSE;
   options.color_data.palette = NULL;
   options.color_data.extra = FALSE;
   options.color_data.alpha = FALSE;
