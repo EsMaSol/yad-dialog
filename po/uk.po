@@ -1509,5 +1509,3 @@ msgstr "Переглядач іконок"
 msgid "Inspect GTK Icon Theme"
 msgstr "Перегляд теми іконок GTK"
 
-#~ msgid "Add separator between dialog and buttons"
-#~ msgstr "Додати розділювач між діалогом та кнопками"
