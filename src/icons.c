@@ -304,7 +304,7 @@ parse_desktop_file (gchar * filename)
               gchar *url = g_key_file_get_string (kf, "Desktop Entry", "URL", NULL);
               if (url)
                 {
-                  ent->command = g_strdup_printf ("xdg-open '%s'", url);
+                  ent->command = g_strdup_printf (settings.open_cmd, url);
                   g_free (url);
                 }
             }

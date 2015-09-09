@@ -43,7 +43,8 @@ read_settings (void)
   settings.combo_always_editable = FALSE;
   settings.show_gtk_palette = FALSE;
   settings.expand_palette = FALSE;
-  settings.term = "xterm -e %s";
+  settings.term = "xterm -e '%s'";
+  settings.open_cmd = "xdg-open '%s'";
   settings.ignore_unknown = TRUE;
   settings.max_tab = 100;
 
@@ -78,6 +79,8 @@ read_settings (void)
             settings.expand_palette = g_key_file_get_boolean (kf, "General", "expand_palette", NULL);
           if (g_key_file_has_key (kf, "General", "terminal", NULL))
             settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
+          if (g_key_file_has_key (kf, "General", "open_command", NULL))
+            settings.open_cmd = g_key_file_get_string (kf, "General", "open_command", NULL);
           if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
             settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
           if (g_key_file_has_key (kf, "General", "max_tab", NULL))
@@ -104,30 +107,32 @@ write_settings (void)
   kf = g_key_file_new ();
 
   g_key_file_set_integer (kf, "General", "width", settings.width);
-  g_key_file_set_comment (kf, "General", "width", "Default dialog width", NULL);
+  g_key_file_set_comment (kf, "General", "width", " Default dialog width", NULL);
   g_key_file_set_integer (kf, "General", "height", settings.height);
-  g_key_file_set_comment (kf, "General", "height", "Default dialog height", NULL);
+  g_key_file_set_comment (kf, "General", "height", " Default dialog height", NULL);
   g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
-  g_key_file_set_comment (kf, "General", "timeout", "Default timeout (0 for no timeout)", NULL);
+  g_key_file_set_comment (kf, "General", "timeout", " Default timeout (0 for no timeout)", NULL);
   g_key_file_set_string (kf, "General", "timeout_indicator", settings.to_indicator);
   g_key_file_set_comment (kf, "General", "timeout_indicator",
-                          "Position of timeout indicator (top, bottom, left, right, none)", NULL);
+                          " Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
-  g_key_file_set_comment (kf, "General", "show_remain", "Show remain seconds in timeout indicator", NULL);
+  g_key_file_set_comment (kf, "General", "show_remain", " Show remain seconds in timeout indicator", NULL);
   g_key_file_set_boolean (kf, "General", "always_selected", settings.always_selected);
-  g_key_file_set_comment (kf, "General", "always_selected", "List widget always have a selection", NULL);
+  g_key_file_set_comment (kf, "General", "always_selected", " List widget always have a selection", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
-  g_key_file_set_comment (kf, "General", "combo_always_editable", "Combo-box in entry dialog is always editable", NULL);
+  g_key_file_set_comment (kf, "General", "combo_always_editable", " Combo-box in entry dialog is always editable", NULL);
   g_key_file_set_boolean (kf, "General", "show_gtk_palette", settings.show_gtk_palette);
-  g_key_file_set_comment (kf, "General", "show_gtk_palette", "Show GtkColorSelection palette", NULL);
+  g_key_file_set_comment (kf, "General", "show_gtk_palette", " Show GtkColorSelection palette", NULL);
   g_key_file_set_boolean (kf, "General", "expand_palette", settings.expand_palette);
-  g_key_file_set_comment (kf, "General", "expand_palette", "Expand list of predefined colors in color dialog", NULL);
+  g_key_file_set_comment (kf, "General", "expand_palette", " Expand list of predefined colors in color dialog", NULL);
   g_key_file_set_string (kf, "General", "terminal", settings.term);
-  g_key_file_set_comment (kf, "General", "terminal", "Default terminal command (use %s for command template)", NULL);
+  g_key_file_set_comment (kf, "General", "terminal", " Default terminal command (use %s for arguments placeholder)", NULL);
+  g_key_file_set_string (kf, "General", "open_command", settings.open_cmd);
+  g_key_file_set_comment (kf, "General", "open_command", " Default open command (use %s for arguments placeholder)", NULL);
   g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
-  g_key_file_set_comment (kf, "General", "ignore_unknown_options", "Ingnore unknown command-line options", NULL);
+  g_key_file_set_comment (kf, "General", "ignore_unknown_options", " Ingnore unknown command-line options", NULL);
   g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);
-  g_key_file_set_comment (kf, "General", "max_tab", "Maximum number of tabs in notebook", NULL);
+  g_key_file_set_comment (kf, "General", "max_tab", " Maximum number of tabs in notebook", NULL);
 
   if (settings.print_settings)
     gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
