@@ -43,6 +43,7 @@ read_settings (void)
   settings.combo_always_editable = FALSE;
   settings.term = "xterm -e '%s'";
   settings.open_cmd = "xdg-open '%s'";
+  settings.date_format = "%x";
   settings.ignore_unknown = TRUE;
   settings.max_tab = 100;
 
@@ -75,6 +76,8 @@ read_settings (void)
             settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
           if (g_key_file_has_key (kf, "General", "open_command", NULL))
             settings.open_cmd = g_key_file_get_string (kf, "General", "open_command", NULL);
+          if (g_key_file_has_key (kf, "General", "date_format", NULL))
+            settings.date_format = g_key_file_get_string (kf, "General", "date_format", NULL);
           if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
             settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
           if (g_key_file_has_key (kf, "General", "max_tab", NULL))
@@ -119,6 +122,8 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "terminal", " Default terminal command (use %s for arguments placeholder)", NULL);
   g_key_file_set_string (kf, "General", "open_command", settings.open_cmd);
   g_key_file_set_comment (kf, "General", "open_command", " Default open command (use %s for arguments placeholder)", NULL);
+  g_key_file_set_string (kf, "General", "date_format", settings.date_format);
+  g_key_file_set_comment (kf, "General", "date_format", " Default date format (sett msgfmt(3) for details)", NULL);
   g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
   g_key_file_set_comment (kf, "General", "ignore_unknown_options", " Ingnore unknown command-line options", NULL);
   g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);

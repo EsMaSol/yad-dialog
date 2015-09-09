@@ -545,9 +545,6 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
           gchar *format = options.common_data.date_format;
           gchar time_string[128];
 
-          if (format == NULL)
-            format = "%x";
-
           gtk_calendar_get_date (GTK_CALENDAR (cal), &day, &month, &year);
           d = g_date_new_dmy (year, month + 1, day);
           g_date_strftime (time_string, 127, format, d);

@@ -426,6 +426,7 @@ typedef struct {
   GdkPixbuf *small_fallback_image;
   gchar *term;
   gchar *open_cmd;
+  gchar *date_format;
   guint max_tab;
 
   GtkPrintSettings *print_settings;

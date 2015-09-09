@@ -1953,7 +1953,7 @@ yad_options_init (void)
   options.common_data.multi = FALSE;
   options.common_data.editable = FALSE;
   options.common_data.command = NULL;
-  options.common_data.date_format = "%x";
+  options.common_data.date_format = settings.date_format;
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
   options.common_data.listen = FALSE;
