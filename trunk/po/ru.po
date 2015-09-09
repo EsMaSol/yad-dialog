@@ -1504,6 +1504,3 @@ msgstr "Броузер иконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Исследование темы иконок GTK"
-
-#~ msgid "Add separator between dialog and buttons"
-#~ msgstr "Добавить разделитель между диалогом и кнопками"
