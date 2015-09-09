@@ -230,7 +230,9 @@ typedef struct {
   gboolean save;
   gboolean confirm_overwrite;
   gchar *confirm_text;
-  gchar **filter;
+  gchar **file_filt;
+  gchar **mime_filt;
+  gchar *image_filt;
 } YadFileData;
 
 typedef struct {
@@ -365,6 +367,7 @@ typedef struct {
   gboolean listen;
   gboolean preview;
   gboolean quoted_output;
+  GList *filters;
   key_t key;
 } YadCommonData;
 

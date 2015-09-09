@@ -125,6 +125,7 @@ file_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
   gchar *dir, *basename;
+  GList *filt;
   GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 
   if (options.file_data.directory)
@@ -178,54 +179,9 @@ file_create_widget (GtkWidget * dlg)
       large_path = g_build_filename (g_get_user_cache_dir (), "thumbnails", "large", NULL);
     }
 
-  if (options.file_data.filter)
-    {
-      /* Filter format: Executables | *.exe *.bat *.com */
-      gint filter_i;
-
-      for (filter_i = 0; options.file_data.filter[filter_i]; filter_i++)
-        {
-          GtkFileFilter *filter = gtk_file_filter_new ();
-          gchar *filter_str = options.file_data.filter[filter_i];
-          gchar **pattern, **patterns;
-          gchar *name = NULL;
-          gint i;
-
-          /* Set name */
-          for (i = 0; filter_str[i] != '\0'; i++)
-            {
-              if (filter_str[i] == '|')
-                break;
-            }
-
-          if (filter_str[i] == '|')
-            name = g_strstrip (g_strndup (filter_str, i));
-
-          if (name)
-            {
-              gtk_file_filter_set_name (filter, name);
-
-              /* Point i to the right position for split */
-              for (++i; filter_str[i] == ' '; i++);
-            }
-          else
-            {
-              gtk_file_filter_set_name (filter, filter_str);
-              i = 0;
-            }
-
-          /* Get patterns */
-          patterns = g_strsplit_set (filter_str + i, " ", -1);
-
-          for (pattern = patterns; *pattern; pattern++)
-            gtk_file_filter_add_pattern (filter, *pattern);
-
-          g_free (name);
-          g_strfreev (patterns);
-
-          gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (w), filter);
-        }
-    }
+  /* add filters */
+  for (filt = options.common_data.filters; filt; filt = filt->next)
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (w), GTK_FILE_FILTER (filt->data));
 
   g_signal_connect (w, "file-activated", G_CALLBACK (file_activated_cb), dlg);
 
