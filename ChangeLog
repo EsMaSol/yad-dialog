@@ -1,3 +1,45 @@
+2015-09-08 14:22  v1c0nt
+
+	* po/ru.po, po/uk.po:
+
+2015-09-08 14:22  v1c0nt
+
+	* data/yad.1, src/option.c:
+
+2015-09-08 14:16  v1c0nt
+
+	* configure.ac: add -no-rules-hint option to list dialog
+
+2015-09-08 14:15  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/color.c, src/list.c,
+	  src/option.c, src/util.c, src/yad.h:
+
+2015-09-08 12:20  v1c0nt
+
+	* data/yad.1, src/main.c: add YAD_OPTIONS variable
+
+2015-09-08 12:03  v1c0nt
+
+	* src/main.c: fix setting icon theme
+
+2015-09-08 10:35  v1c0nt
+
+	* configure.ac:
+
+2015-09-08 10:34  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/list.c, src/option.c,
+	  src/yad.h: add separators to --list dialog
+
+2015-09-08 04:57  v1c0nt
+
+	* src/option.c: fix parsing orientation
+
+2015-09-05 06:28  v1c0nt
+
+	* ChangeLog, NEWS: update NEWS
+
 2015-09-05 05:31  v1c0nt
 
 	* configure.ac, data/yad.1: update man page. bump version to
