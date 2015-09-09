@@ -385,6 +385,7 @@ static void
 select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * event, gpointer data)
 {
   GtkWidget *dlg;
+  GList *filt;
   static gchar *path = NULL;
 
   if (event->button == 1)
@@ -419,6 +420,10 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
         }
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
+
+      /* add filters */
+      for (filt = options.common_data.filters; filt; filt = filt->next)
+        gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dlg), GTK_FILE_FILTER (filt->data));
 
       if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
         {
@@ -457,6 +462,7 @@ static void
 create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * event, gpointer data)
 {
   GtkWidget *dlg;
+  GList *filt;
   static gchar *path = NULL;
 
   if (event->button == 1)
@@ -490,6 +496,10 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
                                              GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
         }
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
+
+      /* add filters */
+      for (filt = options.common_data.filters; filt; filt = filt->next)
+        gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dlg), GTK_FILE_FILTER (filt->data));
 
       if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
         {
@@ -560,6 +570,7 @@ form_create_widget (GtkWidget * dlg)
 {
   GtkWidget *sw, *vp, *tbl;
   GtkWidget *w = NULL;
+  GList *filt;
 
   if (options.form_data.fields)
     {
@@ -740,6 +751,11 @@ form_create_widget (GtkWidget * dlg)
               e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
               gtk_widget_set_name (e, "yad-form-file");
               gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), g_get_current_dir ());
+
+              /* add filters */
+              for (filt = options.common_data.filters; filt; filt = filt->next)
+                gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (e), GTK_FILE_FILTER (filt->data));
+
 #if !GTK_CHECK_VERSION(3,0,0)
               gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                 GTK_EXPAND | GTK_FILL, 0, 5, 5);

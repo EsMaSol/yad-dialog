@@ -350,11 +350,6 @@ Specify separator character when returning multiple filenames.
 Confirm file selection if filename already exists.
 Optional argument is a text for confirmation dialog.
 .TP
-.B \-\-file-filter=\fINAME | PATTERN1 PATTERN2 ...\fP
-Add a filename filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
-is a shell-style filename pattern (for example *.txt). This option may be
-used multiply times.
-.TP
 .B \-\-add-preview
 Add preview widget to file dialog. Preview images loads from large or normal thumbnails according to XDG Thumbnails
 specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
@@ -745,6 +740,21 @@ Invert scale direction.
 .TP
 .B \-\-mark=\fI[NAME]:VALUE\fP
 Add a mark to scale. May be used multiply times. \fINAME\fP is an optional arguments for set label to mark.
+
+.SS File filters options
+.TP
+.B \-\-file-filter=\fINAME | PATTERN1 PATTERN2 ...\fP
+Add a filename filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
+is a shell-style filename pattern (for example *.txt). This option may be used multiply times.
+.TP
+.B \-\-mime-filter=\fINAME | MIME1 MIME2 ...\fP
+Add a mime-type filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
+is a name of mime type (for example text/plain). This option may be used multiply times.
+.TP
+.B \-\-image-filter=\fI[NAME]\fP
+Add filter for images supported by gdk-pixbuf library. \fINAME\fP in as optional name for this filter.
+
+This options applies to all of yad's file chooser dialogs.
 
 .SS Miscellaneous options
 .TP
