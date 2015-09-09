@@ -91,7 +91,7 @@ link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
         g_printf ("%s\n", uri);
       else
         {
-          gchar *cmd = g_strdup_printf ("xdg-open '%s'", uri);
+          gchar *cmd = g_strdup_printf (settings.open_cmd, uri);
           g_spawn_command_line_async (cmd, NULL);
           g_free (cmd);
         }
