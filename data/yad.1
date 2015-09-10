@@ -350,11 +350,6 @@ Specify separator character when returning multiple filenames.
 Confirm file selection if filename already exists.
 Optional argument is a text for confirmation dialog.
 .TP
-.B \-\-add-preview
-Add preview widget to file dialog. Preview images loads from large or normal thumbnails according to XDG Thumbnails
-specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
-as large thumbnails.
-.TP
 .B \-\-quoted-output
 Output values will be shell-style quoted.
 
@@ -753,6 +748,11 @@ is a name of mime type (for example text/plain). This option may be used multipl
 .TP
 .B \-\-image-filter=\fI[NAME]\fP
 Add filter for images supported by gdk-pixbuf library. \fINAME\fP in as optional name for this filter.
+.TP
+.B \-\-add-preview
+Add preview widget. Preview images loads from large or normal thumbnails according to XDG Thumbnails
+specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
+as large thumbnails.
 
 This options applies to all of yad's file chooser dialogs.
 
