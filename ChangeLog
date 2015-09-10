@@ -1,3 +1,49 @@
+2015-09-10 05:31  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/file.c, src/form.c,
+	  src/option.c, src/util.c, src/yad.h: enable preview for all of
+	  file chooser dialogs
+
+2015-09-09 16:34  v1c0nt
+
+	* po/ru.po, po/uk.po: remove crap from translation
+
+2015-09-09 16:19  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/file.c, src/form.c,
+	  src/option.c, src/yad.h: extend file filters and apply them to
+	  all of file dialogs
+
+2015-09-09 12:15  v1c0nt
+
+	* src/form.c, src/option.c, src/util.c, src/yad.h: add date_format
+	  default settings
+
+2015-09-09 11:25  v1c0nt
+
+	* src/option.c, src/yad.h: remove rules_hint from settings
+
+2015-09-09 11:21  v1c0nt
+
+	* data/yad.1, po/ru.po, po/uk.po, src/color.c, src/option.c,
+	  src/util.c, src/yad.h: add palette options to color dialog.
+	  remove this settings fron yad settings file
+
+2015-09-09 10:29  v1c0nt
+
+	* data/yad.1, src/html.c, src/icons.c, src/text.c, src/util.c,
+	  src/yad.h: change hardcoded xdg-open to yad setting
+	  "open_command"
+
+2015-09-09 09:53  v1c0nt
+
+	* src/main.c, src/option.c, src/util.c, src/yad.h: remove obsolete
+	  dialog-sep option. code cleanup
+
+2015-09-09 05:48  v1c0nt
+
+	* ChangeLog:
+
 2015-09-08 14:22  v1c0nt
 
 	* po/ru.po, po/uk.po:
