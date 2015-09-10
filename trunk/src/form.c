@@ -421,6 +421,14 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
 
+      /* add preview */
+      if (options.common_data.preview)
+        {
+          GtkWidget *p = gtk_image_new ();
+          gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (dlg), p);
+          g_signal_connect (dlg, "update-preview", G_CALLBACK (update_preview), p);
+        }
+
       /* add filters */
       for (filt = options.common_data.filters; filt; filt = filt->next)
         gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dlg), GTK_FILE_FILTER (filt->data));
@@ -496,6 +504,14 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
                                              GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
         }
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
+
+      /* add preview */
+      if (options.common_data.preview)
+        {
+          GtkWidget *p = gtk_image_new ();
+          gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (dlg), p);
+          g_signal_connect (dlg, "update-preview", G_CALLBACK (update_preview), p);
+        }
 
       /* add filters */
       for (filt = options.common_data.filters; filt; filt = filt->next)
@@ -751,6 +767,14 @@ form_create_widget (GtkWidget * dlg)
               e = gtk_file_chooser_button_new (_("Select file"), GTK_FILE_CHOOSER_ACTION_OPEN);
               gtk_widget_set_name (e, "yad-form-file");
               gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (e), g_get_current_dir ());
+
+              /* add preview */
+              if (options.common_data.preview)
+                {
+                  GtkWidget *p = gtk_image_new ();
+                  gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (e), p);
+                  g_signal_connect (e, "update-preview", G_CALLBACK (update_preview), p);
+                }
 
               /* add filters */
               for (filt = options.common_data.filters; filt; filt = filt->next)

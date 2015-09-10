@@ -187,6 +187,73 @@ get_pixbuf (gchar * name, YadIconSize size)
   return pb;
 }
 
+void
+update_preview (GtkFileChooser * chooser, GtkWidget *p)
+{
+  gchar *uri;
+  static gchar *normal_path = NULL;
+  static gchar *large_path = NULL;
+
+  /* init thumbnails path */
+  if (!normal_path)
+    normal_path = g_build_filename (g_get_user_cache_dir (), "thumbnails", "normal", NULL);
+  if (!large_path)
+    large_path = g_build_filename (g_get_user_cache_dir (), "thumbnails", "large", NULL);
+
+  /* load preview */
+  uri = gtk_file_chooser_get_preview_uri (chooser);
+  if (uri)
+    {
+      gchar *file;
+      GChecksum *chs;
+      GdkPixbuf *pb;
+
+      chs = g_checksum_new (G_CHECKSUM_MD5);
+      g_checksum_update (chs, uri, -1);
+      /* first try to get preview from large thumbnail */
+      file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
+      if (g_file_test (file, G_FILE_TEST_EXISTS))
+        pb = gdk_pixbuf_new_from_file (file, NULL);
+      else
+        {
+          /* try to get preview from normal thumbnail */
+          g_free (file);
+          file = g_strdup_printf ("%s/%s.png", normal_path, g_checksum_get_string (chs));
+          if (g_file_test (file, G_FILE_TEST_EXISTS))
+            pb = gdk_pixbuf_new_from_file (file, NULL);
+          else
+            {
+              /* try to create it */
+              g_free (file);
+              file = g_filename_from_uri (uri, NULL, NULL);
+              pb = gdk_pixbuf_new_from_file_at_size (file, 256, 256, NULL);
+              g_free (file);
+              if (pb)
+                {
+                  /* save thumbnail */
+                  g_mkdir_with_parents (large_path, 0755);
+                  file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
+                  gdk_pixbuf_save (pb, file, "png", NULL, NULL);
+                }
+            }
+        }
+      g_checksum_free (chs);
+
+      if (pb)
+        {
+          gtk_image_set_from_pixbuf (GTK_IMAGE (p), pb);
+          g_object_unref (pb);
+          gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
+        }
+      else
+        gtk_file_chooser_set_preview_widget_active (chooser, FALSE);
+
+      g_free (uri);
+    }
+  else
+    gtk_file_chooser_set_preview_widget_active (chooser, FALSE);
+}
+
 gchar **
 split_arg (const gchar * str)
 {

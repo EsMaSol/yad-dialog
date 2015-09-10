@@ -500,6 +500,8 @@ void paned_close_childs (void);
 void read_settings (void);
 void write_settings (void);
 
+void update_preview (GtkFileChooser * chooser, GtkWidget *p);
+
 GdkPixbuf *get_pixbuf (gchar * name, YadIconSize size);
 
 gchar **split_arg (const gchar * str);
